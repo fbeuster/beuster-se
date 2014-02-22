@@ -1,0 +1,19 @@
+# this is webspace specific
+.htaccess
+.htpasswd
+Robots.txt
+google*.html
+rss.xml
+
+# workaround to keep user/ and files/ in repo but ignore contents
+user/*
+files/*
+images/blog/*
+images/foren/*
+images/mods/*
+images/port/*
+images/tmp/*
+!.gitignore
+
+index*.*
+!index.php
