@@ -282,6 +282,7 @@ div.adSense.footer {
 	color: #1d3747;
 }
 .beContentEntry h1.beContentEntryHeader {
+	margin-bottom: 15px;
 	line-height: 150%;
 }
 .beContentEntryThumb {
@@ -736,12 +737,36 @@ div#beContentEntryComments div.beCommentEntry .replies {
 .beContentEntry ol li ol li ol {
 	list-style-type: lower-roman;
 }
-.beContentEntry code {
-	padding: 1px 3px;
-	font-size: 0.9em;
-	line-height: 125%;
+.beContentEntry .code {
+	margin-top: 15px;
+	border: 1px solid #aaaaaa;
+}
+.beContentEntry .code .line {
+	display: block;
+	padding: 0 10px 0 0;
+	font-size: 0.85em;
+	line-height: 1.5em;
 	font-family: "Source Code Pro";
-	background: #dadada;
+	color: #1a1a1a;
+	background: #e4e4e4;
+	transition: 0.15s all;
+}
+.beContentEntry .code .line:hover {
+	background: #f0f0f0;
+	cursor: default;
+}
+.beContentEntry .code .line .no {
+	display: inline-block;
+	margin-right: 10px;
+	padding-right: 5px;
+	width: 30px;
+	border-right: 1px solid #cccccc;
+	background: #d4d4d4;
+	text-align: right;
+	opacity: 0.7;
+}
+.beContentEntry .code .line:hover .no {
+	background: #e4e4e4;
 }
 .beContentEntry pre {
 	padding: 10px;

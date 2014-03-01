@@ -46,7 +46,7 @@
             $this->str = stripslashes($this->str);   
         }
         
-        public function codeFirstPass() {
+        public function parseCode() {
             while(strpos($this->str, '[code]') !== false) {
                 $strCode = '';
                 $posA = strpos($this->str, '[code]');
@@ -54,47 +54,26 @@
                 
                 $strCode = substr($this->str, $posA + 6, $posE - ($posA + 6));
                 $strCodeAlt = substr($this->str, $posA, $posE - $posA + 7);
-                
-                $strCode = highlight_string($strCode, true);
-                
-                $strCode = preg_replace('#&amp;#Uis', '&', $strCode);
-                $strCode = preg_replace('+<span style="color: #000000">+Uis', '', $strCode);
-                $strCode = preg_replace('#</span>#Uis', '', $strCode);
-                $strCode = preg_replace('#\n#Uis', '', $strCode);
-                $strCode = preg_replace('#\"#', '"', $strCode);
-                
-                #pre($strCodeAlt);
-                #pre(htmlspecialchars($strCode));
-                $this->str = str_replace($strCodeAlt, $strCode, $this->str);
-            }
-        }
-        
-        public function codeSecondPass() {
-            $codePos = 0;
-            $anz = substr_count($this->str, '<code>');
-            $anzC = 0;
-            while($anz > $anzC) {
-                $posA = strpos($this->str, '<code>', $codePos);
-                $posE = strpos($this->str, '</code>', $codePos);
-                $strCode = substr($this->str, $posA + 6, $posE - $posA - 6);
-                $strCodeOld = $strCode;
 
-                /*$strCode = str_replace('<img class="sm" src="/images/smsmile.gif" alt="Keep smiling!">', ':)', $strCode);
-                $strCode = str_replace('<img class="sm" src="/images/smlaugh.gif" alt="Laughing">', ':D', $strCode);
-                $strCode = str_replace('<img class="sm" src="/images/smsad.gif" alt="I\'m sad.">', ':(', $strCode);
-                $strCode = str_replace('<img class="sm" src="/images/smone.gif" alt="You know...">', ';)', $strCode);*/
-
-                $strCode = preg_replace('#<br />#Uis', '', $strCode);
-                $strCode = preg_replace('#^\r(.*)#', '$1', $strCode);
-
-                $this->str = str_replace($strCodeOld, $strCode, $this->str);
-                $codePos = $posA + strlen($strCode) + 7;
-                $anzC++;
-            }
-            if($this->mobile) {
-                $this->str = preg_replace('#<code>(.*)</code>#Uis', '<textarea class="code" cols="35" rows="15">\1</textarea>', $this->str);
-            } else {
-                $this->str = preg_replace('#<code>(.*)</code>#Uis', '</p><pre class="code"><code>\1</code></pre><p>', $this->str);                
+                $lines = array();
+                $i = 1;
+                foreach(preg_split("/((\r?\n)|(\r\n?))/", $strCode) as $line){
+                    $class = 'line';
+                    if($i%2==0)
+                        $class .= ' even';
+                    else
+                        $class .= ' odd';
+                    $line = highlight_string($line, true);
+                    $line = preg_replace('+<span style="color: #([a-f0-9]{6})">(.*?)</span>+Uis', '\2', $line);
+                    $line = preg_replace('+<code>(.*?)</code>+Uis', '\1', $line);
+                    $line = preg_replace('#&amp;#Uis', '&', $line);
+                    $line = preg_replace('#\n#Uis', '', $line);
+                    $lines[] = '<code class="'.$class.'"><span class="no">'.$i.'</span>'.$line.'</code>';
+                    $i++;
+                }
+                $strCode = implode($lines);
+                
+                $this->str = str_replace($strCodeAlt, '<div class="code">'.$strCode.'</div>', $this->str);
             }
         }
         
@@ -481,7 +460,7 @@
             parent::trimStr();
             parent::htmlSpecial();
             parent::removeEmptyTags();
-            parent::codeFirstPass();
+            parent::parseCode();
             parent::removeEmptySpace();
             parent::textFormats();
             parent::headlines();
@@ -491,7 +470,6 @@
             $this->lists();
             parent::breakLines();
             parent::illustrateSmiles();
-            parent::codeSecondPass();
             $this->embedVideo();
             parent::paragraphs();
             parent::appendQuoteSources();
