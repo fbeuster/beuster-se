@@ -314,14 +314,29 @@ $(document).ready(function(){
     	$('.beCommentEntry .reply').each(function(){
     		$(this).removeAttr('href');
     		$(this).click(function(){
-    			var author = $(this).parent().find('.author').text();
+    			var author = $(this).parent().children('.beCommentEntryHeader').children('.author').text();
     			$('.beCommentNew .reply').attr('value', $(this).parent().attr('data-reply'));
     			$('html, body').animate({
 			        scrollTop: $('.beCommentNew').offset().top
 			    }, 400, 'swing', function() {
 			    	$('.beCommentNewHeader').text('Schreibe einen Kommentar an ' + author + '!');
+			    	$('.beCommentNewHeader').append(
+			    		$('<span></span>')
+			    		.text('Antwort abbrechen')
+			    		.addClass('cancelReply')
+			    		.click(function() {
+			    			$('.beCommentNew .reply').attr('value', 'null');
+			    			$('.beCommentNewHeader').text('Schreibe einen Kommentar!');
+			    		}));
 			    });
     		});
+    	});
+
+    	$('#formPublicReset').click(function() {
+    		if($('.beCommentNew .reply').attr('value') != 'null') {
+				$('.beCommentNew .reply').attr('value', 'null');
+    			$('.beCommentNewHeader').text('Schreibe einen Kommentar!');
+    		}
     	});
 
     	/** countdown **/

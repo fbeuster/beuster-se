@@ -428,6 +428,23 @@ div#beContentEntryComments div.beCommentEntry .replies {
 	font-weight: bold;
 	color: #083046;
 }
+.beCommentNewHeader .cancelReply {
+	display: inline-block;
+	height: 20px;
+	margin: 0 0 0 20px;
+	padding-left: 25px;
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: normal;
+	color: #afafaf;
+	background: url('../images/commentReply.png') top left no-repeat;
+	background-position: 0 -40px;
+}
+.beCommentNewHeader .cancelReply:hover {
+	color: #666666;
+	cursor: pointer;
+	background-position: 0 -60px;
+}
 .beCommentNew form .antSp {
 	display: none;
 }
@@ -450,18 +467,30 @@ div#beContentEntryComments div.beCommentEntry .replies {
 	border: 1px solid #b0b0b0;
 	background: #fafafa;
 }
-.beCommentNew form input[type=submit] {
+.beCommentNew form input.button {
 	width: 130px;
 	height: 30px;
+	border: 0;
+}
+.beCommentNew form input[type=submit] {
 	margin: 10px 0 0 94px;
 	padding: 0 10px;
-	border: 0;
 	font-weight: bold;
 	background: #1686c6;
 	color: #ffffff;
 }
+.beCommentNew form input[type=reset] {
+	padding: 0 10px;
+	background: #cccccc;
+	color: #666666;
+}
 .beCommentNew form input[type=submit]:not([disabled=disabled]):hover {
 	background: #083046;
+	cursor: pointer;
+}
+.beCommentNew form input[type=reset]:hover {
+	background: #999999;
+	color: #ffffff;
 	cursor: pointer;
 }
 .beCommentNewInfo {

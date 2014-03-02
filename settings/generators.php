@@ -186,6 +186,7 @@
         $ret .= '   <input type="text" name="homepage">'."\r";
         $ret .= '  </span>'."\r";
         $ret .= '  <input type="submit" name="formaction" value="Absenden" class="button" id="formPublicSub">'."\r";
+        $ret .= '  <input type="reset" name="formreset" value="Eingaben löschen" class="button" id="formPublicReset">'."\r";
         $ret .= '</form>'."\r";
         $ret .= '<p class="beCommentNewTime">'."\r";
         $ret .= '  Warte noch <strong id="wait">20</strong> Sekunden, bevor du posten kannst.'."\r";
