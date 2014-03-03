@@ -1397,7 +1397,7 @@ fieldset.backend tbody.adThumb tr td {
 		border-spacing: 20px 10px;
 	}
 
-	.beContentEntry {
+	.beContentEntryRow .beContentEntry {
 		display: table-cell;
 		float: none;
 		height: 100%;
@@ -1727,7 +1727,7 @@ fieldset.backend tbody.adThumb tr td {
 	}
 	aside#beMainAside.portfolio {
 		float: left;
-		margin: 10px 0 0 10px;
+		margin: 10px 0 0 20px;
 		width: 218px;
 	}
 	aside#beMainAside.portfolio .beMainAsideEntry.searchBox form {
@@ -1771,7 +1771,7 @@ fieldset.backend tbody.adThumb tr td {
 		width: 158px;
 	}
 	aside#beMainAside.portfolio {
-		margin: 10px 0 0 10px;
+		margin: 10px 0 0 30px;
 		width: 278px;
 	}
 	aside#beMainAside.portfolio .beMainAsideEntry.searchBox form {
