@@ -252,7 +252,7 @@
             $this->str = preg_replace('#\[affi=(.*)\]#Uis', '', $this->str);
 
             // new style
-            $this->str = preg_replace('#\[asin=(.*)\]#Uis', '', $this->str);
+            $this->str = preg_replace('#\[asin=.*\](.*)\[/asin\]#Uis', '$1', $this->str);
         }
         
         public function shorten($message) {
