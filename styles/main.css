@@ -626,16 +626,16 @@ div#beContentEntryComments div.beCommentEntry .replies {
     height: 105px;
 }
 #galL {
-	background-position: -575px -25px;
-}
-#galL:hover {
-	background-position: -575px -130px;
-}
-#galR {
 	background-position: -600px -25px;
 }
-#galR:hover {
+#galL:hover {
 	background-position: -600px -130px;
+}
+#galR {
+	background-position: -625px -25px;
+}
+#galR:hover {
+	background-position: -625px -130px;
 }
 
 .beLightbox {
@@ -1056,29 +1056,35 @@ fieldset.backend .bbImg#btnplay {
 fieldset.backend .bbImg#btnplay:hover {
 	background-position: -450px -50px;
 }
-fieldset.backend .bbImg#smsmile {
+fieldset.backend .bbImg#btnamazon {
 	background-position: -475px -25px;
 }
-fieldset.backend .bbImg#smsmile:hover {
+fieldset.backend .bbImg#btnamazon:hover {
 	background-position: -475px -50px;
 }
-fieldset.backend .bbImg#smlaugh {
+fieldset.backend .bbImg#smsmile {
 	background-position: -500px -25px;
 }
-fieldset.backend .bbImg#smlaugh:hover {
+fieldset.backend .bbImg#smsmile:hover {
 	background-position: -500px -50px;
 }
-fieldset.backend .bbImg#smsad {
+fieldset.backend .bbImg#smlaugh {
 	background-position: -525px -25px;
 }
-fieldset.backend .bbImg#smsad:hover {
+fieldset.backend .bbImg#smlaugh:hover {
 	background-position: -525px -50px;
 }
-fieldset.backend .bbImg#smone {
+fieldset.backend .bbImg#smsad {
 	background-position: -550px -25px;
 }
-fieldset.backend .bbImg#smone:hover {
+fieldset.backend .bbImg#smsad:hover {
 	background-position: -550px -50px;
+}
+fieldset.backend .bbImg#smone {
+	background-position: -575px -25px;
+}
+fieldset.backend .bbImg#smone:hover {
+	background-position: -575px -50px;
 }
 fieldset.backend .bbImg#btnuber2 {
 	background-position: -150px -25px;

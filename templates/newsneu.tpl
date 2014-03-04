@@ -88,6 +88,7 @@
             <button class="bbImg" type="button" title="Link einfügen" id="btnlink">&nbsp;</button>
             <button class="bbImg" type="button" title="YouTube-Video einbetten" id="btnyt">&nbsp;</button>
             <button class="bbImg" type="button" title="YouTube-Playlist einbinden" id="btnplay">&nbsp;</button>
+            <button class="bbImg" type="button" title="Amazon Affiliate" id="btnamazon">&nbsp;</button>
           </div>
           <div class="bbSpan">
             <button class="bbImg" type="button" title=":)" id="smsmile">&nbsp;</button>

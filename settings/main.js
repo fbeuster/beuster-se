@@ -465,6 +465,10 @@ $(document).ready(function(){
                 var url = prompt('Playlist-ID eingeben:','');
                 wrapText('[play]' + url,'[/play]');
             });
+            $('#btnamazon').click(function(){
+                var asin = prompt('ASIN eingeben:','');
+                wrapText('[asin=' + asin,']');
+            });
         }
     }
 

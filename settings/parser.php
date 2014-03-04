@@ -151,7 +151,6 @@
         
         public function links() {
             $this->str = preg_replace('#\[url\](.*)\[/url\]#Uis', '<a href="$1">$1</a>', $this->str);
-            #$this->str = preg_replace('#\[url=(.*)\](.*)\[/url\]#Uis', '<a href="$1">$2</a>', $this->str);
             $urlPos = 0;
             $anz = substr_count($this->str, '[url=');
             $anzUrl = 0;
@@ -226,11 +225,34 @@
         }
 
         public function affiliateImage() {
+            // old style 
             $this->str = preg_replace('#\[affi=(.*)\]#Uis', '<img src="$1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />', $this->str);
+
+            // new style
+            preg_match_all('/\[asin=(.+?)\](.+?)\[\/asin\]/', $this->str, $asins, PREG_PATTERN_ORDER);
+            foreach($asins[1] as $k => $asin) {
+                $pattern = $asins[0][$k];
+                $text = $asins[2][$k].' *';
+                
+                $href1 = 'http://www.amazon.de/gp/product/';
+                $href2 = '/ref=as_li_ss_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=';
+                $href3 = '&linkCode=as2&tag=beustersede-21';
+                $href = $href1.$asin.$href2.$asin.$href3;
+                $asinL = '<a href="'.$href.'">'.$text.'</a>';
+
+                $src = 'http://ir-de.amazon-adsystem.com/e/ir?t=beustersede-21&l=as2&o=3&a='.$asin;
+                $asinI = '<img src="'.$src.'" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />';
+                
+                $this->str = str_replace($pattern, $asinL.$asinI, $this->str);
+            }
         }
 
         public function removeAffiliateImage() {
+            // old style
             $this->str = preg_replace('#\[affi=(.*)\]#Uis', '', $this->str);
+
+            // new style
+            $this->str = preg_replace('#\[asin=(.*)\]#Uis', '', $this->str);
         }
         
         public function shorten($message) {
