@@ -589,6 +589,10 @@ div#beContentEntryComments div.beCommentEntry .replies {
 	margin: 0 !important;
 	padding: 2px 10px 5px 10px;
 }
+.searchInfo {
+	font-size: 0.95em;
+	color: #444444;
+}
 
 /*** GALLERY ***/
 

@@ -1,15 +1,15 @@
 
   <div class="beContentEntry">
     <h1 class="beContentEntryHeader">Suchergebnisse</h1>
-      <p>Du hast nach folgendem String gesucht: <b><?php echo $data['str']; ?></b></p>
+      <p>Du hast nach folgendem Begriff gesucht: <b><?php echo $data['str']; ?></b></p>
       <?php
        if(isset($data['error']))
        {
         echo '<p>'.$data['error'].'</p>';
        } else if(isset($data['result'])){?>
-        <p>
-         Es wurden folgende <?php echo $data['anzRes']; ?> Ergebnisse gefunden (insgesamt <?php echo $data['pageNbr']; ?> Seiten):<br>
+        <p class="searchInfo">
          Ergebnisse <?php echo $data['page'] * 5 - 4;?> bis <?php if($data['anzRes'] < $end = $data['page'] * 5) echo $data['anzRes']; else echo $end; ?>
+         von <?php echo $data['anzRes']; ?>
        </p><?php
         $i = 1;
         foreach($data['result'] as $result)
@@ -34,11 +34,13 @@
     </article><?php
          $i++;
         }
-        if($data['pageNbr'] >= 1) {
-         echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page', $mob);
-        }
        } else {
         echo '<p>Der angegebene Suchbegriff wurde nicht gefunden</p>';
        }
       ?>
   </div>
+  <?php
+    if($data['pageNbr'] >= 1) {
+      echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page', $mob);
+    }
+  ?>
