@@ -1,4 +1,23 @@
 <?php
+
+    function moduleDonate() {
+        $ret = "";
+        $ret .= '<div class="beMainAsideEntry donate">'."\n";
+        $ret .= "<script id='fbvkn0d'>\n";
+        $ret .= "    (function(i){\n";
+        $ret .= "        var f,s=document.getElementById(i);\n";
+        $ret .= "        f=document.createElement('iframe');\n";
+        $ret .= "        f.src='//api.flattr.com/button/view/?uid=beuster-se&button=compact&url='+encodeURIComponent(document.URL);\n";
+        $ret .= "        f.title='Flattr';\n";
+        $ret .= "        f.height=20;\n";
+        $ret .= "        f.width=110;\n";
+        $ret .= "        f.style.borderWidth=0;\n";
+        $ret .= "        s.parentNode.insertBefore(f,s);\n";
+        $ret .= "    })('fbvkn0d');\n";
+        $ret .= "</script>\n";
+        $ret .= "</div>\n";
+        return $ret;
+    }
     function moduleTopArticles ($db, $mob) {
         if(!$mob) {
             $appPre = '<div class="beMainAsideEntry top">';

@@ -14,6 +14,7 @@
       <?php 
       echo moduleSearch();
       echo moduleSocialShare($mob);
+      echo moduleDonate();
       if($currPage == 'index') {
         echo moduleTopArticles($db,$mob);
       } else if($currPage == 'single') {
