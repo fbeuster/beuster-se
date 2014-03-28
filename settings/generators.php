@@ -163,22 +163,6 @@
             $ret .= '  Noch <span>1500</span> Zeichen übrig.'."\r";
             $ret .= '</p>'."\r";
         }
-        /*if($bb != '' && !$mob) {
-            $ret .= '  <p id="bb">'."\r";
-            $ret .= '   <img class="button" src="/images/bbbold.gif" id="btnbold" title="Fett">'."\r";
-            $ret .= '   <img class="button" src="/images/bbitalic.gif" id="btnitalic" title="Kursiv">'."\r";
-            $ret .= '   <img class="button" src="/images/bbunderline.gif" id="btnunderline" title="Unterstrichen">'."\r";
-            if(!$mob) $ret .= '<br>'."\r";
-            $ret .= '   <img class="button" src="/images/bblink.gif" id="btnlink" title="Link">'."\r";
-            $ret .= '   <img class="button" src="/images/bbquote.gif" id="btnquote" title="Quote">'."\r";
-            if(!$mob) $ret .= '<br>'."\r";
-            $ret .= '   <img class="button" src="/images/smsmile.gif" id="smsmile" title="smiling">'."\r";
-            $ret .= '   <img class="button" src="/images/smlaugh.gif" id="smlaugh" title="laughing">'."\r";
-            $ret .= '   <img class="button" src="/images/smsad.gif" id="smsad" title="sad">'."\r";
-            if(!$mob) $ret .= '<br>'."\r";
-            $ret .= '   <img class="button" src="/images/smone.gif" id="smone" title="You know...">'."\r";
-            $ret .= '  </p>'."\r";
-        }*/
         $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
         $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
         $ret .= '  <span class="antSp">'."\r";
@@ -197,39 +181,39 @@
         return $ret;
     }
  
-    function genMenu($db) {
-        $pars = getTopCats($db);
+    function genMenu() {
+        $pars = getTopCats();
         foreach($pars as $par) {
-            echo '<li><a href="/'.(($par!=getCatID($db, 'Blog'))?lowerCat(getCatName($db, $par)):'').'">'.getCatName($db, $par).'</a></li>'."\r";
+            echo '<li><a href="/'.(($par!=getCatID('Blog'))?lowerCat(getCatName($par)):'').'">'.getCatName($par).'</a></li>'."\r";
         }
     }
  
-    function genSubMenu($db) {
+    function genSubMenu() {
         if(isset($_GET['n'])) {
-            $catID = getNewsCat($db, $_GET['n']);
-            $cat = getCatName($db, $catID);
-            $catParentID = getCatParent($db, $catID);
-            $catParentName = getCatname($db, $catParentID);
+            $catID = getNewsCat($_GET['n']);
+            $cat = getCatName($catID);
+            $catParentID = getCatParent($catID);
+            $catParentName = getCatname($catParentID);
             echo '<li class="between">&gt;</li><li><a href="/">Blog</a></li>'."\r";
             if(lowerCat($cat) !== 'blog') {
                 echo '<li class="between">&gt;</li><li><a href="/'.lowerCat($catParentName).'">'.$catParentName.'</a></li>'."\r";
                 echo '<li class="between">&gt;</li><li><a href="/'.lowerCat($cat).'">'.$cat.'</a></li>'."\r";
             }
         } else {
-            if(isset($_GET['c']) && isCat($db, $_GET['c'])) {
+            if(isset($_GET['c']) && isCat($_GET['c'])) {
                 $catID = $_GET['c'];
-            } else if(isset($_GET['p']) && isCat($db, $_GET['p'])) {
+            } else if(isset($_GET['p']) && isCat($_GET['p'])) {
                 $catID = $_GET['p'];
             } else {
-                $catID = getCatID($db, 'Blog');
+                $catID = getCatID('Blog');
             }
             if(!is_numeric($catID)) {
-                $catID = getCatID($db, $catID);
+                $catID = getCatID($catID);
             }
-            $catParentID = getCatParent($db, $catID);
-            $children = getChildrenNames($db, $catParentID);
+            $catParentID = getCatParent($catID);
+            $children = getChildrenNames($catParentID);
             $noborder = ' class="noborder"';
-            if($catID == getCatID($db, 'blog')) {
+            if($catID == getCatID('blog')) {
                 echo ' <li'.$noborder.'><a href="/blog">Blog</a></li>'."\r";
                 $noborder = '';
             }
@@ -240,7 +224,8 @@
         }
     }
  
-    function genTopArticles($db, $mob, $n = 5) {
+    function genTopArticles($mob, $n = 5) {
+        $db = Database::getDB()->getCon();
         $ret = '';
         $ret .= '<span class="entryInfo">viel gelesene Artikel</span>'."\n";
         $ret .= '<ul class="topList">'."\n";
@@ -271,13 +256,14 @@
         }
         $stmt->close();
         foreach($res as $k => $v) {
-            $ret .= '<li><a href="'.getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']).'" title="'.$v['Titel'].'">'.shortenTitle($v['Titel'], 25).'</a></li>';
+            $ret .= '<li><a href="'.getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']).'" title="'.$v['Titel'].'">'.shortenTitle($v['Titel'], 25).'</a></li>';
         }
         $ret .= '</ul>'."\n";
         return $ret;
     }
  
-    function genlastArticles($db, $mob, $n = 5) {
+    function genlastArticles($mob, $n = 5) {
+        $db = Database::getDB()->getCon();
         $ret = '';
         $ret .= '<h2>Letzten '.$n.' Artikel</h2>'."\n";
         $ret .= '<ul>'."\n";
@@ -307,7 +293,7 @@
         }
         $stmt->close();
         foreach($res as $k => $v) {
-            $ret .= '<li><a href="'.getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']).'" title="'.$v['Titel'].'">'.shortenTitle($v['Titel'], 25).'</a></li>';
+            $ret .= '<li><a href="'.getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']).'" title="'.$v['Titel'].'">'.shortenTitle($v['Titel'], 25).'</a></li>';
         }
         $ret .= '</ul>'."\n";
         return $ret;

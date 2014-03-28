@@ -1,7 +1,7 @@
 <?php
   if (count($data['news'])) {
     foreach ($data['news'] as $beitrag) {
-      $url = 'http://beusterse.de'.replaceUml(getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']));
+      $url = 'http://beusterse.de'.replaceUml(getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']));
       $anhang = ' #beusterse ';
       if(strlen($beitrag['Titel']) > 61) {
         $text = substr($beitrag['Titel'], 0, 60).'...'.$anhang.$url;
@@ -50,23 +50,16 @@
   <!-- comments -->
   <div id="beContentEntryComments">
     <h2 id="comments" class="beContentEntryCommentsHeader">Kommentare (<?php echo $beitrag['Cmt']; ?>)</h2>
-    <?php if(count($data['comments']) > 0) { ?>
-      <?php foreach($data['comments'] as $cmt) { ?>
+    <?php 
+      $cmtReply = getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);
+      if(count($data['comments']) > 0) {
+        foreach($data['comments'] as $cmt) {
+
+          echo genComment($cmt, $cmtReply);
+        }
+        if($beitrag['seitenzahlC'] > 1) { ?>
     <div class="beCommentEntry">
-      <span class="beCommentEntryAvatar"><img src="<?php echo get_Gravatar($cmt['mail']); ?>" alt="Avatar"></span>
-      <span class="beCommentEntryHeader">
-        <time datetime="<?php echo $cmt['datAttr']; ?>" class="long"><?php echo $cmt['datum']; ?></time> -
-        <?php if(isValidUserUrl($cmt['web'])) {echo '<a href="'.$cmt['web'].'">'.$cmt['autor'].'</a>';} else {echo $cmt['autor'];} ?>
-      </span><br>
-      <div class="beCommentEntryContent">
-        <?php echo $cmt['inhalt']."\n"; ?>
-      </div>
-      <br class="clear">
-    </div>
-      <?php } ?>
-      <?php if($beitrag['seitenzahlC'] > 1) { ?>
-    <div class="beCommentEntry">
-      <?php echo genPager($beitrag['seitenzahlC'], $beitrag['startC'], getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']).'/page', $mob); ?>
+      <?php echo genPager($beitrag['seitenzahlC'], $beitrag['startC'], getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']).'/page', $mob); ?>
     </div>
       <?php } ?>
     <?php } else { ?>
@@ -74,10 +67,10 @@
       <p>Keine Kommentare vorhanden.</p>
     </div>
     <?php } ?>
-    <div class="beCommentNew">
+    <div class="beCommentNew" id="newComment">
       <span class="beCommentNewHeader">Schreibe einen Kommentar!</span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']), time(), $mob, $bbCmt, 'Kommentar schreiben', 'commentForm'); ?>
+       echo genFormPublic($err, $cmtReply, time(), $mob, $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
     </div>
   </div>
         

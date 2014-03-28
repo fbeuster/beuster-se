@@ -18,19 +18,19 @@
         $ret .= "</div>\n";
         return $ret;
     }
-    function moduleTopArticles ($db, $mob) {
+    function moduleTopArticles ($mob) {
         if(!$mob) {
             $appPre = '<div class="beMainAsideEntry top">';
             $appPost = '</div>';
-            return $appPre.genTopArticles($db, $mob).$appPost;
+            return $appPre.genTopArticles($mob).$appPost;
         }
     }
  
-    function moduleLastArticles ($db, $mob) {
+    function moduleLastArticles ($mob) {
         if(!$mob) {
             $appPre = '<div class="moduleAside">';
             $appPost = '</div>';
-            return $appPre.genLastArticles($db, $mob).$appPost;
+            return $appPre.genLastArticles($mob).$appPost;
         }
     }
  
@@ -141,13 +141,14 @@
         return $ret;
     }
  
-    function moduleRandomArticle($db, $mob) {
+    function moduleRandomArticle($mob) {
+        $db = Database::getDB()->getCon();
         $ret = '';
         $ena = 1;
         $done = false;
         while(!$done) {
-            $id = mt_rand(0,getAnzNews($db));
-            if(newsExists($db, $id) && isNewsVisible($db, $id)) {
+            $id = mt_rand(0,getAnzNews());
+            if(newsExists($id) && isNewsVisible($id)) {
                 $done = true;
             }
         }
@@ -169,23 +170,23 @@
         $result->close();
         if('[yt]' == substr($newsinhalt,0,4)) {$preApp = '<p class="randomText" style="text-indent:0;">';} else {$preApp = '<p class="randomText">';}
         $backApp = '</p>';                  
-        $catName = getCatName($db, getNewsCat($db, $id));
+        $catName = getCatName(getNewsCat($id));
         $ret .= '<div class="beMainAsideEntry randomArticle">'."\n";
         $ret .= '  <span class="entryInfo">Kennst du schon...</span>';
         $ret .= '<h5 class="randomTitle">'.changetext($newstitel, 'titel', $mob).'</h5>'."\n";
-        $ret .= $preApp.str_replace('###link###', getLink($db, $catName, $newsid, $newstitel), changetext($newsinhalt, 'vorschau', $mob, 200)).$backApp;
+        $ret .= $preApp.str_replace('###link###', getLink($catName, $newsid, $newstitel), changetext($newsinhalt, 'vorschau', $mob, 200)).$backApp;
         $ret .= '</div>'."\n";
         return $ret;
     }
     
-    function moduleArchive($db, $mob) {
+    function moduleArchive($mob) {
         $ret = '';
         if(!$mob) {
             $ret .= '<div class="beMainAsideEntry archive" style="max-height: inherit !important;">'."\n";
             $ret .= ' <span class="entryInfo">schau mal ins Archiv</span>'."\n";
             $ret .= ' <ul class="articleArchiveMain">'."\n";
             for($year = (int)date("Y"); $year >= 2010; $year--) {
-                $numberYear= articlesInDate($db, $year);
+                $numberYear= articlesInDate($year);
                 if($numberYear > 0) {
                     $ret .= '  <li>'."\n";
                     $ret .= '   <span class="articleArchiveYear" style="cursor: pointer;">'.$year."</span>\n";
@@ -196,10 +197,12 @@
                         $m = 12;
                     }
                     for($month = $m; $month >= 1; $month--) {
-                        $numberMonth = articlesInDate($db, $year, $month);
+                        $numberMonth = articlesInDate($year, $month);
                         if($numberMonth > 0) {
                             $ret .= '    <li>'."\n";
-                            $ret .= '     <a href="/'.$year.'/'.$month.'">'.makeMonthName($month).' <span class="number" style="color: #999999;">('.$numberMonth.')</span></a>'."\n";
+                            $ret .= '     <a href="/'.$year.'/'.$month.'">';
+                            $ret .= '     '.makeMonthName($month).' <span class="number" style="color: #999999;">('.$numberMonth.')</span>';
+                            $ret .= '     </a>'."\n";
                             $ret .= '    </li>'."\n";
                         }
                     }

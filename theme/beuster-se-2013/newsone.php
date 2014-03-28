@@ -1,7 +1,7 @@
 <?php
   if (count($data['news'])) {
     foreach ($data['news'] as $beitrag) {
-      $url = 'http://beusterse.de'.replaceUml(getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']));
+      $url = 'http://beusterse.de'.replaceUml(getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']));
       $anhang = ' #beusterse ';
       if(strlen($beitrag['Titel']) > 61) {
         $text = substr($beitrag['Titel'], 0, 60).'...'.$anhang.$url;
@@ -54,7 +54,7 @@
   <div id="beContentEntryComments">
     <h2 id="comments" class="beContentEntryCommentsHeader">Kommentare (<?php echo $beitrag['Cmt']; ?>)</h2>
     <?php
-      $cmtReply = getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);
+      $cmtReply = getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);
       if(count($data['comments']) > 0) {
         foreach($data['comments'] as $cmt) {
 
@@ -62,7 +62,7 @@
         }
         if($beitrag['seitenzahlC'] > 1) { ?>
     <div class="beCommentEntry">
-      <?php echo genPager($beitrag['seitenzahlC'], $beitrag['startC'], getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']).'/page', $mob); ?>
+      <?php echo genPager($beitrag['seitenzahlC'], $beitrag['startC'], getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']).'/page', $mob); ?>
     </div>
       <?php } ?>
     <?php } else { ?>

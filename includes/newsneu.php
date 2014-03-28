@@ -1,12 +1,14 @@
 <?php
     $a = array();
-    if (getUserID($db) && hasUserRights($db, 'admin')) {
+    if (getUserID() && hasUserRights('admin')) {
         refreshCookies();
-        $a['filename'] = 'newsneu.tpl';
+        $a['filename'] = 'newsneu.php';
         $a['data'] = array();
         $err = 0;
         $neu = 0;
         $neuPl = 0;
+        $db = Database::getDB()->getCon();
+
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $title      = changetext($_POST['newstitel'], 'neu', $mob);
             $inhalt     = changeText($_POST['newsinhalt'], 'neu', $mob);
@@ -25,7 +27,7 @@
                 $ena = 0;
             else
                 $ena = 1;
-            $authID = getUserID($db);
+            $authID = getUserID();
             if(isset($_POST['projStat']))
                 $projStat = trim($_POST['projStat']);
             $eRet = array(  'titel'  => $title,
@@ -72,12 +74,12 @@
                 } else {
                 }
                 if(!$neu){
-                    $catID = getCatID($db, $cat);
-                    $catNewsID = getMaxCatID($db, $catID) + 1;
+                    $catID = getCatID($cat);
+                    $catNewsID = getMaxCatID($catID) + 1;
                 } else {
                     $catNewsID = 1;
                 }
-                if($catID != getCatID($db, 'Projekte')) {
+                if($catID != getCatID('Projekte')) {
                     $projStat = 0;
                 } else {
                     if($projStat == 0) {
@@ -85,7 +87,7 @@
                         // Projekte als Cat gewält aber keinen Status angegeben
                     }
                 }
-                if($catID == getCatID($db, 'Portfolio')) {
+                if($catID == getCatID('Portfolio')) {
                     $ena = 0;
                 }
 
@@ -118,7 +120,7 @@
                     $imgReplace = array();
                     foreach($_FILES['file']['name'] as $key => $value) {
                         if($_FILES['file']['size'][$key] > 0 && $_FILES['file']['size'][$key] < 5242880 && isImage($_FILES['file']['type'][$key])) {
-                            if($catID == getCatID($db, 'Portfolio')) {
+                            if($catID == getCatID('Portfolio')) {
                                 $pfad = 'images/port/'.pathinfo($_FILES['file']['name'][$key], PATHINFO_BASENAME);
                             } else {
                                 $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.$key.'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
@@ -217,7 +219,7 @@
                                 $catPar = 7;
                             } else {
                                 $typ = 2;
-                                $catPar = getCatID($db, $catPar);
+                                $catPar = getCatID($catPar);
                             }
                             if(!$neuPl) {
                                 // Kategorie anlegen
@@ -249,7 +251,7 @@
                                 $stmt->close();
                             }
                         }
-                        $catID = getCatID($db, $cat);
+                        $catID = getCatID($cat);
                         
                         // Bilder einfügen
                         $newContent = $inhalt;
@@ -279,9 +281,6 @@
                             $sql = "INSERT INTO tags
                                         (`news_id`, `tag`)
                                     VALUES ".$tagSql;
-                            pre("\n\r");
-                            pre($tags);
-                            pre($tagSql);
                             if(!$stmt = $db->prepare($sql)) {
                                 return $db->error;
                             }
@@ -306,8 +305,8 @@
                         $stmt->close();
       
                         // RSS-Eintrag
-                        if($ena && $catID !== getCatID($db, 'Portfolio')) {
-                            $lnk = 'http://beusterse.de'.getLink($db, $cat, $id, $title);
+                        if($ena && $catID !== getCatID('Portfolio')) {
+                            $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,
                                         str_replace('###link###', $lnk, changetext($inhalt, 'vorschau', $mob)),
@@ -352,12 +351,12 @@
             }
         }
   
-        $a['data']['pars'] = getTopCats($db);
-        $a['data']['cats'] = getSubCats($db);
+        $a['data']['pars'] = getTopCats();
+        $a['data']['cats'] = getSubCats();
         $a['data']['cats'][] = 'Blog';
-        $a['data']['pls'] = getPlaylists($db);
+        $a['data']['pls'] = getPlaylists();
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-    } else if(getUserID($db)){
+    } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';

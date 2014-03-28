@@ -3,9 +3,10 @@
   $a['data'] = array();
   if(!isset($_GET['aut'])) {
   } else {
-    $a['filename'] = 'aboutMod.tpl';
+    $a['filename'] = 'aboutMod.php';
+    $db = Database::getDB()->getCon();
     $uName = $db->real_escape_string(stripslashes(trim($_GET['aut'])));
-    $uID = getUserIDbyName($db, $uName);
+    $uID = getUserIDbyName($uName);
     if(!is_int($uID)) {
       $a['data']['err'] = $uName;
     } else {
@@ -25,7 +26,7 @@
       $stmt->close();
       $a['data']['about'] = array('id' => $uID,
                                   'txt' => str_replace('[contactmail]', '</p><address>'.str_replace('@', ' [at] ', getContactMail($db, $uID)).'</address><p>', changetext($uTxt, 'inhalt', $mob)),
-                                  'ClearName' => getClearname($db, $uID),
+                                  'ClearName' => getClearname($uID),
                                   'Name' => $uName);
     }
   }

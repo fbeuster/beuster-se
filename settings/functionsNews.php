@@ -1,6 +1,7 @@
 <?php
 
-    function getNewsTags($db, $newsId, $returnString) {
+    function getNewsTags($newsId, $returnString) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     tag
                 FROM
@@ -38,7 +39,8 @@
         }
     }
  
-    function getNewsIDsTitlesContentCat($db) {
+    function getNewsIDsTitlesContentCat() {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     news.ID,
                     news.Titel,
@@ -60,7 +62,8 @@
         return $news;  
     }
  
-    function getNewsTitle($db, $id = -1) {
+    function getNewsTitle($id = -1) {
+        $db = Database::getDB()->getCon();
         if($id == -1) {
             $id = $_GET['n'];
         }
@@ -79,7 +82,8 @@
         return changetext($title, 'titel', true);  
     }
 
-    function isNewsVisible($db, $id) {
+    function isNewsVisible($id) {
+        $db = Database::getDB()->getCon();
         $ena = 1;
         $sql = 'SELECT
                     ID
@@ -105,7 +109,8 @@
         return true;
     }
  
-    function getAnzNews($db) {
+    function getAnzNews() {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     Count(ID) As Newszahl
                 FROM
@@ -120,7 +125,8 @@
         return $anzahl;
     }
  
-    function newsExists($db, $id){
+    function newsExists($id){
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     ID
                 FROM
@@ -143,7 +149,8 @@
         return true;
     }
   
-    function increaseHitNumber($db, $id) {
+    function increaseHitNumber($id) {
+        $db = Database::getDB()->getCon();
         $sql = 'UPDATE
                     news
                 SET
@@ -156,7 +163,8 @@
         $stmt->close();
     }
  
-    function getNewsTitel($db, $id) {
+    function getNewsTitel($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     Titel
                 FROM
@@ -172,7 +180,8 @@
         return $tit;
     }
  
-    function getHits($db, $id) {
+    function getHits($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     Hits
                 FROM
@@ -188,8 +197,9 @@
         return $a;
     }
  
-    function getNewsID($db, $id, $cat) {
-        $cat = getCatID($db, $cat);
+    function getNewsID($id, $cat) {
+        $db = Database::getDB()->getCon();
+        $cat = getCatID($cat);
         $sql = "SELECT
                     NewsID
                 FROM
@@ -206,7 +216,8 @@
         return $a;
     }
  
-    function getNewsCat($db, $id) {
+    function getNewsCat($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     Cat
                 FROM
@@ -222,7 +233,8 @@
         return $a;
     }
  
-    function getNewsCatID($db, $id) {
+    function getNewsCatID($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     CatID
                 FROM
@@ -238,7 +250,8 @@
         return $a;
     }
     
-    function getMaxNewsUpTime($db) {
+    function getMaxNewsUpTime() {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     MIN(UNIX_TIMESTAMP(Datum))
                 FROM            
@@ -256,7 +269,8 @@
             return $newsUpTime;
         }
     }
-    function getNewsUpTime($db, $newsid) {
+    function getNewsUpTime($newsid) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     UNIX_TIMESTAMP(Datum)
                 FROM            
@@ -277,7 +291,8 @@
         }
     }
 
-    function getArticleAttribute($db, $article, $attribute) {
+    function getArticleAttribute($article, $attribute) {
+        $db = Database::getDB()->getCon();
         switch ($attribute) {
             case 'enable':
                 $sql = "SELECT
@@ -302,6 +317,30 @@
                 return -1;
         }
 
+    }
+
+    function notifyAdmin($title, $content, $user) {
+        $mailTopic = 'Neuer Kommentar zu "'.$titel.'"';
+        $mailContent = '<html>';
+        $mailContent .= '<head><title>Neuer Kommentar</title>';
+        $mailContent .= '</head>';
+        $mailContent .= '<body>';
+        $mailRealContent = '<h1>'.$title.'</h1>';
+        $mailRealContent .= '<p>'.$content.'</p>';
+        $mailRealContent .= '<p>von: '.$user.'</p>';
+        $mailContent .= $mailRealContent;
+        $mailContent .= '</body></html>';
+        $mailHeader = 'MIME-Version: 1.0'."\n";
+        $mailHeader .= 'Content-Type: text/html; charset=utf-8'."\n";
+        $mailHeader .= 'From: beuster{se} Kommentare <info@beusterse.de>'."\n";
+        $mailHeader .= 'Reply-To: beuster{se} Kommentare <info@beusterse.de>'."\n";
+        $mailHeader .= 'X-Mailer: PHP/'.phpversion().'\r\n';
+
+        // return
+        if(!$local) {
+            return mail(adminMail(), $mailTopic, $mailContent, $mailHeader);
+        }
+        return false;
     }
 
 ?>

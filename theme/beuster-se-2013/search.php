@@ -19,9 +19,9 @@
       <header>
         <p>
           <time><?php echo $result['dat'] ?></time>
-          <a href="<?php echo getLink($db, $result['cat'], $result['id'], $result['tit']);?>" class="title"><?php echo $result['tit']; ?></a>
+          <a href="<?php echo getLink($result['cat'], $result['id'], $result['tit']);?>" class="title"><?php echo $result['tit']; ?></a>
           <span>
-            <a href="<?php echo getLink($db, $result['cat'], $result['id'], $result['tit']);?>">
+            <a href="<?php echo getLink($result['cat'], $result['id'], $result['tit']);?>">
               <?php echo $result['cmt']; ?> Kommentare
             </a>
           </span>
@@ -30,7 +30,7 @@
           </span>
         </p>
       </header>
-      <p><?php echo str_replace('###link###', getLink($db, $result['cat'], $result['id'], $result['tit']), $result['inh'])."\n";?></p>
+      <p><?php echo str_replace('###link###', getLink($result['cat'], $result['id'], $result['tit']), $result['inh'])."\n";?></p>
     </article><?php
          $i++;
         }

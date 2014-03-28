@@ -1,14 +1,14 @@
 ﻿<?php
     $a = array();
-    if (getUserID($db) and hasUserRights($db, 'admin')) {
+    if (getUserID() and hasUserRights('admin')) {
         refreshCookies();
-        $a['filename'] = 'admin.tpl';
+        $a['filename'] = 'admin.php';
         $a['data'] = array();
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-    } else if(getUserID($db)){
+    } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';
     } else {
-        $a['filename'] = 'login.tpl';
+        $a['filename'] = 'login.php';
         $a['data'] = array();
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
     }

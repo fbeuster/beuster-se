@@ -1,15 +1,16 @@
 <?php
+    $db = Database::getDB()->getCon();
     if(!$local) {
-        increaseHitNumber($db, $id);
+        increaseHitNumber($id);
     }
     
-    $playlistID = getPlaylistID($db, getNewsCat($db, $id));
+    $playlistID = getPlaylistID(getNewsCat($id));
     $return = '';
  
     if($playlistID == false) {
-        $a['filename'] = 'newsone.tpl';
+        $a['filename'] = 'newsone.php';
     } else {
-        $a['filename'] = 'playlist.tpl';
+        $a['filename'] = 'playlist.php';
         include('playlist.php');
     }
  
@@ -18,58 +19,84 @@
         
         $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
         $Inhalt = changetext(trim($_POST['usrcnt']), 'neu', $mob);
-        $Usermail = $db->real_escape_string(stripslashes(trim($_POST['usrml'])));
+        $Usermail = $db->real_escape_string(stripslashes(strtolower(trim($_POST['usrml']))));
         $webpage = $db->real_escape_string(stripslashes(trim($_POST['usrpg'])));
         $err = checkStandForm($user, $Inhalt, $Usermail, $webpage, trim($_POST['date']), $_POST['email'], $_POST['homepage'], 'commentForm');
         $Inhalt = remDoubles($Inhalt, array('[b]','[i]','[u]'));
-        $replyTo = checkReplyId($db, trim($_POST['reply']));
+        $replyTo = checkReplyId(trim($_POST['reply']));
         
-        if (getUserID($db) && hasUserRights($db, 'admin')) {
+        if (getUserID() && hasUserRights('admin')) {
             refreshCookies();
             $frei = 2;
-            $Usermail = $db->real_escape_string(stripslashes(ADMIN_GRAV_MAIL));
+            $Usermail = $db->real_escape_string(stripslashes(strtolower(ADMIN_GRAV_MAIL)));
             $webpage = $db->real_escape_string(stripslashes(ADMIN_WEBPAGE));
         }
-        $titel = getNewsTitel($db, $id);
-        $errRet = substr(getLink($db, getCatName($db, getNewsCat($db, $id)), $id, $titel), 1);
+        $titel = getNewsTitel($id);
+        $errRet = substr(getLink(getCatName(getNewsCat($id)), $id, $titel), 1);
         if($err == 0) {
-            // no errors, insert comment
-            $sql = 'INSERT INTO
-                        kommentare(Mail, Name, Inhalt, Datum, NewsID, website, Frei, ParentID)
-                    VALUES
-                        (?, ?, ?, NOW(), ?, ?, ?, ?)';
-            if(!$stmt = $db->prepare($sql)) {
-                $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
-            }
-            $stmt->bind_param('sssisii', $Usermail, $user, $Inhalt, $id, $webpage, $frei, $replyTo);
-            if(!$stmt->execute()) {
-                $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
+
+            // exists user in db?
+            $newUser = true;
+            $sql = 'SELECT ID FROM users WHERE LOWER(Email) = ?';
+            $stmt = $db->prepare($sql);
+            if($stmt === false) {
+                $return = showInfo('Fehler #NC3, bitte Admin kontaktieren.', $errRet);
+            } else {
+                $stmt->bind_param('s', $Usermail);
+                if(!$stmt->execute()) {
+                    $return = showInfo('Fehler #NC4, bitte Admin kontaktieren.', $errRet);
+                } else {
+                    $stmt->bind_result($uid);
+                    if(!$stmt->fetch()) {
+                        $newUser = false;
+                    }
+                }
             }
             $stmt->close();
             
-            // notify admin
-            $mailTopic = 'Neuer Kommentar zu "'.$titel.'"';
-            $mailContent = '<html>';
-            $mailContent .= '<head><title>Neuer Kommentar</title>';
-            $mailContent .= '</head>';
-            $mailContent .= '<body>';
-            $mailRealContent = '<h1>'.$titel.'</h1>';
-            $mailRealContent .= '<p>'.$Inhalt.'</p>';
-            $mailRealContent .= '<p>von: '.$user.'</p>';
-            $mailContent .= $mailRealContent;
-            $mailContent .= '</body></html>';
-            $mailHeader = 'MIME-Version: 1.0'."\n";
-            $mailHeader .= 'Content-Type: text/html; charset=utf-8'."\n";
-            $mailHeader .= 'From: beuster{se} Kommentare <info@beusterse.de>'."\n";
-            $mailHeader .= 'Reply-To: beuster{se} Kommentare <info@beusterse.de>'."\n";
-            $mailHeader .= 'X-Mailer: PHP/'.phpversion().'\r\n';
+            // add user to db
+            if($newUser) {
+                $sql = 'INSERT INTO
+                            users(Name, Rights, Email, regDate, Clearname, Website)
+                        VALUES
+                            (?, ?, ?, NOW(), ?, ?)';
+                if(!$stmt = $db->prepare($sql)) {
+                    $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
+                } else {
+                    $rights = 'user';
+                    $stmt->bind_param('sssss', preg_replace('/[^A-Za-z0-9-_]/', '', $user), $rights, $Usermail, $user, $webpage);
+                    if(!$stmt->execute()) {
+                        $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
+                    } else {
+                        $uid = $stmt->insert_id;
+                    }
+                }
+                $stmt->close();
+            }
+            
+
+            // insert comment
+            $sql = 'INSERT INTO
+                        kommentare(Inhalt, Datum, NewsID, Frei, ParentID, UID)
+                    VALUES
+                        (?, NOW(), ?, ?, ?, ?)';
+            if(!$stmt = $db->prepare($sql)) {
+                $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
+            } else {
+                $stmt->bind_param('siiii', $Inhalt, $id, $frei, $replyTo, $uid);
+                if(!$stmt->execute()) {
+                    $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
+                }
+            }
+            $stmt->close();
+            
+            // notify mails
+            notifyAdmin($titel, $Inhalt, $user);
 
             // return
             if($local) {
                 $return = showInfo('Kommentar wurde hinzugefügt.<br>'.$mailRealContent, $errRet);
             } else {
-                $mailSent = mail(adminMail($db), $mailTopic, $mailContent, $mailHeader);
-                if($mailsent){}
                 $return = showInfo('Kommentar wurde hinzugefügt.', $errRet);
             }
         }
@@ -123,7 +150,7 @@
         $return = 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';
     }
     $result->close();
-    $anzCmt = getCmt($db, $id);
+    $anzCmt = getCmt($id);
     if('[yt]' == substr($newsinhalt,0,4)) {
         $preApp = '<p style="text-indent:0;">';
     } else {
@@ -132,43 +159,46 @@
     $backApp = '</p>';
     $news[0] = array(   'ID'            => $id,
                         'Titel'         => changetext($newstitel, 'titel', $mob),
-                        'Autor'         => getClearName($db, $newsautor),
+                        'Autor'         => getClearName($newsautor),
                         'Datum'         => date('d.m.Y H:i', $newsdatum),
                         'datAttr'       => date('c', $newsdatum),
-                        'Inhalt'        => $preApp.grabImages($db, changetext($newsinhalt, 'inhalt', $mob)).$backApp,
+                        'Inhalt'        => $preApp.grabImages(changetext($newsinhalt, 'inhalt', $mob)).$backApp,
                         'Cmt'           => $anzCmt,
-                        'Cat'           => getCatName($db, getNewsCat($db, $id)),
+                        'Cat'           => getCatName(getNewsCat($id)),
                         'seitenzahl'    => 1,
                         'start'         => 1,
                         'seitenzahlC'   => getPages($anzCmt, 10, $start),
                         'startC'        => $start,
                         'projState'     => getProjState($projState),
-                        'tags'          => getNewsTags($db, $id, true));
+                        'tags'          => getNewsTags($id, true));
     $a['data']['eType'] = 0;
     $a['data']['ec'] = '';
     $a['data']['formCnt'] = 20;
  
-    $aside = array( 'author'        => getClearName($db, $newsautor),
-                    'authorNick'    => getuserName($db, $newsautor),
+    $aside = array( 'author'        => getClearName($newsautor),
+                    'authorNick'    => getuserName($newsautor),
                     'date'          => $news[0]['Datum'],
                     'datAttr'       => $news[0]['datAttr'],
-                    'link'          => getLink($db, replaceUml($news[0]['Cat']), $news[0]['ID'], $news[0]['Titel']));
+                    'link'          => getLink(replaceUml($news[0]['Cat']), $news[0]['ID'], $news[0]['Titel']));
  
     $sql = "SELECT
-                ID,
-                Name,
-                Inhalt,
-                UNIX_TIMESTAMP(Datum),
-                Mail,
-                Website,
-                Frei,
-                ParentID
+                kommentare.ID,
+                users.Clearname,
+                kommentare.Inhalt,
+                UNIX_TIMESTAMP(kommentare.Datum),
+                users.Email,
+                users.Website,
+                kommentare.Frei,
+                kommentare.ParentID
             FROM
                 kommentare
+            LEFT JOIN
+                users
+                ON kommentare.UID = users.ID
             WHERE
-                NewsID = ?
+                kommentare.NewsID = ?
             ORDER BY
-                Datum DESC
+                kommentare.Datum DESC
             LIMIT
                 ?, 10";
     if(!$result = $db->prepare($sql)) {

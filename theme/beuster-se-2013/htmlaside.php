@@ -16,17 +16,17 @@
       echo moduleSocialShare($mob);
       echo moduleDonate();
       if($currPage == 'index') {
-        echo moduleTopArticles($db,$mob);
+        echo moduleTopArticles($mob);
       } else if($currPage == 'single') {
         echo moduleArticleInfo($mob,  $ret['data']['aside']);
-        echo moduleRandomArticle($db,$mob);
+        echo moduleRandomArticle($mob);
       } else if($currPage == 'page') {
-        echo moduleRandomArticle($db,$mob);
+        echo moduleRandomArticle($mob);
       } else {
-        echo moduleRandomArticle($db,$mob);
+        echo moduleRandomArticle($mob);
       }
       echo moduleAdSenseAside($mob, $local, $noGA);
-      echo moduleArchive($db,$mob); ?>
+      echo moduleArchive($mob); ?>
     </aside>
     <!-- ende beMainAside -->
     <br class="clear">

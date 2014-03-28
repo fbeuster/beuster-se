@@ -1,9 +1,11 @@
 ﻿<?php
     $a = array();
-    if (getUserID($db) and hasUserRights($db, 'admin')) {
+    if (getUserID() and hasUserRights('admin')) {
         refreshCookies();
-        $a['filename'] = 'stats.tpl';
+        $a['filename'] = 'stats.php';
         $a['data'] = array();
+        $db = Database::getDB()->getCon();
+
         // get top 10 article stats
         $top = array();
         $sql = "SELECT
@@ -42,7 +44,7 @@
         }
         $stmt->close();
         foreach($top as $k => $v) {
-            $top[$k]['Link'] = getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']);
+            $top[$k]['Link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']);
         }
         $a['data']['top'] = $top;
         // get last 10 article stats
@@ -83,7 +85,7 @@
         }
         $stmt->close();
         foreach($last as $k => $v) {
-            $last[$k]['Link'] = getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']);
+            $last[$k]['Link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']);
         }
         $a['data']['last'] = $last;
         $sql = "SELECT
@@ -107,7 +109,7 @@
         $a['data']['down'] = $down;
         $stmt->close();
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-    } else if(getUserID($db)){
+    } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';

@@ -1,8 +1,9 @@
 <?php
 	$a = array();
-	if (getUserID($db) and hasUserRights($db, 'admin')) {
+	if (getUserID() and hasUserRights('admin')) {
+        $db = Database::getDB()->getCon();
 		refreshCookies();
-		$a['filename'] = 'newsoverview.tpl';
+		$a['filename'] = 'newsoverview.php';
 		$a['data'] = array();
 
 		// get articles
@@ -37,7 +38,7 @@
         }
         $stmt->close();
         foreach($news as $k => $v) {
-            $news[$k]['Link'] = getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']);
+            $news[$k]['Link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']);
         }
 
         // get comment amount
@@ -86,7 +87,7 @@
         $a['data']['admin_news'] = true;
 
 		return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-	} else if(getUserID($db)){
+	} else if(getUserID()){
 		return 'Sie haben hier keine Zugriffsrechte.';
 	} else {
 		return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';

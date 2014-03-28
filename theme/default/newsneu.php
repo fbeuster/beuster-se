@@ -1,9 +1,9 @@
-  <div class="beContentEntry">
+
   <?php if(isset($data['fe'])){ ?>
-    <p class="alert">Es ist ein Fehler aufgetreten! Typenummer: <?php echo $data['fe']['t']; ?></p>
+    <p>Es ist ein Fehler aufgetreten! Typenummer: <?php echo $data['fe']['t']; ?></p>
   <?php } ?>
     <form action="/newsneu" method="post" enctype="multipart/form-data">
-      <fieldset class="backend newEntry">
+      <fieldset>
         <legend>Neuen News-Eintrag verfassen</legend>
         <input type="text" name="newstitel" value="<?php if(isset($data['fe']['titel']))echo $data['fe']['titel']; ?>" role="newEntryTitle" placeholder="Titel des Blogeintrags">
         <br>
@@ -13,24 +13,24 @@
         <label>Releasedatum (YYYY-MM-DD):</label>
         <input type="date" name="release" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>">
         <br>
-        <label class="description">Kategorie:</label>
-        <select name="cat" class="catSelect drop200">
-          <option value="error" class="optTop">Kategorie wählen...</option>
+        <label>Kategorie:</label>
+        <select name="cat" class="catSelect">
+          <option value="error">Kategorie wählen...</option>
           <?php foreach($data['cats'] as $cat) { ?>
           <option value="<?php echo $cat; ?>"><?php echo $cat; ?></option>
           <?php } ?>
         </select><br>
-        <label class="description">(neu)</label>
-        <select name="catPar" class="drop200">
-          <option value="error" class="optTop">Parent wählen...</option>
+        <label>(neu)</label>
+        <select name="catPar">
+          <option value="error">Parent wählen...</option>
           <?php foreach($data['pars'] as $par) { ?>
-          <option value="<?php echo $par; ?>"><?php echo getCatName($db, $par); ?></option>
+          <option value="<?php echo $par; ?>"><?php echo getCatName($par); ?></option>
           <?php } ?>
         </select>
         <input type="text" name="catneu" title="Name neue Kategorie"><br>
-        <label class="description">Playlist:</label>
-        <select name="pl" class="drop200">
-          <option value="error" class="optTop">Playlist wählen...</option>
+        <label>Playlist:</label>
+        <select name="pl">
+          <option value="error">Playlist wählen...</option>
           <?php foreach($data['pls'] as $pl) { ?>
           <option value="<?php echo $pl; ?>"><?php echo $pl; ?></option>
           <?php } ?>
@@ -102,7 +102,7 @@
           </div>
         </div>
         <textarea name="newsinhalt" id="newsinhalt" cols="85" rows="20" role="newEntryContent"><?php if(isset($data['fe']['inhalt']))echo $data['fe']['inhalt']; ?></textarea>
-        <br class="clear"><br>
+        <br>
         <p style="padding: 0;">Bilder anhängen, maximal 5MB. Bestes Ergebnis bei 750*500px.</p>
         <label style="width: 100%;">
           Thumbnail (Nummer aus der Liste angeben)
@@ -117,7 +117,6 @@
         <input type="submit" name="formaction" value="News eintragen" />
       </fieldset>
     </form>
-    <p class="backendBackLink">
-      <a href="/admin" class="back">Zurück zur Administration</a>
+    <p>
+      <a href="/admin">Zurück zur Administration</a>
     </p>
-  </div>

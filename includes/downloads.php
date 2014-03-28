@@ -1,10 +1,11 @@
 ﻿<?php
     $a = array();
     $a['data'] = array();
+    $db = Database::getDB()->getCon();
     if(isset($_GET['d'])) {
         $d = trim($_GET['d']) + 0;
         if(is_int($d)) {
-            $a['filename'] = 'downloadsone.tpl';
+            $a['filename'] = 'downloadsone.php';
             $sql = "SELECT
                         downloads.ID,
                         downloads.Name,
@@ -132,7 +133,7 @@
             // n ist keine Integer
         }
     } else {
-        $a['filename'] = 'downloads.tpl';
+        $a['filename'] = 'downloads.php';
         $sql = "SELECT
             downloads.ID,
             downloads.Name,

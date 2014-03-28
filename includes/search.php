@@ -1,7 +1,8 @@
 <?php
   $a = array();
-  $a['filename'] = 'search.tpl';
+  $a['filename'] = 'search.php';
   $a['data'] = array();
+  $db = Database::getDB()->getCon();
 
   $searchStr = '';
   if(isset($_POST['s'])){$searchStr = trim($_POST['s']);}
@@ -39,7 +40,7 @@
                       'score'   => 0);
     }
     $result->close();
-    $maxTime = getMaxNewsUpTime($db);
+    $maxTime = getMaxNewsUpTime();
     foreach($news as $key => $entry) {
       
       /* Title-Score */
@@ -61,7 +62,7 @@
       $scoreContent += $scoreContentExa * 15;
       
       /* Zeitfaktor */
-      $newsTime = getNewsUpTime($db, $entry['id']);
+      $newsTime = getNewsUpTime($entry['id']);
       $timeFactor = $newsTime / $maxTime;
       
       /* Comment-Score */
@@ -94,8 +95,8 @@
 
       /* Popularity-Score */
       $pop = 0;
-      $cmts = getCmt($db, $entry['id']);
-      $hits = getHits($db, $entry['id']);
+      $cmts = getCmt($entry['id']);
+      $hits = getHits($entry['id']);
       $hitCoefficient = 100 - $hits * 100 / $newsTime;
       $pop = $cmts + $scoreComment;
       

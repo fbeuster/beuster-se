@@ -1,7 +1,7 @@
 <?php
 
-    function getPageType($db, $data) {
-        $page = getPage($db);
+    function getPageType($data) {
+        $page = getPage();
         if(isset($data['news']) && count($data['news']) > 0 && !isset($data['admin_news']) &&
             $page != 'single' && $page != 'page' || $page == 'portfolio') {
             return 'multipleArticles';
@@ -10,8 +10,8 @@
         }
     }
     
-    function getPage($db) {
-        $curPage = getCurrentPage($db);
+    function getPage() {
+        $curPage = getCurrentPage();
         if(isset($_GET['p']) && strtolower($_GET['p']) == 'portfolio') {
             return 'portfolio';
         }
@@ -29,15 +29,15 @@
         }
     }
  
-    function getCurrentPage($db) {
+    function getCurrentPage() {
         if(!isset($_GET['p'])) {
             return 'blog';
         } else {
             if($_GET['p'] == 'blog' && isset($_GET['n'])) {
                 return 'entry';
-            } else if(getCatID($db, $_GET['p']) && isTopCat($db, $_GET['p'])) {
+            } else if(getCatID($_GET['p']) && isTopCat($_GET['p'])) {
                 return 'topCategory';
-            } else if(getCatID($db, $_GET['p'])) {
+            } else if(getCatID($_GET['p'])) {
                 return 'category';
             } else {
                 return 'page';
@@ -63,16 +63,16 @@
         }
     }
     
-    function getPageUrl($db) {
-        $curPage = getCurrentPage($db);
+    function getPageUrl() {
+        $curPage = getCurrentPage();
         switch($curPage) {
             case 'blog':
                 return 'http://'.$_SERVER['HTTP_HOST'];
             case 'entry':
                 $id = $_GET['n'];
-                $title = getNewsTitle($db, $id);
-                $cat = getCatName($db, getNewsCat($db, $id));
-                return 'http://'.$_SERVER['HTTP_HOST'].getLink($db, $cat, $id, $title);
+                $title = getNewsTitle($id);
+                $cat = getCatName(getNewsCat($id));
+                return 'http://'.$_SERVER['HTTP_HOST'].getLink($cat, $id, $title);
             case 'topCategory':
                 return 'http://'.$_SERVER['HTTP_HOST'];
             case 'category':
@@ -82,39 +82,40 @@
         }
     }
     
-    function getPageTitle($db, $file) {
-        $curPage = getCurrentPage($db);
+    function getPageTitle($file) {
+        $curPage = getCurrentPage();
         switch($curPage) {
             case 'blog':
                 return 'Blog, Tipps und Videos - beuster{se}';
             case 'entry':
-                return getNewsTitle($db).' - beuster{se}';
+                return getNewsTitle().' - beuster{se}';
             case 'topCategory':
-                return getCatName($db, getCatID($db, $_GET['p'])).' - beuster{se}';
+                return getCatName(getCatID($_GET['p'])).' - beuster{se}';
             case 'category':
-                return getCatName($db, getCatID($db, $_GET['p'])).' - beuster{se}';
+                return getCatName(getCatID($_GET['p'])).' - beuster{se}';
             default:
                 return $file[$_GET['p']][1].' - beuster{se}';
         }
     }
  
-    function getPageDescription($db) {
-        $curPage = getCurrentPage($db);
+    function getPageDescription() {
+        $db = Database::getDB()->getCon();
+        $curPage = getCurrentPage();
         switch($curPage) {
             case 'blog':
-                $i = getCatID($db, 'Blog');
+                $i = getCatID('Blog');
                 break;
             case 'entry':
                 $i = 0;
                 break;
             case 'topCategory':
-                $i = getCatID($db, $_GET['p']);
+                $i = getCatID($_GET['p']);
                 break;
             case 'category':
-                $i = getCatID($db, $_GET['p']);
+                $i = getCatID($_GET['p']);
                 break;
             default:
-                $i = getCatID($db, 'Blog');
+                $i = getCatID('Blog');
                 break;
         }
         if($i !== 0) {

@@ -137,12 +137,13 @@
         return $title;
     }
  
-    function getLink($db, $cat, $id, $title){
+    function getLink($cat, $id, $title){
         $r = '/'.$id.'/'.lowerCat($cat).'/'.replaceUml(buildLinkTitle($title));
         return $r;
     }
  
-    function linkGrab($db, $id) {
+    function linkGrab($id) {
+        $db = Database::getDB()->getCon();
         if($id <= 0) return '#';
         $ena = 1;
         $sql = "SELECT
@@ -164,7 +165,7 @@
         $result->bind_result($title);
         if(!$result->fetch()) return '#';
         $result->close();
-        return substr(getLink($db, getCatName($db, getNewsCat($db,$id)), $id, $title),1);
+        return substr(getLink(getCatName(getNewsCat($id)), $id, $title), 1);
     }
  
     function shortenTitle($title, $l = 20) {
@@ -172,6 +173,11 @@
             $title = substr($title, 0, $l - 1).'...';
         }
         return $title;
+    }
+
+    function getThemeStyle($css) {
+        global $beTheme;
+        return '/theme/'.$beTheme.'/'.$css;
     }
 
     /*** validation ***/
@@ -274,7 +280,8 @@
             return false;
     }
 
-    function checkReplyId($db, $id) {
+    function checkReplyId($id) {
+        $db = Database::getDB()->getCon();
         if(!is_numeric($id)) {
             return -1;
         }
@@ -282,7 +289,7 @@
         $sql = 'SELECT
                     ID
                 FROM
-                    news
+                    kommentare
                 WHERE
                     ID = ?';
         $stmt = $db->prepare($sql);
@@ -459,7 +466,8 @@
         return $num_pages;
     }
  
-    function getAnz($db, $dateSQL = "Datum < NOW()") {
+    function getAnz($dateSQL = "Datum < NOW()") {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     COUNT(*) as Anzahl
                 FROM
@@ -475,7 +483,8 @@
         return $a;
     }
  
-    function getAnzDev($db, $dateSQL = "Datum < NOW()") {
+    function getAnzDev($dateSQL = "Datum < NOW()") {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     COUNT(news.ID) as Anzahl
                 FROM
@@ -494,7 +503,8 @@
         return $a;
     }
  
-    function getCmt($db, $id) {
+    function getCmt($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     COUNT(*) as Anzahl
                 FROM
@@ -510,7 +520,8 @@
         return $a;
     }
  
-    function getNewsPicNumber($db, $id) {
+    function getNewsPicNumber($id) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     COUNT(ID) as Anzahl
                 FROM
@@ -594,7 +605,8 @@
         return $ret;
     }
  
-    function getVideoArticle($db, $id) {
+    function getVideoArticle($id) {
+        $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
                     ID,
@@ -614,7 +626,8 @@
         return -1;
     }
     
-    function getYouTubeIDFromArticle($db, $id) {
+    function getYouTubeIDFromArticle($id) {
+        $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
                     Inhalt
@@ -635,7 +648,8 @@
         return -1;
     }
   
-    function getLast5Articles($db, $mob) {
+    function getLast5Articles($mob) {
+        $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
                     news.ID,
@@ -661,7 +675,7 @@
         }
         $stmt->close();
         foreach($ret as $k => $v) {
-            $ret[$k]['Link'] = getLink($db, getCatName($db, getNewsCat($db, $v['id'])), $v['id'], $v['Titel']);
+            $ret[$k]['Link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']);
         }
         return $ret;
     }
@@ -702,15 +716,16 @@
         return $url;
     }
     
-    function grabImages($db, $content) {
+    function grabImages($content) {
         while(preg_match('#\[img([0-9]*)\]#', $content)) {
-            $content = grabAnImage($db, $content);
+            $content = grabAnImage($content);
         }
         return $content;
     }
     
-    function grabAnImage($db, $content) {
+    function grabAnImage($content) {
         global $sysAdrr;
+        $db = Database::getDB()->getCon();
         $l = strlen($content);
         $pos1 = strpos($content, '[img');
         $pos2 = strpos($content, ']', $pos1) + 1;
@@ -747,7 +762,8 @@
         return $before.$image.$after;
     }
     
-    function articlesInDate($db, $year, $month = 0, $day = 0) {
+    function articlesInDate($year, $month = 0, $day = 0) {
+        $db = Database::getDB()->getCon();
         $return = '';
         // sql
         if($month == 0 && $day == 0) {

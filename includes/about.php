@@ -1,12 +1,13 @@
 <?php
   $a = array();
-  $a['filename'] = 'about.tpl';
+  $a['filename'] = 'about.php';
   $a['data'] = array();
   $a['data']['eType'] = 0;
   $a['data']['ec'] = '';
   $a['data']['formCnt'] = 20;
   
-  if('POST' == $_SERVER['REQUEST_METHOD']) {  
+  if('POST' == $_SERVER['REQUEST_METHOD']) {
+    $db = Database::getDB()->getCon();
     $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
     $Inhalt = $db->real_escape_string(stripslashes(trim($_POST['usrcnt'])));
     $Usermail = $db->real_escape_string(stripslashes(trim($_POST['usrml'])));

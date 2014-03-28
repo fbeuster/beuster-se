@@ -1,10 +1,11 @@
 ﻿<?php
-    if (getUserID($db)) {
+    if (getUserID()) {
         return showInfo('Sie sind bereits eingeloggt.','admin');
     }
     $ret = array();
-    $ret['filename'] = 'login.tpl';
+    $ret['filename'] = 'login.php';
     $ret['data'] = array();
+    $db = Database::getDB()->getCon();
 
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
         if (!isset($_POST['Username'], $_POST['Password'], $_POST['formaction'])) {

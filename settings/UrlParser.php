@@ -1,6 +1,7 @@
 <?php
     include('config.php');
     include('functions.php');
+    include('database.php');
     $parsingUrl = new UrlParser('/#id#/#cat#/#title#', '/#id#/#cat#');
     $parsedUrl = $parsingUrl->doParse();
     echo 'Location: http://'.$sev.$parsedUrl;
@@ -36,10 +37,7 @@
             $this->requestUrl     = $_SERVER['REQUEST_URI'];
             $this->titleScheme    = $titleScheme;
             $this->categoryScheme = $catScheme;
-            
-            $this->db = @new MySQLi(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-            $this->db->query("SET NAMES 'utf8'");
-            $this->db->query("SET CHARACTER SET 'utf8'");
+            $this->db = Database::getDB()->getCon();
         }
         
         /* public functions */

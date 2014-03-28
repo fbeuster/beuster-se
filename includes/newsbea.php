@@ -1,12 +1,13 @@
 ﻿<?php
     $a = array();
-    if (getUserID($db) and hasUserRights($db, 'admin')) {
+    if (getUserID() and hasUserRights('admin')) {
         refreshCookies();
-        $a['filename'] = 'newsbea.tpl';
+        $a['filename'] = 'newsbea.php';
         $a['data'] = array();
         $err = 0;
         $neu = 0;
         $neuPl = 0;
+        $db = Database::getDB()->getCon();
   
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             if (isset($_POST['formactionchange'])) {
@@ -25,7 +26,7 @@
                     $ena = 0;
                 else
                     $ena = 1;
-                $oldEna = getArticleAttribute($db, $newsID, 'enable');
+                $oldEna = getArticleAttribute($newsID, 'enable');
                 $eRet = array(  'titel'  => $title,
                                 'inhalt' => $inhalt,
                                 'id'     => $newsID); 
@@ -66,12 +67,12 @@
 
                 $e = array();
                 if(isset($_FILES['files'])) {
-                    $picsAnzOld = getNewsPicNumber($db, $newsID);
+                    $picsAnzOld = getNewsPicNumber($newsID);
                     foreach($_FILES['file']['name'] as $key => $value) {
                         if( $_FILES['file']['size'][$key] > 0 &&
                             $_FILES['file']['size'][$key] < 5242880 &&
                             isImage($_FILES['file']['type'][$key])) {
-                            if($catID == getCatID($db, 'Portfolio')) {
+                            if($catID == getCatID('Portfolio')) {
                                 $pfad = 'images/port/'.pathinfo($_FILES['file']['name'][$key], PATHINFO_BASENAME);
                             } else {
                                 $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.($key + $picAnzOld).'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
@@ -143,8 +144,8 @@
                     }
                 }
                 if($err == 0 && empty($e)) {
-                    $catidalt = getNewsCatID($db, $newsID);
-                    $catalt = getNewsCat($db, $newsID);
+                    $catidalt = getNewsCatID($newsID);
+                    $catalt = getNewsCat($newsID);
                     if ($neu){
                         /* neue Kategorie */
                         $sql = "INSERT INTO
@@ -176,7 +177,7 @@
                             $stmt->close();
                         }
                     } else {
-                        $cat = getCatID($db, $cat);
+                        $cat = getCatID($cat);
                         if($catalt != $cat) {
                             $sql = "SELECT
                                         MAX(CatID) AS neu
@@ -324,11 +325,11 @@
                     /* add to RSS */
                     if($ena && !$oldEna) {
                         if($neu) {
-                            $lnk = 'http://beusterse.de'.getLink($db, $catNeu, $newsID, $title);
+                            $lnk = 'http://beusterse.de'.getLink($catNeu, $newsID, $title);
                         } else {
-                            $lnk = 'http://beusterse.de'.getLink($db, getCatName($db, $cat), $newsID, $title);
+                            $lnk = 'http://beusterse.de'.getLink(getCatName($cat), $newsID, $title);
                         }
-                        $lnk = 'http://beusterse.de'.getLink($db, $cat, $id, $title);
+                        $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                         addRssItem( $rssFeedPath,
                                     $title,
                                     str_replace('###link###', $lnk, changetext($inhalt, 'vorschau', $mob)),
@@ -370,9 +371,9 @@
                                             'newsidbea'     => $newsid,
                                             'newsinhalt'    => changetext($newsinhalt, 'bea', $mob),
                                             'newstitel'     => changetext($newstitel, 'bea', $mob),
-                                            'newstags'      => getNewsTags($db, $newsid, true),
+                                            'newstags'      => getNewsTags($newsid, true),
                                             'newscat'       => $newscat,
-                                            'isPlaylist'    => isCatPlaylist($db, $newscatid));
+                                            'isPlaylist'    => isCatPlaylist($newscatid));
                 $sql = 'SELECT
                             Pfad,
                             Thumb,
@@ -412,14 +413,14 @@
         }
         $stmt->close();
         $a['data']['news'] = $news;
-        $a['data']['pars'] = getTopCats($db);
-        $a['data']['cats'] = getSubCats($db);
+        $a['data']['pars'] = getTopCats();
+        $a['data']['cats'] = getSubCats();
         $a['data']['cats'][] = 'Blog';
-        $a['data']['pls'] = getPlaylists($db);
+        $a['data']['pls'] = getPlaylists();
         $a['data']['admin_news'] = true;
 
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-    } else if(getUserID($db)){
+    } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';

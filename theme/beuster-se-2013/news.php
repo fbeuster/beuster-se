@@ -4,7 +4,7 @@
   <h1 class="beCategoryHeader"><?php echo $data['news'][0]['CatDispName']; ?> - beuster{se}</h1>
   <?php } ?>
     <menu class="beCategoryNav">
-      <?php echo genSubMenu($db); ?>
+      <?php echo genSubMenu(); ?>
     </menu>
   
     <div id="beMainContent">
@@ -16,12 +16,12 @@
   
   <?php if($i%2==0) { ?><div class="beContentEntryRow"><?php } ?>
   <article class="beContentEntry">
-    <h2 class="beContentEntryHeader"><a href="<?php echo getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>"><?php echo $beitrag['Titel']; ?></a></h2>
+    <h2 class="beContentEntryHeader"><a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>"><?php echo $beitrag['Titel']; ?></a></h2>
     <div class="beContentEntryFooter">
       <span class="categoryLink">Kategorie: <a href="/<?php echo lowerCat($beitrag['Cat']); ?>"><?php echo $beitrag['Cat']; ?></a></span>
       <span class="authorLink">von <?php echo $beitrag['Autor']; ?></span>
       <span class="commentsLink">
-        <a href="<?php echo getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>#comments">
+        <a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>#comments">
           <?php echo $beitrag['Cmt']; ?> Kommentare
         </a>
       </span>
@@ -36,7 +36,7 @@
     <?php } ?>
     <p>
       <time class="beContentEntryTime"  datetime="<?php echo $beitrag['datAttr']; ?>"><?php echo $beitrag['Datum']; ?></time>
-      <?php echo str_replace('###link###', getLink($db, $beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']), $beitrag['Inhalt'])."\n"; ?>
+      <?php echo str_replace('###link###', getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']), $beitrag['Inhalt'])."\n"; ?>
     </p>
   </article>
 

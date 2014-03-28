@@ -33,13 +33,12 @@
     include('settings/generators.php');
     include('settings/modules.php');
     include('settings/parser.php');
+    include('settings/database.php');
  
-    $db = @new MySQLi(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    $db->query("SET NAMES 'utf8'");
-    $db->query("SET CHARACTER SET 'utf8'");
-    if(mysqli_connect_errno()){
+    $db = Database::getDB()->getCon();
+    if($db->connect_errno){
         $ret = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
-    } else if(is_string($error = getUserID($db))){
+    } else if(is_string($error = getUserID())){
         $ret = $error;
     } else {
         // Laden der Include-Datei
@@ -60,40 +59,45 @@
  
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
-    $pageType = getPageType($db, $ret['data']);
-    $currPage = getPage($db);
+    $pageType = getPageType($ret['data']);
+    $currPage = getPage();
+
+    if(!isset($beTheme) || $beTheme == '') {
+        $beTheme = 'default';
+    }
+    $beThemeI = 'theme/'.$beTheme.'/';
     
     // Laden HTML-Kopf
-    include('templates/htmlheader.tpl');
+    include($beThemeI.'htmlheader.php');
     if($analyse && $local) include('settings/analyse.php');
-    include('templates/htmlwarning.tpl');
+    include($beThemeI.'htmlwarning.php');
  
     // Laden der Template-Datei
     if (is_array($ret) && isset($ret['filename'], $ret['data']) &&
         is_string($ret['filename']) && is_array($ret['data'])) {
         // Gültige Include-Datei
-        if (file_exists($file = 'templates/'.$ret['filename'])) {
+        if (file_exists($file = $beThemeI.$ret['filename'])) {
             $data = $ret['data'];
             include $file;
         } else {
             $data['msg'] = 'Templatedatei "'.$file.'" ist nicht vorhanden.';
-            include 'templates/error.tpl';
+            include $beThemeI.'error.php';
         }
     } else if (is_string($ret)) {
         // Fehlermeldung
         $data['msg'] = $ret;
-        include 'templates/error.tpl';
+        include $beThemeI.'error.php';
     } else if (1 == $ret) {
         // return wurde vergessen
         $data['msg'] = 'In der Include-Datei wurde die return Anweisung vergessen.';
-        include 'templates/error.tpl';
+        include $beThemeI.'error.php';
     } else {
         // ein Ungültiger Return wert
         $data['msg'] = 'Die Include-Datei hat einen ungültigen Wert zurückgeliefert.';
-        include 'templates/error.tpl';
+        include $beThemeI.'error.php';
     }
-    include('templates/htmlaside.tpl');
+    include($beThemeI.'htmlaside.php');
     // Laden HTML-Fuss
-    include('templates/htmlfooter.tpl');
+    include($beThemeI.'htmlfooter.php');
     ob_end_flush();
 ?>

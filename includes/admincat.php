@@ -1,8 +1,8 @@
 ﻿<?php
     $a = array();
-    if (getUserID($db) and hasUserRights($db, 'admin')) {
+    if (getUserID() and hasUserRights('admin')) {
         refreshCookies();
-        $a['filename'] = 'admincat.tpl';
+        $a['filename'] = 'admincat.php';
         $a['data'] = array();
   
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,15 +18,15 @@
                 9   => 'Neue Kategorie existiert bereits.',
                 10  => 'Neuer Parent existiert bereits.',
                 11  => 'SQL - ');
-            $parNames = getTopCats($db);
+            $parNames = getTopCats();
             $parIDs = array();
             foreach($parNames as $par) {
-                $parIDs[] = getCatID($db, $par);
+                $parIDs[] = getCatID($par);
             }
-            $catNames = getSubCats($db);
+            $catNames = getSubCats();
             $catIDs = array();
             foreach($catNames as $c) {
-                $catIDs[] = getCatID($db, $c);
+                $catIDs[] = getCatID($c);
             }
             $err = 0;
             if(isset($_POST['parSubmitTable'])) {
@@ -53,17 +53,17 @@
                     if($err == 0) {
                         // News updaten und Parents löschen
                         foreach($parDels as $del => $tar) {
-                            $er = transformCat($db, 'newscat', 'ParentID', $tar, $del);
+                            $er = transformCat('newscat', 'ParentID', $tar, $del);
                             if($er !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
-                            $er = transformCat($db, 'newscatcross', 'Cat', $tar, $del);
+                            $er = transformCat('newscatcross', 'Cat', $tar, $del);
                             if($err == 0 && $er !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
-                            $er = removeCat($db, $del);
+                            $er = removeCat($del);
                             if($err == 0 && $er !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
@@ -113,12 +113,12 @@
                     if($err == 0) {
                         // TODO: Alles gut, News updaten und Cats löschen
                         foreach($catDels as $del => $tar) {
-                            $er = transformNews($db, $del, $tar, getMaxCatID($db, $tar));
+                            $er = transformNews($del, $tar, getMaxCatID($tar));
                             if($err == 0 && $er !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             } else {
-                                $er = removeCat($db, $del);
+                                $er = removeCat($del);
                                 if($err == 0 && $er !== true) {
                                     $errMessages[11] .= $er;
                                     $err = 11;
@@ -127,7 +127,7 @@
                         }
                         // TODO: Alles gut, Cat neuen Parents unterstelllen
                         foreach($catNewPars as $old => $tar) {
-                            $er = transformCat($db, 'newscat', 'ParentID', $tar, $old, 'ID');
+                            $er = transformCat('newscat', 'ParentID', $tar, $old, 'ID');
                             if($err == 0 && $er !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
@@ -140,11 +140,11 @@
                     if('' == $newPar = trim($_POST['catCreateNewPar'])) {
                         $err = 6;
                     } else {
-                        if(isCat($db, $newPar)) {
+                        if(isCat($newPar)) {
                             $err = 10;
                         } else {
                             // Parent anlegen
-                            if($er = createCat($db, $newPar, 0, 0) !== true) {
+                            if($er = createCat($newPar, 0, 0) !== true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
@@ -157,9 +157,9 @@
                 if(isset($_POST['catCreateNewCat'], $_POST['catCreateNewCatPar'])) {
                     if('' != $newCat = trim($_POST['catCreateNewCat'])) {
                         if('err' != $newCatPar = $_POST['catCreateNewCatPar']) {
-                            if(!isCat($db, $newCat)) {
+                            if(!isCat($newCat)) {
                                 // Cat unter Parent anlegen
-                                $er = createCat($db, $newCat, $newCatPar, 2);
+                                $er = createCat($newCat, $newCatPar, 2);
                                 if($er !== true) {
                                     $errMessages[11] .= $er;
                                     $err = 11;
@@ -183,23 +183,23 @@
                 return showInfo('Fehler: '.$errMessages[$err].'<br><a href="/admincat" class="back">Zurück zur Kategorieverwaltung</a>', 'admincat');
             }
         }
-        $cs = getSubCats($db);
+        $cs = getSubCats();
         $cats = array();
         foreach($cs as $c) {
-            $cats[] = array('id' => getCatID($db, $c),
+            $cats[] = array('id' => getCatID($c),
                             'name' => $c,
-                            'parent' => getCatName($db, getCatParent($db, getCatID($db, $c))));
+                            'parent' => getCatName(getCatParent(getCatID($c))));
         }
-        $ps = getTopCats($db);
+        $ps = getTopCats();
         $pars = array();
         foreach($ps as $p) {
             $pars[] = array('id' => $p,
-                            'name' => getCatName($db, $p));
+                            'name' => getCatName($p));
         }
         $a['data']['cats'] = $cats;
         $a['data']['pars'] = $pars;
         return $a;
-    } else if(getUserID($db)){
+    } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';

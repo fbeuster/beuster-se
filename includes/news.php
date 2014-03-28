@@ -11,8 +11,9 @@
     $news = array();
     $archive = false;
 
-    $a['filename'] = 'news.tpl';
+    $a['filename'] = 'news.php';
     $a['data'] = array();
+    $db = Database::getDB()->getCon();
 
     if(isset($_GET['page']))
         $start = (int)$_GET['page'];
@@ -22,12 +23,12 @@
     if(isset($_GET['c'])) {
         $cat = $_GET['c'];
         if(!is_numeric($cat)) {
-            $cat = getCatID($db, $cat);
+            $cat = getCatID($cat);
         }
-        if(!isCat($db, $cat))
+        if(!isCat($cat))
             $cat = -1;
-    } else if(isset($_GET['p']) && isCat($db, $_GET['p'])) {
-        $cat = getCatID($db, $_GET['p']);
+    } else if(isset($_GET['p']) && isCat($_GET['p'])) {
+        $cat = getCatID($_GET['p']);
     } else {
         $cat = -1;
     }
@@ -77,9 +78,9 @@
         
         // calc number of articles and pages
         if($local) {
-            $anzahl = getAnzDev($db, $dateSQL);
+            $anzahl = getAnzDev($dateSQL);
         } else {
-            $anzahl = getAnz($db, $dateSQL);
+            $anzahl = getAnz($dateSQL);
         }
         $pages = getPages($anzahl, 8, $start);
         if($start>$pages)$start=$pages;
@@ -170,20 +171,20 @@
                 $news[$key]['thumb'] = 'http://'.$sysAdrr.'/'.$path.'.jpg';
             }
             $stmt->close();
-            $news[$key]['Cmt']   = getCmt($db, $entry['ID']);
-            $news[$key]['Cat']   = getCatName($db, getNewsCat($db,$entry['ID']));
-            $news[$key]['CatID'] = getNewsCatID($db, $entry['ID']);
+            $news[$key]['Cmt']   = getCmt($entry['ID']);
+            $news[$key]['Cat']   = getCatName(getNewsCat($entry['ID']));
+            $news[$key]['CatID'] = getNewsCatID($entry['ID']);
             if($archive) {
                 $news[$key]['archive'] = 1;
                 $news[$key]['dest']    = $destDate;
             } else {
                 $news[$key]['dest']  = lowerCat($news[$key]['Cat']);   
             }
-            $news[$key]['Autor'] = getClearName($db, $news[$key]['Autor']);
+            $news[$key]['Autor'] = getClearName($news[$key]['Autor']);
             
-            $playlistID = getPlaylistID($db, getNewsCat($db,$entry['ID']));
+            $playlistID = getPlaylistID(getNewsCat($entry['ID']));
             if($playlistID !== false) {
-                $videoID = getYouTubeIDFromArticle($db, $entry['ID']);
+                $videoID = getYouTubeIDFromArticle($entry['ID']);
                 $path = 'images/tmp/'.$playlistID.'-'.$videoID;
                 $news[$key]['thumb']    = 'http://'.$sysAdrr.'/'.$path.'.jpg';
                 $news[$key]['playlist'] = 1;
@@ -191,18 +192,18 @@
         }
     } else {
         // Kategorienews
-        if(getCatID($db, 'portfolio') == $cat) {
+        if(getCatID('portfolio') == $cat) {
             include('portfolio.php');
         } else {
-            if(isTopCat($db, $cat)) {
+            if(isTopCat($cat)) {
                 // Top-Cat
-                $catID = getCatParent($db, $cat);
-                if($cat == getCatID($db, 'blog')) {
-                    $blogID = getCatID($db, 'blog');
-                    $anzahl = getAnzCat($db, $blogID);
+                $catID = getCatParent($cat);
+                if($cat == getCatID('blog')) {
+                    $blogID = getCatID('blog');
+                    $anzahl = getAnzCat($blogID);
                 } else {
                     $blogID = 0;
-                    $anzahl = getAnzTopCat($db, $catID);
+                    $anzahl = getAnzTopCat($catID);
                 }
                 $pages = getPages($anzahl, 8, $start);
                 if($start>$pages) $start=$pages;
@@ -234,7 +235,7 @@
             } else {
                 // Sub-Cat
                 $catID = $cat;
-                $anzahl = getAnzCat($db, $catID);
+                $anzahl = getAnzCat($catID);
                 $pages = getPages($anzahl, 8, $start);
                 if($start > $pages) $start = $pages;
                 $sql = "SELECT
@@ -302,23 +303,23 @@
                     $news[$key]['thumb'] = 'http://'.$sysAdrr.'/'.$path.'.jpg';
                 }
                 $stmt->close();
-                $news[$key]['Cmt']          = getCmt($db, $entry['ID']);
-                $news[$key]['Cat']          = getCatName($db, getNewsCat($db, $entry['ID']));
-                $news[$key]['CatID']        = getNewsCatID($db, $entry['ID']);
+                $news[$key]['Cmt']          = getCmt($entry['ID']);
+                $news[$key]['Cat']          = getCatName(getNewsCat($entry['ID']));
+                $news[$key]['CatID']        = getNewsCatID($entry['ID']);
                 if($archive) {
                     $news[$key]['archive'] = 1;
                     $news[$key]['dest']    = $destDate;
                 } else {
-                    $news[$key]['dest']     = lowerCat(getCatName($db, $catID)); 
+                    $news[$key]['dest']     = lowerCat(getCatName($catID)); 
                 }
-                $news[$key]['dest']         = lowerCat(getCatName($db, $catID));
-                $news[$key]['Autor']        = getClearName($db, $news[$key]['Autor']);
-                $news[$key]['CatDispName']  = getCatName($db, $catID);
-                $news[$key]['CatDescr']     = getCatDescr($db, $catID);
+                $news[$key]['dest']         = lowerCat(getCatName($catID));
+                $news[$key]['Autor']        = getClearName($news[$key]['Autor']);
+                $news[$key]['CatDispName']  = getCatName($catID);
+                $news[$key]['CatDescr']     = getCatDescr($catID);
             
-                $playlistID = getPlaylistID($db, getNewsCat($db,$entry['ID']));
+                $playlistID = getPlaylistID(getNewsCat($entry['ID']));
                 if($playlistID !== false) {
-                    $videoID = getYouTubeIDFromArticle($db, $entry['ID']);
+                    $videoID = getYouTubeIDFromArticle($entry['ID']);
                     $path = 'images/tmp/'.$playlistID.'-'.$videoID;
                     $news[$key]['thumb'] = 'http://'.$sysAdrr.'/'.$path.'.jpg';
                     $news[$key]['playlist'] = 1;

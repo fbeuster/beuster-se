@@ -1,51 +1,52 @@
 <?php
- $a['filename'] = 'portfolio.tpl';
- $return = '';
+  $a['filename'] = 'portfolio.php';
+  $return = '';
+  $db = Database::getDB()->getCon();
  
- $portID = getCatID($db, 'Portfolio');
+  $portID = getCatID('Portfolio');
  
- $sql = "SELECT
+  $sql = "SELECT
             news.Titel,
             news.Inhalt,
             pics.Name,
             pics.Pfad
-         FROM
+          FROM
             news
-         JOIN
+          JOIN
             newscatcross ON
             news.ID = newscatcross.NewsID
-         LEFT JOIN
+          LEFT JOIN
             pics ON
             pics.NewsID = news.ID
-         WHERE
+          WHERE
             newscatcross.Cat = ?";
  // Titel  -> <article id="xxx">
  // Inhalt -> Group###Text unter Bild
- if(!$stmt = $db->prepare($sql))
-  $return = $db->error;
- if($return == '')
-  $stmt->bind_param('i', $portID);
- if($return == '')
-  if(!$stmt->execute())
-   $return = $stmt->error;
- if($return == '') {
-  $stmt->bind_result($portFileName, $portFileText, $portFilePicName, $portFilePicPath);
-  $portFiles = array();
-  while($stmt->fetch()) {
-   $portFileText = explode('###', $portFileText);
-   $portFiles[] = array('id'    => $portFileText[1],
-                        'name'  => $portFileName,
-                        'text'  => changetext($portFileText[2], 'inhalt', $mob),
-                        'group' => $portFileText[0],
-                        'file'  => $portFilePicName,
-                        'path'  => $portFilePicPath);
+  if(!$stmt = $db->prepare($sql))
+    $return = $db->error;
+  if($return == '')
+    $stmt->bind_param('i', $portID);
+  if($return == '')
+    if(!$stmt->execute())
+      $return = $stmt->error;
+  if($return == '') {
+    $stmt->bind_result($portFileName, $portFileText, $portFilePicName, $portFilePicPath);
+    $portFiles = array();
+    while($stmt->fetch()) {
+      $portFileText = explode('###', $portFileText);
+      $portFiles[] = array( 'id'    => $portFileText[1],
+                            'name'  => $portFileName,
+                            'text'  => changetext($portFileText[2], 'inhalt', $mob),
+                            'group' => $portFileText[0],
+                            'file'  => $portFilePicName,
+                            'path'  => $portFilePicPath);
+    }
+    $stmt->close();
+    $portFilesSorted = array();
+    foreach($portFiles as $portFile) {
+      $portFilesSorted[$portFile['group']][] = $portFile;
+    }
+    $a['data']['portFiles'] = $portFilesSorted;
   }
-  $stmt->close();
-  $portFilesSorted = array();
-  foreach($portFiles as $portFile) {
-   $portFilesSorted[$portFile['group']][] = $portFile;
-  }
-  $a['data']['portFiles'] = $portFilesSorted;
- }
- $a['data']['ret'] = $return;
+  $a['data']['ret'] = $return;
 ?>

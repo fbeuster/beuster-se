@@ -7,7 +7,7 @@
  <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="<?php echo getPageDescription($db); ?>">
+  <meta name="description" content="<?php echo getPageDescription(); ?>">
   <?php if(isset($ret['data']['news'], $ret['data']['news'][0]['tags']) && $ret['data']['news'][0]['tags'] != '') { ?>
 <meta name="keywords" content="<?php echo $ret['data']['news'][0]['tags']; ?>, beuster{se}, Felix Beuster, Blog, News, Tutorials">
   <?php } else { ?>
@@ -16,14 +16,15 @@
 <meta name="author" content="Felix Beuster">
   <meta property='og:locale' content='de_de'/>
   <meta property='fb:admins' content='100002550334323'/>
-  <meta property='og:title' content='<?php echo getPageTitle($db, $file); ?>'/>
-  <meta property='og:url' content='<?php echo getPageUrl($db); ?>'/>
+  <meta property='og:title' content='<?php echo getPageTitle($file); ?>'/>
+  <meta property='og:url' content='<?php echo getPageUrl(); ?>'/>
   <meta property='og:site_name' content='beusterse.de'/>
   <meta property='og:type' content='website'/>
   <meta property='og:image' content='<?php echo getPageOGImage($ret['data']); ?>'/>
-  <meta property='og:description' content='<?php echo getPageDescription($db); ?>'/>
+  <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
   <!--<link href="/images/favicon.ico" type="image/x-icon" rel="shortcut icon"> -->
   
+  <!-- so many sweet favicons, inspired by Edward Black (http://quda.tv) -->
   <link rel="shortcut icon" href="/images/favs/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/images/favs/fav96.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/images/favs/fav144.png">
@@ -48,10 +49,10 @@
   <meta name="apple-mobile-web-app-title" content="beuster{se}">
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" /> 
-  <title><?php echo getPageTitle($db, $file); ?></title>
+  <title><?php echo getPageTitle($file); ?></title>
   <?php if(!$ieOld) { ?>
   <!-- style it -->
-  <link href="/styles/main.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="<?php echo getThemeStyle('styles/main.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <?php } else { ?>
   <!-- not another internet explorer -.- -->
   <link href="/settings/ie.css" rel="stylesheet" type="text/css" media="screen">
@@ -90,7 +91,7 @@
     </span>
     <?php } ?>
     <nav>
-      <menu id="beMainNav"><?php genMenu($db);
+      <menu id="beMainNav"><?php genMenu();
       ?></menu>
     </nav>
   </header>

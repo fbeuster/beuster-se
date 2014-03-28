@@ -43,7 +43,7 @@
                 imagejpeg($image, $pfad);
                 imagedestroy($image);
             }
-            $art = linkGrab($db, getVideoArticle($db, $vidID));
+            $art = linkGrab(getVideoArticle($vidID));
             if(!$mob) {
                 $url[] = array('url' => $vidID, 'title' => $titleYt, 'dur' => $length, 'thumb' => $pfad, 'art' => $art);
             } else {
@@ -59,7 +59,7 @@
         }
     } while($again);
 
-    $ytID = getYouTubeIDFromArticle($db, $id);
+    $ytID = getYouTubeIDFromArticle($id);
 
     if($url[count($url)-1]['url'] == $ytID && count($url) >= 3) {
         $a['data']['videos'][] = $url[count($url)-2];

@@ -1,9 +1,8 @@
 <?php
 
-    function getUserID($db) {
-        if (!is_object($db)) {return false;}
-        if (!($db instanceof MySQLi)) {return false;}
+    function getUserID() {
         if (!isset($_COOKIE['UserID'], $_COOKIE['Password'])) {return false;}
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     ID
                 FROM
@@ -28,7 +27,8 @@
         return $UserID;
     }
 
-    function getUserIDbyName($db, $uName) {
+    function getUserIDbyName($uName) {
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     ID
                 FROM
@@ -45,10 +45,9 @@
         return $uID;
     }
  
-    function hasUserRights($db, $rights) {
-        if (!is_object($db)) {return false;}
-        if (!($db instanceof MySQLi)) {return false;}
+    function hasUserRights($rights) {
         if (!isset($_COOKIE['UserID'], $_COOKIE['Password'])) {return false;}
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     rights
                 FROM
@@ -74,7 +73,8 @@
         return true;
     }
  
-    function getUserName($db, $uID) {
+    function getUserName($uID) {
+        $db = Database::getDB()->getCon();
         $uName = 'err';
         $sql = 'SELECT
                     Name
@@ -92,7 +92,8 @@
         return $uName;
     }
  
-    function getClearName($db, $uID) {
+    function getClearName($uID) {
+        $db = Database::getDB()->getCon();
         $uName = 'err';
         $sql = 'SELECT
                     Clearname
@@ -110,7 +111,8 @@
         return $uName;
     }
  
-    function getContactMail($db, $uID) {
+    function getContactMail($uID) {
+        $db = Database::getDB()->getCon();
         $umail = '';
         $sql = 'SELECT
                     Contactmail
@@ -128,7 +130,8 @@
         return $uMail;
     }
  
-    function isUsernameNotAvalible($db, $name) {
+    function isUsernameNotAvalible($name) {
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     Name
                 FROM
@@ -150,7 +153,8 @@
         return true;
     }
   
-    function getUser($db, $i) {
+    function getUser($i) {
+        $db = Database::getDB()->getCon();
         $sql = "SELECT
                     ID,
                     Name,
@@ -174,7 +178,8 @@
         return $a;
     }
  
-    function adminMail($db) {
+    function adminMail() {
+        $db = Database::getDB()->getCon();
         $sql = 'SELECT
                     Email
                 FROM
