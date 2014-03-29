@@ -47,7 +47,7 @@
                     $return = showInfo('Fehler #NC4, bitte Admin kontaktieren.', $errRet);
                 } else {
                     $stmt->bind_result($uid);
-                    if(!$stmt->fetch()) {
+                    if($stmt->fetch()) {
                         $newUser = false;
                     }
                 }
@@ -95,7 +95,7 @@
 
             // return
             if($local) {
-                $return = showInfo('Kommentar wurde hinzugefügt.<br>'.$mailRealContent, $errRet);
+                $return = showInfo('Kommentar wurde hinzugefügt.<br>'.$Inhalt, $errRet);
             } else {
                 $return = showInfo('Kommentar wurde hinzugefügt.', $errRet);
             }

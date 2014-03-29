@@ -108,7 +108,7 @@
  
     function showInfo($msg, $refr) {
         $ret['test'] = 'ss';
-        $ret['filename'] = 'info.tpl';
+        $ret['filename'] = 'info.php';
         $ret['data']['msg'] = $msg;
         $ret['data']['refresh'] = $refr;
         return $ret;

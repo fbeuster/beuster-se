@@ -320,6 +320,7 @@
     }
 
     function notifyAdmin($title, $content, $user) {
+        global $local;
         $mailTopic = 'Neuer Kommentar zu "'.$titel.'"';
         $mailContent = '<html>';
         $mailContent .= '<head><title>Neuer Kommentar</title>';
