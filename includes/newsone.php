@@ -159,7 +159,6 @@
     $backApp = '</p>';
     $news[0] = array(   'ID'            => $id,
                         'Titel'         => changetext($newstitel, 'titel', $mob),
-                        'Autor'         => getClearName($newsautor),
                         'Datum'         => date('d.m.Y H:i', $newsdatum),
                         'datAttr'       => date('c', $newsdatum),
                         'Inhalt'        => $preApp.grabImages(changetext($newsinhalt, 'inhalt', $mob)).$backApp,
@@ -175,30 +174,24 @@
     $a['data']['ec'] = '';
     $a['data']['formCnt'] = 20;
  
-    $aside = array( 'author'        => getClearName($newsautor),
-                    'authorNick'    => getuserName($newsautor),
+    $aside = array( 'author'        => User::newFromId($newsautor),
                     'date'          => $news[0]['Datum'],
                     'datAttr'       => $news[0]['datAttr'],
                     'link'          => getLink(replaceUml($news[0]['Cat']), $news[0]['ID'], $news[0]['Titel']));
  
     $sql = "SELECT
-                kommentare.ID,
-                users.Clearname,
-                kommentare.Inhalt,
-                UNIX_TIMESTAMP(kommentare.Datum),
-                users.Email,
-                users.Website,
-                kommentare.Frei,
-                kommentare.ParentID
+                ID,
+                UID,
+                Inhalt,
+                UNIX_TIMESTAMP(Datum),
+                Frei,
+                ParentID
             FROM
                 kommentare
-            LEFT JOIN
-                users
-                ON kommentare.UID = users.ID
             WHERE
-                kommentare.NewsID = ?
+                NewsID = ?
             ORDER BY
-                kommentare.Datum DESC
+                Datum DESC
             LIMIT
                 ?, 10";
     if(!$result = $db->prepare($sql)) {
@@ -210,7 +203,7 @@
     }
     $comments = array();
     $replies = array();
-    $result->bind_result($cmtID, $cmtAutor, $cmtInhalt, $cmtDatum, $cmtMail, $cmtWeb, $cmtFrei, $cmtReply);
+    $result->bind_result($cmtID, $cmtAuthor, $cmtInhalt, $cmtDatum, $cmtFrei, $cmtReply);
     while($result->fetch()) {
         if($cmtFrei == 3) $cmtInhalt = '[cmtSpam]'.$cmtInhalt;
 
@@ -220,31 +213,33 @@
                 $replies[$cmtReply] = array();
             }
             $replies[$cmtReply][] = array(  'id'      => $cmtID,
-                                            'autor'   => $cmtAutor,
-                                            'web'     => rewriteUrl($cmtWeb),
                                             'inhalt'  => changetext($cmtInhalt, 'cmtInhalt', $mob),
                                             'datum'   => date('d.m.Y H:i', $cmtDatum),
                                             'datAttr' => date('c', $cmtDatum),
-                                            'mail'    => $cmtMail,
                                             'frei'    => $cmtFrei,
-                                            'replyTo' => $cmtReply);
+                                            'replyTo' => $cmtReply,
+                                            'user'    => $cmtAuthor);
         } else {
             $comments[] = array('id'      => $cmtID,
-                                'autor'   => $cmtAutor,
-                                'web'     => rewriteUrl($cmtWeb),
                                 'inhalt'  => changetext($cmtInhalt, 'cmtInhalt', $mob),
                                 'datum'   => date('d.m.Y H:i', $cmtDatum),
                                 'datAttr' => date('c', $cmtDatum),
-                                'mail'    => $cmtMail,
                                 'frei'    => $cmtFrei,
                                 'replyTo' => $cmtReply,
-                                'replies' => array());
+                                'replies' => array(),
+                                'user'    => $cmtAuthor);
         }
     }
     $result->close();
+    foreach ($comments as $k => $c) {
+        $comments[$k]['user'] = User::newFromId($c['user']);
+    }
 
     // sorting replies to comments
     foreach($replies as $cid => $rep) {
+        foreach ($rep as $k => $r) {
+            $rep[$k]['user'] = User::newFromId($r['user']);
+        }
         foreach($comments as $k => $c) {
             if($c['id'] == $cid) {
                 // array reverse so that older replies are closer to orig. comment
@@ -252,6 +247,7 @@
             }
         }
     }
+
     $a['data']['comments'] = $comments;
  
     $pics = array();

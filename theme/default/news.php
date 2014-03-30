@@ -17,7 +17,7 @@
     <h2><a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>"><?php echo $beitrag['Titel']; ?></a></h2>
     <div>
       <span>Kategorie: <a href="/<?php echo lowerCat($beitrag['Cat']); ?>"><?php echo $beitrag['Cat']; ?></a></span>
-      <span>von <?php echo $beitrag['Autor']; ?></span>
+      <span>von <?php echo $beitrag['author']->getClearname(); ?></span>
       <span>
         <a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>#comments">
           <?php echo $beitrag['Cmt']; ?> Kommentare

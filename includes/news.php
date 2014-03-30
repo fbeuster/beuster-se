@@ -134,7 +134,7 @@
         while($stmt->fetch()) {
             $titel = changetext($newstitel, 'titel', $mob);
             $news[] = array('Titel'         => $titel,
-                            'Autor'         => $newsautor,
+                            'author'        => $newsautor,
                             'Datum'         => date('d.m.Y', $newsdatum),
                             'datAttr'       => date('c', $newsdatum),
                             'Inhalt'        => changetext($newsinhalt, 'vorschau', $mob),
@@ -180,7 +180,7 @@
             } else {
                 $news[$key]['dest']  = lowerCat($news[$key]['Cat']);   
             }
-            $news[$key]['Autor'] = getClearName($news[$key]['Autor']);
+            $news[$key]['author'] = User::newFromId($news[$key]['author']);
             
             $playlistID = getPlaylistID(getNewsCat($entry['ID']));
             if($playlistID !== false) {
@@ -266,7 +266,7 @@
             while($stmt->fetch()) {
                 $titel = changetext($newstitel, 'titel', $mob);
                 $news[] = array('Titel'         => $titel,
-                                'Autor'         => $newsautor,
+                                'author'        => $newsautor,
                                 'Datum'         => date('d.m.Y', $newsdatum),
                                 'datAttr'       => date('c', $newsdatum),
                                 'Inhalt'        => changetext($newsinhalt, 'vorschau', $mob),
@@ -313,7 +313,7 @@
                     $news[$key]['dest']     = lowerCat(getCatName($catID)); 
                 }
                 $news[$key]['dest']         = lowerCat(getCatName($catID));
-                $news[$key]['Autor']        = getClearName($news[$key]['Autor']);
+                $news[$key]['author']       = User::newFromId($news[$key]['author']));
                 $news[$key]['CatDispName']  = getCatName($catID);
                 $news[$key]['CatDescr']     = getCatDescr($catID);
             

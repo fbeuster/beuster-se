@@ -305,14 +305,14 @@
         }
         $html = '';
         $html .= '<div class="beCommentEntry" id="comment'.$cmt['id'].'" data-reply="'.$replyId.'">';
-        $html .= '  <span class="beCommentEntryAvatar"><img src="'.get_Gravatar($cmt['mail']).'" alt="Avatar"></span>';
+        $html .= '  <span class="beCommentEntryAvatar"><img src="'.get_Gravatar($cmt['user']->getMail()).'" alt="Avatar"></span>';
         $html .= '  <span class="beCommentEntryHeader">';
         $html .= '    <time datetime="'.$cmt['datAttr'].'" class="long">'.$cmt['datum'].'</time> -';
         $html .= '    <span class="author">';
-        if(isValidUserUrl($cmt['web'])) {
-            $html .= '<a href="'.$cmt['web'].'">'.$cmt['autor'].'</a>';
+        if(isValidUserUrl(rewriteUrl($cmt['user']->getWebsite()))) {
+            $html .= '<a href="'.rewriteUrl($cmt['user']->getWebsite()).'">'.$cmt['user']->getClearname().'</a>';
         } else {
-            $html .= $cmt['autor'];
+            $html .= $cmt['user']->getClearname();
         }
         $html .= '</span>';
         $html .= '  </span>';

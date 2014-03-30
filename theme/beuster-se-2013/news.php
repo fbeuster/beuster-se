@@ -19,7 +19,7 @@
     <h2 class="beContentEntryHeader"><a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>"><?php echo $beitrag['Titel']; ?></a></h2>
     <div class="beContentEntryFooter">
       <span class="categoryLink">Kategorie: <a href="/<?php echo lowerCat($beitrag['Cat']); ?>"><?php echo $beitrag['Cat']; ?></a></span>
-      <span class="authorLink">von <?php echo $beitrag['Autor']; ?></span>
+      <span class="authorLink">von <?php echo $beitrag['author']->getClearname(); ?></span>
       <span class="commentsLink">
         <a href="<?php echo getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);?>#comments">
           <?php echo $beitrag['Cmt']; ?> Kommentare

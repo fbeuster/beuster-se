@@ -6,7 +6,7 @@
  	if(isset($data['err'])) {
   		echo $data['err'].' ist kein Autor auf <a href="http://beusterse.de">beusterse.de</a>.';
  	} else { ?>
-   	<img src="/images/mods/<?php echo $data['about']['Name']; ?>.jpg" class="about"><?php echo $data['about']['txt']; 
+   	<img src="/images/mods/<?php echo $data['about']->getName(); ?>.jpg" class="about"><?php echo $data['about']->buildInfo(); 
  	} ?>
   	</p>
   </article>

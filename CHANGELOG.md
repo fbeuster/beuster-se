@@ -1,5 +1,22 @@
 # Changelog
 
+## 31.01.2014 - v0.8 - User class
+
+```
++	index.php: added section to load classes
++	classes/user.php: handles a user
+*	following files now use ther user class:
+*		includes/aboutMod.php
+*		includes/news.php
+*		includes/newsone.php
+*		settings/generators.php
+*		settings/modules.php
+*		theme/beuster-se-2013/aboutMod.php
+*		theme/beuster-se-2013/news.php
+*		theme/default/aboutMod.php
+*		theme/default/news.php
+```
+
 ## 30.03.2014 - v0.7 - Database
 
 ```

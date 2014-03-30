@@ -109,11 +109,12 @@
     }
  
     function moduleArticleInfo($mob, $info) {
+        $author = $info['author'];
         $ret = '';
         $ret .= '<div class="beMainAsideEntry articleInfo">'."\n";
         $ret .= '  <span class="entryInfo">informationen zum artikel</span>';
         $ret .= ' <p>'."\n";
-        $ret .= '  Dieser Artikel wurde geschrieben von <a href="/aboutAuthor/'.$info['authorNick'].'">'.$info['author'].'</a> am'."\n";
+        $ret .= '  Dieser Artikel wurde geschrieben von <a href="/aboutAuthor/'.$author->getName().'">'.$author->getClearname().'</a> am'."\n";
         $ret .= '  <time datetime="'.$info['datAttr'].'" class="long">'.$info['date'].'</time>Uhr.'."\n";
         $ret .= ' </p>'."\n";
         $ret .= ' <p>'."\n";
