@@ -33,7 +33,7 @@
     include('settings/generators.php');
     include('settings/modules.php');
     include('settings/parser.php');
-    include('settings/database.php');
+    include('classes/database.php');
  
     $db = Database::getDB()->getCon();
     if($db->connect_errno){

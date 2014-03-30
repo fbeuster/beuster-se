@@ -504,37 +504,21 @@
     }
  
     function getCmt($id) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(*) as Anzahl
-                FROM
-                    kommentare
-                WHERE
-                    NewsID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($a);
-        if(!$result->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $result->close();
-        return $a;
+        $db = Database::getDB();
+        $cond = array('NewsID = ?', 'i', array($id));
+        $res = $db->select('kommentare', array('COUNT(ID) AS n'), $cond);
+        if($res != null)
+            return $res[0]['n'];
+        return 0;
     }
  
     function getNewsPicNumber($id) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(ID) as Anzahl
-                FROM
-                    pics
-                WHERE
-                    NewsID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($a);
-        if(!$result->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $result->close();
-        return $a;
+        $db = Database::getDB();
+        $cond = array('NewsID = ?', 'i', array($id));
+        $res = $db->select('pics', array('COUNT(ID) AS n'), $cond);
+        if($res != null)
+            return $res[0]['n'];
+        return 0;
     }
  
     function lic($l) {
