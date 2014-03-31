@@ -313,7 +313,7 @@
                     $news[$key]['dest']     = lowerCat(getCatName($catID)); 
                 }
                 $news[$key]['dest']         = lowerCat(getCatName($catID));
-                $news[$key]['author']       = User::newFromId($news[$key]['author']));
+                $news[$key]['author']       = User::newFromId($news[$key]['author']);
                 $news[$key]['CatDispName']  = getCatName($catID);
                 $news[$key]['CatDescr']     = getCatDescr($catID);
             

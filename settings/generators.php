@@ -301,30 +301,30 @@
 
     function genComment($cmt, $cmtReply, $replyId = '') {
         if($replyId == '') {
-            $replyId = $cmt['id'];
+            $replyId = $cmt->getId();
         }
         $html = '';
-        $html .= '<div class="beCommentEntry" id="comment'.$cmt['id'].'" data-reply="'.$replyId.'">';
-        $html .= '  <span class="beCommentEntryAvatar"><img src="'.get_Gravatar($cmt['user']->getMail()).'" alt="Avatar"></span>';
+        $html .= '<div class="beCommentEntry" id="comment'.$cmt->getId().'" data-reply="'.$replyId.'">';
+        $html .= '  <span class="beCommentEntryAvatar"><img src="'.get_Gravatar($cmt->getAuthor()->getMail()).'" alt="Avatar"></span>';
         $html .= '  <span class="beCommentEntryHeader">';
-        $html .= '    <time datetime="'.$cmt['datAttr'].'" class="long">'.$cmt['datum'].'</time> -';
+        $html .= '    <time datetime="'.date('c', $cmt->getDate()).'" class="long">'.date('d.m.Y H:i', $cmt->getDate()).'</time> -';
         $html .= '    <span class="author">';
-        if(isValidUserUrl(rewriteUrl($cmt['user']->getWebsite()))) {
-            $html .= '<a href="'.rewriteUrl($cmt['user']->getWebsite()).'">'.$cmt['user']->getClearname().'</a>';
+        if(isValidUserUrl(rewriteUrl($cmt->getAuthor()->getWebsite()))) {
+            $html .= '<a href="'.rewriteUrl($cmt->getAuthor()->getWebsite()).'">'.$cmt->getAuthor()->getClearname().'</a>';
         } else {
-            $html .= $cmt['user']->getClearname();
+            $html .= $cmt->getAuthor()->getClearname();
         }
         $html .= '</span>';
         $html .= '  </span>';
         $html .= '  <div class="beCommentEntryContent">';
-        $html .= $cmt['inhalt']."\n";
+        $html .= $cmt->getContentParsed()."\n";
         $html .= '  </div>';
         $html .= '  <br class="clear">';
         $cmtReplyLink = $cmtReply.'#newComment?comment-reply='.$replyId;
         $html .= '  <a class="reply" href="'.$cmtReplyLink.'">Antworten</a>';
-        if(isset($cmt['replies']) && count($cmt['replies']) > 0) {
+        if($cmt->hasReplies()) {
             $html .= '  <div class="replies">';
-            foreach($cmt['replies'] as $reply) {
+            foreach($cmt->getReplies() as $reply) {
                 $html .= genComment($reply, $cmtReply, $replyId);
             }
             $html .= '  </div>';

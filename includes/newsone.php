@@ -178,76 +178,19 @@
                     'date'          => $news[0]['Datum'],
                     'datAttr'       => $news[0]['datAttr'],
                     'link'          => getLink(replaceUml($news[0]['Cat']), $news[0]['ID'], $news[0]['Titel']));
- 
-    $sql = "SELECT
-                ID,
-                UID,
-                Inhalt,
-                UNIX_TIMESTAMP(Datum),
-                Frei,
-                ParentID
-            FROM
-                kommentare
-            WHERE
-                NewsID = ?
-            ORDER BY
-                Datum DESC
-            LIMIT
-                ?, 10";
-    if(!$result = $db->prepare($sql)) {
-        $return = $db->error;
-    }
-    $result->bind_param('ii', $id, getOffset($anzCmt, 10, $start));
-    if(!$result->execute()) {
-        $return = $result->error;
-    }
-    $comments = array();
-    $replies = array();
-    $result->bind_result($cmtID, $cmtAuthor, $cmtInhalt, $cmtDatum, $cmtFrei, $cmtReply);
-    while($result->fetch()) {
-        if($cmtFrei == 3) $cmtInhalt = '[cmtSpam]'.$cmtInhalt;
 
-        // collecting comments and replies
-        if($cmtReply != -1) {
-            if(!isset($replies[$cmtReply]) || !is_array($replies[$cmtReply])) {
-                $replies[$cmtReply] = array();
-            }
-            $replies[$cmtReply][] = array(  'id'      => $cmtID,
-                                            'inhalt'  => changetext($cmtInhalt, 'cmtInhalt', $mob),
-                                            'datum'   => date('d.m.Y H:i', $cmtDatum),
-                                            'datAttr' => date('c', $cmtDatum),
-                                            'frei'    => $cmtFrei,
-                                            'replyTo' => $cmtReply,
-                                            'user'    => $cmtAuthor);
-        } else {
-            $comments[] = array('id'      => $cmtID,
-                                'inhalt'  => changetext($cmtInhalt, 'cmtInhalt', $mob),
-                                'datum'   => date('d.m.Y H:i', $cmtDatum),
-                                'datAttr' => date('c', $cmtDatum),
-                                'frei'    => $cmtFrei,
-                                'replyTo' => $cmtReply,
-                                'replies' => array(),
-                                'user'    => $cmtAuthor);
-        }
+    // get comments
+    $comments = Database::getDB()->select(
+        'kommentare',
+        array('ID'),
+        array('NewsID = ? AND ParentID = -1', 'i', array($id)),
+        'ORDER BY Datum DESC',
+        array('LIMIT ?, 10', 'i', array(getOffset($anzCmt, 10, $start))));
+    foreach ($comments as $k => $comment) {
+        $comment = new Comment($comment['ID']);
+        $comment->loadReplies();
+        $comments[$k] = $comment;
     }
-    $result->close();
-    foreach ($comments as $k => $c) {
-        $comments[$k]['user'] = User::newFromId($c['user']);
-    }
-
-    // sorting replies to comments
-    foreach($replies as $cid => $rep) {
-        foreach ($rep as $k => $r) {
-            $rep[$k]['user'] = User::newFromId($r['user']);
-        }
-        foreach($comments as $k => $c) {
-            if($c['id'] == $cid) {
-                // array reverse so that older replies are closer to orig. comment
-                $comments[$k]['replies'] = array_reverse($rep);
-            }
-        }
-    }
-
     $a['data']['comments'] = $comments;
  
     $pics = array();

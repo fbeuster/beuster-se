@@ -18,6 +18,7 @@ class Database {
 	 * constructor
 	 */
 	function __construct() {
+		$this->getCon();
 	}
 
 	/**
@@ -47,10 +48,11 @@ class Database {
 	 * @param array $fields array of field names
 	 * @param array $cond WHERE conidtions, given as array(condition_string, types, array(vars))
 	 * @param String $options phrase as GROUP BY, ORDER BY as single string
+	 * @param array $limit LIMIT conditions, given as array(limit_strin, types, array(vars))
 	 * @param String $join tables to join, given as single string
 	 * @return null|Array
 	 */
-	public function select($table, $fields, $cond = null, $options = null, $join = null) {
+	public function select($table, $fields, $cond = null, $options = null, $limit = null, $join = null) {
 		
 		// concatenate fields
 		if(!is_array($fields) || empty($fields)) {
@@ -67,7 +69,51 @@ class Database {
 		if($join == null)
 			$join == '';
 
+		// limit
+		$limit_vars = array();
+		if($limit == null || (is_array($limit) && empty($limit))) {
+			$limit_string = '';
+		} else {
+			// validate $limit
+			if(!is_array($limit)) {
+				$this->error = 'limit has to be an array';
+				return null;
+			}
+			if(count($limit) != 3) {
+				$this->error = 'wrong limit length';
+				return null;
+			}
+			if($limit[0] == null || !is_string($limit[0]) || $limit[0] == '') {
+				$this->error = 'wrong limit string';
+				return null;
+			}
+			if($limit[1] == null || !is_string($limit[1]) || $limit[1] == '') {
+				$this->error = 'wrong limit types';
+				return null;
+			}
+			if(!is_array($limit[2])) {
+				$this->error = 'limit variables have to be an array';
+				return null;
+			}
+			if(!strlen($limit[1]) == count($limit[2])) {
+				$this->error = 'limit type and variable missmatch';
+				return null;
+			}
+
+			// limit string
+			$limit_string = ' '.$limit[0];
+
+			// building bind_param for limits
+			$limit_vars[] = $limit[1];
+			foreach ($limit[2] as $k => $v) {
+				$var = 'lim'.$k;
+				$$var = $limit[2][$k];
+				$limit_vars[] = &$$var;
+			}
+		}
+
 		// conditions
+		$cond_vars = array();
 		if($cond == null || (is_array($cond) && empty($cond))) {
 			$cond_string = '';
 		} else {
@@ -100,8 +146,7 @@ class Database {
 			// condition string
 			$cond_string = ' WHERE '.$cond[0];
 
-			// building bind_param
-			$cond_vars = array();
+			// building bind_param for conditions
 			$cond_vars[] = $cond[1];
 			foreach ($cond[2] as $k => $v) {
 				$var = 'con'.$k;
@@ -110,8 +155,31 @@ class Database {
 			}
 		}
 
+		// combine limit and condition vars
+		$vars = array();
+		if($cond_string != '' && $limit_string != '') {
+			$vars[0] = $cond_vars[0] . $limit_vars[0];
+			for($i = 1; $i < count($cond_vars); $i++) {
+				$v = 'varC'.$i;
+				$$v = $cond_vars[$i];
+				$vars[] = &$$v;
+			}
+			for($i = 1; $i < count($limit_vars); $i++) {
+				$v = 'varL'.$i;
+				$$v = $limit_vars[$i];
+				$vars[] = &$$v;
+			}
+		} else if($cond_string != '') {
+			$vars = $cond_vars;
+		} else if($limit_string != '') {
+			$vars = $limit_vars;
+		}
+
+		// options
+		$options = ' '.$options;
+
 		// buildung sql
-		$sql = 'SELECT '.$fields.' FROM '.$table.$join.$cond_string.$options;
+		$sql = 'SELECT '.$fields.' FROM '.$table.$join.$cond_string.$options.$limit_string;
 
 		// prepare request
 		$stmt = $this->con->prepare($sql);
@@ -121,8 +189,8 @@ class Database {
 		}
 
 		// bind_param
-		if($cond != '') {
-			if(!call_user_func_array(array($stmt, 'bind_param'), $cond_vars)) {
+		if($cond_string != '' || $limit_string != '') {
+			if(!call_user_func_array(array($stmt, 'bind_param'), $vars)) {
 				$this->error = $stmt->error;
 				return null;
 			}

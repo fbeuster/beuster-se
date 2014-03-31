@@ -37,6 +37,7 @@
     // load classes
     include('classes/database.php');
     include('classes/user.php');
+    include('classes/comment.php');
  
     $db = Database::getDB()->getCon();
     if($db->connect_errno){

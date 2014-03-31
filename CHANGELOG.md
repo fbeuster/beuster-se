@@ -1,5 +1,17 @@
 # Changelog
 
+## 31.01.2014 - v0.9 - Comment class
+
+```
++	classes/comment.php: handles a user
++	classes/databae.php: added $limit to select()
+*	includes/news.php: fixed critical bug
+*	following files now use ther user class:
+*		index.php
+*		includes/newsone.php
+*		settings/generators.php
+```
+
 ## 31.01.2014 - v0.8 - User class
 
 ```
