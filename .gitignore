@@ -6,6 +6,7 @@ google*.html
 rss.xml
 
 # workaround to keep user/ and files/ in repo but ignore contents
+documentation
 user/*
 themes/*
 files/*

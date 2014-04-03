@@ -1,16 +1,15 @@
 <?php
-
 /**
- * \file user.php
- * \brief User
+ * \file classes/user.php
+ * \brief Class for a general User
  */
 
 /**
- * \brief user class
+ * Class for a general User.
+ * \class User
+ * \author Felix Beuster
  * 
- * providing a user class as well as helpfull and rqqired funcionts
- * 
- * @author Felix Beuster
+ * providing a user class as well as helpfull and required funcionts
  */
 class User {
 
@@ -29,7 +28,10 @@ class User {
 	private $clearname; /**< user's clear name */
 
 	/**
-	 * constructor
+	 * construcotr
+	 * 
+	 * @param int $by Referenced by constant, us constant from User
+	 * @return type
 	 */
 	public function __construct($by) {
 		$this->by = $by;
@@ -38,7 +40,7 @@ class User {
 	/*** PUBLIC ***/
 
 	/**
-	 * \brief user from id
+	 * User from id.
 	 * 
 	 * construct new user from id
 	 * 
@@ -59,11 +61,11 @@ class User {
 	}
 
 	/**
-	 * \brief user from mail
+	 * User from mail.
 	 * 
 	 * construct new user from mail adress
 	 * 
-	 * @param String $mail the mail adress
+	 * @param string $mail the mail adress
 	 * @return User
 	 */
 	public static function newFromMail($mail) {
@@ -80,11 +82,11 @@ class User {
 	}
 
 	/**
-	 * \brief user from name
+	 * User from name.
 	 * 
 	 * construct new user from user name (login name)
 	 * 
-	 * @param String $name the login name
+	 * @param string $name the login name
 	 * @return User
 	 */
 	public static function newFromName($name) {
@@ -101,7 +103,7 @@ class User {
 	}
 
 	/**
-	 * \brief loads a user
+	 * Loads a user.
 	 * 
 	 * loading user based by reference variable $by
 	 */
@@ -134,7 +136,7 @@ class User {
 	}
 
 	/**
-	 * \brief user about html
+	 * User about text (html).
 	 * 
 	 * get and build the user's about text to html
 	 * 
@@ -149,7 +151,7 @@ class User {
 	}
 
 	/**
-	 * \brief single user info
+	 * Single user info.
 	 * 
 	 * gets a siingle user information from database
 	 * 
@@ -166,7 +168,7 @@ class User {
 	}
 
 	/**
-	 * \brief is admin?
+	 * Admin right check.
 	 * 
 	 * is the current user an admin
 	 * 
@@ -177,7 +179,7 @@ class User {
 	}
 
 	/**
-	 * \brief user load status
+	 * User load status.
 	 * 
 	 * is a user loaded from db?
 	 * 

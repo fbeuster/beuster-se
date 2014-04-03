@@ -96,7 +96,7 @@ header#beMainHeader span.pageTitle {
 	font-weight: normal;
 	color: #083046;
     text-shadow: 0 0 6px #aaaaaa;
-    font-family: "Source Code Pro";
+    font-family: "Source Code Pro", "Lucida Console", Monaco, monospace;
 }
 header#beMainHeader h1.pageTitle span,
 header#beMainHeader span.pageTitle span {

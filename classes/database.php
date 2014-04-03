@@ -1,17 +1,30 @@
 <?php
 
 /**
-* 
-*/
+ * Database handler.
+ * \file classes/database.php
+ */
+
+/**
+ * Database handler.
+ * \class Database
+ * \author Felix Beuster
+ * 
+ * Provides a simple and global access to the database.
+ * 
+ * \todo function for INSERT
+ * \todo function for DELETE
+ * \todo function for UPDATE
+ */
 class Database {
-	
-	// class instance
+
+	/** database instance */
 	private static $instance;
 
-	// connection to database
+	/** current connection to database */
 	private $con;
 
-	// error messages
+	/** most recent error message */
 	public $error;
 
 	/**
@@ -22,7 +35,10 @@ class Database {
 	}
 
 	/**
-	 * retrievieng the current or a new database connection
+	 * Get Database instance.
+	 * 
+	 * retrievieng the current or a new database instance
+	 * 
 	 * @return Database
 	 */
 	public static function getDB() {
@@ -31,6 +47,13 @@ class Database {
 		return self::$instance;
 	}
 
+	/**
+	 * Get connection to database.
+	 * 
+	 * retrieving and generating a MySQLi connection
+	 * 
+	 * @return MySQLi
+	 */
 	public function getCon() {
 		if(!$this->con) {
 			$this->con = @new MySQLi(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -41,6 +64,8 @@ class Database {
 	}
 
 	/**
+	 * Select from database.
+	 * 
 	 * selects data from database
 	 * function retuns an array of rows or null
 	 * 

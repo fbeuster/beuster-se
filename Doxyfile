@@ -1,0 +1,93 @@
+######
+##
+## Doxyfile
+##
+## Settings for Doxygen
+##
+######
+
+
+
+#### Project Settings
+
+## project name
+PROJECT_NAME = "beuster{se} CMS"
+
+## output directory
+OUTPUT_DIRECTORY = documentation
+
+## sub directories for better peformance
+CREATE_SUBDIRS = YES
+
+JAVADOC_AUTOBRIEF = YES
+
+
+#### Input Settings
+
+## scan recursive
+RECURSIVE = YES
+
+## excluding some files
+EXCLUDE_PATTERNS = */.git/*
+EXCLUDE_PATTERNS += */.gitignore
+EXCLUDE_PATTERNS += */.htaccess
+EXCLUDE_PATTERNS += */.htpasswd
+EXCLUDE_PATTERNS += */Robots.txt
+EXCLUDE_PATTERNS += */google*.html
+EXCLUDE_PATTERNS += */rss.xml
+EXCLUDE_PATTERNS += */documentation/*
+EXCLUDE_PATTERNS += */user/*
+EXCLUDE_PATTERNS += */files/*
+EXCLUDE_PATTERNS += */images/blog/*
+EXCLUDE_PATTERNS += */images/foren/*
+EXCLUDE_PATTERNS += */images/mods/*
+EXCLUDE_PATTERNS += */images/port/*
+EXCLUDE_PATTERNS += */images/tmp/*
+EXCLUDE_PATTERNS += */index*.html
+
+
+
+#### Source Browsing
+
+## enabling
+SOURCE_BROWSER = YES
+
+## still want comments in the browser
+STRIP_CODE_COMMENTS = NO
+
+REFERENCES_RELATION = YES
+
+
+
+#### Build Settings
+
+## we want private members
+EXTRACT_PRIVATE = YES
+
+## we want static members
+EXTRACT_STATIC = YES
+
+## todo list is wanted
+GENERATE_TODOLIST = YES
+
+
+
+#### HTML Output Settings
+
+## tree vie on the left is wanted
+GENERATE_TREEVIEW = YES
+
+
+
+#### LaTeX Output Settings
+
+## no tex needed
+GENERATE_LATEX = NO
+
+
+
+#### Graph Settings
+
+HAVE_DOT = YES
+
+COLLABORATION_GRAPH = NO
