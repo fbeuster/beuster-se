@@ -58,7 +58,7 @@
         $ret .= '" class="pArrows" id="pagerleft" title="Zurück">&nbsp;</a>'."\r";
         $ret .= ' <div id="number"';
         if($j < 5) {
-            $ret .= 'style="text-align:center;';
+            $ret .= ' style="text-align:center;';
             if($mob) {
                 $ret .= 'width:'.($j*27).'px;';
             }
@@ -83,11 +83,9 @@
             $link .= '"';
             if($i == $t && $i == $j) {
                 $link .= ' style="border: 0;"';
-            }
-            if($i == $t) {
+            } else if($i == $t) {
                 $link .= ' style="border-left: 0;"';
-            }
-            if($i == $j) {
+            } else if($i == $j) {
                 $link .= ' style="border-right: 0;"';
             }
             $link .= '>'.$i.'</a></li>'."\r";

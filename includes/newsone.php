@@ -110,88 +110,17 @@
         $a['data']['comment_reply'] = $_GET['comment-reply'];
     }
 
-    if($local) {
-        $sql = "SELECT
-                    Titel,
-                    Autor,                
-                    Inhalt,
-                    UNIX_TIMESTAMP(Datum),
-                    Status
-                FROM            
-                    news
-                WHERE
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {
-            $return = $db->error;
-        } 
-        $result->bind_param('i', $id);
-    } else {
-        $sql = "SELECT
-                    Titel,
-                    Autor,                
-                    Inhalt,
-                    UNIX_TIMESTAMP(Datum),
-                    Status
-                FROM            
-                    news
-                WHERE
-                    enable = ? AND
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {
-            $return = $db->error;
-        } 
-        $result->bind_param('ii', $ena, $id);
-    }
-    if(!$result->execute()) {
-        $return = $result->error;
-    }
-    $result->bind_result($newstitel, $newsautor, $newsinhalt, $newsdatum, $projState);
-    if(!$result->fetch()) {
-        $return = 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';
-    }
-    $result->close();
-    $anzCmt = getCmt($id);
-    if('[yt]' == substr($newsinhalt,0,4)) {
-        $preApp = '<p style="text-indent:0;">';
-    } else {
-        $preApp = '<p>';
-    }
-    $backApp = '</p>';
-    $news[0] = array(   'ID'            => $id,
-                        'Titel'         => changetext($newstitel, 'titel', $mob),
-                        'Datum'         => date('d.m.Y H:i', $newsdatum),
-                        'datAttr'       => date('c', $newsdatum),
-                        'Inhalt'        => $preApp.grabImages(changetext($newsinhalt, 'inhalt', $mob)).$backApp,
-                        'Cmt'           => $anzCmt,
-                        'Cat'           => getCatName(getNewsCat($id)),
-                        'seitenzahl'    => 1,
-                        'start'         => 1,
-                        'seitenzahlC'   => getPages($anzCmt, 10, $start),
-                        'startC'        => $start,
-                        'projState'     => getProjState($projState),
-                        'tags'          => getNewsTags($id, true));
+    $article = new Article($id, $local);
+    $articles[0] = $article;
+
     $a['data']['eType'] = 0;
     $a['data']['ec'] = '';
     $a['data']['formCnt'] = 20;
  
-    $aside = array( 'author'        => User::newFromId($newsautor),
-                    'date'          => $news[0]['Datum'],
-                    'datAttr'       => $news[0]['datAttr'],
-                    'link'          => getLink(replaceUml($news[0]['Cat']), $news[0]['ID'], $news[0]['Titel']));
-
-    // get comments
-    $comments = Database::getDB()->select(
-        'kommentare',
-        array('ID'),
-        array('NewsID = ? AND ParentID = -1', 'i', array($id)),
-        'ORDER BY Datum DESC',
-        array('LIMIT ?, 10', 'i', array(getOffset($anzCmt, 10, $start))));
-    foreach ($comments as $k => $comment) {
-        $comment = new Comment($comment['ID']);
-        $comment->loadReplies();
-        $comments[$k] = $comment;
-    }
-    $a['data']['comments'] = $comments;
+    $aside = array( 'author'        => $article->getAuthor(),
+                    'date'          => date('d.m.Y H:i', $article->getDate()),
+                    'datAttr'       => date('c', $article->getDate()),
+                    'link'          => $article->getLink());
  
     $pics = array();
     $sql = "SELECT

@@ -483,15 +483,15 @@ abstract class ArticleParser {
         $this->str = preg_replace('=\[img([0-9]*)\]=Ui', '', $this->str);
     }
     
-    abstract function blockquotes();    /**< abstract, implementation in sub class */.
-    abstract function lists();  /**< abstract, implementation in sub class */.
-    abstract function parse();  /**< abstract, implementation in sub class */.
+    abstract function blockquotes();    /**< abstract, implementation in sub class */
+    abstract function lists();  /**< abstract, implementation in sub class */
+    abstract function parse();  /**< abstract, implementation in sub class */
     /**
      * abstract, implementation in sub class.
      * \todo make it non abstract
      */
     abstract function searchMarks();
-    abstract function embedVideo(); /**< abstract, implementation in sub class */.
+    abstract function embedVideo(); /**< abstract, implementation in sub class */
 }
 
 /**

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Holding an article comment.
+ * Holding an Article comment.
  * \file classes/comment.php
  */
 
 /**
- * Holding an article comment.
+ * Holding an Article comment.
  * 
  * \class Comment
  * \author Felix Beuster
  * 
- * Holding a single comment, it's replies and provide handling functions
+ * Holding a single comment, its replies and provide handling functions
  */
 class Comment {
 

@@ -32,12 +32,14 @@
     include('settings/externals.php');
     include('settings/generators.php');
     include('settings/modules.php');
-    include('settings/parser.php');
 
     // load classes
     include('classes/database.php');
     include('classes/user.php');
     include('classes/comment.php');
+    include('classes/article.php');
+    include('classes/parser.php');
+    include('classes/image.php');
  
     $db = Database::getDB()->getCon();
     if($db->connect_errno){

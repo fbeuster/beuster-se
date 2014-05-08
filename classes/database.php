@@ -91,8 +91,8 @@ class Database {
 		$table .= ' ';
 
 		// joins
-		if($join == null)
-			$join == '';
+		if($join == null) $join == '';
+		$join .= ' ';
 
 		// limit
 		$limit_vars = array();

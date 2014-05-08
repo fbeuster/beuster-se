@@ -1,5 +1,27 @@
 # Changelog
 
+## 08.05.2014 - v0.11 - Article and Image Class
+
+~~~~~
++	classes/article.php: new class to hold an article
+*	classes/comment.php: tweaked documentation
+*	classes/database.php: fixed bug for joining tables
++	classes/image.php: new class to hold an article image
+*	settings/functionsPage.php: getPageType() now uses term 'article' instead of 'news'
+*	settings/generators.php: bug fixing in generatePager()
+*	settings/parser.php: moved to classes/parser.php
++	index.php: added article, image, parser to load routine
+*	following files now use the article class:
+*		includes/news.php
+*		includes/newsone.php
+*		themes/beusterse-2013/htmlheader.php
+*		themes/beusterse-2013/news.php
+*		themes/beusterse-2013/newsone.php
+*		themes/default/htmlheader.php
+*		themes/default/news.php
+*		themes/default/newsone.php
+~~~~~
+
 ## 03.04.2014 - v0.10 - Documentation
 
 ~~~~~

@@ -1,36 +1,36 @@
 <?php
-  if (count($data['news'])) {
-    foreach ($data['news'] as $beitrag) {
-      $url = 'http://beusterse.de'.replaceUml(getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']));
+  if (count($data['articles'])) {
+    foreach ($data['articles'] as $article) {
+      $url = 'http://beusterse.de'.replaceUml($article->getLink());
       $anhang = ' #beusterse ';
-      if(strlen($beitrag['Titel']) > 61) {
-        $text = substr($beitrag['Titel'], 0, 60).'...'.$anhang.$url;
+      if(strlen($article->getTitle()) > 61) {
+        $text = substr($article->getTitle(), 0, 60).'...'.$anhang.$url;
       } else {
-        $text = $beitrag['Titel'].$anhang.$url;
+        $text = $article->getTitle().$anhang.$url;
       } ?>
 
  <article>
-    <h1><?php echo $beitrag['Titel']; ?></h1>
-    <span value="<?php echo substr($beitrag['projState'], 0, 1); ?>">
-      Status: <?php echo substr($beitrag['projState'], 1, strlen($beitrag['projState'])-1); ?>
+    <h1><?php echo $article->getTitle(); ?></h1>
+    <span value="<?php echo substr($article->getProjState(), 0, 1); ?>">
+      Status: <?php echo substr($article->getProjState(), 1, strlen($article->getProjState())-1); ?>
     </span>
     <?php } ?>
-    <?php echo $beitrag['Inhalt']."\n"; ?>
+    <?php echo $article->getContentParsed()."\n"; ?>
     <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics'], $mob).'</section>'; } ?>
   </article>
 
   <!-- comments -->
   <div>
-    <h2 id="comments">Kommentare (<?php echo $beitrag['Cmt']; ?>)</h2>
+    <h2 id="comments">Kommentare (<?php echo echo count($article->getComments()); ?>)</h2>
     <?php
-      $cmtReply = getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']);
-      if(count($data['comments']) > 0) {
-        foreach($data['comments'] as $cmt) {
+      $cmtReply = $article->getLink();
+      if(count($article->getComments()) > 0) {
+        foreach($article->getComments() as $cmt) {
           echo genComment($cmt, $cmtReply);
         }
-        if($beitrag['seitenzahlC'] > 1) { ?>
+        if($article->getPagesCmt() > 1) { ?>
     <div>
-      <?php echo genPager($beitrag['seitenzahlC'], $beitrag['startC'], getLink($beitrag['Cat'], $beitrag['ID'], $beitrag['Titel']).'/page', $mob); ?>
+      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page', $mob); ?>
     </div>
       <?php } ?>
     <?php } else { ?>

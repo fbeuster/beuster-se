@@ -2,7 +2,7 @@
 
     function getPageType($data) {
         $page = getPage();
-        if(isset($data['news']) && count($data['news']) > 0 && !isset($data['admin_news']) &&
+        if(isset($data['articles']) && count($data['articles']) > 0 && !isset($data['admin_news']) &&
             $page != 'single' && $page != 'page' || $page == 'portfolio') {
             return 'multipleArticles';
         } else {
