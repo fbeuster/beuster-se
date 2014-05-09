@@ -1,5 +1,30 @@
 # Changelog
 
+## 10.05.2014 - v0.12 - Categroy and Lixter class
+
+~~~~~
++	classes/Category.php: new class to hold categories
++	classes/Lixter.php: new main class
+*	index.php: make use of Lixter class
+*	following files now use Category:
+*		includes/news.php
+*		themes/beusterse-2013/htmlaside.php
+*		themes/beusterse-2013/news.php
+*		themes/beusterse-2013/playlist.php
+*		themes/default/htmlaside.php
+*		themes/default/news.php
+*		themes/default/playlist.php
+*	themes/beusterse-2013/playlist.php: bugfixing for Article usage
+*	themes/default/playlist.php: bugfixing for Article usage
+*	renamed:
+*		article.php > Article.php
+*		comment.php > Comment.php
+*		database.php > Database.php
+*		image.php > Image.php
+*		parser.php > Parser.php
+*		user.php > User.php
+~~~~~
+
 ## 08.05.2014 - v0.11 - Article and Image Class
 
 ~~~~~

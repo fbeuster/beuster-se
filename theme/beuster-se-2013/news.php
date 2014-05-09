@@ -18,7 +18,7 @@
         <article class="beContentEntry">
           <h2 class="beContentEntryHeader"><a href="<?php echo $article->getLink();?>"><?php echo $article->getTitle(); ?></a></h2>
           <div class="beContentEntryFooter">
-            <span class="categoryLink">Kategorie: <a href="/<?php echo lowerCat($article->getCategory()); ?>"><?php echo $article->getCategory(); ?></a></span>
+            <span class="categoryLink">Kategorie: <a href="/<?php echo $article->getCategory()->getnameUrl(); ?>"><?php echo $article->getCategory()->getName(); ?></a></span>
             <span class="authorLink">von <?php echo $article->getAuthor()->getClearname(); ?></span>
             <span class="commentsLink">
               <a href="<?php echo $article->getLink();?>#comments">

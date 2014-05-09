@@ -91,7 +91,7 @@ class Article {
         foreach($strokes as $char) {
             $title = str_replace($char, '-', $title);
         }
-		return '/'.$this->id.'/'.lowerCat($this->category).'/'.replaceUml($title);;
+		return '/'.$this->id.'/'.$this->getCategory()->getNameUrl().'/'.replaceUml($title);
 	}
 
 	/*** GETTER / SETTER ***/
@@ -225,15 +225,15 @@ class Article {
 	
 	/**
 	 * getter for category
-	 * @return string
+	 * @return Category
 	 */
-	public function getCategory() { return $this->category; }
+	public function getCategory() { return new Category($this->category); }
 	
 	/**
 	 * setter for category
-	 * @param string $category to set
+	 * @param Category $category to set
 	 */
-	public function setCategory($category) { $this->category = $category; }
+	public function setCategory($category) { $this->category = $category->getId(); }
 
 	/**
 	 * getter for thumbnail
@@ -322,7 +322,7 @@ class Article {
 
 		if(count($res) != 1)
 			return;
-		$this->category = getCatName($res[0]['Cat']);
+		$this->category = $res[0]['Cat'];
 
 		// comments
 

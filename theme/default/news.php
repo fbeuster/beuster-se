@@ -16,7 +16,7 @@
   <article>
     <h2><a href="<?php $article->getLink();?>"><?php echo $article->getTitle(); ?></a></h2>
     <div>
-      <span>Kategorie: <a href="/<?php echo lowerCat($article->getCategory()); ?>"><?php echo $article->getCategory(); ?></a></span>
+      <span>Kategorie: <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>"><?php echo $article->getCategory()->getName(); ?></a></span>
       <span>von <?php echo $article->getAuthor()->getClearname(); ?></span>
       <span>
         <a href="<?php echo $article->getLink());?>#comments">

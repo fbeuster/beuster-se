@@ -115,7 +115,7 @@
             $a['data']['conf']['dest']    = $destDate;
         } else {
             $a['data']['conf']['archive'] = 0;
-            $a['data']['conf']['dest']  = lowerCat($articles[0]->getCategory());   
+            $a['data']['conf']['dest']  = $articles[0]->getCategory()->getNameUrl();
         }
         $a['data']['conf']['seitenzahl'] = $pages;
         $a['data']['conf']['start'] = $start;
@@ -176,7 +176,7 @@
                 $a['data']['conf']['dest']    = $destDate;
             } else {
                 $a['data']['conf']['archive'] = 0;
-                $a['data']['conf']['dest']  = lowerCat($articles[0]->getCategory());   
+                $a['data']['conf']['dest']  = $articles[0]->getCategory()->getNameUrl();
             }
             $a['data']['conf']['seitenzahl'] = $pages;
             $a['data']['conf']['start'] = $start;
