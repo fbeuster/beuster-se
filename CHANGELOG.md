@@ -1,5 +1,18 @@
 # Changelog
 
+## 06.06.2014 - v0.13 - Categroy work
+
+~~~~~
++	classes/Category.php: added newFromName()
++	classes/Category.php: added getNameUrlStatic()
++	classes/Category.php: added isLoaded()
++	classes/Category.php: added isTopCategory()
++	classes/Category.php: added isPortfolio()
+*	classes/Category.php: refactored $a in getNameUrl()
+*	classes/Category.php: rewritten isCategoryName()
+*	includes/news.php: make more use of Category
+~~~~~
+
 ## 10.05.2014 - v0.12 - Categroy and Lixter class
 
 ~~~~~

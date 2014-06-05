@@ -47,18 +47,58 @@ class Category {
 	 */
 	public static function isCategoryName($name) {
 
+		$name = replaceUml(self::getNameUrlStatic($name));
+
 		$return = 0;
 
-		$db = Database::getDB()->getCon();
+		$dbs = Database::getDB();
 		$fields = array('ID', 'Cat');
-        $conds = array('LOWER(Cat) = LOWER(?)', 's', array($name));
-        $res = $dbs->select('newscat', $fields, $conds);
+        $res = $dbs->select('newscat', $fields);
         foreach ($res as $cId) {
-        	$return = $cId;
+        	if($name == replaceUml(self::getNameUrlStatic($cId['Cat'])))
+        		$return = $cId['ID'];
         }
 
         return $return;
 	}
+
+	public static function newFromName($name) {
+		if($i = self::isCategoryName($name)) {
+			return new Category($i);
+		}
+		return new Category(1);
+	}
+
+	/**
+	 * static variant of getNameUrl()
+	 * 
+	 * @param String $name the text to transform
+	 * @return String
+	 */
+	public static function getNameUrlStatic($name = null) {
+		if($name == null)
+			return '';
+        $strokes = array(' ', '---', '--');
+        foreach($strokes as $char) {
+            $name = str_replace($char, '-', $name);
+        }
+        return mb_strtolower($name, 'UTF-8');
+	}
+
+	/*** PUBLIC ***/
+
+	public function isLoaded() {
+		return $this->loaded;
+	}
+
+	public function isTopCategory() {
+		return $this->type == self::CAT_TYPE_TOP;
+	}
+
+	public function isPortfolio() {
+		return $this->type == self::CAT_TYPE_PORTFOLIO;
+	}
+
 
 	/*** GET / SET ***/
 
@@ -91,12 +131,12 @@ class Category {
 	 * @return String
 	 */
 	public function getNameUrl() {
-		$a = $this->name;
+		$name = $this->name;
         $strokes = array(' ', '---', '--');
         foreach($strokes as $char) {
-            $a = str_replace($char, '-', $a);
+            $name = str_replace($char, '-', $name);
         }
-        return mb_strtolower($a, 'UTF-8');
+        return mb_strtolower($name, 'UTF-8');
 	}
 	
 	/**

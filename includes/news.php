@@ -1,11 +1,5 @@
 ﻿<?php
-    // Umstrukturieren:
-    //     wenn kein c da ist, dann alles anzeigen
-    //     wenn c == blog dann wirklich nur die EInträge der KAtegorie blog, nicht mehr
-    // 0 - Top
-    // 1 - Playlist
-    // 2 - Sub
-    // 3 - Portfolio
+
     $a = array();
     $ena = 1;
     $news = array();
@@ -21,16 +15,15 @@
         $start = 1;
 
     if(isset($_GET['c'])) {
-        $cat = $_GET['c'];
-        if(!is_numeric($cat)) {
-            $cat = getCatID($cat);
+        if(is_numeric($_GET['c'])) {
+            $cat = new Category($_GET['c']);
+        } else {
+            $cat = Category::newFromName($_GET['c']);
         }
-        if(!isCat($cat))
-            $cat = -1;
-    } else if(isset($_GET['p']) && isCat($_GET['p'])) {
-        $cat = getCatID($_GET['p']);
+    } else if(isset($_GET['p'])){
+        $cat = Category::newFromName($_GET['p']);
     } else {
-        $cat = -1;
+        $cat = new Category(1);
     }
     if(isset($_GET['n'])) {
         $id = $_GET['n'];
@@ -44,7 +37,7 @@
 
         include('newsone.php');
         if($a['data']['ret'] != '') return $a['data']['ret'];
-    } else if($cat == -1) {
+    } else if(!$cat->isLoaded() || $cat->getId() == 1) {
 
         // all articles
         
@@ -124,36 +117,35 @@
 
         // Kategorienews
 
-        if(getCatID('portfolio') == $cat) {
+        if($cat->isPortfolio()) {
             include('portfolio.php');
         } else {
             // get article ids
+            #echo '<pre>'; print_r($cat); echo '</pre>';
             
             $fields = array('news.ID');
-            if(isTopCat($cat)) {
-                $catID = getCatParent($cat);
-                if($cat == getCatID('blog')) {
+            if($cat->isTopCategory()) {
+                if($cat->getId() == getCatID('blog')) {
                     $blogID = getCatID('blog');
                     $anzahl = getAnzCat($blogID);
                 } else {
                     $blogID = 0;
-                    $anzahl = getAnzTopCat($catID);
+                    $anzahl = getAnzTopCat($cat->getId());
                 }
 
                 // Top-Cat
                 $conds = array(
                     'news.enable = ? AND news.Datum < NOW() AND'.
-                    ' (newscat.ParentID = ? OR newscat.ID = ?)', 'iii', array($ena, $catID, $blogID));
+                    ' (newscat.ParentID = ? OR newscat.ID = ?)', 'iii', array($ena, $cat->getId(), $blogID));
                 $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
                 $joins .= ' JOIN newscat ON newscat.ID = newscatcross.Cat';
             } else {
                 // Sub-Cat
-                $catID = $cat;
-                $anzahl = getAnzCat($catID);
+                $anzahl = getAnzCat($cat->getId());
 
                 $conds = array(
                     'news.enable = ? AND news.Datum < NOW() AND'.
-                    ' newscatcross.Cat = ?', 'ii', array($ena, $catID));
+                    ' newscatcross.Cat = ?', 'ii', array($ena, $cat->getId()));
                 $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
             }
 
