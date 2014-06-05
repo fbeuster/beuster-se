@@ -39,7 +39,7 @@
                             'text'  => changetext($portFileText[2], 'inhalt', $mob),
                             'group' => $portFileText[0],
                             'file'  => $portFilePicName,
-                            'path'  => $portFilePicPath);
+                            'path'  => 'http://'.$sysAdrr.'/'.$portFilePicPath);
     }
     $stmt->close();
     $portFilesSorted = array();

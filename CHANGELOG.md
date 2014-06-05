@@ -1,5 +1,12 @@
 # Changelog
 
+## 06.06.2014 - v0.13.1 - portfolio fix
+
+~~~~~
+*	includes/portfolio.php: fixed image path
+*	settings/main.js: fixed window width/height
+~~~~~
+
 ## 06.06.2014 - v0.13 - Categroy work
 
 ~~~~~

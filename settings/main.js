@@ -17,8 +17,8 @@ $(document).ready(function(){
         return n;
     }
     
-    var maxWidth = $(window).width();
-    var maxHeight = $(window).height();
+    var maxWidth = window.innerWidth;
+    var maxHeight = window.innerHeight;
     
     /* Galerie */
     $('.beContentEntryGalleryImageList li').toggleClass('hasjs');
@@ -147,9 +147,9 @@ $(document).ready(function(){
         
         var newImg = new Image();
         newImg.onload = function() {
-            var imgHeight = newImg.height;
-            var imgWidth = newImg.width;
             view.attr('src', p.attr('src')).load(function(){
+	            var imgHeight = newImg.height;
+	            var imgWidth = newImg.width;
                 while(imgWidth > maxWidth || (imgHeight + 30) > maxHeight) {
                     imgWidth = imgWidth * 0.9;
                     imgHeight = imgHeight * 0.9;
