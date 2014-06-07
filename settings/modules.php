@@ -110,22 +110,22 @@
  
     function moduleArticleInfo($mob, $info) {
         $author = $info['author'];
+        $lnk = 'http://'.$_SERVER['HTTP_HOST'].$info['link'];
         $ret = '';
         $ret .= '<div class="beMainAsideEntry articleInfo">'."\n";
-        $ret .= '  <span class="entryInfo">informationen zum artikel</span>';
-        $ret .= ' <p>'."\n";
-        $ret .= '  Dieser Artikel wurde geschrieben von <a href="/aboutAuthor/'.$author->getName().'">'.$author->getClearname().'</a> am'."\n";
-        $ret .= '  <time datetime="'.$info['datAttr'].'" class="long">'.$info['date'].'</time>Uhr.'."\n";
-        $ret .= ' </p>'."\n";
-        $ret .= ' <p>'."\n";
-        $ret .= '  Mit * gekennzeichnete Links sind Affiliate Links.'."\n";
-        $ret .= ' </p>'."\n";
-        $ret .= ' <p>'."\n";
-        $ret .= '  Link zum Artikel:';
-        if(!$mob) $ret .= '<br>';
-        $ret .= "\n";
-        $ret .= '  <input value="'.'http://'.$_SERVER['HTTP_HOST'].$info['link'].'" type="text" class="articleLink" readonly>'."\n";
-        $ret .= ' </p>'."\n";
+        $ret .= ' <span class="entryInfo">informationen zum artikel</span>';
+        $ret .= ' <dl>';
+        $ret .= '  <dt>Veröffentlicht</dt>';
+        $ret .= '  <dd><time datetime="'.$info['datAttr'].'" class="long">'.$info['date'].'</time></dd>';
+        $ret .= '  <br class="clear">';
+        $ret .= '  <dt>Autor</dt>';
+        $ret .= '  <dd><a href="/aboutAuthor/'.$author->getName().'">'.$author->getClearname().'</a></dd>';
+        $ret .= '  <br class="clear">';
+        $ret .= '  <dt>Link</dt>';
+        $ret .= '  <dd class="articleLink"><a href="'.$lnk.'" title="'.$lnk.'">'.$lnk.'</a></dd>';
+        $ret .= '  <br class="clear">';
+        $ret .= ' </dl>';
+        $ret .= ' <p class="info">Mit einem * gekennzeichnete Links sind Amazon Affiliate Links.</p>';
         $ret .= '</div>'."\n";
         return $ret;
     }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 06.06.2014 - v0.13.2 - sidebar adjustments
+
+~~~~~
+*	settings/modules.php: restructured content in moduleArticleInfo()
++	theme/beuster-se-2013/styles/main.css: added styles for new structure
+~~~~~
+
 ## 06.06.2014 - v0.13.1 - portfolio fix
 
 ~~~~~
