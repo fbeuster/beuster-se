@@ -1,5 +1,14 @@
 # Changelog
 
+## 08.06.2014 - v0.14.1 - Sorting, portfolio adjustments
+
+~~~~~
++	classes/Sorting.php: new class for sorting algorithms
++	classes/PortfolioSet.php: add PortfolioItem sort in loadPortfolioSet()
+*	includes/news.php: fixes
+*	includes/portfolio.php: fixes
+~~~~~
+
 ## 08.06.2014 - v0.14 - PortfolioSet, PortfolioItem
 
 ~~~~~

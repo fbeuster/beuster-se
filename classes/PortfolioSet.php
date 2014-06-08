@@ -49,7 +49,9 @@ class PortfolioSet {
 	 */
 	public function setItems($items) { $this->items = $items; }
 	
-
+	/**
+	 * Loads the current PortfolioSet.
+	 */
 	private function loadPortfolioSet() {
 
 		# PortfolioSet meta
@@ -72,6 +74,9 @@ class PortfolioSet {
 		foreach ($res as $item) {
 			$this->items[] = new PortfolioItem($item['NewsID']);
 		}
+
+		# sort PortfoilioItems
+		usort($this->items, array('Sorting', 'ArticleDesc'));
 
 		# set load status
 		$this->loaded = true;

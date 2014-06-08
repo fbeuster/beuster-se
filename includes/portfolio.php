@@ -4,8 +4,9 @@
 	# request portfolio sets
 	$fields = array('ID');
 	$conds = array('Typ = ? AND ParentId != ?', 'ii', array(3, 1));
+	$options = 'ORDER BY Cat ASC';
 	$db = Database::getDB();
-	$res = $db->select('newscat', $fields, $conds);
+	$res = $db->select('newscat', $fields, $conds, $options);
 
 	# fill portfolio sets
 	$portSets = array();
@@ -14,5 +15,5 @@
 	}
 
 	$a['data']['portSets'] = $portSets;
-	$a['data']['ret'] = $return;
+	$a['data']['ret'] = '';
 ?>

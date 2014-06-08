@@ -172,8 +172,8 @@
             }
             $a['data']['conf']['seitenzahl'] = $pages;
             $a['data']['conf']['start'] = $start;
+            $a['data']['articles'] = $articles;
         }
     }
-    $a['data']['articles'] = $articles;
     return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
 ?>
