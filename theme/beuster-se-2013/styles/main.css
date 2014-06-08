@@ -121,6 +121,7 @@ menu#beMainNav {
 menu#beMainNav li {
 	padding: 3px 0;
 	list-style-type: none;
+	transition: background 0.1s;
 }
 menu#beMainNav li:hover {
 	background: #083046;
@@ -276,6 +277,9 @@ div.adSense.footer {
 .beMainAsideEntry.top ul li:before,
 .beMainAsideEntry.archive ul li:before {
 	content: " - \020 ";
+}
+.beMainAsideEntry.archive .articleArchiveYear:hover {
+	font-weight: bold;
 }
 
 .beMainAsideEntry.articleInfo {
@@ -729,17 +733,17 @@ div#beContentEntryComments div.beCommentEntry .replies {
 .bePortfolioEntry {
 	display: block;
 	width: 200px;
-	height: 200px;
 	float: left;
 	margin: 10px;
 	padding: 10px;
-	line-height: 200px;
 	background: #dfdfdf;
 	box-shadow: 0 0 5px #aaaaaa;
 	text-align: center;
+	transition: box-shadow 0.15s;
 }
 .bePortfolioEntry:hover {
 	box-shadow: 0 0 5px #1086c6;
+	cursor: pointer
 }
 .bePortfolioEntry img {
 	max-width: 200px;

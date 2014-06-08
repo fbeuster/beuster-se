@@ -1,5 +1,17 @@
 # Changelog
 
+## 08.06.2014 - v0.14 - PortfolioSet, PortfolioItem
+
+~~~~~
++	classes/PortfolioItem.php: new class to hold a single portfolio entry
++	classes/PortfolioSet.php: new class to hold a set of portfolio entry
+*	following files make use of new classes:
+*		includes/portfolio.php
+*		theme/beuster-se-2013/portfolio.php
+*		theme/default/portfolio.php
+*	theme/beuster-se-2013/styles/main.css: portfolio adjustements
+~~~~~
+
 ## 06.06.2014 - v0.13.2 - sidebar adjustments
 
 ~~~~~
