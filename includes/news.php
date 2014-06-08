@@ -112,6 +112,7 @@
         }
         $a['data']['conf']['seitenzahl'] = $pages;
         $a['data']['conf']['start'] = $start;
+        $a['data']['articles'] = $articles;
 
     } else {
 

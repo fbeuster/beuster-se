@@ -1,5 +1,11 @@
 # Changelog
 
+## 08.06.2014 - v0.14.2 - news fix
+
+~~~~~
+*	includes/news.php: fixed news show bug
+~~~~~
+
 ## 08.06.2014 - v0.14.1 - Sorting, portfolio adjustments
 
 ~~~~~
