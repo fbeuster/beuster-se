@@ -1,5 +1,12 @@
 # Changelog
 
+## 08.06.2014 - v0.14.3 - article fix
+
+~~~~~
+*	includes/news.php: fixed article show bug
+*	themes/beuster-se-2013/styles/main.css: line-height adjustment for article info
+~~~~~
+
 ## 08.06.2014 - v0.14.2 - news fix
 
 ~~~~~

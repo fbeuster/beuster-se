@@ -233,6 +233,7 @@ div.adSense.footer {
 
 .beMainAsideEntry.articleInfo dl {
 	overflow: hidden;
+	line-height: 100%;
 }
 .beMainAsideEntry.articleInfo dl dt {
 	display: block;

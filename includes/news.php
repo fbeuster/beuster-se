@@ -37,6 +37,7 @@
 
         include('newsone.php');
         if($a['data']['ret'] != '') return $a['data']['ret'];
+        $a['data']['articles'] = $articles;
     } else if(!$cat->isLoaded() || $cat->getId() == 1) {
 
         // all articles
