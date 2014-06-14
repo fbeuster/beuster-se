@@ -65,7 +65,7 @@
   </style>
   <?php } ?>
   <!-- wanna play javascript? -->
-  <script type="text/javascript" src="/settings/main.js"></script>
+  <script type="text/javascript" src="<?php echo getThemeStyle('scripts/main.js'); ?>"></script>
   <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
   <script type="text/javascript" src="/settings/scriptAdm.js"></script>
   <?php } ?>

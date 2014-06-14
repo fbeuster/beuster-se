@@ -1,5 +1,14 @@
 # Changelog
 
+## 14.06.2014 - v0.14.4 - cleanup
+
+~~~~~
+*	includes/news.php: imported code fomr includes/portfolio.php
+-	includes/portfolio.php: deleted, not needed any longer
+*	moved settings/main.js > theme/beuster-se-2013/scripts/main.js
+*	theme/beuster-se-2013/htmlheader.php: adjusted javascript sources
+~~~~~
+
 ## 08.06.2014 - v0.14.3 - article fix
 
 ~~~~~
