@@ -134,42 +134,21 @@
         }
     } else {
         $a['filename'] = 'downloads.php';
-        $sql = "SELECT
-            downloads.ID,
-            downloads.Name,
-            downloads.Description,
-            files.downloads,
-            downcats.CatName
-         FROM
-            downloads
-         LEFT JOIN
-            files ON downloads.File = files.ID
-         JOIN
-            downcats ON downloads.CatID = downcats.ID
-         ORDER BY
-            downcats.CatName ASC,
-            downloads.Name DESC,
-            files.downloads DESC";
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        if(!$stmt->execute()) {return $result->error;}
-        $down = array();     
-        $stmt->bind_result($id, $name, $descr, $downloads, $cat);  
-        while($stmt->fetch()) {
-            $down[$id] = array( 'id'    => $id,
-                                'name'  => $name,
-                                'descr' => changetext($descr, 'vorschau', $mob, 200),
-                                'anz'   => $downloads,
-                                'cat'   => $cat);
+
+        $downSets = array();
+        $downStat = array('no' => 0);
+
+        $fields = array('ID');
+        $db = Database::getDB();
+        $res = $db->select('downcats', $fields);
+
+        foreach ($res as $k => $down) {
+            $downSet = new DownloadSet($down['ID']);
+            $downStat['no'] += $downSet->getCount();
+            $downSets[] = $downSet;
         }
-        $stmt->close();
-        $downCats = array();
-        foreach ($down as $entry) {
-            if(!in_array($entry['cat'], $downCats)) {
-                $downCats[] = $entry['cat'];
-            }
-        }
-        $a['data']['down'] = $down;
-        $a['data']['downCats'] = $downCats;
+        $a['data']['downStat'] = $downStat;
+        $a['data']['downSets'] = $downSets;
     }
     return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
 ?>

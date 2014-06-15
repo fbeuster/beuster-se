@@ -1,5 +1,17 @@
 # Changelog
 
+## 15.06.2014 - v0.15 - download section
+
+~~~~~
++	classes/DownloadFile.php: new class to hold download item
++	classes/DownloadFile.php: new class to hold set of download items
++	classes/File.php: new class to hold a single file
++	classes/Sorting.php: added sorting methods for DownloadFile
+*	following files make use of new class:
+*		theme/beuster-se-2013/downloads.php
+*		theme/default/downloads.php
+~~~~~
+
 ## 14.06.2014 - v0.14.4 - cleanup
 
 ~~~~~
