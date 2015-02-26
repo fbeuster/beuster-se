@@ -156,46 +156,72 @@ class Lixter {
     $pageType = getPageType($this->content['data']);
     $currPage = getPage();
 
-    if(!isset($beTheme) || $beTheme == '') {
-      $beTheme = 'default';
-    }
-    $beThemeI = 'theme/'.$beTheme.'/';
-
     // Laden HTML-Kopf
-    include($beThemeI.'htmlheader.php');
+    include($this->getFilePath('htmlheader.php'));
     if($analyse && $local) include('settings/analyse.php');
-    include($beThemeI.'htmlwarning.php');
+    include($this->getFilePath('htmlwarning.php'));
 
     // Laden der Template-Datei
-    if (is_array($this->content) && isset($this->content['filename'], $this->content['data']) &&
-      is_string($this->content['filename']) && is_array($this->content['data'])) {
+    if ($this->isValidTemplate()) {
       // Gültige Include-Datei
-      if(file_exists($file = 'user/theme/'.$this->content['filename'])) {
-        $data = $this->content['data'];
-        include $file;
-      } else if (file_exists($file = $beThemeI.$this->content['filename'])) {
+      $file = $this->getFilePath();
+      if($file !== false) {
         $data = $this->content['data'];
         include $file;
       } else {
         $data['msg'] = 'Templatedatei "'.$file.'" ist nicht vorhanden.';
-        include $beThemeI.'error.php';
+        include $this->getFilePath('error.php');
       }
     } else if (is_string($this->content)) {
       // Fehlermeldung
       $data['msg'] = $this->content;
-      include $beThemeI.'error.php';
+      include $this->getFilePath('error.php');
     } else if (1 == $this->content) {
       // return wurde vergessen
       $data['msg'] = 'In der Include-Datei wurde die return Anweisung vergessen.';
-      include $beThemeI.'error.php';
+      include $this->getFilePath('error.php');
     } else {
       // ein Ungültiger Return wert
       $data['msg'] = 'Die Include-Datei hat einen ungültigen Wert zurückgeliefert.';
-      include $beThemeI.'error.php';
+      include $this->getFilePath('error.php');
     }
-    include($beThemeI.'htmlaside.php');
-    // Laden HTML-Fuss
-    include($beThemeI.'htmlfooter.php');
+
+    include($this->getFilePath('htmlaside.php'));
+    include($this->getFilePath('htmlfooter.php'));
+  }
+
+  /**
+   * check wether the specified file has a local override or not
+   */
+  private function getFilePath($filename = null) {
+    if($filename === null) {
+      $filename = $this->content['filename'];
+    }
+
+    if (file_exists('user/theme/'.$filename)) {
+      return 'user/theme/'.$filename;
+    }
+
+    if(!isset($beTheme) || $beTheme == '') {
+      $beTheme = 'default';
+    }
+    $beThemeP = 'theme/'.$beTheme.'/';
+
+    if (file_exists($beThemeP.$filename)) {
+      return $beThemeP.$filename;
+    }
+
+    return false;
+  }
+
+  /**
+   * check if we have a valid template file and data
+   */
+  private function isValidTemplate() {
+    return is_array($this->content)
+            && isset($this->content['filename'], $this->content['data'])
+            && is_string($this->content['filename'])
+            && is_array($this->content['data']);
   }
 }
 
