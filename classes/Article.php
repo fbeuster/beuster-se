@@ -370,7 +370,7 @@ class Article {
         if($playlistID !== false) {
             $videoID = getYouTubeIDFromArticle($this->id);
             $path = 'images/tmp/'.$playlistID.'-'.$videoID;
-            $this->thumbnail = 'http://'.$sysAdrr.'/'.$path.'.jpg';
+            $this->thumbnail = $path.'.jpg';
             $this->playlist = true;
         }
 

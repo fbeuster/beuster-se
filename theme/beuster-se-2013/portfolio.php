@@ -8,7 +8,7 @@
       foreach($portSet->getItems() as $portItem) {
         $portImage = $portItem->getImage();
         echo '  <div class="bePortfolioEntry">'."\n";
-        echo '    <img src="'.$portImage->getPath().'" title="'.$portImage->getTitle().'" name="'.$portImage->getTitle().'" alt="'.$portImage->getTitle().'" class="portImage">'."\n";
+        echo '    <img src="'.makeAbsolutePath($portImage->getPath()).'" title="'.$portImage->getTitle().'" name="'.$portImage->getTitle().'" alt="'.$portImage->getTitle().'" class="portImage">'."\n";
         echo '    <span class="infotext">'.$portItem->getTitle().'</span>'."\n";
         echo '  </div>'."\n";
       }

@@ -180,6 +180,15 @@
         return '/theme/'.$beTheme.'/'.$css;
     }
 
+    function makeAbsolutePath($path, $append = '') {
+        global $beRemoteAbsoluteAddr, $sysAdrr;
+        if($beRemoteAbsoluteAddr === false) {
+            return 'http://'.$sysAdrr.'/'.$path.$append;
+        } else {
+            return 'http://'.$beRemoteAbsoluteAddr.'/'.$path.$append;
+        }
+    }
+
     /*** validation ***/
 
     function isValidUserUrl($url) {
@@ -737,15 +746,16 @@
             $return = $result->error;
         }
         $result->close();
-        
+
         if($return !== '') {
             $image = '';
         } else {
-            $image = '</p><div class="beContentEntryImage"><img src="http://'.$sysAdrr.'/'.$pfad.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></div><p>';
-        }        
+            $path   = makeAbsolutePath($pfad);
+            $image  = '</p><div class="beContentEntryImage"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></div><p>';
+        }
         return $before.$image.$after;
     }
-    
+
     function articlesInDate($year, $month = 0, $day = 0) {
         $db = Database::getDB()->getCon();
         $return = '';
