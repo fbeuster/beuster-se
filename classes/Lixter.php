@@ -194,6 +194,7 @@ class Lixter {
    * check wether the specified file has a local override or not
    */
   private function getFilePath($filename = null) {
+    global $beTheme;
     if($filename === null) {
       $filename = $this->content['filename'];
     }

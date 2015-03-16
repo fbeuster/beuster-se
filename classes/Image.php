@@ -31,7 +31,7 @@ class Image {
 		if($this->thumb) {
 	        $path = str_replace('blog/id', 'blog/thid', $this->path);
 	        $path = str_replace('.', '_', $path);
-	        return 'http://'.$sysAdrr.'/'.$path.'.jpg';
+	        return $path.'.jpg';
 	    } else {
 	    	return '';
 	    }
