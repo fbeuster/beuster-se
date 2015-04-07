@@ -23,7 +23,7 @@
   <meta property='og:image' content='<?php echo getPageOGImage($ret['data']); ?>'/>
   <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
   <!--<link href="/images/favicon.ico" type="image/x-icon" rel="shortcut icon"> -->
-  
+
   <!-- so many sweet favicons, inspired by Edward Black (http://quda.tv) -->
   <link rel="shortcut icon" href="/images/favs/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/images/favs/fav96.png">
@@ -48,7 +48,7 @@
   <meta name="msapplication-wide310x150logo" content="/images/favs/fav310w.png">
   <meta name="apple-mobile-web-app-title" content="beuster{se}">
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" /> 
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
   <title><?php echo getPageTitle($file); ?></title>
   <?php if(!$ieOld) { ?>
   <!-- style it -->
@@ -65,7 +65,7 @@
   </style>
   <?php } ?>
   <!-- wanna play javascript? -->
-  <script type="text/javascript" src="<?php echo getThemeStyle('scripts/main.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo getThemeStyle('scripts/beusterse.js'); ?>"></script>
   <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
   <script type="text/javascript" src="/settings/scriptAdm.js"></script>
   <?php } ?>

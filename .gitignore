@@ -19,3 +19,7 @@ images/tmp/*
 
 index*.*
 !index.php
+
+# no compiled JS files
+theme/beuster-se-2013/scripts/*_compiled.js
+theme/beuster-se-2013/scripts/beusterse.js
