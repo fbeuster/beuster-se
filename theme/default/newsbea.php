@@ -9,7 +9,7 @@
     <form action="/newsbea" method="post">
       <fieldset>
         <legend>News-Einträge bearbeiten</legend>
-        <label>News wählen:</label> 
+        <label>News wählen:</label>
         <select name="newsid">
           <option value="0">Bitte wählen...</option>
           <?php foreach($data['news'] as $value) { ?>
@@ -23,7 +23,7 @@
         <label>Manuelle Freigabe</label>
         <input type="checkbox" name="enable">
         <br>
-        <?php if(isset($data['newsbea'])) {$newsbea = $data['newsbea'];} 
+        <?php if(isset($data['newsbea'])) {$newsbea = $data['newsbea'];}
               else {$newsbea = array('newstitel' => '', 'newsinhalt' => '', 'newsidbea' => '', 'newstags' => '');}?>
         <input type="text" name="newstitel" value="<?php if($e) echo $data['err']['titel']; else echo $newsbea['newstitel']; ?>" role="newEntryTitle" placeholder="Titel des Blogeintrags">
         <input type="hidden" name="newsid2" size="3" value="<?php if($e) echo $data['err']['titel']; else echo $newsbea['newsidbea']; ?>">
@@ -61,7 +61,7 @@
           <?php } ?>
         </select>
         <input type="text" name="plneu" title="Name neue Playlist">
-        <input type="text" name="plneuid" title="ID neue Playlist">
+        <input type="text" name="plneuid" title="ID neue Playlist"><br>
         <label>
           Tags (durch Komma trennen):
         </label>

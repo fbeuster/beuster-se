@@ -36,7 +36,7 @@
           <?php } ?>
         </select>
         <input type="text" name="plneu" title="Name neue Playlist">
-        <input type="text" name="plneuid" title="ID neue Playlist">
+        <input type="text" name="plneuid" title="ID neue Playlist"><br>
         <label>
           Tags (durch Komma trennen):
         </label>
