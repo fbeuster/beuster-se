@@ -6,135 +6,154 @@
   display: block;
   margin: 10px;
   padding: 10px;
-}
-.beMainAsideEntry .entryInfo {
-  font-style: italic;
-  color: #444444;
-}
-.beMainAsideEntry {
   opacity: 0.7;
   transition: 0.3s all;
-}
-.beMainAsideEntry:hover {
-  opacity: 1;
-}
 
-.beMainAsideEntry.socialInteraction {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-.beMainAsideEntry ul.socialInteraction {
-  display: block;
-  text-align: center;
-  background: #106393;
-}
-.beMainAsideEntry ul.socialInteraction li {
-  display: inline-block;
-}
-.beMainAsideEntry ul.socialInteraction li a {
-  display: block;
-  background: url('../images/sprite.png') no-repeat;
-}
+  &:hover {
+    opacity: 1;
+  }
 
-.beMainAsideEntry.searchBox form {
-  display: block;
-  margin: 0 auto;
-}
-.beMainAsideEntry.searchBox form input {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 5px 10px;
-  font-size: 15px;
-}
-.beMainAsideEntry.searchBox form input[type=text] {
-  border: 1px solid #bbbbbb;
-}
-.beMainAsideEntry.searchBox form input[type=submit] {
-  width: 30px;
-  padding: 5px 0;
-  border: 1px solid #bbbbbb;
-  border-left: 0;
-  background: url('../images/sprite.png') no-repeat;
-  background-position: -440px -75px;
-}
-.beMainAsideEntry.searchBox form input[type=submit]:hover {
-  background-position: -440px -105px;
-  cursor: pointer;
-}
-.beMainAsideEntry.searchBox form input[type="submit"]::-moz-focus-inner {
-  border:0;
-}
+  .entryInfo {
+    font-style: italic;
+    color: #444444;
+  }
 
-.beMainAsideEntry.articleInfo dl {
-  overflow: hidden;
-  line-height: 100%;
-}
-.beMainAsideEntry.articleInfo dl dt {
-  display: block;
-  float: left;
-  opacity: 0.7;
-  margin-right: 15px;
-}
-.beMainAsideEntry.articleInfo dl dd.articleLink {
-  overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #1686c6;
-}
-.beMainAsideEntry.articleInfo dl dd.articleLink:hover {
-  color: #d02c33;
-}
-.beMainAsideEntry.articleInfo p.info {
-  font-size: 12px;
-  line-height: 150%;
-  opacity: 0.8;
-}
+  &.socialInteraction {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
 
-.beMainAsideEntry.randomArticle .randomTitle {
-  font-size: 17px;
-}
-.beMainAsideEntry.randomArticle .randomText {
-  font-size: 15px;
-}
+  ul.socialInteraction {
+    display: block;
+    text-align: center;
+    background: #106393;
 
-.beMainAsideEntry.top ul,
-.beMainAsideEntry.archive ul  {
-  list-style: none;
-  margin-left: 0;
-  padding-left: 1em;
-  text-indent: -1em;
-}
-.beMainAsideEntry.top ul li,
-.beMainAsideEntry.archive ul li {
-  list-style-type: none;
-}
-.beMainAsideEntry.top ul li:before,
-.beMainAsideEntry.archive ul li:before {
-  content: " - \020 ";
-}
-.beMainAsideEntry.archive .articleArchiveYear:hover {
-  font-weight: bold;
-}
+    li {
+      display: inline-block;
 
-.beMainAsideEntry.articleInfo {
-  font-size: 15px;
-}
-.beMainAsideEntry.articleInfo .entryInfo {
-  font-size: 17px;
-}
-.beMainAsideEntry.articleInfo input {
-  width: 100%;
-  height: 25px;
-}
+      a {
+        display: block;
+        background: url('../images/sprite.png') no-repeat;
+      }
+    }
+  }
 
-.beMainAsideEntry.adSense {
-  overflow: hidden;
-  text-align: center;
-}
+  &.searchBox form {
+      display: block;
+      margin: 0 auto;
 
-.beMainAsideEntry.donate {
-  text-align: center;
+    input {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 15px;
+
+      &[type=text] {
+        border: 1px solid #bbbbbb;
+      }
+
+      &[type=submit] {
+        width: 30px;
+        padding: 5px 0;
+        border: 1px solid #bbbbbb;
+        border-left: 0;
+        background: url('../images/sprite.png') no-repeat;
+        background-position: -440px -75px;
+
+        &:hover {
+          background-position: -440px -105px;
+          cursor: pointer;
+        }
+      }
+
+      &[type="submit"]::-moz-focus-inner {
+        border:0;
+      }
+    }
+  }
+
+  &.articleInfo {
+    font-size: 15px;
+
+    dl {
+      overflow: hidden;
+      line-height: 100%;
+
+      dt {
+        display: block;
+        float: left;
+        opacity: 0.7;
+        margin-right: 15px;
+      }
+
+      dd.articleLink {
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #1686c6;
+
+        &:hover {
+          color: #d02c33;
+        }
+      }
+    }
+
+    p.info {
+      font-size: 12px;
+      line-height: 150%;
+      opacity: 0.8;
+    }
+
+    .entryInfo {
+      font-size: 17px;
+    }
+
+    input {
+      width: 100%;
+      height: 25px;
+    }
+  }
+
+  &.randomArticle {
+    .randomTitle {
+      font-size: 17px;
+    }
+
+    .randomText {
+      font-size: 15px;
+    }
+  }
+
+  &.top, &.archive {
+    ul {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 1em;
+      text-indent: -1em;
+
+      li {
+        list-style-type: none;
+
+        &:before {
+          content: " - \020 ";
+        }
+      }
+    }
+  }
+
+  &.archive .articleArchiveYear:hover {
+    font-weight: bold;
+  }
+
+  &.adSense {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  &.donate {
+    text-align: center;
+  }
 }

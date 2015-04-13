@@ -2,27 +2,28 @@
 
 /** layout.scss **/
 
-header#beMainHeader {
+#beMainHeader {
   width: 100%;
   background: url('../images/background.png') #efefef;
 }
-div#beMainContainer{
+
+#beMainContainer{
   margin: 0 auto;
   font-size: 17px;
   line-height: 175%;
 }
-div#beMainPortfolio {
+
+#beMainPortfolio {
 }
-aside#beMainAside {
+
+#beMainAside {
   margin: 60px auto 0 auto;
   background: #ebebeb;
   border: 1px solid #aaaaaa;
   box-shadow: 0 0 6px #aaaaaa;
 }
-/*aside#beMainAside {
-  margin: 20px auto 0 auto;
-}*/
-footer#beMainFooter {
+
+#beMainFooter {
   width: 100%;
   margin-top: 15px;
   padding: 4px 0 2px 0;

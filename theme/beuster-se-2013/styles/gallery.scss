@@ -5,28 +5,34 @@
 .beContentEntryGallery {
   margin: 0 auto;
 }
+
 .beContentEntryGalleryImageList {
   display: block;
   margin: 0 auto !important;
   padding: 0 !important;
+
+  li {
+    width: 150px;
+    height: 100px;
+    margin: 0 10px 20px 10px;
+
+    img {
+      max-width: 150px;
+      max-height: 100px;
+    }
+  }
 }
-.beContentEntryGalleryImageList li {
-  width: 150px;
-  height: 100px;
-  margin: 0 10px 20px 10px;
-}
-.beContentEntryGalleryImageList li img {
-  max-width: 150px;
-  max-height: 100px;
-}
+
 .beContentEntryGalleryBigImage {
   display: none;
   margin: 0 auto 10px auto;
   text-align: center;
+
+  img {
+    display: none;
+  }
 }
-.beContentEntryGalleryBigImage img {
-  display: none;
-}
+
 #galL,
 #galR {
   display: none;
@@ -35,17 +41,21 @@
     background: url('../images/sprite.png') no-repeat;
     height: 105px;
 }
+
 #galL {
   background-position: -600px -25px;
+
+  &:hover {
+    background-position: -600px -130px;
+  }
 }
-#galL:hover {
-  background-position: -600px -130px;
-}
+
 #galR {
   background-position: -625px -25px;
-}
-#galR:hover {
-  background-position: -625px -130px;
+
+  &:hover {
+    background-position: -625px -130px;
+  }
 }
 
 .beLightbox {
@@ -57,6 +67,7 @@
   z-index: 2000;
   background: rgba(120,120,120,0.7);
 }
+
 .beLightboxWrapper {
   width: 90%;
   height: 90%;
@@ -64,20 +75,25 @@
   box-shadow: 0 0 10px #555555;
   background: #ebebeb;
 }
+
 .beLightboxImage {
   margin: 0 auto;
+
+  img {
+    display: block;
+  }
 }
-.beLightboxImage img {
-  display: block;
-}
+
 .beLightboxText {
   padding: 0 10px;
   height: 30px;
   border-top: 1px solid #bfbfbf;
 }
+
 .beLightboxDescription {
   float: left;
 }
+
 .beLightboxClose {
   float: right;
   cursor: pointer;

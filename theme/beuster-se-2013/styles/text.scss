@@ -2,105 +2,126 @@
 
 /** text.scss **/
 
-.beContentEntry h2,
-.beContentEntry h3 {
-  margin: 15px 0 0 0;
-  color: #1d3747;
-}
-.beContentEntry p {
-  margin: 0 0 15px 0;
-}
-.beContentEntry b {
-  font-weight: bold;
-}
-.beContentEntry i {
-  font-style: italic;
-}
-.beContentEntry u {
-  text-decoration: underline;
-}
-.beContentEntry del {
-  text-decoration: line-through;
-}
-.beContentEntry ins {
-  text-decoration: none;
-  font-style: italic;
-}
-.beContentEntry cite:before,
-.beContentEntry cite:after {
-  content: "\"";
-}
-.beContentEntry blockquote {
-  margin: 0 0 15px 0;
-  padding: 10px;
-  border:  1px solid #d4d4d4;
-  border-left:  3px solid #55a3cf;
-  background: #e4e4e4;
-}
-.beContentEntry blockquote span {
-  font-size: 0.85em;
-  color: #4f4f4f;
-}
-.beContentEntry ul,
-.beContentEntry ol {
-  margin: 0 0 15px 20px;
-  padding: 0 0 0 20px;
-}
-.beContentEntry ul li ul,
-.beContentEntry ol li ol {
-  margin: 0;
-}
-.beContentEntry ol {
-  list-style-type: decimal;
-}
-.beContentEntry ol li ol {
-  list-style-type: lower-alpha;
-}
-.beContentEntry ol li ol li ol {
-  list-style-type: lower-roman;
-}
-.beContentEntry .code {
-  margin-top: 15px;
-  border: 1px solid #aaaaaa;
-}
-.beContentEntry .code .line {
-  display: block;
-  padding: 0 10px 0 0;
-  font-size: 0.85em;
-  line-height: 1.5em;
-  font-family: "Source Code Pro";
-  color: #1a1a1a;
-  background: #e4e4e4;
-  transition: 0.15s all;
-}
-.beContentEntry .code .line:hover {
-  background: #f0f0f0;
-  cursor: default;
-}
-.beContentEntry .code .line .no {
-  display: inline-block;
-  margin-right: 10px;
-  padding-right: 5px;
-  width: 30px;
-  border-right: 1px solid #cccccc;
-  background: #d4d4d4;
-  text-align: right;
-  opacity: 0.7;
-}
-.beContentEntry .code .line:hover .no {
-  background: #e4e4e4;
-}
-.beContentEntry pre {
-  padding: 10px;
-  font-size: 0.9em;
-  line-height: 125%;
-  font-family: "Source Code Pro";
-  background: #dadada;
-}
-.beContentEntry .embeddedVideo.video {
-  display: block;
-  margin: 0 auto 15px auto;
-}
-.beContentEntry .embeddedVideo.link {
-  display: none;
+.beContentEntry {
+  h2, h3 {
+    margin: 15px 0 0 0;
+    color: #1d3747;
+  }
+
+  p {
+    margin: 0 0 15px 0;
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  del {
+
+    text-decoration: line-through;
+  }
+  ins {
+    text-decoration: none;
+    font-style: italic;
+  }
+
+  cite:before, cite:after {
+    content: "\"";
+  }
+
+  blockquote {
+    margin: 0 0 15px 0;
+    padding: 10px;
+    border:  1px solid #d4d4d4;
+    border-left:  3px solid #55a3cf;
+    background: #e4e4e4;
+
+    span {
+      font-size: 0.85em;
+      color: #4f4f4f;
+    }
+  }
+
+  ul, ol {
+    margin: 0 0 15px 20px;
+    padding: 0 0 0 20px;
+  }
+
+  ul li ul,
+  ol li ol {
+    margin: 0;
+  }
+
+  ol {
+    list-style-type: decimal;
+
+    li ol {
+      list-style-type: lower-alpha;
+
+      li ol {
+        list-style-type: lower-roman;
+      }
+    }
+  }
+
+  .code {
+    margin-top: 15px;
+    border: 1px solid #aaaaaa;
+
+    .line {
+      display: block;
+      padding: 0 10px 0 0;
+      font-size: 0.85em;
+      line-height: 1.5em;
+      font-family: "Source Code Pro";
+      color: #1a1a1a;
+      background: #e4e4e4;
+      transition: 0.15s all;
+
+      &:hover {
+        background: #f0f0f0;
+        cursor: default;
+
+        .no {
+          background: #e4e4e4;
+        }
+      }
+
+      .no {
+        display: inline-block;
+        margin-right: 10px;
+        padding-right: 5px;
+        width: 30px;
+        border-right: 1px solid #cccccc;
+        background: #d4d4d4;
+        text-align: right;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  pre {
+    padding: 10px;
+    font-size: 0.9em;
+    line-height: 125%;
+    font-family: "Source Code Pro";
+    background: #dadada;
+  }
+
+  .embeddedVideo.video {
+    display: block;
+    margin: 0 auto 15px auto;
+  }
+
+  .embeddedVideo.link {
+    display: none;
+  }
 }

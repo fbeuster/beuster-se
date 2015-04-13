@@ -2,48 +2,56 @@
 
 /** comments.scss **/
 
-div#beContentEntryComments {
+#beContentEntryComments {
   margin: 20px 0 0 0;
+
+  h2.beContentEntryCommentsHeader {
+    padding: 0 10px;
+    border-bottom: 2px solid #55a3cf;
+    color: #083046;
+  }
+
+  div.beCommentEntry {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #afafaf;
+    border-top: 0;
+    background: #ebebeb;
+
+    span.beCommentEntryAvatar {
+      float: left;
+      margin: 0 20px 0 0;
+      border: 1px solid #aaaaaa;
+    }
+
+    span.beCommentEntryHeader {
+      padding: 0 20px 0 0;
+      border-bottom: 1px solid #d0d0d0;
+      color: #1d3747;
+      font-size: 0.95em;
+    }
+
+    .reply {
+      padding-left: 25px;
+      line-height: 100%;
+      background: url('../images/commentReply.png') top left no-repeat;
+      background-position: 0 0;
+      color: #afafaf;
+      cursor: pointer;
+
+      &:hover {
+        color: #666666;
+        background-position: 0 -20px;
+      }
+    }
+
+    .replies {
+      margin-top: 20px;
+      border-top: 1px solid #55A3CF;
+    }
+  }
 }
-div#beContentEntryComments h2.beContentEntryCommentsHeader {
-  padding: 0 10px;
-  border-bottom: 2px solid #55a3cf;
-  color: #083046;
-}
-div#beContentEntryComments div.beCommentEntry {
-  position: relative;
-  padding: 20px;
-  border: 1px solid #afafaf;
-  border-top: 0;
-  background: #ebebeb;
-}
-div#beContentEntryComments div.beCommentEntry span.beCommentEntryAvatar {
-  float: left;
-  margin: 0 20px 0 0;
-  border: 1px solid #aaaaaa;
-}
-div#beContentEntryComments div.beCommentEntry span.beCommentEntryHeader {
-  padding: 0 20px 0 0;
-  border-bottom: 1px solid #d0d0d0;
-  color: #1d3747;
-  font-size: 0.95em;
-}
-div#beContentEntryComments div.beCommentEntry .reply {
-  padding-left: 25px;
-  line-height: 100%;
-  background: url('../images/commentReply.png') top left no-repeat;
-  background-position: 0 0;
-  color: #afafaf;
-  cursor: pointer;
-}
-div#beContentEntryComments div.beCommentEntry .reply:hover {
-  color: #666666;
-  background-position: 0 -20px;
-}
-div#beContentEntryComments div.beCommentEntry .replies {
-  margin-top: 20px;
-  border-top: 1px solid #55A3CF;
-}
+
 .beCommentNew {
   padding: 20px;
   border: 1px solid #b0b0b0;
@@ -51,81 +59,96 @@ div#beContentEntryComments div.beCommentEntry .replies {
   font-size: 1.1em;
   color: #222222;
   background: #ebebeb;
+
+  form {
+    .antSp {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    input[type=text] {
+      height: 25px;
+      margin-top: 10px;
+      padding: 0 10px;
+      border: 1px solid #b0b0b0;
+      background: #fafafa;
+    }
+
+    textarea {
+      height: 180px;
+      margin-top: 10px;
+      padding: 10px;
+      vertical-align: top;
+      border: 1px solid #b0b0b0;
+      background: #fafafa;
+    }
+
+    input.button {
+      width: 130px;
+      height: 30px;
+      border: 0;
+    }
+
+    input[type=submit] {
+      margin: 10px 0 0 94px;
+      padding: 0 10px;
+      font-weight: bold;
+      background: #1686c6;
+      color: #ffffff;
+
+      &:hover:not([disabled=disabled]) {
+        background: #083046;
+        cursor: pointer;
+      }
+    }
+
+    input[type=reset] {
+      padding: 0 10px;
+      background: #cccccc;
+      color: #666666;
+
+      &:hover {
+        background: #999999;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    }
+  }
 }
+
 .beCommentNewHeader {
   font-size: 1.2em;
   font-weight: bold;
   color: #083046;
+
+  .cancelReply {
+    display: inline-block;
+    height: 20px;
+    margin: 0 0 0 20px;
+    padding-left: 25px;
+    font-size: 17px;
+    line-height: 19px;
+    font-weight: normal;
+    color: #afafaf;
+    background: url('../images/commentReply.png') top left no-repeat;
+    background-position: 0 -40px;
+
+    &:hover {
+      color: #666666;
+      cursor: pointer;
+      background-position: 0 -60px;
+    }
+  }
 }
-.beCommentNewHeader .cancelReply {
-  display: inline-block;
-  height: 20px;
-  margin: 0 0 0 20px;
-  padding-left: 25px;
-  font-size: 17px;
-  line-height: 19px;
-  font-weight: normal;
-  color: #afafaf;
-  background: url('../images/commentReply.png') top left no-repeat;
-  background-position: 0 -40px;
-}
-.beCommentNewHeader .cancelReply:hover {
-  color: #666666;
-  cursor: pointer;
-  background-position: 0 -60px;
-}
-.beCommentNew form .antSp {
-  display: none;
-}
-.beCommentNew form label {
-  display: inline-block;
-  margin-top: 10px;
-}
-.beCommentNew form input[type=text] {
-  height: 25px;
-  margin-top: 10px;
-  padding: 0 10px;
-  border: 1px solid #b0b0b0;
-  background: #fafafa;
-}
-.beCommentNew form textarea {
-  height: 180px;
-  margin-top: 10px;
-  padding: 10px;
-  vertical-align: top;
-  border: 1px solid #b0b0b0;
-  background: #fafafa;
-}
-.beCommentNew form input.button {
-  width: 130px;
-  height: 30px;
-  border: 0;
-}
-.beCommentNew form input[type=submit] {
-  margin: 10px 0 0 94px;
-  padding: 0 10px;
-  font-weight: bold;
-  background: #1686c6;
-  color: #ffffff;
-}
-.beCommentNew form input[type=reset] {
-  padding: 0 10px;
-  background: #cccccc;
-  color: #666666;
-}
-.beCommentNew form input[type=submit]:not([disabled=disabled]):hover {
-  background: #083046;
-  cursor: pointer;
-}
-.beCommentNew form input[type=reset]:hover {
-  background: #999999;
-  color: #ffffff;
-  cursor: pointer;
-}
+
 .beCommentNewInfo {
-  margin: 10px 0 0 0;
   padding: 0 0 0 92px;
 }
+
 .beCommentNewInfo,
 .beCommentNewTime,
 .beCommentNewDisclaimer {

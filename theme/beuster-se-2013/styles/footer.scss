@@ -2,13 +2,15 @@
 
 /** footer.scss **/
 
-footer#beMainFooter a {
+#beMainFooter a {
   text-decoration: none;
   color: #ffffff;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
-footer#beMainFooter a:hover {
-  text-decoration: underline;
-}
+
 div.adSense.footer {
   height: 90px;
   margin: 20px 0 0 0;

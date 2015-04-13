@@ -8,11 +8,13 @@
   border-bottom: 1px solid #1686c6;
   color: #1d3747;
 }
+
 .bePortfolioSubHeader {
   clear: both;
   padding: 15px 0 0 0;
   color: #1d3747;
 }
+
 .bePortfolioEntry {
   display: block;
   width: 200px;
@@ -23,13 +25,15 @@
   box-shadow: 0 0 5px #aaaaaa;
   text-align: center;
   transition: box-shadow 0.15s;
-}
-.bePortfolioEntry:hover {
-  box-shadow: 0 0 5px #1086c6;
-  cursor: pointer
-}
-.bePortfolioEntry img {
-  max-width: 200px;
-  max-height: 200px;
-  vertical-align: middle;
+
+  &:hover {
+    box-shadow: 0 0 5px #1086c6;
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+    vertical-align: middle;
+  }
 }
