@@ -1,0 +1,61 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** pager.scss **/
+
+#beMainContent #pager{
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+#beMainContent .hasJs#pager{
+    width: 237px;
+    margin: 10px auto 0 auto;
+}
+#beMainContent #pager a{
+    width: 25px;
+    float: left;
+}
+#beMainContent #pager .pArrows {
+    display: none;
+    background: url('../images/sprite.png') no-repeat;
+}
+#beMainContent #pager .pArrows#pagerleft {
+    background-position: -470px -75px;
+}
+#beMainContent #pager .pArrows#pagerright {
+    background-position: -470px -100px;
+}
+#beMainContent #pager a.hasJs {
+    display: block;
+    visibility: hidden;
+}
+#beMainContent #pager #number {
+}
+#beMainContent #pager .hasJs#number {
+    width:187px;
+    float: left;
+}
+#beMainContent #pager #number #pnr {
+    font-size: 1.2em;
+    margin: 0 auto;
+    padding: 0;
+}
+#beMainContent #pager #number .hasJs#pnr {
+    display: block;
+}
+#beMainContent #pager #number #pnr li {
+    display: inline;
+    width: 25px;
+    text-align: center;
+}
+#beMainContent #pager #number #pnr li a {
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #aaaaaa;
+  color: #1d3747;
+}
+#beMainContent #pager #number #pnr li a:hover {
+  color: #1686c6;
+}
+#beMainContent #pager #number #pnr li.themecolor a {
+    font-weight: bold;
+  color: #1686c6;
+}

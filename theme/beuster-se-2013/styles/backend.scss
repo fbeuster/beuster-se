@@ -1,0 +1,310 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** backend.scss **/
+
+.backendLinkList {
+  list-style-type: none;
+}
+.backendTable {
+  width: 100%;
+  margin: 10px 0 0 0;
+  border-collapse: collapse;
+}
+.backendTable.noWidth {
+  width: auto;
+}
+.backendTableHeadRow {
+  background: #d0d0d0;
+  border-bottom: 1px solid #000000;
+}
+.backendTableRow0 {
+  background: #efefef;
+}
+.backendTableRow1 {
+  background: #e0e0e0;
+}
+.backendTable tr td,
+.backendTable tr th {
+  padding: 1px 5px;
+  vertical-align: top;
+}
+.backendTable tr td.tabZahl {
+  text-align: center;
+}
+.backendTable tr td.fullDate {
+  width: 130px;
+}
+.backendTable tr td.w30 {
+  width: 30px;
+}
+.backendTable tr td.w50 {
+  width: 50px;
+}
+.backendTable.cmtEnable tr td div.close {
+  height: 50px;
+  overflow-y: hidden;
+}
+.backendBackLink {
+  margin: 20px 0 10px 10px !important;
+  font-size: 20px;
+}
+
+fieldset.backend {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #cfcfcf;
+}
+fieldset.backend legend {
+  margin: 0 10px;
+  padding: 0 10px;
+  font-weight: bold;
+  color: #083047;
+}
+fieldset.backend label,
+fieldset.backend input,
+fieldset.backend button,
+fieldset.backend select {
+  display: inline-block;
+  height: 25px;
+    font-size: inherit;
+    padding: 0.2em !important;
+  margin: 5px 0 0 0;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+fieldset.backend input[type="checkbox"] {
+  height: auto;
+}
+fieldset.backend input[type="text"],
+fieldset.backend input[type="password"] {
+  border: 1px solid #dfdfdf;
+}
+fieldset.backend input[type="submit"],
+fieldset.backend.newEntry input[type=button] {
+  border: 0;
+  font-size: 17px;
+}
+fieldset.backend input[type="submit"] {
+  background: #1686c6;
+  color: #ffffff;
+}
+fieldset.backend input[type=submit]:hover {
+  background: #083046;
+  cursor: pointer;
+}
+fieldset.backend.newEntry input[type=submit] {
+  margin: 5px 0 0 0 !important;
+}
+fieldset.backend.newEntry input[type=button] {
+  border: 1px solid #bfbfbf;
+  background: #e0e0e0;
+}
+fieldset.backend.newEntry input[type=button]:hover {
+  background: #dadada;
+}
+fieldset.backend.newEntry input[role="newEntryTitle"],
+fieldset.backend.newEntry input[role="newEntryTags"] {
+  width: 100%;
+}
+fieldset.backend.newEntry label.description {
+  width: 94px;
+}
+fieldset.backend.newEntry select.drop200 {
+  width: 194px;
+}
+fieldset.backend .bbDiv{
+    height: 25px;
+    border-bottom: 0;
+}
+fieldset.backend .bbSpan{
+    display: block;
+    padding-left: 7px;
+    float: left;
+    border-top: 1px solid #dfdfdf;
+    background: #efefef url('../images/sprite.png') no-repeat 0px 0px;
+}
+fieldset.backend .bbImg {
+    width: 25px;
+    height: 25px;
+    padding: 0 !important;
+    margin: 0;
+    box-shadow: 0 0 0;
+    border: 0;
+    float: left;
+    background: url('../images/sprite.png') no-repeat;
+}
+fieldset.backend .bbImg:hover {
+    cursor: pointer;
+}
+fieldset.backend .bbImg#btnbold {
+  background-position: -0px -25px;
+}
+fieldset.backend .bbImg#btnbold:hover {
+  background-position: -0px -50px;
+}
+fieldset.backend .bbImg#btnitalic {
+  background-position: -25px -25px;
+}
+fieldset.backend .bbImg#btnitalic:hover {
+  background-position: -25px -50px;
+}
+fieldset.backend .bbImg#btnunderline {
+  background-position: -50px -25px;
+}
+fieldset.backend .bbImg#btnunderline:hover {
+  background-position: -50px -50px;
+}
+fieldset.backend .bbImg#btnmark {
+  background-position: -75px -25px;
+}
+fieldset.backend .bbImg#btnmark:hover {
+  background-position: -75px -50px;
+}
+fieldset.backend .bbImg#btndel {
+  background-position: -100px -25px;
+}
+fieldset.backend .bbImg#btndel:hover {
+  background-position: -100px -50px;
+}
+fieldset.backend .bbImg#btnins {
+  background-position: -125px -25px;
+}
+fieldset.backend .bbImg#btnins:hover {
+  background-position: -125px -50px;
+}
+fieldset.backend .bbImg#btnquote {
+  background-position: -200px -25px;
+}
+fieldset.backend .bbImg#btnquote:hover {
+  background-position: -200px -50px;
+}
+fieldset.backend .bbImg#btncite {
+  background-position: -225px -25px;
+}
+fieldset.backend .bbImg#btncite:hover {
+  background-position: -225px -50px;
+}
+fieldset.backend .bbImg#btnbquote {
+  background-position: -250px -25px;
+}
+fieldset.backend .bbImg#btnbqoute:hover {
+  background-position: -250px -50px;
+}
+fieldset.backend .bbImg#btnol {
+  background-position: -275px -25px;
+}
+fieldset.backend .bbImg#btnol:hover {
+  background-position: -275px -50px;
+}
+fieldset.backend .bbImg#btnul {
+  background-position: -300px -25px;
+}
+fieldset.backend .bbImg#btnul:hover {
+  background-position: -300px -50px;
+}
+fieldset.backend .bbImg#btnli {
+  background-position: -325px -25px;
+}
+fieldset.backend .bbImg#btnli:hover {
+  background-position: -325px -50px;
+}
+fieldset.backend .bbImg#btncode {
+  background-position: -350px -25px;
+}
+fieldset.backend .bbImg#btncode:hover {
+  background-position: -350px -50px;
+}
+fieldset.backend .bbImg#btnpar {
+  background-position: -375px -25px;
+}
+fieldset.backend .bbImg#btnpar:hover {
+  background-position: -375px -50px;
+}
+fieldset.backend .bbImg#btnlink {
+  background-position: -400px -25px;
+}
+fieldset.backend .bbImg#btnlink:hover {
+  background-position: -400px -50px;
+}
+fieldset.backend .bbImg#btnyt {
+  background-position: -425px -25px;
+}
+fieldset.backend .bbImg#btnyt:hover {
+  background-position: -425px -50px;
+}
+fieldset.backend .bbImg#btnplay {
+  background-position: -450px -25px;
+}
+fieldset.backend .bbImg#btnplay:hover {
+  background-position: -450px -50px;
+}
+fieldset.backend .bbImg#btnamazon {
+  background-position: -475px -25px;
+}
+fieldset.backend .bbImg#btnamazon:hover {
+  background-position: -475px -50px;
+}
+fieldset.backend .bbImg#smsmile {
+  background-position: -500px -25px;
+}
+fieldset.backend .bbImg#smsmile:hover {
+  background-position: -500px -50px;
+}
+fieldset.backend .bbImg#smlaugh {
+  background-position: -525px -25px;
+}
+fieldset.backend .bbImg#smlaugh:hover {
+  background-position: -525px -50px;
+}
+fieldset.backend .bbImg#smsad {
+  background-position: -550px -25px;
+}
+fieldset.backend .bbImg#smsad:hover {
+  background-position: -550px -50px;
+}
+fieldset.backend .bbImg#smone {
+  background-position: -575px -25px;
+}
+fieldset.backend .bbImg#smone:hover {
+  background-position: -575px -50px;
+}
+fieldset.backend .bbImg#btnuber2 {
+  background-position: -150px -25px;
+}
+fieldset.backend .bbImg#btnuber2:hover {
+  background-position: -150px -50px;
+}
+fieldset.backend .bbImg#btnuber3 {
+  background-position: -175px -25px;
+}
+fieldset.backend .bbImg#btnuber3:hover {
+  background-position: -175px -50px;
+}
+fieldset.backend p {
+    margin: 0 !important;
+}
+fieldset.backend .newsNeuHelpPort {
+    display: none;
+    font-family: Consolas;
+}
+fieldset.backend textarea[role="newEntryContent"] {
+  width: 100%;
+  border: 1px solid #bbbbbb;
+  border-top: 0;
+  background: #eaeaea;
+}
+fieldset.backend img.adThumb {
+    max-width: 99px;
+    max-height: 66px;
+    margin: 5px 0 0 0;
+    box-shadow: #606060 0 0 5px;}
+fieldset.backend div.adImg {
+    width: 450px;
+    height: 300px;
+    float: left;}
+fieldset.backend div.adImg img {
+    max-width: 450px;
+    max-height: 300px;}
+fieldset.backend tbody.adThumb tr td {
+    text-align: center;}

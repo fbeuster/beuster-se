@@ -1,0 +1,32 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** search.scss **/
+
+.searchEntry {
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #bfbfbf;
+}
+.searchEntry header {
+  margin: 0;
+  padding: 2px 10px 0 10px;
+  border-bottom: 1px solid #bfbfbf;
+  background: #e4e4e4;
+}
+.searchEntry header a {
+  color: #083047;
+}
+.searchEntry header a:hover {
+  color: #1686c6;
+}
+.searchEntry header .title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.searchEntry p {
+  margin: 0 !important;
+  padding: 2px 10px 5px 10px;
+}
+.searchInfo {
+  font-size: 0.95em;
+  color: #444444;
+}

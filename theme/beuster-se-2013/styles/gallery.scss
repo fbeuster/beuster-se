@@ -1,0 +1,84 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** gallery.scss **/
+
+.beContentEntryGallery {
+  margin: 0 auto;
+}
+.beContentEntryGalleryImageList {
+  display: block;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.beContentEntryGalleryImageList li {
+  width: 150px;
+  height: 100px;
+  margin: 0 10px 20px 10px;
+}
+.beContentEntryGalleryImageList li img {
+  max-width: 150px;
+  max-height: 100px;
+}
+.beContentEntryGalleryBigImage {
+  display: none;
+  margin: 0 auto 10px auto;
+  text-align: center;
+}
+.beContentEntryGalleryBigImage img {
+  display: none;
+}
+#galL,
+#galR {
+  display: none;
+    float: left;
+    text-align: center;
+    background: url('../images/sprite.png') no-repeat;
+    height: 105px;
+}
+#galL {
+  background-position: -600px -25px;
+}
+#galL:hover {
+  background-position: -600px -130px;
+}
+#galR {
+  background-position: -625px -25px;
+}
+#galR:hover {
+  background-position: -625px -130px;
+}
+
+.beLightbox {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2000;
+  background: rgba(120,120,120,0.7);
+}
+.beLightboxWrapper {
+  width: 90%;
+  height: 90%;
+  margin: 2.5% auto;
+  box-shadow: 0 0 10px #555555;
+  background: #ebebeb;
+}
+.beLightboxImage {
+  margin: 0 auto;
+}
+.beLightboxImage img {
+  display: block;
+}
+.beLightboxText {
+  padding: 0 10px;
+  height: 30px;
+  border-top: 1px solid #bfbfbf;
+}
+.beLightboxDescription {
+  float: left;
+}
+.beLightboxClose {
+  float: right;
+  cursor: pointer;
+}

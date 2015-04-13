@@ -1,0 +1,43 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** menu.scss **/
+
+menu#beMainNav {
+  text-align: center;
+  margin: 10px 0 0 0 !important;
+  padding: 0 !important;
+  background: #1686c6;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  box-shadow: 0 0 5px #888888;
+}
+menu#beMainNav li {
+  padding: 3px 0;
+  list-style-type: none;
+  transition: background 0.1s;
+}
+menu#beMainNav li:hover {
+  background: #083046;
+}
+menu#beMainNav li a {
+  text-decoration: none;
+  color: #ffffff;
+    text-shadow: 0 0 4px #666666;
+}
+menu.beCategoryNav {
+  margin: 15px 0 0 0;
+}
+menu.beCategoryNav li {
+  padding: 0 10px;
+  list-style-type: none;
+}
+menu.beCategoryNav li.noborder {
+  border: 0 !important;
+}
+menu.beCategoryNav li a {
+  font-size: 20px;
+  color: #083046;
+}
+menu.beCategoryNav li a:hover {
+  color: #d02c33;
+}

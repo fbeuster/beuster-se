@@ -1,0 +1,22 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** header.scss **/
+
+header#beMainHeader h1.pageTitle,
+header#beMainHeader span.pageTitle {
+  display: block;
+  margin: 0 0 0 35px;
+  padding: 10px 0 0 0;
+  font-weight: normal;
+  color: #083046;
+    text-shadow: 0 0 6px #aaaaaa;
+    font-family: "Source Code Pro", "Lucida Console", Monaco, monospace;
+}
+header#beMainHeader h1.pageTitle span,
+header#beMainHeader span.pageTitle span {
+  margin: 0 0 0 20px;
+    text-shadow: none;
+  color: #083046;
+    text-shadow: 0 0 5px #cccccc;
+    font-family: Calibri, Tahoma, Arial, sans-Serif;
+}

@@ -52,7 +52,7 @@
   <title><?php echo getPageTitle($file); ?></title>
   <?php if(!$ieOld) { ?>
   <!-- style it -->
-  <link href="<?php echo getThemeStyle('styles/main.css'); ?>" rel="stylesheet" type="text/css" media="screen">
+  <link href="<?php echo getThemeStyle('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <?php } else { ?>
   <!-- not another internet explorer -.- -->
   <link href="/settings/ie.css" rel="stylesheet" type="text/css" media="screen">
