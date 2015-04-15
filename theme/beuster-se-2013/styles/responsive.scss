@@ -269,7 +269,7 @@
   }
   .beCategoryNav li {
     display: inline;
-    border-left: 1px solid #bfbfbf;
+    border-left: 1px solid $gray;
   }
   .beContentEntryRow {
     display: table;
@@ -545,7 +545,7 @@
     float: left;
     margin: 0 5px 0 0;
     padding: 0 5px 0 0;
-    border-right: 1px solid #cfcfcf;
+    border-right: 1px solid $lighter_gray;
   }
   .beContentEntry .beContentEntryFooter span.authorLink {
     float: left;

@@ -7,27 +7,27 @@
 
   h2.beContentEntryCommentsHeader {
     padding: 0 10px;
-    border-bottom: 2px solid #55a3cf;
-    color: #083046;
+    border-bottom: 2px solid $highlight_blue_light;
+    color: $highlight_blue_darkest;
   }
 
   div.beCommentEntry {
     position: relative;
     padding: 20px;
-    border: 1px solid #afafaf;
+    border: 1px solid $gray;
     border-top: 0;
-    background: #ebebeb;
+    background: $lighterer_gray;
 
     span.beCommentEntryAvatar {
       float: left;
       margin: 0 20px 0 0;
-      border: 1px solid #aaaaaa;
+      border: 1px solid $dark_gray;
     }
 
     span.beCommentEntryHeader {
       padding: 0 20px 0 0;
-      border-bottom: 1px solid #d0d0d0;
-      color: #1d3747;
+      border-bottom: 1px solid $lighter_gray;
+      color: $highlight_blue_darker;
       font-size: 0.95em;
     }
 
@@ -36,29 +36,29 @@
       line-height: 100%;
       background: url('../images/commentReply.png') top left no-repeat;
       background-position: 0 0;
-      color: #afafaf;
+      color: $gray;
       cursor: pointer;
 
       &:hover {
-        color: #666666;
+        color: $darker_gray;
         background-position: 0 -20px;
       }
     }
 
     .replies {
       margin-top: 20px;
-      border-top: 1px solid #55A3CF;
+      border-top: 1px solid $highlight_blue_light;
     }
   }
 }
 
 .beCommentNew {
   padding: 20px;
-  border: 1px solid #b0b0b0;
+  border: 1px solid $gray;
   border-top: 0;
   font-size: 1.1em;
-  color: #222222;
-  background: #ebebeb;
+  color: $darkest_gray;
+  background: $lighterer_gray;
 
   form {
     .antSp {
@@ -74,8 +74,8 @@
       height: 25px;
       margin-top: 10px;
       padding: 0 10px;
-      border: 1px solid #b0b0b0;
-      background: #fafafa;
+      border: 1px solid $gray;
+      background: $lightest_gray;
     }
 
     textarea {
@@ -83,8 +83,8 @@
       margin-top: 10px;
       padding: 10px;
       vertical-align: top;
-      border: 1px solid #b0b0b0;
-      background: #fafafa;
+      border: 1px solid $gray;
+      background: $lightest_gray;
     }
 
     input.button {
@@ -97,23 +97,23 @@
       margin: 10px 0 0 94px;
       padding: 0 10px;
       font-weight: bold;
-      background: #1686c6;
-      color: #ffffff;
+      background: $highlight_blue;
+      color: $white;
 
       &:hover:not([disabled=disabled]) {
-        background: #083046;
+        background: $highlight_blue_darkest;
         cursor: pointer;
       }
     }
 
     input[type=reset] {
       padding: 0 10px;
-      background: #cccccc;
-      color: #666666;
+      background: $light_gray;
+      color: $darker_gray;
 
       &:hover {
-        background: #999999;
-        color: #ffffff;
+        background: $dark_gray;
+        color: $white;
         cursor: pointer;
       }
     }
@@ -123,7 +123,7 @@
 .beCommentNewHeader {
   font-size: 1.2em;
   font-weight: bold;
-  color: #083046;
+  color: $highlight_blue_darkest;
 
   .cancelReply {
     display: inline-block;
@@ -133,12 +133,12 @@
     font-size: 17px;
     line-height: 19px;
     font-weight: normal;
-    color: #afafaf;
+    color: $gray;
     background: url('../images/commentReply.png') top left no-repeat;
     background-position: 0 -40px;
 
     &:hover {
-      color: #666666;
+      color: $darker_gray;
       cursor: pointer;
       background-position: 0 -60px;
     }

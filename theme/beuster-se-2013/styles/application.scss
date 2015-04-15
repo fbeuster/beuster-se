@@ -3,6 +3,7 @@
 /** application.scss **/
 
 @import 'reset';
+@import 'lib/_color';
 @import 'backend';
 @import 'comments';
 @import 'content';
@@ -21,7 +22,7 @@
 /*** GENERAL ***/
 
 body {
-	background: url('../images/background.png') fixed #efefef;
+	background: url('../images/background.png') fixed $lighterer_gray;
 	font-family: Calibri, Tahoma, Arial, sans-Serif;
 }
 br.clear {
@@ -32,13 +33,13 @@ br.clear {
 }
 a {
 	text-decoration: none;
-	color: #1686c6;
+	color: $highlight_blue;
 }
 a:hover {
-	color: #d02c33;
+	color: $highlight_red;
 }
 .alert {
-	color: red;
+	color: $red;
 }
 @font-face {
     font-family: "Source Code Pro";
@@ -60,13 +61,13 @@ a:hover {
 	font-size: 1.8em;
 	text-align: center;
 	padding-top: 35px;
-	background: #1686c6;
+	background: $highlight_blue;
 	opacity: 0;
 	transition: all 0.3s;
-	color: #ffffff;
-	text-shadow: 0 0 4px #666666;
+	color: $white;
+	text-shadow: 0 0 4px $darker_gray;
 }
 .birth4 a:hover {
 	opacity: 1;
-	color: #ffffff;
+	color: $white;
 }

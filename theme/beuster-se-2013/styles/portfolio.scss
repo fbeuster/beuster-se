@@ -5,14 +5,14 @@
 .bePortfolioHeader {
   margin: 15px 0 0 0;
   padding-bottom: 5px;
-  border-bottom: 1px solid #1686c6;
-  color: #1d3747;
+  border-bottom: 1px solid $highlight_blue;
+  color: $highlight_blue_darker;
 }
 
 .bePortfolioSubHeader {
   clear: both;
   padding: 15px 0 0 0;
-  color: #1d3747;
+  color: $highlight_blue_darker;
 }
 
 .bePortfolioEntry {
@@ -21,13 +21,13 @@
   float: left;
   margin: 10px;
   padding: 10px;
-  background: #dfdfdf;
-  box-shadow: 0 0 5px #aaaaaa;
+  background: $lighter_gray;
+  box-shadow: 0 0 5px $dark_gray;
   text-align: center;
   transition: box-shadow 0.15s;
 
   &:hover {
-    box-shadow: 0 0 5px #1086c6;
+    box-shadow: 0 0 5px $highlight_blue_light;
     cursor: pointer;
   }
 

@@ -46,16 +46,16 @@
 }
 
 .backendTableHeadRow {
-  background: #d0d0d0;
-  border-bottom: 1px solid #000000;
+  background: $lighter_gray;
+  border-bottom: 1px solid $black;
 }
 
 .backendTableRow0 {
-  background: #efefef;
+  background: $lighterer_gray;
 }
 
 .backendTableRow1 {
-  background: #e0e0e0;
+  background: $lighter_gray;
 }
 
 .backendBackLink {
@@ -66,13 +66,13 @@
 fieldset.backend {
   margin: 10px;
   padding: 20px;
-  border: 1px solid #cfcfcf;
+  border: 1px solid $lighter_gray;
 
   legend {
     margin: 0 10px;
     padding: 0 10px;
     font-weight: bold;
-    color: #083047;
+    color: $hightlight_blue_darkest;
   }
 
   label,
@@ -95,7 +95,7 @@ fieldset.backend {
 
   input[type="text"],
   input[type="password"] {
-    border: 1px solid #dfdfdf;
+    border: 1px solid $lighter_gray;
   }
 
   input[type="submit"],
@@ -105,8 +105,8 @@ fieldset.backend {
   }
 
   input[type="submit"] {
-    background: #1686c6;
-    color: #ffffff;
+    background: $hightlight_blue;
+    color: $white;
 
     &:hover {
       background: #083046;
@@ -120,11 +120,11 @@ fieldset.backend {
     }
 
     input[type=button] {
-      border: 1px solid #bfbfbf;
-      background: #e0e0e0;
+      border: 1px solid $gray;
+      background: $lighter_gray;
 
       &:hover {
-        background: #dadada;
+        background: $light_gray;
       }
     }
 
@@ -151,8 +151,8 @@ fieldset.backend {
       display: block;
       padding-left: 7px;
       float: left;
-      border-top: 1px solid #dfdfdf;
-      background: #efefef url('../images/sprite.png') no-repeat 0px 0px;
+      border-top: 1px solid $lighter_gray;
+      background: $lighterer_gray url('../images/sprite.png') no-repeat 0px 0px;
   }
 
   .bbImg {
@@ -301,16 +301,16 @@ fieldset.backend {
 
   textarea[role="newEntryContent"] {
     width: 100%;
-    border: 1px solid #bbbbbb;
+    border: 1px solid $gray;
     border-top: 0;
-    background: #eaeaea;
+    background: $lighterer_gray;
   }
 
   img.adThumb {
     max-width: 99px;
     max-height: 66px;
     margin: 5px 0 0 0;
-    box-shadow: #606060 0 0 5px;
+    box-shadow: $darker_gray 0 0 5px;
   }
 
   div.adImg {

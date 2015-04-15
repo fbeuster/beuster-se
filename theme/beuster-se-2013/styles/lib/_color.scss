@@ -1,0 +1,30 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** _color.scss **/
+
+$white:           #ffffff;
+$lightest_gray:   #f4f4f4;
+$lighterer_gray:  #efefef;
+$lighter_gray:    #d4d4d4;
+$light_gray:      #cccccc;
+$gray:            #bbbbbb;
+$dark_gray:       #999999;
+$darker_gray:     #666666;
+$darkerer_gray:   #505050;
+$darkest_gray:    #1a1a1a;
+$black:           #000000;
+
+
+$highlight_blue_light:    #55a3cf;
+$highlight_blue:          #1686c6;
+$highlight_blue_dark:     #106393;
+$highlight_blue_darker:   #1d3747;
+$highlight_blue_darkest:  #083047;
+
+$highlight_red: #d02c33;
+$red:           #ff0000;
+
+@mixin background-opacity($color, $alpha) {
+  background: $color;
+  background: rgba($color, $alpha);
+}

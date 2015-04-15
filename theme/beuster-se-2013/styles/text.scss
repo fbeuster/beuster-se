@@ -5,7 +5,7 @@
 .beContentEntry {
   h2, h3 {
     margin: 15px 0 0 0;
-    color: #1d3747;
+    color: $highlight_blue_darker;
   }
 
   p {
@@ -40,13 +40,13 @@
   blockquote {
     margin: 0 0 15px 0;
     padding: 10px;
-    border:  1px solid #d4d4d4;
-    border-left:  3px solid #55a3cf;
-    background: #e4e4e4;
+    border:  1px solid $lighter_gray;
+    border-left:  3px solid $highlight_blue_light;
+    background: $lighterer_gray;
 
     span {
       font-size: 0.85em;
-      color: #4f4f4f;
+      color: $darkerer_gray;
     }
   }
 
@@ -74,7 +74,7 @@
 
   .code {
     margin-top: 15px;
-    border: 1px solid #aaaaaa;
+    border: 1px solid $dark_gray;
 
     .line {
       display: block;
@@ -82,16 +82,16 @@
       font-size: 0.85em;
       line-height: 1.5em;
       font-family: "Source Code Pro";
-      color: #1a1a1a;
-      background: #e4e4e4;
+      color: $darkest_gray;
+      background: $lighterer_gray;
       transition: 0.15s all;
 
       &:hover {
-        background: #f0f0f0;
+        background: $lighter_gray;
         cursor: default;
 
         .no {
-          background: #e4e4e4;
+          background: $light_gray;
         }
       }
 
@@ -100,8 +100,8 @@
         margin-right: 10px;
         padding-right: 5px;
         width: 30px;
-        border-right: 1px solid #cccccc;
-        background: #d4d4d4;
+        border-right: 1px solid $light_gray;
+        background: $lighter_gray;
         text-align: right;
         opacity: 0.7;
       }
@@ -113,7 +113,7 @@
     font-size: 0.9em;
     line-height: 125%;
     font-family: "Source Code Pro";
-    background: #dadada;
+    background: $lighter_gray;
   }
 
   .embeddedVideo.video {

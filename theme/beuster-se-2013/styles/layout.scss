@@ -4,7 +4,7 @@
 
 #beMainHeader {
   width: 100%;
-  background: url('../images/background.png') #efefef;
+  background: url('../images/background.png') $lighterer_gray;
 }
 
 #beMainContainer{
@@ -18,19 +18,19 @@
 
 #beMainAside {
   margin: 60px auto 0 auto;
-  background: #ebebeb;
-  border: 1px solid #aaaaaa;
-  box-shadow: 0 0 6px #aaaaaa;
+  background: $lighterer_gray;
+  border: 1px solid $dark_gray;
+  box-shadow: 0 0 6px $dark_gray;
 }
 
 #beMainFooter {
   width: 100%;
   margin-top: 15px;
   padding: 4px 0 2px 0;
-  background: #1686c6;
-  color: #ffffff;
+  background: $highlight_blue;
+  color: $white;
   text-align: center;
-  border-bottom: 1px solid #ffffff;
-  border-top: 1px solid #ffffff;
-  box-shadow: 0 0 5px #888888;
+  border-bottom: 1px solid $white;
+  border-top: 1px solid $white;
+  box-shadow: 0 0 5px $dark_gray;
 }

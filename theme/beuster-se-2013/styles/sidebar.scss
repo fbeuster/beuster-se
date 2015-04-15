@@ -15,7 +15,7 @@
 
   .entryInfo {
     font-style: italic;
-    color: #444444;
+    color: $darkerer_gray;
   }
 
   &.socialInteraction {
@@ -27,7 +27,7 @@
   ul.socialInteraction {
     display: block;
     text-align: center;
-    background: #106393;
+    background: $highlight_blue_dark;
 
     li {
       display: inline-block;
@@ -51,13 +51,13 @@
       font-size: 15px;
 
       &[type=text] {
-        border: 1px solid #bbbbbb;
+        border: 1px solid $gray;
       }
 
       &[type=submit] {
         width: 30px;
         padding: 5px 0;
-        border: 1px solid #bbbbbb;
+        border: 1px solid $gray;
         border-left: 0;
         background: url('../images/sprite.png') no-repeat;
         background-position: -440px -75px;
@@ -93,10 +93,10 @@
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #1686c6;
+        color: $highlight_blue;
 
         &:hover {
-          color: #d02c33;
+          color: $highlight_red;
         }
       }
     }

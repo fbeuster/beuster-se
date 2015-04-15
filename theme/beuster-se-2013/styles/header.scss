@@ -9,15 +9,15 @@
     margin: 0 0 0 35px;
     padding: 10px 0 0 0;
     font-weight: normal;
-    color: #083046;
-    text-shadow: 0 0 6px #aaaaaa;
+    color: $highlight_blue_darkest;
+    text-shadow: 0 0 6px $dark_gray;
     font-family: "Source Code Pro", "Lucida Console", Monaco, monospace;
 
     span {
       margin: 0 0 0 20px;
       text-shadow: none;
-      color: #083046;
-      text-shadow: 0 0 5px #cccccc;
+      color: $highlight_blue_darkest;
+      text-shadow: 0 0 5px $light_gray;
       font-family: Calibri, Tahoma, Arial, sans-Serif;
     }
   }

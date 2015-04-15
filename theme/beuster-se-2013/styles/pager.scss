@@ -55,18 +55,18 @@
     text-align: center;
 
     a {
-      border-left: 1px solid #ffffff;
-      border-right: 1px solid #aaaaaa;
-      color: #1d3747;
+      border-left: 1px solid $white;
+      border-right: 1px solid $dark_gray;
+      color: $highlight_blue_darker;
 
       &:hover {
-        color: #1686c6;
+        color: $highlight_blue;
       }
     }
 
     &.themecolor a {
       font-weight: bold;
-      color: #1686c6;
+      color: $highlight_blue;
     }
   }
 }

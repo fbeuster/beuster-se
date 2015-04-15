@@ -65,15 +65,15 @@
   height: 100%;
   top: 0;
   z-index: 2000;
-  background: rgba(120,120,120,0.7);
+  @include background-opacity($dark_gray, 0.7);
 }
 
 .beLightboxWrapper {
   width: 90%;
   height: 90%;
   margin: 2.5% auto;
-  box-shadow: 0 0 10px #555555;
-  background: #ebebeb;
+  box-shadow: 0 0 10px $darkerer_gray;
+  background: $lighterer_gray;
 }
 
 .beLightboxImage {
@@ -87,7 +87,7 @@
 .beLightboxText {
   padding: 0 10px;
   height: 30px;
-  border-top: 1px solid #bfbfbf;
+  border-top: 1px solid $gray;
 }
 
 .beLightboxDescription {
