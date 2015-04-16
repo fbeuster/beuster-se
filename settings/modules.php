@@ -217,4 +217,15 @@
     }
     return $ret;
   }
+
+  function moduleRecommendedArticle($article_id) {
+    if($article_id === null) return;
+
+    $article  = new Article($article_id);
+    $title    = "Empfohlener Artikel:";
+    $info     = " <span class='entryInfo'>\n  " . $title . "\n </span>\n";
+    $content  = " <a href='" . $article->getLink() . "'>\n  " . $article->getTitle() . "\n </a>\n";
+
+    return "<div class='beMainAsideEntry recommend'>\n" . $info . $content . "</div>\n";
+  }
 ?>
