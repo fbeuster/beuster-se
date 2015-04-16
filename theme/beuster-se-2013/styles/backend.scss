@@ -72,7 +72,7 @@ fieldset.backend {
     margin: 0 10px;
     padding: 0 10px;
     font-weight: bold;
-    color: $hightlight_blue_darkest;
+    color: $highlight_blue_darkest;
   }
 
   label,
@@ -105,7 +105,7 @@ fieldset.backend {
   }
 
   input[type="submit"] {
-    background: $hightlight_blue;
+    background: $highlight_blue;
     color: $white;
 
     &:hover {
