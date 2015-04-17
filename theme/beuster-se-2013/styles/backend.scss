@@ -81,12 +81,12 @@ fieldset.backend {
   select {
     display: inline-block;
     height: 25px;
-      font-size: inherit;
-      padding: 0.2em !important;
+    font-size: inherit;
+    padding: 0.2em !important;
     margin: 5px 0 0 0;
-      -moz-box-sizing: content-box;
-      -webkit-box-sizing: content-box;
-      box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
   }
 
   input[type="checkbox"] {
@@ -109,7 +109,7 @@ fieldset.backend {
     color: $white;
 
     &:hover {
-      background: #083046;
+      background: $highlight_blue_darkest;
       cursor: pointer;
     }
   }
@@ -295,8 +295,8 @@ fieldset.backend {
   }
 
   .newsNeuHelpPort {
+    @include font-source;
     display: none;
-    font-family: Consolas;
   }
 
   textarea[role="newEntryContent"] {

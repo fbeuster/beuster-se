@@ -1,6 +1,30 @@
 /** beuster{se} | (c) 2010-2015 **/
 
-/** text.scss **/
+/** typography.scss **/
+
+body {
+  @include font-default;
+}
+
+br.clear {
+  display: block;
+  height: 1px;
+  margin-top: -1px;
+  clear: both;
+}
+
+a {
+  text-decoration: none;
+  color: $highlight_blue;
+
+  &:hover {
+    color: $highlight_red;
+  }
+}
+
+.alert {
+  color: $red;
+}
 
 .beContentEntry {
   h2, h3 {
@@ -77,11 +101,12 @@
     border: 1px solid $dark_gray;
 
     .line {
+      @include font-source;
+
       display: block;
       padding: 0 10px 0 0;
       font-size: 0.85em;
       line-height: 1.5em;
-      font-family: "Source Code Pro";
       color: $darkest_gray;
       background: $lighterer_gray;
       transition: 0.15s all;
@@ -109,10 +134,11 @@
   }
 
   pre {
+    @include font-source;
+
     padding: 10px;
     font-size: 0.9em;
     line-height: 125%;
-    font-family: "Source Code Pro";
     background: $lighter_gray;
   }
 

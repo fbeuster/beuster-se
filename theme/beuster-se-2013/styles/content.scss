@@ -13,7 +13,7 @@
   .beContentEntryHeader {
     margin-top: 0 !important;
     border-bottom: 1px solid $highlight_blue;
-    color: #1d3747;
+    color: $highlight_blue_darker;
     line-height: 100%;
 
     a {
@@ -74,7 +74,7 @@
 h1.beCategoryHeader {
   padding: 0 10px;
   line-height: 110%;
-  color: #083047;
+  color: $highlight_blue_darkest;
 }
 
 .beContentEntryTime {

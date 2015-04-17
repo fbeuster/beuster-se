@@ -89,10 +89,7 @@
       }
 
       dd.articleLink {
-        overflow: hidden;
-        -ms-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        @include text-inline-truncate;
         color: $highlight_blue;
 
         &:hover {

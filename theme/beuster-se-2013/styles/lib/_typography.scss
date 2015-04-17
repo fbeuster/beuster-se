@@ -1,0 +1,23 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** lib/_typography.scss **/
+
+@font-face {
+  font-family: "Source Code Pro";
+  src: url('../images/SourceCodePro-Regular.otf') format('opentype');
+}
+
+@mixin font-default {
+  font-family: Calibri, Tahoma, Arial, sans-Serif;
+}
+
+@mixin font-source {
+  font-family: "Source Code Pro", "Lucida Console", Monaco, monospace;
+}
+
+@mixin text-inline-truncate {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

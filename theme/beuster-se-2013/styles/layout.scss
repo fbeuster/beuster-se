@@ -2,6 +2,10 @@
 
 /** layout.scss **/
 
+body {
+  background: url('../images/background.png') fixed $lighterer_gray;
+}
+
 #beMainHeader {
   width: 100%;
   background: url('../images/background.png') $lighterer_gray;
@@ -11,9 +15,6 @@
   margin: 0 auto;
   font-size: 17px;
   line-height: 175%;
-}
-
-#beMainPortfolio {
 }
 
 #beMainAside {

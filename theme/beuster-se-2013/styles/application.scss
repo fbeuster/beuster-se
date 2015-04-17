@@ -4,6 +4,9 @@
 
 @import 'reset';
 @import 'lib/_color';
+@import 'lib/_typography';
+@import 'typography';
+
 @import 'backend';
 @import 'comments';
 @import 'content';
@@ -17,57 +20,34 @@
 @import 'responsive';
 @import 'search';
 @import 'sidebar';
-@import 'text';
 
 /*** GENERAL ***/
 
-body {
-	background: url('../images/background.png') fixed $lighterer_gray;
-	font-family: Calibri, Tahoma, Arial, sans-Serif;
-}
-br.clear {
-	display: block;
-	height: 1px;
-	margin-top: -1px;
-	clear: both;
-}
-a {
-	text-decoration: none;
-	color: $highlight_blue;
-}
-a:hover {
-	color: $highlight_red;
-}
-.alert {
-	color: $red;
-}
-@font-face {
-    font-family: "Source Code Pro";
-    src: url('../images/SourceCodePro-Regular.otf') format('opentype');}
-
 .birth4 {
-	height: 150px;
-	width: 150px;
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	background: url('../images/beusterse4y.png') no-repeat scroll 0% 0% transparent;
-	cursor: pointer;
-}
-.birth4 a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	font-size: 1.8em;
-	text-align: center;
-	padding-top: 35px;
-	background: $highlight_blue;
-	opacity: 0;
-	transition: all 0.3s;
-	color: $white;
-	text-shadow: 0 0 4px $darker_gray;
-}
-.birth4 a:hover {
-	opacity: 1;
-	color: $white;
+  height: 150px;
+  width: 150px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background: url('../images/beusterse4y.png') no-repeat scroll 0% 0% transparent;
+  cursor: pointer;
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 1.8em;
+    text-align: center;
+    padding-top: 35px;
+    background: $highlight_blue;
+    opacity: 0;
+    transition: all 0.3s;
+    color: $white;
+    text-shadow: 0 0 4px $darker_gray;
+
+    &:hover {
+      opacity: 1;
+      color: $white;
+    }
+  }
 }
