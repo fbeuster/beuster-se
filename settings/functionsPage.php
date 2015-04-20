@@ -1,13 +1,16 @@
 <?php
 
-  function getPageType($data) {
+  function getPageType($content) {
     $page = getPage();
-    if(isset($data['articles']) && count($data['articles']) > 0 && !isset($data['admin_news']) &&
-      $page != 'single' && $page != 'page' || $page == 'portfolio') {
-      return 'multipleArticles';
-    } else {
-      return 'singleArticle';
+    if(is_object($content)) {
+      return $content->getPageType();
     }
+    if( isset($content['data']['articles']) && count($content['data']['articles']) > 0 &&
+        !isset($content['data']['admin_news']) && $page != 'single' && $page != 'page' ||
+        $page == 'portfolio') {
+      return 'multipleArticles';
+    }
+    return 'singleArticle';
   }
 
   function getPage() {

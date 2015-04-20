@@ -17,6 +17,7 @@ class Lixter {
 
   private static $lix; /**< Lixter instance */
   private $content; /**< loaded content */
+  private $isPage = false;
 
   /**
    * constructor
@@ -54,8 +55,7 @@ class Lixter {
     $this->buildContent();
   }
 
-  public function getContent()
-  {
+  public function getContent() {
     return $this->content;
   }
 
@@ -125,9 +125,12 @@ class Lixter {
 
     $db = Database::getDB()->getCon();
     if($db->connect_errno){
-      $this->content = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
+      $message        = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
+      $this->isPage   = true;
+      $this->content  = new ErrorPage($message);
     } else if(is_string($error = getUserID())){
-      $this->content = $error;
+      $this->isPage   = true;
+      $this->content  = new ErrorPage($error);
     } else {
       // Laden der Include-Datei
       if(isset($_GET['p'])) {
@@ -135,7 +138,9 @@ class Lixter {
           if(file_exists('includes/'.$file[$_GET['p']][0])) {
             $this->content = include 'includes/'.$file[$_GET['p']][0];
           } else {
-            $this->content = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
+            $message        = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
+            $this->isPage   = true;
+            $this->content  = new ErrorPage($message);
           }
         } else {
           $this->content = include 'includes/'.$file['blog'][0];
@@ -154,7 +159,7 @@ class Lixter {
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
-    $pageType = getPageType($this->content['data']);
+    $pageType = getPageType($this->content);
     $currPage = getPage();
 
     // Laden HTML-Kopf
@@ -170,20 +175,19 @@ class Lixter {
         $data = $this->content['data'];
         include $file;
       } else {
-        $data['msg'] = 'Templatedatei "'.$file.'" ist nicht vorhanden.';
+        $this->content = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
         include $this->getFilePath('error.php');
       }
-    } else if (is_string($this->content)) {
-      // Fehlermeldung
-      $data['msg'] = $this->content;
+    } else if ($this->isPage) {
+      // error message
       include $this->getFilePath('error.php');
     } else if (1 == $this->content) {
       // return wurde vergessen
-      $data['msg'] = 'In der Include-Datei wurde die return Anweisung vergessen.';
+      $this->content = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
       include $this->getFilePath('error.php');
     } else {
       // ein Ungültiger Return wert
-      $data['msg'] = 'Die Include-Datei hat einen ungültigen Wert zurückgeliefert.';
+      $this->content = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
       include $this->getFilePath('error.php');
     }
 

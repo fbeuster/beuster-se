@@ -1,4 +1,4 @@
 
     <p>
-      <?php echo $data['msg']; ?>
+      <?php echo Lixter::getLix()->getContent()->getMessage(); ?>
     </p>
