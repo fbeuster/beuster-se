@@ -2,155 +2,154 @@
 
 /** sidebar.scss **/
 
-.beMainAsideEntry {
-  display: block;
-  margin: 10px;
-  padding: 10px;
-  opacity: 0.7;
-  transition: 0.3s all;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  .entryInfo {
-    font-style: italic;
-    color: $darkerer_gray;
-  }
-
-  &.socialInteraction {
+#beMainAside {
+  .module {
     display: block;
-    margin: 0;
-    padding: 0;
-  }
+    margin: 10px;
+    padding: 10px;
+    opacity: 0.7;
+    transition: 0.3s all;
 
-  ul.socialInteraction {
-    display: block;
-    text-align: center;
-    background: $highlight_blue_dark;
-
-    li {
-      display: inline-block;
-
-      a {
-        display: block;
-        background: url('../images/sprite.png') no-repeat;
-      }
+    &:hover {
+      opacity: 1;
     }
-  }
 
-  &.searchBox form {
-      display: block;
-      margin: 0 auto;
+    h4 {
+      font-weight: normal;
+      font-style: italic;
+      color: $darkerer_gray;
+    }
 
-    input {
-      display: block;
-      float: left;
-      margin: 0;
-      padding: 5px 10px;
+    &.adSense {
+      overflow: hidden;
+      text-align: center;
+    }
+
+    &.archive .articleArchiveYear:hover {
+      font-weight: bold;
+    }
+
+    &.articleInfo {
       font-size: 15px;
 
-      &[type=text] {
-        border: 1px solid $gray;
-      }
+      dl {
+        overflow: hidden;
+        line-height: 100%;
 
-      &[type=submit] {
-        width: 30px;
-        padding: 5px 0;
-        border: 1px solid $gray;
-        border-left: 0;
-        background: url('../images/sprite.png') no-repeat;
-        background-position: -440px -75px;
+        dt {
+          display: block;
+          float: left;
+          opacity: 0.7;
+          margin-right: 15px;
+        }
 
-        &:hover {
-          background-position: -440px -105px;
-          cursor: pointer;
+        dd.articleLink {
+          @include text-inline-truncate;
+          color: $highlight_blue;
+
+          &:hover {
+            color: $highlight_red;
+          }
         }
       }
 
-      &[type="submit"]::-moz-focus-inner {
-        border:0;
+      p.info {
+        font-size: 12px;
+        line-height: 150%;
+        opacity: 0.8;
+      }
+
+      input {
+        width: 100%;
+        height: 25px;
       }
     }
-  }
 
-  &.articleInfo {
-    font-size: 15px;
+    &.donate {
+      text-align: center;
+    }
 
-    dl {
-      overflow: hidden;
-      line-height: 100%;
+    &.list {
+      ul {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 1em;
+        text-indent: -1em;
 
-      dt {
+        li {
+          list-style-type: none;
+
+          &:before {
+            content: " - \020 ";
+          }
+        }
+      }
+    }
+
+    &.randomArticle {
+      .randomTitle {
+        font-size: 17px;
+      }
+
+      .randomText {
+        font-size: 15px;
+      }
+    }
+
+    &.searchBox form {
+        display: block;
+        margin: 0 auto;
+
+      input {
         display: block;
         float: left;
-        opacity: 0.7;
-        margin-right: 15px;
-      }
+        margin: 0;
+        padding: 5px 10px;
+        font-size: 15px;
 
-      dd.articleLink {
-        @include text-inline-truncate;
-        color: $highlight_blue;
+        &[type=text] {
+          border: 1px solid $gray;
+        }
 
-        &:hover {
-          color: $highlight_red;
+        &[type=submit] {
+          width: 30px;
+          padding: 5px 0;
+          border: 1px solid $gray;
+          border-left: 0;
+          background: url('../images/sprite.png') no-repeat;
+          background-position: -440px -75px;
+
+          &:hover {
+            background-position: -440px -105px;
+            cursor: pointer;
+          }
+        }
+
+        &[type="submit"]::-moz-focus-inner {
+          border:0;
         }
       }
     }
 
-    p.info {
-      font-size: 12px;
-      line-height: 150%;
-      opacity: 0.8;
-    }
+    &.socialInteraction {
+      display: block;
+      margin: 0;
+      padding: 0;
 
-    .entryInfo {
-      font-size: 17px;
-    }
+      ul.socialInteraction {
+        display: block;
+        text-align: center;
+        background: $highlight_blue_dark;
 
-    input {
-      width: 100%;
-      height: 25px;
-    }
-  }
+        li {
+          display: inline-block;
 
-  &.randomArticle {
-    .randomTitle {
-      font-size: 17px;
-    }
-
-    .randomText {
-      font-size: 15px;
-    }
-  }
-
-  &.top, &.archive {
-    ul {
-      list-style: none;
-      margin-left: 0;
-      padding-left: 1em;
-      text-indent: -1em;
-
-      li {
-        list-style-type: none;
-
-        &:before {
-          content: " - \020 ";
+          a {
+            display: block;
+            background: url('../images/sprite.png') no-repeat;
+          }
         }
       }
     }
-  }
-
-  &.archive .articleArchiveYear:hover {
-    font-weight: bold;
-  }
-
-  &.adSense {
-    overflow: hidden;
-    text-align: center;
-  }
-
-  &.donate {
-    text-align: center;
   }
 }

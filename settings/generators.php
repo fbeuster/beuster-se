@@ -27,7 +27,7 @@
         $ret .= ' </div>';
         return $ret;
     }
- 
+
     function genPager($anzPages, $currPage, $dest, $mob) {
         $pagesToSee = 5;
         $ret = '';
@@ -103,7 +103,7 @@
         $ret .= '</div>'."\r";
         return $ret;
     }
- 
+
     function genFormPublic($err, $dest, $time, $mob, $bb, $title, $formType, $reply = 'null') {
         $ret = '';
         switch($err['t']) {
@@ -174,18 +174,18 @@
         $ret .= '  Warte noch <strong id="wait">20</strong> Sekunden, bevor du posten kannst.'."\r";
         $ret .= '</p>'."\r";
         $ret .= '<p class="beCommentNewDisclaimer">'."\r";
-        $ret .= '  Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im <a href="/impressum">Impressum</a>.'."\r"; 
+        $ret .= '  Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im <a href="/impressum">Impressum</a>.'."\r";
         $ret .= '</p>'."\r";
         return $ret;
     }
- 
+
     function genMenu() {
         $pars = getTopCats();
         foreach($pars as $par) {
             echo '<li><a href="/'.(($par!=getCatID('Blog'))?lowerCat(getCatName($par)):'').'">'.getCatName($par).'</a></li>'."\r";
         }
     }
- 
+
     function genSubMenu() {
         if(isset($_GET['n'])) {
             $catID = getNewsCat($_GET['n']);
@@ -221,24 +221,23 @@
             }
         }
     }
- 
+
     function genTopArticles($mob, $n = 5) {
         $db = Database::getDB()->getCon();
         $ret = '';
-        $ret .= '<span class="entryInfo">viel gelesene Artikel</span>'."\n";
         $ret .= '<ul class="topList">'."\n";
         $res = array();
         $sql = "SELECT
                     ID,
                     Titel
-                FROM            
+                FROM
                     news
                 WHERE
                     enable = 1 AND
                     Datum < NOW()
                 GROUP BY
                     ID
-                ORDER BY                
+                ORDER BY
                     Hits DESC,
                     Datum DESC
                 LIMIT
@@ -259,17 +258,16 @@
         $ret .= '</ul>'."\n";
         return $ret;
     }
- 
-    function genlastArticles($mob, $n = 5) {
+
+    function genlastArticles($mob, $n) {
         $db = Database::getDB()->getCon();
         $ret = '';
-        $ret .= '<h2>Letzten '.$n.' Artikel</h2>'."\n";
         $ret .= '<ul>'."\n";
         $res = array();
         $sql = "SELECT
                     ID,
                     Titel
-                FROM            
+                FROM
                     news
                 WHERE
                     enable = 1 AND

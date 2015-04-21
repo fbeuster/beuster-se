@@ -45,15 +45,19 @@
   footer#beMainFooter {
     height: 42px;
   }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form,
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form,
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form {
-    width: 260px;
-  }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form input[type=text],
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form input[type=text],
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form input[type=text] {
-    width: 208px;
+
+  #beMainAside {
+    &.portfolio,
+    &.singleArticle,
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
   }
 }
 
@@ -205,34 +209,36 @@
     width: 69px;
     height: 69px;
   }
-  .beMainAsideEntry ul.socialInteraction li,
-  .beMainAsideEntry ul.socialInteraction li a {
-    width: 60px;
-    height: 60px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube {
-    background-position: -180px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube:hover {
-    background-position: -180px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook {
-    background-position: 0px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook:hover {
-    background-position: 0px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter {
-    background-position: -120px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter:hover {
-    background-position: -120px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle {
-    background-position: -60px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle:hover {
-    background-position: -60px -135px;
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 60px;
+
+          li, li a {
+            width: 60px;
+            height: 60px;
+          }
+          a.socialLinkYoutube {
+            background-position: -180px -75px;
+            &:hover { background-position: -180px -135px; }
+          }
+          a.socialLinkFacebook {
+            background-position: 0px -75px;
+            &:hover { background-position: 0px -135px; }
+          }
+          a.socialLinkTwitter {
+            background-position: -120px -75px;
+            &:hover { background-position: -120px -135px; }
+          }
+          a.socialLinkGoogle {
+            background-position: -60px -75px;
+            &:hover { background-position: -60px -135px; }
+          }
+        }
+      }
+    }
   }
   .beCommentNew form label {
     width: 90px;
@@ -331,52 +337,62 @@
     margin: 10px 0 0 20px;
     width: 218px;
   }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form {
-    width: 170px;
+
+  #beMainAside {
+    &.singleArticle {
+      .module.searchBox form {
+        width: 170px;
+
+        input[type=text] {
+          width: 118px;
+        }
+      }
+    }
+
+    &.portfolio,
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
   }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form input[type=text] {
-    width: 118px;
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 50px;
+
+          li, li a {
+            width: 50px;
+            height: 50px;
+          }
+
+          a.socialLinkYoutube {
+            background-position: -390px -75px;
+            &:hover { background-position: -390px -125px; }
+          }
+          a.socialLinkFacebook {
+            background-position: -240px -75px;
+            &:hover { background-position: -240px -125px; }
+          }
+          a.socialLinkTwitter {
+            background-position: -340px -75px;
+            &:hover { background-position: -340px -125px; }
+          }
+          a.socialLinkGoogle {
+            background-position: -290px -75px;
+            &:hover { background-position: -290px -125px; }
+          }
+        }
+      }
+    }
   }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form,
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form {
-    width: 260px;
-  }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form input[type=text],
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form input[type=text] {
-    width: 208px;
-  }
-  .beMainAsideEntry ul.socialInteraction {
-    height: 50px;
-  }
-  .beMainAsideEntry ul.socialInteraction li,
-  .beMainAsideEntry ul.socialInteraction li a {
-    width: 50px;
-    height: 50px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube {
-    background-position: -390px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube:hover {
-    background-position: -390px -125px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook {
-    background-position: -240px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook:hover {
-    background-position: -240px -125px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter {
-    background-position: -340px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter:hover {
-    background-position: -340px -125px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle {
-    background-position: -290px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle:hover {
-    background-position: -290px -125px;
-  }
+
   .beCommentNew form label {
     width: 100px;
   }
@@ -619,12 +635,19 @@
     margin: 10px 0 0 20px;
     width: 218px;
   }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form {
-    width: 170px;
+
+  #beMainAside {
+    &.portfolio {
+      .module.searchBox form {
+        width: 170px;
+
+        input[type=text] {
+          width: 118px;
+        }
+      }
+    }
   }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form input[type=text] {
-    width: 118px;
-  }
+
   div#beMainPortfolio {
     float: left;
     width: 720px;
@@ -644,30 +667,44 @@
     margin: 10px 0 0 10px;
     width: 238px;
   }
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form {
-    width: 190px;
-  }
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form input[type=text] {
-    width: 138px;
+
+  #beMainAside {
+    &.portfolio {
+      .module.searchBox form {
+        width: 230px;
+
+        input[type=text] {
+          width: 178px;
+        }
+      }
+    }
+
+    &.singleArticle {
+      .module.searchBox form {
+        width: 210px;
+
+        input[type=text] {
+          width: 158px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 190px;
+
+        input[type=text] {
+          width: 138px;
+        }
+      }
+    }
   }
   aside#beMainAside.singleArticle {
     width: 288px;
   }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form {
-    width: 210px;
-  }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form input[type=text] {
-    width: 158px;
-  }
   aside#beMainAside.portfolio {
     margin: 10px 0 0 30px;
     width: 278px;
-  }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form {
-    width: 230px;
-  }
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form input[type=text] {
-    width: 178px;
   }
 }
 @media (min-width: 1300px) {
@@ -720,13 +757,20 @@
   div#beContentEntryComments div.beCommentEntry .beCommentEntryContent {
     margin-left: 120px;
   }
-  .beMainAsideEntry ul.socialInteraction {
-    height: 50px;
-  }
-  .beMainAsideEntry ul.socialInteraction li,
-  .beMainAsideEntry ul.socialInteraction li a {
-    width: 50px;
-    height: 50px;
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 50px;
+
+          li, li a {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -756,52 +800,60 @@
   aside#beMainAside.multipleArticles {
     width: 258px;
   }
-  .beMainAsideEntry ul.socialInteraction {
-    height: 60px;
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 60px;
+
+          li,  li a {
+            width: 60px;
+            height: 60px;
+          }
+
+          a.socialLinkYoutube {
+            background-position: -180px -75px;
+            &:hover { background-position: -180px -135px; }
+          }
+          a.socialLinkFacebook {
+            background-position: 0px -75px;
+            &:hover { background-position: 0px -135px; }
+          }
+          a.socialLinkTwitter {
+            background-position: -120px -75px;
+            &:hover { background-position: -120px -135px; }
+          }
+          a.socialLinkGoogle {
+            background-position: -60px -75px;
+            &:hover { background-position: -60px -135px; }
+          }
+        }
+      }
+    }
+
+    &.portfolio,
+    &.singleArticle {
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 220px;
+
+        input[type=text] {
+          width: 168px;
+        }
+      }
+    }
   }
-  .beMainAsideEntry ul.socialInteraction li,
-  .beMainAsideEntry ul.socialInteraction li a {
-    width: 60px;
-    height: 60px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube {
-    background-position: -180px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkYoutube:hover {
-    background-position: -180px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook {
-    background-position: 0px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkFacebook:hover {
-    background-position: 0px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter {
-    background-position: -120px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkTwitter:hover {
-    background-position: -120px -135px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle {
-    background-position: -60px -75px;
-  }
-  .beMainAsideEntry .socialInteraction li a.socialLinkGoogle:hover {
-    background-position: -60px -135px;
-  }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form,
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form {
-    width: 260px;
-  }
-  aside#beMainAside.singleArticle .beMainAsideEntry.searchBox form input[type=text],
-  aside#beMainAside.portfolio .beMainAsideEntry.searchBox form input[type=text] {
-    width: 208px;
-  }
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form {
-    width: 220px;
-  }
-  aside#beMainAside.multipleArticles .beMainAsideEntry.searchBox form input[type=text] {
-    width: 168px;
-  }
+
   div#beMainPortfolio {
     width: 1200px;
   }

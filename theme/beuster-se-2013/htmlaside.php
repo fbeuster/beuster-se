@@ -11,9 +11,9 @@
     <!-- ende beMainContent -->
     <!-- beMainAside -->
     <aside id="beMainAside" class="<?php echo $asideClass; ?>">
-      <?php 
+      <?php
       echo moduleSearch();
-      echo moduleSocialShare($mob);
+      echo moduleSocialShare();
       echo moduleDonate();
       if($currPage == 'index') {
         echo moduleTopArticles($mob);
