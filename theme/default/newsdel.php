@@ -2,18 +2,18 @@
     <form action="/newsdel" method="post">
       <fieldset>
         <legend>Blogeintrag löschen</legend>
-        <label>Blogeintrag wählen:</label> 
+        <label>Blogeintrag wählen:</label>
         <select name="newsid">
           <option value="0">Bitte wählen...</option>
           <?php foreach($data['news'] as $value){ ?>
           <option value="<?php echo $value['newsid'] ?>">
-            <?php echo $value['newsdatum']; ?> | <?php echo changetext($value['newstitel'], 'titel', $mob); ?>
+            <?php echo $value['newsdatum']; ?> | <?php echo changetext($value['newstitel'], 'titel'); ?>
           </option>
           <?php } ?>
         </select>
         <input type="submit" name="formactionchoose" value="Gewählten Blogeintrag löschen..." />
         <br />
-        <?php if(isset($data['newsbea'])) {$newsbea = $data['newsbea'];} 
+        <?php if(isset($data['newsbea'])) {$newsbea = $data['newsbea'];}
               else {$newsbea = array('newstitel' => '', 'newsinhalt' => '', 'newsidbea' => '');}?>
         <label>Titel:</label>
         <input type="text" name="newstitel" value="<?php echo $newsbea['newstitel']; ?>" readonly />

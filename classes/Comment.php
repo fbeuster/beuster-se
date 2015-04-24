@@ -7,10 +7,10 @@
 
 /**
  * Holding an Article comment.
- * 
+ *
  * \class Comment
  * \author Felix Beuster
- * 
+ *
  * Holding a single comment, its replies and provide handling functions
  */
 class Comment {
@@ -32,7 +32,7 @@ class Comment {
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param int $cid comment id
 	 */
 	public function __construct($cid) {
@@ -44,7 +44,7 @@ class Comment {
 
 	/**
 	 * Load replies.
-	 * 
+	 *
 	 * Based on the actual comment, this function loads all replies.
 	 */
 	public function loadReplies() {
@@ -59,9 +59,9 @@ class Comment {
 
 	/**
 	 * Has comment replies.
-	 * 
+	 *
 	 * Just checks, weather the comment has replies or not
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function hasReplies() {
@@ -79,39 +79,39 @@ class Comment {
 	/**
 	 * getter for comment date
 	 * @return int
-	 */	
+	 */
 	public function getDate() { return $this->date; }
-	
+
 	/**
 	 * getter for comment author
 	 * @return string
 	 */
 	public function getAuthor() { return $this->author; }
-	
+
 	/**
 	 * getter for comment enable status
 	 * @return bool
 	 */
 	public function getEnable() { return $this->enable; }
-	
+
 	/**
 	 * getter for comment news id
 	 * @return int
 	 */
 	public function getNewsId() { return $this->newsId; }
-	
+
 	/**
 	 * getter for comment content
 	 * @return string
 	 */
 	public function getContent() { return $this->content; }
-	
+
 	/**
 	 * getter for comment replies
 	 * @return array(Comment)
 	 */
 	public function getReplies() { return $this->replies; }
-	
+
 	/**
 	 * getter for comment parent id
 	 * @return int
@@ -123,8 +123,7 @@ class Comment {
 	 * @return string
 	 */
 	public function getContentParsed() {
-		global $mob;
-		return changetext($this->content, 'cmtInhalt', $mob);
+		return changetext($this->content, 'cmtInhalt');
 	}
 
 	/**
@@ -167,7 +166,7 @@ class Comment {
 
 	/**
 	 * Loads a comment.
-	 * 
+	 *
 	 * This loads a comment from database, refrenced by comment id
 	 */
 	private function loadComment() {

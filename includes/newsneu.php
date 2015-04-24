@@ -10,19 +10,19 @@
         $db = Database::getDB()->getCon();
 
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
-            $title      = changetext($_POST['newstitel'], 'neu', $mob);
-            $inhalt     = changeText($_POST['newsinhalt'], 'neu', $mob);
+            $title      = changetext($_POST['newstitel'], 'neu');
+            $inhalt     = changeText($_POST['newsinhalt'], 'neu');
             $release    = trim($_POST['release']);
             $tagStr     = trim($_POST['tags']);
-            
+
             $cat        = $_POST['cat'];
             $catNeu     = trim($_POST['catneu']);
             $catPar     = $_POST['catPar'];
-            
+
             $play       = $_POST['pl'];
             $playNeu    = trim($_POST['plneu']);
             $playNeuID  = trim($_POST['plneuid']);
-            
+
             if(isset($_POST['enable']))
                 $ena = 0;
             else
@@ -114,7 +114,7 @@
                     }
                     $id = $stmt->insert_id;
                     $stmt->close();
-                    
+
                     // Bilder hochladen
                     $e = array();
                     $imgReplace = array();
@@ -150,7 +150,7 @@
                                     return $stmt->error;
                                 }
                                 $stmt->close();
-                                
+
                                 // Bild-ID abfragen
                                 $sql = "SELECT
                                             MAX(ID) AS maxid
@@ -167,7 +167,7 @@
                                 $stmt->close();
                                 $imgReplace[] = array('n' => $key + 1, 'id' => $maxid);
                             }
-                            
+
                             // Thumbnail erstellen
                             $pic = array();
                             $pathTemp = pathinfo($pfad);
@@ -252,7 +252,7 @@
                             }
                         }
                         $catID = getCatID($cat);
-                        
+
                         // Bilder einfügen
                         $newContent = $inhalt;
                         foreach($imgReplace as $image) {
@@ -273,7 +273,7 @@
                         if(!$stmt->execute()) {#
                             return $stmt->error;
                         }
-                        $stmt->close(); 
+                        $stmt->close();
 
                         // Tags in DB einfügen
                         if(!empty($tags)) {
@@ -289,7 +289,7 @@
                             }
                             $stmt->close();
                         }
-                        
+
                         // Eintrag und Kategorie verknüpfen
                         $sql = "INSERT INTO
                                     newscatcross(NewsID, Cat, CatID)
@@ -303,13 +303,13 @@
                             return $stmt->error;
                         }
                         $stmt->close();
-      
+
                         // RSS-Eintrag
                         if($ena && $catID !== getCatID('Portfolio')) {
                             $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,
-                                        str_replace('###link###', $lnk, changetext($inhalt, 'vorschau', $mob)),
+                                        str_replace('###link###', $lnk, changetext($inhalt, 'vorschau')),
                                         date("D, j M Y H:i:s ", time()).'GMT',
                                         $id,
                                         $lnk);
@@ -350,7 +350,7 @@
                 return showInfo('Die News wurde hinzugefügt. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
             }
         }
-  
+
         $a['data']['pars'] = getTopCats();
         $a['data']['cats'] = getSubCats();
         $a['data']['cats'][] = 'Blog';

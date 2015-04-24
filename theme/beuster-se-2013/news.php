@@ -1,4 +1,4 @@
-  <?php 
+  <?php
   if (count($data['articles'])) {
     /*if($data['articles'][0]['CatDescr'] !== '') { ?>
       <h1 class="beCategoryHeader"><?php echo $data['articles'][0]->getCategory(); ?> - beuster{se}</h1>
@@ -6,14 +6,14 @@
     <menu class="beCategoryNav">
       <?php echo genSubMenu(); ?>
     </menu>
-  
+
     <div id="beMainContent">
     <?php
 
       $i = 0;
       $last = count($data['articles']) - 1;
       foreach ($data['articles'] as $article) { ?>
-  
+
         <?php if($i%2==0) { ?><div class="beContentEntryRow"><?php } ?>
         <article class="beContentEntry">
           <h2 class="beContentEntryHeader"><a href="<?php echo $article->getLink();?>"><?php echo $article->getTitle(); ?></a></h2>
@@ -55,7 +55,7 @@
       } else {
         $dest = '/page';
       }
-      echo genPager($data['conf']['seitenzahl'], $data['conf']['start'], $dest, $mob); ?>
+      echo genPager($data['conf']['seitenzahl'], $data['conf']['start'], $dest); ?>
     <?php } else { ?>
       <p class="info">
         Es sind keine News vorhanden

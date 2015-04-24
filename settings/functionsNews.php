@@ -38,7 +38,7 @@
             return $tags;
         }
     }
- 
+
     function getNewsIDsTitlesContentCat() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -59,9 +59,9 @@
             $news[] = array($id, $t, $c, $cat);
         }
         $stmt->close();
-        return $news;  
+        return $news;
     }
- 
+
     function getNewsTitle($id = -1) {
         $db = Database::getDB()->getCon();
         if($id == -1) {
@@ -79,7 +79,7 @@
         $stmt->bind_result($title);
         if(!$stmt->fetch()) {return 'Es wurde keine solche News gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
         $stmt->close();
-        return changetext($title, 'titel', true);  
+        return changetext($title, 'titel');
     }
 
     function isNewsVisible($id) {
@@ -108,7 +108,7 @@
         $stmt->close();
         return true;
     }
- 
+
     function getAnzNews() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -116,7 +116,7 @@
                 FROM
                     news";
         if(!$stmt = $db->query($sql)) {return $db->error;}
-        if($stmt->num_rows) {        
+        if($stmt->num_rows) {
             while($row = $stmt->fetch_assoc()) {
                 $anzahl = $row['Newszahl'];
             }
@@ -124,7 +124,7 @@
         $stmt->close();
         return $anzahl;
     }
- 
+
     function newsExists($id){
         $db = Database::getDB()->getCon();
         $sql = 'SELECT
@@ -148,7 +148,7 @@
         $stmt->close();
         return true;
     }
-  
+
     function increaseHitNumber($id) {
         $db = Database::getDB()->getCon();
         $sql = 'UPDATE
@@ -162,7 +162,7 @@
         if(!$stmt->execute()) {return $stmt->error;}
         $stmt->close();
     }
- 
+
     function getNewsTitel($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -179,7 +179,7 @@
         $result->close();
         return $tit;
     }
- 
+
     function getHits($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -196,7 +196,7 @@
         $result->close();
         return $a;
     }
- 
+
     function getNewsID($id, $cat) {
         $db = Database::getDB()->getCon();
         $cat = getCatID($cat);
@@ -215,7 +215,7 @@
         $result->close();
         return $a;
     }
- 
+
     function getNewsCat($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -232,7 +232,7 @@
         $result->close();
         return $a;
     }
- 
+
     function getNewsCatID($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -249,12 +249,12 @@
         $result->close();
         return $a;
     }
-    
+
     function getMaxNewsUpTime() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
                     MIN(UNIX_TIMESTAMP(Datum))
-                FROM            
+                FROM
                     news
                 WHERE
                     Datum < NOW()";
@@ -273,7 +273,7 @@
         $db = Database::getDB()->getCon();
         $sql = "SELECT
                     UNIX_TIMESTAMP(Datum)
-                FROM            
+                FROM
                     news
                 WHERE
                     ID = ? AND
@@ -297,7 +297,7 @@
             case 'enable':
                 $sql = "SELECT
                             enable
-                        FROM            
+                        FROM
                             news
                         WHERE
                             ID = ?";

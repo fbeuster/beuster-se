@@ -5,7 +5,7 @@
         $a['filename'] = 'newsdel.php';
         $a['data'] = array();
         $db = Database::getDB()->getCon();
-      
+
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             if (isset($_POST['formactiondel'])) {
 
@@ -32,7 +32,7 @@
                     if(file_exists($pic)) {
                         unlink($pic);
                     }
-                }    
+                }
                 $stmt->close();
 
                 // remove images from db
@@ -76,7 +76,7 @@
                 $stmt->close();
 
                 return showInfo('Der Blogeintrag wurde gelöscht. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
-                
+
             } else if(isset($_POST['formactionchoose'])) {
                 // get news details
                 $sql = 'SELECT
@@ -94,8 +94,8 @@
                 if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsdel" class="back">Zurück zum Löschdialog</a>';}
                 $a['data']['newsbea'] = array(
                                             'newsidbea'     => $newsid,
-                                            'newsinhalt'    => changetext($newsinhalt, 'bea', $mob),
-                                            'newstitel'     => changetext($newstitel, 'bea', $mob));
+                                            'newsinhalt'    => changetext($newsinhalt, 'bea'),
+                                            'newstitel'     => changetext($newstitel, 'bea'));
                 $stmt->close();
             }
         }
@@ -110,7 +110,7 @@
                 ORDER BY
                     Datum DESC";
         if(!$stmt = $db->query($sql)) {return $db->error;}
-        $news = array();       
+        $news = array();
         while($row = $stmt->fetch_assoc()) {
             $news[$row['ID']] = array('newsid'=>$row['ID'], 'newsdatum'=>$row['Changedatum'], 'newstitel'=>$row['Titel']);
         }
@@ -118,7 +118,7 @@
 
         $a['data']['news'] = $news;
         $a['data']['admin_news'] = true;
-      
+
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
     } else if(getUserID()){
         return 'Sie haben hier keine Zugriffsrechte.';

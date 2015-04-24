@@ -16,18 +16,18 @@
       echo moduleSocialShare();
       echo moduleDonate();
       if($currPage == 'index') {
-        echo moduleTopArticles($mob);
+        echo moduleTopArticles();
       } else if($currPage == 'single') {
         $cnt = Lixter::getLix()->getContent();
-        echo moduleArticleInfo($mob,  $cnt['data']['aside']);
-        echo moduleRandomArticle($mob);
+        echo moduleArticleInfo($cnt['data']['aside']);
+        echo moduleRandomArticle();
       } else if($currPage == 'page') {
-        echo moduleRandomArticle($mob);
+        echo moduleRandomArticle();
       } else {
-        echo moduleRandomArticle($mob);
+        echo moduleRandomArticle();
       }
-      echo moduleAdSenseAside($mob, $local, $noGA);
-      echo moduleArchive($mob); ?>
+      echo moduleAdSenseAside($local, $noGA);
+      echo moduleArchive(); ?>
     </aside>
     <!-- ende beMainAside -->
     <br class="clear">

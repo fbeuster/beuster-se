@@ -1,18 +1,18 @@
-<?php 
-  if (count($data['articles'])) { 
+<?php
+  if (count($data['articles'])) {
     if($data['articles'][0]['CatDescr'] !== '') { ?>
   <h1><?php echo $data['articles'][0]['CatDispName']; ?> - beuster{se}</h1>
   <?php } ?>
     <menu>
       <?php echo genSubMenu(); ?>
     </menu>
-    
+
   <?php
 
   $i = 0;
   $last = count($data['articles']) - 1;
   foreach ($data['articles'] as $article) { ?>
-  
+
   <article>
     <h2><a href="<?php $article->getLink();?>"><?php echo $article->getTitle(); ?></a></h2>
     <div>
@@ -49,7 +49,7 @@
       } else {
         $dest = '/page';
       }
-      echo genPager($data['conf']['seitenzahl'], $data['conf']['start'], $dest, $mob); ?>
+      echo genPager($data['conf']['seitenzahl'], $data['conf']['start'], $dest); ?>
   <?php } else { ?>
   <p>
     Es sind keine News vorhanden

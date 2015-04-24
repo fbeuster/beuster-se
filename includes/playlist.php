@@ -1,11 +1,11 @@
 <?php
     $url = array();
     $urls = array();
- 
+
     // set feed URL
     $feedURL = 'http://gdata.youtube.com/feeds/api/playlists/'.$playlistID;
     //$feedURL = 'http://gdata.youtube.com/feeds/api/users/waterwebdesign/playlists';
-    
+
     $i = 0;
     do {
         $again = false;
@@ -18,14 +18,14 @@
             $media = $entry->children('http://search.yahoo.com/mrss/');
             // get video player URL
             $attrs = $media->group->player->attributes();
-            $watch = $attrs['url']; 
+            $watch = $attrs['url'];
             // get video thumbnail
             $attrs = $media->group->thumbnail[0]->attributes();
-            $thumbnail = $attrs['url'];    
+            $thumbnail = $attrs['url'];
             // get <yt:duration> node for video length
             $yt = $media->children('http://gdata.youtube.com/schemas/2007');
             $attrs = $yt->duration->attributes();
-            $length = $attrs['seconds'];  
+            $length = $attrs['seconds'];
             // get <yt:stats> node for viewer statistics
             $yt = $entry->children('http://gdata.youtube.com/schemas/2007');
             $attrs = $yt->statistics->attributes();
@@ -36,19 +36,15 @@
             $vidID = preg_replace('#&feature=youtube_gdata_player#Us', '', $vidID);
             $pfad = 'images/tmp/'.$playlistID.'-'.$vidID.'.jpg';
             if(!file_exists($pfad)) {
-                $imagequelle = imagecreatefromjpeg($thumbnail); 
-                $image = imagecreatetruecolor(480, 270); 
-                imagecopy($image, $imagequelle, 0, 0, 0, 45, 480, 270); 
+                $imagequelle = imagecreatefromjpeg($thumbnail);
+                $image = imagecreatetruecolor(480, 270);
+                imagecopy($image, $imagequelle, 0, 0, 0, 45, 480, 270);
                 imagedestroy($imagequelle);
                 imagejpeg($image, $pfad);
                 imagedestroy($image);
             }
             $art = linkGrab(getVideoArticle($vidID));
-            if(!$mob) {
-                $url[] = array('url' => $vidID, 'title' => $titleYt, 'dur' => $length, 'thumb' => $pfad, 'art' => $art);
-            } else {
-                $urls[] = array('url' => $vidID, 'title' => $titleYt);
-            }
+            $url[] = array('url' => $vidID, 'title' => $titleYt, 'dur' => $length, 'thumb' => $pfad, 'art' => $art);
         }
         foreach($sxml->link as $link) {
             $linkAttr = $link->attributes();

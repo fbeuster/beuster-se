@@ -21,9 +21,9 @@
     $news = array();
     $sql = "SELECT
               ID,
-              Titel, 
+              Titel,
               Inhalt
-            FROM            
+            FROM
               news
             WHERE
               enable = ? AND
@@ -35,14 +35,14 @@
     $result->bind_result($newsid, $newstitel, $newsinhalt);
     while($result->fetch()) {
       $news[] = array('id'      => $newsid,
-                      'content' => changetext($newsinhalt, 'bea', false),
+                      'content' => changetext($newsinhalt, 'bea'),
                       'title'   => $newstitel,
                       'score'   => 0);
     }
     $result->close();
     $maxTime = getMaxNewsUpTime();
     foreach($news as $key => $entry) {
-      
+
       /* Title-Score */
       $scoreTitle = 0;
       $scoreTitleSim = rank($entry['title'], $searchStr, false);
@@ -51,7 +51,7 @@
       $scoreTitle += ($scoreTitleSim - $scoreTitleApr - $scoreTitleExa) * 5;
       $scoreTitle += ($scoreTitleApr - $scoreTitleExa) * 15;
       $scoreTitle += $scoreTitleExa * 25;
-      
+
       /* Content-Score */
       $scoreContent = 0;
       $scoreContentSim = rank($entry['content'], $searchStr, false);
@@ -60,17 +60,17 @@
       $scoreContent += ($scoreContentSim - $scoreContentApr - $scoreContentExa) * 3;
       $scoreContent += ($scoreContentApr - $scoreContentExa) * 10;
       $scoreContent += $scoreContentExa * 15;
-      
+
       /* Zeitfaktor */
       $newsTime = getNewsUpTime($entry['id']);
       $timeFactor = $newsTime / $maxTime;
-      
+
       /* Comment-Score */
       $cmtScore = 0;
       $comments = array();
       $sql = "SELECT
                 Inhalt
-              FROM            
+              FROM
                 kommentare
               WHERE
                 NewsID = ?";
@@ -79,7 +79,7 @@
       if(!$result->execute()) {$return = $result->error;}
       $result->bind_result($commentContent);
       while($result->fetch()) {
-        $comments[] = array('content' => changetext($commentContent, 'bea', false),
+        $comments[] = array('content' => changetext($commentContent, 'bea'),
                             'score'   => 0);
       }
       $result->close();
@@ -99,7 +99,7 @@
       $hits = getHits($entry['id']);
       $hitCoefficient = 100 - $hits * 100 / $newsTime;
       $pop = $cmts + $scoreComment;
-      
+
       /* Sum up score */
       $rank = $scoreTitle + $scoreContent;
       if($rank > 0)
@@ -142,7 +142,7 @@
         $results[] = array(
           'id'    => $id,
           'tit'   => ($searchMarks)?searchMark($titel, $searchStr, true):$titel,
-          'inh'   => ($searchMarks)?changetext(searchmark($inhalt, $searchStr, true), 'vorschau', $mob):changetext($inhalt, 'vorschau', $mob),
+          'inh'   => ($searchMarks)?changetext(searchmark($inhalt, $searchStr, true), 'vorschau'):changetext($inhalt, 'vorschau'),
           'cat'   => $cat,
           'dat'   => $datum,
           'cmt'   => $cmtAnz,

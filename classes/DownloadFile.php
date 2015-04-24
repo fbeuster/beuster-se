@@ -2,14 +2,14 @@
 
 /**
  * contains a DownloadFile.
- * 
+ *
  * \file classes/DownloadFile.php
  * \author Felix Beuster
  */
 
 /**
  * contains a DownloadFile.
- * 
+ *
  * \class DownloadFile
  * \author Felix Beuster
  */
@@ -23,7 +23,7 @@ class DownloadFile {
 	private $loaded = false;	/**< load status */
 
 	/*** PUBLIC ***/
-	
+
 	/**
 	 * constructor
 	 */
@@ -37,25 +37,25 @@ class DownloadFile {
 	 * @return int
 	 */
 	public function getId() { return $this->id; }
-	
+
 	/**
 	 * setter for id
 	 * @param int $id to set
 	 */
 	public function setId($id) { $this->id = $id; }
-	
+
 	/**
 	 * getter for name
 	 * @return String
 	 */
 	public function getName() { return $this->name; }
-	
+
 	/**
 	 * setter for name
 	 * @param String $name to set
 	 */
 	public function setName($name) { $this->name = $name; }
-	
+
 	/**
 	 * getter for description
 	 * @return String
@@ -67,28 +67,27 @@ class DownloadFile {
 	 * @return String
 	 */
 	public function getDescriptionParsed() {
-		global $mob;
-		return changetext($this->description, 'vorschau', $mob);
+		return changetext($this->description, 'vorschau');
 	}
-	
+
 	/**
 	 * setter for description
 	 * @param String $description to set
 	 */
 	public function setDescription($description) { $this->description = $description; }
-	
+
 	/**
 	 * getter for file
 	 * @return File
 	 */
 	public function getFile() { return $this->file; }
-	
+
 	/**
 	 * setter for file
 	 * @param File $file to set
 	 */
 	public function setFile($file) { $this->file = $file; }
-	
+
 	/*** PRIVATE ***/
 
 	/**

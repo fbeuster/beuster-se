@@ -16,7 +16,7 @@
     </span>
     <?php } ?>
     <?php echo $article->getContentParsed()."\n"; ?>
-    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics'], $mob).'</section>'; } ?>
+    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics']).'</section>'; } ?>
   </article>
 
   <!-- comments -->
@@ -30,7 +30,7 @@
         }
         if($article->getPagesCmt() > 1) { ?>
     <div>
-      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page', $mob); ?>
+      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page'); ?>
     </div>
       <?php } ?>
     <?php } else { ?>
@@ -41,9 +41,9 @@
     <div id="newComment">
       <span>Schreibe einen Kommentar!</span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, $cmtReply, time(), $mob, $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
+       echo genFormPublic($err, $cmtReply, time(), $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
     </div>
   </div>
-        
+
   <?php }  ?>
 <?php }  ?>

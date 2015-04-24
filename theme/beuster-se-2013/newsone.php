@@ -12,7 +12,7 @@
  <article class="beContentEntry">
     <span class="socialTxt" title="<?php echo $text; ?>" style="display: none;"><?php echo $text; ?></span>
     <h1 class="beContentEntryHeader"><?php echo $article->getTitle(); ?></h1>
-    <?php if($article->getProjState() !== 0){ 
+    <?php if($article->getProjState() !== 0){
       switch(substr($article->getProjState(), 0, 1)){
         case '1': $projStyle = 'background: #70d015; color: #000000;'; break;
         case '2': $projStyle = 'background: #efef15; color: #000000;'; break;
@@ -26,7 +26,7 @@
     </span>
     <?php } ?>
     <?php echo $article->getContentParsed()."\n"; ?>
-    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics'], $mob).'</section>'; } ?>
+    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics']).'</section>'; } ?>
   </article>
 
   <?php if(false) { ?>
@@ -62,7 +62,7 @@
         }
         if($article->getPagesCmt() > 1) { ?>
     <div class="beCommentEntry">
-      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page', $mob); ?>
+      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page'); ?>
     </div>
       <?php } ?>
     <?php } else { ?>
@@ -73,9 +73,9 @@
     <div class="beCommentNew" id="newComment">
       <span class="beCommentNewHeader">Schreibe einen Kommentar!</span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, $cmtReply, time(), $mob, $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
+       echo genFormPublic($err, $cmtReply, time(), $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
     </div>
   </div>
-        
+
   <?php }  ?>
 <?php }  ?>

@@ -7,17 +7,16 @@
 
 /**
  * Parser access.
- * 
+ *
  * This parser access is used to support old code. In fact it just call the
  * desired ArticleParser.
- * 
+ *
  * @param String $str the text to parse
  * @param String $type which parser used?
- * @param bool $mob are we on mobile?
  * @param int $l the length, used for preview; default = 750
  * @return String
  */
-function changetext($str, $type, $mob, $l = 750) {
+function changetext($str, $type, $l = 750) {
     switch($type) {
         case 'bea':
             $parsed = new EditParser($str);
@@ -29,16 +28,16 @@ function changetext($str, $type, $mob, $l = 750) {
             $parsed = new DescriptionParser($str);
             break;
         case 'inhalt':
-            $parsed = new ContentParser($str, $mob);
+            $parsed = new ContentParser($str);
             break;
         case 'cmtInhalt':
-            $parsed = new CommentParser($str, $mob);
+            $parsed = new CommentParser($str);
             break;
         case 'vorschau':
-            $parsed = new PreviewParser($str, $mob, $l);
+            $parsed = new PreviewParser($str, $l);
             break;
         default:
-            $parsed = new PreviewParser($str, $mob, $l);
+            $parsed = new PreviewParser($str, $l);
             break;
     }
     return $parsed->parse();
@@ -48,7 +47,7 @@ function changetext($str, $type, $mob, $l = 750) {
  * Abstract class to parse articles.
  * \class ArticleParser
  * \author Felix Beuster
- * 
+ *
  * Implementation of most parsing functions
  */
 abstract class ArticleParser {
@@ -56,43 +55,40 @@ abstract class ArticleParser {
     /** the parsing content */
     public $str = '';
 
-    /** indicator for mobile */
-    public $mobile = false;
-
     /** storing source from cites */
     public $citeSources = array();
 
     /** estimated length, used in shorten() */
     public $estimatedLength = 0;
-    
+
     /**
      * constructor
      */
     public function __construct() {
     }
-    
+
     /**
      * Cut spaces.
-     * 
+     *
      * This simply cut off the spaces vom the string by peforming trim().
      */
     public function trimStr() {
         $this->str = trim($this->str);
     }
-    
+
     /**
      * HTML special characters.
-     * 
+     *
      * Encoding special HTML characters
      */
     public function htmlSpecial() {
         $this->str = htmlspecialchars($this->str);
-        $this->str = stripslashes($this->str);   
+        $this->str = stripslashes($this->str);
     }
-    
+
     /**
      * Parse code blocks.
-     * 
+     *
      * Parsing code blocks.
      * This adds line numbers and different classes for each line.
      */
@@ -101,7 +97,7 @@ abstract class ArticleParser {
             $strCode = '';
             $posA = strpos($this->str, '[code]');
             $posE = strpos($this->str, '[/code]');
-            
+
             $strCode = substr($this->str, $posA + 6, $posE - ($posA + 6));
             $strCodeAlt = substr($this->str, $posA, $posE - $posA + 7);
 
@@ -122,26 +118,26 @@ abstract class ArticleParser {
                 $i++;
             }
             $strCode = implode($lines);
-            
+
             $this->str = str_replace($strCodeAlt, '<div class="code">'.$strCode.'</div>', $this->str);
         }
     }
-    
+
     /**
      * Shrink down whitespace.
-     * 
+     *
      * Removing multiple spaces an replace two line break by a paragraph change
      */
     public function removeEmptySpace() {
         $this->str = preg_replace('/(\r\n){2}/', '[/p][p]', $this->str);
         $this->str = preg_replace('/(\s{2})\s+/', '\1', $this->str);
     }
-    
+
     /**
      * Remove empty tags.
-     * 
+     *
      * tags without content are not needed in HTML later
-     * 
+     *
      * \todo check if tags are missing
      */
     public function removeEmptyTags() {
@@ -150,13 +146,13 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[i\]\[/i\]#', '', $this->str);
         $this->str = preg_replace('#\[del\]\[/del\]#', '', $this->str);
         $this->str = preg_replace('#\[ins\]\[/ins\]#', '', $this->str);
-        $this->str = preg_replace('#\[h2\]\[/h2\]#', '', $this->str);            
-        $this->str = preg_replace('#\[h3\]\[/h3\]#', '', $this->str);              
+        $this->str = preg_replace('#\[h2\]\[/h2\]#', '', $this->str);
+        $this->str = preg_replace('#\[h3\]\[/h3\]#', '', $this->str);
     }
-    
+
     /**
      * Format text.
-     * 
+     *
      * Translate tags for bold, italic, underline, delete and insert into HTML tags.
      */
     public function textFormats() {
@@ -167,31 +163,31 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '<ins>$1</ins>', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
     }
-    
+
     /**
      * Format headlines.
-     * 
+     *
      * Translate tags for headlines into HTML tags
      */
     public function headlines() {
-        $this->str = preg_replace('#\[h2\](.+?)\[/h2\]#', '<h2>$1</h2>', $this->str);            
-        $this->str = preg_replace('#\[h3\](.+?)\[/h3\]#', '<h3>$1</h3>', $this->str);         
+        $this->str = preg_replace('#\[h2\](.+?)\[/h2\]#', '<h2>$1</h2>', $this->str);
+        $this->str = preg_replace('#\[h3\](.+?)\[/h3\]#', '<h3>$1</h3>', $this->str);
     }
-    
+
     /**
      * Remove headlines.
-     * 
+     *
      * Removes headlines and deletes new extra space
      */
     public function removeHeadlines() {
-        $this->str = preg_replace('#\[h2\](.+?)\[/h2\]#', '<b>$1</b>', $this->str);            
+        $this->str = preg_replace('#\[h2\](.+?)\[/h2\]#', '<b>$1</b>', $this->str);
         $this->str = preg_replace('#\[h3\](.+?)\[/h3\]#', '<b>$1</b>', $this->str);
         $this->str = preg_replace('/\r\n/', ' ', $this->str);
     }
-    
+
     /**
      * Remove text formats.
-     * 
+     *
      * Removing text formats such as bold, underline, italic, delete, insert as
      * well as quote, cite and urls. Content of the elements is untouched.
      */
@@ -206,12 +202,12 @@ abstract class ArticleParser {
         $this->str = preg_replace('=\[cite\](.*)\[/cite\]=Uis', '&quot;$1&quot;', $this->str);
         $this->str = preg_replace('#\[cite=(.*)\](.*)\[/cite\]#Uis', '&quot;$2&quot;', $this->str);
         $this->str = preg_replace('#\[url\](.*)\[/url\]#Uis', '$1 ', $this->str);
-        $this->str = preg_replace('#\[url=(.*)\](.*)\[/url\]#Uis', '$2 ', $this->str);           
+        $this->str = preg_replace('#\[url=(.*)\](.*)\[/url\]#Uis', '$2 ', $this->str);
     }
-    
+
     /**
      * Collect sources.
-     * 
+     *
      * Sources from quotes and cites are stored in member $citeSources
      */
     public function collectQuotes() {
@@ -228,12 +224,12 @@ abstract class ArticleParser {
             } else {
                 $i = strlen($this->str);
             }
-        }            
+        }
     }
-    
+
     /**
      * Formate citations.
-     * 
+     *
      * Translate tags for cite and blockquote into HTML
      */
     public function cites() {
@@ -241,10 +237,10 @@ abstract class ArticleParser {
         $this->str = preg_replace('=\[cite\](.*)\[/cite\]=Uis', '<cite>$1</cite>', $this->str);
         $this->str = preg_replace('#\[cite=(.*)\](.*)\[/cite\]#Uis', '<cite title="$1">$2</cite>', $this->str);
     }
-    
+
     /**
      * Link formatting.
-     * 
+     *
      * Translate url tags into HTML
      */
     public function links() {
@@ -254,7 +250,7 @@ abstract class ArticleParser {
         $anzUrl = 0;
         while($anz > $anzUrl) {
             $posA = strpos($this->str, '[url=', $urlPos);
-            $posE = strpos($this->str, '[/url]', $urlPos);   
+            $posE = strpos($this->str, '[/url]', $urlPos);
             $strUrl = substr($this->str, $posA, $posE - $posA + 6);
             $strUrlOld = $strUrl;
             $strUrl = preg_replace('#\[url=(.*?(\[.*?\]).*?)\](.*?)\[/url\]#Uis', '<a href="$1">$3</a>', $strUrl);
@@ -264,10 +260,10 @@ abstract class ArticleParser {
             $anzUrl++;
         }
     }
-    
+
     /**
      * Remove breaklines.
-     * 
+     *
      * Removes breaklines after certain tags which are not needed.
      */
     public function breakLines() {
@@ -279,10 +275,10 @@ abstract class ArticleParser {
         $this->str = preg_replace('#</(li|ul|ol)><br />#', '</$1>', $this->str);
         $this->str = preg_replace('#<(u|o)l class="innews((vor)??)"><br />#', '<$1l class="innews$2">', $this->str);
     }
-    
+
     /**
      * Remove breaklines.
-     * 
+     *
      * Removes general breaklines.
      */
     public function removeBreakLines() {
@@ -290,10 +286,10 @@ abstract class ArticleParser {
         $this->str = preg_replace('#<br/>#', ' ', $this->str);
         $this->str = preg_replace('#<br>#', ' ', $this->str);
     }
-    
+
     /**
      * Remove paragraphs.
-     * 
+     *
      * Clear paragraphs and headlines by removing and translating.
      */
     public function clearParagraphs() {
@@ -302,10 +298,10 @@ abstract class ArticleParser {
         $this->str = preg_replace('=\[p\]=Ui', ' ', $this->str);
         $this->str = preg_replace('=\[/p\]=Ui', ' ', $this->str);
     }
-    
+
     /**
      * Translate paragraphs.
-     * 
+     *
      * This handles different cases of paragraphs and translate them into HTML
      */
     public function paragraphs() {
@@ -321,12 +317,12 @@ abstract class ArticleParser {
         $this->str = preg_replace('=<p><h3>(.*?)</h3>=Ui', '<h3>$1</h3><p>', $this->str);
         $this->str = preg_replace('=<p></p>=Ui', '', $this->str);
     }
-    
+
     /**
      * Smile!.
-     * 
+     *
      * Translate textual emojis into graphical ones.
-     * 
+     *
      * \todo reactivate them, but not in [code]
      */
     public function illustrateSmiles() {
@@ -335,10 +331,10 @@ abstract class ArticleParser {
         $this->str = str_replace(':(', '<img class="sm" src="/images/smsad.gif" alt="I\'m sad.">', $this->str);
         $this->str = str_replace(';)', '<img class="sm" src="/images/smone.gif" alt="You know...">', $this->str);*/
     }
-    
+
     /**
      * Append quote sources.
-     * 
+     *
      * Appending sources from variable ArticleParser#$citeSources generated in
      * ArticleParser::collectQuotes
      */
@@ -357,15 +353,15 @@ abstract class ArticleParser {
 
     /**
      * Generate an affiliate link.
-     * 
+     *
      * Generates an affiliate link and tracking image for Amazon partner
      * programm.
-     * 
+     *
      * \todo extract personal tracking data
      * \todo check DB for old codes
      */
     public function affiliateImage() {
-        // old style 
+        // old style
         $this->str = preg_replace('#\[affi=(.*)\]#Uis', '<img src="$1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />', $this->str);
 
         // new style
@@ -373,7 +369,7 @@ abstract class ArticleParser {
         foreach($asins[1] as $k => $asin) {
             $pattern = $asins[0][$k];
             $text = $asins[2][$k].' *';
-            
+
             $href1 = 'http://www.amazon.de/gp/product/';
             $href2 = '/ref=as_li_ss_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=';
             $href3 = '&linkCode=as2&tag=beustersede-21';
@@ -382,16 +378,16 @@ abstract class ArticleParser {
 
             $src = 'http://ir-de.amazon-adsystem.com/e/ir?t=beustersede-21&l=as2&o=3&a='.$asin;
             $asinI = '<img src="'.$src.'" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />';
-            
+
             $this->str = str_replace($pattern, $asinL.$asinI, $this->str);
         }
     }
 
     /**
      * Remove affiliate link.
-     * 
+     *
      * Removing affiliate links from the text.
-     * 
+     *
      * \todo remove old after cleaning ArticleParser::affiliateImage
      */
     public function removeAffiliateImage() {
@@ -401,13 +397,13 @@ abstract class ArticleParser {
         // new style
         $this->str = preg_replace('#\[asin=.*\](.*)\[/asin\]#Uis', '$1', $this->str);
     }
-    
+
     /**
      * Shorten parsing string.
-     * 
+     *
      * In some cases it is usefull to cut the string at some point. This cutting
      * point is set via ArticleParser#$estimatedLength
-     * 
+     *
      * @param String $message A text to append to the shortend string.
      */
     public function shorten($message) {
@@ -446,7 +442,7 @@ abstract class ArticleParser {
                 else
                     $i++;
             }
-            
+
             if($toCloseEndPos < $this->estimatedLength && ($i === false || $toClosePos == 0)) {
                 $i = $this->estimatedLength;
             } else {
@@ -473,16 +469,16 @@ abstract class ArticleParser {
             $this->str = $this->str.$message.$res;
         }
     }
-    
+
     /**
      * Remove images.
-     * 
+     *
      * Just remove all images from ArticleParser#$str
      */
     public function hideArticleImages() {
         $this->str = preg_replace('=\[img([0-9]*)\]=Ui', '', $this->str);
     }
-    
+
     abstract function blockquotes();    /**< abstract, implementation in sub class */
     abstract function lists();  /**< abstract, implementation in sub class */
     abstract function parse();  /**< abstract, implementation in sub class */
@@ -498,31 +494,29 @@ abstract class ArticleParser {
  * Class to parse article previews.
  * \class PreviewParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for previews
  */
-class PreviewParser extends ArticleParser {  
+class PreviewParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param String $input Text to be parsed
-     * @param bool $mobile mobile view?
      * @param int $length length to cut off
      */
-    public function __construct($input, $mobile, $length) {
+    public function __construct($input, $length) {
         parent::__construct();
         $this->str = $input;
-        $this->mobile = $mobile;
         $this->estimatedLength = $length;
     }
 
     /**
      * Do parsing.
-     * 
+     *
      * Runs the parsing by calling necessary functions from ArticleParser,
      * returns the preview text.
-     * 
+     *
      * @return String
      */
     public function parse() {
@@ -545,30 +539,30 @@ class PreviewParser extends ArticleParser {
         parent::shorten(' <a href="###link###"> weiter...</a>');
         return $this->str;
     }
-    
+
     /**
      * Format blockquotes.
-     * 
+     *
      * Translate blockquote to HTML, for previews <code>cite</code> is more
      * useful.
      */
     public function blockquotes() {
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '<cite title="$1">$2</cite>', $this->str);
     }
-    
+
     /**
      * Format code.
-     * 
+     *
      * For previews code shouldn't be shown, generate a article link instead.
      */
     public function code() {
         $this->str = preg_replace('#\[code\](.*)\[/code\]#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
         $this->str = preg_replace('#<code>(.*)</code>#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
     }
-    
+
     /**
      * Format lists.
-     * 
+     *
      * Flat list for preview text.
      */
     public function lists() {
@@ -576,19 +570,19 @@ class PreviewParser extends ArticleParser {
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1', $this->str);
     }
-    
+
     /**
      * Format search marks.
-     * 
+     *
      * Adding mark tags for search queries
      */
     public function searchmarks() {
         $this->str = preg_replace('#\[mark\](.*)\[/mark\]#Uis', '<mark>$1</mark>', $this->str);
     }
-    
+
     /**
      * Replace embedded video.
-     * 
+     *
      * In oreview texts an embedded video is better replaces by a link.
      */
     public function embedVideo() {
@@ -601,14 +595,14 @@ class PreviewParser extends ArticleParser {
  * Class to parse article description.
  * \class DescriptionParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for description
  */
 class DescriptionParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param string $input The text which need to be paresd
      */
     public function __construct($input) {
@@ -619,10 +613,10 @@ class DescriptionParser extends ArticleParser {
 
     /**
      * Do parsing.
-     * 
+     *
      * Runs the parsing by calling necessary functions from ArticleParser,
      * returns the description text.
-     * 
+     *
      * @return String
      */
     public function parse() {
@@ -644,25 +638,25 @@ class DescriptionParser extends ArticleParser {
         parent::shorten('... Mehr im Blog!');
         return $this->str;
     }
-    
+
     public function blockquotes() {
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '&quot;$2&quot;', $this->str);
     }
-    
+
     public function code() {
         $this->str = preg_replace('#<code>(.*)</code>#Uis',' ', $this->str);
     }
-    
+
     public function lists() {
         $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
-    
+
     public function searchmarks() {
         $this->str = preg_replace('#\[mark\](.*)\[/mark\]#Uis', '$1', $this->str);
     }
-    
+
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '', $this->str);
         $this->str = preg_replace('#\[play\](.*)\[/play\]#Ui', '', $this->str);
@@ -673,14 +667,14 @@ class DescriptionParser extends ArticleParser {
  * Class to parse edit views.
  * \class EditParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for edit views
  */
 class EditParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param string $input The text which need to be paresd
      */
     public function __construct($input) {
@@ -690,20 +684,20 @@ class EditParser extends ArticleParser {
 
     /**
      * Do parsing.
-     * 
+     *
      * Runs the parsing by calling necessary functions from ArticleParser,
      * returns the raw text, just trimmed.
-     * 
+     *
      * @return String
      */
     public function parse() {
         parent::trimStr();
         return $this->str;
     }
-    
-    public function blockquotes() {}        
+
+    public function blockquotes() {}
     public function lists() {}
-    public function searchmarks() {}        
+    public function searchmarks() {}
     public function embedVideo() {}
 }
 
@@ -711,14 +705,14 @@ class EditParser extends ArticleParser {
  * Class to parse new views.
  * \class NewParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for new views
  */
 class NewParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param string $input The text which need to be paresd
      */
     public function __construct($input) {
@@ -728,20 +722,20 @@ class NewParser extends ArticleParser {
 
     /**
      * Do parsing.
-     * 
+     *
      * Runs the parsing by calling necessary functions from ArticleParser,
      * returns the raw text, just trimmed.
-     * 
+     *
      * @return String
      */
     public function parse() {
         parent::trimStr();
         return $this->str;
     }
-    
+
     public function blockquotes() {}
-    public function lists() {}        
-    public function searchMarks() {}        
+    public function lists() {}
+    public function searchMarks() {}
     public function embedVideo() {}
 }
 
@@ -749,29 +743,27 @@ class NewParser extends ArticleParser {
  * Class to parse article main view.
  * \class ContentParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for main view
  */
 class ContentParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param string $input The text which need to be paresd
-     * @param bool $mobile Are we on a mobile device?
      */
-    public function __construct($input, $mobile) {
+    public function __construct($input) {
         parent::__construct();
         $this->str = $input;
-        $this->mobile = $mobile;
     }
 
     /**
      * Do parsing.
-     * 
+     *
      * Runs the parsing by calling necessary functions from ArticleParser,
      * returns the content text.
-     * 
+     *
      * @return String
      */
     public function parse() {
@@ -794,20 +786,20 @@ class ContentParser extends ArticleParser {
         parent::affiliateImage();
         return $this->str;
     }
-    
+
     public function blockquotes() {
         parent::collectQuotes();
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '</p><blockquote cite="$1">$2<br><span class="source">Quelle: $1</span></blockquote><p>', $this->str);
     }
-    
+
     public function lists() {
         $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', '</p><ul class="innews">$1</ul><p>', $this->str);
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', '</p><ol class="innews">$1</ol><p>', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', '<li>$1</li>', $this->str);
     }
-    
+
     public function searchMarks() {}
-    
+
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>', $this->str);
         $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p></p>', $this->str);
@@ -818,18 +810,17 @@ class ContentParser extends ArticleParser {
  * Class to parse comments.
  * \class CommentParser
  * \author Felix Beuster
- * 
+ *
  * specific implementations of some functions for comments
  */
 class CommentParser extends ArticleParser {
 
     /**
      * constructor
-     * 
+     *
      * @param string $input The text which need to be paresd
-     * @param bool $mobile Are we on a mobile device?
      */
-    public function __construct($input, $mobile) {
+    public function __construct($input) {
         parent::__construct();
         $this->str = $input;
     }
@@ -851,23 +842,23 @@ class CommentParser extends ArticleParser {
         parent::removeAffiliateImage();
         return $this->str;
     }
-    
+
     public function blockquotes() {
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '&quot;$2&quot;', $this->str);
     }
-    
+
     public function code() {
         $this->str = preg_replace('#<code>(.*)</code>#Uis',' ', $this->str);
     }
-    
+
     public function lists() {
         $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
-    
+
     public function searchMarks() {}
-    
+
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="http://youtu.be/$1">Video ansehen</a> ', $this->str);
     }

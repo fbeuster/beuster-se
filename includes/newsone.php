@@ -3,28 +3,28 @@
     if(!$local) {
         increaseHitNumber($id);
     }
-    
+
     $playlistID = getPlaylistID(getNewsCat($id));
     $return = '';
- 
+
     if($playlistID == false) {
         $a['filename'] = 'newsone.php';
     } else {
         $a['filename'] = 'playlist.php';
         include('playlist.php');
     }
- 
+
     if('POST' == $_SERVER['REQUEST_METHOD']) {
         $frei = 0;
-        
+
         $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
-        $Inhalt = changetext(trim($_POST['usrcnt']), 'neu', $mob);
+        $Inhalt = changetext(trim($_POST['usrcnt']), 'neu');
         $Usermail = $db->real_escape_string(stripslashes(strtolower(trim($_POST['usrml']))));
         $webpage = $db->real_escape_string(stripslashes(trim($_POST['usrpg'])));
         $err = checkStandForm($user, $Inhalt, $Usermail, $webpage, trim($_POST['date']), $_POST['email'], $_POST['homepage'], 'commentForm');
         $Inhalt = remDoubles($Inhalt, array('[b]','[i]','[u]'));
         $replyTo = checkReplyId(trim($_POST['reply']));
-        
+
         if (getUserID() && hasUserRights('admin')) {
             refreshCookies();
             $frei = 2;
@@ -53,7 +53,7 @@
                 }
             }
             $stmt->close();
-            
+
             // add user to db
             if($newUser) {
                 $sql = 'INSERT INTO
@@ -73,7 +73,7 @@
                 }
                 $stmt->close();
             }
-            
+
 
             // insert comment
             $sql = 'INSERT INTO
@@ -89,7 +89,7 @@
                 }
             }
             $stmt->close();
-            
+
             // notify mails
             notifyAdmin($titel, $Inhalt, $user);
 
@@ -100,7 +100,7 @@
                 $return = showInfo('Kommentar wurde hinzugefügt.', $errRet);
             }
         }
-        $a['data']['eType'] = $err; 
+        $a['data']['eType'] = $err;
         $a['data']['ec'] = array('user' => $user, 'cnt' => $Inhalt, 'mail' => $Usermail, 'page' => $webpage);
     }
 
@@ -116,12 +116,12 @@
     $a['data']['eType'] = 0;
     $a['data']['ec'] = '';
     $a['data']['formCnt'] = 20;
- 
+
     $aside = array( 'author'        => $article->getAuthor(),
                     'date'          => date('d.m.Y H:i', $article->getDate()),
                     'datAttr'       => date('c', $article->getDate()),
                     'link'          => $article->getLink());
- 
+
     $pics = array();
     $sql = "SELECT
                 ID,

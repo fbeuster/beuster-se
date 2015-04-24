@@ -7,7 +7,7 @@
         $text = substr($article->getTitle(), 0, 60).'...'.$anhang.$url;
       } else {
         $text = $article->getTitle().$anhang.$url;
-      } 
+      }
 
 
 
@@ -17,7 +17,7 @@
     <span class="socialTxt" title="<?php echo $text; ?>" style="display: none;"><?php echo $text; ?></span>
     <h1 class="beContentEntryHeader"><?php echo $article->getTitle(); ?></h1>
     <?php echo $article->getContentParsed()."\n"; ?>
-    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics'], $mob).'</section>'; } ?>
+    <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics']).'</section>'; } ?>
   </article>
     <?php } ?>
 
@@ -50,7 +50,7 @@
   <!-- comments -->
   <div id="beContentEntryComments">
     <h2 id="comments" class="beContentEntryCommentsHeader">Kommentare (<?php echo count($article->getComments()); ?>)</h2>
-    <?php 
+    <?php
       $cmtReply = $article->getLink();
       if(count($article->getComments()) > 0) {
         foreach($article->getComments() as $cmt) {
@@ -59,7 +59,7 @@
         }
         if($article['seitenzahlC'] > 1) { ?>
     <div class="beCommentEntry">
-      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page', $mob); ?>
+      <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page'); ?>
     </div>
       <?php } ?>
     <?php } else { ?>
@@ -70,8 +70,8 @@
     <div class="beCommentNew" id="newComment">
       <span class="beCommentNewHeader">Schreibe einen Kommentar!</span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, $cmtReply, time(), $mob, $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
+       echo genFormPublic($err, $cmtReply, time(), $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
     </div>
   </div>
-        
+
   <?php }  ?>

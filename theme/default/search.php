@@ -39,6 +39,6 @@
       ?>
   <?php
     if($data['pageNbr'] >= 1) {
-      echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page', $mob);
+      echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page');
     }
   ?>

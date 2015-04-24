@@ -14,14 +14,14 @@
                     Hits,
                     Datum,
                     TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp
-                FROM            
+                FROM
                     news
                 WHERE
                     enable = 1 AND
                     Datum < NOW()
                 GROUP BY
                     ID
-                ORDER BY                
+                ORDER BY
                     Hits DESC,
                     Datum DESC
                 LIMIT
@@ -35,7 +35,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp);
         while($stmt->fetch()) {
             $top[] = array(
-                        'Titel'     => changetext($newstitel, 'titel', $mob),
+                        'Titel'     => changetext($newstitel, 'titel'),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),
@@ -55,7 +55,7 @@
                     Hits,
                     Datum,
                     TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp
-                FROM            
+                FROM
                     news
                 WHERE
                     enable = 1 AND
@@ -76,7 +76,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp);
         while($stmt->fetch()) {
             $last[] = array(
-                        'Titel'     => changetext($newstitel, 'titel', $mob),
+                        'Titel'     => changetext($newstitel, 'titel'),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),

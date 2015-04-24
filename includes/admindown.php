@@ -4,13 +4,13 @@ if (getUserID() and hasUserRights('admin')) {
   refreshCookies();
   $a['filename'] = 'admindown.php';
   $a['data'] = array();
-  
+
   if ('POST' == $_SERVER['REQUEST_METHOD']) {
     if (!isset($_POST['downname'], $_POST['downdescr'], $_POST['downver'], $_FILES['file'], $_POST['formaction'])) {
       return INVALID_FORM;
     }
-    if (('' == $downname = changetext($_POST['downname'], 'neu', $mob)) OR
-        ('' == $downdescr = changetext($_POST['downdescr'], 'neu', $mob)) OR
+    if (('' == $downname = changetext($_POST['downname'], 'neu')) OR
+        ('' == $downdescr = changetext($_POST['downdescr'], 'neu')) OR
         ('' == $downver = $_POST['downver'])) {
       return EMPTY_FORM;
     }
@@ -19,8 +19,8 @@ if (getUserID() and hasUserRights('admin')) {
       $downlic = 'by-sa';
     }
     $logid = 0;
-    if(!empty($_FILES['file'])) {   
-      $e = array();    
+    if(!empty($_FILES['file'])) {
+      $e = array();
       if($_FILES['file']['size'] > 0 && $_FILES['file']['size'] < 5242880) {
         if(!file_exists($pfad)) {
           $name = $_FILES['file']['name'];
@@ -37,7 +37,7 @@ if (getUserID() and hasUserRights('admin')) {
             return $stmt->error;
           }
           $stmt->close();
-      
+
           $sql = "SELECT
                     ID
                   FROM
@@ -78,7 +78,7 @@ if (getUserID() and hasUserRights('admin')) {
                 return $stmt->error;
               }
               $stmt->close();
-        
+
               $sql = "SELECT
                         ID
                       FROM
@@ -93,7 +93,7 @@ if (getUserID() and hasUserRights('admin')) {
                 return $stmt->error;
               }
               $stmt->bind_result($logid);
-              $stmt->close();   
+              $stmt->close();
             }
           } else if($_FILES['log']['size'] != 0) {
             $e[] = $_FILES['log']['name'];
@@ -125,14 +125,14 @@ if (getUserID() and hasUserRights('admin')) {
             return $stmt->error;
           }
           $stmt->close();
-          return showInfo('Der Download wurde hinzugefügt. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');      
+          return showInfo('Der Download wurde hinzugefügt. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
         } else {
           $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);
-          $a['data']['fm'] = $e;  
+          $a['data']['fm'] = $e;
         }
       } else {
         $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);
-        $a['data']['fm'] = $e;  
+        $a['data']['fm'] = $e;
       }
     } else {
       $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);

@@ -8,7 +8,7 @@
  * Class for a general User.
  * \class User
  * \author Felix Beuster
- * 
+ *
  * providing a user class as well as helpfull and required funcionts
  */
 class User {
@@ -29,7 +29,7 @@ class User {
 
 	/**
 	 * construcotr
-	 * 
+	 *
 	 * @param int $by Referenced by constant, us constant from User
 	 * @return type
 	 */
@@ -41,9 +41,9 @@ class User {
 
 	/**
 	 * User from id.
-	 * 
+	 *
 	 * construct new user from id
-	 * 
+	 *
 	 * @param int $id the user id
 	 * @return User
 	 */
@@ -62,9 +62,9 @@ class User {
 
 	/**
 	 * User from mail.
-	 * 
+	 *
 	 * construct new user from mail adress
-	 * 
+	 *
 	 * @param string $mail the mail adress
 	 * @return User
 	 */
@@ -83,9 +83,9 @@ class User {
 
 	/**
 	 * User from name.
-	 * 
+	 *
 	 * construct new user from user name (login name)
-	 * 
+	 *
 	 * @param string $name the login name
 	 * @return User
 	 */
@@ -104,11 +104,11 @@ class User {
 
 	/**
 	 * Loads a user.
-	 * 
+	 *
 	 * loading user based by reference variable $by
 	 */
 	public function loadUser() {
-		
+
 		$fields = array('ID, Email, Name, Rights, Clearname, Website');
 		switch ($this->by) {
 			case self::BY_ID:
@@ -137,24 +137,23 @@ class User {
 
 	/**
 	 * User about text (html).
-	 * 
+	 *
 	 * get and build the user's about text to html
-	 * 
+	 *
 	 * @return String
 	 */
 	public function buildInfo() {
-		global $mob;
 		return str_replace(
 			'[contactmail]',
 			'</p><address>'.str_replace('@', ' [at] ', $this->getUserInfo('Contactmail')).'</address><p>',
-			changetext($this->getUserInfo('About'), 'inhalt', $mob));
+			changetext($this->getUserInfo('About'), 'inhalt'));
 	}
 
 	/**
 	 * Single user info.
-	 * 
+	 *
 	 * gets a siingle user information from database
-	 * 
+	 *
 	 * @param String $info the database column to be requested
 	 * @return String
 	 */
@@ -169,9 +168,9 @@ class User {
 
 	/**
 	 * Admin right check.
-	 * 
+	 *
 	 * is the current user an admin
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function isAdmin() {
@@ -180,9 +179,9 @@ class User {
 
 	/**
 	 * User load status.
-	 * 
+	 *
 	 * is a user loaded from db?
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function isLoaded() {

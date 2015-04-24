@@ -5,26 +5,26 @@
     include('functionsCategory.php');
 
     /*** general ***/
-    
+
     function pre($pre) {
         echo '<pre>';
         print_r($pre);
         echo '</pre>';
     }
- 
+
     function addRssItem($feedURL, $titel, $text, $date, $id, $link) {
         $xml = new DOMDocument();
         $xml->load($feedURL);
 
-        $cha = $xml->getElementsByTagName('channel')->item(0);   
-        
+        $cha = $xml->getElementsByTagName('channel')->item(0);
+
         $lbd = $cha->getElementsByTagName('lastBuildDate')->item(0);
         $cha->removeChild($lbd);
         $lbd = $xml->createElement('lastBuildDate', utf8_encode($date));
         $cha->appendChild($lbd);
-        
+
         $itm = $xml->createElement('item');
-   
+
         if(count($cha->getElementsByTagName('item')->item(0)) == 0) {
             $cha->appendChild($itm);
         } else {
@@ -33,21 +33,21 @@
         if(count($cha->getElementsByTagName('item')->item(20)) != 0) {
             $cha->removeChild($cha->getElementsByTagName('item')->item(20));
         }
-  
+
         $dat = $xml->createElement('title', $titel);
-        $itm->appendChild($dat); 
+        $itm->appendChild($dat);
         $dat = $xml->createElement('description', $text);
-        $itm->appendChild($dat);    
+        $itm->appendChild($dat);
         $dat = $xml->createElement('link', $link);
-        $itm->appendChild($dat); 
+        $itm->appendChild($dat);
         $dat = $xml->createElement('pubDate', utf8_encode($date));
-        $itm->appendChild($dat); 
+        $itm->appendChild($dat);
         $dat = $xml->createElement('guid', htmlentities($id));
         $itm->appendChild($dat);
-   
+
         $xml->save($feedURL);
     }
- 
+
     function removeRssItem($feedURL, $date, $id) {
 
         $xml = new DOMDocument();
@@ -55,20 +55,20 @@
         $xml->load($feedURL);
         pre($xml);
 
-        $cha = $xml->getElementsByTagName('channel')->item(0);   
-        
+        $cha = $xml->getElementsByTagName('channel')->item(0);
+
         $lbd = $cha->getElementsByTagName('lastBuildDate')->item(0);
         $cha->removeChild($lbd);
         $lbd = $xml->createElement('lastBuildDate', utf8_encode($date));
         $cha->appendChild($lbd);
-        
+
         $items = $cha->getElementsByTagName('item');
         foreach ($items as $item) {
             //pre($item->getElementsByTagName('guid'));
             if($item->getElementsByTagName('guid')->item(0) == $id)
                 pre('a');
         }
-   
+
         /*if(count(->item(0)) == 0) {
             $cha->appendChild($itm);
         } else {
@@ -77,10 +77,10 @@
         if(count($cha->getElementsByTagName('item')->item(20)) != 0) {
             $cha->removeChild($cha->getElementsByTagName('item')->item(20));
         }
-   
+
         $xml->save($feedURL);*/
     }
-  
+
     function analyseErrNewsBea($err) {
         $ret = '';
         switch($err) {
@@ -94,7 +94,7 @@
             case 7: return 'Du kannst nur neue Playlist ODER kategorie auswählen.';
         }
     }
- 
+
     function getSize($s) {
         $i = 0;
         $t = array(' B',' kiB',' MiB',' GiB');
@@ -105,7 +105,7 @@
         $s = round($s, 2).$t[$i];
         return $s;
     }
- 
+
     function showInfo($msg, $refr) {
         $ret['test'] = 'ss';
         $ret['filename'] = 'info.php';
@@ -113,7 +113,7 @@
         $ret['data']['refresh'] = $refr;
         return $ret;
     }
- 
+
     function refreshCookies($pass = ''){
         $UserID = $_COOKIE['UserID'];
         if($pass == '') {
@@ -122,9 +122,9 @@
             $Hash = $pass;
         }
         setcookie('UserID', $UserID, strtotime("+1 day"));
-        setcookie('Password', $Hash, strtotime("+1 day")); 
+        setcookie('Password', $Hash, strtotime("+1 day"));
     }
- 
+
     function buildLinkTitle($title){
         $removes = '#?|().,;:{}[]/';
         $strokes = array(' ', '---', '--');
@@ -136,19 +136,19 @@
         }
         return $title;
     }
- 
+
     function getLink($cat, $id, $title){
         $r = '/'.$id.'/'.lowerCat($cat).'/'.replaceUml(buildLinkTitle($title));
         return $r;
     }
- 
+
     function linkGrab($id) {
         $db = Database::getDB()->getCon();
         if($id <= 0) return '#';
         $ena = 1;
         $sql = "SELECT
                     Titel
-                FROM            
+                FROM
                     news
                 WHERE
                     enable = ? AND
@@ -167,7 +167,7 @@
         $result->close();
         return substr(getLink(getCatName(getNewsCat($id)), $id, $title), 1);
     }
- 
+
     function shortenTitle($title, $l = 20) {
         if(strlen($title) > $l) {
             $title = substr($title, 0, $l - 1).'...';
@@ -197,7 +197,7 @@
         }
         return false;
     }
- 
+
     function urlExists($adresse) {
         $file = @fopen ($adresse, "r");
         if($file) {
@@ -207,7 +207,7 @@
             return false;
         }
     }
- 
+
     function checkStandForm($user, $cnt, $mail, $page, $time, $fmail, $fpage, $formType) {
         if (('' == $user) OR ('' == $cnt) OR ('' == $mail)) {
             return 1;
@@ -228,7 +228,7 @@
         }
         return 0;
     }
- 
+
     function checkMail($email) {
         $isValid = true;
         $atIndex = strrpos($email, "@");
@@ -258,7 +258,7 @@
                 // domain part has two consecutive dots
                 $isValid = false;
             } else if(!preg_match('/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/', str_replace("\\\\","",$local))) {
-                // character not valid in local part unless 
+                // character not valid in local part unless
                 // local part is quoted
                 if (!preg_match('/^"(\\\\"|[^"])+"$/', str_replace("\\\\","",$local))) {
                     $isValid = false;
@@ -425,8 +425,8 @@
             }
         }
         return $distance[$lenStrA-1][$lenStrB-1];
-    } 
- 
+    }
+
     function searchmark($txt, $str, $bbcode = false) {
         $str = mb_strtolower($str, 'UTF-8');
         $i = 0;
@@ -448,7 +448,7 @@
     }
 
     /*** other ***/
- 
+
     function getOffset($a, $o, $s) {
         if($a == 0) {
             return 0;
@@ -460,8 +460,8 @@
         $offset = ($s - 1) * $o; // offset für den Query bestimmen
         if($s > 1) {$s = 1;}
         return $offset;
-    } 
- 
+    }
+
     function getPages($a, $o, $s) {
         if($a == 0) {
             return 0;
@@ -474,7 +474,7 @@
         if($s > $num_pages) {$s = $num_pages;}
         return $num_pages;
     }
- 
+
     function getAnz($dateSQL = "Datum < NOW()") {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -491,7 +491,7 @@
         $anz->close();
         return $a;
     }
- 
+
     function getAnzDev($dateSQL = "Datum < NOW()") {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -511,7 +511,7 @@
         $anz->close();
         return $a;
     }
- 
+
     function getCmt($id) {
         $db = Database::getDB();
         $cond = array('NewsID = ?', 'i', array($id));
@@ -520,7 +520,7 @@
             return $res[0]['n'];
         return 0;
     }
- 
+
     function getNewsPicNumber($id) {
         $db = Database::getDB();
         $cond = array('NewsID = ?', 'i', array($id));
@@ -529,7 +529,7 @@
             return $res[0]['n'];
         return 0;
     }
- 
+
     function lic($l) {
         $ls = array('by' => 'Creative Commons Namensnennung',
                     'sa' => 'Weitergabe unter gleichen Bedingungen',
@@ -542,7 +542,7 @@
         $l .= ' 3.0 Unported Lizenz';
         return $l;
     }
- 
+
     function extractYTid($url) {
         if(preg_match('#http://#', $url)) {$url = substr($url, 6, strlen($url) - 6);}
         if(preg_match('#https://#', $url)) {$url = substr($url, 7, strlen($url) - 7);}
@@ -550,7 +550,7 @@
         if(preg_match('#v=#', $url)) {$url = substr($url, 25, 11);}
         if(strlen($url) == 11) return $url; else return 'HcCKfApGtcE';
     }
- 
+
     function isDoubleBB($cnt, $bb) {
         $bbCl = '[/'.substr($bb, 1);
         $op1 = strpos($cnt, $bb);
@@ -562,7 +562,7 @@
         }
         return false;
     }
- 
+
     function removeDoubleBB($cnt, $bb) {
         $bbCl = '[/'.substr($bb, 1);
         $op1 = strpos($cnt, $bb);
@@ -577,7 +577,7 @@
         }
         return $cnt;
     }
- 
+
     function remDoubles($cnt, $bbs) {
         foreach($bbs as $bb) {
             while(isDoubleBB($cnt, $bb)) {
@@ -586,7 +586,7 @@
         }
         return $cnt;
     }
- 
+
     function replaceUml($ret) {
         $ret = str_replace('ä', 'ae', $ret);
         $ret = str_replace('ö', 'oe', $ret);
@@ -597,7 +597,7 @@
         $ret = str_replace('ß', 'ss', $ret);
         return $ret;
     }
- 
+
     function getVideoArticle($id) {
         $db = Database::getDB()->getCon();
         $ret = array();
@@ -618,7 +618,7 @@
         $result->close();
         return -1;
     }
-    
+
     function getYouTubeIDFromArticle($id) {
         $db = Database::getDB()->getCon();
         $ret = array();
@@ -640,21 +640,21 @@
         $result->close();
         return -1;
     }
-  
-    function getLast5Articles($mob) {
+
+    function getLast5Articles() {
         $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
                     news.ID,
                     news.Titel
-                FROM            
+                FROM
                     news
                 WHERE
                     news.enable = 1 AND
                     news.Datum < NOW()
                 GROUP BY
                     news.ID
-                ORDER BY                
+                ORDER BY
                     news.Datum DESC
                 LIMIT
                     0, 5";
@@ -662,7 +662,7 @@
         if(!$stmt->execute()) {return $result->error;}
         $stmt->bind_result($id, $newstitel);
         while($stmt->fetch()) {
-            $ret[] = array( 'Titel' => changetext($newstitel, 'titel', $mob),
+            $ret[] = array( 'Titel' => changetext($newstitel, 'titel'),
                             'Link' => '',
                             'id' => $id);
         }
@@ -672,17 +672,17 @@
         }
         return $ret;
     }
-  
+
     function makeLocalTimeFromUTC($utcTimestamp = '') {
         if($utcTimestamp == '') {
-            $datArr = localtime(); 
+            $datArr = localtime();
         } else {
             $datArr = localtime($utcTimestamp);
         }
         $date = mktime($datArr[2], $datArr[1], $datArr[0], ($datArr[4] + 1), $datArr[3], ($datArr[5] + 1900));
         return $date;
     }
- 
+
     function getLocalTimeOffset() {
         $offset = makeLocalTimeFromUTC() - time();
         if($offset >= 0)
@@ -690,7 +690,7 @@
         else
             return $offset.':00';
     }
- 
+
     function getProjState($state) {
         switch($state) {
             case 0: return 0;
@@ -701,21 +701,21 @@
             default: return 0;
         }
     }
-    
+
     function rewriteUrl($url) {
         if(preg_match('#^(http(s)?://)(.*)#', $url) == 0) {
             return 'http://'.$url;
         }
         return $url;
     }
-    
+
     function grabImages($content) {
         while(preg_match('#\[img([0-9]*)\]#', $content)) {
             $content = grabAnImage($content);
         }
         return $content;
     }
-    
+
     function grabAnImage($content) {
         global $sysAdrr;
         $db = Database::getDB()->getCon();
@@ -725,7 +725,7 @@
         $before = substr($content, 0, $pos1);
         $id = substr($content, $pos1 + 4, $pos2 - ($pos1 + 4) - 1);
         $after = substr($content, $pos2, $l - $pos2);
-        
+
         $return = '';
         $sql = "SELECT
                     Name,
@@ -813,7 +813,7 @@
         }
         return 0;
     }
-    
+
     function makeMonthName($month) {
         $names = array('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember');
         return $names[$month - 1];

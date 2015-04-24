@@ -156,7 +156,7 @@
 
       $stmt->close();
 
-      return changetext($cont, 'descr', true, 250);
+      return changetext($cont, 'descr', 250);
     }
   }
 ?>

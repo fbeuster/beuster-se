@@ -8,12 +8,12 @@
         $neu = 0;
         $neuPl = 0;
         $db = Database::getDB()->getCon();
-  
+
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             if (isset($_POST['formactionchange'])) {
                 /*** hier ändern ***/
-                $title     = changetext($_POST['newstitel'], 'neu', $mob);
-                $inhalt    = changeText($_POST['newsinhalt'], 'neu', $mob);
+                $title     = changetext($_POST['newstitel'], 'neu');
+                $inhalt    = changeText($_POST['newsinhalt'], 'neu');
                 $tagStr     = trim($_POST['tags']);
                 $cat       = $_POST['cat'];
                 $catNeu    = trim($_POST['catneu']);
@@ -29,7 +29,7 @@
                 $oldEna = getArticleAttribute($newsID, 'enable');
                 $eRet = array(  'titel'  => $title,
                                 'inhalt' => $inhalt,
-                                'id'     => $newsID); 
+                                'id'     => $newsID);
                 if('' == $title || '' == $inhalt || '' == $newsID) {
                     $err = 1;
                 } else if($cat == 'error' && $catNeu == '' && $play == 'error' && $playNeu == '') {
@@ -285,7 +285,7 @@
                             $stmt->close();
                         }
                     }
-                    
+
                     /* Bilder löschen */
                     if(!empty($_POST['del'])) {
                         $del = $_POST['del'];
@@ -332,7 +332,7 @@
                         $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                         addRssItem( $rssFeedPath,
                                     $title,
-                                    str_replace('###link###', $lnk, changetext($inhalt, 'vorschau', $mob)),
+                                    str_replace('###link###', $lnk, changetext($inhalt, 'vorschau')),
                                     date("D, j M Y H:i:s ", time()).'GMT',
                                     $id,
                                     $lnk);
@@ -369,8 +369,8 @@
                 $stmt->close();
                 $a['data']['newsbea'] = array(
                                             'newsidbea'     => $newsid,
-                                            'newsinhalt'    => changetext($newsinhalt, 'bea', $mob),
-                                            'newstitel'     => changetext($newstitel, 'bea', $mob),
+                                            'newsinhalt'    => changetext($newsinhalt, 'bea'),
+                                            'newstitel'     => changetext($newstitel, 'bea'),
                                             'newstags'      => getNewsTags($newsid, true),
                                             'newscat'       => $newscat,
                                             'isPlaylist'    => isCatPlaylist($newscatid));
@@ -404,7 +404,7 @@
                 ORDER BY
                     Datum DESC";
         if(!$stmt = $db->query($sql)) {return $db->error;}
-        $news = array();       
+        $news = array();
         while($row = $stmt->fetch_assoc()) {
             $news[$row['ID']] = array(
                                     'newsid'    =>$row['ID'],

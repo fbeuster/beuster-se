@@ -15,7 +15,7 @@
                     Datum,
                     TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp,
                     enable
-                FROM            
+                FROM
                     news
                 ORDER BY
                     Datum DESC";
@@ -28,7 +28,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp, $enabled);
         while($stmt->fetch()) {
             $news[] = array(
-                        'Titel'     => changetext($newstitel, 'titel', $mob),
+                        'Titel'     => changetext($newstitel, 'titel'),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),

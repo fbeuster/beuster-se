@@ -31,11 +31,11 @@
             if(!$stmt = $db->prepare($sql)) {return $db->error;}
             $stmt->bind_param('i', $d);
             if(!$stmt->execute()) {return $result->error;}
-            $stmt->bind_result($id, $name, $descr, $ver, $lic, $log, $fileID, $path, $downloads, $cat);  
+            $stmt->bind_result($id, $name, $descr, $ver, $lic, $log, $fileID, $path, $downloads, $cat);
             if($stmt->fetch()) {
                 $down = array(  'id'      => $id,
                                 'name'    => $name,
-                                'descr'   => changetext($descr, 'inhalt', $mob),
+                                'descr'   => changetext($descr, 'inhalt'),
                                 'ver'     => $ver,
                                 'path'    => $path,
                                 'anz'     => $downloads,
@@ -97,7 +97,7 @@
                         $file = $value;
                     }
                 }
-    
+
                 if(isset($_GET['finished'])) {
                     if(time() - (42 * 13 + 37) - $qId < 5) {
                         $a['data']['download'] = $file;

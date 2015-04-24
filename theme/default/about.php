@@ -19,4 +19,4 @@
     <h2>Hast du Feedback?</h2>
     <?php
       $err = array('t' => $data['eType'], 'c' => $data['ec']);
-      echo genFormpublic($err, '/about', $data['time'], $mob, '', 'Gib mir Feedback!', 'feedbackForm'); ?>
+      echo genFormpublic($err, '/about', $data['time'], '', 'Gib mir Feedback!', 'feedbackForm'); ?>

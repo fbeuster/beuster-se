@@ -4,7 +4,7 @@ if (getUserID() and hasUserRights('admin')) {
   refreshCookies();
   $a['filename'] = 'admincmtenable.php';
   $a['data'] = array();
-  
+
   $db = Database::getDB()->getCon();
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -77,14 +77,14 @@ if (getUserID() and hasUserRights('admin')) {
 
   $cmt = array();
   $idss = '';
-  if($stmt->num_rows) {        
+  if($stmt->num_rows) {
     while($row = $stmt->fetch_assoc()) {
       $cmt[] = array( 'link'      => $row['Cat'],
                       'titel'     => shortenTitle($row['Titel']),
                       'titelFull' => $row['Titel'],
                       'name'      => $row['Name'],
                       'mail'      => $row['Mail'],
-                      'inhalt'    => changetext($row['Inhalt'],'cmtInhalt', $mob),
+                      'inhalt'    => changetext($row['Inhalt'],'cmtInhalt'),
                       'datum'     => $row['Changedatum'],
                       'web'       => $row['Website'],
                       'id'        => $row['ID'],

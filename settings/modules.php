@@ -17,26 +17,20 @@
     return $donate->getModuleHTML();
   }
 
-  function moduleTopArticles ($mob) {
-    if($mob) return "";
-
+  function moduleTopArticles () {
     $title  = "viel gelesene Artikel";
-    $top    = new SidebarModule($title, genTopArticles($mob), "top list");
+    $top    = new SidebarModule($title, genTopArticles(), "top list");
     return $top->getModuleHTML();
   }
 
-  function moduleLastArticles ($mob) {
-    if($mob) return "";
-
+  function moduleLastArticles () {
     $n      = 5;
     $title  = "Letzten '.$n.' Artikel";
-    $last   = new SidebarModule($title, genLastArticles($mob, $n), "list");
+    $last   = new SidebarModule($title, genLastArticles($n), "list");
     return $last->getModuleHTML();
   }
 
-  function moduleAdSenseAside($mob, $local, $noGA) {
-    if($mob) return "";
-
+  function moduleAdSenseAside($local, $noGA) {
     $id = "google-ads-1";
 
     if($local || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
@@ -102,7 +96,7 @@
     return $share->getModuleHTML();
   }
 
-  function moduleArticleInfo($mob, $info) {
+  function moduleArticleInfo($info) {
     $author   = $info['author'];
     $link     = 'http://'.$_SERVER['HTTP_HOST'].$info['link'];
     $title    = "informationen zum artikel";
@@ -135,7 +129,7 @@
     return $search->getModuleHTML();
   }
 
-  function moduleRandomArticle($mob) {
+  function moduleRandomArticle() {
     $db = Database::getDB()->getCon();
     $ena = 1;
 
@@ -179,17 +173,15 @@
 
     $backApp = '</p>';
     $catName = getCatName(getNewsCat($id));
-    $art_title  = '<h5 class="randomTitle">'.changetext($newstitel, 'titel', $mob).'</h5>'."\n";
-    $art_text   = str_replace('###link###', getLink($catName, $newsid, $newstitel), changetext($newsinhalt, 'vorschau', $mob, 200));
+    $art_title  = '<h5 class="randomTitle">'.changetext($newstitel, 'titel').'</h5>'."\n";
+    $art_text   = str_replace('###link###', getLink($catName, $newsid, $newstitel), changetext($newsinhalt, 'vorschau', 200));
     $content    = $art_title . $preApp . $art_text . $backApp;
     $title      =  "Kennst du schon...";
     $random     = new SidebarModule($title, $content, "randomArticle");
     return $random->getModuleHTML();
   }
 
-  function moduleArchive($mob) {
-    if($mob) return '';
-
+  function moduleArchive() {
     $title    = "Schau mal ins Archiv";
     $content  = '<ul class="articleArchiveMain">'."\n";
     for($year = (int)date("Y"); $year >= 2010; $year--) {

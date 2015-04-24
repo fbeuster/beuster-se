@@ -170,9 +170,8 @@ class Article {
 	 * @return string
 	 */
 	public function getContentParsed() {
-		global $mob;
     $preApp = ('[yt]' == substr($this->content,0,4)) ? '<p style="text-indent:0;">' : '<p>';
-		return $preApp.grabImages(changetext($this->content, 'inhalt', $mob)).'</p>';
+		return $preApp.grabImages(changetext($this->content, 'inhalt')).'</p>';
 	}
 
 	/**
@@ -180,8 +179,7 @@ class Article {
 	 * @return string
 	 */
 	public function getContentPreview() {
-		global $mob;
-		return changetext($this->content, 'vorschau', $mob);
+		return changetext($this->content, 'vorschau');
 	}
 
 	/**
