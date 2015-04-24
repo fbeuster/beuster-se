@@ -55,7 +55,7 @@
   <link href="<?php echo getThemeStyle('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <?php } else { ?>
   <!-- not another internet explorer -.- -->
-  <link href="/settings/ie.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="<?php echo getThemeStyle('styles/ie.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <style type="text/css">
   .alert {
     font-family: sans-Serif;
