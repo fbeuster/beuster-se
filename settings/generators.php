@@ -301,7 +301,7 @@
         }
         $html = '';
         $html .= '<div class="beCommentEntry" id="comment'.$cmt->getId().'" data-reply="'.$replyId.'">';
-        $html .= '  <span class="beCommentEntryAvatar"><img src="'.get_Gravatar($cmt->getAuthor()->getMail()).'" alt="Avatar"></span>';
+        $html .= '  <span class="beCommentEntryAvatar"><img src="'.Externals::getGravatar($cmt->getAuthor()->getMail()).'" alt="Avatar"></span>';
         $html .= '  <span class="beCommentEntryHeader">';
         $html .= '    <time datetime="'.date('c', $cmt->getDate()).'" class="long">'.date('d.m.Y H:i', $cmt->getDate()).'</time> -';
         $html .= '    <span class="author">';

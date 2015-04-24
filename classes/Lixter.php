@@ -112,7 +112,6 @@ class Lixter {
     // loading configuration and functions
     include('settings/config.php');
     include('settings/functions.php');
-    include('settings/externals.php');
     include('settings/generators.php');
     include('settings/modules.php');
   }
