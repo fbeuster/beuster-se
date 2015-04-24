@@ -23,13 +23,12 @@
   <meta property='og:image' content='<?php echo getPageOGImage($ret['data']); ?>'/>
   <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" /> 
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
   <title><?php echo getPageTitle($file); ?></title>
 
   <!-- wanna play javascript? -->
-  <script type="text/javascript" src="/settings/main.js"></script>
   <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
-  <script type="text/javascript" src="/settings/scriptAdm.js"></script>
+  <script type="text/javascript" src="<?php echo getThemeStyle('scripts/scriptAdm.js'); ?>"></script>
   <?php } ?>
   <?php if(isset($ret['data']['refresh'])) {
     echo '<meta http-equiv="refresh" content="3; url=/'.$ret['data']['refresh'].'">';
