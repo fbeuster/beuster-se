@@ -50,7 +50,7 @@
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
   <title><?php echo getPageTitle($file); ?></title>
-  <?php if(!$ieOld) { ?>
+  <?php if(!Utilities::isOldIE()) { ?>
   <!-- style it -->
   <link href="<?php echo getThemeStyle('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <?php } else { ?>

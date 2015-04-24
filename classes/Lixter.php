@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $beTheme, $file, $ieOld, $local, $mob, $noGA, $sysAdrr,
+    global  $analyse, $beTheme, $file, $local, $mob, $noGA, $sysAdrr,
             $beRemoteAbsoluteAddr, $recommendedArticle;
 
     // loading core functions
@@ -89,12 +89,6 @@ class Lixter {
     // setting up some variables
     $sev      = $_SERVER['SERVER_NAME'];
     $sysAdrr  = preg_replace('#(.+?)\.(.+?)\.(.+)#', '$2.$3', $sev);
-    $agent    = $_SERVER['HTTP_USER_AGENT'];
-    $ieOld    = strpos($agent, 'MSIE 5.5') ||
-                strpos($agent, 'MSIE 6.0') ||
-                strpos($agent, 'MSIE 7.0') ||
-                strpos($agent, 'MSIE 8.0');
-    $ie9      = strpos($agent, 'MSIE 9.0');
     $mob      = false;
 
     if($sev == $devServer) {
@@ -154,7 +148,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $local, $analyse, $beTheme, $ieOld, $mob, $noGA, $bbCmt;
+    global $file, $local, $analyse, $beTheme, $mob, $noGA, $bbCmt;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
