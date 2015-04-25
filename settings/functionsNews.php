@@ -39,29 +39,6 @@
         }
     }
 
-    function getNewsIDsTitlesContentCat() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    news.ID,
-                    news.Titel,
-                    news.Inhalt,
-                    newscatcross.Cat
-                FROM
-                    news
-                LEFT JOIN
-                    newscatcross ON
-                    news.ID = newscatcross.NewsID";
-        if(!$stmt = $db->prepare($sql)){return $db->error;}
-        if(!$stmt->execute()) {return $result->error;}
-        $stmt->bind_result($id, $t, $c, $cat);
-        $news = array();
-        while($stmt->fetch()) {
-            $news[] = array($id, $t, $c, $cat);
-        }
-        $stmt->close();
-        return $news;
-    }
-
     function getNewsTitle($id = -1) {
         $db = Database::getDB()->getCon();
         if($id == -1) {

@@ -71,9 +71,4 @@
             }
         }
     }
-    /*
-    #pre($url);
-    $a['data']['videos'] = $url;
-    $a['data']['urls'] = $urls;
-    */
 ?>

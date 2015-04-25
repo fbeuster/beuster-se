@@ -27,24 +27,6 @@
         return $UserID;
     }
 
-    function getUserIDbyName($uName) {
-        $db = Database::getDB()->getCon();
-        $sql = 'SELECT
-                    ID
-                FROM
-                    users
-                WHERE
-                    Name = ?';
-        $stmt = $db->prepare($sql);
-        if (!$stmt) return $db->error;
-        $stmt->bind_param('s', $uName);
-        if (!$stmt->execute()) return $stmt->error;
-        $stmt->bind_result($uID);
-        if(!$stmt->fetch()) return $stmt->error;
-        $stmt->close();
-        return $uID;
-    }
- 
     function hasUserRights($rights) {
         if (!isset($_COOKIE['UserID'], $_COOKIE['Password'])) {return false;}
         $db = Database::getDB()->getCon();
@@ -72,26 +54,7 @@
             $stmt->close();
         return true;
     }
- 
-    function getUserName($uID) {
-        $db = Database::getDB()->getCon();
-        $uName = 'err';
-        $sql = 'SELECT
-                    Name
-                FROM
-                    users
-                WHERE
-                    ID = ?';
-        $stmt = $db->prepare($sql);
-        if (!$stmt) return $db->error;
-        $stmt->bind_param('i', $uID);
-        if (!$stmt->execute()) return $stmt->error;
-        $stmt->bind_result($uName);
-        $stmt->fetch();
-        $stmt->close();  
-        return $uName;
-    }
- 
+
     function getClearName($uID) {
         $db = Database::getDB()->getCon();
         $uName = 'err';
@@ -107,77 +70,10 @@
         if (!$stmt->execute()) return $stmt->error;
         $stmt->bind_result($uName);
         $stmt->fetch();
-        $stmt->close();  
+        $stmt->close();
         return $uName;
     }
- 
-    function getContactMail($uID) {
-        $db = Database::getDB()->getCon();
-        $umail = '';
-        $sql = 'SELECT
-                    Contactmail
-                FROM
-                    users
-                WHERE
-                    ID = ?';
-        $stmt = $db->prepare($sql);
-        if (!$stmt) return $db->error;
-        $stmt->bind_param('i', $uID);
-        if (!$stmt->execute()) return $stmt->error;
-        $stmt->bind_result($uMail);
-        $stmt->fetch();
-        $stmt->close(); 
-        return $uMail;
-    }
- 
-    function isUsernameNotAvalible($name) {
-        $db = Database::getDB()->getCon();
-        $sql = 'SELECT
-                    Name
-                FROM
-                    users
-                WHERE
-                    Name = ?';
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param('s', $name);
-        if (!$stmt->execute()) {
-            $str = $stmt->error;
-            $stmt->close();
-            return $str;
-        }
-        if (!$stmt->fetch()) {
-            $stmt->close();
-            return false;
-        }
-        $stmt->close();
-        return true;
-    }
-  
-    function getUser($i) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    ID,
-                    Name,
-                    Email,
-                    Rights
-                FROM
-                    users
-                WHERE
-                ID = ?";
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        $stmt->bind_param('i', $i);
-        if(!$stmt->execute()) {return $stmt->error;}
-        $stmt->bind_result($userid, $username, $usermail, $userrights);
-        if(!$stmt->fetch()) {return 'Es wurde kein User mit dieser ID gefunden. <br /><a href="/adminuser" class="back">Zurück</a>';}
-        $a = array(
-                'userid'    => $userid,
-                'username'  => $username,
-                'usermail'  => $usermail,
-                'userrights' =>$userrights);
-        $stmt->close();
-        return $a;
-    }
- 
+
     function adminMail() {
         $db = Database::getDB()->getCon();
         $sql = 'SELECT

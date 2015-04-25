@@ -43,14 +43,6 @@
     }
   }
 
-  function getPageImage($data) {
-    if(isset($data['th'])) {
-      return $data['th'];
-    } else {
-      return 'http://beusterse.de/images/logo.png';
-    }
-  }
-
   function getPageOGImage($data) {
     if(isset($data['th_og'])) {
       return $data['th_og'];

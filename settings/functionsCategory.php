@@ -27,7 +27,7 @@
         }
         return false;
     }
-    
+
     function createCat($cat, $parID, $typ) {
         $db = Database::getDB()->getCon();
         $sql = "INSERT INTO
@@ -40,7 +40,7 @@
         $stmt->close();
         return true;
     }
- 
+
     function transformCat($table, $col, $tar, $old, $col2 = '') {
         $db = Database::getDB()->getCon();
         if($col2 == '') {
@@ -64,7 +64,7 @@
         $stmt->close();
         return true;
     }
- 
+
     function removeCat($cat) {
         $db = Database::getDB()->getCon();
         $sql = "DELETE FROM
@@ -77,7 +77,7 @@
         $stmt->close();
         return true;
     }
- 
+
     function transformNews($cat, $new, $max) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -111,7 +111,7 @@
         }
         return true;
     }
- 
+
     function getMaxCatID($catID) {
         $db = Database::getDB()->getCon();
         $sql = " SELECT
@@ -128,7 +128,7 @@
         $stmt->close();
         return $catNewsID;
     }
- 
+
     function getPlaylists() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -149,7 +149,7 @@
         $result->close();
         return $r;
     }
- 
+
     function isCat($c) {
         if(!is_numeric($c)) {
             $c = getCatID($c);
@@ -164,11 +164,10 @@
         }
         return false;
     }
- 
+
     function isTopCat($c) {
         $db = Database::getDB()->getCon();
         $cID = $c;
-        //$cID = getCatID(replaceUml(lowerCat($c)));
         $sql = "SELECT
                     Typ
                 FROM
@@ -186,7 +185,7 @@
         else
             return false;
     }
- 
+
     function getPlaylistID($c) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -203,7 +202,7 @@
         $result->close();
         return $id;
     }
- 
+
     function getChildrenNames($c) {
         $db = Database::getDB()->getCon();
         $ret = array();
@@ -224,7 +223,7 @@
         $result->close();
             return $ret;
     }
- 
+
     function lowerCat($a) {
         $a = str_replace(' ', '-', $a);
         $a = str_replace('+', '-', $a);
@@ -232,7 +231,7 @@
         $a = mb_strtolower($a, 'UTF-8');
         return $a;
     }
- 
+
     function getCats() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -249,27 +248,7 @@
         $result->close();
         return $r;
     }
- 
-    function getTopCatIDsNames() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    ID,
-                    Cat
-                FROM
-                    newscat
-                WHERE
-                    ParentID = 0";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($id, $c);
-        $r = array();
-        while($result->fetch()) {
-            $r[] = array($id, $c);
-        }
-        $result->close();
-        return $r;
-    }
- 
+
     function getTopCats() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -288,7 +267,7 @@
         $result->close();
         return $r;
     }
- 
+
     function getSubCats() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -311,32 +290,7 @@
         $result->close();
         return $r;
     }
- 
-    function getSubCatIDsNamesParents() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    ID,
-                    Cat,
-                    ParentID
-                FROM
-                    newscat
-                WHERE
-                    Typ = 2 OR
-                    Typ = 3
-                ORDER BY
-                    ParentID ASC,
-                    Cat ASC";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($id, $c, $p);
-        $r = array();
-        while($result->fetch()) {
-            $r[] = array($id, $c, $p);
-        }
-        $result->close();
-        return $r;
-    }
- 
+
     function getAnzCat($type) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -357,7 +311,7 @@
         $anz->close();
         return $a;
     }
- 
+
     function getAnzTopCat($type) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -380,7 +334,7 @@
         $anz->close();
         return $a;
     }
- 
+
     function getCatID($cat) {
         $db = Database::getDB()->getCon();
         $cat = replaceUml(lowerCat($cat));
@@ -404,7 +358,7 @@
             return $ret;
         }
     }
- 
+
     function getCatName($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -421,24 +375,7 @@
         $result->close();
         return $a;
     }
- 
-    function getCatDescr($id) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Beschreibung
-                FROM
-                    newscat
-                WHERE
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i',$id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($a);
-        if(!$result->fetch()){return $result->error;}
-        $result->close();
-        return $a;
-    }
- 
+
     function getCatParent($catID) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT

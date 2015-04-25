@@ -6,12 +6,6 @@
 
     /*** general ***/
 
-    function pre($pre) {
-        echo '<pre>';
-        print_r($pre);
-        echo '</pre>';
-    }
-
     function addRssItem($feedURL, $titel, $text, $date, $id, $link) {
         $xml = new DOMDocument();
         $xml->load($feedURL);
@@ -51,9 +45,7 @@
     function removeRssItem($feedURL, $date, $id) {
 
         $xml = new DOMDocument();
-        pre($xml);
         $xml->load($feedURL);
-        pre($xml);
 
         $cha = $xml->getElementsByTagName('channel')->item(0);
 
@@ -64,9 +56,8 @@
 
         $items = $cha->getElementsByTagName('item');
         foreach ($items as $item) {
-            //pre($item->getElementsByTagName('guid'));
             if($item->getElementsByTagName('guid')->item(0) == $id)
-                pre('a');
+                continue;
         }
 
         /*if(count(->item(0)) == 0) {
@@ -543,14 +534,6 @@
         return $l;
     }
 
-    function extractYTid($url) {
-        if(preg_match('#http://#', $url)) {$url = substr($url, 6, strlen($url) - 6);}
-        if(preg_match('#https://#', $url)) {$url = substr($url, 7, strlen($url) - 7);}
-        if(preg_match('#youtu.be#', $url)) {$url = substr($url, 12, 11);}
-        if(preg_match('#v=#', $url)) {$url = substr($url, 25, 11);}
-        if(strlen($url) == 11) return $url; else return 'HcCKfApGtcE';
-    }
-
     function isDoubleBB($cnt, $bb) {
         $bbCl = '[/'.substr($bb, 1);
         $op1 = strpos($cnt, $bb);
@@ -639,56 +622,6 @@
         }
         $result->close();
         return -1;
-    }
-
-    function getLast5Articles() {
-        $db = Database::getDB()->getCon();
-        $ret = array();
-        $sql = "SELECT
-                    news.ID,
-                    news.Titel
-                FROM
-                    news
-                WHERE
-                    news.enable = 1 AND
-                    news.Datum < NOW()
-                GROUP BY
-                    news.ID
-                ORDER BY
-                    news.Datum DESC
-                LIMIT
-                    0, 5";
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        if(!$stmt->execute()) {return $result->error;}
-        $stmt->bind_result($id, $newstitel);
-        while($stmt->fetch()) {
-            $ret[] = array( 'Titel' => changetext($newstitel, 'titel'),
-                            'Link' => '',
-                            'id' => $id);
-        }
-        $stmt->close();
-        foreach($ret as $k => $v) {
-            $ret[$k]['Link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['Titel']);
-        }
-        return $ret;
-    }
-
-    function makeLocalTimeFromUTC($utcTimestamp = '') {
-        if($utcTimestamp == '') {
-            $datArr = localtime();
-        } else {
-            $datArr = localtime($utcTimestamp);
-        }
-        $date = mktime($datArr[2], $datArr[1], $datArr[0], ($datArr[4] + 1), $datArr[3], ($datArr[5] + 1900));
-        return $date;
-    }
-
-    function getLocalTimeOffset() {
-        $offset = makeLocalTimeFromUTC() - time();
-        if($offset >= 0)
-            return '+'.$offset.':00';
-        else
-            return $offset.':00';
     }
 
     function getProjState($state) {
