@@ -2,13 +2,13 @@
 
 class ErrorPage extends Page {
   private $message;
-  private $type = Page::PAGE_TYPE_ERROR;
+  private $type = Page::STATIC_PAGE;
 
   public function __construct($message) {
     $this->message = $message;
   }
 
-  public function getMessage() {
+  public function getContent() {
     return $this->message;
   }
 }

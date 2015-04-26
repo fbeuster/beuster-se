@@ -1,7 +1,7 @@
 <?php
 
 class Page {
-  const PAGE_TYPE_ERROR = 1;
+  const STATIC_PAGE = 1;
 
   public function __construct() {
   }
@@ -10,6 +10,8 @@ class Page {
     /* this will change over time and use the page type */
     return 'singleArticle'; // error page
   }
+
+  public abstract function getContent();
 }
 
 ?>

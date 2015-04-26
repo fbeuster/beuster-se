@@ -168,19 +168,19 @@ class Lixter {
         include $file;
       } else {
         $this->content = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
-        include $this->getFilePath('error.php');
+        include $this->getFilePath('static.php');
       }
     } else if ($this->isPage) {
       // error message
-      include $this->getFilePath('error.php');
+      include $this->getFilePath('static.php');
     } else if (1 == $this->content) {
       // return wurde vergessen
       $this->content = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
-      include $this->getFilePath('error.php');
+      include $this->getFilePath('static.php');
     } else {
       // ein Ungültiger Return wert
       $this->content = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
-      include $this->getFilePath('error.php');
+      include $this->getFilePath('static.php');
     }
 
     include($this->getFilePath('htmlaside.php'));
