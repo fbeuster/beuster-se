@@ -3,6 +3,7 @@
   $a['filename'] = 'search.php';
   $a['data'] = array();
   $db = Database::getDB()->getCon();
+  $config = Config::getConfig();
 
   $searchStr = '';
   if(isset($_POST['s'])){$searchStr = trim($_POST['s']);}
@@ -85,7 +86,7 @@
       $result->close();
       $scoreComment = 0;
       foreach($comments as $keyC => $entryC) {
-        $scoreCommentSim = rank($entryC['content'], $searchStr, $searchCaseSensitive);
+        $scoreCommentSim = rank($entryC['content'], $searchStr, $config->get('search.case_sensitive'));
         $scoreCommentApr = substr_count(mb_strtolower($entryC['content'], 'UTF-8'), $searchStrLow);
         $scoreCommentExa = substr_count($entryC['content'], $searchStr);
         $scoreComment += ($scoreCommentSim - $scoreCommentApr - $scoreCommentExa) * 3;
@@ -141,8 +142,8 @@
       if($stmt->fetch()){
         $results[] = array(
           'id'    => $id,
-          'tit'   => ($searchMarks)?searchMark($titel, $searchStr, true):$titel,
-          'inh'   => ($searchMarks)?changetext(searchmark($inhalt, $searchStr, true), 'vorschau'):changetext($inhalt, 'vorschau'),
+          'tit'   => $config->get('search.marks') ? searchMark($titel, $searchStr, true) : $titel,
+          'inh'   => $config->get('search.marks') ? changetext(searchmark($inhalt, $searchStr, true), 'vorschau') : changetext($inhalt, 'vorschau'),
           'cat'   => $cat,
           'dat'   => $datum,
           'cmt'   => $cmtAnz,

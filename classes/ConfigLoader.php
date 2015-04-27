@@ -2,8 +2,8 @@
 
 class ConfigLoader {
 
-  public static function loadIni() {
-    return parse_ini_file('user/config.ini');
+  public static function loadIni($path) {
+    return parse_ini_file($path);
   }
 
 }

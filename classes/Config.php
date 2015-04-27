@@ -17,7 +17,9 @@ class Config {
     if($key !== self::$key)
       throw new InvalidArgumentException('Private constructor!');
 
-    $this->config = $this->loadConfig();
+    $this->system_config  = ConfigLoader::loadIni('system/config.ini');
+    $this->user_config    = $this->loadUserConfig();
+    $this->config         = array_merge($this->system_config, $this->user_config);
   }
 
   public function get($key) {
@@ -28,9 +30,9 @@ class Config {
     $this->config[$key] = $value;
   }
 
-  private function loadConfig() {
+  private function loadUserConfig() {
     if(file_exists('user/config.ini')) {
-      return ConfigLoader::loadIni();
+      return ConfigLoader::loadIni('user/config.ini');
     }
 
     throw new Exception('No configuration file found.');
