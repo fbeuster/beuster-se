@@ -171,12 +171,10 @@
     }
 
     function makeAbsolutePath($path, $append = '') {
-        global $beRemoteAbsoluteAddr;
-        if($beRemoteAbsoluteAddr === false) {
+        if(Utilities::getRemoteAddress() === null)
             return 'http://'.Utilities::getSystemAddress().'/'.$path.$append;
-        } else {
-            return 'http://'.$beRemoteAbsoluteAddr.'/'.$path.$append;
-        }
+        else
+            return 'http://'.Utilities::getRemoteAddress().'/'.$path.$append;
     }
 
     /*** validation ***/

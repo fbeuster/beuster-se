@@ -16,8 +16,4 @@
 
 	// Beachtung der Groß-/Kleinschreibung bei der Suche
 	$searchCaseSensitive = 0;
-
-	// Allows to set a remote address for images.
-	// Ex.: beusterse.de
-	$beRemoteAbsoluteAddr = false;
 ?>

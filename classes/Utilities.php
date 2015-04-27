@@ -2,6 +2,10 @@
 
 class Utilities {
 
+  public static function getRemoteAddress() {
+    return Config::getConfig()->get('remote_address');
+  }
+
   public static function getSystemAddress() {
     return preg_replace('#(.+?)\.(.+?)\.(.+)#', '$2.$3', $_SERVER['SERVER_NAME']);
   }
