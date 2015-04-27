@@ -18,6 +18,7 @@ class Lixter {
   private static $lix; /**< Lixter instance */
   private $content; /**< loaded content */
   private $isPage = false;
+  private $theme;
 
   /**
    * constructor
@@ -52,11 +53,16 @@ class Lixter {
    */
   public function run() {
     $this->loadContent();
+    $this->loadTheme();
     $this->buildContent();
   }
 
   public function getContent() {
     return $this->content;
+  }
+
+  public function getTheme() {
+    return $this->theme;
   }
 
   /*** PRIVATE ***/
@@ -133,6 +139,10 @@ class Lixter {
     }
   }
 
+  private function loadTheme() {
+    $this->theme = new Theme( Config::getConfig()->get('theme') );
+  }
+
   /**
    * building the user interface
    */
@@ -145,61 +155,36 @@ class Lixter {
     $currPage = getPage();
 
     // Laden HTML-Kopf
-    include($this->getFilePath('htmlheader.php'));
+    include($this->theme->getFile('htmlheader.php'));
     if(Utilities::isDevServer()) include('settings/analyse.php');
-    include($this->getFilePath('htmlwarning.php'));
+    include($this->theme->getFile('htmlwarning.php'));
 
     // Laden der Template-Datei
     if ($this->isValidTemplate()) {
       // Gültige Include-Datei
-      $file = $this->getFilePath();
+      $file = $this->theme->getFile($this->content['filename']);
       if($file !== false) {
         $data = $this->content['data'];
         include $file;
       } else {
         $this->content = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
-        include $this->getFilePath('static.php');
+        include $this->theme->getFile('static.php');
       }
     } else if ($this->isPage) {
       // error message
-      include $this->getFilePath('static.php');
+      include $this->theme->getFile('static.php');
     } else if (1 == $this->content) {
       // return wurde vergessen
       $this->content = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
-      include $this->getFilePath('static.php');
+      include $this->theme->getFile('static.php');
     } else {
       // ein Ungültiger Return wert
       $this->content = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
-      include $this->getFilePath('static.php');
+      include $this->theme->getFile('static.php');
     }
 
-    include($this->getFilePath('htmlaside.php'));
-    include($this->getFilePath('htmlfooter.php'));
-  }
-
-  /**
-   * check wether the specified file has a local override or not
-   */
-  private function getFilePath($filename = null) {
-    if($filename === null) {
-      $filename = $this->content['filename'];
-    }
-
-    if (file_exists('user/theme/'.$filename)) {
-      return 'user/theme/'.$filename;
-    }
-
-    $beTheme = Utilities::getThemeName();
-    if(!isset($beTheme) || $beTheme == '') {
-      $beTheme = 'default';
-    }
-    $beThemeP = 'theme/'.$beTheme.'/';
-
-    if (file_exists($beThemeP.$filename)) {
-      return $beThemeP.$filename;
-    }
-
-    return false;
+    include($this->theme->getFile('htmlaside.php'));
+    include($this->theme->getFile('htmlfooter.php'));
   }
 
   /**

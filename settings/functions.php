@@ -166,10 +166,6 @@
         return $title;
     }
 
-    function getThemeStyle($css) {
-        return '/theme/'.Utilities::getThemeName().'/'.$css;
-    }
-
     function makeAbsolutePath($path, $append = '') {
         if(Utilities::getRemoteAddress() === null)
             return 'http://'.Utilities::getSystemAddress().'/'.$path.$append;

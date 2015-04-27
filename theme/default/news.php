@@ -1,8 +1,8 @@
 <?php
   if (count($data['articles'])) {
-    if($data['articles'][0]['CatDescr'] !== '') { ?>
+    /* if($data['articles'][0]['CatDescr'] !== '') { ?>
   <h1><?php echo $data['articles'][0]['CatDispName']; ?> - beuster{se}</h1>
-  <?php } ?>
+  <?php } */ ?>
     <menu>
       <?php echo genSubMenu(); ?>
     </menu>
@@ -19,7 +19,7 @@
       <span>Kategorie: <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>"><?php echo $article->getCategory()->getName(); ?></a></span>
       <span>von <?php echo $article->getAuthor()->getClearname(); ?></span>
       <span>
-        <a href="<?php echo $article->getLink());?>#comments">
+        <a href="<?php echo $article->getLink();?>#comments">
           <?php echo count($article->getComments()); ?> Kommentare
         </a>
       </span>
@@ -31,7 +31,6 @@
             <img src="<?php echo $article->getThumbnail()->getPathThumb(); ?>" alt="Vorschaubild">
             <?php } ?>
           <?php } ?>
-    <?php } ?>
     <p>
       <time datetime="<?php echo date('c', $article->getDate()); ?>"><?php echo date('d.m.Y', $article->getDate()); ?></time>
       <?php echo str_replace('###link###', $article->getLink(), $article->getContentPreview())."\n"; ?>
