@@ -3,7 +3,7 @@
 
   <!-- Google AdSense -->
   <div class="adSense footer" id="google-ads-2">
-  <?php if($local || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) { ?>
+  <?php if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) { ?>
     Google AdSense
   <?php } else { ?>
     <script type="text/javascript"><!--
@@ -53,7 +53,7 @@
   </div>
   <!-- ende lightbox -->
 
-  <?php if(!$local && (!isset($_GET['p']) || (isset($_GET['p']) && !in_array($_GET['p'], $noGA)))) { ?>
+  <?php if(!Utilities::isDevServer() && (!isset($_GET['p']) || (isset($_GET['p']) && !in_array($_GET['p'], $noGA)))) { ?>
   <!-- Google Analytics -->
   <script type="text/javascript">
     var _gaq = _gaq || [];

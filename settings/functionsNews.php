@@ -297,7 +297,6 @@
     }
 
     function notifyAdmin($title, $content, $user) {
-        global $local;
         $mailTopic = 'Neuer Kommentar zu "'.$titel.'"';
         $mailContent = '<html>';
         $mailContent .= '<head><title>Neuer Kommentar</title>';
@@ -315,7 +314,7 @@
         $mailHeader .= 'X-Mailer: PHP/'.phpversion().'\r\n';
 
         // return
-        if(!$local) {
+        if(!Utilities::isDevServer()) {
             return mail(adminMail(), $mailTopic, $mailContent, $mailHeader);
         }
         return false;

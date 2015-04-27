@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $beTheme, $file, $local, $noGA, $sysAdrr,
+    global  $analyse, $beTheme, $file, $noGA, $sysAdrr,
             $beRemoteAbsoluteAddr, $recommendedArticle;
 
     // loading core functions
@@ -90,12 +90,7 @@ class Lixter {
     $sev      = $_SERVER['SERVER_NAME'];
     $sysAdrr  = preg_replace('#(.+?)\.(.+?)\.(.+)#', '$2.$3', $sev);
 
-    if($sev == $devServer) {
-      $local = true;
-    } else {
-      $local = false;
-    }
-    if($local) {
+    if(Utilities::isDevServer()) {
       error_reporting(E_ALL);
       ini_set('display_errors', 1);
     } else {
@@ -113,7 +108,7 @@ class Lixter {
    * generating and loading current page content
    */
   private function loadContent() {
-    global $file, $local, $sysAdrr;
+    global $file, $sysAdrr;
 
     $db = Database::getDB()->getCon();
     if($db->connect_errno){
@@ -147,7 +142,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $local, $analyse, $beTheme, $noGA, $bbCmt;
+    global $file, $analyse, $beTheme, $noGA, $bbCmt;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
@@ -156,7 +151,7 @@ class Lixter {
 
     // Laden HTML-Kopf
     include($this->getFilePath('htmlheader.php'));
-    if($analyse && $local) include('settings/analyse.php');
+    if($analyse && Utilities::isDevServer()) include('settings/analyse.php');
     include($this->getFilePath('htmlwarning.php'));
 
     // Laden der Template-Datei

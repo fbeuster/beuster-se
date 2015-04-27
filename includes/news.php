@@ -11,7 +11,7 @@
 
     if(isset($_GET['page']))
         $start = (int)$_GET['page'];
-    else 
+    else
         $start = 1;
 
     if(isset($_GET['c'])) {
@@ -30,7 +30,7 @@
     } else {
         $id = -1;
     }
-    
+
     if($id !== -1) {
 
         // single article
@@ -41,7 +41,7 @@
     } else if(!$cat->isLoaded() || $cat->getId() == 1) {
 
         // all articles
-        
+
         // calc date range
         $dateSQL = "err";
         if(isset($_GET['y'])) {
@@ -72,9 +72,9 @@
             $archive = true;
             $dateSQL .= " AND news.Datum < NOW()";
         }
-        
+
         // calc number of articles and pages
-        if($local) {
+        if(Utilities::isDevServer()) {
             $anzahl = getAnzDev($dateSQL);
         } else {
             $anzahl = getAnz($dateSQL);
@@ -86,7 +86,7 @@
         // get article ids
 
         $fields = array('news.ID');
-        if($local) {
+        if(Utilities::isDevServer()) {
             $conds = array($dateSQL.' AND newscatcross.Cat != ?', 'i', array(12));
             $joins = 'LEFT JOIN newscatcross ON news.ID = newscatcross.NewsID';
             $opt = 'GROUP BY news.ID ORDER BY news.Datum DESC';
@@ -98,10 +98,10 @@
         $limit = array('LIMIT ?, 8', 'i', array(getOffset($anzahl, 8, $start)));
         $dbs = Database::getDB();
         $res = $dbs->select('news', $fields, $conds, $opt, $limit, $joins);
-        
+
         $articles = array();
         foreach ($res as $aId) {
-            $articles[] = new Article($aId['ID'], $local);
+            $articles[] = new Article($aId['ID']);
         }
 
         if($archive) {
@@ -141,7 +141,7 @@
         } else {
             // get article ids
             #echo '<pre>'; print_r($cat); echo '</pre>';
-            
+
             $fields = array('news.ID');
             if($cat->isTopCategory()) {
                 if($cat->getId() == getCatID('blog')) {
@@ -176,10 +176,10 @@
 
             $dbs = Database::getDB();
             $res = $dbs->select('news', $fields, $conds, $opt, $limit, $joins);
-            
+
             $articles = array();
             foreach ($res as $aId) {
-                $articles[] = new Article($aId['ID'], $local);
+                $articles[] = new Article($aId['ID']);
             }
 
             if($archive) {

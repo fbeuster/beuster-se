@@ -16,7 +16,6 @@
 class Article {
 
 	private $loaded = false;	/**< load state */
-	private $dev = false;		/**< dev state */
 
 	private $id;				/**< article's id */
 	private $enable;			/**< article's enable status */
@@ -38,11 +37,9 @@ class Article {
 	 * constructor
 	 *
 	 * @param int $id The id of the Article
-	 * @param int $dev Enable status which should be loaded
 	 */
-	public function __construct($id, $dev = false) {
-		$this->id 	= $id;
-		$this->dev 	= $dev;
+	public function __construct($id) {
+		$this->id = $id;
 		$this->loadArticle();
 	}
 
@@ -295,7 +292,7 @@ class Article {
 		// article itself
 
 		$fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status');
-		if($this->dev)
+		if(Utilities::isDevServer())
 			$conds = array('ID = ?', 'i', array($this->id));
 		else
 			$conds = array('ID = ? AND enable = ?', 'ii', array($this->id, 1));

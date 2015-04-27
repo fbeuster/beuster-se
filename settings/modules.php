@@ -30,10 +30,10 @@
     return $last->getModuleHTML();
   }
 
-  function moduleAdSenseAside($local, $noGA) {
+  function moduleAdSenseAside($noGA) {
     $id = "google-ads-1";
 
-    if($local || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
+    if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
       $content = 'Google AdSense'."\n";
     } else {
       $content = '<script type="text/javascript"><!--'."\n";

@@ -26,7 +26,7 @@
       } else {
         echo moduleRandomArticle();
       }
-      echo moduleAdSenseAside($local, $noGA);
+      echo moduleAdSenseAside($noGA);
       echo moduleArchive(); ?>
     </aside>
     <!-- ende beMainAside -->

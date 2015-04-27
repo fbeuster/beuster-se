@@ -1,6 +1,6 @@
 <?php
     $db = Database::getDB()->getCon();
-    if(!$local) {
+    if(!Utilities::isDevServer()) {
         increaseHitNumber($id);
     }
 
@@ -94,7 +94,7 @@
             notifyAdmin($titel, $Inhalt, $user);
 
             // return
-            if($local) {
+            if(Utilities::isDevServer()) {
                 $return = showInfo('Kommentar wurde hinzugefügt.<br>'.$Inhalt, $errRet);
             } else {
                 $return = showInfo('Kommentar wurde hinzugefügt.', $errRet);
@@ -110,7 +110,7 @@
         $a['data']['comment_reply'] = $_GET['comment-reply'];
     }
 
-    $article = new Article($id, $local);
+    $article = new Article($id);
     $articles[0] = $article;
 
     $a['data']['eType'] = 0;
