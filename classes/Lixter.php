@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $file, $noGA;
+    global  $file, $noGA;
 
     // loading core functions
     include('settings/core.php');
@@ -137,7 +137,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $analyse, $noGA, $bbCmt;
+    global $file, $noGA, $bbCmt;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
@@ -146,7 +146,7 @@ class Lixter {
 
     // Laden HTML-Kopf
     include($this->getFilePath('htmlheader.php'));
-    if($analyse && Utilities::isDevServer()) include('settings/analyse.php');
+    if(Utilities::isDevServer()) include('settings/analyse.php');
     include($this->getFilePath('htmlwarning.php'));
 
     // Laden der Template-Datei

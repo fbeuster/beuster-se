@@ -4,9 +4,6 @@
 	/*************************/
 
 	/* Informationen und Einblendungen */
-	// Analyse-Informationen einblenden, kann in der analyse.php angepasst werden
-	$analyse = 1;
-
 	// Aktivierung der HTML-Warning, kann in entsprechender Datei bearbeitet und angepasst werden
 	$att     = 0;
 
