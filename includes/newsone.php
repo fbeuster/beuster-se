@@ -31,8 +31,9 @@
             $Usermail = $db->real_escape_string(stripslashes(strtolower(ADMIN_GRAV_MAIL)));
             $webpage = $db->real_escape_string(stripslashes(ADMIN_WEBPAGE));
         }
-        $titel = getNewsTitel($id);
-        $errRet = substr(getLink(getCatName(getNewsCat($id)), $id, $titel), 1);
+        $article = new Article($id);
+        $title = $article->getTitle();
+        $errRet = substr(getLink(getCatName(getNewsCat($id)), $id, $title), 1);
         if($err == 0) {
 
             // exists user in db?
@@ -91,7 +92,7 @@
             $stmt->close();
 
             // notify mails
-            notifyAdmin($titel, $Inhalt, $user);
+            notifyAdmin($title, $Inhalt, $user);
 
             // return
             if(Utilities::isDevServer()) {

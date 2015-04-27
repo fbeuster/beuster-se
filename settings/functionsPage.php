@@ -58,7 +58,8 @@
         return 'http://'.$_SERVER['HTTP_HOST'];
       case 'entry':
         $id = $_GET['n'];
-        $title = getNewsTitle($id);
+        $article = new Article($id);
+        $title = $article->getTitle();
         $cat = getCatName(getNewsCat($id));
         return 'http://'.$_SERVER['HTTP_HOST'].getLink($cat, $id, $title);
       case 'topCategory':
@@ -74,7 +75,9 @@
     $curPage = getCurrentPage();
     switch($curPage) {
       case 'blog':        return 'Blog, Tipps und Videos - beuster{se}';
-      case 'entry':       return getNewsTitle().' - beuster{se}';
+      case 'entry':
+        $article = new Article($_GET['n']);
+        return $article->getTitle().' - beuster{se}';
       case 'topCategory': return getCatName(getCatID($_GET['p'])).' - beuster{se}';
       case 'category':    return getCatName(getCatID($_GET['p'])).' - beuster{se}';
       default:            return $file[$_GET['p']][1].' - beuster{se}';

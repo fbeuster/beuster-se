@@ -52,10 +52,10 @@
   <title><?php echo getPageTitle($file); ?></title>
   <?php if(!Utilities::isOldIE()) { ?>
   <!-- style it -->
-  <link href="<?php echo Lixter::getLix()->getTheme()->getFile('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">
+  <link href="/<?php echo Lixter::getLix()->getTheme()->getFile('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <?php } else { ?>
   <!-- not another internet explorer -.- -->
-  <link href="<?php echo Lixter::getLix()->getTheme()->getFile('styles/ie.css'); ?>" rel="stylesheet" type="text/css" media="screen">
+  <link href="/<?php echo Lixter::getLix()->getTheme()->getFile('styles/ie.css'); ?>" rel="stylesheet" type="text/css" media="screen">
   <style type="text/css">
   .alert {
     font-family: sans-Serif;
@@ -65,9 +65,9 @@
   </style>
   <?php } ?>
   <!-- wanna play javascript? -->
-  <script type="text/javascript" src="<?php echo Lixter::getLix()->getTheme()->getFile('scripts/beusterse.js'); ?>"></script>
+  <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('scripts/beusterse.js'); ?>"></script>
   <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
-  <script type="text/javascript" src="<?php echo Lixter::getLix()->getTheme()->getFile('scripts/scriptAdm.js'); ?>"></script>
+  <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('scripts/scriptAdm.js'); ?>"></script>
   <?php } ?>
   <?php if(isset($ret['data']['refresh'])) {
     echo '<meta http-equiv="refresh" content="3; url=/'.$ret['data']['refresh'].'">';

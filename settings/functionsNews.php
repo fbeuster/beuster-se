@@ -39,26 +39,6 @@
         }
     }
 
-    function getNewsTitle($id = -1) {
-        $db = Database::getDB()->getCon();
-        if($id == -1) {
-            $id = $_GET['n'];
-        }
-        $sql = "SELECT
-                    Titel
-                FROM
-                    news
-                WHERE
-                    ID = ?";
-        if(!$stmt = $db->prepare($sql)){return $db->error;}
-        $stmt->bind_param('i', $id);
-        if(!$stmt->execute()) {return $result->error;}
-        $stmt->bind_result($title);
-        if(!$stmt->fetch()) {return 'Es wurde keine solche News gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $stmt->close();
-        return changetext($title, 'titel');
-    }
-
     function isNewsVisible($id) {
         $db = Database::getDB()->getCon();
         $ena = 1;
@@ -138,23 +118,6 @@
         $stmt->bind_param('i', $id);
         if(!$stmt->execute()) {return $stmt->error;}
         $stmt->close();
-    }
-
-    function getNewsTitel($id) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Titel
-                FROM
-                    news
-                WHERE
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($tit);
-        if(!$result->fetch()){return $result->error;}
-        $result->close();
-        return $tit;
     }
 
     function getHits($id) {
