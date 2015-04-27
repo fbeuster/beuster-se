@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $file, $noGA, $recommendedArticle;
+    global  $analyse, $file, $noGA;
 
     // loading core functions
     include('settings/core.php');
