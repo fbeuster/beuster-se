@@ -26,8 +26,6 @@ class Image {
 	 * @return string
 	 */
 	public function getPathThumb() {
-		global $sysAdrr;
-
 		if($this->thumb) {
 	        $path = str_replace('blog/id', 'blog/thid', $this->path);
 	        $path = str_replace('.', '_', $path);
@@ -44,43 +42,43 @@ class Image {
 	 * @return int
 	 */
 	public function getId() { return $this->id; }
-	
+
 	/**
 	 * setter for id
 	 * @param int $id to set
 	 */
 	public function setId($id) { $this->id = $id; }
-	
+
 	/**
 	 * getter for articleId
 	 * @return int
 	 */
 	public function getArticleId() { return $this->articleId; }
-	
+
 	/**
 	 * setter for articleId
 	 * @param int $articleId to set
 	 */
 	public function setArticleId($articleId) { $this->articleId = $articleId; }
-	
+
 	/**
 	 * getter for path
 	 * @return string
 	 */
 	public function getPath() { return $this->path; }
-	
+
 	/**
 	 * setter for path
 	 * @param string $path to set
 	 */
 	public function setPath($path) { $this->path = $path; }
-	
+
 	/**
 	 * getter for title
 	 * @return string
 	 */
 	public function getTitle() { return $this->title; }
-	
+
 	/**
 	 * setter for title
 	 * @param string $title to set

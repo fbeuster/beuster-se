@@ -287,8 +287,6 @@ class Article {
 	 * Based on current id, this loads the article.
 	 */
 	private function loadArticle() {
-		global $sysAdrr;
-
 		// article itself
 
 		$fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status');

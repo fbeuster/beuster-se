@@ -171,9 +171,9 @@
     }
 
     function makeAbsolutePath($path, $append = '') {
-        global $beRemoteAbsoluteAddr, $sysAdrr;
+        global $beRemoteAbsoluteAddr;
         if($beRemoteAbsoluteAddr === false) {
-            return 'http://'.$sysAdrr.'/'.$path.$append;
+            return 'http://'.Utilities::getSystemAddress().'/'.$path.$append;
         } else {
             return 'http://'.$beRemoteAbsoluteAddr.'/'.$path.$append;
         }
@@ -649,7 +649,6 @@
     }
 
     function grabAnImage($content) {
-        global $sysAdrr;
         $db = Database::getDB()->getCon();
         $l = strlen($content);
         $pos1 = strpos($content, '[img');

@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $file, $noGA, $sysAdrr,
+    global  $analyse, $file, $noGA,
             $beRemoteAbsoluteAddr, $recommendedArticle;
 
     // loading core functions
@@ -85,10 +85,6 @@ class Lixter {
 
     // using specifc user functions and settings
     include('user/local.php');
-
-    // setting up some variables
-    $sev      = $_SERVER['SERVER_NAME'];
-    $sysAdrr  = preg_replace('#(.+?)\.(.+?)\.(.+)#', '$2.$3', $sev);
 
     if(Utilities::isDevServer()) {
       error_reporting(E_ALL);
@@ -108,7 +104,7 @@ class Lixter {
    * generating and loading current page content
    */
   private function loadContent() {
-    global $file, $sysAdrr;
+    global $file;
 
     $db = Database::getDB()->getCon();
     if($db->connect_errno){

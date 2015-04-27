@@ -168,8 +168,8 @@
         $stmt->close();
         $a['data']['th'] = str_replace('blog/id', 'blog/thid', $a['data']['th_og']);
         $a['data']['th'] = str_replace('.', '_', $a['data']['th']);
-        $a['data']['th'] = 'http://'.$sysAdrr.'/'.$a['data']['th'].'.jpg';
-        $a['data']['th_og'] = 'http://'.$sysAdrr.'/'.$a['data']['th_og'];
+        $a['data']['th'] = 'http://'.Utilities::getSystemAddress().'/'.$a['data']['th'].'.jpg';
+        $a['data']['th_og'] = 'http://'.Utilities::getSystemAddress().'/'.$a['data']['th_og'];
     }
     $a['data']['pics'] = $pics;
     $a['data']['aside'] = $aside;

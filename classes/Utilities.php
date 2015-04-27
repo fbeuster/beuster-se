@@ -2,6 +2,10 @@
 
 class Utilities {
 
+  public static function getSystemAddress() {
+    return preg_replace('#(.+?)\.(.+?)\.(.+)#', '$2.$3', $_SERVER['SERVER_NAME']);
+  }
+
   public static function getThemeName() {
     return Config::getConfig()->get('theme');
   }
