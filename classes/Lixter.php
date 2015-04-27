@@ -77,7 +77,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $analyse, $beTheme, $file, $noGA, $sysAdrr,
+    global  $analyse, $file, $noGA, $sysAdrr,
             $beRemoteAbsoluteAddr, $recommendedArticle;
 
     // loading core functions
@@ -142,7 +142,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $analyse, $beTheme, $noGA, $bbCmt;
+    global $file, $analyse, $noGA, $bbCmt;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
@@ -186,7 +186,6 @@ class Lixter {
    * check wether the specified file has a local override or not
    */
   private function getFilePath($filename = null) {
-    global $beTheme;
     if($filename === null) {
       $filename = $this->content['filename'];
     }
@@ -195,6 +194,7 @@ class Lixter {
       return 'user/theme/'.$filename;
     }
 
+    $beTheme = Utilities::getThemeName();
     if(!isset($beTheme) || $beTheme == '') {
       $beTheme = 'default';
     }

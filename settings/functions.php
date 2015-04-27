@@ -167,8 +167,7 @@
     }
 
     function getThemeStyle($css) {
-        global $beTheme;
-        return '/theme/'.$beTheme.'/'.$css;
+        return '/theme/'.Utilities::getThemeName().'/'.$css;
     }
 
     function makeAbsolutePath($path, $append = '') {

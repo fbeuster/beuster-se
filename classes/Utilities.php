@@ -2,6 +2,10 @@
 
 class Utilities {
 
+  public static function getThemeName() {
+    return Config::getConfig()->get('theme');
+  }
+
   public static function isDevServer() {
     return Config::getConfig()->get('devServer') === $_SERVER['SERVER_NAME'];
   }
