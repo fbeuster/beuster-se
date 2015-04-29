@@ -73,7 +73,7 @@
     <div class="beCommentNew" id="newComment">
       <span class="beCommentNewHeader">Schreibe einen Kommentar!</span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, $cmtReply, time(), $bbCmt, 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
+       echo genFormPublic($err, $cmtReply, time(), 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
     </div>
   </div>
 

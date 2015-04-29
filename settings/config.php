@@ -30,19 +30,19 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
  // Variablen
  $bb = array('[b]...[/b]', '[i]...[/i]', '[u]...[/u]', '[/p][p] (NUR so)', '[url=...]...[/url]', '[quote]...[/quote]', ':) :D :( ;)');
  $bbCmt = array('[b]...[/b]', '[i]...[/i]', '[u]...[/u]', '[url=...]...[/url]', '[quote]...[/quote]', ':) :D :( ;)');
- 
+
  // Konstanten
 
  define('LIMIT_NUM', 5);
  define('DATE_STYLE', '%d.%m.%Y');
  define('DATE_STYLEB', '%d.%m.%Y - %H:%i');
- 
+
  define('INVALID_FORM', 'Benutzen Sie nur Formulare von dieser Homepage.');
  define('EMPTY_FORM', 'Bitte füllen Sie das Formular vollständig aus.');
  define('NOT_LOGGED_IN', 'Sie müssen eingeloggt sein um diese Funktion nutzen zu können.');
  define('NO_NEWS_CHOOSEN', 'Sie haben keine News zum Bearbeiten gewählt.');
  define('BADCAT', 'Sie haben keine Newskategorie gewählt.');
- 
+
 /* Fehlerliste
  *
  *  #NC1   news.php    Commentsinsert  $db->prepare()

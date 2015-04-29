@@ -89,7 +89,7 @@
         return $ret;
     }
 
-    function genFormPublic($err, $dest, $time, $bb, $title, $formType, $reply = 'null') {
+    function genFormPublic($err, $dest, $time, $title, $formType, $reply = 'null') {
         $ret = '';
         switch($err['t']) {
             case 1:

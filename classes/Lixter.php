@@ -147,7 +147,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $noGA, $bbCmt;
+    global $file, $noGA;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
