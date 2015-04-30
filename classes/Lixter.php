@@ -58,7 +58,7 @@ class Lixter {
   }
 
   public function getContent() {
-    return $this->content;
+    return $this->content->getContent();
   }
 
   public function getTheme() {
@@ -114,27 +114,24 @@ class Lixter {
     $db = Database::getDB()->getCon();
     if($db->connect_errno){
       $message        = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
-      $this->isPage   = true;
       $this->content  = new ErrorPage($message);
     } else if(is_string($error = getUserID())){
-      $this->isPage   = true;
       $this->content  = new ErrorPage($error);
     } else {
       // Laden der Include-Datei
       if(isset($_GET['p'])) {
         if(isset($file[$_GET['p']][0])) {
-          if(file_exists('includes/'.$file[$_GET['p']][0])) {
-            $this->content = include 'includes/'.$file[$_GET['p']][0];
+          if(ContentPage::exists($_GET['p'])) {
+            $this->content = new ContentPage($_GET['p']);
           } else {
             $message        = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
-            $this->isPage   = true;
             $this->content  = new ErrorPage($message);
           }
         } else {
-          $this->content = include 'includes/'.$file['blog'][0];
+          $this->content = new ContentPage('blog');
         }
       } else {
-        $this->content = include 'includes/'.$file['blog'][0];
+        $this->content = new ContentPage('blog');
       }
     }
   }
@@ -151,7 +148,7 @@ class Lixter {
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
-    $pageType = getPageType($this->content);
+    $pageType = $this->content->getPageClass();
     $currPage = getPage();
 
     // Laden HTML-Kopf
@@ -162,15 +159,15 @@ class Lixter {
     // Laden der Template-Datei
     if ($this->isValidTemplate()) {
       // Gültige Include-Datei
-      $file = $this->theme->getFile($this->content['filename']);
+      $file = $this->theme->getFile($this->content->getFilename());
       if($file !== false) {
-        $data = $this->content['data'];
+        $data = $this->getContent();
         include $file;
       } else {
         $this->content = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
         include $this->theme->getFile('static.php');
       }
-    } else if ($this->isPage) {
+    } else if ($this->content->getType() === Page::STATIC_PAGE) {
       // error message
       include $this->theme->getFile('static.php');
     } else if (1 == $this->content) {
@@ -191,10 +188,7 @@ class Lixter {
    * check if we have a valid template file and data
    */
   private function isValidTemplate() {
-    return is_array($this->content)
-            && isset($this->content['filename'], $this->content['data'])
-            && is_string($this->content['filename'])
-            && is_array($this->content['data']);
+    return isset($this->content) && is_string($this->content->getFilename());
   }
 }
 

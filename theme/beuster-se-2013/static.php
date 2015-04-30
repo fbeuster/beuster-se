@@ -1,6 +1,6 @@
 
   <div class="beContentEntry">
     <p>
-      <?php echo Lixter::getLix()->getContent()->getContent(); ?>
+      <?php echo Lixter::getLix()->getContent(); ?>
     </p>
   </div>

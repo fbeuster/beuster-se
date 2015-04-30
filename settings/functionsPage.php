@@ -1,18 +1,5 @@
 <?php
 
-  function getPageType($content) {
-    $page = getPage();
-    if(is_object($content)) {
-      return $content->getPageType();
-    }
-    if( isset($content['data']['articles']) && count($content['data']['articles']) > 0 &&
-        !isset($content['data']['admin_news']) && $page != 'single' && $page != 'page' ||
-        $page == 'portfolio') {
-      return 'multipleArticles';
-    }
-    return 'singleArticle';
-  }
-
   function getPage() {
     $curPage = getCurrentPage();
     if(isset($_GET['p']) && strtolower($_GET['p']) == 'portfolio') {
