@@ -16,7 +16,7 @@
 class Lixter {
 
   private static $lix; /**< Lixter instance */
-  private $content; /**< loaded content */
+  private $page; /**< loaded page */
   private $isPage = false;
   private $theme;
 
@@ -52,13 +52,13 @@ class Lixter {
    * loading content
    */
   public function run() {
-    $this->loadContent();
+    $this->loadPage();
     $this->loadTheme();
     $this->buildContent();
   }
 
-  public function getContent() {
-    return $this->content->getContent();
+  public function getPage() {
+    return $this->page;
   }
 
   public function getTheme() {
@@ -108,30 +108,29 @@ class Lixter {
   /**
    * generating and loading current page content
    */
-  private function loadContent() {
+  private function loadPage() {
     global $file;
 
     $db = Database::getDB()->getCon();
     if($db->connect_errno){
       $message        = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
-      $this->content  = new ErrorPage($message);
+      $this->page  = new ErrorPage($message);
     } else if(is_string($error = getUserID())){
-      $this->content  = new ErrorPage($error);
+      $this->page  = new ErrorPage($error);
     } else {
-      // Laden der Include-Datei
       if(isset($_GET['p'])) {
         if(isset($file[$_GET['p']][0])) {
           if(ContentPage::exists($_GET['p'])) {
-            $this->content = new ContentPage($_GET['p']);
+            $this->page = new ContentPage($_GET['p']);
           } else {
-            $message        = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
-            $this->content  = new ErrorPage($message);
+            $message     = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
+            $this->page  = new ErrorPage($message);
           }
         } else {
-          $this->content = new ContentPage('blog');
+          $this->page = new ContentPage('blog');
         }
       } else {
-        $this->content = new ContentPage('blog');
+        $this->page = new ContentPage('blog');
       }
     }
   }
@@ -148,7 +147,7 @@ class Lixter {
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
-    $pageType = $this->content->getPageClass();
+    $pageType = $this->page->getPageClass();
     $currPage = getPage();
 
     // Laden HTML-Kopf
@@ -159,24 +158,24 @@ class Lixter {
     // Laden der Template-Datei
     if ($this->isValidTemplate()) {
       // Gültige Include-Datei
-      $file = $this->theme->getFile($this->content->getFilename());
+      $file = $this->theme->getFile($this->page->getFilename());
       if($file !== false) {
-        $data = $this->getContent();
+        $data = $this->page->getContent();
         include $file;
       } else {
-        $this->content = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
+        $this->page = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
         include $this->theme->getFile('static.php');
       }
-    } else if ($this->content->getType() === Page::STATIC_PAGE) {
+    } else if ($this->page->getType() === Page::STATIC_PAGE) {
       // error message
       include $this->theme->getFile('static.php');
-    } else if (1 == $this->content) {
+    } else if (1 == $this->page) {
       // return wurde vergessen
-      $this->content = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
+      $this->page = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
       include $this->theme->getFile('static.php');
     } else {
       // ein Ungültiger Return wert
-      $this->content = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
+      $this->page = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
       include $this->theme->getFile('static.php');
     }
 
@@ -188,7 +187,7 @@ class Lixter {
    * check if we have a valid template file and data
    */
   private function isValidTemplate() {
-    return isset($this->content) && is_string($this->content->getFilename());
+    return isset($this->page) && is_string($this->page->getFilename());
   }
 }
 

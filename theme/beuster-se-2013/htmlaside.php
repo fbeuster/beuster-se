@@ -18,7 +18,7 @@
       if($currPage == 'index') {
         echo moduleTopArticles();
       } else if($currPage == 'single') {
-        $cnt = Lixter::getLix()->getContent();
+        $cnt = Lixter::getLix()->getPage()->getContent();
         echo moduleArticleInfo($cnt['aside']);
         echo moduleRandomArticle();
       } else if($currPage == 'page') {
