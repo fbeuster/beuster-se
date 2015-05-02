@@ -115,6 +115,8 @@ fieldset.backend {
   }
 
   &.newEntry {
+    @include editor-buttons;
+
     input[type=submit] {
       margin: 5px 0 0 0 !important;
     }
@@ -169,31 +171,6 @@ fieldset.backend {
       cursor: pointer;
     }
   }
-
-  #btnbold      { @include sprite-position(0px, -25px, 0px, -50px); }
-  #btnitalic    { @include sprite-position(-25px, -25px, -25px, -50px); }
-  #btnunderline { @include sprite-position(-50px, -25px, -50px, -50px); }
-  #btnmark      { @include sprite-position(-75px, -25px, -75px, -50px); }
-  #btndel       { @include sprite-position(-100px, -25px, -100px, -50px); }
-  #btnins       { @include sprite-position(-125px, -25px, -125px, -50px); }
-  #btnuber2     { @include sprite-position(-150px, -25px, -150px, -50px); }
-  #btnuber3     { @include sprite-position(-175px, -25px, -175px, -50px); }
-  #btnquote     { @include sprite-position(-200px, -25px, -200px, -50px); }
-  #btncite      { @include sprite-position(-225px, -25px, -225px, -50px); }
-  #btnbquote    { @include sprite-position(-250px, -25px, -250px, -50px); }
-  #btnol        { @include sprite-position(-275px, -25px, -275px, -50px); }
-  #btnul        { @include sprite-position(-300px, -25px, -300px, -50px); }
-  #btnli        { @include sprite-position(-325px, -25px, -325px, -50px); }
-  #btncode      { @include sprite-position(-350px, -25px, -350px, -50px); }
-  #btnpar       { @include sprite-position(-375px, -25px, -375px, -50px); }
-  #btnlink      { @include sprite-position(-400px, -25px, -400px, -50px); }
-  #btnyt        { @include sprite-position(-425px, -25px, -425px, -50px); }
-  #btnplay      { @include sprite-position(-450px, -25px, -450px, -50px); }
-  #btnamazon    { @include sprite-position(-475px, -25px, -475px, -50px); }
-  #smsmile      { @include sprite-position(-500px, -25px, -500px, -50px); }
-  #smlaugh      { @include sprite-position(-525px, -25px, -525px, -50px); }
-  #smsad        { @include sprite-position(-550px, -25px, -550px, -50px); }
-  #smone        { @include sprite-position(-575px, -25px, -575px, -50px); }
 
   p {
     margin: 0 !important;

@@ -47,3 +47,17 @@
     content: " - \020 ";
   }
 }
+
+@mixin editor-buttons {
+  $offset: 0px;
+  $buttons: btnbold, btnitalic, btnunderline, btnmark, btndel, btnins,
+            btnuber2, btnuber3, btnquote, btncite, btnbquote, btnol,
+            btnul, btnli, btncode, btnpar, btnlink, btnyt, btnplay,
+            btnamazon, smsmile, smlaugh, smsad, smone;
+  @each $button in $buttons {
+    ##{$button} {
+      @include sprite-position($offset, -25px, $offset, -50px);
+    }
+    $offset: $offset - 25px;
+  }
+}
