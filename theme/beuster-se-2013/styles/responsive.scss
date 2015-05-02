@@ -221,10 +221,10 @@
             height: 60px;
           }
 
-          a.socialLinkFacebook  { @include sprite-postiion(0px, -75px, 0px, -135px); }
-          a.socialLinkGoogle    { @include sprite-postiion(-60px, -75px, -60px, -135px); }
-          a.socialLinkTwitter   { @include sprite-postiion(-120px, -75px, -120px, -135px); }
-          a.socialLinkYoutube   { @include sprite-postiion(-180px, -75px, -180px, -135px); }
+          a.socialLinkFacebook  { @include sprite-position(0px, -75px, 0px, -135px); }
+          a.socialLinkGoogle    { @include sprite-position(-60px, -75px, -60px, -135px); }
+          a.socialLinkTwitter   { @include sprite-position(-120px, -75px, -120px, -135px); }
+          a.socialLinkYoutube   { @include sprite-position(-180px, -75px, -180px, -135px); }
         }
       }
     }
@@ -361,10 +361,10 @@
             height: 50px;
           }
 
-          a.socialLinkFacebook  { @include sprite-postiion(-240px, -75px, -240px, -125px); }
-          a.socialLinkGoogle    { @include sprite-postiion(-290px, -75px, -290px, -125px); }
-          a.socialLinkTwitter   { @include sprite-postiion(-340px, -75px, -340px, -125px); }
-          a.socialLinkYoutube   { @include sprite-postiion(-390px, -75px, -390px, -125px); }
+          a.socialLinkFacebook  { @include sprite-position(-240px, -75px, -240px, -125px); }
+          a.socialLinkGoogle    { @include sprite-position(-290px, -75px, -290px, -125px); }
+          a.socialLinkTwitter   { @include sprite-position(-340px, -75px, -340px, -125px); }
+          a.socialLinkYoutube   { @include sprite-position(-390px, -75px, -390px, -125px); }
         }
       }
     }
@@ -789,10 +789,10 @@
             height: 60px;
           }
 
-          a.socialLinkFacebook  { @include sprite-postiion(0px, -75px, 0px, -135px); }
-          a.socialLinkGoogle    { @include sprite-postiion(-60px, -75px, -60px, -135px); }
-          a.socialLinkTwitter   { @include sprite-postiion(-120px, -75px, -120px, -135px); }
-          a.socialLinkYoutube   { @include sprite-postiion(-180px, -75px, -180px, -135px); }
+          a.socialLinkFacebook  { @include sprite-position(0px, -75px, 0px, -135px); }
+          a.socialLinkGoogle    { @include sprite-position(-60px, -75px, -60px, -135px); }
+          a.socialLinkTwitter   { @include sprite-position(-120px, -75px, -120px, -135px); }
+          a.socialLinkYoutube   { @include sprite-position(-180px, -75px, -180px, -135px); }
         }
       }
     }
