@@ -53,7 +53,7 @@ beusterse.bbCode = {
       });
       $('#btnamazon').click(function(){
         var asin = prompt('ASIN eingeben:','');
-        beusterse.bbCode.wrapSelection(beusterse.bbCode.makeEventData('[asin=' + asin, ']'));
+        beusterse.bbCode.wrapSelection(beusterse.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
       });
     }
   },
@@ -87,12 +87,14 @@ beusterse.bbCode = {
   },
 
   wrapUrl: function(event) {
-    var url = prompt(event.data.text,'http://');
-    var ext = beusterse.bbCode.hasSelected() ? url : '';
-    url = (url == 'http://' || url == '') ? '' : '=' + url;
+    var url = prompt(event.data.text, 'http://');
+    if(url == 'http://' || url == '')
+      return;
+
+    var ext = beusterse.bbCode.hasSelected() ? '' : url;
     beusterse.bbCode.wrapSelection(
       beusterse.bbCode.makeEventData(
-        '[' + event.data.tag + '' + url + ']' + ext,
+        '[' + event.data.tag + '=' + url + ']' + ext,
         '[/' + event.data.tag + ']'
       ));
   }
