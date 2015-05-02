@@ -3,12 +3,7 @@
 /** footer.scss **/
 
 #beMainFooter a {
-  text-decoration: none;
-  color: $white;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  @include underline-link($white);
 }
 
 div.adSense.footer {

@@ -14,12 +14,7 @@ br.clear {
 }
 
 a {
-  text-decoration: none;
-  color: $highlight_blue;
-
-  &:hover {
-    color: $highlight_red;
-  }
+  @include default-link($highlight_blue, $highlight_red);
 }
 
 .alert {

@@ -13,11 +13,7 @@
     background: $lighterer_gray;
 
     a {
-      color: $highlight_blue_darkest;
-
-      &:hover {
-        color: $highlight_blue;
-      }
+      @include default-link($highlight_blue_darkest, $highlight_blue);
     }
 
     .title {

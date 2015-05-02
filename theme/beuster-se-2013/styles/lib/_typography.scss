@@ -21,3 +21,21 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin default-link($color, $hover) {
+  text-decoration: none;
+  color: $color;
+
+  &:hover {
+    color: $hover;
+  }
+}
+
+@mixin underline-link($color) {
+  text-decoration: none;
+  color: $color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

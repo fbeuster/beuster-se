@@ -44,11 +44,7 @@
   }
 
   h3.downloads a {
-    color: $highlight_blue_dark;
-
-    &:hover {
-      color: $highlight_blue_darker;
-    }
+    @include default-link($highlight_blue_dark, $highlight_blue_darker);
   }
 
   .projState {

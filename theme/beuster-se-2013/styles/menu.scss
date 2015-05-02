@@ -3,11 +3,10 @@
 /** menu.scss **/
 
 #beMainNav {
+  @include background-band($highlight_blue, $white);
   text-align: center;
   margin: 10px 0 0 0 !important;
   padding: 0 !important;
-  background: $highlight_blue;
-  border-top: 1px solid $white;
   border-bottom: 1px solid $white;
   box-shadow: 0 0 5px $dark_gray;
 
@@ -41,11 +40,7 @@ menu.beCategoryNav {
 
     a {
       font-size: 20px;
-      color: $highlight_blue_darkest;
-
-      &:hover {
-        color: $highlight_red;
-      }
+      @include default-link($highlight_blue_darkest, $highlight_red);
     }
   }
 }
