@@ -39,3 +39,11 @@
     text-decoration: underline;
   }
 }
+
+@mixin stroked-list {
+  list-style-type: none;
+
+  &:before {
+    content: " - \020 ";
+  }
+}

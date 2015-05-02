@@ -35,28 +35,15 @@
 
 #galL,
 #galR {
+  @include sprite;
   display: none;
-    float: left;
-    text-align: center;
-    background: url('../images/sprite.png') no-repeat;
-    height: 105px;
+  float: left;
+  text-align: center;
+  height: 105px;
 }
 
-#galL {
-  background-position: -600px -25px;
-
-  &:hover {
-    background-position: -600px -130px;
-  }
-}
-
-#galR {
-  background-position: -625px -25px;
-
-  &:hover {
-    background-position: -625px -130px;
-  }
-}
+#galL { @include sprite-position(-600px, -25px, -600px, -130px); }
+#galR { @include sprite-position(-625px, -25px, -625px, -130px); }
 
 .beLightbox {
   display: none;

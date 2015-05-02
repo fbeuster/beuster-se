@@ -45,11 +45,7 @@
 
         dd.articleLink {
           @include text-inline-truncate;
-          color: $highlight_blue;
-
-          &:hover {
-            color: $highlight_red;
-          }
+          @include default-link($highlight_blue, $highlight_red);
         }
       }
 
@@ -77,11 +73,7 @@
         text-indent: -1em;
 
         li {
-          list-style-type: none;
-
-          &:before {
-            content: " - \020 ";
-          }
+          @include stroked_list;
         }
       }
     }
@@ -112,15 +104,14 @@
         }
 
         &[type=submit] {
+          @include sprite;
+          @include sprite-position(-440px, -75px, -440px, -105px);
           width: 30px;
           padding: 5px 0;
           border: 1px solid $gray;
           border-left: 0;
-          background: url('../images/sprite.png') no-repeat;
-          background-position: -440px -75px;
 
           &:hover {
-            background-position: -440px -105px;
             cursor: pointer;
           }
         }
@@ -145,8 +136,8 @@
           display: inline-block;
 
           a {
+            @include sprite;
             display: block;
-            background: url('../images/sprite.png') no-repeat;
           }
         }
       }

@@ -1,0 +1,19 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** lib/_images.scss **/
+
+$sprite_image: '../images/sprite.png';
+
+@mixin sprite($color:transparent, $left:0px, $top:0px) {
+  background: $color url($sprite_image) no-repeat $left $top;
+}
+
+@mixin sprite-position($left, $top, $left_hover:'', $top_hover:'') {
+  background-position: $left $top;
+
+  @if $left_hover != '' && $top_hover != '' {
+    &:hover {
+      background-position: $left_hover $top_hover;
+    }
+  }
+}

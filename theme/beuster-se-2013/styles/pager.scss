@@ -22,15 +22,15 @@
   }
 
   .pArrows {
+    @include sprite;
     display: none;
-    background: url('../images/sprite.png') no-repeat;
 
     &#pagerleft {
-      background-position: -470px -75px;
+      @include sprite-position(-470px, -75px);
     }
 
     &#pagerright {
-      background-position: -470px -100px;
+      @include sprite-position(-470px, -100px);
     }
   }
 }
