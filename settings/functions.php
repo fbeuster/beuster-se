@@ -98,11 +98,11 @@
     }
 
     function showInfo($msg, $refr) {
-        $ret['test'] = 'ss';
-        $ret['filename'] = 'info.php';
-        $ret['data']['msg'] = $msg;
-        $ret['data']['refresh'] = $refr;
-        return $ret;
+      return array(
+        'filename'  => 'static.php',
+        'data'      => $msg,
+        'refresh'   => $refr 
+      );
     }
 
     function refreshCookies($pass = ''){
