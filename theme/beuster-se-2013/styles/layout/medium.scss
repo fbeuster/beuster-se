@@ -1,0 +1,464 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** medium.scss **/
+
+@media (min-width: 500px) {
+  header#beMainHeader {
+    h1.pageTitle,
+    span.pageTitle {
+      font-size: 30px;
+
+      span {
+        font-size: 20px;
+      }
+    }
+  }
+
+  menu#beMainNav li {
+    padding: 3px 5px;
+    display: inline-block;
+
+    a {
+      font-size: 20px;
+    }
+  }
+
+  #beMainPortfolio {
+    width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 570px) {
+  header#beMainHeader {
+    h1.pageTitle,
+    span.pageTitle {
+      font-size: 35px;
+
+      span {
+        font-size: 25px;
+      }
+    }
+  }
+
+  menu#beMainNav li {
+    padding: 3px 10px;
+  }
+
+  div.beContentEntryGallery {
+    width: 510px;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 510px;
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 469px;
+      max-height: 313px;
+    }
+  }
+}
+
+@media (max-width: 629px) {
+  #beMainContainer {
+    padding: 0 20px;
+  }
+
+  .beContentEntryImage img {
+    width: 100%;
+  }
+
+  #beMainContainer {
+    &.multipleArticles #beMainContent article.beContentEntry .beContentEntryFooter {
+      width: inherit;
+    }
+
+    &.singleArticle #beMainContent article.beContentEntry {
+      & .embeddedVideo.video {
+        width: inherit;
+        height: inherit;
+      }
+
+      & pre {
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;       /* Opera 4-6 */
+        white-space: -o-pre-wrap;       /* Opera 7 */
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  #beContentEntryComments div.beCommentEntry span.beCommentEntryAvatar {
+    &, & img {
+      width: 69px;
+      height: 69px;
+    }
+  }
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 60px;
+
+          li, li a {
+            width: 60px;
+            height: 60px;
+          }
+
+          a.socialLinkFacebook  { @include sprite-position(0px, -75px, 0px, -135px); }
+          a.socialLinkGoogle    { @include sprite-position(-60px, -75px, -60px, -135px); }
+          a.socialLinkTwitter   { @include sprite-position(-120px, -75px, -120px, -135px); }
+          a.socialLinkYoutube   { @include sprite-position(-180px, -75px, -180px, -135px); }
+        }
+      }
+    }
+  }
+
+  .beCommentNew form {
+    label {
+      width: 90px;
+    }
+
+    input[type=text] {
+      width: 90%;
+    }
+
+    textarea {
+      width: 90%;
+    }
+
+    input[type=submit] {
+      margin: 10px auto 0 auto;
+    }
+  }
+
+  fieldset.backend.login input[type="submit"] {
+    margin: 5px 0 0 0;
+  }
+}
+
+@media (min-width: 630px) {
+  #beMainHeader {
+    height: 103px;
+
+    h1.pageTitle,
+    span.pageTitle {
+      font-size: 40px;
+
+      span {
+        font-size: 30px;
+      }
+    }
+  }
+
+  #beMainNav li a {
+    font-size: 22px;
+  }
+
+  .beCategoryNav li {
+    display: inline;
+    border-left: 1px solid $gray;
+  }
+
+  .beContentEntryRow {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 20px 10px;
+  }
+
+  .beContentEntryRow .beContentEntry {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+
+  #beMainContainer.singleArticle {
+    width: 600px;
+
+    #beMainContent {
+      float: left;
+      width: 360px;
+      margin: 0;
+
+      .beContentEntry {
+        width: 320px;
+        margin: 10px auto;
+
+        .embeddedVideo.video {
+          width: 336px;
+          height: 189px;
+        }
+      }
+    }
+  }
+
+  .beContentEntryImage img {
+    max-width: 300px;
+    max-height: 200px;
+  }
+
+  .beContentConnectedEntry {
+    float: left;
+    width: 340px;
+    height: 130px;
+  }
+
+  div.beContentEntryGallery {
+    width: 340px;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 340px;
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 321px;
+      max-height: 214px;
+    }
+  }
+
+  #beContentEntryComments div.beCommentEntry {
+    span.beCommentEntryAvatar {
+      &, & img {
+        width: 69px;
+        height: 69px;
+      }
+    }
+
+    .beCommentEntryContent {
+      margin-left: 90px;
+    }
+  }
+
+  #beMainAside {
+    &.singleArticle {
+      float: left;
+      margin: 10px 0 0 20px;
+      width: 218px;
+
+      .module.searchBox form {
+        width: 170px;
+
+        input[type=text] {
+          width: 118px;
+        }
+      }
+    }
+
+    &.portfolio,
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
+
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 50px;
+
+          li, li a {
+            width: 50px;
+            height: 50px;
+          }
+
+          a.socialLinkFacebook  { @include sprite-position(-240px, -75px, -240px, -125px); }
+          a.socialLinkGoogle    { @include sprite-position(-290px, -75px, -290px, -125px); }
+          a.socialLinkTwitter   { @include sprite-position(-340px, -75px, -340px, -125px); }
+          a.socialLinkYoutube   { @include sprite-position(-390px, -75px, -390px, -125px); }
+        }
+      }
+    }
+  }
+
+  .beCommentNew form {
+    label {
+      width: 100px;
+    }
+
+    input[type=text] {
+      width: 310px;
+    }
+
+    textarea {
+      width: 310px;
+    }
+
+    input[type=submit] {
+      margin: 10px 0 0 94px;
+    }
+  }
+}
+
+@media (max-width: 739px) {
+  #beMainContainer.multipleArticles {
+    padding: 0 20px;
+
+    #beMainContent article.beContentEntry .beContentEntryFooter {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  fieldset.backend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &.login {
+      label {
+        display: block;
+      }
+
+      label,
+      input[type="text"],
+      input[type="password"],
+      input[type="submit"] {
+        width: 95%;
+      }
+
+      input[type="submit"] {
+        display: block;
+        margin: 5px auto 0 auto;
+      }
+    }
+
+    #files {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@media (min-width: 740px) {
+  #beMainPortfolio {
+    width: 720px;
+    margin: 0 auto;
+  }
+
+  #beMainContainer {
+    &.singleArticle {
+      width: 720px;
+
+      #beMainContent {
+        width: 480px;
+
+        .beContentEntry {
+          width: 440px;
+
+          .embeddedVideo.video {
+            width: 448px;
+            height: 252px;
+          }
+        }
+      }
+    }
+
+    &.multipleArticles {
+      width: 720px;
+
+      #beMainContent {
+        width: 700px;
+        margin: 0;
+
+        article.beContentEntry {
+          width: 288px;
+          margin: 10px;
+        }
+      }
+    }
+  }
+
+  .beContentEntryFooter span {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+
+  .beContentEntryImage img {
+    max-width: 420px;
+    max-height: 280px;
+  }
+
+  .beContentConnected {
+    width: 482px;
+  }
+
+  .beContentConnectedEntry {
+    width: 460px;
+  }
+
+  div.beContentEntryGallery {
+    width: 450px;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 340px;
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 340px;
+      max-height: 227px;
+    }
+  }
+
+  #beMainAside {
+    &.portfolio,
+    &.multipleArticles {
+      float: none;
+      width: 328px;
+    }
+  }
+
+  h1.beCategoryHeader {
+    width: 100%;
+    margin: 0;
+  }
+
+  .beCommentNew form {
+    input[type=text] {
+      width: 230px;
+    }
+    textarea {
+      width: 340px;
+    }
+  }
+
+  fieldset.backend.login {
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 300px;
+    }
+
+    input[type="submit"] {
+      width: 130px;
+      margin: 5px 0 0 110px;
+    }
+  }
+}
+
+@media (max-width: 979px) {
+  #galL, #galR {
+      display: none !important;
+  }
+
+  div#beContentEntryComments div.beCommentEntry .reply {
+    display: block;
+    margin-top: 10px;
+  }
+}

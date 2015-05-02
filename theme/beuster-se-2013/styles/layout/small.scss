@@ -1,0 +1,156 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** small.scss **/
+
+@media (max-height: 719px) {
+  div#beMainContainer{
+    margin-top: 20px;
+  }
+}
+
+@media (min-height: 720px) and (min-width: 630px) {
+  header#beMainHeader {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+  }
+
+  div#beMainContainer{
+    margin-top: 120px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    &[id]:target:before {
+      display:block;
+      content:"";
+      height:120px;
+      margin:-120px 0 0;
+    }
+  }
+}
+
+@media (min-width: 260px) {
+  #beMainPortfolio {
+    width: 240px;
+    margin: 0 auto;
+  }
+
+  #galL, #galR {
+    width: 20px;
+  }
+}
+
+@media (min-width: 330px) {
+  footer#beMainFooter {
+    height: 42px;
+  }
+
+  #beMainAside {
+    &.portfolio,
+    &.singleArticle,
+    &.multipleArticles {
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 339px) {
+  div.beContentEntryGallery {
+    text-align: center;
+  }
+
+  ul.beContentEntryGalleryImageList li {
+    display: inline-block;
+
+    &.hasjs {
+      display: none;
+    }
+  }
+
+  div#beMainContainer.singleArticle div#beMainContent article.beContentEntry .embeddedVideo {
+    &.video {
+      display: none !important;
+    }
+
+    &.link {
+      display: block !important;
+    }
+  }
+
+  .beCommentEntry {
+    .beCommentEntryAvatar {
+      display: none !important;
+    }
+    .beCommentEntryContent {
+      margin-left: 0px;
+    }
+  }
+}
+
+@media (min-width: 340px) {
+  .beCommentEntry {
+    .beCommentEntryAvatar {
+      display: block;
+    }
+
+    .beCommentEntryContent {
+      margin-left: 90px;
+    }
+  }
+}
+
+@media (min-width: 400px) {
+  div#beMainContainer.singleArticle div#beMainContent article.beContentEntry .embeddedVideo{
+    &.video {
+      display: block !important;
+    }
+
+    &.link {
+      display: none !important;
+    }
+  }
+
+  div.beContentEntryGallery {
+    width: 340px;
+    text-align: left;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 340px;
+
+    li {
+      display: block;
+      float: left;
+
+      &.hasjs {
+        display: none;
+      }
+    }
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 340px;
+      max-height: 227px;
+    }
+  }
+}
+
+@media (max-width: 499px) {
+  header#beMainHeader {
+    h1.pageTitle,
+    span.pageTitle {
+      font-size: 25px;
+
+      span {
+        font-size: 18px;
+      }
+    }
+  }
+}

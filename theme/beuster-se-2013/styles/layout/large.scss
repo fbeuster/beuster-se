@@ -1,0 +1,391 @@
+/** beuster{se} | (c) 2010-2015 **/
+
+/** large.scss **/
+
+@media (min-width: 980px) {
+  #beMainContainer {
+    &.singleArticle {
+      width: 960px;
+
+      #beMainContent {
+        width: 720px;
+
+        .beContentEntry {
+          width: 680px;
+
+          .embeddedVideo.video {
+            width: 560px;
+            height: 315px;
+          }
+        }
+      }
+    }
+
+    &.multipleArticles {
+      width: 960px;
+
+      #beMainContent {
+        width: 960px;
+        margin: 0;
+
+        article.beContentEntry {
+          width: 418px;
+        }
+      }
+    }
+  }
+
+  .beContentEntryFooter span {
+    display: block;
+    width: auto;
+  }
+
+  .beContentEntry .beContentEntryFooter {
+    span.categoryLink {
+      float: left;
+      margin: 0 5px 0 0;
+      padding: 0 5px 0 0;
+      border-right: 1px solid $lighter_gray;
+    }
+
+    span.authorLink {
+      float: left;
+    }
+
+    span.commentsLink {
+      float: right;
+      margin: 0 0 0 10px;
+    }
+  }
+
+  .beContentEntryImage img {
+    max-width: 600px;
+    max-height: 400px;
+  }
+
+  .beContentEntryGalleryBigImage {
+    float: left;
+  }
+
+  #galL, #galR {
+      width: 30px;
+  }
+
+  .beContentConnected {
+    width: 722px;
+  }
+
+  .beContentConnectedEntry {
+    width: 329px;
+    height: 150px;
+
+    &.odd {
+      margin-left: 10px;
+    }
+
+    &.even {
+      margin-right: 10px;
+    }
+  }
+
+  div.beContentEntryGallery {
+    width: 690px;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 680px;
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 630px;
+      max-height: 420px;
+    }
+  }
+
+  #beContentEntryComments div.beCommentEntry {
+    span.beCommentEntryAvatar {
+      &, & img {
+        width: 89px;
+        height: 89px;
+      }
+    }
+
+    .beCommentEntryContent {
+      margin-left: 110px;
+    }
+
+    .reply {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  #beMainAside {
+    &.singleArticle {
+      float: left;
+      margin: 10px 0 0 20px;
+      width: 218px;
+    }
+
+    &.multipleArticles {
+      width: 468px;
+    }
+
+    &.portfolio {
+      float: left;
+      margin: 10px 0 0 20px;
+      width: 218px;
+
+      .module.searchBox form {
+        width: 170px;
+
+        input[type=text] {
+          width: 118px;
+        }
+      }
+    }
+  }
+
+  #beMainPortfolio {
+    float: left;
+    width: 720px;
+    margin: 0;
+  }
+
+  .beCommentNew form textarea {
+    width: 430px;
+  }
+}
+
+@media (min-width: 1300px) {
+  #beMainPortfolio {
+    width: 960px;
+  }
+
+  #beMainAside {
+    &.portfolio {
+      margin: 10px 0 0 30px;
+      width: 278px;
+
+      .module.searchBox form {
+        width: 230px;
+
+        input[type=text] {
+          width: 178px;
+        }
+      }
+    }
+
+    &.singleArticle {
+      width: 288px;
+
+      .module.searchBox form {
+        width: 210px;
+
+        input[type=text] {
+          width: 158px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      float: left;
+      margin: 10px 0 0 10px;
+      width: 238px;
+
+      .module.searchBox form {
+        width: 190px;
+
+        input[type=text] {
+          width: 138px;
+        }
+      }
+    }
+  }
+
+  #beMainContainer {
+    &.singleArticle {
+      width: 1280px;
+
+      #beMainContent {
+        width: 970px;
+
+        .beContentEntry {
+          width: 930px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      width: 1280px;
+
+      #beMainContent {
+        float: left;
+        width: 1020px;
+
+        article.beContentEntry {
+          width: 448px;
+        }
+      }
+    }
+  }
+
+  .beContentEntryImage img {
+    max-width: 750px;
+    max-height: 500px;
+  }
+
+  .beContentConnected {
+    width: 972px;
+  }
+
+  .beContentConnectedEntry {
+    width: 454px;
+    height: 130px;
+  }
+
+  div.beContentEntryGallery {
+    width: 900px;
+  }
+
+  ul.beContentEntryGalleryImageList {
+    width: 850px;
+  }
+
+  div.beContentEntryGalleryBigImage {
+    &, & img {
+      max-width: 830px;
+      max-height: 554px;
+    }
+  }
+
+  div#beContentEntryComments div.beCommentEntry {
+    .beCommentEntryContent {
+      margin-left: 120px;
+    }
+
+    span.beCommentEntryAvatar {
+      &, & img {
+        width: 99px;
+        height: 99px;
+      }
+    }
+  }
+
+  #beMainAside {
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 50px;
+
+          li, li a {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1620px) {
+  #beMainContainer {
+    &.singleArticle {
+      width: 1350px;
+
+      #beMainContent {
+        width: 970px;
+
+        .beContentEntry {
+          width: 930px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      width: 1600px;
+
+      #beMainContent {
+        width: 1320px;
+
+        article.beContentEntry {
+          width: 598px;
+        }
+      }
+    }
+  }
+
+  #beMainAside {
+    &.singleArticle,
+    &.portfolio {
+      width: 348px;
+
+      .module.searchBox form {
+        width: 260px;
+
+        input[type=text] {
+          width: 208px;
+        }
+      }
+    }
+
+    &.multipleArticles {
+      width: 258px;
+
+      .module.searchBox form {
+        width: 220px;
+
+        input[type=text] {
+          width: 168px;
+        }
+      }
+    }
+
+    .module {
+      &.socialInteraction {
+        ul.socialInteraction {
+          height: 60px;
+
+          li,  li a {
+            width: 60px;
+            height: 60px;
+          }
+
+          a.socialLinkFacebook  { @include sprite-position(0px, -75px, 0px, -135px); }
+          a.socialLinkGoogle    { @include sprite-position(-60px, -75px, -60px, -135px); }
+          a.socialLinkTwitter   { @include sprite-position(-120px, -75px, -120px, -135px); }
+          a.socialLinkYoutube   { @include sprite-position(-180px, -75px, -180px, -135px); }
+        }
+      }
+    }
+  }
+
+  #beMainPortfolio {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #beMainContainer.multipleArticles {
+    width: 1830px;
+
+    #beMainContent {
+      width: 1470px;
+
+      article.beContentEntry {
+        width: 673px;
+        height: 380px;
+      }
+    }
+  }
+
+  #beMainAside.multipleArticles {
+    width: 328px;
+  }
+
+  #beMainPortfolio {
+    width: 1440px;
+  }
+}

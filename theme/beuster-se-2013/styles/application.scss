@@ -8,6 +8,10 @@
 @import 'lib/_typography';
 @import 'typography';
 
+@import 'small';
+@import 'medium';
+@import 'large';
+
 @import 'backend';
 @import 'comments';
 @import 'content';
@@ -18,7 +22,6 @@
 @import 'menu';
 @import 'pager';
 @import 'portfolio';
-@import 'responsive';
 @import 'search';
 @import 'sidebar';
 
