@@ -1,3 +1,6 @@
+# some workspace related ignores
+.settings/*
+
 # this is webspace specific
 .htaccess
 .htpasswd

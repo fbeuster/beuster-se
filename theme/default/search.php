@@ -11,25 +11,25 @@
          von <?php echo $data['anzRes']; ?>
        </p><?php
         $i = 1;
-        foreach($data['result'] as $result)
-        {
+        foreach($data['result'] as $result) {
+          $article = $result->getArticle();
          ?>
     <article>
       <header>
         <p>
-          <time><?php echo $result['dat'] ?></time>
-          <a href="<?php echo getLink($result['cat'], $result['id'], $result['tit']);?>" class="title"><?php echo $result['tit']; ?></a>
+          <time><?php echo date('d.m.Y', $article->getDate()); ?></time>
+          <a href="<?php echo $article->getLink();?>" class="title"><?php echo $result->getMarkedTitle(); ?></a>
           <span>
-            <a href="<?php echo getLink($result['cat'], $result['id'], $result['tit']);?>">
-              <?php echo $result['cmt']; ?> Kommentare
+            <a href="<?php echo $article->getLink();?>">
+              <?php echo count($article->getComments()); ?> Kommentare
             </a>
           </span>
           <span>
-            Kategorie: <a href="/<?php echo $result['cat']; ?>"><?php echo $result['cat']; ?></a>
+            Kategorie: <a href="/<?php echo $article->getCategory()->getName(); ?>"><?php echo $article->getCategory()->getName(); ?></a>
           </span>
         </p>
       </header>
-      <p><?php echo str_replace('###link###', getLink($result['cat'], $result['id'], $result['tit']), $result['inh'])."\n";?></p>
+      <p><?php echo str_replace('###link###', $article->getLink(), $result->getMarkedContent())."\n";?></p>
     </article><?php
          $i++;
         }

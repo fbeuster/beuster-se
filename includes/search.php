@@ -3,20 +3,19 @@
   $a['filename'] = 'search.php';
   $a['data'] = array();
   $db = Database::getDB()->getCon();
-  $config = Config::getConfig();
 
   $searchStr = '';
   if(isset($_POST['s'])){$searchStr = trim($_POST['s']);}
   if(isset($_GET['s'])){$searchStr = trim($_GET['s']);}
 
   if('' == $searchStr){
-    $a ['data']['error'] = 'Du hast keinen Suchbegriff eingegeben.';
-    $a['data']['str'] = $searchStr;
+    $a['data']['error'] = 'Du hast keinen Suchbegriff eingegeben.';
+    $a['data']['str']   = $searchStr;
   } else if(strlen($searchStr) < 3 && '' !== $searchStr){
-    $a ['data']['error'] = 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.';
-    $a['data']['str'] = $searchStr;
+    $a['data']['error'] = 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.';
+    $a['data']['str']   = $searchStr;
   } else if('' !== $searchStr && strlen($searchStr) > 2){
-    $searchStr = $db->real_escape_string(stripslashes(htmlspecialchars($searchStr)));
+    $searchStr    = $db->real_escape_string(stripslashes(htmlspecialchars($searchStr)));
     $searchStrLow = mb_strtolower($searchStr, 'UTF-8');
 
     $news = array();
@@ -42,6 +41,7 @@
     }
     $result->close();
     $maxTime = getMaxNewsUpTime();
+    
     foreach($news as $key => $entry) {
 
       /* Title-Score */
@@ -85,8 +85,9 @@
       }
       $result->close();
       $scoreComment = 0;
+
       foreach($comments as $keyC => $entryC) {
-        $scoreCommentSim = rank($entryC['content'], $searchStr, $config->get('search.case_sensitive'));
+        $scoreCommentSim = rank($entryC['content'], $searchStr, Config::getConfig()->get('search.case_sensitive'));
         $scoreCommentApr = substr_count(mb_strtolower($entryC['content'], 'UTF-8'), $searchStrLow);
         $scoreCommentExa = substr_count($entryC['content'], $searchStr);
         $scoreComment += ($scoreCommentSim - $scoreCommentApr - $scoreCommentExa) * 3;
@@ -111,47 +112,15 @@
         $news[$key]['score'] = $rank * $timeFactor;
       }
     }
+
     usort($news, 'sortCompare');
+
     $results = array();
     foreach($news as $key => $val){
-      $sql = 'SELECT
-                news.ID,
-                news.Titel,
-                news.Inhalt,
-                DATE_FORMAT(news.Datum, "'.DATE_STYLE.'") AS Changedatum,
-                COUNT(kommentare.ID) AS cmtAnz,
-                news.Autor,
-                newscat.Cat
-              FROM
-                news
-              LEFT JOIN
-                kommentare ON
-                kommentare.NewsID = news.ID
-              JOIN
-                newscatcross ON
-                news.ID = newscatcross.NewsID
-              JOIN
-                newscat ON
-                newscatcross.Cat = newscat.ID
-              WHERE
-                news.ID = ?';
-      if(!$stmt = $db->prepare($sql)) {return $db->error;}
-      $stmt->bind_param('i', $val['id']);
-      if(!$stmt->execute()){return $db->error;}
-      $stmt->bind_result($id, $titel, $inhalt, $datum, $cmtAnz, $autor, $cat);
-      if($stmt->fetch()){
-        $results[] = array(
-          'id'    => $id,
-          'tit'   => $config->get('search.marks') ? searchMark($titel, $searchStr, true) : $titel,
-          'inh'   => $config->get('search.marks') ? changetext(searchmark($inhalt, $searchStr, true), 'vorschau') : changetext($inhalt, 'vorschau'),
-          'cat'   => $cat,
-          'dat'   => $datum,
-          'cmt'   => $cmtAnz,
-          'aut'   => $autor);
-      }
-      $stmt->close();
+      $results[] = new SearchResult($val['id'], $searchStr);
     }
     $a['data']['result'] = $results;
+
     if(isset($a['data']['result'])){
       $anzRes = count($a['data']['result']);
       $pageNbr = ceil($anzRes / 5);
