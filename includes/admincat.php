@@ -1,10 +1,11 @@
-﻿<?php
+<?php
     $a = array();
-    if (getUserID() and hasUserRights('admin')) {
+    $user = User::newFromId(getUserID());
+    if ($user && $user->isAdmin()) {
         refreshCookies();
         $a['filename'] = 'admincat.php';
         $a['data'] = array();
-  
+
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errMessages = array(
                 1   => 'Ein Parent soll gelöscht werden, aber das Ziel für die News fehlt.',
@@ -109,7 +110,7 @@
                                 }
                             }
                         }
-                    }     
+                    }
                     if($err == 0) {
                         // TODO: Alles gut, News updaten und Cats löschen
                         foreach($catDels as $del => $tar) {
@@ -149,7 +150,7 @@
                                 $err = 11;
                             }
                         }
-                    }     
+                    }
                 } else {
                     $err = 6;
                 }
@@ -199,8 +200,8 @@
         $a['data']['cats'] = $cats;
         $a['data']['pars'] = $pars;
         return $a;
-    } else if(getUserID()){
-        return 'Sie haben hier keine Zugriffsrechte.';
+    } else if($user){
+        return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';
     }

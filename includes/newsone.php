@@ -25,7 +25,8 @@
         $Inhalt = remDoubles($Inhalt, array('[b]','[i]','[u]'));
         $replyTo = checkReplyId(trim($_POST['reply']));
 
-        if (getUserID() && hasUserRights('admin')) {
+        $user = User::newFromId(getUserID());
+        if ($user && $user->isAdmin()) {
             refreshCookies();
             $frei = 2;
             $Usermail = $db->real_escape_string(stripslashes(strtolower(ADMIN_GRAV_MAIL)));

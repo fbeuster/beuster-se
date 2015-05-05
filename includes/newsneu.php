@@ -1,6 +1,7 @@
 <?php
     $a = array();
-    if (getUserID() && hasUserRights('admin')) {
+    $user = User::newFromId(getUserID());
+    if ($user && $user->isAdmin()) {
         refreshCookies();
         $a['filename'] = 'newsneu.php';
         $a['data'] = array();
@@ -356,8 +357,8 @@
         $a['data']['cats'][] = 'Blog';
         $a['data']['pls'] = getPlaylists();
         return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-    } else if(getUserID()){
-        return 'Sie haben hier keine Zugriffsrechte.';
+    } else if($user){
+        return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
     } else {
         return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';
     }
