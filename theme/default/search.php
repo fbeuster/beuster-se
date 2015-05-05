@@ -38,7 +38,7 @@
        }
       ?>
   <?php
-    if($data['pageNbr'] >= 1) {
+    if(isset($data['pageNbr']) && $data['pageNbr'] >= 1) {
       echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page');
     }
   ?>
