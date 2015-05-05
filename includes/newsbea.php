@@ -344,9 +344,9 @@
                     $a['data']['err']['type'] = analyseErrNewsBea($err);
                 }
             } else if(isset($_POST['formactionchoose'])) {
+                $id = trim($_POST['newsid']);
                 /*** zum Bearbeiten holen ***/
                 $sql = 'SELECT
-                            news.ID,
                             news.Titel,
                             news.Inhalt,
                             news.enable,
@@ -363,17 +363,17 @@
                         WHERE
                             news.ID = ?';
                 if(!$stmt = $db->prepare($sql)) {return $db->error;}
-                $stmt->bind_param('i', trim($_POST['newsid']));
+                $stmt->bind_param('i', $id);
                 if(!$stmt->execute()) {return $stmt->error;}
-                $stmt->bind_result($newsid, $newstitel, $newsinhalt, $newsena, $newscat, $newscatid);
+                $stmt->bind_result($newstitel, $newsinhalt, $newsena, $newscat, $newscatid);
                 if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsbea" class="back">Zurück zum Bearbeiten</a>';}
                 $stmt->close();
                 $a['data']['newsbea'] = array(
-                                            'newsidbea'     => $newsid,
+                                            'newsidbea'     => $id,
                                             'newsinhalt'    => changetext($newsinhalt, 'bea'),
                                             'newstitel'     => changetext($newstitel, 'bea'),
                                             'newsena'       => $newsena,
-                                            'newstags'      => getNewsTags($newsid, true),
+                                            'newstags'      => getNewsTags($id, true),
                                             'newscat'       => $newscat,
                                             'isPlaylist'    => isCatPlaylist($newscatid));
                 $sql = 'SELECT
