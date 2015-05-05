@@ -33,7 +33,7 @@
         <input type="submit" name="formactionchoose" value="Gewählte News bearbeiten">
         <br>
         <label>Manuelle Freigabe</label>
-        <input type="checkbox" name="enable">
+        <input type="checkbox" name="enable" <?php echo isset($data['newsbea']) && $data['newsbea']['newsena'] == 0 ? ' checked="checked"' : ''; ?>>
         <br>
         <?php if(isset($data['newsbea'])) {$newsbea = $data['newsbea'];}
               else {$newsbea = array('newstitel' => '', 'newsinhalt' => '', 'newsidbea' => '', 'newstags' => '');}?>

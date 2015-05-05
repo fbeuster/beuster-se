@@ -349,6 +349,7 @@
                             news.ID,
                             news.Titel,
                             news.Inhalt,
+                            news.enable,
                             newscat.Cat,
                             newscat.ID
                         FROM
@@ -364,13 +365,14 @@
                 if(!$stmt = $db->prepare($sql)) {return $db->error;}
                 $stmt->bind_param('i', trim($_POST['newsid']));
                 if(!$stmt->execute()) {return $stmt->error;}
-                $stmt->bind_result($newsid, $newstitel, $newsinhalt, $newscat, $newscatid);
+                $stmt->bind_result($newsid, $newstitel, $newsinhalt, $newsena, $newscat, $newscatid);
                 if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsbea" class="back">Zurück zum Bearbeiten</a>';}
                 $stmt->close();
                 $a['data']['newsbea'] = array(
                                             'newsidbea'     => $newsid,
                                             'newsinhalt'    => changetext($newsinhalt, 'bea'),
                                             'newstitel'     => changetext($newstitel, 'bea'),
+                                            'newsena'       => $newsena,
                                             'newstags'      => getNewsTags($newsid, true),
                                             'newscat'       => $newscat,
                                             'isPlaylist'    => isCatPlaylist($newscatid));
