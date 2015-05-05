@@ -119,7 +119,9 @@ class Lixter {
       $this->page  = new ErrorPage($error);
     } else {
       if(isset($_GET['p'])) {
-        if(isset($file[$_GET['p']][0])) {
+        if(StaticPage::exists($_GET['p'])) {
+          $this->page = new StaticPage($_GET['p']);
+        } else if(isset($file[$_GET['p']][0])) {
           if(ContentPage::exists($_GET['p'])) {
             $this->page = new ContentPage($_GET['p']);
           } else {

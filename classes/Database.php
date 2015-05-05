@@ -9,9 +9,9 @@
  * Database handler.
  * \class Database
  * \author Felix Beuster
- * 
+ *
  * Provides a simple and global access to the database.
- * 
+ *
  * \todo function for INSERT
  * \todo function for DELETE
  * \todo function for UPDATE
@@ -36,9 +36,9 @@ class Database {
 
 	/**
 	 * Get Database instance.
-	 * 
+	 *
 	 * retrievieng the current or a new database instance
-	 * 
+	 *
 	 * @return Database
 	 */
 	public static function getDB() {
@@ -49,9 +49,9 @@ class Database {
 
 	/**
 	 * Get connection to database.
-	 * 
+	 *
 	 * retrieving and generating a MySQLi connection
-	 * 
+	 *
 	 * @return MySQLi
 	 */
 	public function getCon() {
@@ -63,12 +63,18 @@ class Database {
 		return $this->con;
 	}
 
+	public function tableExists($table) {
+		$sql 		= 'SELECT 1 FROM '.$table;
+		$result = $this->con->query($sql);
+		return isset($result->num_rows);
+	}
+
 	/**
 	 * Select from database.
-	 * 
+	 *
 	 * selects data from database
 	 * function retuns an array of rows or null
-	 * 
+	 *
 	 * @param String $table name for table to select
 	 * @param array $fields array of field names
 	 * @param array $cond WHERE conidtions, given as array(condition_string, types, array(vars))
@@ -78,7 +84,7 @@ class Database {
 	 * @return null|Array
 	 */
 	public function select($table, $fields, $cond = null, $options = null, $limit = null, $join = null) {
-		
+
 		// concatenate fields
 		if(!is_array($fields) || empty($fields)) {
 			$this->error = 'empty fields';
@@ -226,7 +232,7 @@ class Database {
 			$this->error = $stmt->error;
 			return null;
 		}
-		
+
 		// bind_result
 		$rs = array();
 		$meta = $stmt->result_metadata();

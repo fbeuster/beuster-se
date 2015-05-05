@@ -13,6 +13,10 @@ class ErrorPage extends Page {
     return $this->message;
   }
 
+  public function getParsedContent() {
+    return '<p>'.$this->message.'</p>';
+  }
+
   public function getFileName() {
     return $this->file_name;
   }
