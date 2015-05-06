@@ -35,6 +35,10 @@ class StaticPage extends Page {
     return '<p>'.changetext($this->content, 'inhalt').'</p>';
   }
 
+  public function getTitle() {
+    return $this->title;
+  }
+
   public function getFileName() {
     return $this->file_name;
   }

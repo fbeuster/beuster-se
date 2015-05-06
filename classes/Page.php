@@ -26,6 +26,10 @@ abstract class Page {
   public abstract function getType();
 
   public abstract function getContent();
+
+  public abstract function getParsedContent();
+
+  public abstract function getTitle();
 }
 
 ?>
