@@ -14,9 +14,10 @@
         </select>
         <input type="submit" name="formactionchoose" value="Wählen">
         <br><br>
-        <legend>Download hinzufügen</legend>
+        <legend>Download bearbeiten</legend>
         <label>Name:</label>
-        <input type="text" name="downname" value="<?php if(isset($data['fe']['titel']))echo $data['fe']['titel']; ?>">
+        <?php $name = isset($data['fe']) ? $data['fe']['titel'] : (isset($data['down']) ? $data['down']['name'] : ''); ?>
+        <input type="text" name="downname" value="<?php echo $name ?>">
         <br>
         <label>Lizenz</label>
         <select name="downlic">
@@ -29,11 +30,12 @@
         </select>
         <br>
         <label>Version:</label>
-        <input type="text" name="downver" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>">
+        <?php $version = isset($data['down']) ? $data['down']['ver'] : ''; ?>
+        <input type="text" name="downver" value="<?php echo $version; ?>">
         <br><br>
         <label>Beschreibung:</label>
         <br>
-        <p class="bb"> 
+        <p class="bb">
           <noscript>
           Möglicher BB-Code:<br />
           <?php foreach($bb as $bblist) {
@@ -44,7 +46,8 @@
            edToolbar('newsinhalt');
           </script>
         </p>
-        <textarea name="downdescr"  id="newsinhalt" cols="100" rows="20" style="vertical-align: top; float: left;"><?php if(isset($data['fe']['inhalt']))echo $data['fe']['inhalt']; ?></textarea>
+        <?php $description = isset($data['fe']) ? $data['fe']['descr'] : (isset($data['down']) ? $data['down']['descr'] : ''); ?>
+        <textarea name="downdescr" id="newsinhalt" cols="100" rows="20" style="vertical-align: top; float: left;"><?php echo $description; ?></textarea>
         <br class="clear"><br>
         <input type="submit" name="formaction" value="Download hinzufügen" />
        </fieldset>

@@ -1,6 +1,8 @@
 <?php
 $a = array();
 $user = User::newFromCookie();
+$db = Database::getDB()->getCon();
+
 if ($user && $user->isAdmin()) {
   refreshCookies();
   $a['filename'] = 'admindownbea.php';
@@ -15,7 +17,6 @@ if ($user && $user->isAdmin()) {
         ('' == $downver = $_POST['downver'])) {
       return EMPTY_FORM;
     }
-    $db = Database::getDB()->getCon();
     if(0 == $downlic = $_POST['downlic']) {
       $downlic = 'by-sa';
     }
@@ -157,17 +158,15 @@ if ($user && $user->isAdmin()) {
       if(!$stmt->execute()) {
         return $stmt->error;
       }
-      $down = array();
       $stmt->bind_result($name, $descr, $ver, $lic, $cat);
       while($stmt->fetch()) {
-        $down[] = array('id'    => $id,
-                        'name'  => $name,
-                        'descr' => $descr,
-                        'ver'   => $ver,
-                        'lic'   => $lic,
-                        'cat'   => $cat);
+        $a['data']['down'] = array( 'id'    => $id,
+                                    'name'  => $name,
+                                    'descr' => $descr,
+                                    'ver'   => $ver,
+                                    'lic'   => $lic,
+                                    'cat'   => $cat);
       }
-      $a['data']['downs'] = $down;
       $stmt->close();
     }
   }
