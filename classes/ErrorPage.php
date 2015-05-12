@@ -4,7 +4,7 @@ class ErrorPage extends Page {
   private $file_name = 'static.php';
   private $message;
   private $type = Page::STATIC_PAGE;
-  private $title = 'Fehler'
+  private $title = 'Fehler';
 
   public function __construct($message) {
     $this->message = $message;

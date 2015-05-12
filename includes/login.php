@@ -60,8 +60,8 @@
         }
         $stmt->close();
 
-        setcookie('UserID', $UserID, strtotime("+1 day"));
-        setcookie('Password', $Hash, strtotime("+1 day"));
+        setcookie('UserID', $UserID, strtotime("+1 day"), '/');
+        setcookie('Password', $Hash, strtotime("+1 day"), '/');
         $_COOKIE['UserID'] = $UserID; // fake-cookie setzen
         $_COOKIE['Password'] = $Hash; // fake-cookie setzen
 

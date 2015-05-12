@@ -101,7 +101,7 @@
       return array(
         'filename'  => 'static.php',
         'data'      => $msg,
-        'refresh'   => $refr 
+        'refresh'   => $refr
       );
     }
 
@@ -112,8 +112,8 @@
         } else {
             $Hash = $pass;
         }
-        setcookie('UserID', $UserID, strtotime("+1 day"));
-        setcookie('Password', $Hash, strtotime("+1 day"));
+        setcookie('UserID', $UserID, strtotime("+1 day"), '/');
+        setcookie('Password', $Hash, strtotime("+1 day"), '/');
     }
 
     function buildLinkTitle($title){
