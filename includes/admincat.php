@@ -1,6 +1,6 @@
 <?php
     $a = array();
-    $user = User::newFromId(getUserID());
+    $user = User::newFromCookie();
     if ($user && $user->isAdmin()) {
         refreshCookies();
         $a['filename'] = 'admincat.php';

@@ -1,5 +1,8 @@
-﻿<?php
-	if (!getUserID()) {return NOT_LOGGED_IN;}
+<?php
+  $user = User::newFromCookie();
+	if (!$user)
+    return NOT_LOGGED_IN;
+
 	$ret = array();
 	$ret['data'] = array();
 	setcookie('UserID', '', strtotime('-1 day'));

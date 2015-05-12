@@ -1,5 +1,6 @@
-﻿<?php
-    if (getUserID()) {
+<?php
+    $user = User::newFromCookie();
+    if ($user) {
         return showInfo('Sie sind bereits eingeloggt.','admin');
     }
     $ret = array();
@@ -63,7 +64,7 @@
         setcookie('Password', $Hash, strtotime("+1 day"));
         $_COOKIE['UserID'] = $UserID; // fake-cookie setzen
         $_COOKIE['Password'] = $Hash; // fake-cookie setzen
-        
+
         return showInfo('Sie sind nun eingeloggt.', 'admin');
     } else {
         return $ret;

@@ -115,8 +115,6 @@ class Lixter {
     if($db->connect_errno){
       $message        = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
       $this->page  = new ErrorPage($message);
-    } else if(is_string($error = getUserID())){
-      $this->page  = new ErrorPage($error);
     } else {
       if(isset($_GET['p'])) {
         if(StaticPage::exists($_GET['p'])) {

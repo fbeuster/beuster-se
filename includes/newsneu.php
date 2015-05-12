@@ -1,6 +1,6 @@
 <?php
     $a = array();
-    $user = User::newFromId(getUserID());
+    $user = User::newFromCookie();
     if ($user && $user->isAdmin()) {
         refreshCookies();
         $a['filename'] = 'newsneu.php';
@@ -28,7 +28,7 @@
                 $ena = 0;
             else
                 $ena = 1;
-            $authID = getUserID();
+
             if(isset($_POST['projStat']))
                 $projStat = trim($_POST['projStat']);
             $eRet = array(  'titel'  => $title,
@@ -109,7 +109,7 @@
                     if(!$stmt = $db->prepare($sql)) {
                         return $db->error;
                     }
-                    $stmt->bind_param('isssii', $authID, $title, $inhalt, $release, $ena, $projStat);
+                    $stmt->bind_param('isssii', $user->getId(), $title, $inhalt, $release, $ena, $projStat);
                     if(!$stmt->execute()) {
                         return $stmt->error;
                     }

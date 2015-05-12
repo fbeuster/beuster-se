@@ -1,6 +1,7 @@
-﻿<?php
+<?php
   $a = array();
-  if ($UserID = getUserID()) {
+  $user = User::newFromCookie();
+  if ($user) {
     refreshCookies();
     $db = Database::getDB()->getCon();
     $a['filename'] = 'userdata.php';
@@ -16,7 +17,7 @@
     if(!$stmt = $db->prepare($sql)) {
       return $db->error;
     }
-    $stmt->bind_param('i', getUserID());
+    $stmt->bind_param('i', $user->getId());
     if (!$stmt->execute()) {
         return $stmt->error;
     }
@@ -24,8 +25,8 @@
     $stmt->fetch();
     $a['data']['mailold'] = $mailold;
     $stmt->close();
-    
-    
+
+
     if('POST' == $_SERVER['REQUEST_METHOD']) {
       if(isset($_POST['changeMail']) || isset($_POST['changeBoth'])) {
         if ('' == $Mail = trim($_POST['mail'])) {
@@ -47,7 +48,7 @@
           if (!$stmt) {
             return $db->error;
           }
-          $stmt->bind_param('si', $Mail, getUserID());
+          $stmt->bind_param('si', $Mail, $user->getId());
           if (!$stmt->execute()) {
             return $stmt->error;
           }
@@ -76,7 +77,7 @@
             return $db->error;
           }
           $Hash = hash('sha512', $PassOld);
-          $stmt->bind_param('is', $UserID, $Hash);
+          $stmt->bind_param('is', $user->getId(), $Hash);
           if (!$stmt->execute()) {
             return $stmt->error;
           }
@@ -102,7 +103,7 @@
           if (!$stmt) {
             return $db->error;
           }
-          $stmt->bind_param('si', $Hash, getUserID());
+          $stmt->bind_param('si', $Hash, $user->getId());
           if (!$stmt->execute()) {
             return $stmt->error;
           }

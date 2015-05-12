@@ -102,6 +102,31 @@ class User {
 		return $u;
 	}
 
+	public static function newFromCookie() {
+    if (!isset($_COOKIE['UserID'], $_COOKIE['Password']))
+      return null;
+
+    $u = new self(self::BY_ID);
+    $u->setID($_COOKIE['UserID']);
+    $u->loadUser();
+
+    if(!$u->checkPassword($_COOKIE['Password']))
+      return null;
+
+    return $u;
+	}
+
+	public function checkPassword($password) {
+		$fields = array('Password');
+		$conds 	= array('ID = ?', 'i', array($this->id));
+		$res 		= Database::getDB()->select('users', $fields, $conds);
+
+		if(count($res) !== 1)
+			return false;
+
+		return $password === $res[0]['Password'];
+	}
+
 	/**
 	 * Loads a user.
 	 *

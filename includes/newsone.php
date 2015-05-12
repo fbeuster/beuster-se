@@ -25,7 +25,7 @@
         $Inhalt = remDoubles($Inhalt, array('[b]','[i]','[u]'));
         $replyTo = checkReplyId(trim($_POST['reply']));
 
-        $user = User::newFromId(getUserID());
+        $user = User::newFromCookie();
         if ($user && $user->isAdmin()) {
             refreshCookies();
             $frei = 2;
