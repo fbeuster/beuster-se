@@ -19,11 +19,11 @@
         <tbody>
         <?php $i = 0; foreach($data['cmt'] as $cmt) { $i++; ?>
           <tr class="backendTableRow<?php echo $i%2; ?>">
-            <td class="tabDate"><?php echo $cmt['datum'];?></td>
-            <td><div class="wrap close"><a href="<?php echo $cmt['link'];?>" title="<?php echo $cmt['titelFull']; ?>"><?php echo $cmt['titel'];?></a></div></td>
-            <td><?php if(isValidUserUrl($cmt['web'])) {echo '<a href="'.$cmt['web'].'">'.$cmt['name'].'</a>';} else {echo $cmt['name'];}?></td>
-            <td><?php echo $cmt['mail'];?></td>
-            <td><div class="wrap close"><?php echo $cmt['inhalt'];?></div></td>
+            <td class="tabDate"><?php echo date('d.m.Y', $cmt['date']); ?></td>
+            <td><div class="wrap close"><a href="<?php echo $cmt['news']->getLink();?>" title="<?php echo $cmt['news']->getTitle(); ?>"><?php echo $cmt['news']->getTitle();?></a></div></td>
+            <td><?php if(isValidUserUrl($cmt['user']->getWebsite())) {echo '<a href="'.$cmt['user']->getWebsite().'">'.$cmt['user']->getClearname().'</a>';} else {echo $cmt['user']->getClearname();}?></td>
+            <td><?php echo $cmt['user']->getMail();?></td>
+            <td><div class="wrap close"><?php echo $cmt['content'];?></div></td>
             <td><input type="radio" name="<?php echo $cmt['id'];?>" class="del" value="del"></td>
             <td><input type="radio" name="<?php echo $cmt['id'];?>" class="ena" value="frei"></td>
           </tr>

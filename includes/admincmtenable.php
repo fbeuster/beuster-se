@@ -49,74 +49,38 @@ if ($user && $user->isAdmin()) {
     }
     return showInfo('Erfolgreich abgeschlossen.<br><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
   }
-  $sql = "SELECT
-            kommentare.NewsID,
-            news.Titel,
-            newscatcross.Cat,
-            kommentare.ID,
-            kommentare.Name,
-            kommentare.Mail,
-            kommentare.Inhalt,
-            DATE_FORMAT(kommentare.Datum, '".DATE_STYLE."') AS Changedatum,
-            kommentare.Website
-          FROM
-            kommentare
-          JOIN
-            news ON
-            kommentare.NewsID = news.ID
-          JOIN
-            newscatcross ON
-            news.ID = newscatcross.NewsID
-          WHERE
-            kommentare.frei = 0
-          ORDER BY
-            kommentare.NewsID DESC,
-            Changedatum DESC";
-  if(!$stmt = $db->query($sql)) {
-    return $db->error;
-  }
+
+  $db2 = Database::getDB();
+  $fields = array('`ID`', '`UID`', '`NewsID`', '`Inhalt`', 'UNIX_TIMESTAMP(Datum) AS `comment_date`');
+  $conds = array('Frei = ?', 'i', array(0));
+  $options = 'ORDER BY comment_date DESC, NewsID DESC';
+
+  $results = $db2->select('kommentare', $fields, $conds, $options);
 
   $cmt = array();
   $idss = '';
-  if($stmt->num_rows) {
-    while($row = $stmt->fetch_assoc()) {
-      $cmt[] = array( 'link'      => $row['Cat'],
-                      'titel'     => shortenTitle($row['Titel']),
-                      'titelFull' => $row['Titel'],
-                      'name'      => $row['Name'],
-                      'mail'      => $row['Mail'],
-                      'inhalt'    => changetext($row['Inhalt'],'cmtInhalt'),
-                      'datum'     => $row['Changedatum'],
-                      'web'       => $row['Website'],
-                      'id'        => $row['ID'],
-                      'newsID'    => $row['NewsID']);
-      $idss .= $row['ID'].'###';
-    }
-    $idss = substr($idss, 0, strlen($idss) - 3);
+
+  foreach($results as $result) {
+    $cmt[] = array( 'content' => changetext($result['Inhalt'], 'cmtInhalt'),
+                    'date'    => $result['comment_date'],
+                    'id'      => $result['ID'],
+                    'user'    => $result['UID'],
+                    'news'    => $result['NewsID']);
   }
+
+  foreach ($cmt as $key => $cmt_single) {
+    $cmt_single['user'] = User::newFromId($cmt_single['user']);
+    $cmt_single['news'] = new Article($cmt_single['news']);
+    $cmt[$key] = $cmt_single;
+  }
+
   $a['data']['cmt'] = $cmt;
   $a['data']['idss'] = $idss;
-  $stmt->close();
-  foreach($a['data']['cmt'] as $k => $val) {
-    if(newsExists($val['newsID']) === false) {
-      $sql = 'DELETE FROM kommentare WHERE ID = ?';
-      if(!$stmt = $db->prepare($sql)) {
-        return $db->error;
-      }
-      $stmt->bind_param('i', $val['id']);
-      if(!$stmt->execute()) {
-        return $stmt->error;
-      }
-      $stmt->close();
-      unset($a['data']['cmt'][$k]);
-    } else {
-      $a['data']['cmt'][$k]['link'] = getLink(getCatName($val['link']), $val['newsID'], $val['titelFull']);
-    }
-  }
   return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
+
 } else if($user){
-        return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
+  return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
 } else {
-  return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';
+  return showInfo('Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>', 'login');
 }
 ?>
