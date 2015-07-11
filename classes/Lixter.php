@@ -85,9 +85,6 @@ class Lixter {
   private function loadConfig() {
     global  $file, $noGA;
 
-    // loading core functions
-    include('settings/core.php');
-
     // using specifc user functions and settings
     include('user/local.php');
 
