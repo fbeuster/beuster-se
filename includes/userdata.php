@@ -126,6 +126,6 @@
     $a['data']['err'] = $err;
     return $a; // nicht Vergessen, sonst enthält $a nur den Wert int(1)
   } else {
-    return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';
+    return showInfo('Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>', 'login');
   }
 ?>

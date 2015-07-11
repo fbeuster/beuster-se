@@ -97,9 +97,10 @@
         return $s;
     }
 
-    function showInfo($msg, $refr) {
+    function showInfo($msg, $refr, $title = 'Hinweis') {
       return array(
         'filename'  => 'static.php',
+        'title'     => $title,
         'data'      => $msg,
         'refresh'   => $refr
       );

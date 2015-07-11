@@ -426,6 +426,6 @@
     } else if($user){
         return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
     } else {
-        return 'Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>';
+        return showInfo('Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>', 'blog');
     }
 ?>

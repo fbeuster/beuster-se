@@ -39,8 +39,16 @@ class ContentPage extends Page {
   private function loadContent() {
     global $file;
     $data = include 'includes/'.$file[$this->id][0];
+
+    if(!isset($data['data'], $data['filename']))
+      return;
+
     $this->content = $data['data'];
     $this->file_name = $data['filename'];
+
+    if(isset($data['title'])) {
+      $this->title = $data['title'];
+    }
   }
 }
 
