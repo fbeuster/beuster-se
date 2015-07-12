@@ -46,6 +46,7 @@ class Lixter {
   public function init() {
     $this->loadConfig();
     $this->loadClasses();
+    $this->loadLocales();
   }
 
   /**
@@ -100,6 +101,16 @@ class Lixter {
     include('settings/functions.php');
     include('settings/generators.php');
     include('settings/modules.php');
+  }
+
+  /**
+   * loading the specified language
+   */
+  private function loadLocales() {
+    $lang = Config::getConfig()->get('language');
+    $lang = $lang === null ? 'en' : $lang;
+
+    $locales = new Locale($lang);
   }
 
   /**

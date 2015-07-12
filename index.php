@@ -9,16 +9,16 @@
 
     /**
      * autloading for classes
-     * 
+     *
      * @param String $class a class name
      */
     function __autoload($class) {
-        include 'classes/'.$class.'.php';
+        include_once 'classes/'.$class.'.php';
     }
 
     $lix = Lixter::getLix();
     $lix->init();
     $lix->run();
-    
+
     ob_end_flush();
 ?>

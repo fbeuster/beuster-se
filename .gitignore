@@ -10,6 +10,7 @@ rss.xml
 
 # workaround to keep user/ and files/ in repo but ignore contents
 documentation
+cache/locale/*
 user/*
 themes/*
 files/*
