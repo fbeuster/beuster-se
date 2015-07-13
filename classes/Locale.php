@@ -37,7 +37,7 @@
       $this->loadLangFile();
 
       $compiled = "";
-      $compiled .= "<?php class I18N {\n";
+      $compiled .= "<?php class I18n {\n";
       $compiled .= $this->compileArray($this->lang_array);
       $compiled .= 'public static function t($string, $args = null) {' . "\n";
       $compiled .= '  if(constant("self::" . $string) === null) {' . "\n";

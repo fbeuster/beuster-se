@@ -8,6 +8,7 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?php echo getPageDescription(); ?>">
+  <meta name="loaded_lang" content="<?php echo Config::getConfig()->get('language'); ?>">
   <?php if(isset($ret['data']['article']) && count($ret['data']['article']) == 1 && $ret['data']['article'][0]->hasTags()) { ?>
 <meta name="keywords" content="<?php echo $ret['data']['articles'][0]['tags']; ?>, beuster{se}, Felix Beuster, Blog, News, Tutorials">
   <?php } else { ?>

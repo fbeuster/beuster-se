@@ -3,6 +3,7 @@
 var beusterse = beusterse || {};
 
 //@ jquery
+//@ _i18n
 //@ _utilities
 //@ archive
 //@ bbcode
@@ -12,10 +13,15 @@ var beusterse = beusterse || {};
 //@ portfolio
 
 $(document).ready(function(){
-  beusterse.archive.init();
-  beusterse.bbCode.init();
-  beusterse.comment_form.init();
-  beusterse.gallery.init();
-  beusterse.pager.init();
-  beusterse.portfolio.init();
+  beusterse.i18n.init()
+                .complete( runApp );
+
+  function runApp() {
+    beusterse.archive.init();
+    beusterse.bbCode.init();
+    beusterse.comment_form.init();
+    beusterse.gallery.init();
+    beusterse.pager.init();
+    beusterse.portfolio.init();
+  }
 });
