@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<?php
- echo '<!--'.date('d.m.Y H:i',time()).'-->
-<!--'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.http_build_query ($_GET).'-->
-';?>
 <html dir="ltr" lang="de-DE" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
  <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
