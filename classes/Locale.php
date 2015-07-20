@@ -74,17 +74,12 @@
     private function loadLangFile() {
       switch($this->lang_file_type) {
         case self::LANG_FILE_TYPE_JSON:
-          $this->loadLangFileJSON();
+          $this->lang_array = FileLoader::loadJson($this->lang_file, true);
           break;
         default:
           throw new Exception($this->lang_file_type + ' is not a supported translation file type.', 1);
           break;
       }
-    }
-
-    private function loadLangFileJSON() {
-      $file_content = file_get_contents($this->lang_file);
-      $this->lang_array = json_decode($file_content, true);
     }
 
     private function saveCacheFile($content) {
