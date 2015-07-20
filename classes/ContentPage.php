@@ -28,6 +28,14 @@ class ContentPage extends Page {
     return $this->file_name;
   }
 
+  public function getTags() {
+    if (is_string($this->content))                return '';
+    if (!isset($this->content['articles']))       return '';
+    if (count($this->content['articles']) !== 1)  return '';
+
+    return $this->content['articles'][0]->getTagsString();
+  }
+
   public function getType() {
     return $this->type;
   }
