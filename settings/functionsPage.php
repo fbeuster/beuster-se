@@ -30,7 +30,8 @@
     }
   }
 
-  function getPageOGImage($data) {
+  function getPageOGImage() {
+    $data = Lixter::getLix()->getPage()->getContent();
     if(isset($data['th_og'])) {
       return $data['th_og'];
     } else {
