@@ -15,7 +15,7 @@ class Config {
 
   public function __construct($key) {
     if($key !== self::$key)
-      throw new InvalidArgumentException('Private constructor!');
+      throw new InvalidArgumentException( I18n::t('config.private_constructor') );
 
     $this->system_config  = FileLoader::loadIni('system/config.ini');
     $this->user_config    = $this->loadUserConfig();
@@ -39,7 +39,7 @@ class Config {
       return FileLoader::loadIni('user/config.ini');
     }
 
-    throw new Exception('No configuration file found.');
+    throw new Exception( I18n::t('config.no_config_file') );
     return array();
   }
 }
