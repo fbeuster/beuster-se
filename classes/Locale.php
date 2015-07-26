@@ -59,7 +59,7 @@
 
       foreach($array as $keyword => $translation) {
         if(is_array($translation)) {
-          $compiled .= $this->compileArray($translation, $keyword . '_');
+          $compiled .= $this->compileArray($translation, $prefix . $keyword . '_');
         } else {
           $compiled .= 'const ' . $prefix . $keyword . ' = \'' . str_replace('\'', '\\\'', $translation) . "';\n";
         }
