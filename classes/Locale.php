@@ -28,7 +28,7 @@
       $this->lang_file  = $this->lang_path . $this->lang . '.' . $this->lang_file_type;
       $this->cache_file = $this->cache_path . $this->lang . '.php';
 
-      if(!file_exists($this->cache_file) || filemtime($this->cache_file) <= filemtime($this->lang_file)) {
+      if(true || !file_exists($this->cache_file) || filemtime($this->cache_file) <= filemtime($this->lang_file)) {
         $this->compile();
       }
     }
@@ -61,6 +61,9 @@
         if(is_array($translation)) {
           $compiled .= $this->compileArray($translation, $prefix . $keyword . '_');
         } else {
+          if ( !mb_check_encoding($translation, 'UTF-8') ) {
+            $translation = mb_convert_encoding($translation, 'UTF-8');
+          }
           $compiled .= 'const ' . $prefix . $keyword . ' = \'' . str_replace('\'', '\\\'', $translation) . "';\n";
         }
       }
