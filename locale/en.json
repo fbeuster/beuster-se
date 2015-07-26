@@ -1,2 +1,23 @@
 {
+  "database" : {
+    "fields" : {
+      "are_empty" : "Fields are empty."
+    },
+    "limit" : {
+      "must_be_array" : "Limit has to be an array.",
+      "invalid_length" : "Invalid limit length.",
+      "invalid_string" : "Invalid limit string.",
+      "invalid_type" : "Invalid limit type.",
+      "vars_must_be_array" : "Limit variables have to be an array.",
+      "type_vars_mismatch" : "Limit type and variable count missmatch."
+    },
+    "conditions" : {
+      "must_be_array" : "Cond has to be an array.",
+      "invalid_length" : "Invalid cond length.",
+      "invalid_string" : "Invalid cond string.",
+      "invalid_type" : "Invalid cond type.",
+      "vars_must_be_array" : "Cond variables have to be an array.",
+      "type_vars_mismatch" : "Cond type and variable count missmatch."
+    }
+  }
 }

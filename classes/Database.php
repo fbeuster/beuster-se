@@ -87,7 +87,7 @@ class Database {
 
 		// concatenate fields
 		if(!is_array($fields) || empty($fields)) {
-			$this->error = 'empty fields';
+			$this->error = I18n::t('database.fields.are_empty');
 			return null;
 		}
 		$fields = implode(', ', $fields);
@@ -107,27 +107,27 @@ class Database {
 		} else {
 			// validate $limit
 			if(!is_array($limit)) {
-				$this->error = 'limit has to be an array';
+				$this->error = I18n::t('database.limit.must_be_array');
 				return null;
 			}
 			if(count($limit) != 3) {
-				$this->error = 'wrong limit length';
+				$this->error = I18n::t('database.limit.invalid_length');
 				return null;
 			}
 			if($limit[0] == null || !is_string($limit[0]) || $limit[0] == '') {
-				$this->error = 'wrong limit string';
+				$this->error = I18n::t('database.limit.invalid_string');
 				return null;
 			}
 			if($limit[1] == null || !is_string($limit[1]) || $limit[1] == '') {
-				$this->error = 'wrong limit types';
+				$this->error = I18n::t('database.limit.invalid_type');
 				return null;
 			}
 			if(!is_array($limit[2])) {
-				$this->error = 'limit variables have to be an array';
+				$this->error = I18n::t('database.limit.vars_must_be_array');
 				return null;
 			}
 			if(!strlen($limit[1]) == count($limit[2])) {
-				$this->error = 'limit type and variable missmatch';
+				$this->error = I18n::t('database.limit.type_vars_mismatch');
 				return null;
 			}
 
@@ -150,27 +150,27 @@ class Database {
 		} else {
 			// validate $cond
 			if(!is_array($cond)) {
-				$this->error = 'condition has to be an array';
+				$this->error = I18n::t('database.conditions.must_be_array');
 				return null;
 			}
 			if(count($cond) != 3) {
-				$this->error = 'wrong condition length';
+				$this->error = I18n::t('database.conditions.invalid_length');
 				return null;
 			}
 			if($cond[0] == null || !is_string($cond[0]) || $cond[0] == '') {
-				$this->error = 'wrong condition string';
+				$this->error = I18n::t('database.conditions.invalid_string');
 				return null;
 			}
 			if($cond[1] == null || !is_string($cond[1]) || $cond[1] == '') {
-				$this->error = 'wrong condition types';
+				$this->error = I18n::t('database.conditions.invalid_type');
 				return null;
 			}
 			if(!is_array($cond[2])) {
-				$this->error = 'condition variables have to be an array';
+				$this->error = I18n::t('database.conditions.vars_must_be_array');
 				return null;
 			}
 			if(!strlen($cond[1]) == count($cond[2])) {
-				$this->error = 'condition type and variable missmatch';
+				$this->error = I18n::t('database.conditions.type_vars_mismatch');
 				return null;
 			}
 
