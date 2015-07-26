@@ -44,8 +44,8 @@ class Lixter {
    * Loadings classes.
    */
   public function init() {
-    $this->loadLocales();
     $this->loadConfig();
+    $this->loadLocales();
     $this->loadClasses();
   }
 

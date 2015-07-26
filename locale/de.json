@@ -1,6 +1,2 @@
 {
-  "config" : {
-    "private_constructor" : "Privater Konstruktor!",
-    "no_config_file": "Keine Konfigurationsdatei gefunden."
-  }
 }
