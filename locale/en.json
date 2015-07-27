@@ -19,5 +19,10 @@
       "vars_must_be_array" : "Cond variables have to be an array.",
       "type_vars_mismatch" : "Cond type and variable count missmatch."
     }
+  },
+  "page" : {
+    "error" : {
+      "title" : "Error"
+    }
   }
 }

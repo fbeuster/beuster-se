@@ -4,10 +4,11 @@ class ErrorPage extends Page {
   private $file_name = 'static.php';
   private $message;
   private $type = Page::STATIC_PAGE;
-  private $title = 'Fehler';
+  private $title;
 
   public function __construct($message) {
-    $this->message = $message;
+    $this->message  = $message;
+    $this->title    = I18n::t('page.error.title');
   }
 
   public function getContent() {

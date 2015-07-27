@@ -19,5 +19,10 @@
       "vars_must_be_array" : "Cond Variablen müssen Arrays sein.",
       "type_vars_mismatch" : "Cond Typ- und Variablenanzahl ist nicht gleich."
     }
+  },
+  "page" : {
+    "error" : {
+      "title" : "Fehler"
+    }
   }
 }
