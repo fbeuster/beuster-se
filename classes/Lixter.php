@@ -120,19 +120,19 @@ class Lixter {
     global $file;
 
     $db = Database::getDB()->getCon();
-    if($db->connect_errno){
-      $message        = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
-      $this->page  = new ErrorPage($message);
+    if ($db->connect_errno) {
+      $message    = I18n::t( 'lixter.load.mysql_connection_error', array(mysqli_connect_error()) );
+      $this->page = new ErrorPage($message);
     } else {
-      if(isset($_GET['p'])) {
-        if(StaticPage::exists($_GET['p'])) {
+      if (isset($_GET['p'])) {
+        if (StaticPage::exists($_GET['p'])) {
           $this->page = new StaticPage($_GET['p']);
-        } else if(isset($file[$_GET['p']][0])) {
-          if(ContentPage::exists($_GET['p'])) {
+        } else if (isset($file[$_GET['p']][0])) {
+          if (ContentPage::exists($_GET['p'])) {
             $this->page = new ContentPage($_GET['p']);
           } else {
-            $message     = "Include-Datei konnte nicht geladen werden: 'includes/".$file[$_GET['p']][0]."'";
-            $this->page  = new ErrorPage($message);
+            $message    = I18n::t( 'lixter.load.include_not_found', array('includes/' . $file[$_GET['p']][0]) );
+            $this->page = new ErrorPage($message);
           }
         } else {
           $this->page = new ContentPage('blog');
@@ -158,32 +158,30 @@ class Lixter {
     $pageType = $this->page->getPageClass();
     $currPage = getPage();
 
-    // Laden HTML-Kopf
     include($this->theme->getFile('htmlheader.php'));
-    if(Utilities::isDevServer()) include('settings/analyse.php');
+    if (Utilities::isDevServer()) include('settings/analyse.php');
     include($this->theme->getFile('htmlwarning.php'));
 
-    // Laden der Template-Datei
     if ($this->isValidTemplate()) {
-      // Gültige Include-Datei
+      # valid include file
       $file = $this->theme->getFile($this->page->getFilename());
-      if($file !== false) {
+      if ($file !== false) {
         $data = $this->page->getContent();
         include $file;
       } else {
-        $this->page = new ErrorPage('Templatedatei "'.$file.'" ist nicht vorhanden.');
+        $this->page = new ErrorPage( I18n::t('lixter.build.template_not_found', array($file)) );
         include $this->theme->getFile('static.php');
       }
     } else if ($this->page->getType() === Page::STATIC_PAGE) {
-      // error message
+      # error message
       include $this->theme->getFile('static.php');
     } else if (1 == $this->page) {
-      // return wurde vergessen
-      $this->page = new ErrorPage('In der Include-Datei wurde die return Anweisung vergessen.');
+      # no return statement given
+      $this->page = new ErrorPage( I18n::t('lixter.build.no_return_statement') );
       include $this->theme->getFile('static.php');
     } else {
-      // ein Ungültiger Return wert
-      $this->page = new ErrorPage('Die Include-Datei hat einen ungültigen Wert zurückgeliefert.');
+      # invalid return value
+      $this->page = new ErrorPage( I18n::t('lixter.build.invalid_return_value') );
       include $this->theme->getFile('static.php');
     }
 

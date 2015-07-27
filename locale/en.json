@@ -1,4 +1,15 @@
 {
+  "lixter" : {
+    "load" : {
+      "mysql_connection_error" : "Connection to database failed, MySQL return: %s",
+      "include_not_found" : "Could not found include file: %s"
+    },
+    "build" : {
+      "template_not_found" : "Could not load template file: %s",
+      "no_return_statement" : "The include file did not have an return statement.",
+      "invalid_return_value" : "The include file return in invalid value."
+    }
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields are empty."
