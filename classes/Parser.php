@@ -3,6 +3,38 @@
 /**
  * Text parser.
  * \file settings/parser.php
+ *
+ *
+ * Future article syntax:
+ *
+ * article ::= tag*
+ *
+ * tag ::= block_tag | format_tag | list_tag
+ *
+ * block_tag      ::= open_block_tag (format_tag | text) close_block_tag
+ * open_block_tag ::= '[' block_tag_name ']'
+ * open_block_tag ::= '[' '/' block_tag_name ']'
+ * block_tag_name ::= 'h2' | 'h3' | 'p'
+ *
+ * format_tag ::= simple_format_tag | extended_format_tag
+ *
+ * simple_format_tag       ::= open_simple_format_tag (format_tag | text) close_simple_format_tag
+ * open_simple_format_tag  ::= '[' simple_format_tag_name ']'
+ * close_simple_format_tag ::= '[' '/' simple_format_tag_name ']'
+ * simple_format_tag_name  ::= 'b' | 'code' | 'del' | 'i' | 'ins' | 'mark' | 'play' | 'quote' | 'u' | 'url' | 'yt'
+ *
+ * extended_format_tag       ::= open_extended_format_tag (format_tag | text) close_extended_format_tag
+ * open_extended_format_tag  ::= '[' extended_format_tag_name '=' parameter ']'
+ * close_extended_format_tag ::= '[' '/' extended_format_tag_name ']'
+ * extended_format_tag_name  ::=  'asin' | 'bquote' | 'cite' | 'url'
+ * parameter                 ::= '^]' '^]'*
+ *
+ * list_tag       ::= open_list_tag (list_item_tag list_item_tag*) close_list_tag
+ * open_list_tag  ::= '[' ('ul' | 'ol') ']'
+ * list_item_tag  ::= '[' 'li' ']' (format_tag | list_tag | text) '[' '/' 'li' ']'
+ * close_list_tag ::= '[' '/' ('ul' | 'ol') ']'
+ *
+ * text ::=  '^[' '^['*
  */
 
 /**
