@@ -35,7 +35,7 @@
             if($stmt->fetch()) {
                 $down = array(  'id'      => $id,
                                 'name'    => $name,
-                                'descr'   => changetext($descr, 'inhalt'),
+                                'descr'   => Parser::parse($descr, Parser::TYPE_CONTENT),
                                 'ver'     => $ver,
                                 'path'    => $path,
                                 'anz'     => $downloads,

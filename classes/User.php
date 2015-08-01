@@ -171,7 +171,7 @@ class User {
 		return str_replace(
 			'[contactmail]',
 			'</p><address>'.str_replace('@', ' [at] ', $this->getUserInfo('Contactmail')).'</address><p>',
-			changetext($this->getUserInfo('About'), 'inhalt'));
+			Parser::parse($this->getUserInfo('About'), Parser::TYPE_CONTENT));
 	}
 
 	/**

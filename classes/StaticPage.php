@@ -32,7 +32,7 @@ class StaticPage extends Page {
   }
 
   public function getParsedContent() {
-    return '<p>'.changetext($this->content, 'inhalt').'</p>';
+    return '<p>'.Parser::parse($this->content, Parser::TYPE_CONTENT).'</p>';
   }
 
   public function getTitle() {

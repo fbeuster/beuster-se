@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- <?php echo '<pre>'; print_r(Lixter::getLix()->getPage()->getContent()); echo '</pre>'; ?> -->
 <html dir="ltr" lang="de-DE" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
  <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">

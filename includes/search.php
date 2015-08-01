@@ -35,13 +35,13 @@
     $result->bind_result($newsid, $newstitel, $newsinhalt);
     while($result->fetch()) {
       $news[] = array('id'      => $newsid,
-                      'content' => changetext($newsinhalt, 'bea'),
+                      'content' => Parser::parse($newsinhalt, Parser::TYPE_EDIT),
                       'title'   => $newstitel,
                       'score'   => 0);
     }
     $result->close();
     $maxTime = getMaxNewsUpTime();
-    
+
     foreach($news as $key => $entry) {
 
       /* Title-Score */
@@ -80,7 +80,7 @@
       if(!$result->execute()) {$return = $result->error;}
       $result->bind_result($commentContent);
       while($result->fetch()) {
-        $comments[] = array('content' => changetext($commentContent, 'bea'),
+        $comments[] = array('content' => Parser::parse($commentContent, Parser::TYPE_EDIT),
                             'score'   => 0);
       }
       $result->close();

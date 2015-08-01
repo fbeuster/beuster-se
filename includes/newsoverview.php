@@ -29,7 +29,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp, $enabled);
         while($stmt->fetch()) {
             $news[] = array(
-                        'Titel'     => changetext($newstitel, 'titel'),
+                        'Titel'     => Parser::parse($newstitel, Parser::TYPE_PREVIEW),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),

@@ -18,7 +18,7 @@
         $frei = 0;
 
         $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
-        $Inhalt = changetext(trim($_POST['usrcnt']), 'neu');
+        $Inhalt = Parser::parse(trim($_POST['usrcnt']), Parser::TYPE_NEW);
         $Usermail = $db->real_escape_string(stripslashes(strtolower(trim($_POST['usrml']))));
         $webpage = $db->real_escape_string(stripslashes(trim($_POST['usrpg'])));
         $err = checkStandForm($user, $Inhalt, $Usermail, $webpage, trim($_POST['date']), $_POST['email'], $_POST['homepage'], 'commentForm');

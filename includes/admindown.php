@@ -10,8 +10,8 @@ if ($user && $user->isAdmin()) {
     if (!isset($_POST['downname'], $_POST['downdescr'], $_POST['downver'], $_FILES['file'], $_POST['formaction'])) {
       return INVALID_FORM;
     }
-    if (('' == $downname = changetext($_POST['downname'], 'neu')) OR
-        ('' == $downdescr = changetext($_POST['downdescr'], 'neu')) OR
+    if (('' == $downname = Parser::parse($_POST['downname'], Parser::TYPE_NEW)) OR
+        ('' == $downdescr = Parser::parse($_POST['downdescr'], Parser::TYPE_NEW)) OR
         ('' == $downver = $_POST['downver'])) {
       return EMPTY_FORM;
     }

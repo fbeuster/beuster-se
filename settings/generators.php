@@ -232,7 +232,7 @@
         if(!$stmt->execute()) {return $stmt->error;}
         $stmt->bind_result($id, $newstitel);
         while($stmt->fetch()) {
-            $res[] = array( 'Titel' => changetext($newstitel, 'titel'),
+            $res[] = array( 'Titel' => Parser::parse($newstitel, Parser::TYPE_PREVIEW),
                             'Link' => '',
                             'id' => $id);
         }
@@ -268,7 +268,7 @@
         if(!$stmt->execute()) {return $stmt->error;}
         $stmt->bind_result($id, $newstitel);
         while($stmt->fetch()) {
-            $res[] = array( 'Titel' => changetext($newstitel, 'titel'),
+            $res[] = array( 'Titel' => Parser::parse($newstitel, Parser::TYPE_PREVIEW),
                             'Link' => '',
                             'id' => $id);
         }

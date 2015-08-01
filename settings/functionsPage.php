@@ -139,7 +139,7 @@
 
       $stmt->close();
 
-      return changetext($cont, 'descr', 250);
+      return Parser::parse($cont, Parser::TYPE_DESC);
     }
   }
 ?>

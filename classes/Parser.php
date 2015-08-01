@@ -38,41 +38,54 @@
  */
 
 /**
- * Parser access.
- *
- * This parser access is used to support old code. In fact it just call the
- * desired ArticleParser.
- *
- * @param String $str the text to parse
- * @param String $type which parser used?
- * @param int $l the length, used for preview; default = 750
- * @return String
- */
-function changetext($str, $type, $l = 750) {
-    switch($type) {
-        case 'bea':
-            $parsed = new EditParser($str);
-            break;
-        case 'neu':
-            $parsed = new NewParser($str);
-            break;
-        case 'descr':
-            $parsed = new DescriptionParser($str);
-            break;
-        case 'inhalt':
-            $parsed = new ContentParser($str);
-            break;
-        case 'cmtInhalt':
-            $parsed = new CommentParser($str);
-            break;
-        case 'vorschau':
-            $parsed = new PreviewParser($str, $l);
-            break;
-        default:
-            $parsed = new PreviewParser($str, $l);
-            break;
+* Parser class
+* \class Parser
+* \author Felix Beuster
+*
+* Static access to parser classes
+*/
+class Parser {
+    const TYPE_COMMENT  = 1;
+    const TYPE_CONTENT  = 2;
+    const TYPE_DESC     = 3;
+    const TYPE_EDIT     = 4;
+    const TYPE_NEW      = 5;
+    const TYPE_PREVIEW  = 6;
+
+    /**
+     * Parser access.
+     *
+     * @param String $string the text to parse
+     * @param String $parser_type which parser used?
+     * @param int $length the length, used for preview; default = 750
+     * @return String
+     */
+    public static function parse($string, $parser_type, $length = 750) {
+        switch($parser_type) {
+            case self::TYPE_COMMENT:
+                $parsed = new CommentParser($string);
+                break;
+            case self::TYPE_CONTENT:
+                $parsed = new ContentParser($string);
+                break;
+            case self::TYPE_EDIT:
+                $parsed = new EditParser($string);
+                break;
+            case self::TYPE_DESC:
+                $parsed = new DescriptionParser($string);
+                break;
+            case self::TYPE_NEW:
+                $parsed = new NewParser($string);
+                break;
+            case self::TYPE_PREVIEW:
+                $parsed = new PreviewParser($string, $length);
+                break;
+            default:
+                $parsed = new PreviewParser($string, $length);
+                break;
+        }
+        return $parsed->parse();
     }
-    return $parsed->parse();
 }
 
 /**

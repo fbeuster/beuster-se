@@ -1,7 +1,7 @@
 <?php
 
   class SearchResult {
-    
+
     private $article;
     private $search_str;
     private $search_marks;
@@ -24,7 +24,7 @@
     public function getMarkedContent() {
       $content        = $this->article->getContent();
       $marked_content = $this->search_marks ? searchMark($content, $this->search_str, true) : $content;
-      return changetext($marked_content, 'vorschau');
+      return Parser::parse($marked_content, Parser::TYPE_PREVIEW);
     }
   }
 ?>

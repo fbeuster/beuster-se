@@ -36,7 +36,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp);
         while($stmt->fetch()) {
             $top[] = array(
-                        'Titel'     => changetext($newstitel, 'titel'),
+                        'Titel'     => Parser::parse($newstitel, Parser::TYPE_PREVIEW),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),
@@ -77,7 +77,7 @@
         $stmt->bind_result($id, $newstitel, $hits, $date, $timeUp);
         while($stmt->fetch()) {
             $last[] = array(
-                        'Titel'     => changetext($newstitel, 'titel'),
+                        'Titel'     => Parser::parse($newstitel, Parser::TYPE_PREVIEW),
                         'Link'      => '',
                         'id'        => $id,
                         'date'      => date("d.m.Y H:i", strtotime($date)),

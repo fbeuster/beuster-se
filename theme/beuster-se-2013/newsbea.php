@@ -26,7 +26,7 @@
           <option value="0">Bitte wählen...</option>
           <?php foreach($data['news'] as $value) { ?>
           <option value="<?php echo $value['newsid'] ?>">
-          <?php echo $value['newsdatum']; ?> | <?php echo changetext($value['newstitel'], 'titel'); ?>
+          <?php echo $value['newsdatum']; ?> | <?php echo Parser::parse($value['newstitel'], Parser::TYPE_PREVIEW); ?>
           </option>
           <?php } ?>
         </select>

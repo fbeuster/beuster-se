@@ -173,8 +173,8 @@
 
     $backApp = '</p>';
     $catName = getCatName(getNewsCat($id));
-    $art_title  = '<h5 class="randomTitle">'.changetext($newstitel, 'titel').'</h5>'."\n";
-    $art_text   = str_replace('###link###', getLink($catName, $newsid, $newstitel), changetext($newsinhalt, 'vorschau', 200));
+    $art_title  = '<h5 class="randomTitle">'.Parser::parse($newstitel, Parser::TYPE_PREVIEW).'</h5>'."\n";
+    $art_text   = str_replace('###link###', getLink($catName, $newsid, $newstitel), Parser::parse($newsinhalt, Parser::TYPE_PREVIEW, 200));
     $content    = $art_title . $preApp . $art_text . $backApp;
     $title      =  "Kennst du schon...";
     $random     = new SidebarModule($title, $content, "randomArticle");

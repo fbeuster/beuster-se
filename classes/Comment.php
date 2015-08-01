@@ -123,7 +123,7 @@ class Comment {
 	 * @return string
 	 */
 	public function getContentParsed() {
-		return changetext($this->content, 'cmtInhalt');
+		return Parser::parse($this->content, Parser::TYPE_COMMENT);
 	}
 
 	/**

@@ -11,8 +11,8 @@
         $db = Database::getDB()->getCon();
 
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
-            $title      = changetext($_POST['newstitel'], 'neu');
-            $inhalt     = changeText($_POST['newsinhalt'], 'neu');
+            $title      = Parser::parse($_POST['newstitel'], Parser::TYPE_NEW);
+            $inhalt     = Parser::parse($_POST['newsinhalt'], Parser::TYPE_NEW);
             $release    = trim($_POST['release']);
             $tagStr     = trim($_POST['tags']);
 
@@ -310,7 +310,7 @@
                             $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,
-                                        str_replace('###link###', $lnk, changetext($inhalt, 'vorschau')),
+                                        str_replace('###link###', $lnk, Parser::parse($inhalt, Parser::TYPE_PREVIEW)),
                                         date("D, j M Y H:i:s ", time()).'GMT',
                                         $id,
                                         $lnk);

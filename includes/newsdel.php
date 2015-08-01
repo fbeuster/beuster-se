@@ -95,8 +95,8 @@
                 if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsdel" class="back">Zurück zum Löschdialog</a>';}
                 $a['data']['newsbea'] = array(
                                             'newsidbea'     => $newsid,
-                                            'newsinhalt'    => changetext($newsinhalt, 'bea'),
-                                            'newstitel'     => changetext($newstitel, 'bea'));
+                                            'newsinhalt'    => Parser::parse($newsinhalt, Parser::TYPE_EDIT),
+                                            'newstitel'     => Parser::parse($newstitel, Parser::TYPE_EDIT));
                 $stmt->close();
             }
         }

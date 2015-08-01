@@ -61,7 +61,7 @@ if ($user && $user->isAdmin()) {
   $idss = '';
 
   foreach($results as $result) {
-    $cmt[] = array( 'content' => changetext($result['Inhalt'], 'cmtInhalt'),
+    $cmt[] = array( 'content' => Parser::parse($result['Inhalt'], Parser::TYPE_COMMENT),
                     'date'    => $result['comment_date'],
                     'id'      => $result['ID'],
                     'user'    => $result['UID'],

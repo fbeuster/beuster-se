@@ -67,7 +67,7 @@ class DownloadFile {
 	 * @return String
 	 */
 	public function getDescriptionParsed() {
-		return changetext($this->description, 'vorschau');
+		return Parser::parse($this->description, Parser::TYPE_PREVIEW);
 	}
 
 	/**

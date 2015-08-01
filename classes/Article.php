@@ -168,7 +168,7 @@ class Article {
 	 */
 	public function getContentParsed() {
     $preApp = ('[yt]' == substr($this->content,0,4)) ? '<p style="text-indent:0;">' : '<p>';
-		return $preApp.grabImages(changetext($this->content, 'inhalt')).'</p>';
+		return $preApp.grabImages( Parser::parse($this->content, Parser::TYPE_CONTENT) ).'</p>';
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Article {
 	 * @return string
 	 */
 	public function getContentPreview() {
-		return changetext($this->content, 'vorschau');
+		return Parser::parse($this->content, Parser::TYPE_PREVIEW);
 	}
 
 	/**
