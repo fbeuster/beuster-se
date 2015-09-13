@@ -1,5 +1,7 @@
 <?php
-    $db = Database::getDB()->getCon();
+    $db = Database::getDB();
+    $dbCon = $db->getCon();
+
     if(!Utilities::isDevServer()) {
         increaseHitNumber($id);
     }
@@ -17,20 +19,20 @@
     if('POST' == $_SERVER['REQUEST_METHOD']) {
         $frei = 0;
 
-        $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
+        $user = $dbCon->real_escape_string(stripslashes(trim($_POST['usr'])));
         $Inhalt = Parser::parse(trim($_POST['usrcnt']), Parser::TYPE_NEW);
-        $Usermail = $db->real_escape_string(stripslashes(strtolower(trim($_POST['usrml']))));
-        $webpage = $db->real_escape_string(stripslashes(trim($_POST['usrpg'])));
+        $Usermail = $dbCon->real_escape_string(stripslashes(strtolower(trim($_POST['usrml']))));
+        $webpage = $dbCon->real_escape_string(stripslashes(trim($_POST['usrpg'])));
         $err = checkStandForm($user, $Inhalt, $Usermail, $webpage, trim($_POST['date']), $_POST['email'], $_POST['homepage'], 'commentForm');
         $Inhalt = remDoubles($Inhalt, array('[b]','[i]','[u]'));
         $replyTo = checkReplyId(trim($_POST['reply']));
 
-        $user = User::newFromCookie();
-        if ($user && $user->isAdmin()) {
+        $cookie_user = User::newFromCookie();
+        if ($cookie_user && $cookie_user->isAdmin()) {
             refreshCookies();
             $frei = 2;
-            $Usermail = $db->real_escape_string(stripslashes(strtolower(ADMIN_GRAV_MAIL)));
-            $webpage = $db->real_escape_string(stripslashes(ADMIN_WEBPAGE));
+            $Usermail = $dbCon->real_escape_string(stripslashes(strtolower(ADMIN_GRAV_MAIL)));
+            $webpage = $dbCon->real_escape_string(stripslashes(ADMIN_WEBPAGE));
         }
         $article = new Article($id);
         $title = $article->getTitle();
@@ -39,22 +41,14 @@
 
             // exists user in db?
             $newUser = true;
-            $sql = 'SELECT ID FROM users WHERE LOWER(Email) = ?';
-            $stmt = $db->prepare($sql);
-            if($stmt === false) {
-                $return = showInfo('Fehler #NC3, bitte Admin kontaktieren.', $errRet);
-            } else {
-                $stmt->bind_param('s', $Usermail);
-                if(!$stmt->execute()) {
-                    $return = showInfo('Fehler #NC4, bitte Admin kontaktieren.', $errRet);
-                } else {
-                    $stmt->bind_result($uid);
-                    if($stmt->fetch()) {
-                        $newUser = false;
-                    }
-                }
+
+            $fields = array('ID');
+            $conds = array('LOWER(Email) = ?', 's', array($Usermail));
+            $res  = $db2->select('users', $fields, $conds);
+
+            if (count($res)) {
+                $newUser = false;
             }
-            $stmt->close();
 
             // add user to db
             if($newUser) {
@@ -62,11 +56,13 @@
                             users(Name, Rights, Email, regDate, Clearname, Website)
                         VALUES
                             (?, ?, ?, NOW(), ?, ?)';
-                if(!$stmt = $db->prepare($sql)) {
+                if(!$stmt = $dbCon->prepare($sql)) {
                     $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
                 } else {
                     $rights = 'user';
-                    $stmt->bind_param('sssss', preg_replace('/[^A-Za-z0-9-_]/', '', $user), $rights, $Usermail, $user, $webpage);
+                    $trimmed_name = preg_replace('/[^A-Za-z0-9-_]/', '', $user);
+
+                    $stmt->bind_param('sssss', $trimmed_name, $rights, $Usermail, $user, $webpage);
                     if(!$stmt->execute()) {
                         $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
                     } else {
@@ -82,7 +78,7 @@
                         kommentare(Inhalt, Datum, NewsID, Frei, ParentID, UID)
                     VALUES
                         (?, NOW(), ?, ?, ?, ?)';
-            if(!$stmt = $db->prepare($sql)) {
+            if(!$stmt = $dbCon->prepare($sql)) {
                 $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
             } else {
                 $stmt->bind_param('siiii', $Inhalt, $id, $frei, $replyTo, $uid);
@@ -124,55 +120,31 @@
                     'datAttr'       => date('c', $article->getDate()),
                     'link'          => $article->getLink());
 
-    $pics = array();
-    $sql = "SELECT
-                ID,
-                Name,
-                Pfad
-            FROM
-                pics
-            WHERE
-                NewsID = ?
-            ORDER BY
-                ID";
-    if(!$result = $db->prepare($sql)) {
-        $return = $db->error;
+    $pics    = array();
+    $fields  = array('ID', 'Name', 'Pfad');
+    $conds   = array('NewsID = ?', 'i', array($id));
+    $options = 'ORDER BY ID';
+    $res     = $db->select('pics', $fields, $conds, $options);
+
+    foreach ($res as $key => $pic) {
+        $pics[] = array('id'    => $pic['ID'],
+                        'name'  => $pic['Name'],
+                        'pfad'  => $pic['Pfad']);
     }
-    $result->bind_param('i', $id);
-    if(!$result->execute()) {
-        $return = $result->error;
-    }
-    $result->bind_result($picId, $picName, $picPfad);
-    while($result->fetch()) {
-        $pics[] = array('id' =>$picId,
-                        'name' =>$picName,
-                        'pfad' =>$picPfad);
-    }
-    $result->close();
+
     $t = 1;
     if(!empty($pics)) {
-        $sql = 'SELECT
-                    Pfad
-                FROM
-                    pics
-                WHERE
-                    NewsID = ? AND
-                    Thumb = ?';
-        if(!$stmt = $db->prepare($sql)) {
-            $return = $db->error;
-        }
-        $stmt->bind_param('ii', $id, $t);
-        if(!$stmt->execute()) {
-            $return = $stmt->error;
-        }
-        $stmt->bind_result($a['data']['th_og']);
-        if(!$stmt->fetch()) {}
-        $stmt->close();
+        $fields = array('Pfad');
+        $conds  = array('NewsID = ? AND Thumb = ?', 'ii', array($id, $t));
+        $res    = $db->select('pics', $fields, $conds);
+
+        $a['data']['th_og'] = count($res) ? $res[0]['Pfad'] : '';
         $a['data']['th'] = str_replace('blog/id', 'blog/thid', $a['data']['th_og']);
         $a['data']['th'] = str_replace('.', '_', $a['data']['th']);
         $a['data']['th'] = 'http://'.Utilities::getSystemAddress().'/'.$a['data']['th'].'.jpg';
         $a['data']['th_og'] = 'http://'.Utilities::getSystemAddress().'/'.$a['data']['th_og'];
     }
+
     $a['data']['pics'] = $pics;
     $a['data']['aside'] = $aside;
     $a['data']['ret'] = $return;
