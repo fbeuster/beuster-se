@@ -21,7 +21,7 @@
 
   <!-- comments -->
   <div>
-    <h2 id="comments">Kommentare (<?php echo echo count($article->getComments()); ?>)</h2>
+    <h2 id="comments">Kommentare (<?php echo echo $article->getCommentsCount(); ?>)</h2>
     <?php
       $cmtReply = $article->getLink();
       if(count($article->getComments()) > 0) {

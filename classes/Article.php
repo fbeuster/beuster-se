@@ -30,6 +30,7 @@ class Article {
 	private $playlist = false;			/**< playlist state */
 
 	private $comments = array();	/**< article comments */
+	private $commentsCount;		/**< article comments count */
 	private $pagesCmt;				/**< article comment pages*/
 	private $startCmt;				/**< article comment pages start */
 
@@ -254,6 +255,13 @@ class Article {
 	 */
 	public function setComments($comments) { $this->comments = $comments; }
 
+
+	/**
+	 * getter for comments count
+	 * @return int
+	 */
+	public function getCommentsCount() { return $this->commentsCount; }
+
 	/**
 	 * getter for pagesCmt
 	 * @return int
@@ -338,6 +346,17 @@ class Article {
       $comment = new Comment($comment['ID']);
       $comment->loadReplies();
       $this->comments[] = $comment;
+    }
+
+    // comments count
+
+    $res = Database::getDB()->select(
+            'kommentare',
+            array('COUNT(ID) as count'),
+            array('NewsID = ?', 'i', array($this->id)));
+
+    foreach ($res as $key => $value) {
+      $this->commentsCount = $value['count'];
     }
 
     // tags

@@ -52,7 +52,7 @@
 
   <!-- comments -->
   <div id="beContentEntryComments">
-    <h2 id="comments" class="beContentEntryCommentsHeader">Kommentare (<?php echo count($article->getComments()); ?>)</h2>
+    <h2 id="comments" class="beContentEntryCommentsHeader">Kommentare (<?php echo $article->getCommentsCount(); ?>)</h2>
     <?php
       $cmtReply = $article->getLink();
       if(count($article->getComments()) > 0) {
