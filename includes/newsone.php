@@ -41,52 +41,31 @@
 
             // exists user in db?
             $newUser = true;
+            $uid = 0;
 
             $fields = array('ID');
             $conds = array('LOWER(Email) = ?', 's', array($Usermail));
-            $res  = $db2->select('users', $fields, $conds);
+            $res  = $db->select('users', $fields, $conds);
 
             if (count($res)) {
                 $newUser = false;
+                $uid = $res[0]['ID'];
             }
 
             // add user to db
             if($newUser) {
-                $sql = 'INSERT INTO
-                            users(Name, Rights, Email, regDate, Clearname, Website)
-                        VALUES
-                            (?, ?, ?, NOW(), ?, ?)';
-                if(!$stmt = $dbCon->prepare($sql)) {
-                    $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
-                } else {
-                    $rights = 'user';
-                    $trimmed_name = preg_replace('/[^A-Za-z0-9-_]/', '', $user);
-
-                    $stmt->bind_param('sssss', $trimmed_name, $rights, $Usermail, $user, $webpage);
-                    if(!$stmt->execute()) {
-                        $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
-                    } else {
-                        $uid = $stmt->insert_id;
-                    }
-                }
-                $stmt->close();
+                $fields = array('Name', 'Rights', 'Email', 'regDate', 'Clearname', 'Website');
+                $values = array('sss&ss', array(
+                            preg_replace('/[^A-Za-z0-9-_]/', '', $user),
+                            'user', $Usermail, 'NOW()', $user, $webpage));
+                $uid = $db->insertInto('users', $fields, $values);
             }
-
 
             // insert comment
-            $sql = 'INSERT INTO
-                        kommentare(Inhalt, Datum, NewsID, Frei, ParentID, UID)
-                    VALUES
-                        (?, NOW(), ?, ?, ?, ?)';
-            if(!$stmt = $dbCon->prepare($sql)) {
-                $return = showInfo('Fehler #NC1, bitte Admin kontaktieren.', $errRet);
-            } else {
-                $stmt->bind_param('siiii', $Inhalt, $id, $frei, $replyTo, $uid);
-                if(!$stmt->execute()) {
-                    $return = showInfo('Fehler #NC2, bitte Admin kontaktieren.', $errRet);
-                }
-            }
-            $stmt->close();
+            $fields = array('Inhalt', 'Datum', 'NewsID', 'Frei', 'ParentID', 'UID');
+            $values = array('s&iiii', array(
+                       $Inhalt, 'NOW()', $id, $frei, $replyTo, $uid ));
+            $res = $db->insertInto('kommentare', $fields, $values);
 
             // notify mails
             notifyAdmin($title, $Inhalt, $user);

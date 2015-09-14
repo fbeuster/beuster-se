@@ -29,6 +29,13 @@
       "invalid_type" : "Ungültiger cond Typ.",
       "vars_must_be_array" : "Cond Variablen müssen Arrays sein.",
       "type_vars_mismatch" : "Cond Typ- und Variablenanzahl ist nicht gleich."
+    },
+    "values" : {
+      "must_be_array" : "value muss ein Array sein.",
+      "invalid_length" : "Ungültige value Länge.",
+      "invalid_string" : "Ungültiger value String.",
+      "vars_must_be_array" : "value Variablen müssen Arrays sein.",
+      "type_vars_mismatch" : "value Typ- und Variablenanzahl ist nicht gleich."
     }
   },
   "page" : {

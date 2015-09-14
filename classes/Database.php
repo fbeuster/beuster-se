@@ -69,6 +69,100 @@ class Database {
 		return isset($result->num_rows);
 	}
 
+	public function insertInto($table, $fields, $values) {
+
+		// concatenate fields
+		if(!is_array($fields) || empty($fields)) {
+			$this->error = I18n::t('database.fields.are_empty');
+			return null;
+		}
+		$fields = implode(', ', $fields);
+
+		// table name
+		if($table == null || $table == '') return null;
+		$table .= ' ';
+
+
+		// values
+		$vars = array();
+
+		// validate $values
+		if($values == null || !is_array($values) ||  (is_array($values) && empty($values))) {
+			$this->error = I18n::t('database.values.must_be_array');
+			return null;
+		}
+		if(count($values) != 2) {
+			$this->error = I18n::t('database.values.invalid_length');
+			return null;
+		}
+		if($values[0] == null || !is_string($values[0]) || $values[0] == '') {
+			$this->error = I18n::t('database.values.invalid_string');
+			return null;
+		}
+		if(!is_array($values[1])) {
+			$this->error = I18n::t('database.values.vars_must_be_array');
+			return null;
+		}
+		if(!strlen($values[0]) == count($values[1])) {
+			$this->error = I18n::t('database.values.type_vars_mismatch');
+			return null;
+		}
+
+		// value string
+		$value_string = 'VALUES (';
+
+		foreach (str_split($values[0]) as $key => $char) {
+			if ($char == '&') {
+				$value_string .= $values[1][$key];
+				unset($values[1][$key]);
+			} else {
+				$value_string .= '?';
+			}
+
+			$value_string .= ', ';
+		}
+
+		$value_string = substr($value_string, 0, strlen($value_string) - 2);
+		$value_string .= ')';
+
+		// building bind_param for conditions
+		$vars[] = str_replace('&', '', $values[0]);
+		foreach ($values[1] as $k => $v) {
+			$var = 'val'.$k;
+			$$var = $values[1][$k];
+			$vars[] = &$$var;
+		}
+
+		// buildung sql
+		$sql = 'INSERT INTO '.$table.'('.$fields.') '.$value_string.';';
+
+		// prepare request
+		$stmt = $this->con->prepare($sql);
+		if(!$stmt) {
+			$this->error = $this->con->error;
+			return null;
+		}
+
+		// bind_param
+		if(!call_user_func_array(array($stmt, 'bind_param'), $vars)) {
+			$this->error = $stmt->error;
+			return null;
+		}
+
+		// execute
+		if(!$stmt->execute()) {
+			$this->error = $stmt->error;
+			return null;
+		}
+
+		$insert_id = $stmt->insert_id;
+
+		// close
+		$stmt->close();
+
+		return $insert_id;
+	}
+
 	/**
 	 * Select from database.
 	 *
