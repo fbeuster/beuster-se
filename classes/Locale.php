@@ -28,7 +28,7 @@
       $this->lang_file  = $this->lang_path . $this->lang . '.' . $this->lang_file_type;
       $this->cache_file = $this->cache_path . $this->lang . '.php';
 
-      if(true || !file_exists($this->cache_file) || filemtime($this->cache_file) <= filemtime($this->lang_file)) {
+      if(!file_exists($this->cache_file) || filemtime($this->cache_file) <= filemtime($this->lang_file)) {
         $this->compile();
       }
     }

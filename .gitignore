@@ -1,5 +1,7 @@
 # some workspace related ignores
 .settings/*
+*.sublime-project
+*.sublime-workspace
 
 # this is webspace specific
 .htaccess
