@@ -6,6 +6,7 @@
 
     const LANG_FILE_TYPE_JSON = 'json';
 
+    private $base_path  = '';
     private $lang_path  = 'locale/';
     private $cache_path = 'cache/locale/';
 
@@ -16,8 +17,9 @@
     private $lang_file;
     private $cache_file;
 
-    public function __construct($lang = 'en', $lang_file_type = self::LANG_FILE_TYPE_JSON) {
-      $this->lang = $lang;
+    public function __construct($lang = 'en', $base_path = '', $lang_file_type = self::LANG_FILE_TYPE_JSON) {
+      $this->lang           = $lang;
+      $this->base_path      = $base_path;
       $this->lang_file_type = $lang_file_type;
 
       $this->init();
@@ -25,8 +27,8 @@
     }
 
     private function init() {
-      $this->lang_file  = $this->lang_path . $this->lang . '.' . $this->lang_file_type;
-      $this->cache_file = $this->cache_path . $this->lang . '.php';
+      $this->lang_file  = $this->base_path . $this->lang_path . $this->lang . '.' . $this->lang_file_type;
+      $this->cache_file = $this->base_path . $this->cache_path . $this->lang . '.php';
 
       if(!file_exists($this->cache_file) || filemtime($this->cache_file) <= filemtime($this->lang_file)) {
         $this->compile();
