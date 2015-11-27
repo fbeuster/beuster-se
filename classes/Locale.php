@@ -42,7 +42,7 @@
       $compiled .= "<?php class I18n {\n";
       $compiled .= $this->compileArray($this->lang_array);
       $compiled .= 'public static function t($string, $args = null) {' . "\n";
-      $compiled .= '  $string = str_replace(".", "_", $string);' . "\n";
+      $compiled .= '  $string = str_replace(".", "§", $string);' . "\n";
       $compiled .= '  if(constant("self::" . $string) === null) {' . "\n";
       $compiled .= '    return "Missing translation for \'$string\'";' . "\n";
       $compiled .= "  }\n";
@@ -60,13 +60,17 @@
       $compiled = '';
 
       foreach($array as $keyword => $translation) {
-        if(is_array($translation)) {
-          $compiled .= $this->compileArray($translation, $prefix . $keyword . '_');
+        if (strpos($keyword, '§')) {
+            throw new Exception('Paragraph symbol (§) is not allowed in translation keys.', 1);
         } else {
-          if ( !mb_check_encoding($translation, 'UTF-8') ) {
-            $translation = mb_convert_encoding($translation, 'UTF-8');
+          if(is_array($translation)) {
+            $compiled .= $this->compileArray($translation, $prefix . $keyword . '§');
+          } else {
+            if ( !mb_check_encoding($translation, 'UTF-8') ) {
+              $translation = mb_convert_encoding($translation, 'UTF-8');
+            }
+            $compiled .= 'const ' . $prefix . $keyword . ' = \'' . str_replace('\'', '\\\'', $translation) . "';\n";
           }
-          $compiled .= 'const ' . $prefix . $keyword . ' = \'' . str_replace('\'', '\\\'', $translation) . "';\n";
         }
       }
 
