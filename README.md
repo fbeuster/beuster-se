@@ -1,15 +1,20 @@
-# beuster{se} CMS
+# Lixter
 
 Since 2010 I developed constantly on my blog software, adding
-features, restructuring and so on. Now I finally moved it to git as the next
+features, restructuring and so on. I moved it to git as the next
 step.
 
-Currently it's not well built and not object oriented, which is why I would
-not recommend to use it for now. But of course you can, if you ready to put some
-work in it.
-Be aware that there are still some parts for [my blog](http://beusterse.de)
-hardcoded.
+This CMS is still in the process of being transfared into object orientation. However it is completely working out of the box. Check the Installation section for more information.
 
-Over the next ~~weeks~~ months I will transform the system step by step, so once it's
-finished it should be totally oo-Style and usable for everyone.
 Code documentation can be found under [doc.beusterse.de](http://doc.beusterse.de)
+
+## Installation
+
+Considering your website is `http://test.com`, navigate to
+```
+http://test.com/setup/index.php
+```
+to start the setup routine. Follow the simple instructions to setup the configuration, including database settings, administrator information, themes and more.
+
+### Notice
+While there is a setup routine available, it is in its first revision, so be aware of potential bugs (there are a few todos left...). Also, the setup routine is a basic HTML form as of now, no styling or interactive scripts yet.

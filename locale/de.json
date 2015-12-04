@@ -42,5 +42,14 @@
     "error" : {
       "title" : "Fehler"
     }
+  },
+  "setup" : {
+    "database" : {
+      "invalid_db_host" : "Ungültiger oder fehlender Wert für Datenbank Host.",
+      "invalid_db_name" : "Ungültiger oder fehlender Wert für Datenbank Name.",
+      "invalid_db_user" : "Ungültiger oder fehlender Wert für Datenbank Nutzer.",
+      "invalid_db_pass" : "Ungültiger oder fehlender Wert für Datenbank Passwort.",
+      "invalid_db_char" : "Ungültiger oder fehlender Wert für Datenbank Zeichensatz."
+    }
   }
 }

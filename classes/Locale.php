@@ -26,6 +26,8 @@
       $this->includeLanguage();
     }
 
+    // todo fallback if jsons are missing and no cache files exist
+
     private function init() {
       $this->lang_file  = $this->base_path . $this->lang_path . $this->lang . '.' . $this->lang_file_type;
       $this->cache_file = $this->base_path . $this->cache_path . $this->lang . '.php';

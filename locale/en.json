@@ -42,5 +42,53 @@
     "error" : {
       "title" : "Error"
     }
+  },
+  "setup" : {
+    "admin_user" : {
+      "invalid_mail" : "The admin's mail is invalid.",
+      "invalid_password_2" : "The repeated password is invalid.",
+      "missing_mail" : "Value for admin email is missing.",
+      "missing_password" : "Value for password is missing.",
+      "missing_password_2" : "Value for repeated password is missing.",
+      "missing_realname" : "Value for amdin's real name is missing.",
+      "missing_username" : "Value for admin's user name is missing.",
+      "not_ready" : "Previous setup steps are not completed."
+    },
+    "advanced" : {
+      "invalid_dev_server_address" : "Value for development server address is invalid.",
+      "invalid_remote_server_address" : "Value for remote server address is invalid.",
+      "missing_dev_server_address" : "Value for development server address is missing.",
+      "missing_remote_server_address" : "Value for remote server address is missing.",
+      "not_ready" : "Previous setup steps are not completed."
+    },
+    "content" : {
+      "invalid_db_char" : "Value for database charset is invalid.",
+      "invalid_new_db_value" : "Value for new or exisiting database is invalid.",
+      "missing_db_char" : "Value for database character set is missing.",
+      "missing_from_existing_file" : "Ypu need to upload an SQL file.",
+      "missing_new_db" : "Value for new or exisiting database is missing.",
+      "missing_new_db_file" : "Default SQL file could not be found.",
+      "not_ready" : "Previous setup steps are not completed."
+    },
+    "custom" : {
+      "invalid_language" : "Value for language is invalid.",
+      "invalid_theme" : "Value for theme is invalid.",
+      "invalid_timezone" : "Value for timezone is invalid.",
+      "missing_language" : "Value for language is missing",
+      "missing_theme" : "Value for theme is missing",
+      "missing_timezone" : "Value for timezone is missing",
+      "not_ready" : "Previous setup steps are not completed.",
+      "rss_not_writable" : "The given RSS path is not writable"
+    },
+    "database" : {
+      "access_denied" : "Access denied for user %s.",
+      "connection_error" : "A connection error occured.",
+      "missing_db_host" : "Value for database host is missing.",
+      "missing_db_name" : "Value for database name is missing.",
+      "missing_db_user" : "Value for database user is missing.",
+      "missing_db_pass" : "Value for database password is missing.",
+      "unkown_database" : "Unknown database '%s'.",
+      "unkown_host" : "Unknown host '%s'."
+    }
   }
 }
