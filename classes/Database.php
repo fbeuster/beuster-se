@@ -12,7 +12,6 @@
  *
  * Provides a simple and global access to the database.
  *
- * \todo function for INSERT
  * \todo function for DELETE
  * \todo function for UPDATE
  */
@@ -69,7 +68,7 @@ class Database {
 		return isset($result->num_rows);
 	}
 
-	public function insertInto($table, $fields, $values) {
+	public function insert($table, $fields, $values) {
 
 		// concatenate fields
 		if(!is_array($fields) || empty($fields)) {

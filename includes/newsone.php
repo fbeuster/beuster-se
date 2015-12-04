@@ -58,14 +58,14 @@
                 $values = array('sss&ss', array(
                             preg_replace('/[^A-Za-z0-9-_]/', '', $user),
                             'user', $Usermail, 'NOW()', $user, $webpage));
-                $uid = $db->insertInto('users', $fields, $values);
+                $uid = $db->insert('users', $fields, $values);
             }
 
             // insert comment
             $fields = array('Inhalt', 'Datum', 'NewsID', 'Frei', 'ParentID', 'UID');
             $values = array('s&iiii', array(
                        $Inhalt, 'NOW()', $id, $frei, $replyTo, $uid ));
-            $res = $db->insertInto('kommentare', $fields, $values);
+            $res = $db->insert('kommentare', $fields, $values);
 
             // notify mails
             notifyAdmin($title, $Inhalt, $user);
