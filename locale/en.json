@@ -89,6 +89,13 @@
       "missing_db_pass" : "Value for database password is missing.",
       "unkown_database" : "Unknown database '%s'.",
       "unkown_host" : "Unknown host '%s'."
+    },
+    "title" : "Lixter initial configuration",
+    "welcome" : {
+      "content" : "On the following five pages, you can setup your own instance of Lixter. Settings will include the database configuration, information aobut the content and administrator as well as customization and advanced settings.",
+      "header" : "Welcome to Lixter",
+      "legend" : "Step 0: Welcome",
+      "submit" : "Start"
     }
   }
 }

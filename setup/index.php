@@ -15,10 +15,13 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lixter Setup Page</title>
+    <title><?php echo I18n::t("setup.title"); ?></title>
+    <link rel="stylesheet" href="assets/main.css" type="text/css">
   </head>
   <body>
-    <h1>Lixter setup process</h1>
-    <?php require_once $setup->getStepFile(); ?>
+    <div class="main_wrapper">
+      <h1><?php echo I18n::t("setup.title"); ?></h1>
+      <?php require_once $setup->getStepFile(); ?>
+    </div>
   </body>
 </html>

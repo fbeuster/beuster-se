@@ -89,6 +89,13 @@
       "missing_db_pass" : "Angabe des Datenbank-Passwortes fehlt.",
       "unkown_database" : "Unbekannte Datenbank '%s'.",
       "unkown_host" : "Unbekannter Host '%s'."
+    },
+    "title" : "Lixter Erstkonfiguration",
+    "welcome" : {
+      "content" : "Auf den folgenden fünf Seiten kannst du eine eigene Version von Lixter konfiguieren. Die Einstellungen beinhalten die Datenbank-Konfiguration, Informationen über den Inhalt und Administrator, sowie benutzerdefinierte Anpassungen und erweiterte Einstellungen.",
+      "header" : "Willkommen in Lixter",
+      "legend" : "Schritt 0: Willkommen",
+      "submit" : "Start"
     }
   }
 }

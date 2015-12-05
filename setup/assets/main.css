@@ -1,0 +1,121 @@
+/** resets **/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, acronym, address, code, del, dfn,
+em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;}
+body {
+    line-height: 1.29;}
+table {
+    border-collapse: separate;
+    border-spacing: 0;}
+caption, th, td {
+    text-align: left;
+    font-weight: normal;}
+table, td, th {
+    vertical-align: middle;}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:"";}
+blockquote, q {
+    quotes:"" "";}
+a img {
+    border: none;}
+
+body {
+	background: #f9f9f9;
+	font-family: Calibri, "Noto Sans", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.main_wrapper {
+	margin: 0 auto;
+ 	max-width: 800px;
+ 	padding: 0 1em;
+}
+
+h1 {
+	margin: 1em 0;
+	padding-bottom: 0.25em;
+  position: relative;
+}
+
+@-webkit-keyframes headerBar { from { width: 0%; } to { width: 100% } }
+@-moz-keyframes headerBar { from { width: 0%; } to { width: 100% } }
+@keyframes headerBar { from { width: 0%; } to { width: 100% } }
+
+h1:after {
+  content: "";
+  width: 0%;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  background: #1686C6;
+
+  -webkit-animation: headerBar ease-in 1;
+  -moz-animation: headerBar ease-in 1;
+  animation: headerBar ease-in 1;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+
+  -webkit-animation-delay: 0.75s;
+  -moz-animation-delay: 0.75s;
+  animation-delay: 0.75s;
+}
+
+fieldset {
+	padding-top: 0.5em;
+}
+
+fieldset legend {
+	color: #333333;
+	font-style: italic;
+}
+
+.progress {
+  background: #cccccc;
+  height: 3px;
+  margin-bottom: 1em;
+  opacity: 0.75;
+}
+
+.progress .bar {
+  background: #0ea86c;
+  width: 0%;
+}
+
+.progress .bar.w20 {
+  width: 20%;
+}
+
+.progress .bar.w40 {
+  width: 40%;
+}
+
+.progress .bar.w60 {
+  width: 60%;
+}
+
+.progress .bar.w80 {
+  width: 80%;
+}
+
+.progress .bar.w100 {
+  width: 100%;
+}
+
+input.nav_button {
+	display: block;
+	margin-top: 1.5em;
+}
