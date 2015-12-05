@@ -16,5 +16,7 @@ http://test.com/setup/index.php
 ```
 to start the setup routine. Follow the simple instructions to setup the configuration, including database settings, administrator information, themes and more.
 
+Also make sure, that the cache and cache/locale directory are writable for the web page.
+
 ### Notice
 While there is a setup routine available, it is in its first revision, so be aware of potential bugs (there are a few todos left...). Also, the setup routine is a basic HTML form as of now, no styling or interactive scripts yet.

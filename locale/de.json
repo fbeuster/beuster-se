@@ -44,12 +44,51 @@
     }
   },
   "setup" : {
+    "admin_user" : {
+      "invalid_mail" : "Die Administrator Email-Adresse ist ungültig.",
+      "invalid_password_2" : "Das wiederholte Passwort ist ungültig.",
+      "missing_mail" : "Die Administrator Email-Adresse fehlt.",
+      "missing_password" : "Das Passwort fehlt.",
+      "missing_password_2" : "Die Passwortwiederholung fehlt.",
+      "missing_realname" : "Der Realname des Administrators fehlt.",
+      "missing_username" : "Der Nutzername des Administrators fehlt.",
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+    },
+    "advanced" : {
+      "invalid_dev_server_address" : "Development Server Adresse ungültig.",
+      "invalid_remote_server_address" : "Remote Server Adresse ungültig.",
+      "missing_dev_server_address" : "Development Server Adresse fehlt.",
+      "missing_remote_server_address" : "Remote Server Adresse fehlt.",
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+    },
+    "content" : {
+      "invalid_db_char" : "Wert für den Zeichensatz ungültig.",
+      "invalid_new_db_value" : "Ungültiger Wert für neue oder existierende Datenbankkonfiguration.",
+      "missing_db_char" : "Wert für den Zeichensatz fehlt.",
+      "missing_from_existing_file" : "SQL Datei für Datenbankeinspielung fehlt.",
+      "missing_new_db" : "Fehlender Wert für neue oder existierende Datenbankkonfiguration.",
+      "missing_new_db_file" : "SQL Datei zur Datenbankerstellung fehlt.",
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+    },
+    "custom" : {
+      "invalid_language" : "Ungültige Sprache.",
+      "invalid_theme" : "Ungültiges Design.",
+      "invalid_timezone" : "Ungültige Zeitzone.",
+      "missing_language" : "Angabe der Sprache fehlt.",
+      "missing_theme" : "Angabe des Designs fehlt.",
+      "missing_timezone" : "Angabe der Zeitzone fehlt.",
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
+      "rss_not_writable" : "I, angegebenen RSS Pfad kann keine Datei erstellt werden."
+    },
     "database" : {
-      "invalid_db_host" : "Ungültiger oder fehlender Wert für Datenbank Host.",
-      "invalid_db_name" : "Ungültiger oder fehlender Wert für Datenbank Name.",
-      "invalid_db_user" : "Ungültiger oder fehlender Wert für Datenbank Nutzer.",
-      "invalid_db_pass" : "Ungültiger oder fehlender Wert für Datenbank Passwort.",
-      "invalid_db_char" : "Ungültiger oder fehlender Wert für Datenbank Zeichensatz."
+      "access_denied" : "Zugriff für Nutzer %s verweigert.",
+      "connection_error" : "Ein Verbindungsfehler ist aufgetreten.",
+      "missing_db_host" : "Angabe des Datenban-Host fehlt.",
+      "missing_db_name" : "Angabe des Datenbank-Namens fehlt.",
+      "missing_db_user" : "Angabe des Datenbank-Nutzers fehlt.",
+      "missing_db_pass" : "Angabe des Datenbank-Passwortes fehlt.",
+      "unkown_database" : "Unbekannte Datenbank '%s'.",
+      "unkown_host" : "Unbekannter Host '%s'."
     }
   }
 }
