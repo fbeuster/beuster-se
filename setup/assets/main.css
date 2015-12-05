@@ -86,12 +86,13 @@ fieldset legend {
 .progress {
   background: #cccccc;
   height: 3px;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   opacity: 0.75;
 }
 
 .progress .bar {
   background: #0ea86c;
+  height: 3px;
   width: 0%;
 }
 
@@ -115,7 +116,57 @@ fieldset legend {
   width: 100%;
 }
 
-input.nav_button {
+.nav_button {
 	display: block;
-	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+span.nav_button:before {
+  color: #333333;
+  content: "<";
+  margin-right: 0.25em;
+}
+
+span.nav_button a {
+  color: #333333;
+  text-decoration: none;
+}
+
+span.nav_button a:hover {
+  text-decoration: underline;
+}
+
+fieldset p {
+  margin-bottom: 1.5em;
+}
+
+fieldset label {
+  display: block;
+  clear: both;
+  float: left;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+  width: 25%;
+}
+
+fieldset input[type=text],
+fieldset input[type=password] {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  display: block;
+  float: left;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+  width: 25%;
+}
+
+fieldset hr:last-of-type {
+  background: #cccccc;
+  border: 0;
+  clear: both;
+  height: 2px;
+  margin: 0;
+  margin-bottom: 1.5em;
+  opacity: 0.75;
 }

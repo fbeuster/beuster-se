@@ -82,11 +82,18 @@
     },
     "database" : {
       "access_denied" : "Zugriff für Nutzer %s verweigert.",
+      "back_link" : "Zurück",
       "connection_error" : "Ein Verbindungsfehler ist aufgetreten.",
+      "label_db_host" : "Datenbank Host",
+      "label_db_name" : "Datenbank Name",
+      "label_db_user" : "Datenbank Nutzer",
+      "label_db_pass" : "Datenbank Passwort",
+      "legend" : "Schritt 1: Datenbank",
       "missing_db_host" : "Angabe des Datenban-Host fehlt.",
       "missing_db_name" : "Angabe des Datenbank-Namens fehlt.",
       "missing_db_user" : "Angabe des Datenbank-Nutzers fehlt.",
       "missing_db_pass" : "Angabe des Datenbank-Passwortes fehlt.",
+      "submit" : "Speichern und weiter",
       "unkown_database" : "Unbekannte Datenbank '%s'.",
       "unkown_host" : "Unbekannter Host '%s'."
     },

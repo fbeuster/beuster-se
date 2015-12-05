@@ -82,11 +82,18 @@
     },
     "database" : {
       "access_denied" : "Access denied for user %s.",
+      "back_link" : "Back",
       "connection_error" : "A connection error occured.",
+      "label_db_host" : "Database host",
+      "label_db_name" : "Database name",
+      "label_db_user" : "Database user",
+      "label_db_pass" : "Database password",
+      "legend" : "Step 1: Database",
       "missing_db_host" : "Value for database host is missing.",
       "missing_db_name" : "Value for database name is missing.",
       "missing_db_user" : "Value for database user is missing.",
       "missing_db_pass" : "Value for database password is missing.",
+      "submit" : "Save and next",
       "unkown_database" : "Unknown database '%s'.",
       "unkown_host" : "Unknown host '%s'."
     },
