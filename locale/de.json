@@ -65,11 +65,17 @@
       "submit" : "Speichern und weiter"
     },
     "advanced" : {
+      "back_link" : "Zurück",
       "invalid_dev_server_address" : "Development Server Adresse ungültig.",
       "invalid_remote_server_address" : "Remote Server Adresse ungültig.",
+      "label_dev_server" : "Development server",
+      "label_dev_server_address" : "Dev. Server Adresse",
+      "label_remote_server_address" : "Remote Server Adresse",
+      "legend" : "Schritt 5: Erweiterte Einstellungen",
       "missing_dev_server_address" : "Development Server Adresse fehlt.",
       "missing_remote_server_address" : "Remote Server Adresse fehlt.",
-      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
+      "submit" : "Speichern und weiter"
     },
     "content" : {
       "back_link" : "Zurück",

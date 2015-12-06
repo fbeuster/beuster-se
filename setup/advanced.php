@@ -2,19 +2,19 @@
 
 <form action="index.php?step=advanced" method="post">
   <fieldset>
+    <legend><?php echo I18n::t("setup.advanced.legend"); ?></legend>
+    <div class="progress">
+      <div class="bar w100">&nbsp;</div>
+    </div>
     <?php $form->showMessages(); ?>
-    <span><a href="index.php?step=custom">Back</a></span>
-    <br>
-    <legend>advanced</legend>
-    <label for="devServer">devServer</label>
+    <span class="nav_button"><a href="index.php?step=custom"><?php echo I18n::t("setup.advanced.back_link"); ?></a></span>
+    <label for="devServer"><?php echo I18n::t("setup.advanced.label_dev_server"); ?></label>
     <?php $form->checkbox('devServer', 'devServer'); ?>
-    <br>
-    <label for="devServerAddress">devServerAddress</label>
+    <label for="devServerAddress"><?php echo I18n::t("setup.advanced.label_dev_server_address"); ?></label>
     <?php $form->textField('devServerAddress', 'devServerAddress'); ?>
-    <br>
-    <label for="remoteServerAddress">remoteServerAddress</label>
+    <label for="remoteServerAddress"><?php echo I18n::t("setup.advanced.label_remote_server_address"); ?></label>
     <?php $form->textField('remoteServerAddress', 'remoteServerAddress'); ?>
-    <br>
-    <input type="submit" value="Save and next">
+    <hr>
+    <input type="submit" value="<?php echo I18n::t("setup.advanced.submit"); ?>" class="nav_button">
   </fieldset>
 </form>

@@ -65,11 +65,17 @@
       "submit" : "Save and next"
     },
     "advanced" : {
+      "back_link" : "Back",
       "invalid_dev_server_address" : "Value for development server address is invalid.",
       "invalid_remote_server_address" : "Value for remote server address is invalid.",
+      "label_dev_server" : "Development server",
+      "label_dev_server_address" : "Dev. server address",
+      "label_remote_server_address" : "Remote server address",
+      "legend" : "Step 5: Advanced settings",
       "missing_dev_server_address" : "Value for development server address is missing.",
       "missing_remote_server_address" : "Value for remote server address is missing.",
-      "not_ready" : "Previous setup steps are not completed."
+      "not_ready" : "Previous setup steps are not completed.",
+      "submit" : "Save and next"
     },
     "content" : {
       "back_link" : "Back",
