@@ -88,14 +88,21 @@
       "submit" : "Speichern und weiter"
     },
     "custom" : {
+      "back_link" : "Zurück",
       "invalid_language" : "Ungültige Sprache.",
       "invalid_theme" : "Ungültiges Design.",
       "invalid_timezone" : "Ungültige Zeitzone.",
+      "label_language" : "Sprache",
+      "label_rss_path" : "RSS-Dateipfad",
+      "label_timezone" : "Zeitzone",
+      "legend" : "Schritt 4: Anpassung",
       "missing_language" : "Angabe der Sprache fehlt.",
       "missing_theme" : "Angabe des Designs fehlt.",
       "missing_timezone" : "Angabe der Zeitzone fehlt.",
       "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
-      "rss_not_writable" : "Im angegebenen RSS Pfad kann keine Datei erstellt werden."
+      "rss_not_writable" : "Im angegebenen RSS Pfad kann keine Datei erstellt werden.",
+      "submit" : "Speichern und weiter",
+      "title_themes" : "Themen"
     },
     "database" : {
       "access_denied" : "Zugriff für Nutzer %s verweigert.",

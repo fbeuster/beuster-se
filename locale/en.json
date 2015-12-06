@@ -88,14 +88,21 @@
       "submit" : "Save and next"
     },
     "custom" : {
+      "back_link" : "Back",
       "invalid_language" : "Value for language is invalid.",
       "invalid_theme" : "Value for theme is invalid.",
       "invalid_timezone" : "Value for timezone is invalid.",
+      "label_language" : "Language",
+      "label_rss_path" : "RSS file path",
+      "label_timezone" : "Timezone",
+      "legend" : "Step 4: Customization",
       "missing_language" : "Value for language is missing",
       "missing_theme" : "Value for theme is missing",
       "missing_timezone" : "Value for timezone is missing",
       "not_ready" : "Previous setup steps are not completed.",
-      "rss_not_writable" : "The given RSS path is not writable"
+      "rss_not_writable" : "The given RSS path is not writable",
+      "submit" : "Save and next",
+      "title_themes" : "Themes"
     },
     "database" : {
       "access_denied" : "Access denied for user %s.",

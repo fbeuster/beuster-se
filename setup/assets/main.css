@@ -141,6 +141,13 @@ fieldset p {
   margin-bottom: 1.5em;
 }
 
+fieldset span.section_title {
+  display: block;
+  float: left;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
 fieldset label {
   display: block;
   clear: both;
@@ -166,7 +173,7 @@ fieldset input[type=password] {
   width: 25%;
 }
 
-fieldset hr:last-of-type {
+fieldset hr {
   background: #cccccc;
   border: 0;
   clear: both;
@@ -174,6 +181,10 @@ fieldset hr:last-of-type {
   margin: 0;
   margin-bottom: 1.5em;
   opacity: 0.75;
+}
+
+fieldset hr:last-of-type {
+  height: 2px;
 }
 
 fieldset .file_uploader {
