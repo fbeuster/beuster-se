@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo I18n::t("setup.title"); ?></title>
     <link rel="stylesheet" href="assets/main.css" type="text/css">
+    <script src="assets/main.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="main_wrapper">

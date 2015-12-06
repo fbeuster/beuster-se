@@ -14,8 +14,10 @@
     <?php $form->radioButton('new_db', 'new_db', array('checked' => 'checked', 'value' => 'new_db')); ?>
     <label for="from_existing"><?php echo I18n::t("setup.content.label_from_existing"); ?></label>
     <?php $form->radioButton('from_existing', 'new_db', array('value' => 'from_existing')); ?>
-    <label for="sql_file"><?php echo I18n::t("setup.content.label_sql_file"); ?></label>
-    <input type="file" name="sql_file" id="sql_file">
+    <div class="file_uploader">
+      <label for="sql_file"><?php echo I18n::t("setup.content.label_sql_file"); ?></label>
+      <input type="file" name="sql_file" id="sql_file">
+    </div>
     <hr>
     <input type="submit" value="<?php echo I18n::t("setup.content.submit"); ?>" class="nav_button">
   </fieldset>

@@ -175,3 +175,11 @@ fieldset hr:last-of-type {
   margin-bottom: 1.5em;
   opacity: 0.75;
 }
+
+fieldset .file_uploader {
+  display: none;
+}
+
+fieldset .file_uploader.active {
+  display: block;
+}
