@@ -187,10 +187,12 @@ fieldset hr:last-of-type {
   height: 2px;
 }
 
+fieldset .dev_server,
 fieldset .file_uploader {
   display: none;
 }
 
+fieldset .dev_server.active,
 fieldset .file_uploader.active {
   display: block;
 }
