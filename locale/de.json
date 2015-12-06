@@ -45,14 +45,24 @@
   },
   "setup" : {
     "admin_user" : {
+      "back_link" : "Zurück",
       "invalid_mail" : "Die Administrator Email-Adresse ist ungültig.",
       "invalid_password_2" : "Das wiederholte Passwort ist ungültig.",
+      "label_mail" : "E-Mail",
+      "label_password" : "Passwort",
+      "label_password_2" : "Passwort (Wiederholung)",
+      "label_realname" : "Realer Name",
+      "label_username" : "Nutzername",
+      "label_website" : "Website",
+      "legend" : "Schritt 3: Administrator",
       "missing_mail" : "Die Administrator Email-Adresse fehlt.",
       "missing_password" : "Das Passwort fehlt.",
       "missing_password_2" : "Die Passwortwiederholung fehlt.",
       "missing_realname" : "Der Realname des Administrators fehlt.",
       "missing_username" : "Der Nutzername des Administrators fehlt.",
-      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
+      "step_info" : "Bitte gib die Informationen über den Administrator ein. Dieser Nutzer wird die meiste Kontrolle in deinem CMS haben.",
+      "submit" : "Speichern und weiter"
     },
     "advanced" : {
       "invalid_dev_server_address" : "Development Server Adresse ungültig.",

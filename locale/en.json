@@ -45,14 +45,24 @@
   },
   "setup" : {
     "admin_user" : {
+      "back_link" : "Back",
       "invalid_mail" : "The admin's mail is invalid.",
       "invalid_password_2" : "The repeated password is invalid.",
+      "label_mail" : "Email",
+      "label_password" : "Password",
+      "label_password_2" : "Password (repeated)",
+      "label_realname" : "Real name",
+      "label_username" : "User name",
+      "label_website" : "Website",
+      "legend" : "Step 3: Administrator",
       "missing_mail" : "Value for admin email is missing.",
       "missing_password" : "Value for password is missing.",
       "missing_password_2" : "Value for repeated password is missing.",
       "missing_realname" : "Value for amdin's real name is missing.",
       "missing_username" : "Value for admin's user name is missing.",
-      "not_ready" : "Previous setup steps are not completed."
+      "not_ready" : "Previous setup steps are not completed.",
+      "step_info" : "Please enter the information for the administrator. This user will have the most control over your CMS.",
+      "submit" : "Save and next"
     },
     "advanced" : {
       "invalid_dev_server_address" : "Value for development server address is invalid.",
@@ -65,8 +75,8 @@
       "back_link" : "Back",
       "invalid_db_char" : "Value for database charset is invalid.",
       "invalid_new_db_value" : "Value for new or exisiting database is invalid.",
-      "legend" : "Step 2: Content",
       "label_db_char" : "Database character set",
+      "legend" : "Step 2: Content",
       "label_from_existing" : "Existing database",
       "label_sql_file" : "Import file",
       "label_new_db" : "New database",
