@@ -127,6 +127,11 @@
       "unkown_database" : "Unknown database '%s'.",
       "unkown_host" : "Unknown host '%s'."
     },
+    "finish" : {
+      "info" : "You finished the setup and everything is ready to go now. Head over to the %s and the results. You can always can gp to the admin section and change some of the settings.",
+      "link" : "main page",
+      "title" : "All done!"
+    },
     "title" : "Lixter initial configuration",
     "welcome" : {
       "content" : "On the following five pages, you can setup your own instance of Lixter. Settings will include the database configuration, information aobut the content and administrator as well as customization and advanced settings.",

@@ -128,27 +128,27 @@ span.nav_button:before {
   margin-right: 0.25em;
 }
 
-span.nav_button a {
-  color: #333333;
+a {
+  color: #333399;
   text-decoration: none;
 }
 
-span.nav_button a:hover {
+a:hover {
   text-decoration: underline;
 }
 
-fieldset p {
+p {
   margin-bottom: 1.5em;
 }
 
-fieldset span.section_title {
+span.section_title {
   display: block;
   float: left;
   font-weight: bold;
   margin-bottom: 1em;
 }
 
-fieldset label {
+label {
   display: block;
   clear: both;
   float: left;
@@ -157,23 +157,33 @@ fieldset label {
   width: 25%;
 }
 
-fieldset input,
-fieldset select {
+input,
+select {
   display: block;
   float: left;
   font-size: 1em;
   margin-bottom: 1.5em;
 }
 
-fieldset input[type=text],
-fieldset input[type=password] {
+input[type=text],
+input[type=password] {
   background: #ffffff;
   border: 1px solid #cccccc;
   border-radius: 0;
   width: 25%;
 }
 
-fieldset hr {
+.dev_server,
+.file_uploader {
+  display: none;
+}
+
+.dev_server.active,
+.file_uploader.active {
+  display: block;
+}
+
+hr {
   background: #cccccc;
   border: 0;
   clear: both;
@@ -183,16 +193,6 @@ fieldset hr {
   opacity: 0.75;
 }
 
-fieldset hr:last-of-type {
+hr:last-of-type {
   height: 2px;
-}
-
-fieldset .dev_server,
-fieldset .file_uploader {
-  display: none;
-}
-
-fieldset .dev_server.active,
-fieldset .file_uploader.active {
-  display: block;
 }

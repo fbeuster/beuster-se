@@ -127,6 +127,11 @@
       "unkown_database" : "Unbekannte Datenbank '%s'.",
       "unkown_host" : "Unbekannter Host '%s'."
     },
+    "finish" : {
+      "info" : "Du hast die Einrichtung abgeschlossen und alles ist bereit. Schau dir die %s an, um die Ergebnisse zu sehe. Du kannst jederzeit einige der Einstellungen im Administrationsbereich ändern.",
+      "link" : "Haupseite",
+      "title" : "Geschafft!"
+    },
     "title" : "Lixter Erstkonfiguration",
     "welcome" : {
       "content" : "Auf den folgenden fünf Seiten kannst du eine eigene Version von Lixter konfiguieren. Die Einstellungen beinhalten die Datenbank-Konfiguration, Informationen über den Inhalt und Administrator, sowie benutzerdefinierte Anpassungen und erweiterte Einstellungen.",
