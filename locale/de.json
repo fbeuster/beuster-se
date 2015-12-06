@@ -62,13 +62,20 @@
       "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
     },
     "content" : {
+      "back_link" : "Zurück",
       "invalid_db_char" : "Wert für den Zeichensatz ungültig.",
       "invalid_new_db_value" : "Ungültiger Wert für neue oder existierende Datenbankkonfiguration.",
+      "legend" : "Schritt 2: Inhalt",
+      "label_db_char" : "Databank-Zeichensatz",
+      "label_from_existing" : "Bestehende Datenbank",
+      "label_sql_file" : "Importdatei",
+      "label_new_db" : "Neue Datenbank",
       "missing_db_char" : "Wert für den Zeichensatz fehlt.",
       "missing_from_existing_file" : "SQL Datei für Datenbankeinspielung fehlt.",
       "missing_new_db" : "Fehlender Wert für neue oder existierende Datenbankkonfiguration.",
       "missing_new_db_file" : "SQL Datei zur Datenbankerstellung fehlt.",
-      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen."
+      "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
+      "submit" : "Speichern und weiter"
     },
     "custom" : {
       "invalid_language" : "Ungültige Sprache.",
@@ -78,7 +85,7 @@
       "missing_theme" : "Angabe des Designs fehlt.",
       "missing_timezone" : "Angabe der Zeitzone fehlt.",
       "not_ready" : "Vorhergehenden Einrichtungsschritte nicht abgeschlossen.",
-      "rss_not_writable" : "I, angegebenen RSS Pfad kann keine Datei erstellt werden."
+      "rss_not_writable" : "Im angegebenen RSS Pfad kann keine Datei erstellt werden."
     },
     "database" : {
       "access_denied" : "Zugriff für Nutzer %s verweigert.",

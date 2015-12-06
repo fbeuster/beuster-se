@@ -2,22 +2,21 @@
 
 <form action="index.php?step=content" method="post" class="<?php echo $form->getErrorClass(); ?>">
   <fieldset>
+    <legend><?php echo I18n::t("setup.content.legend"); ?></legend>
+    <div class="progress">
+      <div class="bar w40">&nbsp;</div>
+    </div>
     <?php $form->showMessages(); ?>
-    <span><a href="index.php?step=database">Back</a></span>
-    <br>
-    <legend>content</legend>
-    <label for="db_char">db_char</label>
+    <span class="nav_button"><a href="index.php?step=database"><?php echo I18n::t("setup.content.back_link"); ?></a></span>
+    <label for="db_char"><?php echo I18n::t("setup.content.label_db_char"); ?></label>
     <?php $form->selectField('db_char', 'db_char', SetupHelper::getCharsets(), 'utf8', SetupHelper::getFieldOptions('db_char')); ?>
-    <br>
-    <label for="new_db">new_db</label>
+    <label for="new_db"><?php echo I18n::t("setup.content.label_new_db"); ?></label>
     <?php $form->radioButton('new_db', 'new_db', array('checked' => 'checked', 'value' => 'new_db')); ?>
-    <br>
-    <label for="from_existing">from_existing</label>
+    <label for="from_existing"><?php echo I18n::t("setup.content.label_from_existing"); ?></label>
     <?php $form->radioButton('from_existing', 'new_db', array('value' => 'from_existing')); ?>
-    <br>
-    <label for="sql_file">sql_file</label>
+    <label for="sql_file"><?php echo I18n::t("setup.content.label_sql_file"); ?></label>
     <input type="file" name="sql_file" id="sql_file">
-    <br>
-    <input type="submit" value="Save and next">
+    <hr>
+    <input type="submit" value="<?php echo I18n::t("setup.content.submit"); ?>" class="nav_button">
   </fieldset>
 </form>

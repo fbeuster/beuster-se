@@ -118,6 +118,7 @@ fieldset legend {
 
 .nav_button {
 	display: block;
+  float: none;
 	margin-bottom: 1.5em;
 }
 
@@ -149,15 +150,19 @@ fieldset label {
   width: 25%;
 }
 
+fieldset input,
+fieldset select {
+  display: block;
+  float: left;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+
 fieldset input[type=text],
 fieldset input[type=password] {
   background: #ffffff;
   border: 1px solid #cccccc;
   border-radius: 0;
-  display: block;
-  float: left;
-  font-size: 1em;
-  margin-bottom: 1.5em;
   width: 25%;
 }
 

@@ -62,13 +62,20 @@
       "not_ready" : "Previous setup steps are not completed."
     },
     "content" : {
+      "back_link" : "Back",
       "invalid_db_char" : "Value for database charset is invalid.",
       "invalid_new_db_value" : "Value for new or exisiting database is invalid.",
+      "legend" : "Step 2: Content",
+      "label_db_char" : "Database character set",
+      "label_from_existing" : "Existing database",
+      "label_sql_file" : "Import file",
+      "label_new_db" : "New database",
       "missing_db_char" : "Value for database character set is missing.",
-      "missing_from_existing_file" : "Ypu need to upload an SQL file.",
+      "missing_from_existing_file" : "You need to upload an SQL file.",
       "missing_new_db" : "Value for new or exisiting database is missing.",
       "missing_new_db_file" : "Default SQL file could not be found.",
-      "not_ready" : "Previous setup steps are not completed."
+      "not_ready" : "Previous setup steps are not completed.",
+      "submit" : "Save and next"
     },
     "custom" : {
       "invalid_language" : "Value for language is invalid.",
