@@ -101,9 +101,12 @@ class FormHandler {
   }
 
   public function showMessages() {
+    echo '<div class="messages">';
+    echo '<span class="label">Notifications:</span>';
     foreach ($_SESSION['form_messages'] as $msg) {
-      echo '<span>' . $msg . '</span><br>';
+      echo '<span class="error">' . $msg . '</span>';
     }
+    echo '</div>';
   }
 
   public function textField($id, $name, $extra = null) {

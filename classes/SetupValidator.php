@@ -80,7 +80,7 @@ class SetupValidator extends AbstractValidator {
 
   private function validateAdminUser() {
     if (!$this->readyForAdminUser()) {
-      $this->addMessage('setup.admin_user.not_ready');
+      $this->addMessage(I18n::t('setup.admin_user.not_ready'));
 
     } else {
       $this->values = array('admin_username'  => $_POST['admin_username'],
@@ -122,7 +122,7 @@ class SetupValidator extends AbstractValidator {
 
   private function validateAdvanced() {
     if (!$this->readyForAdvanced()) {
-      $this->addMessage('setup.advanced.not_ready');
+      $this->addMessage(I18n::t('setup.advanced.not_ready'));
 
     } else {
       if (isset($_POST['devServer'])) {
@@ -160,8 +160,8 @@ class SetupValidator extends AbstractValidator {
   }
 
   private function validateContent() {
-    if (!$this->readyForContent()) {
-      $this->addMessage('setup.content.not_ready');
+    if (true || !$this->readyForContent()) {
+      $this->addMessage(I18n::t('setup.content.not_ready'));
 
     } else {
       if ($this->isMissing('db_char')) {
@@ -203,7 +203,7 @@ class SetupValidator extends AbstractValidator {
 
   private function validateCustom() {
     if (!$this->readyForCustom()) {
-      $this->addMessage('setup.custom.not_ready');
+      $this->addMessage(I18n::t('setup.custom.not_ready'));
 
     } else {
       echo '<pre>'; print_r($_POST); echo '</pre>';

@@ -27,20 +27,21 @@ a img {
     border: none;}
 
 body {
-	background: #f9f9f9;
-	font-family: Calibri, "Noto Sans", Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  background: #f0f9f9;
+  color: #191f1f;
+  font-family: Calibri, "Noto Sans", Helvetica, Arial, sans-serif;
+  line-height: 1.75;
 }
 
 .main_wrapper {
-	margin: 0 auto;
- 	max-width: 800px;
- 	padding: 0 1em;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 1em;
 }
 
 h1 {
-	margin: 1em 0;
-	padding-bottom: 0.25em;
+  margin: 1em 0;
+  padding-bottom: 0.25em;
   position: relative;
 }
 
@@ -75,12 +76,12 @@ h1:after {
 }
 
 fieldset {
-	padding-top: 0.5em;
+  padding-top: 0.5em;
 }
 
 fieldset legend {
-	color: #333333;
-	font-style: italic;
+  color: #333333;
+  font-style: italic;
 }
 
 .progress {
@@ -117,9 +118,9 @@ fieldset legend {
 }
 
 .nav_button {
-	display: block;
+  display: block;
   float: none;
-	margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 span.nav_button:before {
@@ -195,4 +196,20 @@ hr {
 
 hr:last-of-type {
   height: 2px;
+}
+
+div.messages {
+  margin-bottom: 1.5em;
+}
+
+div.messages .label {
+  display: block;
+  font-weight: bold;
+  padding: 0.25em 0;
+}
+
+div.messages .error {
+  border-left: 3px solid #fe5f55;
+  display: block;
+  padding: 0.25em 0.5em;
 }
