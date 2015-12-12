@@ -95,6 +95,8 @@
     },
     "custom" : {
       "back_link" : "Zurück",
+      "file_missing" : "Konnte %s nicht finden.",
+      "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "invalid_language" : "Ungültige Sprache.",
       "invalid_theme" : "Ungültiges Design.",
       "invalid_timezone" : "Ungültige Zeitzone.",

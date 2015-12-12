@@ -95,6 +95,8 @@
     },
     "custom" : {
       "back_link" : "Back",
+      "file_missing" : "Could not find %s",
+      "file_wrtie_error" : "Could not write into %s",
       "invalid_language" : "Value for language is invalid.",
       "invalid_theme" : "Value for theme is invalid.",
       "invalid_timezone" : "Value for timezone is invalid.",
