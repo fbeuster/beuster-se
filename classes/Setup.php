@@ -40,6 +40,8 @@ class Setup {
         $this->setup_handler->handleStep();
         if (!$this->setup_handler->hasError()) {
           header('Location:index.php?step=' . $this->validator->getNextStep());
+        } else {
+          $this->form_handler->addMessages($this->setup_handler->getMessages());
         }
       } else {
         $this->form_handler->addErrors($this->validator->getErrors());

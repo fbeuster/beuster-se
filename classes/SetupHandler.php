@@ -9,6 +9,14 @@ class SetupHandler {
     $this->step = Setup::getSetup()->getStepName();
   }
 
+  private function addMessage($message) {
+    $this->messages[] = $message;
+  }
+
+  public function getMessages() {
+    return $this->messages;
+  }
+
   private function handleAdminUser() {
     $mysqli = Database::getDB()->getCon();
     $sql    = ' UPDATE users
