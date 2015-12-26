@@ -160,7 +160,7 @@ class SetupValidator extends AbstractValidator {
   }
 
   private function validateContent() {
-    if (true || !$this->readyForContent()) {
+    if (!$this->readyForContent()) {
       $this->addMessage(I18n::t('setup.content.not_ready'));
 
     } else {
@@ -186,10 +186,10 @@ class SetupValidator extends AbstractValidator {
             break;
 
           case 'from_existing':
-            if(isset($_POST['sql_file'])) {
+            if(isset($_FILES['sql_file'])) {
               # todo validate this file
             } else {
-              $this->addError('new_db', 'setup.content.missig_from_existing_file');
+              $this->addError('new_db', 'setup.content.missing_from_existing_file');
             }
             break;
 

@@ -79,6 +79,10 @@
     },
     "content" : {
       "back_link" : "Zurück",
+      "backup_loading_error" : "Fehler beim Laden der Datenbank aus Backup-Datei.",
+      "db_loading_error" : "Fehler beim Laden der Datenbank.",
+      "file_missing" : "Konnte %s nicht finden.",
+      "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "invalid_db_char" : "Wert für den Zeichensatz ungültig.",
       "invalid_new_db_value" : "Ungültiger Wert für neue oder existierende Datenbankkonfiguration.",
       "legend" : "Schritt 2: Inhalt",

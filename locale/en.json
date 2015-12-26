@@ -79,6 +79,10 @@
     },
     "content" : {
       "back_link" : "Back",
+      "backup_loading_error" : "Error while loading database from backup file.",
+      "db_loading_error" : "Error while loading database.",
+      "file_missing" : "Could not find %s",
+      "file_wrtie_error" : "Could not write into %s",
       "invalid_db_char" : "Value for database charset is invalid.",
       "invalid_new_db_value" : "Value for new or exisiting database is invalid.",
       "label_db_char" : "Database character set",

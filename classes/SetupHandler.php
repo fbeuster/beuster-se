@@ -79,27 +79,56 @@ class SetupHandler {
   }
 
   private function handleContent() {
-    $local_file = '../user/local.php';
-    if (file_exists($local_file)) {
+    $base_path      = '../';
+    $local_file     = 'user/local.php';
+    $sql_file       = 'lixter_setup.sql';
+    $from_existing  = $_POST['new_db'] == 'from_existing';
+
+    if (file_exists($base_path . $local_file)) {
       $data = array(
                 "define('DB_CHAR', '" . $_POST['db_char'] . "');\n"
               );
-      $output = file_put_contents($local_file, implode('', $data), FILE_APPEND);
+      $output = file_put_contents($base_path . $local_file, implode('', $data), FILE_APPEND);
 
       if ($output === false) {
+        $this->addMessage(I18n::t('setup.content.file_write_error', $local_file));
         $this->error = true;
       }
 
-      $mysqli = Database::getDB()->getCon();
-      $sql    = file_get_contents('lixter_setup.sql');
-      $result = $mysqli->multi_query($sql);
+      if (  ( $from_existing && isset($_FILES['sql_file']) ) ||
+            ( !$from_existing && file_exists($sql_file) ) ) {
 
-      if (!$result) {
+        $mysqli = Database::getDB()->getCon();
+
+        if ($from_existing) {
+          $sql = file_get_contents($_FILES['sql_file']['tmp_name']);
+
+        } else {
+          $sql = file_get_contents($sql_file);
+        }
+
+        $result = $mysqli->multi_query($sql);
+
+        if (!$result) {
+          # todo improve error catching from multi query
+          if ($from_existing) {
+            $this->addMessage(I18n::t('setup.content.backup_loading_error'));
+
+          } else {
+            $this->addMessage(I18n::t('setup.content.db_loading_error'));
+          }
+
+          $this->error = true;
+        }
+
+      } else {
+        $this->addMessage(I18n::t('setup.content.file_missing', $sql_file));
         $this->error = true;
       }
 
     } else {
-      # todo handle missing file
+      $this->addMessage(I18n::t('setup.content.file_missing', $local_file));
+      $this->error = true;
     }
   }
 
@@ -122,7 +151,7 @@ class SetupHandler {
       }
     } else {
       $this->addMessage(I18n::t('setup.custom.file_missing', $config_file));
-      $this->error = true:
+      $this->error = true;
     }
 
     if (file_exists($base_path . $local_file)) {

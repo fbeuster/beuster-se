@@ -1,6 +1,6 @@
 <?php $form = Setup::getSetup()->getFormHandler(); ?>
 
-<form action="index.php?step=content" method="post" class="<?php echo $form->getErrorClass(); ?>">
+<form action="index.php?step=content" method="post" enctype="multipart/form-data" class="<?php echo $form->getErrorClass(); ?>">
   <fieldset>
     <legend><?php echo I18n::t("setup.content.legend"); ?></legend>
     <div class="progress">
