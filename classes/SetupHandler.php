@@ -186,10 +186,12 @@ class SetupHandler {
       $output = file_put_contents($local_file, implode('', $data));
 
       if ($output === false) {
+        $this->addMessage(I18n::t('setup.database.file_write_error', $local_file));
         $this->error = true;
       }
     } else {
-      # todo handle existing file
+      $this->addMessage(I18n::t('setup.database.file_missing', $local_file));
+      $this->error = true;
     }
   }
 

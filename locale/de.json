@@ -120,6 +120,8 @@
       "access_denied" : "Zugriff für Nutzer %s verweigert.",
       "back_link" : "Zurück",
       "connection_error" : "Ein Verbindungsfehler ist aufgetreten.",
+      "file_missing" : "Konnte %s nicht finden.",
+      "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "label_db_host" : "Datenbank Host",
       "label_db_name" : "Datenbank Name",
       "label_db_user" : "Datenbank Nutzer",
