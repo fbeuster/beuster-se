@@ -140,6 +140,7 @@
       "link" : "Haupseite",
       "title" : "Geschafft!"
     },
+    "invalid_step" : "Der aktuelle Schritt ist ungültig.",
     "title" : "Lixter Erstkonfiguration",
     "welcome" : {
       "content" : "Auf den folgenden fünf Seiten kannst du eine eigene Version von Lixter konfiguieren. Die Einstellungen beinhalten die Datenbank-Konfiguration, Informationen über den Inhalt und Administrator, sowie benutzerdefinierte Anpassungen und erweiterte Einstellungen.",

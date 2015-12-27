@@ -140,6 +140,7 @@
       "link" : "main page",
       "title" : "All done!"
     },
+    "invalid_step" : "The current step is invalid.",
     "title" : "Lixter initial configuration",
     "welcome" : {
       "content" : "On the following five pages, you can setup your own instance of Lixter. Settings will include the database configuration, information aobut the content and administrator as well as customization and advanced settings.",

@@ -210,6 +210,10 @@ class SetupHandler {
     }
   }
 
+  public function handleInvalidStep() {
+    $this->addMessage(I18n::t('setup.invalid_step'));
+  }
+
   public function hasError() {
     return $this->error;
   }

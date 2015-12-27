@@ -306,7 +306,7 @@ class SetupValidator extends AbstractValidator {
   }
 
   private function validateInvalidStep() {
-
+    $this->addMessage(I18n::t('setup.invalid_step'));
   }
 
   private function validateStep() {
