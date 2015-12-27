@@ -57,10 +57,12 @@ class SetupHandler {
   }
 
   private function handleAdvanced() {
-    if (isset($_POST['devServer'])) {
-      $config_file = '../user/config.ini';
+    $base_path    = '../';
+    $config_file  = 'user/config.ini';
 
-      if (file_exists($config_file)) {
+    if (isset($_POST['devServer'])) {
+
+      if (file_exists($base_path . $config_file)) {
         $dev    = $_POST['devServerAddress'];
         $remote = $_POST['remoteServerAddress'];
 
@@ -71,11 +73,16 @@ class SetupHandler {
                   "devServer = \"" . $dev . "\"\n",
                   "remote_address = \"" . $remote . "\"\n"
                 );
-        $output = file_put_contents($config_file, implode('', $data), FILE_APPEND);
+        $output = file_put_contents($base_path . $config_file, implode('', $data), FILE_APPEND);
 
         if ($output === false) {
+          $this->addMessage(I18n::t('setup.advanced.file_write_error', $config_file));
           $this->error = true;
         }
+
+      } else {
+        $this->addMessage(I18n::t('setup.advanced.file_missing', $config_file));
+        $this->error = true;
       }
     }
   }

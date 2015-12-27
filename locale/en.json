@@ -70,6 +70,8 @@
     },
     "advanced" : {
       "back_link" : "Back",
+      "file_missing" : "Could not find %s",
+      "file_wrtie_error" : "Could not write into %s",
       "invalid_dev_server_address" : "Value for development server address is invalid.",
       "invalid_remote_server_address" : "Value for remote server address is invalid.",
       "label_dev_server" : "Development server",
