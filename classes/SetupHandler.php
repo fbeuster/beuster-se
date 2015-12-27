@@ -2,7 +2,7 @@
 
 class SetupHandler {
 
-  private $error = false;
+  private $messages = array();
   private $step;
 
   public function __construct() {
@@ -32,7 +32,6 @@ class SetupHandler {
 
     if (!$stmt) {
       $this->addMessage(I18n::t('errors.mysql_error', $mysqli->error));
-      $this->error = true;
 
     } else {
       $password = hash('sha512', $_POST['admin_password']);
@@ -48,7 +47,6 @@ class SetupHandler {
 
       if (!$stmt->execute()) {
         $this->addMessage(I18n::t('errors.execute_error'));
-        $this->error = true;
 
       } else {
         $stmt->close();
@@ -77,12 +75,10 @@ class SetupHandler {
 
         if ($output === false) {
           $this->addMessage(I18n::t('setup.advanced.file_write_error', $config_file));
-          $this->error = true;
         }
 
       } else {
         $this->addMessage(I18n::t('setup.advanced.file_missing', $config_file));
-        $this->error = true;
       }
     }
   }
@@ -101,7 +97,6 @@ class SetupHandler {
 
       if ($output === false) {
         $this->addMessage(I18n::t('setup.content.file_write_error', $local_file));
-        $this->error = true;
       }
 
       if (  ( $from_existing && isset($_FILES['sql_file']) ) ||
@@ -127,17 +122,14 @@ class SetupHandler {
             $this->addMessage(I18n::t('setup.content.db_loading_error'));
           }
 
-          $this->error = true;
         }
 
       } else {
         $this->addMessage(I18n::t('setup.content.file_missing', $sql_file));
-        $this->error = true;
       }
 
     } else {
       $this->addMessage(I18n::t('setup.content.file_missing', $local_file));
-      $this->error = true;
     }
   }
 
@@ -156,11 +148,9 @@ class SetupHandler {
 
       if ($output === false) {
         $this->addMessage(I18n::t('setup.custom.file_write_error', $config_file));
-        $this->error = true;
       }
     } else {
       $this->addMessage(I18n::t('setup.custom.file_missing', $config_file));
-      $this->error = true;
     }
 
     if (file_exists($base_path . $local_file)) {
@@ -172,18 +162,18 @@ class SetupHandler {
 
       if ($output === false) {
         $this->addMessage(I18n::t('setup.custom.file_write_error', $local_file));
-        $this->error = true;
       }
 
     } else {
       $this->addMessage(I18n::t('setup.custom.file_missing', $local_file));
-      $this->error = true;
     }
   }
 
   private function handleDatabase() {
-    $local_file = '../user/local.php';
-    if (!file_exists($local_file)) {
+    $base_path  = '../'
+    $local_file = 'user/local.php';
+
+    if (!file_exists($base_path . $local_file)) {
       $data = array(
                 "<?php\n",
                 "define('DB_HOST', '" . $_POST['db_host'] . "');\n",
@@ -192,15 +182,14 @@ class SetupHandler {
                 "define('DB_USER', '" . $_POST['db_user'] . "');\n"
               );
 
-      $output = file_put_contents($local_file, implode('', $data));
+      $output = file_put_contents($base_path . $local_file, implode('', $data));
 
       if ($output === false) {
         $this->addMessage(I18n::t('setup.database.file_write_error', $local_file));
-        $this->error = true;
       }
+
     } else {
       $this->addMessage(I18n::t('setup.database.file_missing', $local_file));
-      $this->error = true;
     }
   }
 
@@ -224,7 +213,7 @@ class SetupHandler {
   }
 
   public function hasError() {
-    return $this->error;
+    return !empty($this->messages);
   }
 }
 
