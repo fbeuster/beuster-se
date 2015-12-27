@@ -31,6 +31,7 @@ class SetupHandler {
     $stmt = $mysqli->prepare($sql);
 
     if (!$stmt) {
+      $this->addMessage(I18n::t('errors.mysql_error', $mysqli->error));
       $this->error = true;
 
     } else {
@@ -46,6 +47,7 @@ class SetupHandler {
                                   $user_id);
 
       if (!$stmt->execute()) {
+        $this->addMessage(I18n::t('errors.execute_error'));
         $this->error = true;
 
       } else {

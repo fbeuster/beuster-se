@@ -1,5 +1,7 @@
 <?php
 
+# todo what if a step gots called more than once?
+
 class SetupValidator extends AbstractValidator {
 
   private $isValid = false;

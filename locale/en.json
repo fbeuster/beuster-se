@@ -38,6 +38,10 @@
       "type_vars_mismatch" : "value Typ- und Variablenanzahl ist nicht gleich."
     }
   },
+  "errors" : {
+    "execute_error" : "Error while executing the request.",
+    "mysqli_error" : "The database returned an error."
+  },
   "page" : {
     "error" : {
       "title" : "Error"
