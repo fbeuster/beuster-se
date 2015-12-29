@@ -118,7 +118,6 @@ class Lixter {
   private function loadLocales() {
     $lang = Config::getConfig()->get('language');
     $lang = $lang === null ? 'en' : $lang;
-    $lang = 'fr';
 
     $locales = new Locale($lang);
   }
