@@ -14,6 +14,10 @@ class FileLoader {
   public static function file_get_contents_utf8($path) {
     $file_content = file_get_contents($path);
 
+    if (!$file_content) {
+      throw new Exception($path . ' not found.', 1);
+    }
+
     if (substr($file_content, 0, 3) == pack("CCC", 0xEF, 0xBB, 0xBF)) {
       $file_content = substr($file_content, 3);
     }
