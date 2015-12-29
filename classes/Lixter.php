@@ -86,6 +86,15 @@ class Lixter {
   private function loadConfig() {
     global  $file, $noGA;
 
+    // non-catched exceptions should be logged
+    set_exception_handler(function($exception) {
+      echo 'Oups, something went wrong :(';
+
+      foreach (split("\n", $exception) as $line) {
+        error_log($line);
+      }
+    });
+
     // using specifc user functions and settings
     include('user/local.php');
 
@@ -109,6 +118,7 @@ class Lixter {
   private function loadLocales() {
     $lang = Config::getConfig()->get('language');
     $lang = $lang === null ? 'en' : $lang;
+    $lang = 'fr';
 
     $locales = new Locale($lang);
   }
