@@ -181,13 +181,16 @@ class Lixter {
         $this->page = new ErrorPage( I18n::t('lixter.build.template_not_found', array($file)) );
         include $this->theme->getFile('static.php');
       }
+
     } else if ($this->page->getType() === Page::STATIC_PAGE) {
       # error message
       include $this->theme->getFile('static.php');
-    } else if (1 == $this->page) {
+
+    } else if ($this->page === 1) {
       # no return statement given
       $this->page = new ErrorPage( I18n::t('lixter.build.no_return_statement') );
       include $this->theme->getFile('static.php');
+
     } else {
       # invalid return value
       $this->page = new ErrorPage( I18n::t('lixter.build.invalid_return_value') );

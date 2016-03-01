@@ -10,11 +10,11 @@
 
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
         if (!isset($_POST['Username'], $_POST['Password'], $_POST['formaction'])) {
-            return INVALID_FORM;
+            return  showInfo(INVALID_FORM, 'login');
         }
         if (('' == $Username = trim($_POST['Username'])) OR
             ('' == $Password = trim($_POST['Password']))) {
-            return EMPTY_FORM;
+            return  showInfo(EMPTY_FORM, 'login');
         }
 
         $sql = 'SELECT
@@ -33,7 +33,7 @@
         }
         $stmt->bind_result($UserID);
         if (!$stmt->fetch()) {
-            return 'Es wurde kein Benutzer mit den angegebenen Namen gefunden.<br /><a href="/login" class="back">Erneut versuchen</a>';
+            return  showInfo('Es wurde kein Benutzer mit den angegebenen Namen gefunden.<br /><a href="/login" class="back">Erneut versuchen</a>', 'login');
         }
         $stmt->close();
 
@@ -56,7 +56,7 @@
         }
         $stmt->bind_result($Hash);
         if (!$stmt->fetch()) {
-            return 'Das eingegebene Password ist ungültig.<br /><a href="/login" class="back">Erneut versuchen</a>';
+            return showInfo('Das eingegebene Password ist ungültig.<br /><a href="/login" class="back">Erneut versuchen</a>', 'login');
         }
         $stmt->close();
 
