@@ -325,7 +325,7 @@
                         $stmt->close();
 
                         // RSS-Eintrag
-                        if($ena && $catID !== getCatID('Portfolio')) {
+                        if($ena && isset($rssFeedPath) && $catID !== getCatID('Portfolio')) {
                             $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,
