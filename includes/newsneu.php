@@ -80,7 +80,8 @@
                 } else {
                     $catNewsID = 1;
                 }
-                if($catID != getCatID('Projekte')) {
+
+                if($neu || $catID != getCatID('Projekte')) {
                     $projStat = 0;
                 } else {
                     if($projStat == 0) {
@@ -88,7 +89,8 @@
                         // Projekte als Cat gewält aber keinen Status angegeben
                     }
                 }
-                if($catID == getCatID('Portfolio')) {
+
+                if(!$neu && $catID == getCatID('Portfolio')) {
                     $ena = 0;
                 }
 
@@ -109,7 +111,8 @@
                     if(!$stmt = $db->prepare($sql)) {
                         return $db->error;
                     }
-                    $stmt->bind_param('isssii', $user->getId(), $title, $inhalt, $release, $ena, $projStat);
+                    $user_id = $user->getId();
+                    $stmt->bind_param('isssii', $user_id, $title, $inhalt, $release, $ena, $projStat);
                     if(!$stmt->execute()) {
                         return $stmt->error;
                     }
@@ -236,12 +239,28 @@
                                     return $stmt->error;
                                 }
                                 $stmt->close();
+
                             } else {
+                                // Kategorie anlegen
+                                $sql = "INSERT INTO
+                                            newscat(Cat, ParentID, Typ)
+                                        VALUES
+                                            (?, ?, ?)";
+                                if(!$stmt = $db->prepare($sql)) {
+                                    return $db->error;
+                                }
+                                $stmt->bind_param('sii',$cat, $catPar, $typ);
+                                if(!$stmt->execute()) {
+                                    return $stmt->error;
+                                }
+                                $catID = $stmt->insert_id;
+                                $stmt->close();
+
                                 // Playlist anlegen
                                 $sql = "INSERT INTO
                                             playlist(ytID, catID)
                                         VALUES
-                                            (?, ?, ?)";
+                                            (?, ?)";
                                 if(!$stmt = $db->prepare($sql)) {
                                     return $db->error;
                                 }
