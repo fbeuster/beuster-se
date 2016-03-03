@@ -575,27 +575,6 @@
         return $ret;
     }
 
-    function getVideoArticle($id) {
-        $db = Database::getDB()->getCon();
-        $ret = array();
-        $sql = "SELECT
-                    ID,
-                    Inhalt
-                FROM
-                    news";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($nID, $cnt);
-        $r = array();
-        while($result->fetch()) {
-            if(strpos($cnt, '[yt]'.$id.'[/yt]') !== false) {
-                return $nID;
-            }
-        }
-        $result->close();
-        return -1;
-    }
-
     function getYouTubeIDFromArticle($id) {
         $db = Database::getDB()->getCon();
         $ret = array();

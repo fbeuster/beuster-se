@@ -9,12 +9,7 @@
     $playlistID = getPlaylistID(getNewsCat($id));
     $return = '';
 
-    if($playlistID == false) {
-        $a['filename'] = 'newsone.php';
-    } else {
-        $a['filename'] = 'playlist.php';
-        include('playlist.php');
-    }
+    $a['filename'] = 'newsone.php';
 
     if('POST' == $_SERVER['REQUEST_METHOD']) {
         $frei = 0;
