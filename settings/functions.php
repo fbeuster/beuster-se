@@ -167,8 +167,8 @@
         return $title;
     }
 
-    function makeAbsolutePath($path, $append = '') {
-        if(Utilities::getRemoteAddress() === null)
+    function makeAbsolutePath($path, $append = '', $stay_local = false) {
+        if($stay_local || Utilities::getRemoteAddress() === null)
             return 'http://'.Utilities::getSystemAddress().'/'.$path.$append;
         else
             return 'http://'.Utilities::getRemoteAddress().'/'.$path.$append;

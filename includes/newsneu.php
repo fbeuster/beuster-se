@@ -216,6 +216,7 @@
                             $e[] = $_FILES['file']['name'][$key];
                         }
                     }
+
                     if(empty($e)) {
                         if($neu) {
                             if($neuPl) {
@@ -272,6 +273,28 @@
                             }
                         }
                         $catID = getCatID($cat);
+
+                        // grab video thumbnail
+                        if (isCatPlaylist($catID)) {
+                            $video_id       = getYouTubeIDFromArticle($id);
+                            $playlist_id    = getPlaylistID($catID);
+                            $thumbnail      = 'https://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
+                            $store_path     = 'images/tmp/'.$playlist_id.'-'.$video_id.'.jpg';
+
+                            if(!file_exists($store_path)) {
+                                $source_image   = imagecreatefromjpeg($thumbnail);
+                                $thumb_width     = imagesx($source_image);
+                                $thumb_height    = imagesy($source_image);
+
+                                $scaled_image   = imagecreatetruecolor($thumb_width, $thumb_height);
+
+                                imagecopy($scaled_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height);
+                                imagedestroy($source_image);
+                                $scaled_image = imagescale($scaled_image, 480, 270);
+                                imagejpeg($scaled_image, $store_path);
+                                imagedestroy($scaled_image);
+                            }
+                        }
 
                         // Bilder einfügen
                         $newContent = $inhalt;
