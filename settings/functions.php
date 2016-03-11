@@ -434,6 +434,53 @@
 
     /*** other ***/
 
+    function getArticleLinks($sql, $n) {
+        $db  = Database::getDB()->getCon();
+        $res = array();
+
+        if(!$stmt = $db->prepare($sql)) {
+            return array($db->error);
+        }
+
+        $stmt->bind_param('i', $n);
+
+        if(!$stmt->execute()) {
+            return array($stmt->error);
+        }
+
+        $stmt->bind_result($id, $db_title);
+
+        while($stmt->fetch()) {
+            $title  = Parser::parse($db_title, Parser::TYPE_PREVIEW);
+            $link   = getLink(getCatName(getNewsCat($id)), $id, $title);
+            $res[]  = '<a href="'.$link.'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
+        }
+
+        $stmt->close();
+
+        return $res;
+    }
+
+    function getTopArticles($n = 5) {
+        $sql = "SELECT   ID, Titel
+                FROM     news
+                WHERE    enable = 1 AND Datum < NOW()
+                GROUP BY ID
+                ORDER BY Hits DESC, Datum DESC
+                LIMIT    0, ?";
+        return getArticleLinks($sql, $n);
+    }
+
+    function getlastArticles($n) {
+        $sql = "SELECT   ID, Titel
+                FROM     news
+                WHERE    enable = 1 AND Datum < NOW()
+                GROUP BY ID
+                ORDER BY Datum DESC
+                LIMIT    0, ?";
+        return getArticleLinks($sql, $n);
+    }
+
     function getOffset($a, $o, $s) {
         if($a == 0) {
             return 0;

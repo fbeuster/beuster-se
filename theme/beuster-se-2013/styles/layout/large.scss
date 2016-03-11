@@ -277,7 +277,7 @@
   #beMainAside {
     .module {
       &.socialInteraction {
-        ul.socialInteraction {
+        ul {
           height: 50px;
 
           li, li a {
@@ -345,7 +345,7 @@
 
     .module {
       &.socialInteraction {
-        ul.socialInteraction {
+        ul {
           height: 60px;
 
           li,  li a {

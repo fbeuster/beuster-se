@@ -39,73 +39,6 @@
         }
     }
 
-    function isNewsVisible($id) {
-        $db = Database::getDB()->getCon();
-        $ena = 1;
-        $sql = 'SELECT
-                    ID
-                FROM
-                    news
-                WHERE
-                    ID = ? AND
-                    enable = ? AND
-                    Datum < NOW()';
-        $stmt = $db->prepare($sql);
-        if (!$stmt) {return $db->error;}
-        $stmt->bind_param('ii', $id, $ena);
-        if (!$stmt->execute()) {
-            $stmt->close();
-            return false;
-        }
-        $stmt->bind_result($ênable);
-        if (!$stmt->fetch()) {
-            $stmt->close();
-            return false;
-        }
-        $stmt->close();
-        return true;
-    }
-
-    function getAnzNews() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Count(ID) As Newszahl
-                FROM
-                    news";
-        if(!$stmt = $db->query($sql)) {return $db->error;}
-        if($stmt->num_rows) {
-            while($row = $stmt->fetch_assoc()) {
-                $anzahl = $row['Newszahl'];
-            }
-        }
-        $stmt->close();
-        return $anzahl;
-    }
-
-    function newsExists($id){
-        $db = Database::getDB()->getCon();
-        $sql = 'SELECT
-                    ID
-                FROM
-                    news
-                WHERE
-                    ID = ?';
-        $stmt = $db->prepare($sql);
-        if (!$stmt) {return false;}
-        $stmt->bind_param('i', $id);
-        if (!$stmt->execute()) {
-            $stmt->close();
-            return false;
-        }
-        $stmt->bind_result($resID);
-        if (!$stmt->fetch()) {
-            $stmt->close();
-            return false;
-        }
-        $stmt->close();
-        return true;
-    }
-
     function increaseHitNumber($id) {
         $db = Database::getDB()->getCon();
         $sql = 'UPDATE
@@ -256,7 +189,32 @@
             default:
                 return -1;
         }
+    }
 
+    function getRandomArticle() {
+        $db  = Database::getDB()->getCon();
+        $ena = 1;
+        $sql = "SELECT  ID
+                FROM    news
+                WHERE Datum < NOW() AND enable = ? AND ID >= (
+                    SELECT FLOOR( MAX(ID) * RAND())
+                    FROM news )
+                ORDER BY ID
+                LIMIT 1";
+
+        if(!$stmt = $db->prepare($sql)) return null;
+
+        $stmt->bind_param('i', $ena);
+
+        if(!$stmt->execute()) return null;
+
+        $stmt->bind_result($id);
+
+        if(!$stmt->fetch()) return null;
+
+        $stmt->close();
+
+        return new Article($id);
     }
 
     function notifyAdmin($title, $content, $user) {

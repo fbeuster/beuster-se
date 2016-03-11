@@ -2,7 +2,7 @@
 
 beusterse.archive = {
   init: function() {
-    if($('.articleArchiveMain').length == 0)
+    if($('.module.archive ul').first().length == 0)
       return;
 
     this.binHandlers();
@@ -14,15 +14,15 @@ beusterse.archive = {
   },
 
   minimizeAll: function() {
-    $('.articleArchiveMain').children().each(function(){
-      $(this).children('.articleArchiveSub').each(function(){
+    $('.module.archive ul').first().children().each(function(){
+      $(this).children('ul').each(function(){
         $(this).hide();
       });
     });
   },
 
   yearClick: function() {
-    $(this).parent().children('.articleArchiveSub').each(function(){
+    $(this).next().each(function(){
       $(this).is(':visible') ? $(this).slideUp() : $(this).slideDown();
     });
   }

@@ -6,28 +6,33 @@
     $content  .= "    var f,s=document.getElementById(i);\n";
     $content  .= "    f=document.createElement('iframe');\n";
     $content  .= "    f.src='//api.flattr.com/button/view/?uid=beuster-se&button=compact&url='+encodeURIComponent(document.URL);\n";
-    $content  .= "    f.title='Flattr';\n";
-    $content  .= "    f.height=20;\n";
-    $content  .= "    f.width=110;\n";
-    $content  .= "    f.style.borderWidth=0;\n";
+    $content  .= "    f.title='Flattr';\n f.height=20;\n f.width=110;\n f.style.borderWidth=0;\n";
     $content  .= "    s.parentNode.insertBefore(f,s);\n";
     $content  .= "  })('fbvkn0d');\n";
     $content  .= "</script>\n";
-    $donate   = new SidebarModule(null, $content, "donate");
-    return $donate->getModuleHTML();
+
+    $config = array("title" => "",
+                    "classes" => "donate",
+                    "content" => $content);
+    $donate   = new SidebarContentModule($config);
+    return $donate->getHTML();
   }
 
-  function moduleTopArticles () {
-    $title  = "viel gelesene Artikel";
-    $top    = new SidebarModule($title, genTopArticles(), "top list");
-    return $top->getModuleHTML();
+  function moduleTopArticles() {
+    $config = array("title" => "viel gelesene Artikel",
+                    "classes" => "top list",
+                    "list" => getTopArticles());
+    $top    = new SidebarListModule($config);
+    return $top->getHTML();
   }
 
-  function moduleLastArticles () {
+  function moduleLastArticles() {
     $n      = 5;
-    $title  = "Letzten '.$n.' Artikel";
-    $last   = new SidebarModule($title, genLastArticles($n), "list");
-    return $last->getModuleHTML();
+    $config = array("title" => "Letzten $n Artikel",
+                    "classes" => "list",
+                    "list" => getLastArticles($n));
+    $last   = new SidebarListModule($config);
+    return $last->getHTML();
   }
 
   function moduleAdSenseAside($noGA) {
@@ -81,19 +86,24 @@
       $content .= '</script>'."\n";
     }
 
-    $adsense = new SidebarModule(null, $content, "adSense", $id);
-    return $adsense->getModuleHTML();
+    $config = array("title" => "",
+                    "classes" => "adSense",
+                    "id" => $id,
+                    "content" => $content);
+    $adsense   = new SidebarContentModule($config);
+    return $adsense->getHTML();
   }
 
   function moduleSocialShare() {
-    $content  = '<ul class="socialInteraction">'."\n";
-    $content  .= ' <li><a href="http://www.youtube.com/user/waterwebdesign" class="socialLinkYoutube" title="YouTube"></a></li>'."\n";
-    $content  .= ' <li><a href="https://twitter.com/#!/FBeuster" class="socialLinkTwitter" title="Twitter"></a></li>'."\n";
-    $content  .= ' <li><a href="https://www.facebook.com/beusterse" class="socialLinkFacebook" title="Facebook"></a></li>'."\n";
-    $content  .= ' <li><a href="https://plus.google.com/102857640059997003370" class="socialLinkGoogle" title="Google+" rel="publisher"></a></li>'."\n";
-    $content  .= '</ul>'."\n";
-    $share    = new SidebarModule(null, $content, "socialInteraction");
-    return $share->getModuleHTML();
+    $config = array("title" => '',
+                    "classes" => "socialInteraction",
+                    "list" => array(
+                      '<a href="http://www.youtube.com/user/waterwebdesign" class="socialLinkYoutube" title="YouTube"></a>',
+                      '<a href="https://twitter.com/#!/FBeuster" class="socialLinkTwitter" title="Twitter"></a>',
+                      '<a href="https://www.facebook.com/beusterse" class="socialLinkFacebook" title="Facebook"></a>',
+                      '<a href="https://plus.google.com/102857640059997003370" class="socialLinkGoogle" title="Google+" rel="publisher"></a>'));
+    $test = new SidebarListModule($config);
+    return $test->getHTML();
   }
 
   function moduleArticleInfo($info) {
@@ -115,112 +125,85 @@
     $content  .= '</dl>';
     $content  .= '<p class="info">Mit einem * gekennzeichnete Links sind Amazon Affiliate Links.</p>';
 
-    $info     = new SidebarModule($title, $content, "articleInfo");
-    return $info->getModuleHTML();
+
+    $config = array("title" => $title,
+                    "classes" => "articleInfo",
+                    "content" => $content);
+    $info   = new SidebarContentModule($config);
+    return $info->getHTML();
   }
 
   function moduleSearch() {
-    $content = '<form action="/search" method="post">'."\n";
-    $content .= ' <input type="text" name="s" id="field" placeholder="Wonach möchtest du suchen?">'."\n";
-    $content .= ' <input type="submit" value="" name="search" title="Suchen">'."\n";
-    $content .= ' <br class="clear">'."\n";
-    $content .= '</form>'."\n";
-    $search = new SidebarModule(null, $content, "searchBox");
-    return $search->getModuleHTML();
+    $config = array("classes" => "searchBox");
+    $search = new SidebarSearchModule($config);
+    return $search->getHTML();
   }
 
   function moduleRandomArticle() {
-    $db = Database::getDB()->getCon();
-    $ena = 1;
+    $article  = getRandomArticle();
+    $style    = '';
 
-    $done = false;
-    while(!$done) {
-      $id = mt_rand(0,getAnzNews());
-      if(newsExists($id) && isNewsVisible($id)) {
-        $done = true;
-      }
-    }
-    $sql = "SELECT
-              ID,
-              Titel,
-              Inhalt
-            FROM
-              news
-            WHERE
-              enable = ? AND
-              ID = ? AND
-              Datum < NOW()";
-    if(!$result = $db->prepare($sql))
-      return $db->error;
 
-    $result->bind_param('ii', $ena, $id);
-
-    if(!$result->execute())
-      return $result->error;
-
-    $result->bind_result($newsid, $newstitel, $newsinhalt);
-
-    if(!$result->fetch())
-      return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';
-
-    $result->close();
-
-    if('[yt]' == substr($newsinhalt,0,4)) {
-      $preApp = '<p class="randomText" style="text-indent:0;">';
-    } else {
-      $preApp = '<p class="randomText">';
+    if('[yt]' == substr($article->getContent(),0,4)) {
+      $style = ' style="text-indent:0;"';
     }
 
-    $backApp = '</p>';
-    $catName = getCatName(getNewsCat($id));
-    $art_title  = '<h5 class="randomTitle">'.Parser::parse($newstitel, Parser::TYPE_PREVIEW).'</h5>'."\n";
-    $art_text   = str_replace('###link###', getLink($catName, $newsid, $newstitel), Parser::parse($newsinhalt, Parser::TYPE_PREVIEW, 200));
-    $content    = $art_title . $preApp . $art_text . $backApp;
-    $title      =  "Kennst du schon...";
-    $random     = new SidebarModule($title, $content, "randomArticle");
-    return $random->getModuleHTML();
+    $preApp     = "<p class='randomText' $style >";
+    $backApp    = "</p>\n";
+    $art_title  = '<h5 class="randomTitle">'.Parser::parse($article->getTitle(), Parser::TYPE_PREVIEW).'</h5>'."\n";
+    $art_text   = str_replace('###link###', $article->getLink(), $article->getContentPreview());
+    $article_html    = $art_title . $preApp . $art_text . $backApp;
+
+    $config = array("title" => "Kennst du schon...",
+                    "classes" => "randomArticle",
+                    "content" => $article_html);
+    $random = new SidebarContentModule($config);
+    return $random->getHTML();
   }
 
   function moduleArchive() {
-    $title    = "Schau mal ins Archiv";
-    $content  = '<ul class="articleArchiveMain">'."\n";
+    $list = array();
+
     for($year = (int)date("Y"); $year >= 2010; $year--) {
 
       if(articlesInDate($year) === 0) continue;
 
-      $months = '';
+      $month_list = array();
       for($month = 12; $month >= 1; $month--) {
 
         $numberMonth = articlesInDate($year, $month);
         if($numberMonth === 0)
           continue;
 
-        $month_str  = '<li><a href="/'.$year.'/'.$month.'">';
+        $month_str  = '<a href="/'.$year.'/'.$month.'">';
         $month_str  .= makeMonthName($month);
         $month_str  .= ' <span class="number" style="color: #999999;">('.$numberMonth.')</span>';
-        $month_str  .= '</a></li>'."\n";
-        $months     .= $month_str;
+        $month_str  .= '</a>';
+        $month_list[] = $month_str;
       }
 
-      $year_title = '  <span class="articleArchiveYear" style="cursor: pointer;">'.$year."</span>\n";
-      $year_list  = '  <ul class="articleArchiveSub">'."\n" . $months . '  </ul>'."\n";
-      $year_str   = $year_title . $year_list;
-      $content    .= ' <li>'."\n".$year_str.' </li>'."\n";
-    }
-    $content .= '</ul>'."\n";
-    $archive  = new SidebarModule($title, $content, "archive list");
+      $year_title = '<span class="articleArchiveYear" style="cursor: pointer;">'.$year."</span>";
 
-    return $archive->getModuleHTML();
+      $list[$year_title] = $month_list;
+    }
+
+    $config = array("title" => "Schau mal ins Archiv",
+                    "classes" => "archive list",
+                    "list" => $list);
+
+    $archive  = new SidebarListModule($config);
+    return $archive->getHTML();
   }
 
   function moduleRecommendedArticle($article_id) {
     if($article_id === null) return;
 
     $article    = new Article($article_id);
-    $title      = "Empfohlener Artikel:";
-    $content    = " <a href='" . $article->getLink() . "'>\n  " . $article->getTitle() . "\n </a>\n";
-    $recommend  = new SidebarModule($title, $content, "recommend");
+    $config = array("title" => "Empfohlener Artikel:",
+                    "classes" => "recommend",
+                    "content" => "<a href='" . $article->getLink() . "'>\n  " . $article->getTitle() . "\n </a>\n");
+    $recommend  = new SidebarContentModule($config);
 
-    return $recommend->getModuleHTML();
+    return $recommend->getHTML();
   }
 ?>

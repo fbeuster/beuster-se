@@ -1,33 +1,56 @@
 <?php
 
-  class SidebarModule {
+  abstract class SidebarModule {
 
     private $classes;
-    private $content;
-    private $title;
     private $id;
+    private $title;
+    private $valid = false;
 
-    public function __construct($title, $content, $classes = '', $id = '') {
-      $this->content  = $content;
-      $this->classes  = $classes;
-      $this->title    = $title;
-      $this->id       = $id;
+    public function __construct($config) {
+      if (!$this->isValid($config)) {
+        # TODO some error
+
+      } else {
+        $this->classes  = isset($config['classes']) ? $config['classes'] : '';
+        $this->id       = isset($config['id']) ? $config['id'] : '';
+
+        $this->title    = $config['title'];
+      }
     }
 
-    public function getModuleHTML() {
-      $pre  = '<section class="module '.$this->classes.'" id="'.$this->id.'">'."\n";
-      $post = '</section>'."\n";
+    public function getHTML() {
+      $id     = $this->id !== '' ? " id='$this->id'" : '';
+      $class  = " class='module $this->classes'";
+
+      $pre    = '<section'.$id.$class.">\n";
+      $post   = '</section>'."\n";
       return $pre . $this->makeTitle() . $this->makeContent() . $post;
     }
 
-    private function makeTitle() {
+    protected function isValid($config) {
+      $requirements = isset($config['requirements']) ? $config['requirements'] : '';
+      $requirements[] = 'title';
+
+      foreach ($requirements as $requirement) {
+        if (!isset($config[$requirement])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    protected abstract function makeContent();
+
+    protected function makeTitle() {
       return $this->title === null ? '' : '<h4>' . $this->title . '</h4>'."\n";
     }
 
-    private function makeContent() {
+    protected function wrapContent($content) {
       $pre  = '<div class="module_inside">'."\n";
       $post = '</div>'."\n";
-      return $pre . $this->content . $post;
+      return $pre . $content . $post;
     }
   }
 
