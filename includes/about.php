@@ -5,7 +5,7 @@
   $a['data']['eType'] = 0;
   $a['data']['ec'] = '';
   $a['data']['formCnt'] = 20;
-  
+
   if('POST' == $_SERVER['REQUEST_METHOD']) {
     $db = Database::getDB()->getCon();
     $user = $db->real_escape_string(stripslashes(trim($_POST['usr'])));
@@ -28,13 +28,13 @@
       $mailHeader .= 'Content-Type: text/html; charset=utf-8'."\n";
       $mailHeader .= 'From: '.$user.'<'.$Usermail.'>'."\n";
       $mailHeader .= 'Reply-To: '.$user.'<'.$Usermail.'>'."\n";
-      $mailHeader .= 'X-Mailer: PHP/'.phpversion().'\r\n'; 
+      $mailHeader .= 'X-Mailer: PHP/'.phpversion().'\r\n';
       if($_SERVER['SERVER_NAME'] == "beusterse.loc") {
         echo '<pre style=" width: 90%; padding: 0 5%; background: #efefef;">'.$mailContent.'</pre>';
       } else {
         $mailSent = mail($mailTo, $mailTopic, $mailContent, $mailHeader);
         if($mailsent) {
-          return showInfo('Danke für deine Nachricht.', '/about');
+          return showInfo('Danke für deine Nachricht.', 'about');
         }
       }
     }

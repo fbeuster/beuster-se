@@ -3,8 +3,9 @@
 class ContentPage extends Page {
   private $id;
   private $content;
-  private $type = Page::CONTENT_PAGE;
+  private $refresh = '';
   private $title;
+  private $type = Page::CONTENT_PAGE;
 
   public function __construct($id) {
     $this->id = $id;
@@ -20,12 +21,16 @@ class ContentPage extends Page {
     return $this->content;
   }
 
+  public function getFileName() {
+    return $this->file_name;
+  }
+
   public function getParsedContent() {
     return $this->content;
   }
 
-  public function getFileName() {
-    return $this->file_name;
+  public function getRefreshName() {
+    return $this->refresh;
   }
 
   public function getTags() {
@@ -36,12 +41,12 @@ class ContentPage extends Page {
     return $this->content['articles'][0]->getTagsString();
   }
 
-  public function getType() {
-    return $this->type;
-  }
-
   public function getTitle() {
     return $this->title;
+  }
+
+  public function getType() {
+    return $this->type;
   }
 
   private function loadContent() {
@@ -56,6 +61,10 @@ class ContentPage extends Page {
 
     if(isset($data['title'])) {
       $this->title = $data['title'];
+    }
+
+    if (isset($data['refresh'])) {
+      $this->refresh = $data['refresh'];
     }
   }
 }

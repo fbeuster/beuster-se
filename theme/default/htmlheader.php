@@ -31,8 +31,8 @@
   <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
   <script type="text/javascript" src="<?php echo Lixter::getLix()->getTheme()->getFile('scripts/scriptAdm.js'); ?>"></script>
   <?php } ?>
-  <?php if(isset($ret['data']['refresh'])) {
-    echo '<meta http-equiv="refresh" content="3; url=/'.$ret['data']['refresh'].'">';
+  <?php if($page->getRefreshName() !== '') {
+    echo '<meta http-equiv="refresh" content="3; url=/'.$page->getRefreshName().'">';
   } ?>
  </head>
  <body>
