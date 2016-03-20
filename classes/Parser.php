@@ -270,7 +270,7 @@ abstract class ArticleParser {
      * Removes all list formatting.
      */
     public function removeLists() {
-        $this->str = preg_replace('#\[(ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
+        $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1', $this->str);
     }
