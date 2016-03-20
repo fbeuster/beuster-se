@@ -207,6 +207,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '<del>$1</del>', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '<ins>$1</ins>', $this->str);
         $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#Uis', '<mark>$1</mark>', $this->str);
+        $this->str = preg_replace('#\[address\](.+?)\[/address\]#Uis', '<address>$1</address>', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
     }
 
@@ -244,6 +245,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '$1', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '$1', $this->str);
         $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#', '$1', $this->str);
+        $this->str = preg_replace('#\[address\](.+?)\[/address\]#', '$1', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
         $this->str = preg_replace('=\[quote\](.*)\[/quote\]=Uis', '&quot;$1&quot;', $this->str);
         $this->str = preg_replace('=\[cite\](.*)\[/cite\]=Uis', '&quot;$1&quot;', $this->str);
