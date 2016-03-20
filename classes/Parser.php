@@ -206,6 +206,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[i\](.+?)\[/i\]#', '<i>$1</i>', $this->str);
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '<del>$1</del>', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '<ins>$1</ins>', $this->str);
+        $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#Uis', '<mark>$1</mark>', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
     }
 
@@ -242,6 +243,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[i\](.+?)\[/i\]#', '$1', $this->str);
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '$1', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '$1', $this->str);
+        $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#', '$1', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
         $this->str = preg_replace('=\[quote\](.*)\[/quote\]=Uis', '&quot;$1&quot;', $this->str);
         $this->str = preg_replace('=\[cite\](.*)\[/cite\]=Uis', '&quot;$1&quot;', $this->str);
@@ -527,11 +529,6 @@ abstract class ArticleParser {
     abstract function blockquotes();    /**< abstract, implementation in sub class */
     abstract function lists();  /**< abstract, implementation in sub class */
     abstract function parse();  /**< abstract, implementation in sub class */
-    /**
-     * abstract, implementation in sub class.
-     * \todo make it non abstract
-     */
-    abstract function searchMarks();
     abstract function embedVideo(); /**< abstract, implementation in sub class */
 }
 
@@ -617,15 +614,6 @@ class PreviewParser extends ArticleParser {
     }
 
     /**
-     * Format search marks.
-     *
-     * Adding mark tags for search queries
-     */
-    public function searchmarks() {
-        $this->str = preg_replace('#\[mark\](.*)\[/mark\]#Uis', '<mark>$1</mark>', $this->str);
-    }
-
-    /**
      * Replace embedded video.
      *
      * In oreview texts an embedded video is better replaces by a link.
@@ -698,10 +686,6 @@ class DescriptionParser extends ArticleParser {
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
 
-    public function searchmarks() {
-        $this->str = preg_replace('#\[mark\](.*)\[/mark\]#Uis', '$1', $this->str);
-    }
-
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '', $this->str);
         $this->str = preg_replace('#\[play\](.*)\[/play\]#Ui', '', $this->str);
@@ -742,7 +726,6 @@ class EditParser extends ArticleParser {
 
     public function blockquotes() {}
     public function lists() {}
-    public function searchmarks() {}
     public function embedVideo() {}
 }
 
@@ -780,7 +763,6 @@ class NewParser extends ArticleParser {
 
     public function blockquotes() {}
     public function lists() {}
-    public function searchMarks() {}
     public function embedVideo() {}
 }
 
@@ -843,8 +825,6 @@ class ContentParser extends ArticleParser {
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', '<li>$1</li>', $this->str);
     }
 
-    public function searchMarks() {}
-
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>', $this->str);
         $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p></p>', $this->str);
@@ -901,8 +881,6 @@ class CommentParser extends ArticleParser {
         $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
         $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
-
-    public function searchMarks() {}
 
     public function embedVideo() {
         $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="http://youtu.be/$1">Video ansehen</a> ', $this->str);
