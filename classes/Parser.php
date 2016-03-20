@@ -253,6 +253,29 @@ abstract class ArticleParser {
     }
 
     /**
+     * Format lists
+     *
+     * Formatting (nested) ordered and unordered list.
+     *
+     * \todo Very naive implementation, needs improvement in future parse re-do
+     */
+    public function lists() {
+        $this->str = preg_replace('#\[(/)?(u|o)l\]#Uis', '<$1$2l>', $this->str);
+        $this->str = preg_replace('#\[(/)?li\]#Uis', '<$1li>', $this->str);
+    }
+
+    /**
+     * Remove list formats
+     *
+     * Removes all list formatting.
+     */
+    public function removeLists() {
+        $this->str = preg_replace('#\[(ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
+        $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
+        $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1', $this->str);
+    }
+
+    /**
      * Collect sources.
      *
      * Sources from quotes and cites are stored in member $citeSources
@@ -527,7 +550,6 @@ abstract class ArticleParser {
     }
 
     abstract function blockquotes();    /**< abstract, implementation in sub class */
-    abstract function lists();  /**< abstract, implementation in sub class */
     abstract function parse();  /**< abstract, implementation in sub class */
     abstract function embedVideo(); /**< abstract, implementation in sub class */
 }
@@ -572,7 +594,7 @@ class PreviewParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
-        $this->lists();
+        parent::removeLists();
         parent::breakLines();
         parent::clearParagraphs();
         $this->embedVideo();
@@ -600,17 +622,6 @@ class PreviewParser extends ArticleParser {
     public function code() {
         $this->str = preg_replace('#\[code\](.*)\[/code\]#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
         $this->str = preg_replace('#<code>(.*)</code>#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
-    }
-
-    /**
-     * Format lists.
-     *
-     * Flat list for preview text.
-     */
-    public function lists() {
-        $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1', $this->str);
     }
 
     /**
@@ -661,7 +672,7 @@ class DescriptionParser extends ArticleParser {
         parent::removeFormats();
         parent::removeHeadlines();
         $this->blockquotes();
-        $this->lists();
+        parent::removeLists();
         parent::breakLines();
         parent::removeBreaklines();
         parent::clearParagraphs();
@@ -678,12 +689,6 @@ class DescriptionParser extends ArticleParser {
 
     public function code() {
         $this->str = preg_replace('#<code>(.*)</code>#Uis',' ', $this->str);
-    }
-
-    public function lists() {
-        $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
 
     public function embedVideo() {
@@ -725,7 +730,6 @@ class EditParser extends ArticleParser {
     }
 
     public function blockquotes() {}
-    public function lists() {}
     public function embedVideo() {}
 }
 
@@ -762,7 +766,6 @@ class NewParser extends ArticleParser {
     }
 
     public function blockquotes() {}
-    public function lists() {}
     public function embedVideo() {}
 }
 
@@ -804,7 +807,7 @@ class ContentParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
-        $this->lists();
+        parent::lists();
         parent::breakLines();
         parent::illustrateSmiles();
         $this->embedVideo();
@@ -817,12 +820,6 @@ class ContentParser extends ArticleParser {
     public function blockquotes() {
         parent::collectQuotes();
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '</p><blockquote cite="$1">$2<br><span class="source">Quelle: $1</span></blockquote><p>', $this->str);
-    }
-
-    public function lists() {
-        $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', '</p><ul class="innews">$1</ul><p>', $this->str);
-        $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', '</p><ol class="innews">$1</ol><p>', $this->str);
-        $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', '<li>$1</li>', $this->str);
     }
 
     public function embedVideo() {
@@ -859,7 +856,7 @@ class CommentParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
-        $this->lists();
+        parent::removeLists();
         parent::breakLines();
         parent::paragraphs();
         $this->embedVideo();
@@ -874,12 +871,6 @@ class CommentParser extends ArticleParser {
 
     public function code() {
         $this->str = preg_replace('#<code>(.*)</code>#Uis',' ', $this->str);
-    }
-
-    public function lists() {
-        $this->str = preg_replace('#\[ul\](.*)\[/ul\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[ol\](.*)\[/ol\]#Uis', ' $1 ', $this->str);
-        $this->str = preg_replace('#\[li\](.*)\[/li\]#Uis', ' $1 ', $this->str);
     }
 
     public function embedVideo() {
