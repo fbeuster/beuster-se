@@ -344,8 +344,8 @@ abstract class ArticleParser {
         $this->str = preg_replace('#</p><br />#', '</p>', $this->str);
         $this->str = preg_replace('#</h2><br />#', '</h2>', $this->str);
         $this->str = preg_replace('#</h3><br />#', '</h3>', $this->str);
+        $this->str = preg_replace('#<(u|o)l><br />#', '<$1l>', $this->str);
         $this->str = preg_replace('#</(li|ul|ol)><br />#', '</$1>', $this->str);
-        $this->str = preg_replace('#<(u|o)l class="innews((vor)??)"><br />#', '<$1l class="innews$2">', $this->str);
     }
 
     /**
