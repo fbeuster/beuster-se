@@ -72,33 +72,44 @@
 
         // get and set the title based on url
         private function parseTitleUrl() {
-            $posId = strpos($this->title, '-') + 1;
-            $this->title = substr($this->title,  $posId, strlen($this->title) - $posId);
+            $removes = '#?|().,;:{}[]/';
+            $strokes = array(' ', '---', '--');
+
+            $posId              = strpos($this->title, '-') + 1;
+            $this->articleId    = substr($this->title, 0, $posId - 1);
+            $this->title        = substr($this->title,  $posId, strlen($this->title) - $posId);
 
             $sql = "SELECT
-                        ID,
                         Titel
                     FROM
-                        news";
-            if(!$stmt = $this->db->prepare($sql)){return $this->db->error;}
-            if(!$stmt->execute()) {return $result->error;}
-            $stmt->bind_result($id, $title);
-            while($stmt->fetch()) {
-                $title = str_replace('#', '', $title);
-                $title = str_replace(' ', '-', $title);
-                $title = str_replace('---', '-', $title);
-                $title = str_replace('--', '-', $title);
-                $title = str_replace('?', '', $title);
-                $titel = replaceUml($title);
-                if($this->title == $title) {
-                    $this->articleId = $id;
-                    break;
-                }
+                        news
+                    WHERE
+                        ID = ?";
+            if (!$stmt = $this->db->prepare($sql)) {
+                return $this->db->error;
+            }
+            $stmt->bind_param('i', $this->articleId);
+
+            if (!$stmt->execute()) {
+                return $stmt->error;
+            }
+            $stmt->bind_result($title);
+
+            if (!$stmt->fetch()) {
+                return $stmt->error;
             }
             $stmt->close();
-            if($this->articleId !== -1) {
-                $this->parsedUrl = '/'.$this->articleId.'/'.$this->cat.'/'.$this->title;
+
+            for ($i = 0; $i < strlen($removes); $i++) {
+              $this->title = str_replace($removes[$i], '', $this->title);
             }
+
+            foreach ($strokes as $char) {
+              $this->title = str_replace($char, '-', $this->title);
+            }
+
+            $this->title        = replaceUml($this->title);
+            $this->parsedUrl    = '/'.$this->articleId.'/'.$this->cat.'/'.$this->title;
         }
 
         // get and set the category based on url
