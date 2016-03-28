@@ -74,6 +74,7 @@
         private function parseTitleUrl() {
             $posId = strpos($this->title, '-') + 1;
             $this->title = substr($this->title,  $posId, strlen($this->title) - $posId);
+            $this->title = $this->smoothenTitle($this->title);
 
             $sql = "SELECT
                         ID,
@@ -84,13 +85,7 @@
             if(!$stmt->execute()) {return $result->error;}
             $stmt->bind_result($id, $title);
             while($stmt->fetch()) {
-                $title = str_replace('#', '', $title);
-                $title = str_replace(' ', '-', $title);
-                $title = str_replace('---', '-', $title);
-                $title = str_replace('--', '-', $title);
-                $title = str_replace('?', '', $title);
-                $titel = replaceUml($title);
-                if($this->title == $title) {
+                if($this->title == $this->smoothenTitle($title)) {
                     $this->articleId = $id;
                     break;
                 }
@@ -99,6 +94,20 @@
             if($this->articleId !== -1) {
                 $this->parsedUrl = '/'.$this->articleId.'/'.$this->cat.'/'.$this->title;
             }
+        }
+
+        private function smoothenTitle($title) {
+            $removes = '#?|().,;:{}[]/';
+            $strokes = array(' ', '---', '--');
+
+            for($i = 0; $i < strlen($removes); $i++) {
+              $title = str_replace($removes[$i], '', $title);
+            }
+
+            foreach($strokes as $char) {
+              $title = str_replace($char, '-', $title);
+            }
+            return replaceUml($title);
         }
 
         // get and set the category based on url
