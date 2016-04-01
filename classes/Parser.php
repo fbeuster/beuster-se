@@ -384,10 +384,14 @@ abstract class ArticleParser {
         $this->str = preg_replace('#<p><br />#', '<p>', $this->str);
         $this->str = preg_replace('#</p><br />#', '</p>'."\r\n", $this->str);
         $this->str = preg_replace('#<br />(\r\n)*?</p>#', '</p>'."\r\n", $this->str);
-        $this->str = preg_replace('#</(u|o)l></p>#', '</$1l>', $this->str);
         $this->str = preg_replace('=<p><h2>(.*?)</h2>=Ui', '<h2>$1</h2><p>', $this->str);
         $this->str = preg_replace('=<p><h3>(.*?)</h3>=Ui', '<h3>$1</h3><p>', $this->str);
-        $this->str = preg_replace('=<p></p>=Ui', '', $this->str);
+        $this->str = preg_replace('#<p>\s*<ol>([\w\W]*?)</ol>\s*</p>#', '<ol>$1</ol>', $this->str);
+        $this->str = preg_replace('#<p>\s*<ul>([\w\W]*?)</ul>\s*</p>#', '<ul>$1</ul>', $this->str);
+        $this->str = preg_replace('#<p>\s*<ol>([\w\W]*?)</ol>\s*$#', '<ol>$1</ol>', $this->str);
+        $this->str = preg_replace('#<p>\s*<ul>([\w\W]*?)</ul>\s*$#', '<ul>$1</ul>', $this->str);
+        $this->str = preg_replace('#<p>\s*<div([\w\W]*?)</div>\s*</p>#', '<div$1</div>', $this->str);
+        $this->str = preg_replace('=<p>\s*</p>=Ui', '', $this->str);
     }
 
     /**
