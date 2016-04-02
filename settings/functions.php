@@ -450,13 +450,17 @@
 
         $stmt->bind_result($id, $db_title);
 
+        $articles = array();
         while($stmt->fetch()) {
+            $articles[$id] = $db_title;
+        }
+        $stmt->close();
+
+        foreach ($articles as $id => $db_title) {
             $title  = Parser::parse($db_title, Parser::TYPE_PREVIEW);
             $link   = getLink(getCatName(getNewsCat($id)), $id, $title);
             $res[]  = '<a href="'.$link.'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
         }
-
-        $stmt->close();
 
         return $res;
     }
