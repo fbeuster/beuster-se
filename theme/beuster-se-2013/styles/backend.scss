@@ -184,8 +184,8 @@ fieldset.backend {
   textarea[role="newEntryContent"] {
     width: 100%;
     border: 1px solid $gray;
-    border-top: 0;
     background: $lighterer_gray;
+    resize: vertical;
   }
 
   img.adThumb {
