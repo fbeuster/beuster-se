@@ -31,7 +31,6 @@
     public function getTokens() { return $this->tokens; }
 
     public function run() {
-
       while ($this->current_index < $this->current_length) {
         $char = substr($this->article->getContent(), $this->current_index, 1);
 
@@ -68,6 +67,9 @@
 
         $this->current_index++;
       }
+
+      # adding last phrase
+      $this->addToken( new Token($this->current_phrase, $this->current_type) );
     }
   }
 
