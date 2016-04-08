@@ -18,12 +18,6 @@
       $this->current_type   = Token::CONTENT;
     }
 
-    private function addToken($token) {
-      if (!($token->getType() === Token::CONTENT && trim($token->getText()) === '')) {
-        $this->tokens->push($token);
-      }
-    }
-
     /**
      * getter for tokens
      * @return SplDoublyLinkedList
@@ -36,8 +30,8 @@
 
         switch ($char) {
           case Matcher::isNewLine($char) :
-            $this->addToken( new Token($this->current_phrase, $this->current_type) );
-            $this->addToken( new Token($char, Token::NEWLINE) );
+            $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+            $this->tokens->push( new Token($char, Token::NEWLINE) );
 
             $this->current_phrase = '';
             $this->current_type   = Token::CONTENT;
@@ -45,7 +39,7 @@
             break;
 
           case Matcher::isTagStart($char) :
-            $this->addToken( new Token($this->current_phrase, $this->current_type) );
+            $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
 
             $this->current_phrase = $char;
             $this->current_type   = Token::TAG;
@@ -53,7 +47,7 @@
             break;
 
           case Matcher::isTagEnd($char) :
-            $this->addToken( new Token($this->current_phrase . $char, $this->current_type) );
+            $this->tokens->push( new Token($this->current_phrase . $char, $this->current_type) );
 
             $this->current_phrase = '';
             $this->current_type   = Token::CONTENT;
@@ -69,7 +63,7 @@
       }
 
       # adding last phrase
-      $this->addToken( new Token($this->current_phrase, $this->current_type) );
+      $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
     }
   }
 
