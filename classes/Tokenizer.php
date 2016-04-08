@@ -24,13 +24,19 @@
      */
     public function getTokens() { return $this->tokens; }
 
+    private function hasPhrase() {
+      return $this->current_phrase !== '';
+    }
+
     public function run() {
       while ($this->current_index < $this->current_length) {
         $char = substr($this->article->getContent(), $this->current_index, 1);
 
         switch ($char) {
           case Matcher::isNewLine($char) :
-            $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+            if ($this->hasPhrase()) {
+              $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+            }
             $this->tokens->push( new Token($char, Token::NEWLINE) );
 
             $this->current_phrase = '';
@@ -39,7 +45,9 @@
             break;
 
           case Matcher::isTagStart($char) :
-            $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+            if ($this->hasPhrase()) {
+              $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+            }
 
             $this->current_phrase = $char;
             $this->current_type   = Token::TAG;
@@ -63,7 +71,9 @@
       }
 
       # adding last phrase
-      $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+      if ($this->hasPhrase()) {
+        $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+      }
     }
   }
 
