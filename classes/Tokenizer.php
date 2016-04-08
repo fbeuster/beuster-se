@@ -1,6 +1,7 @@
 <?php
 
   class Tokenizer {
+    private $raw_string;
     private $tokens;
 
     private $current_index;
@@ -8,12 +9,12 @@
     private $current_phrase;
     private $current_type;
 
-    public function __construct($article) {
-      $this->article  = $article;
-      $this->tokens   = new SplDoublyLinkedList();
+    public function __construct($raw_string) {
+      $this->raw_string = $raw_string;
+      $this->tokens     = new SplDoublyLinkedList();
 
       $this->current_index  = 0;
-      $this->current_length = strlen($this->article->getContent());
+      $this->current_length = strlen($this->raw_string);
       $this->current_phrase = '';
       $this->current_type   = Token::CONTENT;
     }
@@ -30,7 +31,7 @@
 
     public function run() {
       while ($this->current_index < $this->current_length) {
-        $char = substr($this->article->getContent(), $this->current_index, 1);
+        $char = substr($this->raw_string, $this->current_index, 1);
 
         switch ($char) {
           case Matcher::isNewLine($char) :
