@@ -40,7 +40,12 @@
   },
   "errors" : {
     "execute_error" : "Fehler beim Ausführen der Anfrage.",
-    "mysqli_error" : "Die Datenbank meldete einen Fehler."
+    "mysqli_error" : "Die Datenbank meldete einen Fehler.",
+    "parser" : {
+      "token" : {
+        "tag_in_tag" : "Tags müssen geschlossen werden, bevor ein neuer geöffnet wird."
+      }
+    }
   },
   "page" : {
     "error" : {

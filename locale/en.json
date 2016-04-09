@@ -40,7 +40,12 @@
   },
   "errors" : {
     "execute_error" : "Error while executing the request.",
-    "mysqli_error" : "The database returned an error."
+    "mysqli_error" : "The database returned an error.",
+    "parser" : {
+      "token" : {
+        "tag_in_tag" : "Tags must be closed before opening a new one."
+      }
+    }
   },
   "page" : {
     "error" : {
