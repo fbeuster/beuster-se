@@ -89,7 +89,13 @@
 
       # adding last phrase
       if ($this->hasPhrase()) {
-        $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+        if ($this->current_type == Token::TAG) {
+          $this->current_error = ParserError::TYPE_UNCLOSED_TAG;
+          return false;
+
+        } else {
+          $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+        }
       }
 
       return true;

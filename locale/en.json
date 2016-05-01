@@ -43,7 +43,8 @@
     "mysqli_error" : "The database returned an error.",
     "parser" : {
       "token" : {
-        "tag_in_tag" : "Tags must be closed before opening a new one."
+        "tag_in_tag" : "Tags must be closed before opening a new one.",
+        "unclosed_tag" : "Tags must be closed"
       }
     }
   },

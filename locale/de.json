@@ -43,7 +43,8 @@
     "mysqli_error" : "Die Datenbank meldete einen Fehler.",
     "parser" : {
       "token" : {
-        "tag_in_tag" : "Tags müssen geschlossen werden, bevor ein neuer geöffnet wird."
+        "tag_in_tag" : "Tags müssen geschlossen werden, bevor ein neuer geöffnet wird.",
+        "unclosed_tag" : "Tags müssen geschlossen werden."
       }
     }
   },

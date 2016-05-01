@@ -1,7 +1,8 @@
 <?php
 
   class ParserError {
-    const TYPE_TAG_IN_TAG = 'errors.parser.token.tag_in_tag';
+    const TYPE_TAG_IN_TAG   = 'errors.parser.token.tag_in_tag';
+    const TYPE_UNCLOSED_TAG = 'errors.parser.token.unclosed_tag';
 
     private $index;
     private $raw_string;
