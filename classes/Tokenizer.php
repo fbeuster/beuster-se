@@ -41,13 +41,18 @@
 
         switch ($char) {
           case Matcher::isNewLine($char) :
-            if ($this->hasPhrase()) {
-              $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
-            }
-            $this->tokens->push( new Token($char, Token::NEWLINE) );
+            if ($this->current_type == Token::TAG) {
+              $this->current_phrase .= $char;
 
-            $this->current_phrase = '';
-            $this->current_type   = Token::CONTENT;
+            } else {
+              if ($this->hasPhrase()) {
+                $this->tokens->push( new Token($this->current_phrase, $this->current_type) );
+              }
+              $this->tokens->push( new Token($char, Token::NEWLINE) );
+
+              $this->current_phrase = '';
+              $this->current_type   = Token::CONTENT;
+            }
 
             break;
 
