@@ -24,6 +24,7 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
   'admincat'        => array("admincat.php",        "AdminCP - Kategorien"),
   'admincmtenable'  => array("admincmtenable.php",  "AdminCP - Kommentare"),
   'snippetnew'      => array("snippetnew.php",      "AdminCP - Snippet erstellen"),
+  'snippetedit'     => array("snippetedit.php",     "AdminCP - Snippet bearbeiten"),
   'userdata'        => array("userdata.php",        "Deine Daten bearbeiten"),
   'error'           => array("error.php",           "Fehler!"),
   'search'          => array("search.php",          "Suchergebnisse"));
