@@ -260,6 +260,24 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Rights`, `Email`, `regDate`, `Contactmail`, `Clearname`, `About`, `cmtNotify`, `Website`) VALUES
 (10001, 'admin', 'empty', 'admin', 'admin@email.com', NOW(), 'admin@email.com', 'Admin', 'About me text', 1, '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `snippets`
+--
+
+CREATE TABLE `snippets` (
+  `name` varchar(20) NOT NULL,
+  `content_de` text NOT NULL,
+  `content_en` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for table `snippets`
+--
+ALTER TABLE `snippets`
+  ADD PRIMARY KEY (`name`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

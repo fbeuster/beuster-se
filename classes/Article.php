@@ -169,8 +169,9 @@ class Article {
 	 */
 	public function getContentDecorated() {
 		$id = new ImageDecorator($this->getContentParsed());
+		$sd = new SnippetDecorator($id->getContent());
 
-		return $id->getContent();
+		return $sd->getContent();
 	}
 
 	/**
