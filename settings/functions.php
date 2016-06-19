@@ -706,7 +706,7 @@
         if($return !== '') {
             $image = '';
         } else {
-            $path   = makeAbsolutePath($pfad);
+            $path   = makeAbsolutePath($pfad, '', true);
             $image  = '</p><div class="beContentEntryImage"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></div><p>';
         }
         return $before.$image.$after;

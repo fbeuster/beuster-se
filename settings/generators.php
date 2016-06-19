@@ -10,10 +10,10 @@
             $pfad = str_replace('blog/id', 'blog/thid', $pic['pfad']);
             $pfad = str_replace('.', '_', $pfad);
             $pfad = $pfad.'.jpg';
-            $ret .= '   <li><a href="'.makeAbsolutePath($pic['pfad']).'">';
-            $ret .= '    <img src="'.makeAbsolutePath($pfad).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'">';
+            $ret .= '   <li><a href="'.makeAbsolutePath($pic['pfad'], '', true).'">';
+            $ret .= '    <img src="'.makeAbsolutePath($pfad, '', true).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'">';
             $ret .= '   </a></li>';
-            $ret .= '   <li class="hasjs"><img src="'.makeAbsolutePath($pfad).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'"></li>';
+            $ret .= '   <li class="hasjs"><img src="'.makeAbsolutePath($pfad, '', true).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'"></li>';
         }
         $ret .= '  </ul>';
         $ret .= '  <br class="clear">'."\r";

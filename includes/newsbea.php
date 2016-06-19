@@ -388,7 +388,7 @@
                         ORDER BY
                             ID';
                 if(!$stmt = $db->prepare($sql)) {return $db->error;}
-                $stmt->bind_param('i', $newsid);
+                $stmt->bind_param('i', $id);
                 if(!$stmt->execute()) {return $stmt->error;}
                 $stmt->bind_result($pfad, $thumb, $pid);
                 $a['data']['pfad'] = array();

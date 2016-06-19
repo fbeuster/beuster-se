@@ -156,7 +156,7 @@
                     $pfad = str_replace('.', '_', $pfad);
           ?>
             <tr>
-              <td><img src="<?php echo makeAbsolutePath($pfad, '.jpg'); ?>" name="" class="adThumb"></td>
+              <td><img src="<?php echo makeAbsolutePath($pfad, '.jpg', true); ?>" name="" class="adThumb"></td>
               <td><input type="radio" name="thumbOld" value="<?php echo $pic['id']; ?>"<?php if($pic['thumb'] == 1) { echo ' checked="checked"'; } ?>></td>
               <td><input type="checkbox" name="del[]" value="<?php echo $pic['id']; ?>"></td>
               <td>[img<?php echo $pic['id']; ?>]</td>
