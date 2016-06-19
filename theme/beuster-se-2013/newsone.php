@@ -25,7 +25,7 @@
       Status: <?php echo substr($article->getProjState(), 1, strlen($article->getProjState())-1); ?>
     </span>
     <?php } ?>
-    <?php echo $article->getContentParsed()."\n"; ?>
+    <?php echo $article->getContentDecorated()."\n"; ?>
     <?php if(count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics']).'</section>'; } ?>
   </article>
 

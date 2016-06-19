@@ -164,12 +164,22 @@ class Article {
 	public function getContent() { return $this->content; }
 
 	/**
+	 * getter for decorated content
+	 * @return string
+	 */
+	public function getContentDecorated() {
+		$id = new ImageDecorator($this->getContentParsed());
+
+		return $id->getContent();
+	}
+
+	/**
 	 * getter for parsed content
 	 * @return string
 	 */
 	public function getContentParsed() {
     $preApp = ('[yt]' == substr($this->content,0,4)) ? '<p style="text-indent:0;">' : '<p>';
-		return $preApp.grabImages( Parser::parse($this->content, Parser::TYPE_CONTENT) ).'</p>';
+		return $preApp.Parser::parse($this->content, Parser::TYPE_CONTENT).'</p>';
 	}
 
 	/**

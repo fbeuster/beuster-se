@@ -666,52 +666,6 @@
         return $url;
     }
 
-    function grabImages($content) {
-        while(preg_match('#\[img([0-9]*)\]#', $content)) {
-            $content = grabAnImage($content);
-        }
-        return $content;
-    }
-
-    function grabAnImage($content) {
-        $db = Database::getDB()->getCon();
-        $l = strlen($content);
-        $pos1 = strpos($content, '[img');
-        $pos2 = strpos($content, ']', $pos1) + 1;
-        $before = substr($content, 0, $pos1);
-        $id = substr($content, $pos1 + 4, $pos2 - ($pos1 + 4) - 1);
-        $after = substr($content, $pos2, $l - $pos2);
-
-        $return = '';
-        $sql = "SELECT
-                    Name,
-                    Pfad
-                FROM
-                    pics
-                WHERE
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {
-            $return = $db->error;
-        }
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {
-            $return = $result->error;
-        }
-        $result->bind_result($name, $pfad);
-        if(!$result->fetch()) {
-            $return = $result->error;
-        }
-        $result->close();
-
-        if($return !== '') {
-            $image = '';
-        } else {
-            $path   = makeAbsolutePath($pfad, '', true);
-            $image  = '</p><div class="beContentEntryImage"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></div><p>';
-        }
-        return $before.$image.$after;
-    }
-
     function articlesInDate($year, $month = 0, $day = 0) {
         $db = Database::getDB()->getCon();
         $return = '';
