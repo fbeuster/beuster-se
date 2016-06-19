@@ -15,6 +15,7 @@
       <li>&nbsp;</li>
       <li><a href="/snippetnew">Snippet erstellen</a></li>
       <li><a href="/snippetedit">Snippet bearbeiten</a></li>
+      <li><a href="/snippetdelete">Snippet löschen</a></li>
       <li>&nbsp;</li>
       <li><a href="/admin/stats">Statistiken</a></li>
       <li><a href="/userdata">Daten ändern</a></li>
