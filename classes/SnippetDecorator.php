@@ -15,18 +15,14 @@
     }
 
     private function getSnippet($name) {
-      $db = Database::getDB();
+      $snippet = new Snippet($name);
 
-      $fields = array('content_de');
-      $conds  = array('name = ?', 's', array($name));
-      $res    = $db->select('snippets', $fields, $conds);
+      if ($snippet->isLoaded()) {
+        return $snippet->getContentParsed('de');
 
-      if(count($res) != 1)
+      } else {
         return '';
-
-      $content = $res[0]['content_de'];
-
-      return Parser::parse($content, Parser::TYPE_CONTENT);
+      }
     }
   }
 
