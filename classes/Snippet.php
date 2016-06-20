@@ -12,6 +12,16 @@
       $this->load();
     }
 
+    public static function exists($name) {
+      $db = Database::getDB();
+
+      $fields = array('content_de');
+      $conds  = array('name = ?', 's', array($name));
+      $res    = $db->select('snippets', $fields, $conds);
+
+      return count($res) == 1;
+    }
+
     public function getContent($lang) {
       if (array_key_exists($lang, $this->content)) {
         return $this->content[$lang];

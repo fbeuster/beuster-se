@@ -22,7 +22,7 @@
       } else if(strlen($name) > 20) {
         $err = 2;
 
-      } else if(false) {
+      } else if(Snippet::exists($name)) {
         # already exists
         $err = 3;
 
