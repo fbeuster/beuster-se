@@ -60,16 +60,36 @@
   }
 
   function getPageTitle($file) {
-    $curPage = getCurrentPage();
-    switch($curPage) {
-      case 'blog':        return 'Blog, Tipps und Videos - beuster{se}';
-      case 'entry':
-        $article = new Article($_GET['n']);
-        return $article->getTitle().' - beuster{se}';
-      case 'topCategory': return getCatName(getCatID($_GET['p'])).' - beuster{se}';
-      case 'category':    return getCatName(getCatID($_GET['p'])).' - beuster{se}';
-      default:            return $file[$_GET['p']][1].' - beuster{se}';
+    $config = Config::getConfig();
+    $page   = Lixter::getLix()->getPage();
+
+    $return_title = '';
+    $separator    = ' - ';
+    $site_name    = $config->get('site_name');
+    $site_title   = $config->get('site_title');
+
+    if ($page->getType() === Page::STATIC_PAGE ||
+        $page->getType() === Page::CONTENT_PAGE) {
+      $return_title = $page->getTitle();
+
+    } else {
+      $curPage = getCurrentPage();
+      switch($curPage) {
+        case 'blog':
+          $return_title = $site_title;
+
+        case 'topCategory':
+          $return_title = getCatName(getCatID($_GET['p']));
+
+        case 'category':
+          $return_title = getCatName(getCatID($_GET['p']));
+
+        default:
+          $return_title = $file[$_GET['p']][1];
+      }
     }
+
+    return $return_title . $separator . $site_name;
   }
 
   function getPageDescription() {

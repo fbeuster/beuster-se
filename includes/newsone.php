@@ -10,6 +10,7 @@
     $return = '';
 
     $a['filename'] = 'newsone.php';
+    $a['single_article'] = true;
 
     if('POST' == $_SERVER['REQUEST_METHOD']) {
         $frei = 0;
