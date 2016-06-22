@@ -25,11 +25,11 @@
         } else if(strlen($name) > 20) {
           $err = 2;
 
-        } else if(Snippet::exists($name)) {
+        } else if(Snippet::exists($name) && $name !== $old_name) {
           # already exists
           $err = 3;
 
-        } else if(Snippet::exists($old_name)) {
+        } else if(!Snippet::exists($old_name)) {
           # old_name not exists
           $err = 4;
 
@@ -57,7 +57,7 @@
           $a['data']['err']['type'] = analyseErrNewsBea($err);
 
         } else {
-          return showInfo('Das Snippet wurde geändert. <br /><a href="/snippetedit" class="back">Zurück zum Bearbeiten</a>', 'newsbea');
+          return showInfo('Das Snippet wurde geändert. <br /><a href="/snippetedit" class="back">Zurück zum Bearbeiten</a>', 'snippetedit');
         }
 
       } else if(isset($_POST['formactionchoose'])) {
