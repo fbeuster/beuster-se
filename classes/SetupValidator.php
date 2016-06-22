@@ -208,7 +208,6 @@ class SetupValidator extends AbstractValidator {
       $this->addMessage(I18n::t('setup.custom.not_ready'));
 
     } else {
-      echo '<pre>'; print_r($_POST); echo '</pre>';
       if ($this->isMissing('theme')) {
         $this->addError('theme', 'setup.custom.missing_theme');
       } else {

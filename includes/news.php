@@ -140,7 +140,6 @@
             $a['data']['ret'] = '';
         } else {
             // get article ids
-            #echo '<pre>'; print_r($cat); echo '</pre>';
 
             $fields = array('news.ID');
             if($cat->isTopCategory()) {

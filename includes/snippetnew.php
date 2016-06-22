@@ -9,7 +9,6 @@
     $db = Database::getDB();
 
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
-      echo '<pre>'; print_r($_POST); echo '</pre>';
       $content = Parser::parse($_POST['content'], Parser::TYPE_NEW);
       $name = trim($_POST['name']);
 
