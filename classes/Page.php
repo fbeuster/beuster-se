@@ -7,6 +7,27 @@ abstract class Page {
   public function __construct() {
   }
 
+  public function addUriSnippets() {
+    $appending = '';
+
+    if (Utilities::hasUriSnippets()) {
+      # this snippet length should be defined somewhere else though
+      $snippet_name_length = 2;
+      $snippet_names = str_split( Utilities::getUriSnippets(),
+                                  $snippet_name_length);
+
+      foreach ($snippet_names as $snippet_name) {
+        $snippet = new Snippet($snippet_name);
+
+        if ($snippet->isLoaded()) {
+          $appending .= $snippet->getContentParsed('de');
+        }
+      }
+    }
+
+    return $appending;
+  }
+
   public function getPageClass() {
     switch($this->getType()) {
       case Page::STATIC_PAGE:
