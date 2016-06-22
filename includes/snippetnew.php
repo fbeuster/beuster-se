@@ -27,8 +27,11 @@
         $err = 3;
 
       } else {
-        $fields = array('name', 'content_de', 'content_en');
-        $values = array('sss', array($name, $content, $content));
+        $now    = date("Y-m-d H:i:s", time());
+        $fields = array('name', 'content_de', 'content_en',
+                        'created', 'edited');
+        $values = array('sssss', array( $name, $content, $content,
+                                        $now, $now));
         $res    = $db->insert('snippets', $fields, $values);
       }
 

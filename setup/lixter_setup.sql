@@ -269,7 +269,9 @@ INSERT INTO `users` (`ID`, `Name`, `Password`, `Rights`, `Email`, `regDate`, `Co
 CREATE TABLE `snippets` (
   `name` varchar(20) NOT NULL,
   `content_de` text NOT NULL,
-  `content_en` text NOT NULL
+  `content_en` text NOT NULL,
+  `created` datetime NOT NULL,
+  `edited` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

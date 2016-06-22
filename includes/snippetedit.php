@@ -35,17 +35,19 @@
 
         } else {
           $db2 = $db->getCon();
+          $now = date("Y-m-d H:i:s", time());
 
           $sql = 'UPDATE
                     snippets
                   SET
                     name = ?,
                     content_de = ?,
-                    content_en = ?
+                    content_en = ?,
+                    edited = ?
                   WHERE
                     name = ?';
           if(!$stmt = $db2->prepare($sql)) {return $db2->error;}
-          $stmt->bind_param('ssss', $name, $content, $content, $old_name);
+          $stmt->bind_param('sssss', $name, $content, $content, $now, $old_name);
           if(!$stmt->execute()) {return $stmt->error;}
           $stmt->close();
         }
