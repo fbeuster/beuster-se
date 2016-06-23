@@ -16,7 +16,7 @@
       $db = Database::getDB();
 
       $fields = array('content_de');
-      $conds  = array('name = ?', 's', array($name));
+      $conds  = array('name LIKE ?', 's', array($name));
       $res    = $db->select('snippets', $fields, $conds);
 
       return count($res) == 1;

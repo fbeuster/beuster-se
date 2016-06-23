@@ -49,7 +49,7 @@
                     content_en = ?,
                     edited = ?
                   WHERE
-                    name = ?';
+                    name LIKE ?';
           if(!$stmt = $db2->prepare($sql)) {return $db2->error;}
           $stmt->bind_param('sssss', $name, $content, $content, $now, $old_name);
           if(!$stmt->execute()) {return $stmt->error;}

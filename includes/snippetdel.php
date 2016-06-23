@@ -17,7 +17,7 @@
         $sql = 'DELETE FROM
                   snippets
                 WHERE
-                  name = ?';
+                  name LIKE ?';
         if(!$stmt = $db2->prepare($sql)) {return $db2->error;}
         $stmt->bind_param('s', $_POST['name']);
         if(!$stmt->execute()) {return $stmt->error;}

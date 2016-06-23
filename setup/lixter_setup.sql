@@ -267,12 +267,12 @@ INSERT INTO `users` (`ID`, `Name`, `Password`, `Rights`, `Email`, `regDate`, `Co
 --
 
 CREATE TABLE `snippets` (
-  `name` varchar(20) NOT NULL,
-  `content_de` text NOT NULL,
-  `content_en` text NOT NULL,
+  `name` varchar(20) COLLATE latin1_general_cs NOT NULL,
+  `content_de` text COLLATE latin1_general_cs NOT NULL,
+  `content_en` text COLLATE latin1_general_cs NOT NULL,
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 --
 -- Indexes for table `snippets`
