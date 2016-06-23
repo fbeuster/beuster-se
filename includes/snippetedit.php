@@ -25,13 +25,17 @@
         } else if(strlen($name) > 20) {
           $err = 2;
 
+        } else if(!preg_match('#^[A-Za-z0-9]*$#', $name)) {
+          # invalid characters
+          $err = 3;
+
         } else if(Snippet::exists($name) && $name !== $old_name) {
           # already exists
-          $err = 3;
+          $err = 4;
 
         } else if(!Snippet::exists($old_name)) {
           # old_name not exists
-          $err = 4;
+          $err = 5;
 
         } else {
           $db2 = $db->getCon();

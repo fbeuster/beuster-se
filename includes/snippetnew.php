@@ -19,11 +19,16 @@
         $err = 1;
 
       } else if(strlen($name) > 20) {
+        # too long
         $err = 2;
+
+      } else if(!preg_match('#^[A-Za-z0-9]*$#', $name)) {
+        # invalid characters
+        $err = 3;
 
       } else if(Snippet::exists($name)) {
         # already exists
-        $err = 3;
+        $err = 4;
 
       } else {
         $now    = date("Y-m-d H:i:s", time());
