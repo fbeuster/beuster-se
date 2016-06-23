@@ -11,10 +11,9 @@ abstract class Page {
     $appending = '';
 
     if (Utilities::hasUriSnippets()) {
-      # this snippet length should be defined somewhere else though
-      $snippet_name_length = 2;
-      $snippet_names = str_split( Utilities::getUriSnippets(),
-                                  $snippet_name_length);
+      $snippet_name_delimiter = '-';
+      $snippet_names = explode( $snippet_name_delimiter,
+                                Utilities::getUriSnippets());
 
       foreach ($snippet_names as $snippet_name) {
         $snippet = new Snippet($snippet_name);
