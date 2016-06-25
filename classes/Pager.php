@@ -2,6 +2,7 @@
 
 class Pager {
 
+  const FILLER_TEXT = '...';
   const VISIBLE_PAGES = 5;
 
   private $current_page;
@@ -65,8 +66,10 @@ class Pager {
 
       } else {
         $i = 1;
+        $last_insert_text = '';
 
         for($i; $i <= $this->total_pages; $i++) {
+          $skip = false;
           if ($i == $this->current_page) {
             $page_active = true;
             $page_href = "#";
@@ -74,17 +77,29 @@ class Pager {
 
           } elseif ($i == 1 || $i == $this->total_pages ||
                     $i == $this->current_page - 1 ||
-                    $i == $this->current_page + 1) {
+                    $i == $this->current_page + 1 ||
+                    ( $this->current_page < Pager::VISIBLE_PAGES - 1 &&
+                      $i < Pager::VISIBLE_PAGES - 1) ||
+                    ( $this->current_page > $this->total_pages - Pager::VISIBLE_PAGES + 1 &
+                      $i > $this->total_pages - Pager::VISIBLE_PAGES + 1)) {
             $page_active = false;
             $page_href = $this->destination . $i;
             $page_text = $i;
 
           } else {
-            $page_active = false;
-            $page_href = '';
-            $page_text = '...';
+            if ($last_insert_text !== Pager::FILLER_TEXT) {
+              $page_active = false;
+              $page_href = '';
+              $page_text = Pager::FILLER_TEXT;
+            } else {
+              $skip = true;
+            }
           }
-          $ret[] = array($page_text, $page_href, $page_active);
+
+          if(!$skip) {
+            $last_insert_text = $page_text;
+            $ret[] = array($page_text, $page_href, $page_active);
+          }
         }
       }
     }
