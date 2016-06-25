@@ -167,6 +167,7 @@ class Lixter {
     $pageType = $this->page->getPageClass();
     $currPage = getPage();
 
+    include($this->theme->getFile('functions.php'));
     include($this->theme->getFile('htmlheader.php'));
     if (Utilities::isDevServer()) include('settings/analyse.php');
     include($this->theme->getFile('htmlwarning.php'));
