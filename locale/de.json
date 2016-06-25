@@ -53,6 +53,10 @@
       "title" : "Fehler"
     }
   },
+  "pager" : {
+    "next_text" : "Vor",
+    "prev_text" : "Zurück"
+  },
   "setup" : {
     "admin_user" : {
       "back_link" : "Zurück",

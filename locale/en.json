@@ -53,6 +53,10 @@
       "title" : "Error"
     }
   },
+  "pager" : {
+    "next_text" : "Next",
+    "prev_text" : "Prev"
+  },
   "setup" : {
     "admin_user" : {
       "back_link" : "Back",
