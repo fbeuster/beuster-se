@@ -2,6 +2,7 @@
 $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
               'login', 'logout',
               'newsbea', 'newsneu', 'newsdel', 'newsoverview',
+              'snippetnew', 'snippetedit', 'snippetdelete',
               'stats', 'userdata');
 
  // Dateien
