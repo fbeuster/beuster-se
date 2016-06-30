@@ -8,6 +8,7 @@
     switch($curPage) {
       case 'blog':        return 'index';
       case 'entry':       return 'single';
+      case 'page':        return 'page';
       case 'topCategory': return 'category';
       case 'category':    return 'category';
       default:            return 'index';
