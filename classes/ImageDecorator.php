@@ -28,7 +28,7 @@
       $path = $res[0]['Pfad'];
 
       $path   = makeAbsolutePath($path, '', true);
-      $image  = '</p><div class="beContentEntryImage"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></div><p>';
+      $image  = '</p><p class="image"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></p><p>';
 
       return $image;
     }
