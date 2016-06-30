@@ -45,6 +45,8 @@
 * Static access to parser classes
 */
 class Parser {
+    const DEFAULT_PREVIEW_LENGTH = 750;
+
     const TYPE_COMMENT  = 1;
     const TYPE_CONTENT  = 2;
     const TYPE_DESC     = 3;
@@ -60,7 +62,8 @@ class Parser {
      * @param int $length the length, used for preview; default = 750
      * @return String
      */
-    public static function parse($string, $parser_type, $length = 750) {
+    public static function parse($string, $parser_type,
+                            $length = Parser::DEFAULT_PREVIEW_LENGTH) {
         switch($parser_type) {
             case self::TYPE_COMMENT:
                 $parsed = new CommentParser($string);

@@ -187,8 +187,8 @@ class Article {
 	 * getter for preview content
 	 * @return string
 	 */
-	public function getContentPreview() {
-		return Parser::parse($this->content, Parser::TYPE_PREVIEW);
+	public function getContentPreview($length = Parser::DEFAULT_PREVIEW_LENGTH) {
+		return Parser::parse($this->content, Parser::TYPE_PREVIEW, $length);
 	}
 
 	/**
