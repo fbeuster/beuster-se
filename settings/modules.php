@@ -150,7 +150,7 @@
 
     $preApp     = "<p class='randomText' $style >";
     $backApp    = "</p>\n";
-    $art_title  = '<h5 class="randomTitle">'.Parser::parse($article->getTitle(), Parser::TYPE_PREVIEW).'</h5>'."\n";
+    $art_title  = '<h5 class="randomTitle">'.Parser::parse($article->getTitle(), Parser::TYPE_PREVIEW, 250).'</h5>'."\n";
     $art_text   = str_replace('###link###', $article->getLink(), $article->getContentPreview());
     $article_html    = $art_title . $preApp . $art_text . $backApp;
 
