@@ -7,10 +7,10 @@
 
 /**
 * Holding a Category.
-* 
+*
 * \class Category
 * \author Felix Beuster
-* 
+*
 * Class to hold and handle category functions
 */
 class Category {
@@ -27,10 +27,10 @@ class Category {
 	private $type;			/**< type of the category */
 	private $parent;		/**< id of parent category */
 	private $description;	/**< category description */
-	
+
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param int $id an category id
 	 */
 	function __construct($id) {
@@ -71,7 +71,7 @@ class Category {
 
 	/**
 	 * static variant of getNameUrl()
-	 * 
+	 *
 	 * @param String $name the text to transform
 	 * @return String
 	 */
@@ -107,19 +107,19 @@ class Category {
 	 * @return int
 	 */
 	public function getId() { return $this->id; }
-	
+
 	/**
 	 * setter for id
 	 * @param int $id to set
 	 */
 	public function setId($id) { $this->id = $id; }
-	
+
 	/**
 	 * getter for name
 	 * @return String
 	 */
 	public function getName() { return $this->name; }
-	
+
 	/**
 	 * setter for name
 	 * @param String $name to set
@@ -138,25 +138,25 @@ class Category {
         }
         return mb_strtolower($name, 'UTF-8');
 	}
-	
+
 	/**
 	 * getter for type
 	 * @return int
 	 */
 	public function getType() { return $this->type; }
-	
+
 	/**
 	 * setter for type
 	 * @param int $type to set
 	 */
 	public function setType($type) { $this->type = $type; }
-	
+
 	/**
 	 * getter for parent
 	 * @return Category
 	 */
 	public function getParent() { return $this->parent == 0 ? null : new Category($this->parent); }
-	
+
 	/**
 	 * setter for parent
 	 * @param Category $parent to set
@@ -168,13 +168,13 @@ class Category {
 	 * @return String
 	 */
 	public function getDescription() { return $this->description; }
-	
+
 	/**
 	 * setter for description
 	 * @param String $description to set
 	 */
 	public function setDescription($description) { $this->description = $description; }
-	
+
 	/*** PRIVATE ***/
 
 	/**

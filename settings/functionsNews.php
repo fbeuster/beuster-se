@@ -218,7 +218,7 @@
     }
 
     function notifyAdmin($title, $content, $user) {
-        $mailTopic = 'Neuer Kommentar zu "'.$titel.'"';
+        $mailTopic = 'Neuer Kommentar zu "'.$title.'"';
         $mailContent = '<html>';
         $mailContent .= '<head><title>Neuer Kommentar</title>';
         $mailContent .= '</head>';
