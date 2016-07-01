@@ -840,8 +840,16 @@ class ContentParser extends ArticleParser {
     }
 
     public function embedVideo() {
-        $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>', $this->str);
-        $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe><p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p></p>', $this->str);
+        $pre_wrap   = '<div class="video"><div class="wrapper">';
+        $post_wrap  = '</div></div>';
+
+        $iframe = '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe>';
+
+        $p_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p>';
+        $v_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>';
+
+        $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', $pre_wrap.$iframe.$v_note.$post_wrap, $this->str);
+        $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', $pre_wrap.$iframe.$p_note.$post_wrap, $this->str);
     }
 }
 
