@@ -61,47 +61,11 @@
         </p>
         <label>Inhalt:</label>
         <br>
-        <div class="bbDiv">
-          <div class="bbSpan bbSpanFirst">
-            <button class="bbImg" type="button" title="Fett" id="btnbold">&nbsp;</button>
-            <button class="bbImg" type="button" title="Kursiv" id="btnitalic">&nbsp;</button>
-            <button class="bbImg" type="button" title="Unterstrichen" id="btnunderline">&nbsp;</button>
-            <button class="bbImg" type="button" title="Makiert" id="btnmark">&nbsp;</button>
-            <button class="bbImg" type="button" title="Als Gelöscht auszeichnen" id="btndel">&nbsp;</button>
-            <button class="bbImg" type="button" title="Eingefügt (nach Del.)" id="btnins">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Anführungsstriche" id="btnquote">&nbsp;</button>
-            <button class="bbImg" type="button" title="Inline-Zitat" id="btncite">&nbsp;</button>
-            <button class="bbImg" type="button" title="Blockzitat" id="btnbquote">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Aufzählung" id="btnol">&nbsp;</button>
-            <button class="bbImg" type="button" title="Liste" id="btnul">&nbsp;</button>
-            <button class="bbImg" type="button" title="Listenelement" id="btnli">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Codebereich" id="btncode">&nbsp;</button>
-            <button class="bbImg" type="button" title="Neuer Absatz" id="btnpar">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Link einfügen" id="btnlink">&nbsp;</button>
-            <button class="bbImg" type="button" title="YouTube-Video einbetten" id="btnyt">&nbsp;</button>
-            <button class="bbImg" type="button" title="YouTube-Playlist einbinden" id="btnplay">&nbsp;</button>
-            <button class="bbImg" type="button" title="Amazon Affiliate" id="btnamazon">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title=":)" id="smsmile">&nbsp;</button>
-            <button class="bbImg" type="button" title=":(" id="smlaugh">&nbsp;</button>
-            <button class="bbImg" type="button" title=":D" id="smsad">&nbsp;</button>
-            <button class="bbImg" type="button" title=";)" id="smone">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Überschrift 2" id="btnuber2">&nbsp;</button>
-            <button class="bbImg" type="button" title="Überschrift 3" id="btnuber3">&nbsp;</button>
-          </div>
-        </div>
-        <textarea name="newsinhalt" id="newsinhalt" cols="85" rows="20" role="newEntryContent"><?php if(isset($data['fe']['inhalt']))echo $data['fe']['inhalt']; ?></textarea>
+        <?php
+          $content  = isset($data['fe']['inhalt']) ? $data['fe']['inhalt'] : '';
+          $editor   = new Editor('newsinhalt', 'newsinhalt', $content);
+          $editor->show();
+        ?>
         <br>
         <p style="padding: 0;">Bilder anhängen, maximal 5MB. Bestes Ergebnis bei 750*500px.</p>
         <label style="width: 100%;">

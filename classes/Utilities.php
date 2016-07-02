@@ -36,6 +36,10 @@ class Utilities {
             strpos($agent, 'MSIE 7.0') || strpos($agent, 'MSIE 8.0');
   }
 
+  public static function loadSystemView($view, $args = array()) {
+    include (__DIR__ . '/../system/views/' . $view);
+  }
+
 }
 
 ?>

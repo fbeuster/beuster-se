@@ -35,48 +35,11 @@
         <br><br>
         <label>Beschreibung:</label>
         <br>
-        <div class="bbDiv">
-          <div class="bbSpan bbSpanFirst">
-            <button class="bbImg" type="button" title="Fett" id="btnbold">&nbsp;</button>
-            <button class="bbImg" type="button" title="Kursiv" id="btnitalic">&nbsp;</button>
-            <button class="bbImg" type="button" title="Unterstrichen" id="btnunderline">&nbsp;</button>
-            <button class="bbImg" type="button" title="Makiert" id="btnmark">&nbsp;</button>
-            <button class="bbImg" type="button" title="Als Gelöscht auszeichnen" id="btndel">&nbsp;</button>
-            <button class="bbImg" type="button" title="Eingefügt (nach Del.)" id="btnins">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Anführungsstriche" id="btnquote">&nbsp;</button>
-            <button class="bbImg" type="button" title="Inline-Zitat" id="btncite">&nbsp;</button>
-            <button class="bbImg" type="button" title="Blockzitat" id="btnbquote">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Aufzählung" id="btnol">&nbsp;</button>
-            <button class="bbImg" type="button" title="Liste" id="btnul">&nbsp;</button>
-            <button class="bbImg" type="button" title="Listenelement" id="btnli">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Codebereich" id="btncode">&nbsp;</button>
-            <button class="bbImg" type="button" title="Neuer Absatz" id="btnpar">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Link einfügen" id="btnlink">&nbsp;</button>
-            <button class="bbImg" type="button" title="YouTube-Video einbetten" id="btnyt">&nbsp;</button>
-            <button class="bbImg" type="button" title="YouTube-Playlist einbinden" id="btnplay">&nbsp;</button>
-            <button class="bbImg" type="button" title="Amazon Affiliate" id="btnamazon">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title=":)" id="smsmile">&nbsp;</button>
-            <button class="bbImg" type="button" title=":(" id="smlaugh">&nbsp;</button>
-            <button class="bbImg" type="button" title=":D" id="smsad">&nbsp;</button>
-            <button class="bbImg" type="button" title=";)" id="smone">&nbsp;</button>
-          </div>
-          <div class="bbSpan">
-            <button class="bbImg" type="button" title="Überschrift 2" id="btnuber2">&nbsp;</button>
-            <button class="bbImg" type="button" title="Überschrift 3" id="btnuber3">&nbsp;</button>
-          </div>
-        </div>
-        <?php $description = isset($data['fe']) ? $data['fe']['descr'] : (isset($data['down']) ? $data['down']['descr'] : ''); ?>
-        <textarea name="downdescr" id="newsinhalt" cols="100" rows="20" style="vertical-align: top; float: left;"><?php echo $description; ?></textarea>
+        <?php
+          $content  = isset($data['fe']) ? $data['fe']['descr'] : (isset($data['down']) ? $data['down']['descr'] : '');
+          $editor   = new Editor('newsinhalt', 'downdescr', $content);
+          $editor->show();
+        ?>
         <br class="clear"><br>
         <input type="submit" name="formaction" value="Download hinzufügen" />
        </fieldset>
