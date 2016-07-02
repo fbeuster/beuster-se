@@ -9,7 +9,7 @@
       case 'blog':        return 'index';
       case 'entry':       return 'single';
       case 'page':        return 'page';
-      case 'topCategory': return 'category';
+      case 'search':      return 'category';
       case 'category':    return 'category';
       default:            return 'index';
     }
@@ -25,6 +25,8 @@
         return 'topCategory';
       } else if(getCatID($_GET['p'])) {
         return 'category';
+      } else if($_GET['p'] == 'search') {
+        return 'search';
       } else {
         return 'page';
       }
