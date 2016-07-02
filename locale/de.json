@@ -38,6 +38,32 @@
       "type_vars_mismatch" : "value Typ- und Variablenanzahl ist nicht gleich."
     }
   },
+  "editor" : {
+    "toolbar" : {
+      "label" : {
+        "bold" : "Fett",
+        "italic" : "Kursiv",
+        "underline" : "Unterstrichen",
+        "mark" : "Makiert",
+        "del" : "Gelöscht",
+        "ins" : "Eingefügt",
+        "quote" : "Anführungsstriche",
+        "cite" : "Inline-Zitat",
+        "bquote" : "Blockzitat",
+        "ol" : "Aufzählung",
+        "ul" : "Liste",
+        "li" : "Listenelement",
+        "code" : "Codebereich",
+        "par" : "Neuer Absatz",
+        "link" : "Link einfügen",
+        "yt" : "YouTube-Video einbetten",
+        "play" : "YouTube-Playlist einbinden",
+        "amazon" : "Amazon Affiliate Link einfügen",
+        "uber2" : "Überschrift 2",
+        "uber3" : "Überschrift 3"
+      }
+    }
+  },
   "errors" : {
     "execute_error" : "Fehler beim Ausführen der Anfrage.",
     "mysqli_error" : "Die Datenbank meldete einen Fehler.",
