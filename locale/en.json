@@ -81,6 +81,9 @@
     "success" : "You're signed in now.",
     "try_again" : "Try again."
   },
+  "logout" : {
+    "success" : "You're logged out now."
+  },
   "page" : {
     "error" : {
       "title" : "Error"

@@ -9,5 +9,5 @@
   setcookie('Password', null, -1, '/');
   unset($_COOKIE['UserID']);
   unset($_COOKIE['Password']);
-  return showInfo('Sie sind nun ausgeloggt.', 'blog');
+  return showInfo(I18n::t('logout.success'), 'blog');
 ?>

@@ -81,6 +81,9 @@
     "success" : "Du bist nun eingeloggt.",
     "try_again" : "Nochmal versuchen."
   },
+  "logout" : {
+    "success" : "Du bist nun ausgeloggt."
+  },
   "page" : {
     "error" : {
       "title" : "Fehler"
