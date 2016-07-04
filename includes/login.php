@@ -1,7 +1,7 @@
 <?php
     $user = User::newFromCookie();
     if ($user) {
-        return showInfo('Sie sind bereits eingeloggt.','admin');
+        return showInfo(I18n::t('login.already_signed_in'), 'admin');
     }
     $ret = array();
     $ret['filename'] = 'login.php';
@@ -33,7 +33,8 @@
         }
         $stmt->bind_result($UserID);
         if (!$stmt->fetch()) {
-            return  showInfo('Es wurde kein Benutzer mit den angegebenen Namen gefunden.<br /><a href="/login" class="back">Erneut versuchen</a>', 'login');
+            $back = '<a href="/login" class="back">'.I18n::t('login.try_again').'</a>';
+            return  showInfo(I18n::t('login.invalid_user').'<br />'.$back, 'login');
         }
         $stmt->close();
 
@@ -56,16 +57,17 @@
         }
         $stmt->bind_result($Hash);
         if (!$stmt->fetch()) {
-            return showInfo('Das eingegebene Password ist ungültig.<br /><a href="/login" class="back">Erneut versuchen</a>', 'login');
+            $back = '<a href="/login" class="back">'.I18n::t('login.try_again').'</a>';
+            return  showInfo(I18n::t('login.invalid_password').'<br />'.$back, 'login');
         }
         $stmt->close();
 
         setcookie('UserID', $UserID, strtotime("+1 day"), '/');
         setcookie('Password', $Hash, strtotime("+1 day"), '/');
-        $_COOKIE['UserID'] = $UserID; // fake-cookie setzen
-        $_COOKIE['Password'] = $Hash; // fake-cookie setzen
+        $_COOKIE['UserID'] = $UserID;
+        $_COOKIE['Password'] = $Hash;
 
-        return showInfo('Sie sind nun eingeloggt.', 'admin');
+        return showInfo(I18n::t('login.success'), 'admin');
     } else {
         return $ret;
     }

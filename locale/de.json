@@ -74,6 +74,13 @@
       }
     }
   },
+  "login" : {
+    "alredy_signed_in" : "Du bist bereits eingeloggt.",
+    "invalid_password" : "Das eingegebene Password ist ungültig.",
+    "invalid_user" : "Es wurde kein Benutzer mit den angegebenen Namen gefunden.",
+    "success" : "Du bist nun eingeloggt.",
+    "try_again" : "Nochmal versuchen."
+  },
   "page" : {
     "error" : {
       "title" : "Fehler"

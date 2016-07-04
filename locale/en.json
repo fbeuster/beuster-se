@@ -74,6 +74,13 @@
       }
     }
   },
+  "login" : {
+    "alredy_signed_in" : "You're already signed in.",
+    "invalid_password" : "The entered password is invalid.",
+    "invalid_user" : "The entered username could not be found.",
+    "success" : "You're signed in now.",
+    "try_again" : "Try again."
+  },
   "page" : {
     "error" : {
       "title" : "Error"
