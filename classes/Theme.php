@@ -8,6 +8,10 @@ class Theme {
   private $user_path  = 'user/theme/';
 
   public function __construct($name) {
+    if ($name === null || trim($name) === '' || !file_exists('theme/'.$name.'/')) {
+      $name = 'default';
+    }
+
     $this->name = $name;
     $this->path = 'theme/'.$name.'/';
   }
