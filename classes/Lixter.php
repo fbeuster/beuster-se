@@ -101,6 +101,7 @@ class Lixter {
     if(Utilities::isDevServer()) {
       error_reporting(E_ALL);
       ini_set('display_errors', 1);
+
     } else {
       error_reporting(NULL);
     }
@@ -132,21 +133,35 @@ class Lixter {
     if ($db->connect_errno) {
       $message    = I18n::t( 'lixter.load.mysql_connection_error', array(mysqli_connect_error()) );
       $this->page = new ErrorPage($message);
+
     } else {
       if (isset($_GET['p'])) {
+        # page argument found
+
         if (StaticPage::exists($_GET['p'])) {
+          # page argument is static page
           $this->page = new StaticPage($_GET['p']);
+
         } else if (isset($file[$_GET['p']][0])) {
+          # page argument has specific file
+
           if (ContentPage::exists($_GET['p'])) {
+            # specific file is found
             $this->page = new ContentPage($_GET['p']);
+
           } else {
+            # specif file is not found
             $message    = I18n::t( 'lixter.load.include_not_found', array('includes/' . $file[$_GET['p']][0]) );
             $this->page = new ErrorPage($message);
           }
+
         } else {
+          # page argument has no declaration and is not a static page
           $this->page = new ContentPage('blog');
         }
+
       } else {
+        # no page argument found
         $this->page = new ContentPage('blog');
       }
     }
@@ -175,9 +190,11 @@ class Lixter {
     if ($this->isValidTemplate()) {
       # valid include file
       $file = $this->theme->getFile($this->page->getFilename());
+
       if ($file !== false) {
         $data = $this->page->getContent();
         include $file;
+
       } else {
         $this->page = new ErrorPage( I18n::t('lixter.build.template_not_found', array($file)) );
         include $this->theme->getFile('static.php');
