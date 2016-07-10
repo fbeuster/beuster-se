@@ -10,6 +10,10 @@
       "invalid_return_value" : "The include file return in invalid value."
     }
   },
+  "aboutMod" : {
+    "no_username" : "Are you looking for somebody?",
+    "invalid_username" : "%s is not an author on this blog."
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields are empty."
