@@ -1,0 +1,57 @@
+@import 'lib/_color';
+
+body.article {
+  section.comments {
+    @include section_style_info;
+    @include section_title;
+
+    .comment {
+      .wrapper {
+        @include display_flex;
+      }
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $grey;
+        margin-bottom: 1.5em;
+        padding-bottom: 1.5em;
+      }
+
+      a {
+        color: $green;
+        text-decoration: none;
+
+        &:hover {
+          color: $blue;
+        }
+
+        &.reply {
+          cursor: pointer;
+        }
+      }
+
+      .avatar {
+        height: 3em;
+        margin-right: 1.5em;
+        width: 3em;
+
+        img {
+          height: 3em;
+          width: 3em;
+        }
+      }
+
+      .answers {
+        margin: 1.5em 0 0 4.5em;
+      }
+    }
+
+    & > p,
+    form p {
+      color: $darker_grey;
+
+      a {
+        @include default_link($green, $blue);
+      }
+    }
+  }
+}

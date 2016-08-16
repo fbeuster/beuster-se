@@ -1,0 +1,35 @@
+@import 'lib/_color';
+@import 'lib/_typography';
+
+body {
+  @include default_font;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+header {
+  h1,
+  span {
+    @include title_font;
+    color: $cold_grey;
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0.5em 0 0.5em 1em;
+    position: relative;
+
+    a {
+      color: $cold_grey;
+      text-decoration: none;
+    }
+  }
+}
+
+a.back {
+  @include default_link($green, $blue);
+  display: inline-block;
+  margin: 1.5em 0 0 2em;
+}

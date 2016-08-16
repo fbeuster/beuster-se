@@ -1,0 +1,96 @@
+@import 'lib/_color';
+
+form.userform {
+  @include editor_buttons;
+
+  &.articleform {
+    margin-top: 0;
+  }
+
+  .bbDiv {
+      height: 25px;
+      border-bottom: 0;
+  }
+
+  .bbSpan {
+    @include editor_sprite($grey);
+    display: block;
+    padding-left: 7px;
+    float: left;
+    border-top: 1px solid $grey;
+  }
+
+  .bbImg {
+    @include editor_sprite;
+    width: 25px;
+    height: 25px;
+    padding: 0 !important;
+    margin: 0;
+    box-shadow: 0 0 0;
+    border: 0;
+    float: left;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .newsNeuHelp {
+    display: none;
+  }
+
+  select {
+    border: 1px solid #e9e9e9;
+    display: inline-block;
+    padding: 0.5em;
+    width: 15em;
+  }
+
+  input[type=button] {
+    border: 0;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    padding: 0.5em 1em;
+
+    background: $grey;
+    color: $darker_grey;
+
+    &:hover {
+      color: $cold_black;
+    }
+  }
+}
+
+table.newslist {
+  width: 100%;
+
+  th.bigNumber {
+    width: 5em;
+  }
+
+  th.date {
+    width: 9em;
+  }
+
+  th.radio {
+    width: 1.5em;
+  }
+
+  th.smallNumber {
+    width: 3em;
+  }
+
+  td, th {
+    text-align: left;
+  }
+}
+
+ul.pagesList {
+  list-style: none;
+
+  .groupend {
+    margin-bottom: 1.5em;
+  }
+}

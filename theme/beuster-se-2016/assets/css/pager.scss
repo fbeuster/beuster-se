@@ -1,0 +1,56 @@
+@import 'lib/_color';
+
+.content .pager,
+article .pager {
+  @include display_flex;
+  color: $cold_black;
+  justify-content: center;
+  list-style: none;
+  margin: 1.5em auto 0 auto;
+  text-align: center;
+
+  li {
+    background: $cold_grey;
+    border-left: 1px solid $grey;
+    display: inline-block;
+
+    a,
+    &.filler,
+    &.current,
+    &.deactivated {
+      height: 1em;
+      line-height: 1;
+      padding: 1em;
+    }
+
+    &.filler,
+    &.page a,
+    &.current {
+      width: 1em;
+    }
+
+    &.next {
+      border-right: 1px solid $grey;
+    }
+
+    &.current {
+      color: $green;
+      display: block;
+      font-weight: bold;
+    }
+
+    &.deactivated {
+      color: $darker_grey;
+      font-style: italic;
+    }
+
+    a {
+      @include clear_link;
+      display: block;
+
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}
