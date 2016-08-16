@@ -1,0 +1,48 @@
+header {
+  .search {
+    padding: 0.8em 2em 0 1em;
+
+    input {
+      @include clear_button;
+      color: white;
+      font-size: 1em;
+      vertical-align: middle;
+
+      &[type=text] {
+        border-bottom: 1px solid transparent;
+
+        &:focus,
+        &:hover {
+          border-color: white;
+        }
+      }
+
+      &[type=submit] {
+        @include icon_image;
+
+        &:hover {
+          background-position: 0 -1 * $icon_width;
+        }
+      }
+    }
+
+    ::-webkit-input-placeholder, { /* WebKit, Blink, Edge */
+      color: $white;
+    }
+    :-moz-placeholder, { /* Mozilla Firefox 4 to 18 */
+      color: $white;
+      opacity:  1;
+    }
+    ::-moz-placeholder, { /* Mozilla Firefox 19+ */
+      color: $white;
+      opacity:  1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $white;
+    }
+  }
+}
+
+section.search_info {
+  @include section_style_info;
+}

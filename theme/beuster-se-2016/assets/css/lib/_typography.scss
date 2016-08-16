@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+@mixin code_font {
+  font-family: "Source Code Pro", "Lucida Console", Monaco, 'Courier New', monospace;
+}
+
+@mixin default_font {
+  font-family: 'Roboto', sans-serif;
+}
+
+@mixin default_link($color, $color_hover) {
+  color: $color;
+  text-decoration: none;
+
+  &:hover {
+    color: $color_hover;
+  }
+}
+
+@mixin section_title {
+  h2 {
+    color: $green;
+    margin-bottom: 0.75em;
+  }
+}
+
+@mixin title_font {
+  font-family: Monaco, 'Courier New', monospace;
+}

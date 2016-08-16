@@ -1,0 +1,75 @@
+@import 'lib/_color';
+
+$article_border_width : 0.2em;
+
+body.category,
+body.article section.recommended {
+  section.article {
+    @include section_style_info;
+
+    opacity: 0.9;
+    overflow: hidden;
+    padding: 0;
+    transition: all 0.25s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .content {
+      padding: 1em 2em 0 2em;
+
+      a:not(.more) {
+        @include default_link($blue, $green);
+      }
+    }
+
+    .more {
+      border-top: 1px solid $grey;
+      color: $green;
+      display: block;
+      margin-top: 1em;
+      padding: 1em 0;
+      text-decoration: none;
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+
+    .thumb {
+      background: $blue;
+    }
+  }
+}
+
+body.category {
+  &.highlighted {
+    section.article:not(.activated) {
+      opacity: 0.75;
+    }
+  }
+
+  .categoryTitle {
+    color: $green;
+    display: block;
+    font-size: 1.5em;
+    margin-left: 1.33em;
+    margin-top: 1.5em;
+  }
+}
+
+body.article {
+  section.recommended {
+    @include section_style_info;
+    @include section_title;
+
+    section.article {
+      margin-top: 2em;
+
+      .content {
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+@import 'lib/_color';
+
+form.userform {
+  margin-top: 3em;
+
+  fieldset {
+    border: 0;
+
+    legend {
+      color: $green;
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+
+      .cancelReply {
+        color: $cold_black;
+        font-size: 0.66em;
+        margin-left: 1em;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 1.05em;
+      margin-bottom: 0.5em;
+
+      input,
+      select,
+      textarea {
+        background: $white;
+        vertical-align: baseline;
+      }
+
+      input,
+      select,
+      textarea {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        @include default_font;
+        min-height: 5em;
+        resize: vertical;
+      }
+
+      &.required span:after {
+        content: "*";
+        color: $red;
+        display: inline-block;
+        margin-left: 0.25em;
+      }
+    }
+
+    input[type=reset],
+    input[type=submit] {
+      border: 0;
+      cursor: pointer;
+      font-size: 1.1em;
+      margin-bottom: 1em;
+      padding: 0.5em 1em;
+    }
+
+    input[type=submit] {
+      background: $green;
+      color: $cold_grey;
+
+      &:hover {
+        background: $blue;
+      }
+
+      &[disabled=disabled] {
+        color: $dark_grey;
+        cursor: default;
+
+        &:hover {
+          background: $green;
+        }
+      }
+    }
+
+    input[type=reset] {
+      background: $dark_grey;
+      color: $darker_grey;
+
+      &:hover {
+        color: $cold_black;
+      }
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    .antSp {
+      display: none;
+    }
+  }
+
+  &.hasError {
+    .hasError:required {
+      border-color: $red;
+    }
+  }
+}
