@@ -44,9 +44,9 @@
   <header>
     <div class="wrapper">
       <?php if($currPage == 'index') { ?>
-      <h1><a href="index.html">beuster{se}</a></h1>
+      <h1><a href="/">beuster{se}</a></h1>
       <?php } else { ?>
-      <span><a href="index.html">beuster{se}</a></span>
+      <span><a href="/">beuster{se}</a></span>
       <?php } ?>
       <nav>
         <menu><?php genMenu(); ?></menu>
