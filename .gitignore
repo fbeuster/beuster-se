@@ -36,5 +36,6 @@ theme/beuster-se-2016/assets/js/*_compiled.js
 theme/beuster-se-2016/assets/js/beusterse.js
 theme/beuster-se-2016/assets/css/*.css
 theme/beuster-se-2016/assets/css/*.css.map
-system/assets/css/admin.css
+system/assets/css/admin/*.css
+system/assets/css/admin/*.css.map
 system/assets/js/admin/admin.js
