@@ -1,0 +1,526 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+body {
+  font-family: 'Roboto', sans-serif; }
+
+h1,
+h2 {
+  font-weight: normal; }
+
+header h1,
+header span {
+  font-family: Monaco, 'Courier New', monospace;
+  color: #f3f9f9;
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.5em 0 0.5em 1em;
+  position: relative; }
+  header h1 a,
+  header span a {
+    color: #f3f9f9;
+    text-decoration: none; }
+
+a.back {
+  color: #0ea86c;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1.5em 0 0 2em; }
+  a.back:hover {
+    color: #1686c6; }
+
+form.userform #btnbold {
+  background-position: 0px -25px; }
+  form.userform #btnbold:hover {
+    background-position: 0px -50px; }
+form.userform #btnitalic {
+  background-position: -25px -25px; }
+  form.userform #btnitalic:hover {
+    background-position: -25px -50px; }
+form.userform #btnunderline {
+  background-position: -50px -25px; }
+  form.userform #btnunderline:hover {
+    background-position: -50px -50px; }
+form.userform #btnmark {
+  background-position: -75px -25px; }
+  form.userform #btnmark:hover {
+    background-position: -75px -50px; }
+form.userform #btndel {
+  background-position: -100px -25px; }
+  form.userform #btndel:hover {
+    background-position: -100px -50px; }
+form.userform #btnins {
+  background-position: -125px -25px; }
+  form.userform #btnins:hover {
+    background-position: -125px -50px; }
+form.userform #btnuber2 {
+  background-position: -150px -25px; }
+  form.userform #btnuber2:hover {
+    background-position: -150px -50px; }
+form.userform #btnuber3 {
+  background-position: -175px -25px; }
+  form.userform #btnuber3:hover {
+    background-position: -175px -50px; }
+form.userform #btnquote {
+  background-position: -200px -25px; }
+  form.userform #btnquote:hover {
+    background-position: -200px -50px; }
+form.userform #btncite {
+  background-position: -225px -25px; }
+  form.userform #btncite:hover {
+    background-position: -225px -50px; }
+form.userform #btnbquote {
+  background-position: -250px -25px; }
+  form.userform #btnbquote:hover {
+    background-position: -250px -50px; }
+form.userform #btnol {
+  background-position: -275px -25px; }
+  form.userform #btnol:hover {
+    background-position: -275px -50px; }
+form.userform #btnul {
+  background-position: -300px -25px; }
+  form.userform #btnul:hover {
+    background-position: -300px -50px; }
+form.userform #btnli {
+  background-position: -325px -25px; }
+  form.userform #btnli:hover {
+    background-position: -325px -50px; }
+form.userform #btncode {
+  background-position: -350px -25px; }
+  form.userform #btncode:hover {
+    background-position: -350px -50px; }
+form.userform #btnpar {
+  background-position: -375px -25px; }
+  form.userform #btnpar:hover {
+    background-position: -375px -50px; }
+form.userform #btnlink {
+  background-position: -400px -25px; }
+  form.userform #btnlink:hover {
+    background-position: -400px -50px; }
+form.userform #btnyt {
+  background-position: -425px -25px; }
+  form.userform #btnyt:hover {
+    background-position: -425px -50px; }
+form.userform #btnplay {
+  background-position: -450px -25px; }
+  form.userform #btnplay:hover {
+    background-position: -450px -50px; }
+form.userform #btnamazon {
+  background-position: -475px -25px; }
+  form.userform #btnamazon:hover {
+    background-position: -475px -50px; }
+form.userform #smsmile {
+  background-position: -500px -25px; }
+  form.userform #smsmile:hover {
+    background-position: -500px -50px; }
+form.userform #smlaugh {
+  background-position: -525px -25px; }
+  form.userform #smlaugh:hover {
+    background-position: -525px -50px; }
+form.userform #smsad {
+  background-position: -550px -25px; }
+  form.userform #smsad:hover {
+    background-position: -550px -50px; }
+form.userform #smone {
+  background-position: -575px -25px; }
+  form.userform #smone:hover {
+    background-position: -575px -50px; }
+form.userform.articleform {
+  margin-top: 0; }
+form.userform .bbDiv {
+  height: 25px;
+  border-bottom: 0; }
+form.userform .bbSpan {
+  background: #e9e9e9 url("../../img/admin/editor.png") no-repeat 0px 0px;
+  display: block;
+  padding-left: 7px;
+  float: left;
+  border-top: 1px solid #e9e9e9; }
+form.userform .bbImg {
+  background: transparent url("../../img/admin/editor.png") no-repeat 0px 0px;
+  width: 25px;
+  height: 25px;
+  padding: 0 !important;
+  margin: 0;
+  box-shadow: 0 0 0;
+  border: 0;
+  float: left; }
+  form.userform .bbImg:hover {
+    cursor: pointer; }
+form.userform .newsNeuHelp {
+  display: none; }
+form.userform select {
+  border: 1px solid #e9e9e9;
+  display: inline-block;
+  padding: 0.5em;
+  width: 15em; }
+form.userform input[type=button] {
+  border: 0;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  background: #e9e9e9;
+  color: #666666; }
+  form.userform input[type=button]:hover {
+    color: #191f1f; }
+
+table.newslist {
+  width: 100%; }
+  table.newslist th.bigNumber {
+    width: 5em; }
+  table.newslist th.date {
+    width: 9em; }
+  table.newslist th.radio {
+    width: 1.5em; }
+  table.newslist th.smallNumber {
+    width: 3em; }
+  table.newslist td, table.newslist th {
+    text-align: left; }
+
+ul.pagesList {
+  list-style: none; }
+  ul.pagesList .groupend {
+    margin-bottom: 1.5em; }
+
+body.article article section.article {
+  background: #f3f9f9;
+  color: #191f1f;
+  line-height: 1.6;
+  margin: 1.5em 0 0 0;
+  padding: 2em; }
+  body.article article section.article .info {
+    color: #666666;
+    display: block;
+    font-size: 0.9em; }
+  body.article article section.article a {
+    color: #1686c6;
+    text-decoration: none; }
+    body.article article section.article a:hover {
+      color: #0ea86c; }
+  body.article article section.article blockquote {
+    background: #e9e9e9;
+    border-left: 2px solid #0ea86c;
+    margin-bottom: 1em;
+    padding: 1em; }
+    body.article article section.article blockquote span {
+      color: #666666;
+      font-size: 0.85em; }
+  body.article article section.article .code {
+    margin-bottom: 1em; }
+    body.article article section.article .code .line {
+      font-family: "Source Code Pro", "Lucida Console", Monaco, 'Courier New', monospace;
+      background: #e9e9e9;
+      color: #191f1f;
+      display: block;
+      font-size: 0.95em;
+      line-height: 1.5;
+      padding: 0 1em 0 0;
+      transition: 0.15s all; }
+      body.article article section.article .code .line:hover {
+        background: #cccccc;
+        cursor: default; }
+      body.article article section.article .code .line .no {
+        background: #cccccc;
+        display: inline-block;
+        margin-right: 0.6em;
+        opacity: 0.7;
+        padding-right: 0.4em;
+        text-align: right;
+        width: 2em; }
+  body.article article section.article del {
+    text-decoration: line-through; }
+  body.article article section.article h1 {
+    font-size: 1.75em; }
+  body.article article section.article h2 {
+    font-size: 1.25em;
+    margin-top: 1em; }
+  body.article article section.article h3 {
+    font-size: 1em;
+    margin-top: 1em; }
+  body.article article section.article .info {
+    margin-bottom: 1em; }
+  body.article article section.article ins {
+    text-decoration: underline; }
+  body.article article section.article ol,
+  body.article article section.article ul {
+    margin-bottom: 1em;
+    margin-left: 2em; }
+    body.article article section.article ol li > ol,
+    body.article article section.article ol li > ul,
+    body.article article section.article ul li > ol,
+    body.article article section.article ul li > ul {
+      margin-bottom: 0; }
+  body.article article section.article p {
+    margin-bottom: 1em; }
+    body.article article section.article p.image {
+      text-align: center; }
+      body.article article section.article p.image img {
+        max-width: 95%; }
+  body.article article section.article .video {
+    max-width: 656px;
+    margin: 0 auto 1.5em auto; }
+    body.article article section.article .video .wrapper {
+      clear: both;
+      float: none;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+      width: 100%; }
+      body.article article section.article .video .wrapper iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%; }
+      body.article article section.article .video .wrapper .embeddedVideo.link {
+        display: none; }
+
+form.userform {
+  margin-top: 3em; }
+  form.userform fieldset {
+    border: 0; }
+    form.userform fieldset legend {
+      color: #0ea86c;
+      font-size: 1.5em;
+      margin-bottom: 0.5em; }
+      form.userform fieldset legend .cancelReply {
+        color: #191f1f;
+        font-size: 0.66em;
+        margin-left: 1em; }
+    form.userform fieldset label {
+      display: block;
+      font-size: 1.05em;
+      margin-bottom: 0.5em; }
+      form.userform fieldset label input,
+      form.userform fieldset label select,
+      form.userform fieldset label textarea {
+        background: #ffffff;
+        vertical-align: baseline; }
+      form.userform fieldset label input,
+      form.userform fieldset label select,
+      form.userform fieldset label textarea {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box; }
+      form.userform fieldset label textarea {
+        font-family: 'Roboto', sans-serif;
+        min-height: 5em;
+        resize: vertical; }
+      form.userform fieldset label.required span:after {
+        content: "*";
+        color: #fe5f55;
+        display: inline-block;
+        margin-left: 0.25em; }
+    form.userform fieldset input[type=reset],
+    form.userform fieldset input[type=submit] {
+      border: 0;
+      cursor: pointer;
+      font-size: 1.1em;
+      margin-bottom: 1em;
+      padding: 0.5em 1em; }
+    form.userform fieldset input[type=submit] {
+      background: #0ea86c;
+      color: #f3f9f9; }
+      form.userform fieldset input[type=submit]:hover {
+        background: #1686c6; }
+      form.userform fieldset input[type=submit][disabled=disabled] {
+        color: #cccccc;
+        cursor: default; }
+        form.userform fieldset input[type=submit][disabled=disabled]:hover {
+          background: #0ea86c; }
+    form.userform fieldset input[type=reset] {
+      background: #cccccc;
+      color: #666666; }
+      form.userform fieldset input[type=reset]:hover {
+        color: #191f1f; }
+    form.userform fieldset p {
+      margin-bottom: 1em; }
+    form.userform fieldset .antSp {
+      display: none; }
+  form.userform.hasError .hasError:required {
+    border-color: #fe5f55; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #e9e9e9; }
+
+header {
+  background: #0ea86c;
+  padding-top: 2em; }
+  header .wrapper {
+    margin: 0 auto; }
+
+@media (max-width: 15.99em) {
+  section.article .thumb img {
+    height: 100%; } }
+@media (min-width: 17.5em) {
+  section.article .thumb img {
+    margin-top: -12.5%; } }
+@media (min-width: 25em) {
+  section.article .thumb img {
+    margin-top: -25%; } }
+@media (max-width: 35em) {
+  article .pager .filler,
+  article .pager .page:not(.current),
+  .content .pager .filler,
+  .content .pager .page:not(.current) {
+    display: none; } }
+@media (max-width: 37.49em) {
+  form.userform label input,
+  form.userform label select,
+  form.userform label textarea {
+    border: 0;
+    display: block;
+    padding: 0.5em 0;
+    width: 100%; }
+  form.userform label input[type=checkbox] {
+    width: auto; }
+  form.userform label span {
+    display: block; }
+  form.userform label textarea {
+    width: 100%; }
+  form.userform input[type=submit] {
+    width: 100%; } }
+@media (min-width: 37.5em) {
+  body > .wrapper {
+    margin: 0 2em; }
+
+  form.userform label input,
+  form.userform label select,
+  form.userform label textarea {
+    border: 1px solid #e9e9e9;
+    display: inline-block;
+    padding: 0.5em;
+    width: 15em; }
+  form.userform label input[type=checkbox] {
+    width: auto; }
+  form.userform label span {
+    display: inline-block;
+    width: 6em; }
+  form.userform label textarea {
+    width: 25em; }
+  form.userform label.long input,
+  form.userform label.long select,
+  form.userform label.long span,
+  form.userform label.long textarea {
+    width: 100%; }
+  form.userform.articleform span {
+    width: 9em; } }
+@media (max-width: 44.99em) {
+  section.article .thumb {
+    height: 7.5em;
+    overflow: hidden;
+    width: 100%; }
+    section.article .thumb img {
+      width: 100%; } }
+@media (min-width: 45em) {
+  nav {
+    height: 2.6em; }
+    nav menu {
+      float: left; }
+    nav li {
+      float: left; }
+    nav .search {
+      float: right; }
+
+  body > .wrapper {
+    clear: both;
+    margin: 0 auto;
+    width: 45em; }
+
+  header > .wrapper {
+    width: 45em; }
+
+  section.article .content {
+    width: 27.5em; }
+
+  section.recommended section.article .content {
+    width: 23.5em; }
+
+  form.userform label textarea {
+    width: 32.5em; } }
+@media (min-width: 60em) {
+  body > .wrapper,
+  header > .wrapper {
+    width: 60em; }
+
+  section.article .content {
+    width: 42.5em; }
+
+  section.recommended section.article .content {
+    width: 38.5em; }
+
+  form.userform label textarea {
+    width: 47.5em; } }
+@media (min-width: 67.5em) {
+  body > .wrapper,
+  header > .wrapper {
+    width: 67.5em; }
+
+  section.article .content {
+    width: 50em; }
+
+  section.recommended section.article .content {
+    width: 46em; }
+
+  form.userform label textarea {
+    width: 55em; } }
+div.wrapper footer {
+  margin-top: 1.5em;
+  text-align: center; }
+  div.wrapper footer div {
+    margin-bottom: 1.5em; }
+  div.wrapper footer .socials {
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    justify-content: center; }
+    div.wrapper footer .socials a {
+      background: url("../../img/admin/sprite.png") 0 0 no-repeat;
+      background-size: auto 3em;
+      cursor: pointer;
+      height: 1.5em;
+      width: 1.5em;
+      color: transparent;
+      display: inline-block;
+      margin: 0 0.75em;
+      overflow: hidden; }
+      div.wrapper footer .socials a.gh {
+        background-position: -3em 0; }
+      div.wrapper footer .socials a.ig {
+        background-position: -6em 0; }
+      div.wrapper footer .socials a.lk {
+        background-position: -7.5em 0; }
+      div.wrapper footer .socials a.tw {
+        background-position: -1.5em 0; }
+      div.wrapper footer .socials a.yt {
+        background-position: -4.5em 0; }
+      div.wrapper footer .socials a:hover.gh {
+        background-position: -3em -1.5em; }
+      div.wrapper footer .socials a:hover.ig {
+        background-position: -6em -1.5em; }
+      div.wrapper footer .socials a:hover.lk {
+        background-position: -7.5em -1.5em; }
+      div.wrapper footer .socials a:hover.tw {
+        background-position: -1.5em -1.5em; }
+      div.wrapper footer .socials a:hover.yt {
+        background-position: -4.5em -1.5em; }
+  div.wrapper footer .links a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 0.5em; }
+    div.wrapper footer .links a:hover {
+      text-decoration: underline; }
+
+/*# sourceMappingURL=styles.css.map */

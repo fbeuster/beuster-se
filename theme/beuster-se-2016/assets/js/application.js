@@ -5,7 +5,6 @@ var beusterse = beusterse || {};
 //@ lib/_jquery
 //@ lib/_i18n
 //@ lib/_utilities
-//@ bbcode
 //@ comment_form
 //@ gallery
 
@@ -14,7 +13,6 @@ $(document).ready(function(){
                 .complete( runApp );
 
   function runApp() {
-    beusterse.bbCode.init();
     beusterse.comment_form.init();
     beusterse.gallery.init();
 

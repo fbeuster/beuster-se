@@ -4,6 +4,7 @@ class AdminPage extends Page {
 
   private $file_name = 'static.php';
   private $id;
+  private $refresh = '';
   private $type = Page::ADMIN_PAGE;
 
   private $title;
@@ -28,6 +29,10 @@ class AdminPage extends Page {
 
   public function getParsedContent() {
     return $this->content;
+  }
+
+  public function getRefreshName() {
+    return $this->refresh;
   }
 
   public function getTitle() {

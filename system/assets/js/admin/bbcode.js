@@ -1,6 +1,6 @@
-/** beuster{se} | (c) 2010-2015 **/
+/** beuster{se} | (c) 2010-2016 **/
 
-beusterse.bbCode = {
+admin.bbCode = {
 
   target : '',
 
@@ -45,21 +45,21 @@ beusterse.bbCode = {
 
       $('#btnyt').click(function(){
         var url = prompt('Videocode eingeben:','');
-        beusterse.bbCode.wrapSelection(beusterse.bbCode.makeEventData('[yt]' + url, '[/yt]'));
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[yt]' + url, '[/yt]'));
       });
       $('#btnplay').click(function(){
         var url = prompt('Playlist-ID eingeben:','');
-        beusterse.bbCode.wrapSelection(beusterse.bbCode.makeEventData('[play]' + url, '[/play]'));
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[play]' + url, '[/play]'));
       });
       $('#btnamazon').click(function(){
         var asin = prompt('ASIN eingeben:','');
-        beusterse.bbCode.wrapSelection(beusterse.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
       });
     }
   },
 
   hasSelected: function() {
-    var target = $(beusterse.bbCode.target)[0];
+    var target = $(admin.bbCode.target)[0];
     return target.selectionStart != target.selectionEnd;
   },
 
@@ -76,7 +76,7 @@ beusterse.bbCode = {
   },
 
   wrapSelection: function(event) {
-    var textArea  = $(beusterse.bbCode.target);
+    var textArea  = $(admin.bbCode.target);
         value     = textArea.val(),
         start     = textArea[0].selectionStart,
         end       = textArea[0].selectionEnd,
@@ -91,9 +91,9 @@ beusterse.bbCode = {
     if(url == 'http://' || url == '')
       return;
 
-    var ext = beusterse.bbCode.hasSelected() ? '' : url;
-    beusterse.bbCode.wrapSelection(
-      beusterse.bbCode.makeEventData(
+    var ext = admin.bbCode.hasSelected() ? '' : url;
+    admin.bbCode.wrapSelection(
+      admin.bbCode.makeEventData(
         '[' + event.data.tag + '=' + url + ']' + ext,
         '[/' + event.data.tag + ']'
       ));

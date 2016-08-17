@@ -1,0 +1,73 @@
+@import '_color';
+
+$icon_width : 1.5em;
+$editor_image : '../../img/admin/editor.png';
+
+@mixin clear_button {
+  background: transparent;
+  border: 0;
+}
+
+@mixin clear_link {
+  color: inherit;
+  text-decoration: none;
+}
+
+@mixin display_flex {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin icon_image {
+  background: url('../../img/admin/sprite.png') 0 0 no-repeat;
+  background-size: auto 2 * $icon_width;
+  cursor: pointer;
+  height: $icon_width;
+  width: $icon_width;
+}
+
+@mixin section_style_info {
+  background: $cold_grey;
+  color: $cold_black;
+  line-height: 1.6;
+  margin: 1.5em 0 0 0;
+  padding: 2em;
+
+  .info {
+    color: $darker_grey;
+    display: block;
+    font-size: 0.9em;
+  }
+}
+
+@mixin editor_buttons {
+  $offset: 0px;
+  $buttons: btnbold, btnitalic, btnunderline, btnmark, btndel, btnins,
+            btnuber2, btnuber3, btnquote, btncite, btnbquote, btnol,
+            btnul, btnli, btncode, btnpar, btnlink, btnyt, btnplay,
+            btnamazon, smsmile, smlaugh, smsad, smone;
+  @each $button in $buttons {
+    ##{$button} {
+      @include editor_position($offset, -25px, $offset, -50px);
+    }
+    $offset: $offset - 25px;
+  }
+}
+
+
+@mixin editor_position($left, $top, $left_hover:'', $top_hover:'') {
+  background-position: $left $top;
+
+  @if $left_hover != '' && $top_hover != '' {
+    &:hover {
+      background-position: $left_hover $top_hover;
+    }
+  }
+}
+
+@mixin editor_sprite($color:transparent, $left:0px, $top:0px) {
+  background: $color url($editor_image) no-repeat $left $top;
+}

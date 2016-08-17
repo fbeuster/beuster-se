@@ -72,6 +72,15 @@ class Lixter {
     return $this->theme;
   }
 
+  public function getSystemFile($filename) {
+    $path = 'system/';
+
+    if (file_exists($path.$filename))
+      return $path.$filename;
+
+    return false;
+  }
+
   /*** PRIVATE ***/
 
   /**

@@ -27,36 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
   <title><?php echo getPageTitle($file); ?></title>
 
-  <link href="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/css/styles.css'); ?>" rel="stylesheet" type="text/css" media="screen">
+  <link href="/<?php echo Lixter::getLix()->getSystemFile('assets/css/admin/styles.css'); ?>" rel="stylesheet" type="text/css" media="screen">
 
   <!-- wanna play javascript? -->
-  <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/js/beusterse.js'); ?>"></script>
+  <script type="text/javascript" src="/<?php echo Lixter::getLix()->getSystemFile('assets/js/admin/admin.js'); ?>"></script>
 
-  <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
-  <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/js/scriptAdm.js'); ?>"></script>
-  <?php } ?>
-
-  <?php if($page->getType() == Page::CONTENT_PAGE && $page->getRefreshName() !== '') {
+  <?php if($page->getRefreshName() !== '') {
     echo '<meta http-equiv="refresh" content="3; url=/'.$page->getRefreshName().'">';
   } ?>
  </head>
  <body class="<?php echo makeBodyClass($currPage); ?>">
   <header>
     <div class="wrapper">
-      <?php if($currPage == 'index') { ?>
-      <h1><a href="index.html">beuster{se}</a></h1>
-      <?php } else { ?>
-      <span><a href="index.html">beuster{se}</a></span>
-      <?php } ?>
-      <nav>
-        <menu><?php genMenu(); ?></menu>
-        <div class="search">
-          <form action="/search" method="post">
-            <input type="text" placeholder="Search for..." name="s">
-            <input type="submit" value="" alt="search" name="search">
-          </form>
-        </div>
-      </nav>
+      <span><a href="/">beuster{se}</a></span>
     </div>
   </header>
   <div class="wrapper">

@@ -1,4 +1,19 @@
-$(document).ready(function() {
+/** beuster{se} | (c) 2010-2016 **/
+
+var admin = admin || {};
+
+//@ lib/_jquery
+//@ lib/_i18n
+//@ lib/_utilities
+//@ bbcode
+
+$(document).ready(function(){
+  admin.i18n.init()
+                .complete( runApp );
+
+  function runApp() {
+    admin.bbCode.init();
+
     $('#allDel').bind('click',function(event){
         $('.del').attr('checked', 'checked');
     });
@@ -38,4 +53,5 @@ $(document).ready(function() {
             });
         });
     }
+  }
 });
