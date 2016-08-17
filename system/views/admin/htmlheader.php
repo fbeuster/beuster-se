@@ -36,7 +36,7 @@
     echo '<meta http-equiv="refresh" content="3; url=/'.$page->getRefreshName().'">';
   } ?>
  </head>
- <body class="<?php echo makeBodyClass($currPage); ?>">
+ <body class="article">
   <header>
     <div class="wrapper">
       <span><a href="/">beuster{se}</a></span>

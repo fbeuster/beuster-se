@@ -1,45 +1,5 @@
 @import 'lib/_color';
 
-@media(max-width: 15.99em){
-  section.article {
-    .thumb {
-      img {
-        height: 100%;
-      }
-    }
-  }
-}
-
-@media(min-width: 17.5em) {
-  section.article {
-    .thumb {
-      img {
-        margin-top: -12.5%;
-      }
-    }
-  }
-}
-
-@media(min-width: 25em) {
-  section.article {
-    .thumb {
-      img {
-        margin-top: -25%;
-      }
-    }
-  }
-}
-
-@media(max-width: 35em) {
-  article .pager,
-  .content .pager {
-    .filler,
-    .page:not(.current) {
-      display: none;
-    }
-  }
-}
-
 @media(max-width: 37.49em) {
   form.userform {
     label {
@@ -118,37 +78,7 @@
   }
 }
 
-@media(max-width: 44.99em) {
-  section.article {
-    .thumb {
-      height: 7.5em;
-      overflow: hidden;
-      width: 100%;
-
-      img {
-        width: 100%;
-      }
-    }
-  }
-}
-
-
 @media(min-width: 45em) {
-  nav {
-    height: 2.6em;
-
-    menu {
-      float: left;
-    }
-
-    li {
-      float: left;
-    }
-
-    .search {
-      float: right;
-    }
-  }
 
   body > .wrapper {
     clear: both;
@@ -160,54 +90,9 @@
     width: 45em;
   }
 
-  // body.category {
-  //   section.article {
-  //     @include display_flex;
-
-  //     border-left: $article_border_width solid $light_grey;
-
-  //     &:hover {
-  //       border-left: $article_border_width solid $blue;
-  //     }
-
-  //     .content {
-  //       order: 1;
-  //     }
-
-  //     .thumb {
-  //       order: 2;
-  //       overflow: hidden;
-  //       width: 13.3em;
-
-  //       // img {
-  //       //   height: 100%;
-  //       //   margin-top: 0;
-  //       //   width: 100%;
-  //       // }
-
-  //       position: relative;
-
-  //       img {
-  //         height: 100%;
-  //         margin-top: 0;
-  //         position: absolute;
-  //         right: -33%;
-  //       }
-  //     }
-  //   }
-  // }
-
   section.article {
     .content {
       width: 27.5em;
-    }
-  }
-
-  section.recommended {
-    section.article {
-      .content {
-        width: 23.5em;
-      }
     }
   }
 
@@ -232,14 +117,6 @@
     }
   }
 
-  section.recommended {
-    section.article {
-      .content {
-        width: 38.5em;
-      }
-    }
-  }
-
   form.userform {
     label {
       textarea {
@@ -258,14 +135,6 @@
   section.article {
     .content {
       width: 50em;
-    }
-  }
-
-  section.recommended {
-    section.article {
-      .content {
-        width: 46em;
-      }
     }
   }
 
