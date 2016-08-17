@@ -1,8 +1,9 @@
 <?php
 
 abstract class Page {
-  const STATIC_PAGE  = 1;
-  const CONTENT_PAGE = 2;
+  const STATIC_PAGE   = 1;
+  const CONTENT_PAGE  = 2;
+  const ADMIN_PAGE    = 3;
 
   public function __construct() {
   }

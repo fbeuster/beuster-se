@@ -55,7 +55,13 @@ class Lixter {
   public function run() {
     $this->loadPage();
     $this->loadTheme();
-    $this->buildContent();
+
+    if ($this->page->getType() == Page::ADMIN_PAGE) {
+      $this->buildAdmin();
+
+    } else {
+      $this->buildContent();
+    }
   }
 
   public function getPage() {
@@ -138,7 +144,12 @@ class Lixter {
       if (isset($_GET['p'])) {
         # page argument found
 
-        if (StaticPage::exists($_GET['p'])) {
+        if (AdminPage::exists($_GET['p'])) {
+          # page argument is admin page
+          $this->page = new AdminPage($_GET['p']);
+
+        } else if (StaticPage::exists($_GET['p'])) {
+        // if (StaticPage::exists($_GET['p'])) {
           # page argument is static page
           $this->page = new StaticPage($_GET['p']);
 
@@ -169,6 +180,34 @@ class Lixter {
 
   private function loadTheme() {
     $this->theme = new Theme( Config::getConfig()->get('theme') );
+  }
+
+  private function buildAdmin() {
+    global $file, $noGA;
+
+    setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
+
+    $pageType = $this->page->getPageClass();
+    $currPage = getPage();
+
+    include('system/views/admin/functions.php');
+    include('system/views/admin/htmlheader.php');
+    if (Utilities::isDevServer()) include('settings/analyse.php');
+    include('system/views/admin/htmlwarning.php');
+
+    $file = 'system/views/admin/' . $this->page->getFilename();
+
+    if ($file !== false) {
+      $data = $this->page->getContent();
+      include $file;
+
+    } else {
+      $this->page = new ErrorPage( I18n::t('lixter.build.template_not_found', array($file)) );
+      include $this->theme->getFile('static.php');
+    }
+
+    include('system/views/admin/htmlaside.php');
+    include('system/views/admin/htmlfooter.php');
   }
 
   /**
