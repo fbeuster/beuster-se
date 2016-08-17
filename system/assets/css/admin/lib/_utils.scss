@@ -21,14 +21,6 @@ $editor_image : '../../img/admin/editor.png';
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
-@mixin icon_image {
-  background: url('../../img/admin/sprite.png') 0 0 no-repeat;
-  background-size: auto 2 * $icon_width;
-  cursor: pointer;
-  height: $icon_width;
-  width: $icon_width;
-}
-
 @mixin section_style_info {
   background: $cold_grey;
   color: $cold_black;

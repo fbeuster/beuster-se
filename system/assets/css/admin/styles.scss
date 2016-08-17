@@ -16,33 +16,6 @@ div.wrapper footer {
     margin-bottom: 1.5em;
   }
 
-  .socials {
-    @include display_flex;
-    justify-content: center;
-
-    a {
-      @include icon_image;
-      color: transparent;
-      display: inline-block;
-      margin: 0 $icon_width / 2;
-      overflow: hidden;
-
-      &.gh { background-position: -2 * $icon_width 0;}
-      &.ig { background-position: -4 * $icon_width 0;}
-      &.lk { background-position: -5 * $icon_width 0;}
-      &.tw { background-position: -1 * $icon_width 0;}
-      &.yt { background-position: -3 * $icon_width 0;}
-
-      &:hover {
-        &.gh { background-position: -2 * $icon_width -1 * $icon_width;}
-        &.ig { background-position: -4 * $icon_width -1 * $icon_width;}
-        &.lk { background-position: -5 * $icon_width -1 * $icon_width;}
-        &.tw { background-position: -1 * $icon_width -1 * $icon_width;}
-        &.yt { background-position: -3 * $icon_width -1 * $icon_width;}
-      }
-    }
-  }
-
   .links {
     a {
       @include clear_link;
