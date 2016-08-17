@@ -15,7 +15,7 @@
     </p>
   <?php } ?>
 
-    <form action="/newsbea" method="post" class="userform articleform">
+    <form action="/newsedit" method="post" class="userform articleform">
       <fieldset>
         <legend>News-Einträge bearbeiten</legend>
         <label class="required long">
@@ -35,14 +35,14 @@
 
         <label>
           <span>Manuelle Freigabe</span>
-          <input type="checkbox" name="enable" <?php echo isset($data['newsbea']) && $data['newsbea']['newsena'] == 0 ? ' checked="checked"' : ''; ?>>
+          <input type="checkbox" name="enable" <?php echo isset($data['newsedit']) && $data['newsedit']['newsena'] == 0 ? ' checked="checked"' : ''; ?>>
         </label>
 
         <?php
-          if(isset($data['newsbea'])) {
-            $newsbea = $data['newsbea'];
+          if(isset($data['newsedit'])) {
+            $newsedit = $data['newsedit'];
           } else {
-            $newsbea = array( 'newstitel' => '',
+            $newsedit = array( 'newstitel' => '',
                               'newsinhalt' => '',
                               'newsidbea' => '',
                               'newstags' => '');
@@ -51,17 +51,17 @@
 
         <label class="required long">
           <span>Titel</span>
-          <input type="text" name="newstitel" value="<?php if($e) echo $data['err']['titel']; else echo $newsbea['newstitel']; ?>" role="newEntryTitle" placeholder="Titel des Blogeintrags">
+          <input type="text" name="newstitel" value="<?php if($e) echo $data['err']['titel']; else echo $newsedit['newstitel']; ?>" role="newEntryTitle" placeholder="Titel des Blogeintrags">
         </label>
 
-        <input type="hidden" name="newsid2" size="3" value="<?php if($e) echo $data['err']['titel']; else echo $newsbea['newsidbea']; ?>">
+        <input type="hidden" name="newsid2" size="3" value="<?php if($e) echo $data['err']['titel']; else echo $newsedit['newsidbea']; ?>">
 
         <label class="required">
           <span>Kategorie</span>
           <select name="cat" class="catSelect">
             <option value="error">Kategorie wählen...</option>
             <?php foreach($data['cats'] as $cat) {
-                    if(!$newsbea['isPlaylist'] && $newsbea['newscat'] == $cat) {
+                    if(!$newsedit['isPlaylist'] && $newsedit['newscat'] == $cat) {
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
@@ -91,7 +91,7 @@
           <select name="pl">
             <option value="error">Playlist wählen...</option>
             <?php foreach($data['pls'] as $pl) {
-                    if($newsbea['isPlaylist'] && $newsbea['newscat'] == $pl) {
+                    if($newsedit['isPlaylist'] && $newsedit['newscat'] == $pl) {
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
@@ -105,11 +105,11 @@
 
         <label class="long">
           <span>Tags</span>
-          <input type="text" name="tags" title="Tags für den Artikel" value="<?php echo $newsbea['newstags']; ?>" role="newEntryTags" placeholder="Tag (durch Komma trennen)">
+          <input type="text" name="tags" title="Tags für den Artikel" value="<?php echo $newsedit['newstags']; ?>" role="newEntryTags" placeholder="Tag (durch Komma trennen)">
         </label>
 
-        <p class="newsNeuHelp">
-          <span class="newsNeuProj" style="display: none;">
+        <p class="newsNewHelp">
+          <span class="newsNewProj" style="display: none;">
             <br>
             <label class="alert description">Projektstatus</label>
             <select name="projStat" class="projChoose" disabled="disabled">
@@ -121,7 +121,7 @@
             </select>
           </span>
           <br>
-          <span class="newsNeuHelpPort">
+          <span class="newsNewHelpPort">
             Syntax für Portfolioeintrag:<br>
             Gruppenname###ID/Dateiname###Infotext<br><br>
           </span>
@@ -130,7 +130,7 @@
         <label class="required long">
           <span>Inhalt</span>
           <?php
-            $content  = $e ? $data['err']['inhalt'] : $newsbea['newsinhalt'];
+            $content  = $e ? $data['err']['inhalt'] : $newsedit['newsinhalt'];
             $editor   = new Editor('newsinhalt', 'newsinhalt', $content);
             $editor->show();
           ?>

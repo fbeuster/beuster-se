@@ -5,7 +5,7 @@
   <?php if(isset($data['fe'])){ ?>
     <p>Es ist ein Fehler aufgetreten! Typenummer: <?php echo $data['fe']['t']; ?></p>
   <?php } ?>
-    <form action="/newsneu" method="post" enctype="multipart/form-data" class="userform articleform">
+    <form action="/newsnew" method="post" enctype="multipart/form-data" class="userform articleform">
       <fieldset>
         <legend>Neuen News-Eintrag verfassen</legend>
         <label class="required long">
@@ -61,8 +61,8 @@
           <input type="text" name="tags" title="Tags für den Artikel" role="newEntryTags" placeholder="Tag (durch Komma trennen)">
         </label>
 
-        <p class="newsNeuHelp">
-          <span class="newsNeuProj" style="display: none;">
+        <p class="newsNewHelp">
+          <span class="newsNewProj" style="display: none;">
             <br>
             <label class="description alert">Projektstatus</label>
             <select name="projStat" class="projChoose drop200" disabled="disabled">
@@ -74,7 +74,7 @@
             </select>
           </span>
           <br>
-          <span class="newsNeuHelpPort">
+          <span class="newsNewHelpPort">
             Syntax für Portfolioeintrag:<br>
             Gruppenname###ID/Dateiname###Infotext<br><br>
           </span>

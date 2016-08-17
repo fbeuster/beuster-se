@@ -16,17 +16,5 @@
         </div>
       </footer>
     </div>
-
-    <div class="lightbox">
-      <div class="wrapper">
-        <div class="image">
-          <img src="/images/spacer.gif" alt="" id="imgViewport">
-        </div>
-        <div class="text">
-          <span class="decription">Ich bin ein Test.</span>
-          <span class="close">Close</span>
-        </div>
-      </div>
-    </div>
   </body>
 </html>

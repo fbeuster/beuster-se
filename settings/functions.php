@@ -72,7 +72,7 @@
         $xml->save($feedURL);*/
     }
 
-    function analyseErrNewsBea($err) {
+    function analyseErrNewsEdit($err) {
         $ret = '';
         switch($err) {
             case 0: return 'Ist doch alles okay?';

@@ -16,7 +16,7 @@ class AdminPage extends Page {
   }
 
   public static function exists($id) {
-    return file_exists('admin/'.$id.'.php') && file_exists('system/views/admin/'.$id.'.php');
+    return file_exists('lix-admin/'.$id.'.php') && file_exists('system/views/admin/'.$id.'.php');
   }
 
   public function getContent() {
@@ -45,7 +45,7 @@ class AdminPage extends Page {
 
   private function loadPage() {
     global $file;
-    $data = include 'admin/'.$this->id.'.php';
+    $data = include 'lix-admin/'.$this->id.'.php';
 
     if(!isset($data['data'], $data['filename']))
       return;

@@ -34,15 +34,15 @@ $(document).ready(function(){
         $('.adImg img').attr('src', $(this).attr('src').replace('.jpg', '').replace('_', '.').replace('blog/thid', 'blog/id'));
     });
     $('.catSelect').change(function() {
-        $('.newsNeuHelpPort').css('display','none');
-        $('.newsNeuProj').css('display','none');
+        $('.newsNewHelpPort').css('display','none');
+        $('.newsNewProj').css('display','none');
         $('.projChoose').attr('disabled', 'disabled');
         var opt = $('.catSelect option:selected').text();
         if(opt == 'Portfolio') {
-            $('.newsNeuHelpPort').css('display','block');
+            $('.newsNewHelpPort').css('display','block');
         }
         if(opt == 'Projekte') {
-            $('.newsNeuProj').css('display','block');
+            $('.newsNewProj').css('display','block');
             $('.projChoose').removeAttr('disabled');
         }
     });

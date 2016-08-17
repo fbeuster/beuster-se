@@ -21,24 +21,24 @@
         <input type="submit" name="formactionchoose" value="Gewählten Blogeintrag löschen..." />
         <br />
         <?php
-          if(isset($data['newsbea'])) {
-            $newsbea = $data['newsbea'];
+          if(isset($data['newsedit'])) {
+            $newsedit = $data['newsedit'];
           } else {
-            $newsbea = array( 'newstitel' => '',
+            $newsedit = array( 'newstitel' => '',
                               'newsinhalt' => '',
                               'newsidbea' => '');
           }
         ?>
         <label class="long">
           <span>Titel</span>
-          <input type="text" name="newstitel" value="<?php echo $newsbea['newstitel']; ?>" readonly />
+          <input type="text" name="newstitel" value="<?php echo $newsedit['newstitel']; ?>" readonly />
         </label>
 
-        <input type="hidden" name="newsid2" size="3" value="<?php echo $newsbea['newsidbea']; ?>" />
+        <input type="hidden" name="newsid2" size="3" value="<?php echo $newsedit['newsidbea']; ?>" />
 
         <label class="long">
           <span>Inhalt</span>
-          <textarea name="newsinhalt" id="newsinhalt" cols="80" rows="20" readonly ><?php echo $newsbea['newsinhalt']; ?></textarea>
+          <textarea name="newsinhalt" id="newsinhalt" cols="80" rows="20" readonly ><?php echo $newsedit['newsinhalt']; ?></textarea>
         </label>
 
         <input type="submit" name="formactiondel" value="Blogeintrag löschen" />

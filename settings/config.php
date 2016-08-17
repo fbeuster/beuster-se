@@ -1,7 +1,7 @@
 <?php
 $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
               'login', 'logout',
-              'newsbea', 'newsneu', 'newsdel', 'newsoverview',
+              'newsedit', 'newsnew', 'newsdel', 'newsoverview',
               'snippetnew', 'snippetedit', 'snippetdelete',
               'stats', 'userdata');
 
@@ -15,8 +15,8 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
   'logout'          => array("logout.php",          "Logout"),
   'admin'           => array("admin.php",           "AdminCP"),
   'aboutAuthor'     => array("aboutMod.php",        "Über den Autor"),
-  'newsneu'         => array("newsneu.php",         "AdminCP - Neue News verfassen"),
-  'newsbea'         => array("newsbea.php",         "AdminCP - News überarbeiten"),
+  'newsnew'         => array("newsnew.php",         "AdminCP - Neue News verfassen"),
+  'newsedit'        => array("newsedit.php",         "AdminCP - News überarbeiten"),
   'newsdel'         => array("newsdel.php",         "AdminCP - News löschen"),
   'newsoverview'    => array("newsoverview.php",    "AdminCP - Newsübersicht"),
   'stats'           => array("stats.php",           "AdminCP - Statistiken"),

@@ -3,7 +3,7 @@
     $user = User::newFromCookie();
     if ($user && $user->isAdmin()) {
         refreshCookies();
-        $a['filename'] = 'newsneu.php';
+        $a['filename'] = 'newsnew.php';
         $a['data'] = array();
         $err = 0;
         $neu = 0;

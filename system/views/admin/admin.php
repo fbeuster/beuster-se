@@ -4,8 +4,8 @@
     <h1>Adminbereich</h1>
     <ul class="pagesList">
       <li><a href="/newsoverview">Newsübersicht</a></li>
-      <li><a href="/newsneu">Neue News verfassen</a></li>
-      <li><a href="/newsbea">News editieren</a></li>
+      <li><a href="/newsnew">Neue News verfassen</a></li>
+      <li><a href="/newsedit">News editieren</a></li>
       <li class="groupend"><a href="/newsdel">News löschen</a></li>
 
       <li><a href="/admincat">Kategorien verwalten</a></li>
@@ -18,7 +18,7 @@
       <li><a href="/snippetedit">Snippet bearbeiten</a></li>
       <li class="groupend"><a href="/snippetdelete">Snippet löschen</a></li>
 
-      <li><a href="/admin/stats">Statistiken</a></li>
+      <li><a href="/stats">Statistiken</a></li>
       <li class="groupend"><a href="/userdata">Daten ändern</a></li>
 
       <li><a href="/logout">Logout</a></li>

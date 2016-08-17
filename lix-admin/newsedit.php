@@ -3,7 +3,7 @@
     $user = User::newFromCookie();
     if ($user && $user->isAdmin()) {
         refreshCookies();
-        $a['filename'] = 'newsbea.php';
+        $a['filename'] = 'newsedit.php';
         $a['data'] = array();
         $err = 0;
         $neu = 0;
@@ -339,10 +339,10 @@
                                     $lnk);
                     }
 
-                    return showInfo('Die News wurde geändert. <br /><a href="/newsbea" class="back">Zurück zum Bearbeiten</a>', 'newsbea');
+                    return showInfo('Die News wurde geändert. <br /><a href="/newsedit" class="back">Zurück zum Bearbeiten</a>', 'newsedit');
                 } else {
                     $a['data']['err'] = $eRet;
-                    $a['data']['err']['type'] = analyseErrNewsBea($err);
+                    $a['data']['err']['type'] = analyseErrNewsEdit($err);
                 }
             } else if(isset($_POST['formactionchoose'])) {
                 $id = trim($_POST['newsid']);
@@ -367,9 +367,9 @@
                 $stmt->bind_param('i', $id);
                 if(!$stmt->execute()) {return $stmt->error;}
                 $stmt->bind_result($newstitel, $newsinhalt, $newsena, $newscat, $newscatid);
-                if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsbea" class="back">Zurück zum Bearbeiten</a>';}
+                if(!$stmt->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/newsedit" class="back">Zurück zum Bearbeiten</a>';}
                 $stmt->close();
-                $a['data']['newsbea'] = array(
+                $a['data']['newsedit'] = array(
                                             'newsidbea'     => $id,
                                             'newsinhalt'    => Parser::parse($newsinhalt, Parser::TYPE_EDIT),
                                             'newstitel'     => Parser::parse($newstitel, Parser::TYPE_EDIT),

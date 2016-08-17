@@ -58,7 +58,7 @@
 
         if($err != 0) {
           $a['data']['err'] = $eRet;
-          $a['data']['err']['type'] = analyseErrNewsBea($err);
+          $a['data']['err']['type'] = analyseErrNewsEdit($err);
 
         } else {
           return showInfo('Das Snippet wurde geändert. <br /><a href="/snippetedit" class="back">Zurück zum Bearbeiten</a>', 'snippetedit');
