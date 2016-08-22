@@ -20,27 +20,35 @@
       "article" : {
         "delete" : "Delete article",
         "edit" : "Edit article",
+        "label" : "Articles",
         "new" : "New article",
         "overview" : "Article overview"
       },
       "category" : {
+        "label" : "Categories",
         "manage" : "Manage categories"
       },
       "comment" : {
-        "enable" : "Enable comments"
+        "enable" : "Enable comments",
+        "label" : "Comments"
       },
       "download" : {
         "delete" : "Delete download",
+        "label" : "Downloads",
         "new" : "New download"
       },
-      "logout" : "Logout",
+      "misc" : {
+        "label" : "Miscellanious",
+        "logout" : "Logout",
+        "settings" : "Settings",
+        "stats" : "View statistics"
+      },
       "snippet" : {
         "delete" : "Delete snippet",
         "edit" : "Edit snippet",
+        "label" : "Snippets",
         "new" : "New snippet"
-      },
-      "settings" : "Settings",
-      "stats" : "View statistics"
+      }
     }
   },
   "database" : {

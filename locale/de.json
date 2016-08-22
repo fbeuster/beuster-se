@@ -20,27 +20,35 @@
       "article" : {
         "delete" : "Artikel löschen",
         "edit" : "Artikel bearbeiten",
+        "label" : "Artikel",
         "new" : "Artikel erstellen",
         "overview" : "Artikelübersicht"
       },
       "category" : {
+        "label" : "Kategorien",
         "manage" : "Kategorien verwalten"
       },
       "comment" : {
-        "enable" : "Kommentare freischalten"
+        "enable" : "Kommentare freischalten",
+        "label" : "Kommentare"
       },
       "download" : {
         "delete" : "Download löschen",
+        "label" : "Downloads",
         "new" : "Download erstellen"
       },
-      "logout" : "Logout",
+      "misc" : {
+        "label" : "Sonstiges",
+        "logout" : "Logout",
+        "settings" : "Einstellungen",
+        "stats" : "Statistiken ansehen"
+      },
       "snippet" : {
         "delete" : "Snippet löschen",
         "edit" : "Snippet bearbeiten",
+        "label" : "Snippets",
         "new" : "Snippet erstellen"
-      },
-      "settings" : "Einstellungen",
-      "stats" : "Statistiken ansehen"
+      }
     }
   },
   "database" : {
