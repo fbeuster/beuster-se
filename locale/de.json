@@ -15,6 +15,7 @@
     "invalid_username" : "%s ist kein Autor auf diesem Blog."
   },
   "admin" : {
+    "back_link" : "< Zurück zur Seitenverwaltung",
     "label" : "Seitenverwaltung",
     "navigation" : {
       "article" : {
@@ -50,7 +51,29 @@
         "new" : "Snippet erstellen"
       }
     },
-    "no_access" : "Sie haben hier keine Zugriffsrechte."
+    "no_access" : "Du hast hier keine Zugriffsrechte.",
+    "not_logged_in" : "Du bist nicht eingeloggt.",
+    "stats" : {
+      "downloads_table" : {
+        "label" : "Downloads",
+        "header" : {
+          "downloads" : "Downloads",
+          "file" : "Datei"
+        }
+      },
+      "label" : "Seitenstatistiken",
+      "rankings_table" : {
+        "last_label" : "Artikelranking (Letzten 10 Artikel)",
+        "top_label" : "Artikelranking (Top 10 Artikel)",
+        "header" : {
+          "article" : "Artikel",
+          "date" : "Datum",
+          "hits" : "Hits",
+          "hits_per_day" : "Hits/Tag"
+        }
+      }
+    },
+    "try_again" : "Erneut versuchen."
   },
   "database" : {
     "fields" : {

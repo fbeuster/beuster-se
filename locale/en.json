@@ -15,6 +15,7 @@
     "invalid_username" : "%s is not an author on this blog."
   },
   "admin" : {
+    "back_link" : "< Back to page administration",
     "label" : "Page administration",
     "navigation" : {
       "article" : {
@@ -50,7 +51,29 @@
         "new" : "New snippet"
       }
     },
-    "no_access" : "You have no access to this page."
+    "no_access" : "You have no access to this page.",
+    "not_logged_in" : "You're not logged in.",
+    "stats" : {
+      "label" : "Page statistics",
+      "downloads_table" : {
+        "label" : "Downloads",
+        "header" : {
+          "downloads" : "Downloads",
+          "file" : "File"
+        }
+      },
+      "rankings_table" : {
+        "last_label" : "Article ranking (Last 10 articles)",
+        "top_label" : "Article ranking (Top 10 articles)",
+        "header" : {
+          "article" : "Article",
+          "date" : "Date",
+          "hits" : "Hits",
+          "hits_per_day" : "Hits/day"
+        }
+      }
+    },
+    "try_again" : "Try again."
   },
   "database" : {
     "fields" : {
