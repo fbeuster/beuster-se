@@ -46,9 +46,10 @@
       $compiled .= "<?php class I18n {\n";
       $compiled .= $this->compileArray($this->lang_array);
       $compiled .= 'public static function t($string, $args = null) {' . "\n";
+      $compiled .= '  $orig = $string;' . "\n";
       $compiled .= '  $string = str_replace(".", "§", $string);' . "\n";
       $compiled .= '  if(constant("self::" . $string) === null) {' . "\n";
-      $compiled .= '    return "Missing translation for \'$string\'";' . "\n";
+      $compiled .= '    return "Missing translation for \'$orig\'";' . "\n";
       $compiled .= "  }\n";
       $compiled .= '  if($args === null) {' . "\n";
       $compiled .= '    return constant("self::" . $string);' . "\n";
