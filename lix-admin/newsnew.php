@@ -349,7 +349,7 @@
 
                         // RSS-Eintrag
                         if($ena && isset($rssFeedPath) && $catID !== getCatID('Portfolio')) {
-                            $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
+                            $lnk = 'http://'.Utilities::getSystemAddress().getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,
                                         str_replace('###link###', $lnk, Parser::parse($inhalt, Parser::TYPE_PREVIEW)),

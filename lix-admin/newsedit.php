@@ -325,12 +325,15 @@
 
                     /* add to RSS */
                     if($ena && !$oldEna) {
+                        $lnk = 'http://'.Utilities::getSystemAddress();
+
                         if($neu) {
-                            $lnk = 'http://beusterse.de'.getLink($catNeu, $newsID, $title);
+                            $lnk = $lnk.getLink($catNeu, $newsID, $title);
+
                         } else {
-                            $lnk = 'http://beusterse.de'.getLink(getCatName($cat), $newsID, $title);
+                            $lnk = $lnk.getLink(getCatName($cat), $newsID, $title);
                         }
-                        $lnk = 'http://beusterse.de'.getLink($cat, $id, $title);
+
                         addRssItem( $rssFeedPath,
                                     $title,
                                     str_replace('###link###', $lnk, Parser::parse($inhalt, Parser::TYPE_PREVIEW)),
