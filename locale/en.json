@@ -16,6 +16,11 @@
   },
   "admin" : {
     "back_link" : "< Back to page administration",
+    "footer" : {
+      "cms" : "Lixter CMS by Felix Beuster",
+      "copy" : "&copy; Copyright 2010 - 2016",
+      "runs_with" : "Runs with"
+    },
     "label" : "Page administration",
     "navigation" : {
       "article" : {

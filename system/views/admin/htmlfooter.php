@@ -1,12 +1,10 @@
 
       <footer>
         <div class="links">
-          <a href="http://fixel.me">Lixter CMS by Felix Beuster</a>
+          <?php echo I18n::t('admin.footer.runs_with'); ?>
+          <a href="http://fixel.me"><?php echo I18n::t('admin.footer.cms'); ?></a>
+          <?php echo I18n::t('admin.footer.copy'); ?>
         </div>
-        <div class="copy">
-          &copy; Copyright 2010 - 2016 Felix Beuster
-        </div>
-      </footer>
     </div>
   </body>
 </html>

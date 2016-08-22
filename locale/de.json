@@ -16,6 +16,11 @@
   },
   "admin" : {
     "back_link" : "< Zurück zur Seitenverwaltung",
+    "footer" : {
+      "cms" : "Lixter CMS von Felix Beuster",
+      "copy" : "&copy; Copyright 2010 - 2016",
+      "runs_with" : "Läuft mit"
+    },
     "label" : "Seitenverwaltung",
     "navigation" : {
       "article" : {
