@@ -14,6 +14,35 @@
     "no_username" : "Nach wem suchst du?",
     "invalid_username" : "%s ist kein Autor auf diesem Blog."
   },
+  "admin" : {
+    "label" : "Seitenverwaltung",
+    "navigation" : {
+      "article" : {
+        "delete" : "Artikel löschen",
+        "edit" : "Artikel bearbeiten",
+        "new" : "Artikel erstellen",
+        "overview" : "Artikelübersicht"
+      },
+      "category" : {
+        "manage" : "Kategorien verwalten"
+      },
+      "comment" : {
+        "enable" : "Kommentare freischalten"
+      },
+      "download" : {
+        "delete" : "Download löschen",
+        "new" : "Download erstellen"
+      },
+      "logout" : "Logout",
+      "snippet" : {
+        "delete" : "Snippet löschen",
+        "edit" : "Snippet bearbeiten",
+        "new" : "Snippet erstellen"
+      },
+      "settings" : "Einstellungen",
+      "stats" : "Statistiken ansehen"
+    }
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields ist leer."

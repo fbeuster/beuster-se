@@ -14,6 +14,35 @@
     "no_username" : "Are you looking for somebody?",
     "invalid_username" : "%s is not an author on this blog."
   },
+  "admin" : {
+    "label" : "Page administration",
+    "navigation" : {
+      "article" : {
+        "delete" : "Delete article",
+        "edit" : "Edit article",
+        "new" : "New article",
+        "overview" : "Article overview"
+      },
+      "category" : {
+        "manage" : "Manage categories"
+      },
+      "comment" : {
+        "enable" : "Enable comments"
+      },
+      "download" : {
+        "delete" : "Delete download",
+        "new" : "New download"
+      },
+      "logout" : "Logout",
+      "snippet" : {
+        "delete" : "Delete snippet",
+        "edit" : "Edit snippet",
+        "new" : "New snippet"
+      },
+      "settings" : "Settings",
+      "stats" : "View statistics"
+    }
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields are empty."
