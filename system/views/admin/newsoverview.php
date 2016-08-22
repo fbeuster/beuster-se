@@ -1,21 +1,24 @@
 
 <article>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
   <section class="article">
-  	<h1>Artikelübersicht</h1>
+  	<h1><?php echo I18n::t('admin.article.overview.label'); ?></h1>
   	<p>
-  		Insgesamt wurden <?php echo count($data['news']); ?> Artikel
-      und <?php echo $data['cmtAmount']; ?> Kommentare verfasst. <?php echo $data['enaAmount']; ?> Artikel warten noch auf Freischaltung.
+      <?php echo I18n::t('admin.article.overview.summary', array(
+        count($data['news']),
+        $data['cmtAmount'],
+        $data['enaAmount']
+      )); ?>
   	</p>
     <table class="newslist">
       <thead>
         <tr>
           <th class="smallNumber">#</th>
-          <th class="smallNumber">ID</th>
-          <th class="date">Datum</th>
-          <th class="bigNumber">Hits</th>
-          <th class="bigNumber">Hits/d</th>
-          <th>Artikel</th>
+          <th class="smallNumber"><?php echo I18n::t('admin.article.overview.table_header.id'); ?></th>
+          <th><?php echo I18n::t('admin.article.overview.table_header.article'); ?></th>
+          <th class="bigNumber"><?php echo I18n::t('admin.article.overview.table_header.hits'); ?></th>
+          <th class="bigNumber"><?php echo I18n::t('admin.article.overview.table_header.hits_per_day'); ?></th>
+          <th class="date"><?php echo I18n::t('admin.article.overview.table_header.date'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -26,10 +29,10 @@
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?>>
           <td ><?php echo ($i+1); ?></td>
           <td ><?php echo $entry['id']; ?></td>
-          <td ><?php echo $entry['date']; ?></td>
+          <td><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
           <td ><?php echo $entry['hits']; ?></td>
-          <td ><?php echo $entry['hitsPerDay']; ?></td>
-          <td><a href="<?php echo $entry['Link']; ?>"><?php echo $entry['Titel']; ?></a></td>
+          <td ><?php echo $entry['per_day']; ?></td>
+          <td ><?php echo $entry['date']; ?></td>
         </tr>
       <?php
             $i++;
@@ -39,5 +42,5 @@
     </table>
   </section>
 
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
 </article>

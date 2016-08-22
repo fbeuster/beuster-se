@@ -15,6 +15,19 @@
     "invalid_username" : "%s ist kein Autor auf diesem Blog."
   },
   "admin" : {
+    "article" : {
+      "overview" : {
+        "label" : "Artikelübersichtsliste",
+        "summary" : "Insgesamt wurden %s Artikel und %s Kommentare verfasst. %s Artikel sind noch nicht veröffentlicht.",
+        "table_header" : {
+          "article" : "Artikel",
+          "date" : "Datum",
+          "id" : "ID",
+          "hits" : "Hits",
+          "hits_per_day" : "Hits/Tag"
+        }
+      }
+    },
     "back_link" : "< Zurück zur Seitenverwaltung",
     "footer" : {
       "cms" : "Lixter CMS von Felix Beuster",
