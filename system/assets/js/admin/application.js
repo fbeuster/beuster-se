@@ -46,8 +46,8 @@ $(document).ready(function(){
             $('.projChoose').removeAttr('disabled');
         }
     });
-    if($('.cmtEnable').length > 0) {
-        $('.cmtEnable tr').click(function(){
+    if($('.commentlist').length > 0) {
+        $('.commentlist tr').click(function(){
             $(this).children().each(function(){
                 $(this).find('div').toggleClass('close');
             });

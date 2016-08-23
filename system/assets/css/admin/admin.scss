@@ -63,6 +63,7 @@ form.userform {
   }
 }
 
+table.commentlist,
 table.newslist {
   width: 100%;
 
@@ -84,6 +85,17 @@ table.newslist {
 
   td, th {
     text-align: left;
+  }
+}
+
+table.commentlist {
+  div.wrap.close {
+    height: 1.5em;
+    overflow: hidden;
+  }
+
+  td {
+    vertical-align: top;
   }
 }
 

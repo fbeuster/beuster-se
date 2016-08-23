@@ -8,7 +8,7 @@
     <?php } else { ?>
       <form action="/admincmtenable" method="post" class="userform articleform">
         <fieldset>
-          <table class="newslist">
+          <table class="commentlist">
             <thead>
               <tr>
                 <th class="date">Datum</th>
