@@ -129,7 +129,11 @@
                             } else {
                                 $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.$key.'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
                             }
-                            if(!file_exists($pfad)) {
+
+                            if (!is_writable($pfad)) {
+                                $e[] = $_FILES['file']['name'][$key];
+
+                            } else if(!file_exists($pfad)) {
                                 $thumb = (int)trim($_POST['thumb']);
                                 if(is_int($thumb) && '' != $thumb) {
                                     if($thumb == $key + 1) {
