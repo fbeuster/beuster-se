@@ -17,6 +17,10 @@
   "admin" : {
     "article" : {
       "overview" : {
+        "filter" : {
+          "label" : "Filter article list",
+          "placeholder" : "Article title"
+        },
         "label" : "Article overview list",
         "summary" : "A total of %s articles and %s comments have been written. %s articles are not published yet.",
         "table_header" : {

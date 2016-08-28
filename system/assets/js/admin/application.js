@@ -53,5 +53,22 @@ $(document).ready(function(){
             });
         });
     }
+
+    $('input[name=article_filter]').on('focus', function() {
+      $(this).on('keyup', function() {
+        var value = this.value;
+
+        $('table.newslist tbody tr').each(function(){
+          var $link = $(this).find('.title a');
+
+          if ($link.text().toLowerCase().includes(value.toLowerCase())) {
+            $(this).removeClass('hidden');
+
+          } else {
+            $(this).addClass('hidden');
+          }
+        });
+      });
+    });
   }
 });

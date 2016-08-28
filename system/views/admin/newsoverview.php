@@ -10,6 +10,12 @@
         $data['enaAmount']
       )); ?>
   	</p>
+    <form>
+      <label>
+        <?php echo I18n::t('admin.article.overview.filter.label'); ?>:
+        <input type="text" name="article_filter" placeholder="<?php echo I18n::t('admin.article.overview.filter.placeholder'); ?>">
+      </label>
+    </form>
     <table class="newslist">
       <thead>
         <tr>
@@ -29,7 +35,7 @@
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?>>
           <td ><?php echo ($i+1); ?></td>
           <td ><?php echo $entry['id']; ?></td>
-          <td><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
+          <td class="title"><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
           <td ><?php echo $entry['hits']; ?></td>
           <td ><?php echo $entry['per_day']; ?></td>
           <td ><?php echo $entry['date']; ?></td>

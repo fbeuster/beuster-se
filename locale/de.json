@@ -17,6 +17,10 @@
   "admin" : {
     "article" : {
       "overview" : {
+        "filter" : {
+          "label" : "Filter Artikelübersicht",
+          "placeholder" : "Artikeltitel"
+        },
         "label" : "Artikelübersichtsliste",
         "summary" : "Insgesamt wurden %s Artikel und %s Kommentare verfasst. %s Artikel sind noch nicht veröffentlicht.",
         "table_header" : {
