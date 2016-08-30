@@ -70,11 +70,26 @@
         "delete" : "Delete snippet",
         "edit" : "Edit snippet",
         "label" : "Snippets",
-        "new" : "New snippet"
+        "new" : "New snippet",
+        "overview" : "Snippet overview"
       }
     },
     "no_access" : "You have no access to this page.",
     "not_logged_in" : "You're not logged in.",
+    "snippet" : {
+      "overview" : {
+        "filter" : {
+          "label" : "Filter snippet overview",
+          "placeholder" : "Snippet name"
+        },
+        "label" : "Snippet overview list",
+        "table_header" : {
+          "created" : "Created",
+          "edited" : "Last edited",
+          "name" : "Name"
+        }
+      }
+    },
     "stats" : {
       "label" : "Page statistics",
       "downloads_table" : {

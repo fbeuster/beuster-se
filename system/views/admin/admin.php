@@ -28,6 +28,7 @@
 
     <h2><?php echo I18n::t('admin.navigation.snippet.label'); ?></h2>
     <ul class="pagesList">
+      <li><a href="/snippetoverview"><?php echo I18n::t('admin.navigation.snippet.overview'); ?></a></li>
       <li><a href="/snippetnew"><?php echo I18n::t('admin.navigation.snippet.new'); ?></a></li>
       <li><a href="/snippetedit"><?php echo I18n::t('admin.navigation.snippet.edit'); ?></a></li>
       <li><a href="/snippetdelete"><?php echo I18n::t('admin.navigation.snippet.delete'); ?></a></li>

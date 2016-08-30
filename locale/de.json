@@ -70,11 +70,26 @@
         "delete" : "Snippet löschen",
         "edit" : "Snippet bearbeiten",
         "label" : "Snippets",
-        "new" : "Snippet erstellen"
+        "new" : "Snippet erstellen",
+        "overview" : "Snippetübersicht"
       }
     },
     "no_access" : "Du hast hier keine Zugriffsrechte.",
     "not_logged_in" : "Du bist nicht eingeloggt.",
+    "snippet" : {
+      "overview" : {
+        "filter" : {
+          "label" : "Filter Snippetübersicht",
+          "placeholder" : "Snippetname"
+        },
+        "label" : "Snippetübersichtsliste",
+        "table_header" : {
+          "created" : "Erstellt",
+          "edited" : "Bearbeitet",
+          "name" : "Name"
+        }
+      }
+    },
     "stats" : {
       "downloads_table" : {
         "label" : "Downloads",
