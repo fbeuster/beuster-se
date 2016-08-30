@@ -97,7 +97,11 @@
         return $s;
     }
 
-    function showInfo($msg, $refr, $title = 'Hinweis') {
+    function showInfo($msg, $refr, $title = null) {
+        if ($title === null ) {
+            $title = I18n::t('page.info.title');
+        }
+
       return array(
         'filename'  => 'static.php',
         'title'     => $title,
