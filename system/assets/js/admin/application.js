@@ -6,6 +6,7 @@ var admin = admin || {};
 //@ lib/_i18n
 //@ lib/_utilities
 //@ bbcode
+//@ snippetpreview
 
 $(document).ready(function(){
   admin.i18n.init()
@@ -13,6 +14,7 @@ $(document).ready(function(){
 
   function runApp() {
     admin.bbCode.init();
+    admin.snippetPreview.init();
 
     $('#allDel').bind('click',function(event){
         $('.del').attr('checked', 'checked');

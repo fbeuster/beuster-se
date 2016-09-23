@@ -83,6 +83,10 @@
           "placeholder" : "Snippet name"
         },
         "label" : "Snippet overview list",
+        "preview" : {
+          "label" : "Preview - Click to close",
+          "title" : "Click for preview"
+        },
         "table_header" : {
           "created" : "Created",
           "edited" : "Last edited",

@@ -83,6 +83,10 @@
           "placeholder" : "Snippetname"
         },
         "label" : "Snippetübersichtsliste",
+        "preview" : {
+          "label" : "Vorschau - Klicken zum Schließen",
+          "title" : "Klicken für Vorschau"
+        },
         "table_header" : {
           "created" : "Erstellt",
           "edited" : "Bearbeitet",

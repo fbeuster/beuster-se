@@ -23,9 +23,9 @@
         if(count($data['snippets'])) {
           $i = 0;
           foreach($data['snippets'] as $entry) { ?>
-        <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?>>
+        <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-snippet="<?php echo $entry['name']; ?>">
           <td ><?php echo ($i+1); ?></td>
-          <td class="title"><?php echo $entry['name']; ?></td>
+          <td class="title" title="<?php echo I18n::t('admin.snippet.overview.preview.title'); ?>"><?php echo $entry['name']; ?></td>
           <td ><?php echo $entry['created']; ?></td>
           <td ><?php echo $entry['edited']; ?></td>
         </tr>
