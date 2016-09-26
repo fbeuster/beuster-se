@@ -12,7 +12,6 @@
  *
  * Provides a simple and global access to the database.
  *
- * \todo function for DELETE
  * \todo function for UPDATE
  */
 class Database {
@@ -66,6 +65,95 @@ class Database {
 		$sql 		= 'SELECT 1 FROM '.$table;
 		$result = $this->con->query($sql);
 		return isset($result->num_rows);
+	}
+
+	/**
+	 * Delete from database.
+	 *
+	 * deletes data from database
+	 * function retuns true on success, false on fail
+	 *
+	 * @param String $table name for table to select
+	 * @param array $cond WHERE conidtions, given as array(condition_string, types, array(vars))
+	 * @return bool
+	 */
+	public function delete($table, $cond) {
+
+		// table name
+		if($table == null || $table == '') return false;
+		$table .= ' ';
+
+		// conditions
+		$cond_vars = array();
+		if($cond == null || (is_array($cond) && empty($cond))) {
+			$cond_string = '';
+		} else {
+			// validate $cond
+			if(!is_array($cond)) {
+				$this->error = I18n::t('database.conditions.must_be_array');
+				return false;
+			}
+			if(count($cond) != 3) {
+				$this->error = I18n::t('database.conditions.invalid_length');
+				return false;
+			}
+			if($cond[0] == null || !is_string($cond[0]) || $cond[0] == '') {
+				$this->error = I18n::t('database.conditions.invalid_string');
+				return false;
+			}
+			if($cond[1] == null || !is_string($cond[1]) || $cond[1] == '') {
+				$this->error = I18n::t('database.conditions.invalid_type');
+				return false;
+			}
+			if(!is_array($cond[2])) {
+				$this->error = I18n::t('database.conditions.vars_must_be_array');
+				return false;
+			}
+			if(!strlen($cond[1]) == count($cond[2])) {
+				$this->error = I18n::t('database.conditions.type_vars_mismatch');
+				return false;
+			}
+
+			// condition string
+			$cond_string = ' WHERE '.$cond[0];
+
+			// building bind_param for conditions
+			$cond_vars[] = $cond[1];
+			foreach ($cond[2] as $k => $v) {
+				$var = 'con'.$k;
+				$$var = $cond[2][$k];
+				$cond_vars[] = &$$var;
+			}
+		}
+
+		// buildung sql
+		$sql = 'DELETE FROM '.$table.$cond_string;
+
+		// prepare request
+		$stmt = $this->con->prepare($sql);
+		if(!$stmt) {
+			$this->error = $this->con->error;
+			return false;
+		}
+
+		// bind_param
+		if($cond_string != '') {
+			if(!call_user_func_array(array($stmt, 'bind_param'), $cond_vars)) {
+				$this->error = $stmt->error;
+				return false;
+			}
+		}
+
+		// execute
+		if(!$stmt->execute()) {
+			$this->error = $stmt->error;
+			return false;
+		}
+
+		// close
+		$stmt->close();
+
+		return true;
 	}
 
 	public function insert($table, $fields, $values) {
