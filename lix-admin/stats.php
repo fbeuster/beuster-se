@@ -132,6 +132,6 @@
 
   } else {
     $link = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
-    return showInfo(i18N::T('admin.not_logged_in').$link, 'login');
+    return showInfo(I18n::t('admin.not_logged_in').$link, 'login');
   }
 ?>

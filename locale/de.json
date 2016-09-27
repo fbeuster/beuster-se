@@ -16,6 +16,59 @@
   },
   "admin" : {
     "article" : {
+      "edit" : {
+        "category" : {
+          "label" : "Kategorie",
+          "placeholder" : "Kategorie wählen..."
+        },
+        "content_label" : "Inhalt",
+        "choose" : {
+          "label" : "Artikel wählen",
+          "placeholder" : "Bitte wählen...",
+          "submit" : "Gewählten Artikel bearbeiten"
+        },
+        "label" : "Artikel bearbeiten",
+        "manual_release_label" : "Manuelle Freigabe",
+        "new_category" : {
+          "label" : "Neue Kategorie",
+          "placeholder_select" : "Elternkategorie wählen...",
+          "placeholder_input" : "Name der neuen Kategorie"
+        },
+        "new_playlist" : {
+          "label" : "Neue Playlist",
+          "placeholder_id" : "YouTube-ID der neuen Playlist",
+          "placeholder_name" : "Name der neuen Playlist"
+        },
+        "not_found" : "Der Artikel konnte nicht gefunden werden.",
+        "pictures" : {
+          "info" : "Bilder hinzufügen, maximale Größe ist %s",
+          "table" : {
+            "bbcode" : "BB-Code",
+            "delete" : "löschen",
+            "thumbnail" : "Vorschaubild"
+          }
+        },
+        "playlist" : {
+          "label" : "Playlist",
+          "placeholder" : "Playlist wählen..."
+        },
+        "submit" : "Artikel ändern",
+        "success" : "Der Artikel wurde geändert.",
+        "tags" : {
+          "label" : "Tags",
+          "placeholder" : "Tags (durch Komma getrennt)"
+        },
+        "title" : {
+          "label" : "Titel",
+          "placeholder" : "Titel des Artikels"
+        },
+        "thumbnail" : {
+          "add_field" : "Feld hinzufügen",
+          "label" : "Vorschaubild",
+          "placeholder" : "Nummer aus unterer Liste eintragen",
+          "remove_field" : "Feld entfernen"
+        }
+      },
       "overview" : {
         "filter" : {
           "label" : "Filter Artikelübersicht",

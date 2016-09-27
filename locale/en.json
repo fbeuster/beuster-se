@@ -16,6 +16,59 @@
   },
   "admin" : {
     "article" : {
+      "edit" : {
+        "category" : {
+          "label" : "Category",
+          "placeholder" : "Select category..."
+        },
+        "content_label" : "Content",
+        "choose" : {
+          "label" : "Select article",
+          "placeholder" : "Please select...",
+          "submit" : "Edit selected article"
+        },
+        "label" : "Edit article",
+        "manual_release_label" : "Manual release",
+        "new_category" : {
+          "label" : "New category",
+          "placeholder_select" : "Select parent category...",
+          "placeholder_input" : "Name of the new category"
+        },
+        "new_playlist" : {
+          "label" : "New playlist",
+          "placeholder_id" : "YouTube-ID of a new playlist",
+          "placeholder_name" : "Name of a new playlist"
+        },
+        "not_found" : "The article could not been found.",
+        "pictures" : {
+          "info" : "Add pictures, maximun size %s",
+          "table" : {
+            "bbcode" : "BB-Code",
+            "delete" : "Delete",
+            "thumbnail" : "Thumbnail"
+          }
+        },
+        "playlist" : {
+          "label" : "Playlist",
+          "placeholder" : "Select playlist..."
+        },
+        "submit" : "Change article",
+        "success" : "The article has been changed.",
+        "tags" : {
+          "label" : "Tags",
+          "placeholder" : "Tags (separated by comma)"
+        },
+        "title" : {
+          "label" : "Title",
+          "placeholder" : "Title of the article"
+        },
+        "thumbnail" : {
+          "add_field" : "Add field",
+          "label" : "Thumbnail",
+          "placeholder" : "Enter number from list below",
+          "remove_field" : "Remove field"
+        }
+      },
       "overview" : {
         "filter" : {
           "label" : "Filter article list",
