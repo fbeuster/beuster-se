@@ -169,6 +169,9 @@
     },
     "try_again" : "Erneut versuchen."
   },
+  "category" : {
+    "no_articles_found" : "Hier wurden keine News gefunden."
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields ist leer."

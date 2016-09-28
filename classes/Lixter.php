@@ -182,7 +182,7 @@ class Lixter {
 
       } else {
         # no page argument found
-        $this->page = new ContentPage('blog');
+        $this->page = new CategoryPage();
       }
     }
   }

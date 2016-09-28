@@ -41,6 +41,7 @@
   </div>
   <?php
     if(isset($data['pageNbr']) && $data['pageNbr'] >= 1) {
+      echo '<br class="clear">'."\r";
       echo genPager($data['pageNbr'], $data['page'], '/search/'.$data['str'].'/page');
     }
   ?>

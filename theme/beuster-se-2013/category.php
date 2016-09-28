@@ -1,8 +1,8 @@
-  <?php
-  if (count($data['articles'])) {
-    /*if($data['articles'][0]['CatDescr'] !== '') { ?>
-      <h1 class="beCategoryHeader"><?php echo $data['articles'][0]->getCategory(); ?> - beuster{se}</h1>
-    <?php }*/ ?>
+<?php
+
+  $page = Lixter::getLix()->getPage();
+
+  if ($page->hasArticles()) { ?>
     <menu class="beCategoryNav">
       <?php echo genSubMenu(); ?>
     </menu>
@@ -11,8 +11,8 @@
     <?php
 
       $i = 0;
-      $last = count($data['articles']) - 1;
-      foreach ($data['articles'] as $article) { ?>
+      $last = count($page->getArticles()) - 1;
+      foreach ($page->getArticles() as $article) { ?>
 
         <?php if($i%2==0) { ?><div class="beContentEntryRow"><?php } ?>
         <article class="beContentEntry">
@@ -47,18 +47,14 @@
         <?php
         $i++;
       }
-      if((isset($_GET['p']) &&
-        $_GET['p'] != 'blog') ||
-        isset($_GET['c']) ||
-        $data['conf']['archive'] == 1) {
-        $dest = '/'.$data['conf']['dest'].'/page';
+      if ( $page->getDestination() != '' ) {
+        $dest = '/'.$page->getDestination().'/page';
+
       } else {
         $dest = '/page';
       }
       echo '<br class="clear">'."\r";
-      echo genPager($data['conf']['seitenzahl'], $data['conf']['start'], $dest); ?>
+      echo genPager($page->getTotalPagesCount(), $page->getStartPage(), $dest); ?>
     <?php } else { ?>
-      <p class="info">
-        Es sind keine News vorhanden
-      </p><?php
+      <p class="info"><?php echo I18n::t('category.no_articles_found'); ?></p><?php
     } ?>

@@ -71,8 +71,9 @@
     $site_name    = $config->get('site_name');
     $site_title   = $config->get('site_title');
 
-    if ($page->getType() === Page::STATIC_PAGE ||
-        $page->getType() === Page::CONTENT_PAGE) {
+    if ($page->getType() === Page::STATIC_PAGE
+      || $page->getType() === Page::CONTENT_PAGE
+      || $page->getType() === Page::CATEGORY_PAGE) {
       $return_title = $page->getTitle();
 
     } else {

@@ -169,6 +169,9 @@
     },
     "try_again" : "Try again."
   },
+  "category" : {
+    "no_articles_found" : "No articles have been found here."
+  },
   "database" : {
     "fields" : {
       "are_empty" : "Fields are empty."

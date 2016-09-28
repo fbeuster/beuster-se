@@ -62,6 +62,7 @@
         }
         if($article->getPagesCmt() > 1) { ?>
     <div class="beCommentEntry">
+      <br class="clear">
       <?php echo genPager($article->getPagesCmt(), $article->getStartCmt(), $article->getLink().'/page'); ?>
     </div>
       <?php } ?>
