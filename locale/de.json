@@ -183,6 +183,7 @@
     },
     "conditions" : {
       "must_be_array" : "Cond muss ein Array sein.",
+      "no_vars_in_string" : "In reinen String Bedingungen sind keine Platzhalter (?) erlaubt.",
       "invalid_length" : "Ungültige cond Länge.",
       "invalid_string" : "Ungültiger cond String.",
       "invalid_type" : "Ungültiger cond Typ.",

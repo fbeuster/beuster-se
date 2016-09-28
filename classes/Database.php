@@ -328,6 +328,16 @@ class Database {
 		$cond_vars = array();
 		if($cond == null || (is_array($cond) && empty($cond))) {
 			$cond_string = '';
+
+		} else if (is_string($cond)) {
+			if (preg_match('#^([^\?]*)$#', $cond)) {
+				$cond_string = ' WHERE ' . $cond;
+
+			} else {
+				$this->error = I18n::t('database.conditions.no_vars_in_string');
+				return null;
+			}
+
 		} else {
 			// validate $cond
 			if(!is_array($cond)) {
@@ -370,12 +380,20 @@ class Database {
 		// combine limit and condition vars
 		$vars = array();
 		if($cond_string != '' && $limit_string != '') {
-			$vars[0] = $cond_vars[0] . $limit_vars[0];
-			for($i = 1; $i < count($cond_vars); $i++) {
-				$v = 'varC'.$i;
-				$$v = $cond_vars[$i];
-				$vars[] = &$$v;
+			$vars[0] = '';
+
+			if (count($cond_vars) > 0) {
+				$vars[0] .= $cond_vars[0];
+
+				for($i = 1; $i < count($cond_vars); $i++) {
+					$v = 'varC'.$i;
+					$$v = $cond_vars[$i];
+					$vars[] = &$$v;
+				}
 			}
+
+			$vars[0] .= $limit_vars[0];
+
 			for($i = 1; $i < count($limit_vars); $i++) {
 				$v = 'varL'.$i;
 				$$v = $limit_vars[$i];

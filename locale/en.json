@@ -183,6 +183,7 @@
     },
     "conditions" : {
       "must_be_array" : "Cond has to be an array.",
+      "no_vars_in_string" : "No placeholders (?) are allowed in single string conditions.",
       "invalid_length" : "Invalid cond length.",
       "invalid_string" : "Invalid cond string.",
       "invalid_type" : "Invalid cond type.",
