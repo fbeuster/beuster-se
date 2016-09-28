@@ -111,7 +111,7 @@ class Pager {
 
     } else {
       $next_active = true;
-      $next_href = $this->destination.($this->current_page -1);
+      $next_href = $this->destination.($this->current_page + 1);
     }
     $ret[] = array( $this->next_text, $next_href, $next_active);
 
