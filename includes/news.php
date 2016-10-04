@@ -1,11 +1,6 @@
 ﻿<?php
 
     $a = array();
-    $ena = 1;
-    $news = array();
-    $archive = false;
-
-    $a['filename'] = 'news.php';
     $a['data'] = array();
 
     if(isset($_GET['c'])) {
