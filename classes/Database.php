@@ -101,7 +101,8 @@ class Database {
 				$this->error = I18n::t('database.conditions.invalid_string');
 				return false;
 			}
-			if($cond[1] == null || !is_string($cond[1]) || $cond[1] == '') {
+			if(($cond[1] == null || !is_string($cond[1]) || $cond[1] == '')
+				&& ($cond[1] == '' && !empty($cond[2]))) {
 				$this->error = I18n::t('database.conditions.invalid_type');
 				return false;
 			}
@@ -118,11 +119,13 @@ class Database {
 			$cond_string = ' WHERE '.$cond[0];
 
 			// building bind_param for conditions
-			$cond_vars[] = $cond[1];
-			foreach ($cond[2] as $k => $v) {
-				$var = 'con'.$k;
-				$$var = $cond[2][$k];
-				$cond_vars[] = &$$var;
+			if (!empty($cond[2])) {
+				$cond_vars[] = $cond[1];
+				foreach ($cond[2] as $k => $v) {
+					$var = 'con'.$k;
+					$$var = $cond[2][$k];
+					$cond_vars[] = &$$var;
+				}
 			}
 		}
 
@@ -137,7 +140,7 @@ class Database {
 		}
 
 		// bind_param
-		if($cond_string != '') {
+		if(!empty($cond_vars)) {
 			if(!call_user_func_array(array($stmt, 'bind_param'), $cond_vars)) {
 				$this->error = $stmt->error;
 				return false;
@@ -352,7 +355,8 @@ class Database {
 				$this->error = I18n::t('database.conditions.invalid_string');
 				return null;
 			}
-			if($cond[1] == null || !is_string($cond[1]) || $cond[1] == '') {
+			if(($cond[1] == null || !is_string($cond[1]) || $cond[1] == '')
+				&& ($cond[1] == '' && !empty($cond[2]))) {
 				$this->error = I18n::t('database.conditions.invalid_type');
 				return null;
 			}
@@ -369,11 +373,13 @@ class Database {
 			$cond_string = ' WHERE '.$cond[0];
 
 			// building bind_param for conditions
-			$cond_vars[] = $cond[1];
-			foreach ($cond[2] as $k => $v) {
-				$var = 'con'.$k;
-				$$var = $cond[2][$k];
-				$cond_vars[] = &$$var;
+			if (!empty($cond[2])) {
+				$cond_vars[] = $cond[1];
+				foreach ($cond[2] as $k => $v) {
+					$var = 'con'.$k;
+					$$var = $cond[2][$k];
+					$cond_vars[] = &$$var;
+				}
 			}
 		}
 
@@ -419,7 +425,7 @@ class Database {
 		}
 
 		// bind_param
-		if($cond_string != '' || $limit_string != '') {
+		if(!empty($vars)) {
 			if(!call_user_func_array(array($stmt, 'bind_param'), $vars)) {
 				$this->error = $stmt->error;
 				return null;
