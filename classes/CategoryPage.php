@@ -1,9 +1,10 @@
 <?php
 
 class CategoryPage extends Page {
-  const PAGE_LENGTH = 8;
+  const DEFAULT_PAGE_LENGTH = 8;
 
   private $articles;
+  private $config;
   private $content;
   private $destination = '';
   private $file_name = 'category.php';
@@ -12,6 +13,8 @@ class CategoryPage extends Page {
   private $type = Page::CATEGORY_PAGE;
 
   public function __construct($category = null) {
+    $this->config = Config::getConfig();
+
     if ($category === null) {
       $this->category = null;
 
@@ -123,7 +126,17 @@ class CategoryPage extends Page {
       $start_page = $total_pages;
     }
 
-    return ($start_page - 1) * self::PAGE_LENGTH;
+    return ($start_page - 1) * $this->getPageLength();
+  }
+
+  public function getPageLength() {
+    $length = $this->config->get('category_page_length');
+
+    if ($length == null || !is_int($length)) {
+      return self::DEFAULT_PAGE_LENGTH;
+    }
+
+    return $this->config->get('category_page_length');
   }
 
   public function getParsedContent() {
@@ -182,7 +195,7 @@ class CategoryPage extends Page {
       return 1;
     }
 
-    $total_pages = ceil($total_articles / self::PAGE_LENGTH);
+    $total_pages = ceil($total_articles / $this->getPageLength());
 
     if (!$total_pages) {
       $total_pages = 1;
@@ -204,7 +217,6 @@ class CategoryPage extends Page {
   }
 
   private function loadContent() {
-    $config = Config::getConfig();
     $db     = Database::getDB();
     $conds  = $this->getDateConditions();
 
@@ -225,7 +237,7 @@ class CategoryPage extends Page {
     $fields = array('news.ID');
     $opt    = 'GROUP BY news.ID ORDER BY news.Datum DESC';
     $limit  = array('LIMIT ?, ?', 'ii',
-                    array($this->getOffsetPages(), self::PAGE_LENGTH));
+                    array($this->getOffsetPages(), $this->getPageLength()));
     $res    = $db->select('news', $fields, $conds, $opt, $limit, $joins);
 
     if ($res) {
@@ -234,7 +246,7 @@ class CategoryPage extends Page {
       }
     }
 
-    $this->title = $config->get('site_title');
+    $this->title = $this->config->get('site_title');
   }
 }
 
