@@ -158,9 +158,17 @@ class Lixter {
           $this->page = new AdminPage($_GET['p']);
 
         } else if (StaticPage::exists($_GET['p'])) {
-        // if (StaticPage::exists($_GET['p'])) {
           # page argument is static page
           $this->page = new StaticPage($_GET['p']);
+
+        } else if ($_GET['p'] == 'blog' && isset($_GET['c'])
+          && Category::isCategoryName($_GET['c'])) {
+          # page argument is category page
+          $this->page = new CategoryPage($_GET['c']);
+
+        } else if (Category::isCategoryName($_GET['p'])) {
+          # page argument is category page
+          $this->page = new CategoryPage($_GET['p']);
 
         } else if (isset($file[$_GET['p']][0])) {
           # page argument has specific file
@@ -177,7 +185,7 @@ class Lixter {
 
         } else {
           # page argument has no declaration and is not a static page
-          $this->page = new ContentPage('blog');
+          $this->page = new CategoryPage('blog');
         }
 
       } else {

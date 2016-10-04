@@ -12,12 +12,44 @@ class CategoryPage extends Page {
   private $type = Page::CATEGORY_PAGE;
 
   public function __construct($category = null) {
-    $this->category = $category;
+    if ($category === null) {
+      $this->category = null;
+
+    } else {
+      $this->category = Category::newFromName($category);
+    }
+
     $this->loadContent();
   }
 
   public function getArticles() {
     return $this->articles;
+  }
+
+  private function getCategoryConditions() {
+    if ($this->category->isTopCategory()) {
+      $cat_sql    = ' AND (newscat.ParentID = ? OR newscat.ID = ?)';
+      $cat_params = 'ii';
+      $cat_vars   = array(  $this->category->getId(),
+                            $this->category->getId() );
+
+    } else {
+      $cat_sql    = ' AND newscatcross.Cat = ?';
+      $cat_params = 'i';
+      $cat_vars   = array($this->category->getId());
+    }
+
+    return array($cat_sql, $cat_params, $cat_vars);
+  }
+
+  private function getCategoryJoins() {
+    $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
+
+    if ($this->category->isTopCategory()) {
+      $joins .= ' JOIN newscat ON newscat.ID = newscatcross.Cat';
+    }
+
+    return $joins;
   }
 
   public function getContent() {
@@ -26,34 +58,44 @@ class CategoryPage extends Page {
 
   private function getDateSQL() {
     if (!isset($_GET['y'])) {
-      return "Datum < NOW()";
+      return "news.Datum < NOW()";
 
     } else {
       $year = (int) $_GET['y'];
 
       if ($year > (int) date("Y")) {
-        return "Datum < NOW()";
+        return "news.Datum < NOW()";
 
       } else {
-        $year_sql = "YEAR(Datum) = " . $year;
+        $year_sql = "YEAR(news.Datum) = " . $year;
 
         if (!isset($_GET['m'])) {
           $this->destination = $year;
-          return $year_sql . " AND Datum < NOW()";
+          return $year_sql . " AND news.Datum < NOW()";
 
         } else {
           $month = (int) $_GET['m'];
 
           if ($month > 12 || $month < 1) {
-            return "Datum < NOW()";
+            return "news.Datum < NOW()";
 
           } else {
             $this->destination = $year . '/' . $month;
-            $month_sql = " AND MONTH(Datum) = " . $month;
-            return $year_sql . $month_sql . " AND Datum < NOW()";
+            $month_sql = " AND MONTH(news.Datum) = " . $month;
+            return $year_sql . $month_sql . " AND news.Datum < NOW()";
           }
         }
       }
+    }
+  }
+
+  private function getDateConditions() {
+    if(Utilities::isDevServer()) {
+      return array( $this->getDateSQL(), '', array() );
+
+    } else {
+      return array( $this->getDateSQL().' AND news.enable = ?',
+                      'i', array(true));
     }
   }
 
@@ -107,10 +149,23 @@ class CategoryPage extends Page {
   }
 
   private function getTotalArticleCount() {
-    $db = Database::getDB();
+    $db     = Database::getDB();
+    $conds  = $this->getDateConditions();
+
+    if ($this->category === null) {
+      $joins = null;
+
+    } else {
+      $joins      = $this->getCategoryJoins();
+      $cat_conds  = $this->getCategoryConditions();
+
+      $conds[0] = $conds[0] . $cat_conds[0];
+      $conds[1] = $conds[1] . $cat_conds[1];
+      $conds[2] = $conds[2] + $cat_conds[2];
+    }
 
     $fields = array('COUNT(*) AS total');
-    $res    = $db->select('news', $fields);
+    $res    = $db->select('news', $fields, $conds, null, null, $joins);
 
     if (count($res) == 1) {
       return $res[0]['total'];
@@ -151,30 +206,35 @@ class CategoryPage extends Page {
   private function loadContent() {
     $config = Config::getConfig();
     $db     = Database::getDB();
+    $conds  = $this->getDateConditions();
 
     if ($this->category == null) {
+      $joins = null;
 
-      if(Utilities::isDevServer()) {
-        $conds = $this->getDateSQL();
+    } else {
+      $joins      = $this->getCategoryJoins();
+      $cat_conds  = $this->getCategoryConditions();
 
-      } else {
-        $conds = array($this->getDateSQL().' AND enable = ?', 'i',
-                        array(true));
-      }
+      $conds[0] = $conds[0] . $cat_conds[0];
+      $conds[1] = $conds[1] . $cat_conds[1];
+      $conds[2] = $conds[2] + $cat_conds[2];
 
-      $fields = array('ID');
-      $opt    = 'GROUP BY ID ORDER BY Datum DESC';
-      $limit  = array('LIMIT ?, ?', 'ii', array($this->getOffsetPages(), self::PAGE_LENGTH));
-      $res = $db->select('news', $fields, $conds, $opt, $limit);
-
-      if ($res) {
-        foreach ($res as $aId) {
-          $this->articles[] = new Article($aId['ID']);
-        }
-      }
-
-      $this->title = $config->get('site_title');
+      $this->destination = $this->category->getNameUrl();
     }
+
+    $fields = array('news.ID');
+    $opt    = 'GROUP BY news.ID ORDER BY news.Datum DESC';
+    $limit  = array('LIMIT ?, ?', 'ii',
+                    array($this->getOffsetPages(), self::PAGE_LENGTH));
+    $res    = $db->select('news', $fields, $conds, $opt, $limit, $joins);
+
+    if ($res) {
+      foreach ($res as $aId) {
+        $this->articles[] = new Article($aId['ID']);
+      }
+    }
+
+    $this->title = $config->get('site_title');
   }
 }
 

@@ -53,6 +53,12 @@
   }
 
   function makeBodyClass($page) {
+    $p = Lixter::getLix()->getPage();
+
+    if ($p->getType() == Page::CATEGORY_PAGE) {
+      return 'category';
+    }
+
     switch($page) {
       case 'single':
       case 'page' :

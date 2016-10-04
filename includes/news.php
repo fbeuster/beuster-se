@@ -7,12 +7,6 @@
 
     $a['filename'] = 'news.php';
     $a['data'] = array();
-    $db = Database::getDB()->getCon();
-
-    if(isset($_GET['page']))
-        $start = (int)$_GET['page'];
-    else
-        $start = 1;
 
     if(isset($_GET['c'])) {
         if(is_numeric($_GET['c'])) {
@@ -62,59 +56,6 @@
 
             $a['data']['portSets'] = $portSets;
             $a['data']['ret'] = '';
-        } else {
-            // get article ids
-
-            $fields = array('news.ID');
-            if($cat->isTopCategory()) {
-                if($cat->getId() == getCatID('blog')) {
-                    $blogID = getCatID('blog');
-                    $anzahl = getAnzCat($blogID);
-                } else {
-                    $blogID = 0;
-                    $anzahl = getAnzTopCat($cat->getId());
-                }
-
-                // Top-Cat
-                $conds = array(
-                    'news.enable = ? AND news.Datum < NOW() AND'.
-                    ' (newscat.ParentID = ? OR newscat.ID = ?)', 'iii', array($ena, $cat->getId(), $blogID));
-                $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
-                $joins .= ' JOIN newscat ON newscat.ID = newscatcross.Cat';
-            } else {
-                // Sub-Cat
-                $anzahl = getAnzCat($cat->getId());
-
-                $conds = array(
-                    'news.enable = ? AND news.Datum < NOW() AND'.
-                    ' newscatcross.Cat = ?', 'ii', array($ena, $cat->getId()));
-                $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
-            }
-
-            $pages = getPages($anzahl, 8, $start);
-            if($start > $pages) $start = $pages;
-
-            $opt = 'GROUP BY news.ID ORDER BY news.Datum DESC';
-            $limit = array('LIMIT ?, 8', 'i', array(getOffset($anzahl, 8, $start)));
-
-            $dbs = Database::getDB();
-            $res = $dbs->select('news', $fields, $conds, $opt, $limit, $joins);
-
-            $articles = array();
-            foreach ($res as $aId) {
-                $articles[] = new Article($aId['ID']);
-            }
-
-            if($archive) {
-                $a['data']['conf']['archive'] = 1;
-                $a['data']['conf']['dest']    = $destDate;
-            } else {
-                $a['data']['conf']['archive'] = 0;
-                $a['data']['conf']['dest']  = $articles[0]->getCategory()->getNameUrl();
-            }
-            $a['data']['conf']['seitenzahl'] = $pages;
-            $a['data']['conf']['start'] = $start;
-            $a['data']['articles'] = $articles;
         }
     }
     return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
