@@ -291,50 +291,6 @@
         return $r;
     }
 
-    function getAnzCat($type) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(news.ID) as Anzahl
-                FROM
-                    news
-                JOIN
-                    newscatcross ON news.ID = newscatcross.NewsID
-                WHERE
-                    newscatcross.Cat = ? AND
-                    news.enable = 1 AND
-                    news.Datum < NOW()";
-        if(!$anz = $db->prepare($sql)) {return $db->error;}
-        $anz->bind_param('i', $type);
-        if(!$anz->execute()) {return $result->error;}
-        $anz->bind_result($a);
-        if(!$anz->fetch()) {return 'Es wurden keine News gefunden. <br /><a href="/blog">Zurück zum Block</a>';}
-        $anz->close();
-        return $a;
-    }
-
-    function getAnzTopCat($type) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(news.ID) as Anzahl
-                FROM
-                    news
-                JOIN
-                    newscatcross ON news.ID = newscatcross.NewsID
-                JOIN
-                    newscat ON newscatcross.Cat = newscat.ID
-                WHERE
-                    newscat.ParentID = ? AND
-                    news.enable = 1 AND
-                    news.Datum < NOW()";
-        if(!$anz = $db->prepare($sql)) {return $db->error;}
-        $anz->bind_param('i', $type);
-        if(!$anz->execute()) {return $result->error;}
-        $anz->bind_result($a);
-        if(!$anz->fetch()) {return 'Es wurden keine News gefunden. <br /><a href="/blog">Zurück zum Block</a>';}
-        $anz->close();
-        return $a;
-    }
-
     function getCatID($cat) {
         $db = Database::getDB()->getCon();
         $cat = replaceUml(lowerCat($cat));

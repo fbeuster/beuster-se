@@ -138,32 +138,6 @@
         return $r;
     }
 
-    function linkGrab($id) {
-        $db = Database::getDB()->getCon();
-        if($id <= 0) return '#';
-        $ena = 1;
-        $sql = "SELECT
-                    Titel
-                FROM
-                    news
-                WHERE
-                    enable = ? AND
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {
-            echo $db->error;
-            return '#';
-        }
-        $result->bind_param('ii', $ena, $id);
-        if(!$result->execute()) {
-            echo $result->error;
-            return '#';
-        }
-        $result->bind_result($title);
-        if(!$result->fetch()) return '#';
-        $result->close();
-        return substr(getLink(getCatName(getNewsCat($id)), $id, $title), 1);
-    }
-
     function shortenTitle($title, $l = 20) {
         if(strlen($title) > $l) {
             $title = substr($title, 0, $l - 1).'...';
@@ -513,43 +487,6 @@
         if($s > 1) {$s = 1;}
         if($s > $num_pages) {$s = $num_pages;}
         return $num_pages;
-    }
-
-    function getAnz($dateSQL = "Datum < NOW()") {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(*) as Anzahl
-                FROM
-                    news
-                WHERE
-                    enable = 1 AND
-                    ".$dateSQL;
-        if(!$anz = $db->prepare($sql)) {return $db->error;}
-        if(!$anz->execute()) {return $result->error;}
-        $anz->bind_result($a);
-        if(!$anz->fetch()) {return 'Es wurden keine News gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $anz->close();
-        return $a;
-    }
-
-    function getAnzDev($dateSQL = "Datum < NOW()") {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    COUNT(news.ID) as Anzahl
-                FROM
-                    news
-                LEFT JOIN
-                    newscatcross
-                    ON news.ID = newscatcross.NewsID
-                WHERE
-                    ".$dateSQL." AND
-                    newscatcross.Cat != 12";
-        if(!$anz = $db->prepare($sql)) {return $db->error;}
-        if(!$anz->execute()) {return $result->error;}
-        $anz->bind_result($a);
-        if(!$anz->fetch()) {return 'Es wurden keine News gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $anz->close();
-        return $a;
     }
 
     function getCmt($id) {

@@ -70,25 +70,6 @@
         return $a;
     }
 
-    function getNewsID($id, $cat) {
-        $db = Database::getDB()->getCon();
-        $cat = getCatID($cat);
-        $sql = "SELECT
-                    NewsID
-                FROM
-                    newscatcross
-                WHERE
-                    CatID = ? AND
-                    Cat = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('ii', $id, $cat);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($a);
-        if(!$result->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $result->close();
-        return $a;
-    }
-
     function getNewsCat($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
