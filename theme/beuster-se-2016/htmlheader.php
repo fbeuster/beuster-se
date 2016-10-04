@@ -9,11 +9,11 @@
     $page = Lixter::getLix()->getPage();
     $keywords = '';
 
-    if ($page->getType() === Page::CONTENT_PAGE) {
-      $keywords = $page->getTags() . ' ';
+    if ($page->getType() === Page::CATEGORY_PAGE || $page->getType() === Page::CONTENT_PAGE) {
+      $keywords = $page->getTags() . ', ';
     }
   ?>
-<meta name="keywords" content="<?php echo $keywords; ?>, beuster{se}, Felix Beuster, Blog, News, Tutorials">
+<meta name="keywords" content="<?php echo $keywords; ?> beuster{se}, Felix Beuster, Blog, News, Tutorials">
 <meta name="author" content="Felix Beuster">
   <meta property='og:locale' content='de_de'/>
   <meta property='fb:admins' content='100002550334323'/>

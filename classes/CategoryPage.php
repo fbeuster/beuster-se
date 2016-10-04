@@ -153,12 +153,11 @@ class CategoryPage extends Page {
   }
 
   public function getTags() {
-    # TODO
-    if (is_string($this->content))                return '';
-    if (!isset($this->content['articles']))       return '';
-    if (count($this->content['articles']) !== 1)  return '';
+    if ($this->category == null) {
+      return 'Blog';
+    }
 
-    return $this->content['articles'][0]->getTagsString();
+    return $this->category->getName();
   }
 
   private function getTotalArticleCount() {
