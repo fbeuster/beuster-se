@@ -161,6 +161,11 @@ class Lixter {
           # page argument is static page
           $this->page = new StaticPage($_GET['p']);
 
+        } else if ($_GET['p'] == 'blog' && isset($_GET['n'])) {
+          # page argument is article page
+          # TODO make this ArticlePage
+          $this->page = new ContentPage($_GET['p']);
+
         } else if ($_GET['p'] == 'blog' && isset($_GET['c'])
           && Category::isCategoryName($_GET['c'])) {
           # page argument is category page
