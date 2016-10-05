@@ -211,10 +211,15 @@ class Lixter {
 
     $pageType = $this->page->getPageClass();
     $currPage = getPage();
+    $config   = Config::getConfig();
 
     include('system/views/admin/functions.php');
     include('system/views/admin/htmlheader.php');
-    if (Utilities::isDevServer()) include('settings/analyse.php');
+
+    if (Utilities::isDevServer() || $config->get('debug')) {
+      include('system/views/debug.php');
+    }
+
     include('system/views/admin/htmlwarning.php');
 
     $file = 'system/views/admin/' . $this->page->getFilename();
@@ -242,10 +247,15 @@ class Lixter {
 
     $pageType = $this->page->getPageClass();
     $currPage = getPage();
+    $config   = Config::getConfig();
 
     include($this->theme->getFile('functions.php'));
     include($this->theme->getFile('htmlheader.php'));
-    if (Utilities::isDevServer()) include('settings/analyse.php');
+
+    if (Utilities::isDevServer() || $config->get('debug')) {
+      include('system/views/debug.php');
+    }
+
     include($this->theme->getFile('htmlwarning.php'));
 
     if ($this->isValidTemplate()) {
