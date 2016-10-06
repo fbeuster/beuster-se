@@ -132,6 +132,13 @@
     "snippet" : {
       "new" : {
         "content_label" : "Inhalt",
+        "errors" : {
+          "empty_content" : "Der Inhalt eines Snippets kann nicht leer sein.",
+          "empty_name" : "Der Name eines Snippets kann nicht leer sein.",
+          "exists" : "Dieses Snippet existiert bereits.",
+          "invalid_characters" : "Der Name des Snippets enthält ungültige Zeichen.",
+          "long_name" : "Der Name des Snipepts ist zu lang."
+        },
         "label" : "Neues Snippet erstellen",
         "submit" : "Snippet erstellen",
         "success" : "Das Snippet wurde hinzugefügt.",

@@ -8,31 +8,48 @@
     $a['filename']  = 'snippetnew.php';
     $a['data']      = array();
 
-    $err  = 0;
-    $db   = Database::getDB();
+    $db = Database::getDB();
 
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
       $content  = Parser::parse($_POST['content'], Parser::TYPE_NEW);
       $name     = trim($_POST['name']);
-
-      $eRet     = array(  'content' => $content,
+      $errors   = array();
+      $values   = array(  'content' => $content,
                           'name'    => $name);
 
-      if ('' == $name || '' == $content) {
-        # empty name or content
-        $err = 1;
+      if ($name == '') {
+        $errors['name'] = array(
+          'message' => I18n::t('admin.snippet.new.errors.empty_name'),
+          'value'   => $name);
+      }
 
-      } else if (strlen($name) > 20) {
-        # too long
-        $err = 2;
+      if (strlen($name) > 20) {
+        $errors['name'] = array(
+          'message' => I18n::t('admin.snippet.new.errors.long_name'),
+          'value'   => $name);
+      }
 
-      } else if (!preg_match('#^[A-Za-z0-9]*$#', $name)) {
-        # invalid characters
-        $err = 3;
+      if (!preg_match('#^[A-Za-z0-9]*$#', $name)) {
+        $errors['name'] = array(
+          'message' => I18n::t('admin.snippet.new.errors.invalid_characters'),
+          'value'   => $name);
+      }
 
-      } else if (Snippet::exists($name)) {
-        # already exists
-        $err = 4;
+      if (Snippet::exists($name)) {
+        $errors['name'] = array(
+          'message' => I18n::t('admin.snippet.new.errors.exists'),
+          'value'   => $name);
+      }
+
+      if ($content == '') {
+        $errors['content'] = array(
+          'message' => I18n::t('admin.snippet.new.errors.empty_content'),
+          'value'   => $content);
+      }
+
+      if (!empty($errors)) {
+        $a['data']['errors'] = $errors;
+        $a['data']['values'] = $values;
 
       } else {
         $now    = date("Y-m-d H:i:s", time());
@@ -41,13 +58,7 @@
         $values = array('sssss', array( $name, $content, $content,
                                         $now, $now));
         $res    = $db->insert('snippets', $fields, $values);
-      }
 
-      if ($err != 0) {
-        $eRet['t']        = $err;
-        $a['data']['fe']  = $eRet;
-
-      } else {
         $link = ' <br /><a href="/admin">'.I18n::t('admin.back_link').'</a>';
         return showInfo(I18n::t('admin.snippet.new.success').$link, 'admin');
       }

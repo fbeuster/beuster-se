@@ -132,6 +132,13 @@
     "snippet" : {
       "new" : {
         "content_label" : "Content",
+        "errors" : {
+          "empty_content" : "The content of a snippet can't be empty.",
+          "empty_name" : "The name of a snippet can't be empty.",
+          "exists" : "This snippet already exists.",
+          "invalid_characters" : "The snippet name has invalid characters.",
+          "long_name" : "The snipppet name is too long."
+        },
         "label" : "Create new snippet",
         "submit" : "Create snippet",
         "success" : "The snippet has been added.",

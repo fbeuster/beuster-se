@@ -1,4 +1,39 @@
+@charset "utf-8";
 @import 'lib/_color';
+
+body.article {
+  div.error {
+    border: 1px solid $red;
+    margin-bottom: 2em;
+
+    ul.messages {
+      background: $white;
+      color: $cold_black;
+      list-style: none;
+      margin: 0;
+      padding: 0.25em 1em;
+
+      li {
+        padding-left: 1em;
+        text-indent: -0.7em;
+
+        &:before {
+          color: $red;
+          content: "•";
+          font-weight: bold;
+          padding-right: 0.5em;
+        }
+      }
+    }
+
+    .title {
+      background: $red;
+      color: $white;
+      font-weight: bold;
+      padding: 0.25em 1em;
+    }
+  }
+}
 
 form.userform {
   margin-top: 3em;
@@ -49,6 +84,13 @@ form.userform {
         color: $red;
         display: inline-block;
         margin-left: 0.25em;
+      }
+
+      &.has_error {
+        input,
+        textarea {
+          border-color: $red;
+        }
       }
     }
 
