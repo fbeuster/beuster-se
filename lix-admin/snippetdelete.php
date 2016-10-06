@@ -4,7 +4,7 @@
 
   if ($user && $user->isAdmin()) {
     refreshCookies();
-    $a['filename'] = 'snippetdel.php';
+    $a['filename'] = 'snippetdelete.php';
     $a['data'] = array();
     $db = Database::getDB();
 
