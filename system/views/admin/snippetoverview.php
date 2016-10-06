@@ -16,6 +16,7 @@
           <th><?php echo I18n::t('admin.snippet.overview.table_header.name'); ?></th>
           <th class="date"><?php echo I18n::t('admin.snippet.overview.table_header.created'); ?></th>
           <th class="date"><?php echo I18n::t('admin.snippet.overview.table_header.edited'); ?></th>
+          <th class="button"><?php echo I18n::t('admin.snippet.overview.table_header.delete'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
           <td class="title" title="<?php echo I18n::t('admin.snippet.overview.preview.title'); ?>"><?php echo $entry['name']; ?></td>
           <td ><?php echo $entry['created']; ?></td>
           <td ><?php echo $entry['edited']; ?></td>
+          <td class="delete" title="<?php echo I18n::t('admin.snippet.overview.delete.title'); ?>">x</td>
         </tr>
       <?php
             $i++;

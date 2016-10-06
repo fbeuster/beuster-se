@@ -4,7 +4,38 @@ admin.snippetPreview = {
   slide_duration: 400,
 
   bindHandlers: function() {
+    $('td.delete').on('click', this.deleteHandler);
     $('td.title').on('click', this.titleHandler);
+  },
+
+  deleteHandler: function() {
+    var row     = $(this).parent(),
+        snippet = row.attr('data-snippet');
+
+    $.ajax({
+      type: "POST",
+      url: "/api.php",
+      data: {
+        'scope' : 'admin',
+        'method' : 'ApiSnippetDelete',
+        'data' : {
+          'name' : snippet
+        }
+      },
+      success: function(data) {
+        if (data == 'success') {
+          row
+            .find('td')
+            .wrapInner('<div></div>');
+
+          row
+            .find('td div')
+            .slideUp( admin.snippetPreview.slide_duration, function(){
+              row.remove();
+            });
+        }
+      }
+    });
   },
 
   infoHandler: function() {

@@ -131,6 +131,9 @@
     "not_logged_in" : "You're not logged in.",
     "snippet" : {
       "overview" : {
+        "delete" : {
+          "title" : "Click to delete"
+        },
         "filter" : {
           "label" : "Filter snippet overview",
           "placeholder" : "Snippet name"
@@ -142,6 +145,7 @@
         },
         "table_header" : {
           "created" : "Created",
+          "delete" : "Delete",
           "edited" : "Last edited",
           "name" : "Name"
         }
