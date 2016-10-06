@@ -130,6 +130,21 @@
     "no_access" : "Du hast hier keine Zugriffsrechte.",
     "not_logged_in" : "Du bist nicht eingeloggt.",
     "snippet" : {
+      "delete" : {
+        "choose" : {
+          "label" : "Snippet wählen",
+          "placeholder" : "Bitte wählen...",
+          "submit" : "Gewähltes Snippet ansehen"
+        },
+        "content_label" : "Inhalt",
+        "label" : "Snippet löschen",
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name des Snippets"
+        },
+        "submit" : "Snippet löschen",
+        "success" : "Das Snippet wurde gelöscht."
+      },
       "new" : {
         "content_label" : "Inhalt",
         "errors" : {

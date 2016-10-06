@@ -1,22 +1,20 @@
-﻿
-<article>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
-  <section class="article">
-    <?php
-      if(isset($data['snippetedit'])) {
-        $snippetedit = $data['snippetedit'];
 
-      } else {
-        $snippetedit = array('name' => '', 'content' => '');
-      }
-    ?>
+<article>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
+  <section class="article">
     <form action="/snippetdelete" method="post" class="userform articleform">
       <fieldset>
-        <legend>Snippet bearbeiten</legend>
+        <legend>
+          <?php echo I18n::t('admin.snippet.delete.label'); ?>
+        </legend>
         <label class="long">
-          <span>Snippet wählen</span>
+          <span>
+            <?php echo I18n::t('admin.snippet.delete.choose.label'); ?>
+          </span>
           <select name="snippetname">
-            <option value="">Bitte wählen...</option>
+            <option value="">
+              <?php echo I18n::t('admin.snippet.delete.choose.placeholder'); ?>
+            </option>
             <?php foreach($data['snippets'] as $value) { ?>
             <option value="<?php echo $value; ?>">
             <?php echo $value; ?>
@@ -25,22 +23,26 @@
           </select>
         </label>
 
-        <input type="submit" name="formactionchoose" value="Gewähltes Snippet löschen..." />
+        <input type="submit" name="formactionchoose" value="<?php echo I18n::t('admin.snippet.delete.choose.submit'); ?>" />
 
         <label class="long">
-          <span>Name</span>
-          <input type="text" name="name" value="<?php echo $snippetedit['name']; ?>" readonly />
+          <span>
+            <?php echo I18n::t('admin.snippet.delete.name.label'); ?>
+          </span>
+          <input type="text" name="name" value="<?php echo $data['snippetedit']['name']; ?>" placeholder="<?php echo I18n::t('admin.snippet.delete.name.placeholder'); ?>" readonly />
         </label>
 
         <label class="long">
-          <span>Inhalt</span>
-          <textarea name="content" id="newsinhalt" cols="80" rows="20" readonly ><?php echo $snippetedit['content']; ?></textarea>
+          <span>
+            <?php echo I18n::t('admin.snippet.delete.content_label'); ?>
+          </span>
+          <textarea name="content" id="newsinhalt" cols="80" rows="20" readonly ><?php echo $data['snippetedit']['content']; ?></textarea>
         </label>
 
-        <input type="submit" name="formactiondel" value="Snippet löschen" />
+        <input type="submit" name="formactiondel" value="<?php echo I18n::t('admin.snippet.delete.submit'); ?>" />
       </fieldset>
     </form>
   </section>
 
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
 </article>
