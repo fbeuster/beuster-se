@@ -130,6 +130,16 @@
     "no_access" : "You have no access to this page.",
     "not_logged_in" : "You're not logged in.",
     "snippet" : {
+      "new" : {
+        "content_label" : "Content",
+        "label" : "Create new snippet",
+        "submit" : "Create snippet",
+        "success" : "The snippet has been added.",
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name of the snippet"
+        }
+      },
       "overview" : {
         "delete" : {
           "title" : "Click to delete"

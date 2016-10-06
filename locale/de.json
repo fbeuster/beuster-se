@@ -130,6 +130,16 @@
     "no_access" : "Du hast hier keine Zugriffsrechte.",
     "not_logged_in" : "Du bist nicht eingeloggt.",
     "snippet" : {
+      "new" : {
+        "content_label" : "Inhalt",
+        "label" : "Neues Snippet erstellen",
+        "submit" : "Snippet erstellen",
+        "success" : "Das Snippet wurde hinzugefügt.",
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name des neuen Snippets"
+        }
+      },
       "overview" : {
         "delete" : {
           "title" : "Klicken zum Löschen"
