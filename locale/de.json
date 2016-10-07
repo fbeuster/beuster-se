@@ -145,6 +145,29 @@
         "submit" : "Snippet löschen",
         "success" : "Das Snippet wurde gelöscht."
       },
+      "edit" : {
+        "choose" : {
+          "label" : "Snippet wählen",
+          "placeholder" : "Bitte wählen...",
+          "submit" : "Gewähltes Snippet ansehen"
+        },
+        "content_label" : "Inhalt",
+        "errors" : {
+          "empty_content" : "Der Inhalt eines Snippets kann nicht leer sein.",
+          "empty_name" : "Der Name eines Snippets kann nicht leer sein.",
+          "exists" : "Dieses Snippet existiert bereits.",
+          "invalid_characters" : "Der Name des Snippets enthält ungültige Zeichen.",
+          "long_name" : "Der Name des Snipepts ist zu lang.",
+          "no_old_exists" : "Ein Snippet mit dem alten Namen existiert nicht."
+        },
+        "label" : "Snippet bearbeiten",
+        "submit" : "Snippet bearbeiten",
+        "success" : "Das Snippet wurde geändert.",
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name des neuen Snippets"
+        }
+      },
       "new" : {
         "content_label" : "Inhalt",
         "errors" : {

@@ -1,36 +1,39 @@
 
 <article>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
   <section class="article">
-
+    <?php if(isset($data['errors'])){ ?>
+      <div class="error">
+        <div class="title">Error</div>
+        <ul class="messages">
+        <?php foreach ($data['errors'] as $name => $error) { ?>
+          <li><?php echo $error['message']; ?></li>
+        <?php } ?>
+        </ul>
+      </div>
+    <?php } ?>
     <?php
-      $e = 0;
-
-      if(isset($data['err'])) {
-        $e = 1;
-    ?>
-      <p class="alert notice">
-        Ups, da ist was schief gelaufen.<br>
-        <?php echo $data['err']['type']; ?>
-      </p>
-    <?php
-      }
-
-      if(isset($data['snippetedit'])) {
-        $snippetedit = $data['snippetedit'];
+      if(isset($data['values'])) {
+        $values = $data['values'];
 
       } else {
-        $snippetedit = array('name' => '', 'content' => '');
+        $values = array('name' => '', 'content' => '');
       }
     ?>
 
     <form action="/snippetedit" method="post" class="userform articleform">
       <fieldset>
-        <legend>Snippet bearbeiten</legend>
+        <legend>
+          <?php echo I18n::t('admin.snippet.edit.label'); ?>
+        </legend>
         <label class="required long">
-          <span>Snippet wählen</span>
+          <span>
+            <?php echo I18n::t('admin.snippet.edit.choose.label'); ?>
+          </span>
           <select name="snippetname">
-            <option value="">Bitte wählen...</option>
+            <option value="">
+              <?php echo I18n::t('admin.snippet.edit.choose.placeholder'); ?>
+            </option>
             <?php foreach($data['snippets'] as $value) { ?>
             <option value="<?php echo $value; ?>">
             <?php echo $value; ?>
@@ -39,26 +42,30 @@
           </select>
         </label>
 
-        <input type="submit" name="formactionchoose" value="Gewähltes Snippte bearbeiten">
+        <input type="submit" name="formactionchoose" value="<?php echo I18n::t('admin.snippet.edit.choose.submit'); ?>">
 
-        <input type="hidden" name="old_name" value="<?php echo $snippetedit['name']; ?>">
+        <input type="hidden" name="old_name" value="<?php echo $values['name']; ?>">
         <label class="required long">
-          <span>Name</span>
-          <input type="text" name="name" title="Name of the Snippet" value="<?php echo $snippetedit['name']; ?>" role="newEntryTags">
+          <span>
+            <?php echo I18n::t('admin.snippet.edit.name.label'); ?>
+          </span>
+          <input type="text" name="name" title="<?php echo I18n::t('admin.snippet.edit.name.placeholder'); ?>" placeholder="<?php echo I18n::t('admin.snippet.edit.name.placeholder'); ?>" value="<?php echo $values['name']; ?>" role="newEntryTags">
         </label>
 
         <label class="required long">
-          <span>Inhalt</span>
+          <span>
+            <?php echo I18n::t('admin.snippet.edit.content_label'); ?>
+          </span>
           <?php
-            $content  = $e ? $data['err']['inhalt'] : $snippetedit['content'];
+            $content  = isset($values['content']) ? $values['content'] : '';
             $editor   = new Editor('newsinhalt', 'content', $content);
             $editor->show();
           ?>
         </label>
 
-        <input type="submit" name="formactionchange" value="News ändern" />
+        <input type="submit" name="formactionchange" value="<?php echo I18n::t('admin.snippet.edit.submit'); ?>" />
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
 </article>

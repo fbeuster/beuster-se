@@ -1,11 +1,13 @@
 <?php
-  $a = array();
+  $a    = array();
   $user = User::newFromCookie();
+
   if ($user && $user->isAdmin()) {
     refreshCookies();
-    $a['filename'] = 'snippetedit.php';
-    $a['data'] = array();
-    $err = 0;
+
+    $a['filename']  = 'snippetedit.php';
+    $a['data']      = array();
+
     $db = Database::getDB();
 
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
@@ -14,28 +16,49 @@
         $content  = Parser::parse($_POST['content'], Parser::TYPE_NEW);
         $name     = trim($_POST['name']);
         $old_name = trim($_POST['old_name']);
+        $errors   = array();
+        $values   = array(  'content' => $content,
+                            'name'    => $name);
 
-        $eRet = array(  'content' => $content,
-                        'name'    => $name);
+        if ($name == '') {
+          $errors['name'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.empty_name'),
+            'value'   => $name);
+        }
 
-        if('' == $name || '' == $content) {
-          # empty name or content
-          $err = 1;
+        if (strlen($name) > 20) {
+          $errors['name'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.long_name'),
+            'value'   => $name);
+        }
 
-        } else if(strlen($name) > 20) {
-          $err = 2;
+        if (!preg_match('#^[A-Za-z0-9]*$#', $name)) {
+          $errors['name'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.invalid_characters'),
+            'value'   => $name);
+        }
 
-        } else if(!preg_match('#^[A-Za-z0-9]*$#', $name)) {
-          # invalid characters
-          $err = 3;
+        if (Snippet::exists($name) && $name !== $old_name) {
+          $errors['name'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.exists'),
+            'value'   => $name);
+        }
 
-        } else if(Snippet::exists($name) && $name !== $old_name) {
-          # already exists
-          $err = 4;
+        if (!Snippet::exists($old_name)) {
+          $errors['name'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.no_old_exists'),
+            'value'   => $name);
+        }
 
-        } else if(!Snippet::exists($old_name)) {
-          # old_name not exists
-          $err = 5;
+        if ($content == '') {
+          $errors['content'] = array(
+            'message' => I18n::t('admin.snippet.edit.errors.empty_content'),
+            'value'   => $content);
+        }
+
+        if (!empty($errors)) {
+          $a['data']['errors'] = $errors;
+          $a['data']['values'] = $values;
 
         } else {
           $db2 = $db->getCon();
@@ -54,27 +77,21 @@
           $stmt->bind_param('sssss', $name, $content, $content, $now, $old_name);
           if(!$stmt->execute()) {return $stmt->error;}
           $stmt->close();
+
+          $link = '<br /><a href="/admin">'.I18n::t('admin.back_link').'</a>';
+          return showInfo(I18n::t('admin.snippet.edit.success').$link, 'admin');
         }
 
-        if($err != 0) {
-          $a['data']['err'] = $eRet;
-          $a['data']['err']['type'] = analyseErrNewsEdit($err);
-
-        } else {
-          return showInfo('Das Snippet wurde geändert. <br /><a href="/snippetedit" class="back">Zurück zum Bearbeiten</a>', 'snippetedit');
-        }
-
-      } else if(isset($_POST['formactionchoose'])) {
-        $name = trim($_POST['snippetname']);
-
+      } else if (isset($_POST['formactionchoose'])) {
+        $name   = trim($_POST['snippetname']);
         $fields = array('name', 'content_de');
         $conds  = array('name = ?', 's', array($name));
         $res    = $db->select('snippets', $fields, $conds);
 
         if (count($res) > 0) {
-          $a['data']['snippetedit'] = array(
-                                        'name'    => $name,
-                                        'content' => $res[0]['content_de']);
+          $a['data']['values'] = array(
+                                  'name'    => $name,
+                                  'content' => $res[0]['content_de']);
         }
       }
     }
@@ -90,12 +107,14 @@
 
     $a['data']['snippets'] = $snippets;
 
-    return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
+    return $a;
 
-  } else if($user){
-    return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
+  } else if ($user) {
+    return showInfo(I18n::t('admin.no_access'), 'blog');
 
   } else {
-    return showInfo('Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>', 'blog');
+    $link = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
+    return showInfo(I18n::t('admin.not_logged_in').$link, 'login');
   }
+
 ?>
