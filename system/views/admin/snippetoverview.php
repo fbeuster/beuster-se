@@ -16,8 +16,7 @@
           <th><?php echo I18n::t('admin.snippet.overview.table_header.name'); ?></th>
           <th class="date"><?php echo I18n::t('admin.snippet.overview.table_header.created'); ?></th>
           <th class="date"><?php echo I18n::t('admin.snippet.overview.table_header.edited'); ?></th>
-          <th class="button"><?php echo I18n::t('admin.snippet.overview.table_header.edit'); ?></th>
-          <th class="button"><?php echo I18n::t('admin.snippet.overview.table_header.delete'); ?></th>
+          <th class="button"><?php echo I18n::t('admin.snippet.overview.table_header.actions'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -30,10 +29,16 @@
           <td class="title" title="<?php echo I18n::t('admin.snippet.overview.preview.title'); ?>"><?php echo $entry['name']; ?></td>
           <td ><?php echo $entry['created']; ?></td>
           <td ><?php echo $entry['edited']; ?></td>
-          <td title="<?php echo I18n::t('admin.snippet.overview.edit.title'); ?>">
-            <a href="/snippetedit/s/<?php echo $entry['name']; ?>">Edit</a>
+          <td class="actions">
+            <div>
+              <a class="edit"  title="<?php echo I18n::t('admin.snippet.overview.edit.title'); ?>" href="/snippetedit/s/<?php echo $entry['name']; ?>">
+                <?php echo I18n::t('admin.snippet.overview.edit.text'); ?>
+              </a>
+              <a class="delete" title="<?php echo I18n::t('admin.snippet.overview.delete.title'); ?>">
+                <?php echo I18n::t('admin.snippet.overview.delete.text'); ?>
+              </a>
+            </div>
           </td>
-          <td class="delete" title="<?php echo I18n::t('admin.snippet.overview.delete.title'); ?>">x</td>
         </tr>
       <?php
             $i++;

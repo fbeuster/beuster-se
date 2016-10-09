@@ -4,12 +4,12 @@ admin.snippetPreview = {
   slide_duration: 400,
 
   bindHandlers: function() {
-    $('td.delete').on('click', this.deleteHandler);
+    $('td.actions a.delete').on('click', this.deleteHandler);
     $('td.title').on('click', this.titleHandler);
   },
 
   deleteHandler: function() {
-    var row     = $(this).parent(),
+    var row     = $(this).closest('tr'),
         snippet = row.attr('data-snippet');
 
     $.ajax({

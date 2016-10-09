@@ -187,9 +187,11 @@
       },
       "overview" : {
         "delete" : {
+          "text" : "Löschen",
           "title" : "Klicken zum Löschen"
         },
         "edit" : {
+          "text" : "Bearbeiten",
           "title" : "Klicken zum Bearbeiten"
         },
         "filter" : {
@@ -202,9 +204,8 @@
           "title" : "Klicken für Vorschau"
         },
         "table_header" : {
+          "actions" : "Aktionen",
           "created" : "Erstellt",
-          "delete" : "Löschen",
-          "edit" : "Bearbeiten",
           "edited" : "Bearbeitet",
           "name" : "Name"
         }
