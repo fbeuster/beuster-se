@@ -94,6 +94,19 @@
                                   'content' => $res[0]['content_de']);
         }
       }
+    } else if ('GET' == $_SERVER['REQUEST_METHOD']) {
+      if (isset($_GET['snip'])) {
+        $name   = trim($_GET['snip']);
+        $fields = array('name', 'content_de');
+        $conds  = array('name = ?', 's', array($name));
+        $res    = $db->select('snippets', $fields, $conds);
+
+        if (count($res) > 0) {
+          $a['data']['values'] = array(
+                                  'name'    => $name,
+                                  'content' => $res[0]['content_de']);
+        }
+      }
     }
 
     $fields = array('name');

@@ -161,7 +161,7 @@
           "no_old_exists" : "A snippet with the old name does not exist."
         },
         "label" : "Edit snippet",
-        "submit" : "Edit snippet",
+        "submit" : "Save changes",
         "success" : "The snippet has been changed.",
         "name" : {
           "label" : "Name",
@@ -189,6 +189,9 @@
         "delete" : {
           "title" : "Click to delete"
         },
+        "edit" : {
+          "title" : "Click to edit"
+        },
         "filter" : {
           "label" : "Filter snippet overview",
           "placeholder" : "Snippet name"
@@ -201,6 +204,7 @@
         "table_header" : {
           "created" : "Created",
           "delete" : "Delete",
+          "edit" : "Edit",
           "edited" : "Last edited",
           "name" : "Name"
         }

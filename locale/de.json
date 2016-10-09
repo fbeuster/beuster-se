@@ -161,7 +161,7 @@
           "no_old_exists" : "Ein Snippet mit dem alten Namen existiert nicht."
         },
         "label" : "Snippet bearbeiten",
-        "submit" : "Snippet bearbeiten",
+        "submit" : "Änderungen speichern",
         "success" : "Das Snippet wurde geändert.",
         "name" : {
           "label" : "Name",
@@ -189,6 +189,9 @@
         "delete" : {
           "title" : "Klicken zum Löschen"
         },
+        "edit" : {
+          "title" : "Klicken zum Bearbeiten"
+        },
         "filter" : {
           "label" : "Filter Snippetübersicht",
           "placeholder" : "Snippetname"
@@ -201,6 +204,7 @@
         "table_header" : {
           "created" : "Erstellt",
           "delete" : "Löschen",
+          "edit" : "Bearbeiten",
           "edited" : "Bearbeitet",
           "name" : "Name"
         }

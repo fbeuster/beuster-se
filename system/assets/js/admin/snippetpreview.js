@@ -81,7 +81,7 @@ admin.snippetPreview = {
               .prepend(info)
               .appendTo(td);
 
-          td.attr('colspan', '4')
+          td.attr('colspan', row.find('td').length)
             .appendTo(tr);
 
           tr.insertAfter(row);
