@@ -3,7 +3,7 @@
 var I18n = I18n || {};
 
 beusterse.i18n = {
-  lang_path   : 'locale/',
+  lang_path   : '/locale/',
   lang_file   : '',
   translation : {},
 
