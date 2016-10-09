@@ -61,9 +61,16 @@ $(document).ready(function(){
         var value = this.value;
 
         $('table.newslist tbody tr').each(function(){
-          var $link = $(this).find('.title a');
+          var text;
 
-          if ($link.text().toLowerCase().includes(value.toLowerCase())) {
+          if ($(this).find('.title a').length > 0) {
+            text = $(this).find('.title a').text();
+
+          } else {
+            text = $(this).find('.title').text();
+          }
+
+          if (text.toLowerCase().includes(value.toLowerCase())) {
             $(this).removeClass('hidden');
 
           } else {
