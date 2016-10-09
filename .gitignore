@@ -2,6 +2,7 @@
 .settings/*
 *.sublime-project
 *.sublime-workspace
+*.psd
 
 # this is webspace specific
 .htaccess
