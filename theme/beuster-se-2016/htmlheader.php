@@ -48,7 +48,7 @@
       <?php } else { ?>
       <span><a href="/">beuster{se}</a></span>
       <?php } ?>
-      <nav>
+      <nav class="clearfix">
         <menu><?php genMenu(); ?></menu>
         <div class="search">
           <form action="/search" method="post">

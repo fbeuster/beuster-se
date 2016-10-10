@@ -17,3 +17,19 @@ header {
     margin: 0 auto;
   }
 }
+
+.clearfix:after,
+.clearfix:before {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
