@@ -15,6 +15,13 @@ header {
 
   .wrapper {
     margin: 0 auto;
+
+    .row {
+      @include display_flex;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
   }
 }
 

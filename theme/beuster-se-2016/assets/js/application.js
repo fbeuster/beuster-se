@@ -7,6 +7,7 @@ var beusterse = beusterse || {};
 //@ lib/_utilities
 //@ comment_form
 //@ gallery
+//@ search
 
 $(document).ready(function(){
   beusterse.i18n.init()
@@ -15,6 +16,7 @@ $(document).ready(function(){
   function runApp() {
     beusterse.comment_form.init();
     beusterse.gallery.init();
+    beusterse.search.init();
 
     $('body.article section.gallery li').hover(function(){
       $(this).toggleClass('activated');

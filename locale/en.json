@@ -323,6 +323,12 @@
     "next_text" : "Next",
     "prev_text" : "Prev"
   },
+  "search" :  {
+    "form" : {
+      "placeholder" : "Search for...",
+      "submit" : "Search"
+    }
+  },
   "setup" : {
     "admin_user" : {
       "back_link" : "Back",

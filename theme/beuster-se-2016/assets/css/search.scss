@@ -1,7 +1,8 @@
 header {
   .search {
-    margin-bottom: 0.3em;
-    padding: 0.8em 2em 0 1em;
+    -webkit-align-self: center;
+    align-self: center;
+    padding: 1em 2em;
 
     input {
       @include clear_button;
@@ -11,6 +12,8 @@ header {
 
       &[type=text] {
         border-bottom: 1px solid transparent;
+        transition: 0.25s width;
+        width: 10.5em;
 
         &:focus,
         &:hover {
@@ -40,6 +43,14 @@ header {
     }
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
       color: $white;
+    }
+
+    &.inactive {
+      input {
+        &[type=text] {
+          width: 0em;
+        }
+      }
     }
   }
 }

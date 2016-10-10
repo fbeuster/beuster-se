@@ -43,19 +43,21 @@
  <body class="<?php echo makeBodyClass($currPage); ?>">
   <header>
     <div class="wrapper">
-      <?php if($currPage == 'index') { ?>
-      <h1><a href="/">beuster{se}</a></h1>
-      <?php } else { ?>
-      <span><a href="/">beuster{se}</a></span>
-      <?php } ?>
-      <nav class="clearfix">
-        <menu><?php genMenu(); ?></menu>
+      <div class="row">
+        <?php if($currPage == 'index') { ?>
+        <h1><a href="/">beuster{se}</a></h1>
+        <?php } else { ?>
+        <span><a href="/">beuster{se}</a></span>
+        <?php } ?>
         <div class="search">
           <form action="/search" method="post">
-            <input type="text" placeholder="Search for..." name="s">
-            <input type="submit" value="" alt="search" name="search">
+            <input type="text" placeholder="<?php echo I18n::t('search.form.placeholder'); ?>" name="s">
+            <input type="submit" value="" alt="<?php echo I18n::t('search.form.submit'); ?>" name="search">
           </form>
         </div>
+      </div>
+      <nav>
+        <menu class="clearfix"><?php genMenu(); ?></menu>
       </nav>
     </div>
   </header>
