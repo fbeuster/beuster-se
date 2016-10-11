@@ -77,6 +77,13 @@ table.newslist {
   tr {
     display: table-row;
 
+    &.empty {
+      td {
+        font-style: italic;
+        text-align-last: center;
+      }
+    }
+
     &.hidden {
       display: none;
     }

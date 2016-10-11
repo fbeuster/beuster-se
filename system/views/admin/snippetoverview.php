@@ -43,7 +43,11 @@
       <?php
             $i++;
           }
-        } ?>
+        } else { ?>
+        <tr class="backendTableRow0 empty">
+          <td colspan="5">No snippets yet.</td>
+        </tr>
+      <?php } ?>
       </tbody>
     </table>
   </section>
