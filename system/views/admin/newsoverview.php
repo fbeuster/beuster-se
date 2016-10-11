@@ -1,10 +1,10 @@
 
 <article>
-  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
-  	<h1><?php echo I18n::t('admin.article.overview.label'); ?></h1>
+  	<h1><?php I18n::e('admin.article.overview.label'); ?></h1>
   	<p>
-      <?php echo I18n::t('admin.article.overview.summary', array(
+      <?php I18n::e('admin.article.overview.summary', array(
         count($data['news']),
         $data['cmtAmount'],
         $data['enaAmount']
@@ -12,19 +12,19 @@
   	</p>
     <form>
       <label>
-        <?php echo I18n::t('admin.article.overview.filter.label'); ?>:
-        <input type="text" name="article_filter" placeholder="<?php echo I18n::t('admin.article.overview.filter.placeholder'); ?>">
+        <?php I18n::e('admin.article.overview.filter.label'); ?>:
+        <input type="text" name="article_filter" placeholder="<?php I18n::e('admin.article.overview.filter.placeholder'); ?>">
       </label>
     </form>
     <table class="newslist">
       <thead>
         <tr>
           <th class="smallNumber">#</th>
-          <th class="smallNumber"><?php echo I18n::t('admin.article.overview.table_header.id'); ?></th>
-          <th><?php echo I18n::t('admin.article.overview.table_header.article'); ?></th>
-          <th class="bigNumber"><?php echo I18n::t('admin.article.overview.table_header.hits'); ?></th>
-          <th class="bigNumber"><?php echo I18n::t('admin.article.overview.table_header.hits_per_day'); ?></th>
-          <th class="date"><?php echo I18n::t('admin.article.overview.table_header.date'); ?></th>
+          <th class="smallNumber"><?php I18n::e('admin.article.overview.table_header.id'); ?></th>
+          <th><?php I18n::e('admin.article.overview.table_header.article'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits_per_day'); ?></th>
+          <th class="date"><?php I18n::e('admin.article.overview.table_header.date'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -48,5 +48,5 @@
     </table>
   </section>
 
-  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

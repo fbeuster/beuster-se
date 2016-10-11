@@ -1,6 +1,6 @@
 
 <article>
-  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
 
   <?php
@@ -17,14 +17,14 @@
 
     <form action="/newsedit" method="post" class="userform articleform">
       <fieldset>
-        <legend><?php echo I18n::t('admin.article.edit.label'); ?></legend>
+        <legend><?php I18n::e('admin.article.edit.label'); ?></legend>
         <label class="required long">
           <span>
-            <?php echo I18n::t('admin.article.edit.choose.label'); ?>
+            <?php I18n::e('admin.article.edit.choose.label'); ?>
           </span>
           <select name="newsid">
             <option value="0">
-              <?php echo I18n::t('admin.article.edit.choose.placeholder'); ?>
+              <?php I18n::e('admin.article.edit.choose.placeholder'); ?>
             </option>
             <?php foreach($data['news'] as $value) { ?>
               <option value="<?php echo $value['newsid']; ?>">
@@ -34,7 +34,7 @@
             <?php } ?>
           </select>
         </label>
-        <input type="submit" name="formactionchoose" value="<?php echo I18n::t('admin.article.edit.choose.submit'); ?>">
+        <input type="submit" name="formactionchoose" value="<?php I18n::e('admin.article.edit.choose.submit'); ?>">
         <br>
 
         <?php
@@ -50,27 +50,27 @@
 
         <label class="required long">
           <span>
-            <?php echo I18n::t('admin.article.edit.title.label'); ?>
+            <?php I18n::e('admin.article.edit.title.label'); ?>
           </span>
-          <input type="text" name="newstitel" value="<?php if($e) echo $data['err']['titel']; else echo $newsedit['newstitel']; ?>" role="newEntryTitle" placeholder="<?php echo I18n::t('admin.article.edit.title.placeholder'); ?>">
+          <input type="text" name="newstitel" value="<?php if($e) echo $data['err']['titel']; else echo $newsedit['newstitel']; ?>" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.edit.title.placeholder'); ?>">
         </label>
 
         <input type="hidden" name="newsid2" size="3" value="<?php if($e) echo $data['err']['titel']; else echo $newsedit['newsidbea']; ?>">
 
         <label>
           <span>
-            <?php echo I18n::t('admin.article.edit.manual_release_label'); ?>
+            <?php I18n::e('admin.article.edit.manual_release_label'); ?>
           </span>
           <input type="checkbox" name="enable" <?php echo isset($data['newsedit']) && $data['newsedit']['newsena'] == 0 ? ' checked="checked"' : ''; ?>>
         </label>
 
         <label class="required">
           <span>
-            <?php echo I18n::t('admin.article.edit.category.label'); ?>
+            <?php I18n::e('admin.article.edit.category.label'); ?>
           </span>
           <select name="cat" class="catSelect">
             <option value="error">
-              <?php echo I18n::t('admin.article.edit.category.placeholder'); ?>
+              <?php I18n::e('admin.article.edit.category.placeholder'); ?>
             </option>
             <?php foreach($data['cats'] as $cat) {
                     if(!$newsedit['isPlaylist'] && $newsedit['newscat'] == $cat) {
@@ -87,11 +87,11 @@
 
         <label>
           <span>
-            <?php echo I18n::t('admin.article.edit.new_category.label'); ?>
+            <?php I18n::e('admin.article.edit.new_category.label'); ?>
           </span>
           <select name="catPar">
             <option value="error">
-              <?php echo I18n::t('admin.article.edit.new_category.placeholder_select'); ?>
+              <?php I18n::e('admin.article.edit.new_category.placeholder_select'); ?>
               </option>
             <?php foreach($data['pars'] as $par) { ?>
               <option value="<?php echo $par; ?>">
@@ -99,16 +99,16 @@
               </option>
             <?php } ?>
           </select>
-          <input type="text" name="catneu" placeholder="<?php echo I18n::t('admin.article.edit.new_category.placeholder_input'); ?>" title="<?php echo I18n::t('admin.article.edit.new_category.placeholder_input'); ?>">
+          <input type="text" name="catneu" placeholder="<?php I18n::e('admin.article.edit.new_category.placeholder_input'); ?>" title="<?php I18n::e('admin.article.edit.new_category.placeholder_input'); ?>">
         </label>
 
         <label>
           <span>
-            <?php echo I18n::t('admin.article.edit.playlist.label'); ?>
+            <?php I18n::e('admin.article.edit.playlist.label'); ?>
           </span>
           <select name="pl">
             <option value="error">
-              <?php echo I18n::t('admin.article.edit.playlist.placeholder'); ?>
+              <?php I18n::e('admin.article.edit.playlist.placeholder'); ?>
             </option>
             <?php foreach($data['pls'] as $pl) {
                     if($newsedit['isPlaylist'] && $newsedit['newscat'] == $pl) {
@@ -123,17 +123,17 @@
 
         <label>
           <span>
-            <?php echo I18n::t('admin.article.edit.new_playlist.label'); ?>
+            <?php I18n::e('admin.article.edit.new_playlist.label'); ?>
           </span>
-          <input type="text" name="plneu" placeholder="<?php echo I18n::t('admin.article.edit.new_playlist.placeholder_name'); ?>" title="<?php echo I18n::t('admin.article.edit.new_playlist.placeholder_name'); ?>">
-          <input type="text" name="plneuid" placeholder="<?php echo I18n::t('admin.article.edit.new_playlist.placeholder_id'); ?>" title="<?php echo I18n::t('admin.article.edit.new_playlist.placeholder_id'); ?>">
+          <input type="text" name="plneu" placeholder="<?php I18n::e('admin.article.edit.new_playlist.placeholder_name'); ?>" title="<?php I18n::e('admin.article.edit.new_playlist.placeholder_name'); ?>">
+          <input type="text" name="plneuid" placeholder="<?php I18n::e('admin.article.edit.new_playlist.placeholder_id'); ?>" title="<?php I18n::e('admin.article.edit.new_playlist.placeholder_id'); ?>">
         </label>
 
         <label class="long">
           <span>
-            <?php echo I18n::t('admin.article.edit.tags.label'); ?>
+            <?php I18n::e('admin.article.edit.tags.label'); ?>
           </span>
-          <input type="text" name="tags" title="<?php echo I18n::t('admin.article.edit.playlist.placeholder'); ?>" value="<?php echo $newsedit['newstags']; ?>" role="newEntryTags" placeholder="<?php echo I18n::t('admin.article.edit.playlist.placeholder'); ?>">
+          <input type="text" name="tags" title="<?php I18n::e('admin.article.edit.playlist.placeholder'); ?>" value="<?php echo $newsedit['newstags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.edit.playlist.placeholder'); ?>">
         </label>
 
         <p class="newsNewHelp">
@@ -157,7 +157,7 @@
 
         <label class="required long">
           <span>
-            <?php echo I18n::t('admin.article.edit.content_label'); ?>
+            <?php I18n::e('admin.article.edit.content_label'); ?>
           </span>
           <?php
             $content  = $e ? $data['err']['inhalt'] : $newsedit['newsinhalt'];
@@ -172,13 +172,13 @@
               <tr>
                 <th>&nbsp;</th>
                 <th>
-                  <?php echo I18n::t('admin.article.edit.pictures.table.thumbnail'); ?>
+                  <?php I18n::e('admin.article.edit.pictures.table.thumbnail'); ?>
                 </th>
                 <th>
-                  <?php echo I18n::t('admin.article.edit.pictures.table.delete'); ?>
+                  <?php I18n::e('admin.article.edit.pictures.table.delete'); ?>
                 </th>
                 <th>
-                  <?php echo I18n::t('admin.article.edit.pictures.table.bbcode'); ?>
+                  <?php I18n::e('admin.article.edit.pictures.table.bbcode'); ?>
                 </th>
               </tr>
             </thead>
@@ -204,24 +204,24 @@
 
 
         <p>
-          <?php echo I18n::t('admin.article.edit.pictures.info', array('5MB')); ?>
+          <?php I18n::e('admin.article.edit.pictures.info', array('5MB')); ?>
         </p>
         <label class="required">
           <span>
-            <?php echo I18n::t('admin.article.edit.thumbnail.label'); ?>
+            <?php I18n::e('admin.article.edit.thumbnail.label'); ?>
           </span>
-          <input type="text" name="thumb" placeholder="<?php echo I18n::t('admin.article.edit.thumbnail.placeholder'); ?>">
+          <input type="text" name="thumb" placeholder="<?php I18n::e('admin.article.edit.thumbnail.placeholder'); ?>">
         </label>
 
         <ol id="files">
           <li><input type="file" name="file[]"></li>
         </ol>
 
-        <input type="button" value="<?php echo I18n::t('admin.article.edit.thumbnail.remove_field'); ?>" class="delInp">
-        <input type="button" value="<?php echo I18n::t('admin.article.edit.thumbnail.add_field'); ?>" id="addInp"><br><br>
-        <input type="submit" name="formactionchange" value="<?php echo I18n::t('admin.article.edit.submit'); ?>" />
+        <input type="button" value="<?php I18n::e('admin.article.edit.thumbnail.remove_field'); ?>" class="delInp">
+        <input type="button" value="<?php I18n::e('admin.article.edit.thumbnail.add_field'); ?>" id="addInp"><br><br>
+        <input type="submit" name="formactionchange" value="<?php I18n::e('admin.article.edit.submit'); ?>" />
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back"><?php echo I18n::t('admin.back_link'); ?></a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>
