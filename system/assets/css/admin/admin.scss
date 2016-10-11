@@ -72,6 +72,7 @@ input[name=article_filter] {
 
 table.commentlist,
 table.newslist {
+  margin-top: 1em;
   width: 100%;
 
   tr {
@@ -86,6 +87,10 @@ table.newslist {
 
     &.hidden {
       display: none;
+    }
+
+    th {
+      border-bottom: 1px solid $dark_grey;
     }
   }
 
