@@ -66,7 +66,7 @@
   <?php } else { ?>
   <section class="content">
     <section class="article">
-      <p><?php echo I18n::t('category.no_articles_found'); ?></p>
+      <p><?php I18n::e('category.no_articles_found'); ?></p>
     </section>
   </section><?php
  }?>

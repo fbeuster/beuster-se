@@ -46,5 +46,5 @@
 
       echo genPager($page->getTotalPagesCount(), $page->getStartPage(), $dest); ?>
     <?php } else { ?>
-      <p class="info"><?php echo I18n::t('category.no_articles_found'); ?></p><?php
+      <p class="info"><?php I18n::e('category.no_articles_found'); ?></p><?php
     } ?>

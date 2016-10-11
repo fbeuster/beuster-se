@@ -51,8 +51,8 @@
         <?php } ?>
         <div class="search">
           <form action="/search" method="post">
-            <input type="text" placeholder="<?php echo I18n::t('search.form.placeholder'); ?>" name="s">
-            <input type="submit" value="" alt="<?php echo I18n::t('search.form.submit'); ?>" name="search">
+            <input type="text" placeholder="<?php I18n::e('search.form.placeholder'); ?>" name="s">
+            <input type="submit" value="" alt="<?php I18n::e('search.form.submit'); ?>" name="search">
           </form>
         </div>
       </div>
