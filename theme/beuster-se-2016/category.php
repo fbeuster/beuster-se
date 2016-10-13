@@ -5,6 +5,7 @@
   if ($page->hasArticles()) {  ?>
 
 <section class="content">
+  <span class="categoryTitle"><?php echo $page->getTitle(); ?></span>
 
 <?php
 

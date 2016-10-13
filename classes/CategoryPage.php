@@ -221,6 +221,7 @@ class CategoryPage extends Page {
 
     if ($this->category == null) {
       $joins = null;
+      $this->title = $this->config->get('site_title');
 
     } else {
       $joins      = $this->getCategoryJoins();
@@ -230,7 +231,8 @@ class CategoryPage extends Page {
       $conds[1] = $conds[1] . $cat_conds[1];
       $conds[2] = $conds[2] + $cat_conds[2];
 
-      $this->destination = $this->category->getNameUrl();
+      $this->destination  = $this->category->getNameUrl();
+      $this->title        = $this->category->getName();
     }
 
     $fields = array('news.ID');
@@ -244,8 +246,6 @@ class CategoryPage extends Page {
         $this->articles[] = new Article($aId['ID']);
       }
     }
-
-    $this->title = $this->config->get('site_title');
   }
 }
 
