@@ -303,6 +303,18 @@
   },
   "login" : {
     "already_signed_in" : "Du bist bereits eingeloggt.",
+    "form" : {
+      "legend" : "Anmelden",
+      "name" : {
+        "label" : "Nutzername:",
+        "placeholder" : "Nutzername"
+      },
+      "password" : {
+        "label" : "Passwort:",
+        "placeholder" : "Passwort"
+      },
+      "submit" : "Anmelden"
+    },
     "invalid_password" : "Das eingegebene Password ist ungültig.",
     "invalid_user" : "Es wurde kein Benutzer mit den angegebenen Namen gefunden.",
     "success" : "Du bist nun eingeloggt.",

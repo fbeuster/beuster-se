@@ -303,6 +303,18 @@
   },
   "login" : {
     "already_signed_in" : "You're already signed in.",
+    "form" : {
+      "legend" : "Sign in",
+      "name" : {
+        "label" : "Username:",
+        "placeholder" : "Username"
+      },
+      "password" : {
+        "label" : "Password:",
+        "placeholder" : "Password"
+      },
+      "submit" : "Sign in"
+    },
     "invalid_password" : "The entered password is invalid.",
     "invalid_user" : "The entered username could not be found.",
     "success" : "You're signed in now.",
