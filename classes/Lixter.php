@@ -157,6 +157,17 @@ class Lixter {
           # page argument is admin page
           $this->page = new AdminPage($_GET['p']);
 
+        } else if ($_GET['p'] == 'search') {
+          # page argument is search page
+          $this->page = new SearchPage();
+
+          if ($this->page->isValid()) {
+            $this->page->search();
+
+          } else {
+            $this->page = new ErrorPage($this->page->getError());
+          }
+
         } else if (StaticPage::exists($_GET['p'])) {
           # page argument is static page
           $this->page = new StaticPage($_GET['p']);

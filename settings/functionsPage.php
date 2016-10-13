@@ -73,7 +73,8 @@
 
     if ($page->getType() === Page::STATIC_PAGE
       || $page->getType() === Page::CONTENT_PAGE
-      || $page->getType() === Page::CATEGORY_PAGE) {
+      || $page->getType() === Page::CATEGORY_PAGE
+      || $page->getType() === Page::SEARCH_PAGE) {
       $return_title = $page->getTitle();
 
     } else {

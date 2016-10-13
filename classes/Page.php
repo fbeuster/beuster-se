@@ -5,6 +5,7 @@ abstract class Page {
   const CONTENT_PAGE  = 2;
   const ADMIN_PAGE    = 3;
   const CATEGORY_PAGE = 4;
+  const SEARCH_PAGE   = 5;
 
   public function __construct() {
   }
@@ -32,6 +33,7 @@ abstract class Page {
   public function getPageClass() {
     switch($this->getType()) {
       case Page::CATEGORY_PAGE:
+      case Page::SEARCH_PAGE;
         return 'multipleArticles';
       case Page::STATIC_PAGE:
         return 'singleArticle';

@@ -2,14 +2,14 @@
 
 /**
  * Provide Sorting algorithms.
- * 
+ *
  * \file classes/Sorting.php
  * \author Felix Beuster
  */
 
 /**
 * Provide Sorting algorithms.
-* 
+*
 * \class Sorting
 * \author Felix Beuster
 */
@@ -17,7 +17,7 @@ class Sorting {
 
 	/**
 	 * Sorts two Article from old to new.
-	 * 
+	 *
 	 * @param Article $a first item
 	 * @param Article $b second item
 	 * @return int
@@ -30,7 +30,7 @@ class Sorting {
 
 	/**
 	 * Sorts two Article from new to old.
-	 * 
+	 *
 	 * @param Article $a first item
 	 * @param Article $b second item
 	 * @return int
@@ -43,7 +43,7 @@ class Sorting {
 
 	/**
 	 * Sorts two DownloadFile by name, ascending oder.
-	 * 
+	 *
 	 * @param DownloadFile $a first item
 	 * @param DownloadFile $b second item
 	 * @return int
@@ -56,7 +56,7 @@ class Sorting {
 
 	/**
 	 * Sorts two DownloadFile by name, descending oder.
-	 * 
+	 *
 	 * @param DownloadFile $a first item
 	 * @param DownloadFile $b second item
 	 * @return int
@@ -65,6 +65,22 @@ class Sorting {
 		$a = strtolower($a->getName());
 		$b = strtolower($b->getName());
 		return -1 * strcmp($a, $b);
+	}
+
+	public static function searchResultScoreDesc($a, $b) {
+		if (!isset($a['score'], $b['score'])) {
+			return 0;
+		}
+
+		if (!isset($a['score'])) {
+			return 1;
+		}
+
+		if (!isset($b['score'])) {
+			return -1;
+		}
+
+    return ($a['score'] > $b['score']) ? -1 : 1;
 	}
 }
 

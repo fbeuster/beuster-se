@@ -327,7 +327,15 @@
     "form" : {
       "placeholder" : "Suchen nach...",
       "submit" : "Suchen"
-    }
+    },
+    "info" : {
+      "looked_for" : "Du hast nach dem Begriff %s gesucht.",
+      "no_results" : "Keiner Ergebnisse gefunden.",
+      "results" : "Zeige Ergebnisse %s bis %s von %s"
+    },
+    "no_search_term" : "Kein Suchbegriff angegeben.",
+    "title" : "%s - Suche",
+    "too_short" : "Der Suchbegriff war zu kurz."
   },
   "setup" : {
     "admin_user" : {

@@ -36,6 +36,47 @@ class Utilities {
             strpos($agent, 'MSIE 7.0') || strpos($agent, 'MSIE 8.0');
   }
 
+  public static function levenshtein($a, $b) {
+    # based on santhoshtr's method https://gist.github.com/santhoshtr/1710925
+    $length1 = mb_strlen($a, 'UTF-8');
+    $length2 = mb_strlen($b, 'UTF-8');
+
+    if ($length1 < $length2) {
+      return Utilities::levenshtein($b, $a);
+    }
+
+    if ($length1 == 0) {
+      return $length2;
+    }
+
+    if ($a === $b) {
+      return 0;
+    }
+
+    $prevRow    = range( 0, $length2);
+    $currentRow = array();
+
+    for ($i = 0; $i < $length1; $i++) {
+      $currentRow     = array();
+      $currentRow[0]  = $i + 1;
+
+      $c1 = mb_substr($a, $i, 1, 'UTF-8');
+
+      for ($j = 0; $j < $length2; $j++) {
+        $c2 = mb_substr($b, $j, 1, 'UTF-8');
+
+        $insertions     = $prevRow[$j+1] + 1;
+        $deletions      = $currentRow[$j] + 1;
+        $substitutions  = $prevRow[$j] + (($c1 != $c2) ? 1 : 0);
+        $currentRow[]   = min($insertions, $deletions, $substitutions);
+      }
+
+      $prevRow = $currentRow;
+    }
+
+    return $prevRow[$length2];
+  }
+
   public static function loadSystemView($view, $args = array()) {
     include (__DIR__ . '/../system/views/' . $view);
   }
