@@ -1,13 +1,13 @@
 <?php
 
 abstract class Page {
-  const STATIC_PAGE   = 1;
-  const CONTENT_PAGE  = 2;
-  const ADMIN_PAGE    = 3;
-  const CATEGORY_PAGE = 4;
-  const SEARCH_PAGE   = 5;
-  const ARTICLE_PAGE  = 6;
-  const INDEX_PAGE    = 7;
+  const ADMIN_PAGE    = 1;
+  const ARTICLE_PAGE  = 2;
+  const CATEGORY_PAGE = 3;
+  const CONTENT_PAGE  = 4;
+  const INDEX_PAGE    = 5;
+  const SEARCH_PAGE   = 6;
+  const STATIC_PAGE   = 7;
 
   public function __construct() {
   }
