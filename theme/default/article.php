@@ -1,16 +1,21 @@
 <?php
-  if (count($data['articles'])) {
-    foreach ($data['articles'] as $article) {
-      $url = 'http://beusterse.de'.replaceUml($article->getLink());
-      $anhang = ' #beusterse ';
-      if(strlen($article->getTitle()) > 61) {
-        $text = substr($article->getTitle(), 0, 60).'...'.$anhang.$url;
-      } else {
-        $text = $article->getTitle().$anhang.$url;
-      } ?>
+  $page     = Lixter::getLix()->getPage();
+  $article  = $page->getArticle();
+
+  $url    = 'http://beusterse.de'.replaceUml($article->getLink());
+  $anhang = ' #beusterse ';
+
+  if (strlen($article->getTitle()) > 61) {
+    $text = substr($article->getTitle(), 0, 60).'...'.$anhang.$url;
+
+  } else {
+    $text = $article->getTitle().$anhang.$url;
+  }
+?>
 
  <article>
     <h1><?php echo $article->getTitle(); ?></h1>
+    <?php if ($article->getProjState() !== 0) { ?>
     <span value="<?php echo substr($article->getProjState(), 0, 1); ?>">
       Status: <?php echo substr($article->getProjState(), 1, strlen($article->getProjState())-1); ?>
     </span>
@@ -21,7 +26,10 @@
 
   <!-- comments -->
   <div>
-    <h2 id="comments">Kommentare (<?php echo echo $article->getCommentsCount(); ?>)</h2>
+    <h2 id="comments">
+      <?php I18n::e('comment.title'); ?>
+      (<?php echo $article->getCommentsCount(); ?>)
+    </h2>
     <?php
       $cmtReply = $article->getLink();
       if(count($article->getComments()) > 0) {
@@ -35,15 +43,12 @@
       <?php } ?>
     <?php } else { ?>
     <div>
-      <p>Keine Kommentare vorhanden.</p>
+      <p><?php I18n::e('comment.empty'); ?></p>
     </div>
     <?php } ?>
     <div id="newComment">
-      <span>Schreibe einen Kommentar!</span>
+      <span><?php I18n::e('comment.form.legend'); ?></span>
        <?php $err = array('t' => $data['eType'], 'c' => $data['ec']);
-       echo genFormPublic($err, $cmtReply, time(), 'Kommentar schreiben', 'commentForm', $data['comment_reply']); ?>
+       echo genFormPublic($err, $cmtReply, time(), I18n::t('comment.form.legend'), 'commentForm', $page->getCommentReply()); ?>
     </div>
   </div>
-
-  <?php }  ?>
-<?php }  ?>

@@ -84,16 +84,19 @@
     $html .= '  <div class="avatar"><img src="'.Externals::getGravatar($comment->getAuthor()->getMail()).'" alt="Avatar"></div>';
     $html .= '  <div class="content">';
 
-    $cmtReplyLink = $cmtReply.'#newComment?comment-reply='.$replyId;
-    $cmtReplyLinkHtml = ' - <a class="reply" href="'.$cmtReplyLink.'">Antworten</a>';
-
     if(isValidUserUrl(rewriteUrl($comment->getAuthor()->getWebsite()))) {
-      $html .= '   <i class="info">'.date('d.m.Y H:i', $comment->getDate()).' by <a href="'.rewriteUrl($comment->getAuthor()->getWebsite()).'" class="author">'.$comment->getAuthor()->getClearname().'</a>'.$cmtReplyLinkHtml.'</i>';
+      $author_link  = '<a href="'.rewriteUrl($comment->getAuthor()->getWebsite()).'" class="author">'.$comment->getAuthor()->getClearname().'</a>';
 
     } else {
-      $html .= '   <i class="info">'.date('d.m.Y H:i', $comment->getDate()).' by <span class="author">'.$comment->getAuthor()->getClearname().'</span>'.$cmtReplyLinkHtml.'</i>';
+      $author_link = '<span class="author">'.$comment->getAuthor()->getClearname().'</span>';
     }
 
+    $comment_reply  = $cmtReply.'#newComment?comment-reply='.$replyId;
+    $comment_reply  = ' - <a class="reply" href="'.$comment_reply.'">'.I18n::t('comment.reply.link').'</a>';
+    $comment_by     = I18n::t('comment.by', array(date('d.m.Y H:i', $comment->getDate()),
+                                                  $author_link));
+
+    $html .= '   <i class="info">'.$comment_by.$comment_reply.'</i>';
     $html .= $comment->getContentParsed()."\n";
     $html .= '  </div>';
     $html .= ' </div>';
@@ -135,16 +138,16 @@
     $ret = '';
     switch($err['t']) {
       case 1:
-        $ret .= '<p class="alert">Das Formular ist unvollständig. Makierte Felder sind Pflicht.</p>'."\r";
+        $ret .= '<p class="alert">'.I18n::t('general_form.errors.incomplete').'</p>'."\r";
         break;
       case 2:
-        $ret .= '<p class="alert">Sie müssen die Zeit abwarten!</p>'."\r";
+        $ret .= '<p class="alert">'.I18n::t('general_form.errors.too_quick').'</p>'."\r";
         break;
       case 3:
-        $ret .= '<p class="alert">E-Mail ist ungültig</p>'."\r";
+        $ret .= '<p class="alert">'.I18n::t('general_form.errors.invalid_mail').'</p>'."\r";
         break;
       case 4:
-        $ret .= '<p class="alert">Dein Kommentar ist zu lang (max. 1500 Zeichen).</p>'."\r";
+        $ret .= '<p class="alert">'.I18n::t('general_form.errors.too_long', array(1500)).'</p>'."\r";
         break;
       default:
         break;
@@ -154,40 +157,41 @@
     $ret .= ' <fieldset>'."\r";
     $ret .= '  <legend>'.$title.'</legend>'."\r";
 
-    $ret .= '  <label class="required"><span>Name</span>';
+    $ret .= '  <label class="required"><span>'.I18n::t('general_form.name.label').'</span>';
     $ret .= '  <input type="text" name="usr" required="required"';
     if($err['t'] != 0 && $err['c'] != '') {
       $ret .= ' value="'.$err['c']['user'].'"';
     }
-    $ret .= '></label>'."\r";
+    $ret .= ' placeholder="'.I18n::t('general_form.name.placeholder').'"></label>'."\r";
 
     $ret .= '  <span class="antSp">'."\r";
-    $ret .= '   <label for="email">Die Abfrage erfolt in einem anderen Feld. Tragen Sie hier bitte NICHTS ein!</label>'."\r";
+    $ret .= '   <label for="email">'.I18n::t('general_form.mail_spam.label').'</label>'."\r";
     $ret .= '   <input type="email" name="email">'."\r";
     $ret .= '   <br>'."\r";
     $ret .= '  </span>'."\r";
 
     $ret .= '  <span class="antSp">'."\r";
-    $ret .= '   <label for="homepage">Tragen Sie auch hier bitte NICHTS ein!</label>'."\r";
+    $ret .= '   <label for="homepage">'.I18n::t('general_form.website_spam.label').'</label>'."\r";
     $ret .= '   <input type="text" name="homepage">'."\r";
     $ret .= '  </span>'."\r";
 
-    $ret .= '  <label class="required"><span>E-Mail</span>';
+    $ret .= '  <label class="required"><span>'.I18n::t('general_form.mail.label').'</span>';
     $ret .= '  <input type="text" name="usrml" required="required"';
     if($err['t'] != 0 && $err['c'] != '') {
       $ret .= ' value="'.$err['c']['mail'].'"';
     }
-    $ret .= '></label>'."\r";
+    $ret .= ' placeholder="'.I18n::t('general_form.mail.placeholder').'"></label>'."\r";
 
-    $ret .= '  <label><span>Website</span>';
+    $ret .= '  <label><span>'.I18n::t('general_form.website.label').'</span>';
     $ret .= '  <input type="text" name="usrpg"';
     if($err['t'] != 0 && $err['c'] != '') {
       $ret .= ' value="'.$err['c']['page'].'"';
     }
-    $ret .= '></label>'."\r";
+    $ret .= ' placeholder="'.I18n::t('general_form.website.placeholder').'"></label>'."\r";
 
-    $ret .= '  <label class="required"><span>Comment</span>';
-    $ret .= '  <textarea name="usrcnt" id="usrcnt" required="required">';
+    $ret .= '  <label class="required"><span>'.I18n::t('comment.form.message.label').'</span>';
+    $ret .= '  <textarea name="usrcnt" id="usrcnt" required="required"';
+    $ret .= ' placeholder="'.I18n::t('comment.form.message.placeholder').'">';
     if($err['t'] != 0 && $err['c'] != '') {
       $ret .= $err['c']['cnt'];
     }
@@ -196,22 +200,29 @@
 
     if($formType == 'commentForm') {
       $ret .= '<p class="beCommentNewInfo messageLength">'."\r";
-      $ret .= '  Noch <span>1500</span> Zeichen übrig.'."\r";
+      $remain = '<span>1500</span>';
+      $ret .= I18n::t('general_form.remain', array($remain))."\r";
       $ret .= '</p>'."\r";
     }
     $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
     $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
 
-    $ret .= '  <input type="submit" name="formaction" value="Absenden" class="button" id="formSubmit">'."\r";
-    $ret .= '  <input type="reset" name="formreset" value="Eingaben löschen" class="button" id="formReset">'."\r";
+    $ret .= '  <input type="submit" name="formaction" value="'.I18n::t('general_form.submit').'" class="button" id="formSubmit">'."\r";
+    $ret .= '  <input type="reset" name="formreset" value="'.I18n::t('general_form.clear').'" class="button" id="formReset">'."\r";
 
     $ret .= ' </fieldset>'."\r";
     $ret .= '</form>'."\r";
     $ret .= '<p class="newCommentTime">'."\r";
-    $ret .= '  Warte noch <strong id="wait">20</strong> Sekunden, bevor du posten kannst.'."\r";
+
+    $wait = '<strong id="wait">20</strong>';
+    $ret .= I18n::t('general_form.wait', array($wait))."\r";
+
     $ret .= '</p>'."\r";
     $ret .= '<p class="newCommentDisclaimer">'."\r";
-    $ret .= '  Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im <a href="/impressum">Impressum</a>.'."\r";
+
+    $more_info = '<a href="/impressum">'.I18n::t('general_form.imprint').'</a>';
+    $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
+
     $ret .= '</p>'."\r";
     return $ret;
   }

@@ -106,21 +106,20 @@
     return $test->getHTML();
   }
 
-  function moduleArticleInfo($info) {
-    $author   = $info['author'];
-    $link     = 'http://'.$_SERVER['HTTP_HOST'].$info['link'];
+  function moduleArticleInfo($page) {
+    $author   = $page->getArticle()->getAuthor();
     $title    = "informationen zum artikel";
 
     $break    = ' <br class="clear">';
     $content  = '<dl>';
     $content  .= ' <dt>Veröffentlicht</dt>';
-    $content  .= ' <dd><time datetime="'.$info['datAttr'].'" class="long">'.$info['date'].'</time></dd>';
+    $content  .= ' <dd><time datetime="'.$page->getArticle()->getDateFormatted('c').'" class="long">'.$page->getArticle()->getDateFormatted('d.m.Y H:i').'</time></dd>';
     $content  .= $break;
     $content  .= ' <dt>Autor</dt>';
     $content  .= ' <dd><a href="/aboutAuthor/'.$author->getName().'">'.$author->getClearname().'</a></dd>';
     $content  .= $break;
     $content  .= ' <dt>Link</dt>';
-    $content  .= ' <dd class="articleLink"><a href="'.$link.'" title="'.$link.'">'.$link.'</a></dd>';
+    $content  .= ' <dd class="articleLink"><a href="'.$page->getLink().'" title="'.$page->getLink().'">'.$page->getLink().'</a></dd>';
     $content  .= $break;
     $content  .= '</dl>';
     $content  .= '<p class="info">Mit einem * gekennzeichnete Links sind Amazon Affiliate Links.</p>';

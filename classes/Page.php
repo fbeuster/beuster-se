@@ -6,6 +6,7 @@ abstract class Page {
   const ADMIN_PAGE    = 3;
   const CATEGORY_PAGE = 4;
   const SEARCH_PAGE   = 5;
+  const ARTICLE_PAGE  = 6;
 
   public function __construct() {
   }
@@ -35,6 +36,7 @@ abstract class Page {
       case Page::CATEGORY_PAGE:
       case Page::SEARCH_PAGE;
         return 'multipleArticles';
+      case Page::ARTICLE_PAGE:
       case Page::STATIC_PAGE:
         return 'singleArticle';
       default:
@@ -52,6 +54,10 @@ abstract class Page {
   public abstract function getType();
 
   public abstract function getContent();
+
+  public function getInfo() {
+    return array();
+  }
 
   public abstract function getParsedContent();
 

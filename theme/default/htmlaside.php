@@ -8,17 +8,22 @@
 
     <aside>
       <?php
+      $page = Lixter::getLix()->getPage();
+
       echo moduleSearch();
       echo moduleSocialShare();
       echo moduleDonate();
+
       if($currPage == 'index') {
         echo moduleTopArticles();
-      } else if($currPage == 'single') {
-        $cnt = Lixter::getLix()->getPage()->getContent();
-        echo moduleArticleInfo($cnt['aside']);
+
+      } else if($page->getType() == Page::ARTICLE_PAGE) {
+        echo moduleArticleInfo($page);
         echo moduleRandomArticle();
+
       } else if($currPage == 'page') {
         echo moduleRandomArticle();
+
       } else {
         echo moduleRandomArticle();
       }

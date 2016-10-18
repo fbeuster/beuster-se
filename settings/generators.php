@@ -31,73 +31,81 @@
         $ret = '';
         switch($err['t']) {
             case 1:
-                $ret .= '<p class="alert">Das Formular ist unvollständig. Makierte Felder sind Pflicht.</p>'."\r";
+                $ret .= '<p class="alert">'.I18n::t('general_form.errors.incomplete').'</p>'."\r";
                 break;
             case 2:
-                $ret .= '<p class="alert">Sie müssen die Zeit abwarten!</p>'."\r";
+                $ret .= '<p class="alert">'.I18n::t('general_form.errors.too_quick').'</p>'."\r";
                 break;
             case 3:
-                $ret .= '<p class="alert">E-Mail ist ungültig</p>'."\r";
+                $ret .= '<p class="alert">'.I18n::t('general_form.errors.invalid_mail').'</p>'."\r";
                 break;
             case 4:
-                $ret .= '<p class="alert">Dein Kommentar ist zu lang (max. 1500 Zeichen).</p>'."\r";
+                $ret .= '<p class="alert">'.I18n::t('general_form.errors.too_long', array(1500)).'</p>'."\r";
                 break;
             default:
                 break;
         }
         $ret .= '<script type="text/javascript"></script>'."\r";
         $ret .= '<form action="'.$dest.'" method="post">'."\r";
-        $ret .= '  <label for="usr">Name *:</label>'."\r";
+        $ret .= '  <label for="usr">'.I18n::t('general_form.name.label').' *:</label>'."\r";
         $ret .= '  <input type="text" name="usr"';
         if($err['t'] != 0 && $err['c'] != '') {
             $ret .= ' value="'.$err['c']['user'].'"';
         }
-        $ret .= ' required>'."\r";
+        $ret .= ' required placeholder="'.I18n::t('general_form.name.placeholder').'">'."\r";
         $ret .= '  <br>'."\r";
+
         $ret .= '  <span class="antSp">'."\r";
-        $ret .= '   <label for="email">Die Abfrage erfolt in einem anderen Feld. Tragen Sie hier bitte NICHTS ein!</label>'."\r";
+        $ret .= '   <label for="email">'.I18n::t('general_form.mail_spam.label').'</label>'."\r";
         $ret .= '   <input type="email" name="email">'."\r";
         $ret .= '   <br>'."\r";
         $ret .= '  </span>'."\r";
-        $ret .= '  <label for="usrml">Mail *:</label>'."\r";
+
+        $ret .= '  <span class="antSp">'."\r";
+        $ret .= '   <label for="homepage">'.I18n::t('general_form.website_spam.label').'</label>'."\r";
+        $ret .= '   <input type="text" name="homepage">'."\r";
+        $ret .= '  </span>'."\r";
+
+        $ret .= '  <label for="usrml">'.I18n::t('general_form.mail.label').' *:</label>'."\r";
         $ret .= '  <input type="text" name="usrml"';
         if($err['t'] != 0 && $err['c'] != '') {
             $ret .= ' value="'.$err['c']['mail'].'"';
         }
-        $ret .= ' required>'."\r";
+        $ret .= ' required placeholder="'.I18n::t('general_form.mail.placeholder').'">'."\r";
         $ret .= '  <br>'."\r";
-        $ret .= '  <label for="usrpg">Website:</label>'."\r";
+
+        $ret .= '  <label for="usrpg">'.I18n::t('general_form.website.label').':</label>'."\r";
         $ret .= '  <input type="text" name="usrpg"';
         if($err['t'] != 0 && $err['c'] != '') {
             $ret .= ' value="'.$err['c']['page'].'"';
         }
-        $ret .= '>'."\r";
+        $ret .= ' placeholder="'.I18n::t('general_form.website.placeholder').'">'."\r";
         $ret .= '  <br>'."\r";
-        $ret .= '  <label for="usrcnt">Nachricht *:</label>'."\r";
-        $ret .= '  <textarea name="usrcnt" id="usrcnt" required>';
+
+        $ret .= '  <label for="usrcnt">'.I18n::t('general_form.message.label').' *:</label>'."\r";
+        $ret .= '  <textarea name="usrcnt" id="usrcnt" required  placeholder="'.I18n::t('general_form.message.placeholder').'">';
         if($err['t'] != 0 && $err['c'] != '') {
             $ret .= $err['c']['cnt'];
         }
         $ret .= '</textarea>'."\r";
-        if($formType == 'commentForm') {
-            $ret .= '<p class="beCommentNewInfo messageLength">'."\r";
-            $ret .= '  Noch <span>1500</span> Zeichen übrig.'."\r";
-            $ret .= '</p>'."\r";
-        }
         $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
         $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
-        $ret .= '  <span class="antSp">'."\r";
-        $ret .= '   <label for="homepage">Tragen Sie auch hier bitte NICHTS ein!</label>'."\r";
-        $ret .= '   <input type="text" name="homepage">'."\r";
-        $ret .= '  </span>'."\r";
-        $ret .= '  <input type="submit" name="formaction" value="Absenden" class="button" id="formPublicSub">'."\r";
-        $ret .= '  <input type="reset" name="formreset" value="Eingaben löschen" class="button" id="formPublicReset">'."\r";
+        $ret .= '  <input type="submit" name="formaction" value="'.I18n::t('general_form.submit').'" class="button" id="formPublicSub">'."\r";
+        $ret .= '  <input type="reset" name="formreset" value="'.I18n::t('general_form.clear').'" class="button" id="formPublicReset">'."\r";
         $ret .= '</form>'."\r";
+        if($formType == 'commentForm') {
+            $ret .= '<p class="beCommentNewInfo messageLength">'."\r";
+            $remain = '<span>1500</span>';
+            $ret .= I18n::t('general_form.remain', array($remain))."\r";
+            $ret .= '</p>'."\r";
+        }
         $ret .= '<p class="beCommentNewTime">'."\r";
-        $ret .= '  Warte noch <strong id="wait">20</strong> Sekunden, bevor du posten kannst.'."\r";
+        $wait = '<strong id="wait">20</strong>';
+        $ret .= I18n::t('general_form.wait', array($wait))."\r";
         $ret .= '</p>'."\r";
         $ret .= '<p class="beCommentNewDisclaimer">'."\r";
-        $ret .= '  Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im <a href="/impressum">Impressum</a>.'."\r";
+        $more_info = '<a href="/impressum">'.I18n::t('general_form.imprint').'</a>';
+        $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
         $ret .= '</p>'."\r";
         return $ret;
     }

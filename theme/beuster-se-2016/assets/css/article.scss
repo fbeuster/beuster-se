@@ -1,5 +1,49 @@
 @import 'lib/_color';
+body.article {
+  div.info {
+    border: 1px solid;
+    margin-top: 2em;
 
+    ul.messages {
+      background: $white;
+      color: $cold_black;
+      list-style: none;
+      margin: 0;
+      padding: 0.25em 1em;
+
+      li {
+        padding-left: 1em;
+        text-indent: -0.7em;
+
+        &:before {
+          content: "•";
+          font-weight: bold;
+          padding-right: 0.5em;
+        }
+      }
+    }
+
+    .title {
+      color: $white;
+      font-weight: bold;
+      padding: 0.25em 1em;
+    }
+
+    &.success {
+      border-color: $green;
+
+      ul.messages {
+        li:before {
+          color: $green;
+        }
+      }
+
+      .title {
+        background: $green;
+      }
+    }
+  }
+}
 body.article article {
   section.article {
     @include section_style_info;

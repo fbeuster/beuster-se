@@ -14,22 +14,8 @@
     } else {
         $cat = new Category(1);
     }
-    if(isset($_GET['n'])) {
-        $id = $_GET['n'];
-    } else {
-        $id = -1;
-    }
 
-    if($id !== -1) {
-
-        // single article
-
-        include('newsone.php');
-        if($a['data']['ret'] != '') return $a['data']['ret'];
-        $a['data']['articles'] = $articles;
-
-    } else {
-
+    if(!isset($_GET['n'])) {
         // Kategorienews
 
         if($cat->isPortfolio()) {

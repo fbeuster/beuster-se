@@ -59,10 +59,7 @@ class ContentPage extends Page {
     $this->content = $data['data'];
     $this->file_name = $data['filename'];
 
-    if (isset($data['single_article']) && $data['single_article']) {
-      $this->title = $data['data']['articles'][0]->getTitle();
-
-    } else if(isset($data['title'])) {
+    if (isset($data['title'])) {
       $this->title = $data['title'];
 
     } else {

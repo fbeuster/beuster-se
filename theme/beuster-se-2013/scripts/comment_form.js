@@ -47,7 +47,7 @@ beusterse.comment_form = {
   resetFormControls: function() {
     if($('.beCommentNew .reply').attr('value') != 'null') {
       $('.beCommentNew .reply').attr('value', 'null');
-      $('.beCommentNewHeader').text('Schreibe einen Kommentar!');
+      $('.beCommentNewHeader').text( I18n.t('comment.form.legend') );
     }
   },
 
@@ -62,11 +62,11 @@ beusterse.comment_form = {
         scrollTop: scrollAmount
     }, 400, 'swing', function() {
       var cancelButton = $('<span></span>')
-                          .text('Antwort abbrechen')
+                          .text( I18n.t('comment.reply.cancel') )
                           .addClass('cancelReply')
                           .click(beusterse.comment_form.resetFormControls)
       $('.beCommentNewHeader')
-        .text('Schreibe einen Kommentar an ' + author + '!')
+        .text( I18n.t('comment.reply.legend', [author]) )
         .append(cancelButton);
     });
   }
@@ -80,7 +80,7 @@ $.fn.checkLength = function(info, disable) {
       disable.attr('disabled','disabled');
       disable.css('color','#00a9ff');
     } else {
-      if(count <= 0) {
+      if(len <= 0) {
         disable.removeAttr('disabled','disabled');
         disable.css('color','#efefef');
       }

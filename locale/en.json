@@ -233,8 +233,34 @@
     },
     "try_again" : "Try again."
   },
+  "article" : {
+    "back_link" : "< Back to %s",
+    "gallery" : "Gallery",
+    "info" : "written by %s on"
+  },
   "category" : {
     "no_articles_found" : "No articles have been found here."
+  },
+  "comment" : {
+    "by" : "%s by %s",
+    "empty" : "No comments yet.",
+    "form" : {
+      "legend" : "Write something new",
+      "message" : {
+        "label" : "Comment",
+        "placeholder" : "Write your comment..."
+      }
+    },
+    "info" : {
+      "message" : "Your comment has been added.",
+      "title" : "Success!"
+    },
+    "reply" : {
+      "cancel" : "Cancel reply",
+      "legend" : "Write a reply to %s!",
+      "link" : "Reply"
+    },
+    "title" : "Comments"
   },
   "database" : {
     "fields" : {
@@ -299,6 +325,42 @@
         "tag_in_tag" : "Tags must be closed before opening a new one.",
         "unclosed_tag" : "Tags must be closed"
       }
+    }
+  },
+  "general_form" : {
+    "clear" : "Clear form",
+    "disclaimer" : "Marked fields (*) are required, your mail adress won't be published. Furter information can be found under %s.",
+    "errors" : {
+      "incomplete_form" : "The formular is incomplete. Marked fields are required.",
+      "invalid_mail" : "The entered mail address is invalid.",
+      "too_long" : "Your message is too long, the limit is %s characters.",
+      "too_quick" : "You have to wait for the countdown."
+    },
+    "imprint" : "Imprint",
+    "mail" : {
+      "label" : "Email",
+      "placeholder" : "Your Email address"
+    },
+    "mail_spam" : {
+      "label" : "This info is requested in a different field. Please leave this field blank."
+    },
+    "message" : {
+      "label" : "Message",
+      "placeholder" : "Write your message..."
+    },
+    "name" : {
+      "label" : "Name",
+      "placeholder" : "Your name"
+    },
+    "remain" : "%s characters left.",
+    "submit" : "Post",
+    "wait" : "Please wait %s seconds before you can submit the form.",
+    "website" : {
+      "label" : "Website",
+      "placeholder" : "Your website"
+    },
+    "website_spam" : {
+      "label" : "This info is requested in a different field. Please leave this field blank."
     }
   },
   "login" : {

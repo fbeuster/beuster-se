@@ -175,7 +175,12 @@ class Lixter {
         } else if ($_GET['p'] == 'blog' && isset($_GET['n'])) {
           # page argument is article page
           # TODO make this ArticlePage
-          $this->page = new ContentPage($_GET['p']);
+          $this->page = new ArticlePage();
+
+          if (!$this->page->isValid()) {
+            # add note at the top of the page
+            $this->page = new CategoryPage();
+          }
 
         } else if ($_GET['p'] == 'blog' && isset($_GET['c'])
           && Category::isCategoryName($_GET['c'])) {
@@ -268,6 +273,15 @@ class Lixter {
     }
 
     include($this->theme->getFile('htmlwarning.php'));
+
+    if (!empty($this->page->getInfo())) {
+      echo '<div class="info '.$this->page->getInfo()[0].'">
+        <div class="title">'.$this->page->getInfo()[1].'</div>
+        <ul class="messages">
+          <li>'.$this->page->getInfo()[2].'</li>
+        </ul>
+      </div>';
+    }
 
     if ($this->isValidTemplate()) {
       # valid include file

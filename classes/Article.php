@@ -158,6 +158,14 @@ class Article {
 	public function setDate($date) { $this->date = $date; }
 
 	/**
+	 * gets and formats the article date
+	 * @param String $format The target format for the date
+	 */
+	public function getDateFormatted($format) {
+		return date($format, $this->date);
+	}
+
+	/**
 	 * getter for content
 	 * @return string
 	 */

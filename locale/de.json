@@ -233,8 +233,34 @@
     },
     "try_again" : "Erneut versuchen."
   },
+  "article" : {
+    "back_link" : "< Zurück zu %s",
+    "gallery" : "Gallerie",
+    "info" : "geschrieben von %s am"
+  },
   "category" : {
     "no_articles_found" : "Hier wurden keine News gefunden."
+  },
+  "comment" : {
+    "by" : "%s von %s",
+    "empty" : "Bisher keine Kommentare.",
+    "form" : {
+      "legend" : "Schreib etwas neues",
+      "message" : {
+        "label" : "Kommentar",
+        "placeholder" : "Schreibe deinen Kommentar..."
+      }
+    },
+    "info" : {
+      "message" : "Dein Kommentar wurde hinzugefügt.",
+      "title" : "Erfolg!"
+    },
+    "reply" : {
+      "cancel" : "Antwort abbrechen",
+      "legend" : "Schreibe eine Antwort an %s!",
+      "link" : "Antworten"
+    },
+    "title" : "Kommentare"
   },
   "database" : {
     "fields" : {
@@ -299,6 +325,42 @@
         "tag_in_tag" : "Tags müssen geschlossen werden, bevor ein neuer geöffnet wird.",
         "unclosed_tag" : "Tags müssen geschlossen werden."
       }
+    }
+  },
+  "general_form" : {
+    "clear" : "Eingaben löschen",
+    "disclaimer" : "Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im %s.",
+    "errors" : {
+      "incomplete_form" : "Das Formular ist unvollständig. Markierte Felder sind Pflicht.",
+      "invalid_mail" : "Die eingegebene Email-Adresse ist ungültig.",
+      "too_long" : "Deine Nachricht ist zu lang, das Limit liegt bei %s Zeichen.",
+      "too_quick" : "Du musst die Wartezeit abwarten."
+    },
+    "imprint" : "Impressum",
+    "mail" : {
+      "label" : "Email",
+      "placeholder" : "Deine Email-Adresse"
+    },
+    "mail_spam" : {
+      "label" : "Die Abfrage erfolgt in einem anderen Feld. Tragen Sie hier bitte NICHTS ein!"
+    },
+    "message" : {
+      "label" : "Nachricht",
+      "placeholder" : "Schreibe deine Nachricht..."
+    },
+    "name" : {
+      "label" : "Name",
+      "placeholder" : "Dein Name"
+    },
+    "remain" : "Noch %s Zeichen übrig.",
+    "submit" : "Absenden",
+    "wait" : "Bitt warte %s Sekunden, bevor du das Formular abschicken kannst.",
+    "website" : {
+      "label" : "Webseite",
+      "placeholder" : "Deine Webseite"
+    },
+    "website_spam" : {
+      "label" : "Die Abfrage erfolgt in einem anderen Feld. Tragen Sie hier bitte NICHTS ein!"
     }
   },
   "login" : {
