@@ -211,7 +211,7 @@ class Lixter {
 
       } else {
         # no page argument found
-        $this->page = new CategoryPage();
+        $this->page = new IndexPage();
       }
     }
   }

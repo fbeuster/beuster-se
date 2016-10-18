@@ -7,6 +7,7 @@ abstract class Page {
   const CATEGORY_PAGE = 4;
   const SEARCH_PAGE   = 5;
   const ARTICLE_PAGE  = 6;
+  const INDEX_PAGE    = 7;
 
   public function __construct() {
   }
