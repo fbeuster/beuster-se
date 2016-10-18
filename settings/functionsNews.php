@@ -39,37 +39,6 @@
         }
     }
 
-    function increaseHitNumber($id) {
-        $db = Database::getDB()->getCon();
-        $sql = 'UPDATE
-                    news
-                SET
-                    Hits = Hits + 1
-                WHERE
-                    ID = ?';
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        $stmt->bind_param('i', $id);
-        if(!$stmt->execute()) {return $stmt->error;}
-        $stmt->close();
-    }
-
-    function getHits($id) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Hits
-                FROM
-                    news
-                WHERE
-                    ID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($a);
-        if(!$result->fetch()) {return 'Es wurde keine News mit dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $result->close();
-        return $a;
-    }
-
     function getNewsCat($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -102,47 +71,6 @@
         if(!$result->fetch()) {return 'Es wurde keine News zu dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
         $result->close();
         return $a;
-    }
-
-    function getMaxNewsUpTime() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    MIN(UNIX_TIMESTAMP(Datum))
-                FROM
-                    news
-                WHERE
-                    Datum < NOW()";
-        if(!$result = $db->prepare($sql)) {$return = $db->error;}
-        if(!$result->execute()) {$return = $result->error;}
-        $result->bind_result($newsUpTime);
-        if(!($result->fetch())) {
-            $result->close();
-            return 0;
-        } else {
-            $result->close();
-            return $newsUpTime;
-        }
-    }
-    function getNewsUpTime($newsid) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    UNIX_TIMESTAMP(Datum)
-                FROM
-                    news
-                WHERE
-                    ID = ? AND
-                    Datum < NOW()";
-        if(!$result = $db->prepare($sql)) {$return = $db->error;}
-        $result->bind_param('i', $newsid);
-        if(!$result->execute()) {$return = $result->error;}
-        $result->bind_result($newsUpTime);
-        if(!($result->fetch())) {
-            $result->close();
-            return 0;
-        } else {
-            $result->close();
-            return $newsUpTime;
-        }
     }
 
     function getArticleAttribute($article, $attribute) {

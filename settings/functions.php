@@ -460,17 +460,6 @@
         return -1;
     }
 
-    function getProjState($state) {
-        switch($state) {
-            case 0: return 0;
-            case 1: return '1in Bearbeitung';
-            case 2: return '2nicht vordergründig';
-            case 3: return '3pausiert';
-            case 4: return '4beendet';
-            default: return 0;
-        }
-    }
-
     function rewriteUrl($url) {
         if(preg_match('#^(http(s)?://)(.*)#', $url) == 0) {
             return 'http://'.$url;
