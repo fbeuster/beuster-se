@@ -7,17 +7,12 @@
   <meta name="loaded_lang" content="<?php echo Config::getConfig()->get('language'); ?>">
   <?php
     $page = Lixter::getLix()->getPage();
-    $keywords = '';
-
-    if ($page->getType() === Page::CONTENT_PAGE) {
-      $keywords = $page->getTags() . ' ';
-    }
   ?>
-<meta name="keywords" content="<?php echo $keywords; ?>, beuster{se}, Felix Beuster, Blog, News, Tutorials">
+<meta name="keywords" content="beuster{se}, Felix Beuster, Blog, News, Tutorials">
 <meta name="author" content="Felix Beuster">
   <meta property='og:locale' content='de_de'/>
   <meta property='fb:admins' content='100002550334323'/>
-  <meta property='og:title' content='<?php echo getPageTitle($file); ?>'/>
+  <meta property='og:title' content='<?php echo $page->getTitle().' - '.$config->get('site_name'); ?>'/>
   <meta property='og:url' content='<?php echo getPageUrl(); ?>'/>
   <meta property='og:site_name' content='beusterse.de'/>
   <meta property='og:type' content='website'/>
@@ -25,7 +20,7 @@
   <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
-  <title><?php echo getPageTitle($file); ?></title>
+  <title><?php echo $page->getTitle().' - '.$config->get('site_name'); ?></title>
 
   <link href="/<?php echo Lixter::getLix()->getSystemFile('assets/css/admin/styles.css'); ?>" rel="stylesheet" type="text/css" media="screen">
 

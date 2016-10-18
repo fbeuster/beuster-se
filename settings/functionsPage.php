@@ -62,41 +62,6 @@
     }
   }
 
-  function getPageTitle($file) {
-    $config = Config::getConfig();
-    $page   = Lixter::getLix()->getPage();
-
-    $return_title = '';
-    $separator    = ' - ';
-    $site_name    = $config->get('site_name');
-    $site_title   = $config->get('site_title');
-
-    if ($page->getType() === Page::STATIC_PAGE
-      || $page->getType() === Page::CONTENT_PAGE
-      || $page->getType() === Page::CATEGORY_PAGE
-      || $page->getType() === Page::SEARCH_PAGE) {
-      $return_title = $page->getTitle();
-
-    } else {
-      $curPage = getCurrentPage();
-      switch($curPage) {
-        case 'blog':
-          $return_title = $site_title;
-
-        case 'topCategory':
-          $return_title = getCatName(getCatID($_GET['p']));
-
-        case 'category':
-          $return_title = getCatName(getCatID($_GET['p']));
-
-        default:
-          $return_title = $file[$_GET['p']][1];
-      }
-    }
-
-    return $return_title . $separator . $site_name;
-  }
-
   function getPageDescription() {
     $db = Database::getDB()->getCon();
     $curPage = getCurrentPage();

@@ -9,7 +9,7 @@
     $page = Lixter::getLix()->getPage();
     $keywords = '';
 
-    if ($page->getType() === Page::CATEGORY_PAGE || $page->getType() === Page::CONTENT_PAGE) {
+    if ($page->getType() === Page::CATEGORY_PAGE || $page->getType() === Page::CONTENT_PAGE || $page->getType() === Page::ARTICLE_PAGE) {
       $keywords = $page->getTags() . ', ';
     }
   ?>
@@ -17,7 +17,7 @@
   <meta name="author" content="Felix Beuster">
   <meta property='og:locale' content='de_de'/>
   <meta property='fb:admins' content='100002550334323'/>
-  <meta property='og:title' content='<?php echo getPageTitle($file); ?>'/>
+  <meta property='og:title' content='<?php echo $page->getTitle().' - '.$config->get('site_name'); ?>'/>
   <meta property='og:url' content='<?php echo getPageUrl(); ?>'/>
   <meta property='og:site_name' content='beusterse.de'/>
   <meta property='og:type' content='website'/>
@@ -50,7 +50,7 @@
   <meta name="apple-mobile-web-app-title" content="beuster{se}">
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
-  <title><?php echo getPageTitle($file); ?></title>
+  <title><?php echo $page->getTitle().' - '.$config->get('site_name'); ?></title>
   <?php if(!Utilities::isOldIE()) { ?>
   <!-- style it -->
   <link href="/<?php echo Lixter::getLix()->getTheme()->getFile('styles/application.css'); ?>" rel="stylesheet" type="text/css" media="screen">

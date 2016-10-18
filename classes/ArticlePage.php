@@ -183,6 +183,7 @@ class ArticlePage extends RequestPage {
 
   private function loadPage() {
     $this->article  = new Article($this->article_id);
+    $this->title    = $this->article->getTitle();
     $this->valid    = true;
   }
 }
