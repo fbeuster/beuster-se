@@ -236,8 +236,6 @@ class Lixter {
       include('system/views/debug.php');
     }
 
-    include('system/views/admin/htmlwarning.php');
-
     $file = 'system/views/admin/' . $this->page->getFilename();
 
     if ($file !== false) {
@@ -249,7 +247,6 @@ class Lixter {
       include $this->theme->getFile('static.php');
     }
 
-    include('system/views/admin/htmlaside.php');
     include('system/views/admin/htmlfooter.php');
   }
 
