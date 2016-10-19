@@ -68,6 +68,10 @@ class ArticlePage extends RequestPage {
     return $this->content;
   }
 
+  public function getTags() {
+    return $this->article->getTagsString();
+  }
+
   public function getTitle() {
     return $this->title;
   }
