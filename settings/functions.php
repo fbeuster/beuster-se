@@ -1,6 +1,5 @@
 <?php
     include('functionsNews.php');
-    include('functionsUser.php');
     include('functionsPage.php');
     include('functionsCategory.php');
 
