@@ -5,7 +5,9 @@
   if ($page->hasArticles()) {  ?>
 
 <section class="content">
-  <span class="categoryTitle"><?php echo $page->getTitle(); ?></span>
+  <?php if ($page->getType() !== Page::INDEX_PAGE) { ?>
+    <span class="categoryTitle"><?php echo $page->getTitle(); ?></span>
+  <?php } ?>
 
 <?php
 
