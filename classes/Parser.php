@@ -255,6 +255,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[cite=(.*)\](.*)\[/cite\]#Uis', '&quot;$2&quot;', $this->str);
         $this->str = preg_replace('#\[url\](.*)\[/url\]#Uis', '$1 ', $this->str);
         $this->str = preg_replace('#\[url=(.*)\](.*)\[/url\]#Uis', '$2 ', $this->str);
+        $this->str = preg_replace('#\[article=(.*)\](.*)\[/article\]#Uis', '$2 ', $this->str);
     }
 
     /**
@@ -334,6 +335,21 @@ abstract class ArticleParser {
             $codePos = $posE + 5;
             $anzUrl++;
         }
+    }
+
+    public function internalLinks() {
+        while (preg_match('#\[article=([0-9]*)\]#Uis', $this->str)) {
+            preg_match('#\[article=([0-9]*)\]#Uis', $this->str, $snippets);
+            preg_match('#([0-9]*)#', $snippets[1], $values);
+            $this->str = preg_replace(  '#\[article=([0-9]*)\](.*)\[/article\]#Uis',
+                                        '<a href="'.$this->makeInternalLink($values[1]).'">$2</a>',
+                                        $this->str, 1);
+        }
+    }
+
+    private function makeInternalLink($id) {
+        $article = new Article($id);
+        return $article->getLink();
     }
 
     /**
@@ -611,6 +627,7 @@ class PreviewParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
+        parent::internalLinks();
         parent::removeLists();
         parent::breakLines();
         parent::clearParagraphs();
@@ -824,6 +841,7 @@ class ContentParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
+        parent::internalLinks();
         parent::lists();
         parent::breakLines();
         parent::illustrateSmiles();
@@ -881,6 +899,7 @@ class CommentParser extends ArticleParser {
         $this->blockquotes();
         parent::cites();
         parent::links();
+        parent::internalLinks();
         parent::removeLists();
         parent::breakLines();
         parent::paragraphs();
