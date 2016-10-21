@@ -23,7 +23,7 @@
           <img src="<?php echo $thumb_src; ?>" alt="thumb">
         </div>
         <div class="content">
-          <h2><?php echo $article->getTitle(); ?></h2>
+          <h2><?php echo $result->getMarkedTitle(); ?></h2>
           <p>
             <?php
               echo str_replace( '###link###',

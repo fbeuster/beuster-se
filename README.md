@@ -11,7 +11,7 @@ Code documentation can be found under [doc.beusterse.de](http://doc.beusterse.de
 
 ## Requirements
 - PHP 5.5.0
-- MySQL 5.5.47
+- MySQL 5.6.33
 
 ### Build requirements
 - [SASS](http://sass-lang.com/)

@@ -17,8 +17,9 @@
     }
 
     public function getMarkedTitle() {
-      $title = $this->article->getTitle();
-      return $this->search_marks ? $this->addSearchMarks($title) : $title;
+      $title        = $this->article->getTitle();
+      $marked_title = $this->search_marks ? $this->addSearchMarks($title) : $title;
+      return Parser::parse($marked_title, Parser::TYPE_PREVIEW);
     }
 
     public function getMarkedContent() {

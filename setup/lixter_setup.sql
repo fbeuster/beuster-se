@@ -107,7 +107,10 @@ CREATE TABLE IF NOT EXISTS `news` (
   `enable` tinyint(1) NOT NULL,
   `Hits` smallint(6) NOT NULL,
   `Status` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  FULLTEXT KEY `Inhalt` (`Inhalt`),
+  FULLTEXT KEY `Titel` (`Titel`),
+  FULLTEXT KEY `InhaltTitel` (`Titel`,`Inhalt`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
