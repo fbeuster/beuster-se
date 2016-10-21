@@ -1,11 +1,3 @@
-<?php
-  if($currPage == 'portfolio') {
-    $asideClass = 'portfolio';
-  } else {
-    $asideClass = $pageType;
-  }
-?>
-
     <aside>
       <?php
       if (false) {

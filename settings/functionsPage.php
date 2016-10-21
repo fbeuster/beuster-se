@@ -2,9 +2,7 @@
 
   function getPage() {
     $curPage = getCurrentPage();
-    if(isset($_GET['p']) && strtolower($_GET['p']) == 'portfolio') {
-      return 'portfolio';
-    }
+
     switch($curPage) {
       case 'blog':        return 'index';
       case 'entry':       return 'single';

@@ -90,10 +90,6 @@
                     }
                 }
 
-                if(!$neu && $catID == getCatID('Portfolio')) {
-                    $ena = 0;
-                }
-
                 $tags = array();
                 $tmp = explode(',', $tagStr);
                 foreach($tmp as $tag) {
@@ -124,11 +120,8 @@
                     $imgReplace = array();
                     foreach($_FILES['file']['name'] as $key => $value) {
                         if($_FILES['file']['size'][$key] > 0 && $_FILES['file']['size'][$key] < 5242880 && isImage($_FILES['file']['type'][$key])) {
-                            if($catID == getCatID('Portfolio')) {
-                                $pfad = 'images/port/'.pathinfo($_FILES['file']['name'][$key], PATHINFO_BASENAME);
-                            } else {
-                                $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.$key.'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
-                            }
+
+                            $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.$key.'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
 
                             if (!is_writable($pfad)) {
                                 $e[] = $_FILES['file']['name'][$key];
@@ -352,7 +345,7 @@
                         $stmt->close();
 
                         // RSS-Eintrag
-                        if($ena && isset($rssFeedPath) && $catID !== getCatID('Portfolio')) {
+                        if($ena && isset($rssFeedPath)) {
                             $lnk = 'http://'.Utilities::getSystemAddress().getLink($cat, $id, $title);
                             addRssItem( $rssFeedPath,
                                         $title,

@@ -30,11 +30,6 @@
 }
 
 @media (min-width: 260px) {
-  #beMainPortfolio {
-    width: 240px;
-    margin: 0 auto;
-  }
-
   #galL, #galR {
     width: 20px;
   }
@@ -46,7 +41,6 @@
   }
 
   #beMainAside {
-    &.portfolio,
     &.singleArticle,
     &.multipleArticles {
       .module.searchBox form {

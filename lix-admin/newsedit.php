@@ -98,14 +98,8 @@
               && $_FILES['file']['size'][$key] < 5242880
               && isImage($_FILES['file']['type'][$key]) ) {
 
-              if($catID == getCatID('Portfolio')) {
-                $base_name  = pathinfo($_FILES['file']['name'][$key], PATHINFO_BASENAME);
-                $pfad       = 'imag es/port/'.$base_name;
-
-              } else {
-                $extension  = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
-                $pfad       = 'images/blog/id'.$id.'date'.date('Ymd').'n'.($key + $picAnzOld).'.'.$extension;
-              }
+              $extension  = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
+              $pfad       = 'images/blog/id'.$id.'date'.date('Ymd').'n'.($key + $picAnzOld).'.'.$extension;
 
               if (!file_exists($pfad)) {
                 $thumb = (int) trim($_POST['thumb']);

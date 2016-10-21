@@ -18,7 +18,6 @@ beusterse.gallery = {
     $('#galR').click(this.showNextImage);
 
     $('article p.image img').click(this.lightbox);
-    $('.bePortfolioEntry img').click(this.lightbox);
     $('#pic').click(this.lightbox);
 
     $('.beLightboxClose').click(this.closeLightbox);

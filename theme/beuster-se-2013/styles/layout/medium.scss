@@ -22,11 +22,6 @@
       font-size: 20px;
     }
   }
-
-  #beMainPortfolio {
-    width: 480px;
-    margin: 0 auto;
-  }
 }
 
 @media (min-width: 570px) {
@@ -250,7 +245,6 @@
       }
     }
 
-    &.portfolio,
     &.multipleArticles {
       .module.searchBox form {
         width: 260px;
@@ -340,11 +334,6 @@
 }
 
 @media (min-width: 740px) {
-  #beMainPortfolio {
-    width: 720px;
-    margin: 0 auto;
-  }
-
   #beMainContainer {
     &.singleArticle {
       width: 720px;
@@ -413,7 +402,6 @@
   }
 
   #beMainAside {
-    &.portfolio,
     &.multipleArticles {
       float: none;
       width: 328px;

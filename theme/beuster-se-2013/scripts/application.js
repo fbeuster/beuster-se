@@ -9,7 +9,6 @@ var beusterse = beusterse || {};
 //@ comment_form
 //@ gallery
 //@ pager
-//@ portfolio
 
 $(document).ready(function(){
   beusterse.i18n.init()
@@ -20,6 +19,5 @@ $(document).ready(function(){
     beusterse.comment_form.init();
     beusterse.gallery.init();
     beusterse.pager.init();
-    beusterse.portfolio.init();
   }
 });

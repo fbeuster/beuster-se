@@ -44,8 +44,7 @@ abstract class Page {
         $page     = getPage();
         $content  = $this->getContent();
         if( isset($content['articles']) && count($content['articles']) > 0 &&
-          !isset($content['admin_news']) && $page != 'single' && $page != 'page' ||
-          $page == 'portfolio') {
+          !isset($content['admin_news']) && $page != 'single' && $page != 'page') {
           return 'multipleArticles';
         }
         return 'singleArticle';

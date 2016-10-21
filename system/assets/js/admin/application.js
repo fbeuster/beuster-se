@@ -40,9 +40,6 @@ $(document).ready(function(){
         $('.newsNewProj').css('display','none');
         $('.projChoose').attr('disabled', 'disabled');
         var opt = $('.catSelect option:selected').text();
-        if(opt == 'Portfolio') {
-            $('.newsNewHelpPort').css('display','block');
-        }
         if(opt == 'Projekte') {
             $('.newsNewProj').css('display','block');
             $('.projChoose').removeAttr('disabled');

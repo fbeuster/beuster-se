@@ -73,11 +73,6 @@
               <option value="4">beendet</option>
             </select>
           </span>
-          <br>
-          <span class="newsNewHelpPort">
-            Syntax für Portfolioeintrag:<br>
-            Gruppenname###ID/Dateiname###Infotext<br><br>
-          </span>
         </p>
 
         <label class="required long">

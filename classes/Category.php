@@ -18,7 +18,6 @@ class Category {
 	const CAT_TYPE_TOP			= 0;	/**< category type for top categories */
 	const CAT_TYPE_PLAYLIST 	= 1;	/**< category type for playlist categories */
 	const CAT_TYPE_SUB 			= 2;	/**< category type for sub categories */
-	const CAT_TYPE_PORTFOLIO	= 3;	/**< category type for portfolio categories */
 
 	private $loaded = false;	/**< load status of category */
 
@@ -94,11 +93,6 @@ class Category {
 	public function isTopCategory() {
 		return $this->type == self::CAT_TYPE_TOP;
 	}
-
-	public function isPortfolio() {
-		return $this->type == self::CAT_TYPE_PORTFOLIO;
-	}
-
 
 	/*** GET / SET ***/
 

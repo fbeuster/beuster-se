@@ -1,16 +1,8 @@
-<?php
-  if($currPage == 'portfolio') {
-    $asideClass = 'portfolio';
-  } else {
-    $asideClass = $pageType;
-  }
-?>
-
 
     </div>
     <!-- ende beMainContent -->
     <!-- beMainAside -->
-    <aside id="beMainAside" class="<?php echo $asideClass; ?>">
+    <aside id="beMainAside" class="<?php echo $pageType; ?>">
       <?php
       $page = Lixter::getLix()->getPage();
 

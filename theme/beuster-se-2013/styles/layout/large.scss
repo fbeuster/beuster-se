@@ -132,26 +132,6 @@
     &.multipleArticles {
       width: 468px;
     }
-
-    &.portfolio {
-      float: left;
-      margin: 10px 0 0 20px;
-      width: 218px;
-
-      .module.searchBox form {
-        width: 170px;
-
-        input[type=text] {
-          width: 118px;
-        }
-      }
-    }
-  }
-
-  #beMainPortfolio {
-    float: left;
-    width: 720px;
-    margin: 0;
   }
 
   .beCommentNew form textarea {
@@ -160,24 +140,8 @@
 }
 
 @media (min-width: 1300px) {
-  #beMainPortfolio {
-    width: 960px;
-  }
 
   #beMainAside {
-    &.portfolio {
-      margin: 10px 0 0 30px;
-      width: 278px;
-
-      .module.searchBox form {
-        width: 230px;
-
-        input[type=text] {
-          width: 178px;
-        }
-      }
-    }
-
     &.singleArticle {
       width: 288px;
 
@@ -318,8 +282,7 @@
   }
 
   #beMainAside {
-    &.singleArticle,
-    &.portfolio {
+    &.singleArticle {
       width: 348px;
 
       .module.searchBox form {
@@ -361,10 +324,6 @@
       }
     }
   }
-
-  #beMainPortfolio {
-    width: 1200px;
-  }
 }
 
 @media (min-width: 1920px) {
@@ -383,9 +342,5 @@
 
   #beMainAside.multipleArticles {
     width: 328px;
-  }
-
-  #beMainPortfolio {
-    width: 1440px;
   }
 }
