@@ -35,6 +35,7 @@ abstract class Page {
   public function getPageClass() {
     switch($this->getType()) {
       case Page::CATEGORY_PAGE:
+      case Page::INDEX_PAGE;
       case Page::SEARCH_PAGE;
         return 'multipleArticles';
       case Page::ARTICLE_PAGE:
