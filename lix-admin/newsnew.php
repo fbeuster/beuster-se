@@ -121,9 +121,12 @@
                     foreach($_FILES['file']['name'] as $key => $value) {
                         if($_FILES['file']['size'][$key] > 0 && $_FILES['file']['size'][$key] < 5242880 && isImage($_FILES['file']['type'][$key])) {
 
-                            $pfad = 'images/blog/id'.$id.'date'.date('Ymd').'n'.$key.'.'.pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
+                            $pre_path   = 'images/blog/';
+                            $file_name  = 'id'.$id.'date'.date('Ymd').'n'.$key;
+                            $file_ext   = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION)
+                            $pfad       = $pre_path.$file_name.'.'.$file_ext;
 
-                            if (!is_writable($pfad)) {
+                            if (!is_writable($pre_path)) {
                                 $e[] = $_FILES['file']['name'][$key];
 
                             } else if(!file_exists($pfad)) {
