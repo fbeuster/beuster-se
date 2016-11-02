@@ -39,6 +39,25 @@ class User {
 
 	/*** PUBLIC ***/
 
+	public static function isAuthor($name) {
+		$author = User::newFromName($name);
+
+		if ($author == null) {
+			return false;
+		}
+
+		$db 		= Database::getDB();
+		$fields = array('COUNT(`ID`) AS articles');
+		$conds 	= array('Autor = ?', 'i', array($author->getId()));
+		$res 		= $db->select('news', $fields, $conds);
+
+		if (count($res)) {
+			return $res[0]['articles'] > 0;
+		}
+
+		return false;
+	}
+
 	/**
 	 * User from id.
 	 *
@@ -99,7 +118,12 @@ class User {
 		$u = new self(self::BY_NAME);
 		$u->setName($name);
 		$u->loadUser();
-		return $u;
+
+		if ($u->isLoaded()) {
+			return $u;
+		}
+
+		return null;
 	}
 
 	public static function newFromCookie() {

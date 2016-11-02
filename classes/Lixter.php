@@ -191,6 +191,10 @@ class Lixter {
           # page argument is category page
           $this->page = new CategoryPage($_GET['p']);
 
+        } else if (User::isAuthor($_GET['p'])) {
+          # page argument is category page
+          $this->page = new CategoryPage(null, $_GET['p']);
+
         } else if (isset($file[$_GET['p']][0])) {
           # page argument has specific file
 

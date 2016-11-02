@@ -4,6 +4,7 @@ class CategoryPage extends Page {
   const DEFAULT_PAGE_LENGTH = 8;
 
   private $articles;
+  private $author;
   private $config;
   private $content;
   private $destination = '';
@@ -12,7 +13,7 @@ class CategoryPage extends Page {
   private $title;
   private $type = Page::CATEGORY_PAGE;
 
-  public function __construct($category = null) {
+  public function __construct($category = null, $author = null) {
     $this->config = Config::getConfig();
 
     if ($category === null) {
@@ -22,11 +23,26 @@ class CategoryPage extends Page {
       $this->category = Category::newFromName($category);
     }
 
+    if ($author === null) {
+      $this->author = null;
+
+    } else {
+      $this->author = User::newFromName($author);
+    }
+
     $this->loadContent();
   }
 
   public function getArticles() {
     return $this->articles;
+  }
+
+  private function getAuthorConditions() {
+    $cat_sql    = ' news.Autor = ?';
+    $cat_params = 'i';
+    $cat_vars   = array( $this->author->getId() );
+
+    return array($cat_sql, $cat_params, $cat_vars);
   }
 
   private function getCategoryConditions() {
@@ -167,6 +183,10 @@ class CategoryPage extends Page {
     if ($this->category === null) {
       $joins = null;
 
+      if ($this->author != null) {
+        $conds  = $this->getAuthorConditions();
+      }
+
     } else {
       $joins      = $this->getCategoryJoins();
       $cat_conds  = $this->getCategoryConditions();
@@ -222,6 +242,13 @@ class CategoryPage extends Page {
     if ($this->category == null) {
       $joins = null;
       $this->title = $this->config->get('site_title');
+
+      if ($this->author != null) {
+        $conds  = $this->getAuthorConditions();
+
+        $this->destination  = $this->author->getName();
+        $this->title        = $this->author->getClearname();
+      }
 
     } else {
       $joins      = $this->getCategoryJoins();
