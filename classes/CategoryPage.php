@@ -193,7 +193,7 @@ class CategoryPage extends Page {
 
       $conds[0] = $conds[0] . $cat_conds[0];
       $conds[1] = $conds[1] . $cat_conds[1];
-      $conds[2] = $conds[2] + $cat_conds[2];
+      $conds[2] = array_merge($conds[2], $cat_conds[2]);
     }
 
     $fields = array('COUNT(*) AS total');
@@ -256,7 +256,7 @@ class CategoryPage extends Page {
 
       $conds[0] = $conds[0] . $cat_conds[0];
       $conds[1] = $conds[1] . $cat_conds[1];
-      $conds[2] = $conds[2] + $cat_conds[2];
+      $conds[2] = array_merge($conds[2], $cat_conds[2]);
 
       $this->destination  = $this->category->getNameUrl();
       $this->title        = $this->category->getName();
