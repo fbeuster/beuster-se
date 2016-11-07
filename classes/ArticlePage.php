@@ -171,7 +171,7 @@ class ArticlePage extends RequestPage {
         return $db->error;
       }
 
-      $stmt->bind_param('i', $id);
+      $stmt->bind_param('i', $this->article_id);
 
       if (!$stmt->execute()) {
         return $stmt->error;
