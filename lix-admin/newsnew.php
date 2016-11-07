@@ -9,6 +9,7 @@
         $neu = 0;
         $neuPl = 0;
         $db = Database::getDB()->getCon();
+        $dbo = Database::getDB();
 
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $title      = Parser::parse($_POST['newstitel'], Parser::TYPE_NEW);
@@ -100,20 +101,9 @@
                 }
 
                 if($err == 0) {
-                    $sql = "INSERT INTO
-                                news(Autor, Titel, Inhalt, Datum, enable, Status)
-                            VALUES
-                                (?, ?, ?, ?, ?, ?);";
-                    if(!$stmt = $db->prepare($sql)) {
-                        return $db->error;
-                    }
-                    $user_id = $user->getId();
-                    $stmt->bind_param('isssii', $user_id, $title, $inhalt, $release, $ena, $projStat);
-                    if(!$stmt->execute()) {
-                        return $stmt->error;
-                    }
-                    $id = $stmt->insert_id;
-                    $stmt->close();
+                    $fields = array('Autor', 'Titel', 'Inhalt', 'Datum', 'enable', 'Status');
+                    $values = array('isssii', array($user->getId(), $title, $inhalt, $release, $ena, $projStat));
+                    $id    = $dbo->insert('news', $fields, $values);
 
                     // Bilder hochladen
                     $e = array();
@@ -142,33 +132,11 @@
                                 }
                                 $name = $_FILES['file']['name'][$key];
                                 move_uploaded_file($_FILES['file']['tmp_name'][$key], $pfad);
-                                $sql = "INSERT INTO
-                                            pics(NewsID, Name, Pfad, Thumb)
-                                        VALUES
-                                        (?, ?, ?, ?);";
-                                if(!$stmt = $db->prepare($sql)) {
-                                    return $db->error;
-                                }
-                                $stmt->bind_param('issi', $id, $name, $pfad, $thumb);
-                                if(!$stmt->execute()) {
-                                    return $stmt->error;
-                                }
-                                $stmt->close();
 
-                                // Bild-ID abfragen
-                                $sql = "SELECT
-                                            MAX(ID) AS maxid
-                                        FROM
-                                            pics";
-                                $stmt = $db->prepare($sql);
-                                if(!$stmt) {
-                                    return $db->error;
-                                }
-                                if(!$stmt->execute()) {
-                                    return $stmt->error;
-                                }
-                                $stmt->bind_result($maxid);
-                                $stmt->close();
+                                $fields = array('NewsID', 'Name', 'Pfad', 'Thumb');
+                                $values = array('issi', array($id, $name, $pfad, $thumb));
+                                $maxid  = $dbo->insert('pics', $fields, $values);
+
                                 $imgReplace[] = array('n' => $key + 1, 'id' => $maxid);
 
                                 # create thumbnail
@@ -189,50 +157,17 @@
                                 $typ = 2;
                                 $catPar = getCatID($catPar);
                             }
-                            if(!$neuPl) {
-                                // Kategorie anlegen
-                                $sql = "INSERT INTO
-                                            newscat(Cat, ParentID, Typ)
-                                        VALUES
-                                            (?, ?, ?)";
-                                if(!$stmt = $db->prepare($sql)) {
-                                    return $db->error;
-                                }
-                                $stmt->bind_param('sii',$cat, $catPar, $typ);
-                                if(!$stmt->execute()) {
-                                    return $stmt->error;
-                                }
-                                $stmt->close();
 
-                            } else {
-                                // Kategorie anlegen
-                                $sql = "INSERT INTO
-                                            newscat(Cat, ParentID, Typ)
-                                        VALUES
-                                            (?, ?, ?)";
-                                if(!$stmt = $db->prepare($sql)) {
-                                    return $db->error;
-                                }
-                                $stmt->bind_param('sii',$cat, $catPar, $typ);
-                                if(!$stmt->execute()) {
-                                    return $stmt->error;
-                                }
-                                $catID = $stmt->insert_id;
-                                $stmt->close();
+                            // Kategorie anlegen
+                            $fields = array('Cat', 'ParentID', 'Typ');
+                            $values = array('sii', array($cat, $catPar, $typ));
+                            $catID  = $dbo->insert('newscat', $fields, $values);
 
+                            if ($neuPl) {
                                 // Playlist anlegen
-                                $sql = "INSERT INTO
-                                            playlist(ytID, catID)
-                                        VALUES
-                                            (?, ?)";
-                                if(!$stmt = $db->prepare($sql)) {
-                                    return $db->error;
-                                }
-                                $stmt->bind_param('si', $playNeuID, $catID);
-                                if(!$stmt->execute()) {
-                                    return $stmt->error;
-                                }
-                                $stmt->close();
+                                $fields = array('ytID', 'catID');
+                                $values = array('si', array($playNeuID, $catID));
+                                $res    = $dbo->insert('playlist', $fields, $values);
                             }
                         }
                         $catID = getCatID($cat);
@@ -297,18 +232,9 @@
                         }
 
                         // Eintrag und Kategorie verknüpfen
-                        $sql = "INSERT INTO
-                                    newscatcross(NewsID, Cat, CatID)
-                                VALUES
-                                    (?,?,?)";
-                        if(!$stmt = $db->prepare($sql)) {
-                            return $db->error;
-                        }
-                        $stmt->bind_param('iii',$id,$catID,$catNewsID);
-                        if(!$stmt->execute()) {
-                            return $stmt->error;
-                        }
-                        $stmt->close();
+                        $fields = array('NewsID', 'Cat', 'CatID');
+                        $values = array('iii', array($id, $catID, $catNewsID));
+                        $res    = $dbo->insert('newscatcross', $fields, $values);
 
                         // RSS-Eintrag
                         if($ena && isset($rssFeedPath)) {
@@ -321,30 +247,12 @@
                                         $lnk);
                         }
                     } else {
-                        $sql = "DELETE FROM
-                                    news
-                                WHERE
-                                    ID = ?;";
-                        if(!$stmt = $db->prepare($sql)) {
-                            return $db->error;
-                        }
-                        $stmt->bind_param('i', $id);
-                        if(!$stmt->execute()) {
-                            return $stmt->error;
-                        }
-                        $stmt->close();
-                        $sql = "DELETE FROM
-                                    pics
-                                WHERE
-                                    NewsID = ?;";
-                        if(!$stmt = $db->prepare($sql)) {
-                            return $db->error;
-                        }
-                        $stmt->bind_param('i', $id);
-                        if(!$stmt->execute()) {
-                            return $stmt->error;
-                        }
-                        $stmt->close();
+                        $cond   = array('ID = ?', 'i', array($id));
+                        $res    = $dbo->delete('news', $cond);
+
+                        $cond   = array('NewsID = ?', 'i', array($id));
+                        $res    = $dbo->delete('pics', $cond);
+
                         $err = 1;
                     }
                 }
