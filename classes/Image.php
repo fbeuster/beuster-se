@@ -19,6 +19,40 @@ class Image {
     $this->loadImage();
   }
 
+  public static function createThumbnail($path, $width, $height) {
+    $pic      = array();
+    $path_arr = pathinfo($path);
+
+    $pic['path']  = $path_arr['dirname'].'/th'.$path_arr['filename'].'_'.$path_arr['extension'].'.jpg';
+    $pic['dim']   = getimagesize($path);
+    $pic['dim']   = array('w' => $pic['dim'][0],
+                          'h' => $pic['dim'][1]);
+
+    $pic['t'] = getimagesize($path);
+    $pic['t'] = $pic['t'][2];
+
+    switch($pic['t']) {
+      case "1":
+        $original = imagecreatefromgif($path);  break;
+      case "2":
+        $original = imagecreatefromjpeg($path); break;
+      case "3":
+        $original = imagecreatefrompng($path);  break;
+      default:
+        $original = imagecreatefromjpeg($path); break;
+    }
+
+    $thumb = imagecreatetruecolor($width, $height);
+    imagecopyresampled( $thumb, $original,
+                        0, 0, 0, 0,
+                        $width, $height,
+                        $pic['dim']['w'], $pic['dim']['h']);
+    imagejpeg($thumb, $pic['path'], 100);
+
+    imagedestroy($thumb);
+    imagedestroy($original);
+  }
+
   /*** PUBLIC ***/
 
   /**

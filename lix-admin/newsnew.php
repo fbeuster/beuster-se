@@ -123,7 +123,7 @@
 
                             $pre_path   = 'images/blog/';
                             $file_name  = 'id'.$id.'date'.date('Ymd').'n'.$key;
-                            $file_ext   = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION)
+                            $file_ext   = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
                             $pfad       = $pre_path.$file_name.'.'.$file_ext;
 
                             if (!is_writable($pre_path)) {
@@ -170,48 +170,11 @@
                                 $stmt->bind_result($maxid);
                                 $stmt->close();
                                 $imgReplace[] = array('n' => $key + 1, 'id' => $maxid);
+
+                                # create thumbnail
+                                Image::createThumbnail($pfad, 295, 190);
                             }
 
-                            // Thumbnail erstellen
-                            $pic = array();
-                            $pathTemp = pathinfo($pfad);
-                            $pic['pathNeu'] = $pathTemp['dirname'].'/th'.$pathTemp['filename'].'_'.$pathTemp['extension'].'.jpg';
-                            $pic['dim'] = getimagesize($pfad);
-                            $pic['dim'] = array('w' => $pic['dim'][0],
-                                                'h' => $pic['dim'][1]);
-                            $pic['factor'] = max($pic['dim']['w'] / 285, $pic['dim']['h'] / 190);
-                            $pic['dimNeu'] = array( 'w' => round($pic['dim']['w'] / $pic['factor']),
-                                                    'h' => round($pic['dim']['h'] / $pic['factor']));
-                            $pic['t'] = getimagesize($pfad);
-                            $pic['t'] = $pic['t'][2];
-                            switch($pic['t']) {
-                                case "1":
-                                    $picOld = imagecreatefromgif($pfad);
-                                    break;
-                                case "2":
-                                    $picOld = imagecreatefromjpeg($pfad);
-                                    break;
-                                case "3":
-                                    $picOld = imagecreatefrompng($pfad);
-                                    break;
-                                default:
-                                    $picOld = imagecreatefromjpeg($pfad);
-                                    break;
-                            }
-                            $picNeu = imagecreatetruecolor($pic['dimNeu']['w'],$pic['dimNeu']['h']);
-                            imagecopyresampled( $picNeu,
-                                                $picOld,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                $pic['dimNeu']['w'],
-                                                $pic['dimNeu']['h'],
-                                                $pic['dim']['w'],
-                                                $pic['dim']['h']);
-                            imagejpeg($picNeu, $pic['pathNeu'], 100);
-                            imagedestroy($picNeu);
-                            imagedestroy($picOld);
                         } else if($_FILES['file']['size'][$key] != 0){
                             $e[] = $_FILES['file']['name'][$key];
                         }
