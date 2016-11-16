@@ -368,15 +368,6 @@
         return 0;
     }
 
-    function getNewsPicNumber($id) {
-        $db = Database::getDB();
-        $cond = array('NewsID = ?', 'i', array($id));
-        $res = $db->select('pics', array('COUNT(ID) AS n'), $cond);
-        if($res != null)
-            return $res[0]['n'];
-        return 0;
-    }
-
     function lic($l) {
         $ls = array('by' => 'Creative Commons Namensnennung',
                     'sa' => 'Weitergabe unter gleichen Bedingungen',

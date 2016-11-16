@@ -14,7 +14,7 @@
         if($article->isPlaylist()) {
           $thumb_src = $article->getThumbnail();
         } else {
-          $thumb_src = $article->getThumbnail()->getPathThumb();
+          $thumb_src = $article->getThumbnail()->getPathThumb(800, 450);
         }
       }
 ?>

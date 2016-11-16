@@ -15,7 +15,7 @@
     </p>
   <?php } ?>
 
-    <form action="/newsedit" method="post" class="userform articleform">
+    <form action="/newsedit" method="post" enctype="multipart/form-data" class="userform articleform">
       <fieldset>
         <legend><?php I18n::e('admin.article.edit.label'); ?></legend>
         <label class="required long">
@@ -178,13 +178,9 @@
               </tr>
             </thead>
             <tbody class="adThumb">
-            <?php  foreach($data['pfad'] as $pic) {
-                      echo '<pre>'; print_r($pic); echo '</pre>';
-                      $pfad = str_replace('blog/id', 'blog/thid', $pic['pfad']);
-                      $pfad = str_replace('.', '_', $pfad);
-            ?>
+            <?php  foreach($data['pfad'] as $pic) { ?>
               <tr>
-                <td><img src="<?php echo makeAbsolutePath($pfad, '.jpg', true); ?>" name="" class="adThumb"></td>
+                <td><img src="<?php echo makeAbsolutePath(Image::ARTICLE_IMAGE_PATH . $pic['pfad'], '', true); ?>" name="" class="adThumb"></td>
                 <td><input type="radio" name="thumbOld" value="<?php echo $pic['id']; ?>"<?php if($pic['thumb'] == 1) { echo ' checked="checked"'; } ?>></td>
                 <td><input type="checkbox" name="del[]" value="<?php echo $pic['id']; ?>"></td>
                 <td>[img<?php echo $pic['id']; ?>]</td>

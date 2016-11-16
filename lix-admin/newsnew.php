@@ -108,39 +108,18 @@
                     // Bilder hochladen
                     $e = array();
                     $imgReplace = array();
+
                     foreach($_FILES['file']['name'] as $key => $value) {
                         if($_FILES['file']['size'][$key] > 0 && $_FILES['file']['size'][$key] < 5242880 && isImage($_FILES['file']['type'][$key])) {
 
-                            $pre_path   = 'images/blog/';
-                            $file_name  = 'id'.$id.'date'.date('Ymd').'n'.$key;
-                            $file_ext   = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
-                            $pfad       = $pre_path.$file_name.'.'.$file_ext;
-
-                            if (!is_writable($pre_path)) {
+                            $saved = Image::saveUploadedImage(  $_FILES['file']['name'][$key],
+                                                                $_FILES['file']['tmp_name'][$key],
+                                                                $id, (int)trim($_POST['thumb']), $key);
+                            if (!$saved) {
                                 $e[] = $_FILES['file']['name'][$key];
 
-                            } else if(!file_exists($pfad)) {
-                                $thumb = (int)trim($_POST['thumb']);
-                                if(is_int($thumb) && '' != $thumb) {
-                                    if($thumb == $key + 1) {
-                                        $thumb = 1;
-                                    } else {
-                                        $thumb = 0;
-                                    }
-                                } else {
-                                    $thumb = 0;
-                                }
-                                $name = $_FILES['file']['name'][$key];
-                                move_uploaded_file($_FILES['file']['tmp_name'][$key], $pfad);
-
-                                $fields = array('NewsID', 'Name', 'Pfad', 'Thumb');
-                                $values = array('issi', array($id, $name, $pfad, $thumb));
-                                $maxid  = $dbo->insert('pics', $fields, $values);
-
-                                $imgReplace[] = array('n' => $key + 1, 'id' => $maxid);
-
-                                # create thumbnail
-                                Image::createThumbnail($pfad, 295, 190);
+                            } else {
+                                $imgReplace[] = array('n' => $key + 1, 'id' => $saved);
                             }
 
                         } else if($_FILES['file']['size'][$key] != 0){
@@ -247,11 +226,19 @@
                                         $lnk);
                         }
                     } else {
+                        $fields = array('file_name');
+                        $conds  = array('article_id = ?', 'i', array($id));
+                        $images = $dbo->select('images', $fields, $conds);
+
+                        foreach ($images as $image) {
+                            Image::delete($image['file_name']);
+                        }
+
                         $cond   = array('ID = ?', 'i', array($id));
                         $res    = $dbo->delete('news', $cond);
 
-                        $cond   = array('NewsID = ?', 'i', array($id));
-                        $res    = $dbo->delete('pics', $cond);
+                        $cond   = array('article_id = ?', 'i', array($id));
+                        $res    = $dbo->delete('images', $cond);
 
                         $err = 1;
                     }

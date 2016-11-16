@@ -61,6 +61,11 @@ form.userform {
       color: $cold_black;
     }
   }
+
+  img.adThumb {
+    max-height: 108px;
+    max-width: 192px;
+  }
 }
 
 input[name=article_filter] {

@@ -20,13 +20,13 @@
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
 
-      <?php if(count($data['pics']) >= 1) { ?>
+      <?php if(count($article->getGallery()) > 0) { ?>
         <section class="gallery">
           <h2><?php I18n::e('article.gallery'); ?></h2>
           <ul>
-          <?php foreach ($data['pics'] as $image) { ?>
+          <?php foreach ($article->getGallery() as $image) { ?>
             <li>
-              <img src="<?php echo makeAbsolutePath($image['pfad'], '', true); ?>" alt="<?php echo $image['name']; ?>">
+              <img src="<?php echo $image->getAbsolutePath(); ?>" alt="<?php echo $image->getTitle(); ?>">
             </li>
           <?php } ?>
           </ul>

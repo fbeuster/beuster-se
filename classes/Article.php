@@ -31,6 +31,7 @@ class Article {
 
 	private $comments = array();	/**< article comments */
 	private $commentsCount;		/**< article comments count */
+	private $gallery = array();
 	private $pagesCmt;				/**< article comment pages*/
 	private $startCmt;				/**< article comment pages start */
 
@@ -263,6 +264,13 @@ class Article {
 
 
 	/**
+	 * getter for gallery
+	 * @return array(Image)
+	 */
+	public function getGallery() { return $this->gallery; }
+
+
+	/**
 	 * getter for comments
 	 * @return array(Comment)
 	 */
@@ -390,12 +398,22 @@ class Article {
 
 		// thumbnail
 
-		$fields = array('ID');
-		$conds = array('NewsID = ? AND Thumb = ?', 'ii', array($this->id, 1));
-		$res = $db->select('pics', $fields, $conds);
+		$fields = array('id');
+		$conds = array('article_id = ? AND is_thumb = ?', 'ii', array($this->id, 1));
+		$res = $db->select('images', $fields, $conds);
 
     if(count($res) == 1)
-    	$this->thumbnail = new Image($res[0]['ID']);
+    	$this->thumbnail = new Image($res[0]['id']);
+
+    // gallery
+
+		$fields = array('id');
+		$conds = array('article_id = ?', 'i', array($this->id));
+		$res = $db->select('images', $fields, $conds);
+
+    foreach ($res as $image) {
+    	$this->gallery[] = new Image($image['id']);
+    }
 
     // check playlist entry
 

@@ -17,15 +17,15 @@
     private function getImage($id) {
       $db = Database::getDB();
 
-      $fields = array('Name', 'Pfad');
+      $fields = array('caption', 'file_name');
       $conds  = array('ID = ?', 'i', array($id));
-      $res    = $db->select('pics', $fields, $conds);
+      $res    = $db->select('images', $fields, $conds);
 
-      if(count($res) != 1)
+      if (count($res) != 1)
         return '';
 
-      $name = $res[0]['Name'];
-      $path = $res[0]['Pfad'];
+      $name = $res[0]['caption'];
+      $path = Image::Article_IMAGE_PATH . $res[0]['file_name'];
 
       $path   = makeAbsolutePath($path, '', true);
       $image  = '</p><p class="image"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></p><p>';

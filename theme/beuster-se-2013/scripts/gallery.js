@@ -103,10 +103,7 @@ beusterse.gallery = {
   },
 
   getImageSource: function(thumb) {
-    return thumb.attr('src')
-            .replace('blog/thid','blog/id')
-            .replace('.jpg', '')
-            .replace('_', '.');
+    return thumb.attr('src').replace('_295x190.jpg','.jpg');
   },
 
   hideBigImage: function(event) {

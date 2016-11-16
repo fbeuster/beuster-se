@@ -7,13 +7,10 @@
         $i = 0;
         foreach($pics as $pic) {
             $i++;
-            $pfad = str_replace('blog/id', 'blog/thid', $pic['pfad']);
-            $pfad = str_replace('.', '_', $pfad);
-            $pfad = $pfad.'.jpg';
-            $ret .= '   <li><a href="'.makeAbsolutePath($pic['pfad'], '', true).'">';
-            $ret .= '    <img src="'.makeAbsolutePath($pfad, '', true).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'">';
+            $ret .= '   <li><a href="'.$pic->getAbsolutePath().'">';
+            $ret .= '    <img src="'.$pic->getAbsoluteThumbnailPath(295, 190).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic->getTitle().'" title="'.$pic->getTitle().'">';
             $ret .= '   </a></li>';
-            $ret .= '   <li class="hasjs"><img src="'.makeAbsolutePath($pfad, '', true).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic['name'].'" title="'.$pic['name'].'"></li>';
+            $ret .= '   <li class="hasjs"><img src="'.$pic->getAbsoluteThumbnailPath(295, 190).'" id="pic'.$i.'" class="pic" alt="" name="'.$pic->getTitle().'" title="'.$pic->getTitle().'"></li>';
         }
         $ret .= '  </ul>';
         $ret .= '  <br class="clear">'."\r";

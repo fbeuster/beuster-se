@@ -30,7 +30,7 @@
     </span>
     <?php } ?>
     <?php echo $article->getContentDecorated()."\n"; ?>
-    <?php if (count($data['pics']) >= 1) { echo '<section>'.genGal($data['pics']).'</section>'; } ?>
+    <?php if (count($article->getGallery()) > 0) { echo '<section>'.genGal($article->getGallery()).'</section>'; } ?>
   </article>
 
 

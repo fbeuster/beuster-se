@@ -16,7 +16,7 @@
       if($article->isPlaylist()) {
         $thumb_src = $article->getThumbnail();
       } else {
-        $thumb_src = $article->getThumbnail()->getPathThumb();
+        $thumb_src = $article->getThumbnail()->getPathThumb(800, 450);
       }
     } else {
       $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/sample_800_450.jpg');

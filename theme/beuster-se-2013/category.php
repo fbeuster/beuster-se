@@ -33,7 +33,7 @@
               $cssClasses .= ' playlist noShadow'; ?>
             <img src="<?php echo makeAbsolutePath($article->getThumbnail(), '', true); ?>" class="beContentEntryThumb <?php echo $cssClasses; ?>" alt="Vorschaubild">
             <?php } else { ?>
-            <img src="<?php echo makeAbsolutePath($article->getThumbnail()->getPathThumb(), '', true); ?>" class="beContentEntryThumb <?php echo $cssClasses; ?>" alt="Vorschaubild">
+            <img src="<?php echo $article->getThumbnail()->getAbsoluteThumbnailPath(295, 190); ?>" class="beContentEntryThumb <?php echo $cssClasses; ?>" alt="Vorschaubild">
             <?php } ?>
           <?php } ?>
           <p>

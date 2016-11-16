@@ -165,17 +165,16 @@ INSERT INTO `newscatcross` (`NewsID`, `Cat`, `CatID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pics`
+-- Table structure for table `images`
 --
 
-CREATE TABLE IF NOT EXISTS `pics` (
-  `ID` smallint(6) NOT NULL AUTO_INCREMENT,
-  `NewsID` smallint(6) NOT NULL,
-  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Pfad` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `Thumb` tinyint(1) NOT NULL,
-  `Titel` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `article_id` smallint(6) NOT NULL,
+  `caption` text COLLATE utf8_unicode_ci NOT NULL,
+  `file_name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `is_humb` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

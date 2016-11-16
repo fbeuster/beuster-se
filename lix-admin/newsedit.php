@@ -90,84 +90,25 @@
 
         $e = array();
 
-        if (isset($_FILES['files'])) {
-          $picsAnzOld = getNewsPicNumber($newsID);
-
+        // if (isset($_FILES['file'])) {
           foreach ($_FILES['file']['name'] as $key => $value) {
             if ( $_FILES['file']['size'][$key] > 0
               && $_FILES['file']['size'][$key] < 5242880
               && isImage($_FILES['file']['type'][$key]) ) {
 
-              $extension  = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
-              $pfad       = 'images/blog/id'.$id.'date'.date('Ymd').'n'.($key + $picAnzOld).'.'.$extension;
-
-              if (!file_exists($pfad)) {
-                $thumb = (int) trim($_POST['thumb']);
-
-                if (is_int($thumb) && '' != $thumb) {
-                  if($thumb == $key + 1) {
-                    $thumb = 1;
-                  } else {
-                    $thumb = 0;
-                  }
-
-                } else {
-                  $thumb = 0;
-                }
-
-                move_uploaded_file($_FILES['file']['tmp_name'][$key], $pfad);
-
-                $name = $_FILES['file']['name'][$key];
-
-                $fields = array('NewsID', 'Name', 'Pfad', 'Thumb');
-                $values = array('issi', array(  $newsID, $name,
-                                                $pfad, $thumb));
-                $res    = $db2->insert('pics');
+              $saved = Image::saveUploadedImage(  $_FILES['file']['name'][$key],
+                                                  $_FILES['file']['tmp_name'][$key],
+                                                  $newsID, (int)trim($_POST['thumb']), $key);
+              if (!$saved) {
+                $e[] = $_FILES['file']['name'][$key];
               }
-
-              # create thumbnail
-              $pic            = array();
-              $pathTemp       = pathinfo($pfad);
-              $pic['pathNeu'] = $pathTemp['dirname'].'/th'.$pathTemp['filename'].'_'.$pathTemp['extension'].'.jpg';
-              $pic['dim']     = getimagesize($pfad);
-              $pic['dim']     = array(  'w' => $pic['dim'][0],
-                                        'h' => $pic['dim'][1] );
-              $pic['factor']  = max($pic['dim']['w'] / 285, $pic['dim']['h'] / 190);
-              $pic['dimNeu']  = array( 'w' => round($pic['dim']['w'] / $pic['factor']),
-                                        'h' => round($pic['dim']['h'] / $pic['factor']));
-              $pic['t']       = getimagesize($pfad);
-              $pic['t']       = $pic['t'][2];
-
-              switch($pic['t']) {
-                case "1":
-                  $picOld = imagecreatefromgif($pfad);
-                  break;
-                case "2":
-                  $picOld = imagecreatefromjpeg($pfad);
-                  break;
-                case "3":
-                  $picOld = imagecreatefrompng($pfad);
-                  break;
-                default:
-                  $picOld = imagecreatefromjpeg($pfad);
-              }
-
-              $picNeu = imagecreatetruecolor($pic['dimNeu']['w'],$pic['dimNeu']['h']);
-              imagecopyresampled( $picNeu, $picOld,
-                                  0, 0,
-                                  0, 0,
-                                  $pic['dimNeu']['w'], $pic['dimNeu']['h'],
-                                  $pic['dim']['w'], $pic['dim']['h'] );
-              imagejpeg($picNeu, $pic['pathNeu'], 100);
-              imagedestroy($picNeu);
-              imagedestroy($picOld);
 
             } else if ($_FILES['file']['size'][$key] != 0) {
               $e[] = $_FILES['file']['name'][$key];
 
-            } else {}
+            }
           }
-        }
+        // }
 
         if ($err == 0 && empty($e)) {
           $catidalt = getNewsCatID($newsID);
@@ -289,12 +230,12 @@
           if (isset($_POST['thumbOld'])) {
             $pidF = trim($_POST['thumbOld']);
 
-            $fields = array('ID',);
-            $conds  = array('NewsID = ? AND Thumb = 1', 'i', array($newsID));
-            $res    = $db2->select('pics', $fields, $conds);
+            $fields = array('id');
+            $conds  = array('article_id = ? AND is_thumb = 1', 'i', array($newsID));
+            $res    = $db2->select('images', $fields, $conds);
 
             if (count($res) > 0) {
-              $th = $res[0]['ID'];
+              $th = $res[0]['id'];
 
             } else {
               # no old thumbnail found error
@@ -303,11 +244,11 @@
 
             if ($th != $pidF) {
               $sql = 'UPDATE
-                        pics
+                        images
                       SET
-                        Thumb = 1
+                        is_thumb = 1
                       WHERE
-                        ID = ?';
+                        id = ?';
 
               if (!$stmt = $db->prepare($sql)) {
                 return $db->error;
@@ -322,11 +263,11 @@
               $stmt->close();
 
               $sql = 'UPDATE
-                        pics
+                        images
                       SET
-                        Thumb = 0
+                        is_thumb = 0
                       WHERE
-                        ID = ?';
+                        id = ?';
 
               if (!$stmt = $db->prepare($sql)) {
                 return $db->error;
@@ -347,29 +288,16 @@
             $del = $_POST['del'];
 
             foreach($del as $pf) {
-              $fields = array('Pfad');
-              $conds  = array('ID = ?', 'i', array($pf));
-              $res    = $db2->select('pics', $fields, $conds);
+              $fields = array('file_name');
+              $conds  = array('id = ?', 'i', array($pf));
+              $res    = $db2->select('images', $fields, $conds);
 
               if (count($res) > 0) {
-                $path = $res[0]['Pfad'];
-
-              } else {
-                # picture not found error
+                Image::delete($res[0]['file_name']);
               }
 
-              $path2 = str_replace('.', '_', $path).'.jpg';
-
-              if (file_exists($path)) {
-                unlink($path);
-              }
-
-              if (file_exists($path2)) {
-                unlink($path2);
-              }
-
-              $db2->delete( 'pics',
-                            array('ID = ?', 'i', array($pf)) );
+              $conds = array('id = ?', 'i', array($pf));
+              $db2->delete('images', $conds);
             }
           }
 
@@ -409,17 +337,17 @@
           $a['data']['newsedit'] = $newsedit;
         }
 
-        $fields   = array('Pfad', 'Thumb', 'ID');
-        $conds    = array('NewsID = ?', 'i', array($id));
-        $options  = 'ORDER BY ID';
-        $res      = $db2->select('pics', $fields, $conds, $options);
+        $fields   = array('file_name', 'is_thumb', 'id');
+        $conds    = array('article_id = ?', 'i', array($id));
+        $options  = 'ORDER BY id';
+        $res      = $db2->select('images', $fields, $conds, $options);
 
         $a['data']['Pfad'] = array();
 
         foreach ($res as $pic) {
-          $a['data']['pfad'][] = array( 'pfad'  => $pic['Pfad'],
-                                        'thumb' => $pic['Thumb'],
-                                        'id'    => $pic['ID']);
+          $a['data']['pfad'][] = array( 'pfad'  => $pic['file_name'],
+                                        'thumb' => $pic['is_thumb'],
+                                        'id'    => $pic['id']);
         }
       }
     }
