@@ -23,6 +23,11 @@
           <input type="date" name="release" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>">
         </label>
 
+        <label>
+          <span>Releasezeit (HH:MM)</span>
+          <input type="time" name="time" value="<?php if(isset($data['fe']['time']))echo $data['fe']['time']; ?>">
+        </label>
+
         <label class="required">
           <span>Kategorie</span>
           <select name="cat" class="catSelect">

@@ -15,6 +15,7 @@
             $title      = Parser::parse($_POST['newstitel'], Parser::TYPE_NEW);
             $inhalt     = Parser::parse($_POST['newsinhalt'], Parser::TYPE_NEW);
             $release    = trim($_POST['release']);
+            $time       = trim($_POST['time']);
             $tagStr     = trim($_POST['tags']);
 
             $cat        = $_POST['cat'];
@@ -34,17 +35,41 @@
                 $projStat = trim($_POST['projStat']);
             $eRet = array(  'titel'  => $title,
                             'rel'    => $release,
+                            'time'   => $time,
                             'inhalt' => $inhalt);
             if('' == $title || '' == $inhalt) {
                 // Leerer Titel oder leerer Inhalt
                 $err = 1;
             } else {
-                // Datum festlegen
-                if($release == '') {
-                    $release = date("Y-m-d H:i:s", time());
+
+                # set date for the article
+                if ($release == '') {
+                    $release = date("Y-m-d", time());
+
+                } else if (!preg_match('/^[0-9]{4}(-[0-9]{2}){2}$/', $release)) {
+                    $err = 8;
+
                 } else {
-                    $release .= ' 13:37:42';
+                    $release_arr = preg_split('/-/', $release);
+
+                    if (!checkdate($release_arr[1], $release_arr[2], $release_arr[0])) {
+                        $err = 9;
+                    }
                 }
+
+                # set time for the article
+                if ($time == '') {
+                    $time = date("H:i:s", time());
+
+                } else if (!preg_match('/^(2[0-3]|[01][0-9]):([0-5][0-9])$/', $time)) {
+                    $err = 10;
+
+                } else {
+                    $time .= ':00';
+                }
+
+                $release = $release . ' ' . $time;
+
                 // Playlist oder Sub-Kat?
                 if($cat == 'error' && $catNeu == '' && $play == 'error' && $playNeu == '') {
                     // weder Kategorie noch Playlist
