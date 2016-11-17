@@ -45,6 +45,16 @@ class Article {
 		$this->loadArticle();
 	}
 
+  public static function exists($id) {
+    $db = Database::getDB();
+
+    $fields = array('inhalt');
+    $conds  = array('ID = ?', 'i', array($id));
+    $res    = $db->select('news', $fields, $conds);
+
+    return count($res) == 1;
+  }
+
 	/*** PUBLIC ***/
 
 	/**

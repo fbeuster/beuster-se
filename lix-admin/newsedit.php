@@ -350,6 +350,49 @@
                                         'id'    => $pic['id']);
         }
       }
+    } else if ('GET' == $_SERVER['REQUEST_METHOD']) {
+      if (isset($_GET['article'])) {
+        $id     = trim($_GET['article']);
+
+        # get article for edit
+        $fields = array(  'news.Titel', 'news.Inhalt', 'news.enable',
+                          'newscat.Cat', 'newscat.ID' );
+        $join   = 'LEFT JOIN newscatcross ON news.ID = newscatcross.NewsID
+                  LEFT JOIN newscat ON newscat.ID = newscatcross.Cat';
+        $cond   = array('news.ID = ?', 'i', array($id));
+        $res    = $db2->select('news', $fields, $cond, null, null, $join);
+
+        if (count($res) == 0) {
+          return showInfo(I18n::t('admin.article.edit.not_found'), 'newsedit');
+
+        } else {
+          $newsedit = array(
+            'newsidbea'   => $id,
+            'newsinhalt'  => Parser::parse( $res[0]['Inhalt'],
+                                            Parser::TYPE_EDIT),
+            'newstitel'   => Parser::parse( $res[0]['Titel'],
+                                            Parser::TYPE_EDIT),
+            'newsena'     => $res[0]['enable'],
+            'newstags'    => getNewsTags($id, true),
+            'newscat'     => $res[0]['Cat'],
+            'isPlaylist'  => isCatPlaylist($res[0]['ID']));
+
+          $a['data']['newsedit'] = $newsedit;
+        }
+
+        $fields   = array('file_name', 'is_thumb', 'id');
+        $conds    = array('article_id = ?', 'i', array($id));
+        $options  = 'ORDER BY id';
+        $res      = $db2->select('images', $fields, $conds, $options);
+
+        $a['data']['Pfad'] = array();
+
+        foreach ($res as $pic) {
+          $a['data']['pfad'][] = array( 'pfad'  => $pic['file_name'],
+                                        'thumb' => $pic['is_thumb'],
+                                        'id'    => $pic['id']);
+        }
+      }
     }
 
     $fields   = array('ID', 'Titel',

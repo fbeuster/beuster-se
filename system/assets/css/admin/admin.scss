@@ -76,7 +76,7 @@ input[name=article_filter] {
 }
 
 table.commentlist,
-table.newslist {
+table.entry_list {
   margin-top: 1em;
   width: 100%;
 
@@ -147,7 +147,9 @@ table.newslist {
       }
     }
   }
+}
 
+table.entry_list.snippets {
   td.title {
     cursor: pointer;
   }

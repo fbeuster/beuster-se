@@ -5,6 +5,7 @@ var admin = admin || {};
 //@ lib/_jquery
 //@ lib/_i18n
 //@ lib/_utilities
+//@ articleactions
 //@ bbcode
 //@ snippetpreview
 
@@ -13,6 +14,7 @@ $(document).ready(function(){
                 .complete( runApp );
 
   function runApp() {
+    admin.articleActions.init();
     admin.bbCode.init();
     admin.snippetPreview.init();
 
@@ -57,7 +59,7 @@ $(document).ready(function(){
       $(this).on('keyup', function() {
         var value = this.value;
 
-        $('table.newslist tbody tr').each(function(){
+        $('table.entry_list tbody tr').each(function(){
           var text;
 
           if ($(this).find('.title a').length > 0) {

@@ -70,6 +70,14 @@
         }
       },
       "overview" : {
+        "delete" : {
+          "text" : "Delete",
+          "title" : "Click to delete"
+        },
+        "edit" : {
+          "text" : "Edit",
+          "title" : "Click to edit"
+        },
         "filter" : {
           "label" : "Filter article list",
           "placeholder" : "Article title"

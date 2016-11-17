@@ -4,8 +4,10 @@ admin.snippetPreview = {
   slide_duration: 400,
 
   bindHandlers: function() {
-    $('td.actions a.delete').on('click', this.deleteHandler);
-    $('td.title').on('click', this.titleHandler);
+    if ($('.entry_list.snippets').length > 0) {
+      $('td.actions a.delete').on('click', this.deleteHandler);
+      $('td.title').on('click', this.titleHandler);
+    }
   },
 
   deleteHandler: function() {

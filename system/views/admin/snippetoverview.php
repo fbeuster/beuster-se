@@ -9,7 +9,7 @@
         <input type="text" name="article_filter" placeholder="<?php I18n::e('admin.snippet.overview.filter.placeholder'); ?>">
       </label>
     </form>
-    <table class="newslist">
+    <table class="entry_list snippets">
       <thead>
         <tr>
           <th class="smallNumber">#</th>

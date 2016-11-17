@@ -70,6 +70,14 @@
         }
       },
       "overview" : {
+        "delete" : {
+          "text" : "Löschen",
+          "title" : "Klicken zum Löschen"
+        },
+        "edit" : {
+          "text" : "Bearbeiten",
+          "title" : "Klicken zum Bearbeiten"
+        },
         "filter" : {
           "label" : "Filter Artikelübersicht",
           "placeholder" : "Artikeltitel"
