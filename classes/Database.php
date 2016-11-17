@@ -160,6 +160,10 @@ class Database {
 	}
 
 	public function insert($table, $fields, $values) {
+		return $this->insertMany($table, $fields, array($values[0], array($values[1])));
+	}
+
+	public function insertMany($table, $fields, $values) {
 
 		// concatenate fields
 		if(!is_array($fields) || empty($fields)) {
@@ -193,34 +197,44 @@ class Database {
 			$this->error = I18n::t('database.values.vars_must_be_array');
 			return null;
 		}
-		if(!strlen($values[0]) == count($values[1])) {
+		if(!strlen($values[0]) == count($values[1][0])) {
 			$this->error = I18n::t('database.values.type_vars_mismatch');
 			return null;
 		}
 
-		// value string
-		$value_string = 'VALUES (';
+		$value_string = 'VALUES ';
 
-		foreach (str_split($values[0]) as $key => $char) {
-			if ($char == '&') {
-				$value_string .= $values[1][$key];
-				unset($values[1][$key]);
-			} else {
-				$value_string .= '?';
+		foreach ($values[1] as $value_key => $value_set) {
+			$set_string = '(';
+
+			foreach (str_split($values[0]) as $key => $char) {
+				if ($char == '&') {
+					$set_string .= $values[1][$value_key][$key];
+					unset($values[1][$value_key][$key]);
+
+				} else {
+					$set_string .= '?';
+				}
+
+				$set_string .= ', ';
 			}
 
-			$value_string .= ', ';
+			$set_string = substr($set_string, 0, strlen($set_string) - 2);
+			$set_string .= ')';
+
+			$value_string .= $set_string . ', ';
 		}
 
 		$value_string = substr($value_string, 0, strlen($value_string) - 2);
-		$value_string .= ')';
 
 		// building bind_param for conditions
-		$vars[] = str_replace('&', '', $values[0]);
+		$vars[] = str_replace('&', '', str_repeat($values[0], count($values[1])));
 		foreach ($values[1] as $k => $v) {
-			$var = 'val'.$k;
-			$$var = $values[1][$k];
-			$vars[] = &$$var;
+			foreach ($v as $k2 => $v2) {
+				$var = 'val'.$k.'_'.$k2;
+				$$var = $values[1][$k][$k2];
+				$vars[] = &$$var;
+			}
 		}
 
 		// buildung sql
