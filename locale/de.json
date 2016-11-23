@@ -10,10 +10,6 @@
       "invalid_return_value" : "Die Include-Datei hat einen ungültigen Wert zurückgeliefert."
     }
   },
-  "aboutMod" : {
-    "no_username" : "Nach wem suchst du?",
-    "invalid_username" : "%s ist kein Autor auf diesem Blog."
-  },
   "admin" : {
     "article" : {
       "edit" : {

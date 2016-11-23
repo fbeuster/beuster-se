@@ -116,7 +116,7 @@
     $content  .= ' <dd><time datetime="'.$page->getArticle()->getDateFormatted('c').'" class="long">'.$page->getArticle()->getDateFormatted('d.m.Y H:i').'</time></dd>';
     $content  .= $break;
     $content  .= ' <dt>Autor</dt>';
-    $content  .= ' <dd><a href="/aboutAuthor/'.$author->getName().'">'.$author->getClearname().'</a></dd>';
+    $content  .= ' <dd><a href="/'.$author->getName().'">'.$author->getClearname().'</a></dd>';
     $content  .= $break;
     $content  .= ' <dt>Link</dt>';
     $content  .= ' <dd class="articleLink"><a href="'.$page->getLink().'" title="'.$page->getLink().'">'.$page->getLink().'</a></dd>';
