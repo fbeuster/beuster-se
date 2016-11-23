@@ -1,76 +1,134 @@
 
 <article>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
-  <?php if(isset($data['fe'])){ ?>
-    <p>Es ist ein Fehler aufgetreten! Typenummer: <?php echo $data['fe']['t']; ?></p>
-  <?php } ?>
+    <?php if(isset($data['errors'])){ ?>
+      <div class="error">
+        <div class="title">Error</div>
+        <ul class="messages">
+        <?php foreach ($data['errors'] as $name => $error) { ?>
+
+          <?php if (!isset($error['message'])) { ?>
+            <?php foreach ($error as $single) { ?>
+              <li><?php echo $single['message']; ?></li>
+            <?php } ?>
+
+          <?php } else { ?>
+            <li><?php echo $error['message']; ?></li>
+          <?php } ?>
+
+        <?php } ?>
+        </ul>
+      </div>
+    <?php } ?>
     <form action="/newsnew" method="post" enctype="multipart/form-data" class="userform articleform">
       <fieldset>
-        <legend>Neuen News-Eintrag verfassen</legend>
-        <label class="required long">
-          <span>Titel</span>
-          <input type="text" name="newstitel" value="<?php if(isset($data['fe']['titel']))echo $data['fe']['titel']; ?>" role="newEntryTitle" placeholder="Titel des Blogeintrags">
+        <legend><?php I18n::e('admin.article.new.label'); ?></legend>
+        <label class="required long <?php if(isset($data['errors']['title'])) { echo ' has_error'; } ?>">
+          <span><?php I18n::e('admin.article.new.title.label'); ?></span>
+          <input type="text" name="title" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.new.title.placeholder'); ?>" value="<?php if (isset($data['values'], $data['values']['name'])) { echo $data['values']['name']; } ?>">
         </label>
 
         <label>
-          <span>Manuelle Freigabe</span>
-          <input type="checkbox" name="enable">
+          <span>
+            <?php I18n::e('admin.article.new.manual_release_label'); ?>
+          </span>
+          <input type="checkbox" name="unlisted" <?php echo isset($data['values']) && $data['values']['unlisted'] ? ' checked="checked"' : ''; ?>>
         </label>
 
-        <label>
-          <span>Releasedatum (YYYY-MM-DD)</span>
-          <input type="date" name="release" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>">
+        <label class="<?php if(isset($data['errors']['release_date'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.release_date.label'); ?>
+          </span>
+          <input type="date" name="release_date" value="<?php if(isset($data['values']['release_date'])) echo $data['values']['release_date']; ?>" placeholder="<?php I18n::e('admin.article.new.release_date.placeholder'); ?>">
         </label>
 
-        <label>
-          <span>Releasezeit (HH:MM)</span>
-          <input type="time" name="time" value="<?php if(isset($data['fe']['time']))echo $data['fe']['time']; ?>">
+        <label class="<?php if(isset($data['errors']['release_time'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.release_time.label'); ?>
+          </span>
+          <input type="time" name="release_time" value="<?php if(isset($data['values']['release_time'])) echo $data['values']['release_time']; ?>" placeholder="<?php I18n::e('admin.article.new.release_time.placeholder'); ?>">
         </label>
 
-        <label class="required">
-          <span>Kategorie</span>
-          <select name="cat" class="catSelect">
-            <option value="error">Kategorie wählen...</option>
-            <?php foreach($data['cats'] as $cat) { ?>
-            <option value="<?php echo $cat; ?>"><?php echo $cat; ?></option>
+        <label class="required <?php if(isset($data['errors']['category'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.category.label'); ?>
+          </span>
+          <select name="category" class="catSelect">
+            <option value="error">
+              <?php I18n::e('admin.article.new.category.placeholder'); ?>
+            </option>
+            <?php foreach($data['cats'] as $cat) {
+                    if(isset($data['values']['category']) && $data['values']['category'] == $cat) {
+                      $selected = ' selected="selected"';
+                    } else {
+                      $selected = '';
+                    } ?>
+            <option <?php echo 'value="'.$cat.'"'.$selected; ?>><?php echo $cat; ?></option>
             <?php } ?>
           </select>
         </label>
 
-        <label>
-          <span>Neue Kategorie</span>
-          <select name="catPar">
-            <option value="error">Parent wählen...</option>
-            <?php foreach($data['pars'] as $par) { ?>
-            <option value="<?php echo $par; ?>"><?php echo getCatName($par); ?></option>
+        <label class="<?php if(isset($data['errors']['category_new']) || isset($data['errors']['category_parent'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.new_category.label'); ?>
+          </span>
+          <select name="category_parent">
+            <option value="error">
+              <?php I18n::e('admin.article.edit.new_category.placeholder_select'); ?>
+            </option>
+            <?php foreach($data['pars'] as $par) {
+                    if(isset($data['values']['category_parent']) && $data['values']['category_parent'] == $par) {
+                      $selected = ' selected="selected"';
+                    } else {
+                      $selected = '';
+                    } ?> ?>
+            <option <?php echo 'value="'.$par.'"'.$selected; ?>><?php echo getCatName($par); ?></option>
             <?php } ?>
           </select>
-          <input type="text" name="catneu" title="Name neue Kategorie" placeholder="Name der neuen Kategorie">
+          <input type="text" name="category_new" placeholder="<?php I18n::e('admin.article.new.new_category.placeholder_input'); ?>" title="<?php I18n::e('admin.article.new.new_category.placeholder_input'); ?>" value="<?php if(isset($data['values']['category_new'])) echo $data['values']['category_new']; ?>">
         </label>
 
-        <label>
-          <span>Playlist</span>
-          <select name="pl">
-            <option value="error">Playlist wählen...</option>
-            <?php foreach($data['pls'] as $pl) { ?>
-            <option value="<?php echo $pl; ?>"><?php echo $pl; ?></option>
+        <label class="<?php if(isset($data['errors']['playlist'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.playlist.label'); ?>
+          </span>
+          <select name="playlist">
+            <option value="error">
+              <?php I18n::e('admin.article.new.playlist.placeholder'); ?>
+            </option>
+            <?php foreach($data['pls'] as $pl) {
+                    if(isset($data['values']['playlist']) && $data['values']['playlist'] == $pl) {
+                      $selected = ' selected="selected"';
+                    } else {
+                      $selected = '';
+                    } ?> ?>
+              <option <?php echo 'value="'.$pl.'"'.$selected; ?>"><?php echo $pl; ?></option>
             <?php } ?>
           </select>
-          <input type="text" name="plneu" title="Name neue Playlist" placeholder="Name der neuen Playlist">
-          <input type="text" name="plneuid" title="ID neue Playlist" placeholder="ID der neuen Playlist">
         </label>
 
-        <label class="required long">
-          <span>Tags</span>
-          <input type="text" name="tags" title="Tags für den Artikel" role="newEntryTags" placeholder="Tag (durch Komma trennen)">
+        <label class="<?php if(isset($data['errors']['playlist_new']) || isset($data['errors']['laylist_new_id'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.new_playlist.label'); ?>
+          </span>
+          <input type="text" name="playlist_new" placeholder="<?php I18n::e('admin.article.new.new_playlist.placeholder_name'); ?>" title="<?php I18n::e('admin.article.new.new_playlist.placeholder_name'); ?>" value="<?php if(isset($data['values']['playlist_new'])) echo $data['values']['playlist_new']; ?>">
+
+          <input type="text" name="playlist_new_id" placeholder="<?php I18n::e('admin.article.new.new_playlist.placeholder_id'); ?>" title="<?php I18n::e('admin.article.new.new_playlist.placeholder_id'); ?>" value="<?php if(isset($data['values']['playlist_new_id'])) echo $data['values']['playlist_new_id']; ?>">
+        </label>
+
+        <label class="required long <?php if(isset($data['errors']['tags'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.tags.label'); ?>
+          </span>
+          <input type="text" name="tags" title="<?php I18n::e('admin.article.new.tags.placeholder'); ?>" value="<?php if (isset($data['values']['newstags'])) echo $data['values']['newstags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.new.tags.placeholder'); ?>">
         </label>
 
         <p class="newsNewHelp">
           <span class="newsNewProj" style="display: none;">
             <br>
             <label class="description alert">Projektstatus</label>
-            <select name="projStat" class="projChoose drop200" disabled="disabled">
+            <select name="project_status" class="projChoose drop200" disabled="disabled">
               <option value="0">Projektstatus wählen...</option>
               <option value="1">in Bearbeitung</option>
               <option value="2">nicht vordergründig</option>
@@ -80,30 +138,36 @@
           </span>
         </p>
 
-        <label class="required long">
-          <span>Inhalt</span>
+        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>">
+          <span>
+            <?php I18n::e('admin.article.new.content_label'); ?>
+          </span>
           <?php
-            $content  = isset($data['fe']['inhalt']) ? $data['fe']['inhalt'] : '';
-            $editor   = new Editor('newsinhalt', 'newsinhalt', $content);
+            $content  = isset($data['values']['content']) ? $data['values']['content'] : '';
+            $editor   = new Editor('newsinhalt', 'content', $content);
             $editor->show();
           ?>
         </label>
 
         <p>
-          Bilder anhängen, maximal 5MB. Bestes Ergebnis bei 960*540px
+          <?php I18n::e('admin.article.new.pictures.info', array('5MB')); ?>
         </p>
-        <label class="required">
-          <span>Thumbnail-Nr.</span>
-          <input type="text" name="thumb" placeholder="Nummer aus der Liste">
+        <label<?php if(isset($data['errors']['thumbnail'])) { echo ' class="has_error"'; } ?>>
+          <span>
+            <?php I18n::e('admin.article.new.thumbnail.label'); ?>
+          </span>
+          <input type="number" name="thumbnail" value="<?php if (isset($data['values']['thumbnail'])) echo $data['values']['thumbnail']; ?>" placeholder="<?php I18n::e('admin.article.new.thumbnail.placeholder'); ?>">
         </label>
 
         <ol id="files">
           <li><input type="file" name="file[]"></li>
         </ol>
-        <input type="button" value="Feld loeschen" class="delInp"><input type="button" value="Feld hinzufügen" id="addInp"><br><br>
-        <input type="submit" name="formaction" value="News eintragen" />
+
+        <input type="button" value="<?php I18n::e('admin.article.new.thumbnail.remove_field'); ?>" class="delInp">
+        <input type="button" value="<?php I18n::e('admin.article.new.thumbnail.add_field'); ?>" id="addInp"><br><br>
+        <input type="submit" name="formaction" value="<?php I18n::e('admin.article.new.submit'); ?>" />
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

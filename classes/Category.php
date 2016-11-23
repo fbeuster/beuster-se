@@ -90,8 +90,40 @@ class Category {
 		return $this->loaded;
 	}
 
+	public function isPlaylist() {
+		return $this->type == self::CAT_TYPE_PLAYLIST;
+	}
+
 	public function isTopCategory() {
 		return $this->type == self::CAT_TYPE_TOP;
+	}
+
+	public function getMaxArticleId() {
+		$db = Database::getDB();
+
+		$fields = array('MAX(CatID) as max_article_id');
+		$conds  = array('Cat = ?', 'i', array($this->id));
+		$res   	= $db->select('newscatcross', $fields, $conds);
+
+		if (count($res)) {
+			return $res[0]['max_article_id'];
+		}
+
+		return 0;
+	}
+
+	public function getPlaylistId() {
+		$db = Database::getDB();
+
+		$fields = array('ytID');
+		$conds 	= array('catID = ?', 'i', array($this->id));
+		$res		= $db->select('playlist', $fields, $conds);
+
+		if (count($res)) {
+			return $res[0]['ytID'];
+		}
+
+		return '';
 	}
 
 	/*** GET / SET ***/

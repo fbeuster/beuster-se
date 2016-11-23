@@ -2,7 +2,9 @@
 
 class Image {
 
-  const ARTICLE_IMAGE_PATH = 'images/blog/';
+  const ARTICLE_IMAGE_PATH  = 'images/blog/';
+  const IMAGE_MAX_SIZE      = 5242880;
+  const IMAGE_MIN_SIZE      = 0;
 
   private $loaded = false;
 
@@ -71,6 +73,14 @@ class Image {
     }
   }
 
+  public static function isValidFormat($format) {
+    return preg_match('/^image\/(gif|p?jpeg|png)$/', $format);
+  }
+
+  public static function isValidSize($size) {
+    return $size > self::IMAGE_MIN_SIZE && $size <= self::IMAGE_MAX_SIZE;
+  }
+
   public static function saveUploadedImage($file, $tmp_name, $article_id, $thumb_key, $key) {
     $pre_path = Image::ARTICLE_IMAGE_PATH;
 
@@ -114,6 +124,23 @@ class Image {
       #   unused sizes are not necessarily created
 
       return $maxid;
+    }
+  }
+
+  public static function storeRemoteImage($remote, $store_path) {
+    if (!file_exists($store_path)) {
+      $source_image = imagecreatefromjpeg($remote);
+      $thumb_width  = imagesx($source_image);
+      $thumb_height = imagesy($source_image);
+      $scaled_image = imagecreatetruecolor($thumb_width, $thumb_height);
+
+      imagecopy($scaled_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height);
+      imagedestroy($source_image);
+
+      $scaled_image = imagescale($scaled_image, 480, 270);
+
+      imagejpeg($scaled_image, $store_path);
+      imagedestroy($scaled_image);
     }
   }
 

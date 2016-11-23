@@ -133,7 +133,7 @@
           <span>
             <?php I18n::e('admin.article.edit.tags.label'); ?>
           </span>
-          <input type="text" name="tags" title="<?php I18n::e('admin.article.edit.playlist.placeholder'); ?>" value="<?php echo $newsedit['newstags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.edit.playlist.placeholder'); ?>">
+          <input type="text" name="tags" title="<?php I18n::e('admin.article.edit.tags.placeholder'); ?>" value="<?php echo $newsedit['newstags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.edit.tags.placeholder'); ?>">
         </label>
 
         <p class="newsNewHelp">
