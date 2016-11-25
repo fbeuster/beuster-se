@@ -34,14 +34,14 @@
       $length = mb_strlen($lower);
 
       while ($offset !== false) {
-        $offset = strpos(mb_strtolower($text, 'UTF-8'), $lower, $offset);
+        $offset = mb_strpos(mb_strtolower($text, 'UTF-8'), $lower, $offset);
 
         if($offset !== false && $offset <= mb_strlen($text) - $length) {
-          $t1     = substr($text, 0, $offset);
+          $t1     = mb_substr($text, 0, $offset);
           $t2     = '[mark]';
-          $t3     = substr($text, $offset, $length);
+          $t3     = mb_substr($text, $offset, $length);
           $t4     = '[/mark]';
-          $t5     = substr($text, $offset + $length);
+          $t5     = mb_substr($text, $offset + $length);
           $text   = $t1.$t2.$t3.$t4.$t5;
 
           # add length of marks to offset
