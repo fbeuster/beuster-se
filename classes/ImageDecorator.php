@@ -25,7 +25,7 @@
         return '';
 
       $name = $res[0]['caption'];
-      $path = Image::Article_IMAGE_PATH . $res[0]['file_name'];
+      $path = Image::ARTICLE_IMAGE_PATH . $res[0]['file_name'];
 
       $path   = makeAbsolutePath($path, '', true);
       $image  = '</p><p class="image"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'"></p><p>';
