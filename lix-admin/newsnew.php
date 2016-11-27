@@ -228,7 +228,7 @@
       }
 
 
-      if (!empty($errors)) {
+      if (empty($errors)) {
         $release_date = $release_date . ' ' . $release_time;
 
         # category, sub-category or playlist?
@@ -257,8 +257,7 @@
         # insert the article
         $fields = array('Autor', 'Titel', 'Inhalt', 'Datum', 'enable', 'Status');
         $values = array('isssii', array($user->getId(), $title, $content, $release_date, $is_public, $project_status));
-        #$id     = $dbo->insert('news', $fields, $values);
-        $id = -1;
+        $id     = $dbo->insert('news', $fields, $values);
 
         # upload images
         $image_errors   = array();
