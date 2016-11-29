@@ -130,18 +130,40 @@ class Image {
   public static function storeRemoteImage($remote, $store_path) {
     if (!file_exists($store_path)) {
       $source_image = imagecreatefromjpeg($remote);
+
+      if (!$source_image) {
+        return false;
+      }
+
       $thumb_width  = imagesx($source_image);
       $thumb_height = imagesy($source_image);
+
+      # these are the dimensions of YouTube's blank thumbnail
+      if ($thumb_width == 120 && $thumb_height == 90) {
+        return false;
+      }
+
       $scaled_image = imagecreatetruecolor($thumb_width, $thumb_height);
+
+      if (!$scaled_image) {
+        return false;
+      }
 
       imagecopy($scaled_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height);
       imagedestroy($source_image);
 
       $scaled_image = imagescale($scaled_image, 480, 270);
 
-      imagejpeg($scaled_image, $store_path);
+      if (!imagejpeg($scaled_image, $store_path)) {
+        return false;
+      }
+
       imagedestroy($scaled_image);
+
+      return true;
     }
+
+    return true;
   }
 
   /*** PUBLIC ***/

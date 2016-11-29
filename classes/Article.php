@@ -428,10 +428,22 @@ class Article {
     // check playlist entry
 
     $playlistID = getPlaylistID(getNewsCat($this->id));
-    if($playlistID !== false) {
-      $videoID = getYouTubeIDFromArticle($this->id);
-      $path = 'images/tmp/'.$playlistID.'-'.$videoID;
-      $this->thumbnail = $path.'.jpg';
+
+    if ($playlistID !== false) {
+      $video_id = getYouTubeIDFromArticle($this->id);
+      $path     = 'images/tmp/'.$playlistID.'-'.$video_id.'.jpg';
+
+      # missing thumbnail? try to fetch it
+      if (!file_exists($path)) {
+        $thumbnail = 'https://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
+
+        # fetching failed, clear path/thumbnail for this article
+        if (!Image::storeRemoteImage($thumbnail, $path)) {
+          $path = null;
+        }
+      }
+
+      $this->thumbnail = $path;
       $this->playlist = true;
     }
 
