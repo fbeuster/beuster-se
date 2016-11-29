@@ -153,9 +153,9 @@ class Image {
    * @return string
    */
   public function getPathThumb($width = 0, $height = 0) {
-    if (!file_exists(self::ARTICLE_IMAGE_PATH . $this->path
+    if (!file_exists(self::ARTICLE_IMAGE_PATH . $this->path)
       || !is_numeric($width) || !is_numeric($height)
-      || $width <= 0 || $height <= 0)) {
+      || $width <= 0 || $height <= 0) {
 
       return self::ARTICLE_IMAGE_PATH . $this->path;
     }
