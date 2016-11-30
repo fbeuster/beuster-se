@@ -186,23 +186,6 @@
             return false;
     }
 
-    function getPlaylistID($c) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    ytID
-                FROM
-                    playlist
-                WHERE
-                    catID = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $c);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($id);
-        if(!$result->fetch()) {return false;}
-        $result->close();
-        return $id;
-    }
-
     function getChildrenNames($c) {
         $db = Database::getDB()->getCon();
         $ret = array();

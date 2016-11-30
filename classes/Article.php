@@ -427,7 +427,7 @@ class Article {
 
     // check playlist entry
 
-    $playlistID = getPlaylistID(getNewsCat($this->id));
+    $playlistID = $this->category->getPlaylistId(getNewsCat($this->id));
 
     if ($playlistID !== false) {
       $video_id = getYouTubeIDFromArticle($this->id);
