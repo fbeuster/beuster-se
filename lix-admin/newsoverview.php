@@ -3,102 +3,54 @@
   $user = User::newFromCookie();
 
   if ($user && $user->isAdmin()) {
-    $db = Database::getDB()->getCon();
+    $db = Database::getDB();
+
     refreshCookies();
 
     $a['filename']  = 'newsoverview.php';
     $a['data']      = array();
 
     # get articles
-    $news = array();
-    $sql = "SELECT
-              ID,
-              Titel,
-              Hits,
-              Datum,
-              TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp,
-              enable
-            FROM
-              news
-            ORDER BY
-              Datum DESC";
+    $fields   = array('ID', 'Hits', 'TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp', 'enable');
+    $options  = 'ORDER BY Datum DESC';
+    $articles = $db->select('news', $fields, null, $options);
 
-    if (!$stmt = $db->prepare($sql)) {
-      return $db->error;
+    foreach ($articles as $k => $article) {
+      $ar = new Article($article['ID']);
+      $articles[$k] = array(
+                  'title'     => Parser::parse($ar->getTitle(), Parser::TYPE_PREVIEW),
+                  'link'      => $ar->getLink(),
+                  'id'        => $article['ID'],
+                  'date'      => $ar->getDateFormatted("d.m.Y H:i"),
+                  'hits'      => $article['Hits'],
+                  'per_day'   => number_format($article['Hits'] / ($article['TimeUp'] < 1 ? 1 : $article['TimeUp']), 2, '.', ','),
+                  'enabled'   => $article['enable']);
     }
 
-    if (!$stmt->execute()) {
-        return $stmt->error;
-    }
-    $stmt->bind_result($id, $title, $hits, $date, $uptime, $enabled);
+    # get number of comments
+    $total_comments = 0;
+    $fields         = array('COUNT(ID) AS total_comments');
+    $res            = $db->select('kommentare', $fields);
 
-    while($stmt->fetch()) {
-      $news[] = array(
-                  'title'     => Parser::parse($title, Parser::TYPE_PREVIEW),
-                  'link'      => '',
-                  'id'        => $id,
-                  'date'      => date("d.m.Y H:i", strtotime($date)),
-                  'hits'      => $hits,
-                  'per_day'   => number_format($hits / ($uptime < 1 ? 1 : $uptime), 2, '.', ','),
-                  'enabled'   => $enabled);
-    }
-    $stmt->close();
-
-    foreach ($news as $k => $v) {
-      $article          = new Article($v['id']);
-      $news[$k]['link'] = $article->getLink();
+    if (count($res)) {
+      $total_comments = $res[0]['total_comments'];
     }
 
-    # get comment amount
-    $sql = "SELECT
-              COUNT(ID) AS cmtAmount
-            FROM
-              kommentare";
+    # get number of unlisted articles
+    $unlisted = 0;
+    $fields   = array('COUNT(news.ID) AS unlisted');
+    $conds    = array('enable = ? AND newscatcross.Cat != ?', 'ii', array(0, 12));
+    $joins    = 'LEFT JOIN newscatcross ON news.ID = newscatcross.NewsID';
+    $res      = $db->select('news', $fields, $conds, null, null, $joins);
 
-    if (!$stmt = $db->prepare($sql)) {
-      return $db->error;
+    if (count($res)) {
+      $unlisted = $res[0]['unlisted'];
     }
 
-    if (!$stmt->execute()) {
-      return $stmt->error;
-    }
-    $stmt->bind_result($cmtAmount);
-
-    if (!$stmt->fetch()) {
-      return $stmt->error;
-    }
-    $stmt->close();
-
-    # get comment amount
-    $sql = "SELECT
-              COUNT(news.ID) AS enaAmount
-            FROM
-              news
-            LEFT JOIN
-              newscatcross
-              ON news.ID = newscatcross.NewsID
-            WHERE
-              enable = 0 AND
-              newscatcross.Cat != 12";
-
-    if (!$stmt = $db->prepare($sql)) {
-        return $db->error;
-    }
-
-    if (!$stmt->execute()) {
-      return $stmt->error;
-    }
-    $stmt->bind_result($enaAmount);
-
-    if (!$stmt->fetch()) {
-      return $stmt->error;
-    }
-    $stmt->close();
-
-    $a['data']['news']        = $news;
-    $a['data']['cmtAmount']   = $cmtAmount;
-    $a['data']['enaAmount']   = $enaAmount;
-    $a['data']['admin_news']  = true;
+    $a['data']['articles']        = $articles;
+    $a['data']['total_comments']  = $total_comments;
+    $a['data']['unlisted']        = $unlisted;
+    $a['data']['admin_news']      = true;
 
     return $a;
 

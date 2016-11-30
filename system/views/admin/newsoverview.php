@@ -5,9 +5,9 @@
   	<h1><?php I18n::e('admin.article.overview.label'); ?></h1>
   	<p>
       <?php I18n::e('admin.article.overview.summary', array(
-        count($data['news']),
-        $data['cmtAmount'],
-        $data['enaAmount']
+        count($data['articles']),
+        $data['total_comments'],
+        $data['unlisted']
       )); ?>
   	</p>
     <form>
@@ -30,9 +30,9 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['news'])) {
+        if(count($data['articles'])) {
           $i = 0;
-          foreach($data['news'] as $entry) { ?>
+          foreach($data['articles'] as $entry) { ?>
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-article="<?php echo $entry['id']; ?>">
           <td ><?php echo ($i+1); ?></td>
           <td ><?php echo $entry['id']; ?></td>
