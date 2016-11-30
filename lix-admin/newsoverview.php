@@ -45,7 +45,8 @@
     $stmt->close();
 
     foreach ($news as $k => $v) {
-      $news[$k]['link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['title']);
+      $article          = new Article($v['id']);
+      $news[$k]['link'] = $article->getLink();
     }
 
     # get comment amount

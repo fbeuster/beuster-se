@@ -132,11 +132,6 @@
         return $title;
     }
 
-    function getLink($cat, $id, $title){
-        $r = '/'.$id.'/'.lowerCat($cat).'/'.replaceUml(buildLinkTitle($title));
-        return $r;
-    }
-
     function shortenTitle($title, $l = 20) {
         if(strlen($title) > $l) {
             $title = substr($title, 0, $l - 1).'...';
@@ -282,55 +277,31 @@
 
     /*** other ***/
 
-    function getArticleLinks($sql, $n) {
-        $db  = Database::getDB()->getCon();
-        $res = array();
+    function getArticleLinks($options, $n) {
+        $db         = Database::getDB();
+        $res        = array();
+        $fields     = array('ID');
+        $conds      = array('enable = ? AND Datum < NOW()', 'i', array(1));
+        $limit      = array('LIMIT 0, ?', 'i', array($n));
+        $articles   = $db->select('news', $fields, $conds, $options, $limit);
 
-        if(!$stmt = $db->prepare($sql)) {
-            return array($db->error);
-        }
-
-        $stmt->bind_param('i', $n);
-
-        if(!$stmt->execute()) {
-            return array($stmt->error);
-        }
-
-        $stmt->bind_result($id, $db_title);
-
-        $articles = array();
-        while($stmt->fetch()) {
-            $articles[$id] = $db_title;
-        }
-        $stmt->close();
-
-        foreach ($articles as $id => $db_title) {
-            $title  = Parser::parse($db_title, Parser::TYPE_PREVIEW);
-            $link   = getLink(getCatName(getNewsCat($id)), $id, $title);
-            $res[]  = '<a href="'.$link.'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
+        foreach ($articles as $article) {
+            $article    = new Article($article['ID']);
+            $title      = $article->getTitle();
+            $res[]      = '<a href="'.$article->getLink().'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
         }
 
         return $res;
     }
 
     function getTopArticles($n = 5) {
-        $sql = "SELECT   ID, Titel
-                FROM     news
-                WHERE    enable = 1 AND Datum < NOW()
-                GROUP BY ID
-                ORDER BY Hits DESC, Datum DESC
-                LIMIT    0, ?";
-        return getArticleLinks($sql, $n);
+        $options = 'GROUP BY ID ORDER BY Hits DESC, Datum DESC';
+        return getArticleLinks($options, $n);
     }
 
     function getlastArticles($n) {
-        $sql = "SELECT   ID, Titel
-                FROM     news
-                WHERE    enable = 1 AND Datum < NOW()
-                GROUP BY ID
-                ORDER BY Datum DESC
-                LIMIT    0, ?";
-        return getArticleLinks($sql, $n);
+        $options = 'GROUP BY ID ORDER BY Datum DESC';
+        return getArticleLinks($options, $n);
     }
 
     function getOffset($a, $o, $s) {

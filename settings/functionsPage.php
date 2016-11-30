@@ -50,7 +50,7 @@
         $article = new Article($id);
         $title = $article->getTitle();
         $cat = getCatName(getNewsCat($id));
-        return 'http://'.$_SERVER['HTTP_HOST'].getLink($cat, $id, $title);
+        return 'http://'.$_SERVER['HTTP_HOST'].$article->getLink();
       case 'topCategory':
         return 'http://'.$_SERVER['HTTP_HOST'];
       case 'category':

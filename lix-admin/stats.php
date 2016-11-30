@@ -50,7 +50,8 @@
     $stmt->close();
 
     foreach($top as $k => $v) {
-      $top[$k]['link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['title']);
+      $article          = new Article($v['id']);
+      $top[$k]['link']  = $article->getLink();
     }
     $a['data']['top'] = $top;
 
@@ -96,7 +97,8 @@
     $stmt->close();
 
     foreach($last as $k => $v) {
-      $last[$k]['link'] = getLink(getCatName(getNewsCat($v['id'])), $v['id'], $v['title']);
+      $article          = new Article($v['id']);
+      $top[$k]['link']  = $article->getLink();
     }
     $a['data']['last'] = $last;
 
