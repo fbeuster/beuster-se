@@ -5,7 +5,7 @@
   	<h1><?php I18n::e('admin.article.overview.label'); ?></h1>
   	<p>
       <?php I18n::e('admin.article.overview.summary', array(
-        count($data['articles']),
+        $data['total_articles'],
         $data['total_comments'],
         $data['unlisted']
       )); ?>
@@ -16,47 +16,53 @@
         <input type="text" name="article_filter" placeholder="<?php I18n::e('admin.article.overview.filter.placeholder'); ?>">
       </label>
     </form>
-    <table class="entry_list articles">
-      <thead>
-        <tr>
-          <th class="smallNumber">#</th>
-          <th class="smallNumber"><?php I18n::e('admin.article.overview.table_header.id'); ?></th>
-          <th><?php I18n::e('admin.article.overview.table_header.article'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits_per_day'); ?></th>
-          <th class="date"><?php I18n::e('admin.article.overview.table_header.date'); ?></th>
-          <th class="button"><?php I18n::e('admin.snippet.overview.table_header.actions'); ?></th>
-        </tr>
-      </thead>
-      <tbody>
-      <?php
-        if(count($data['articles'])) {
-          $i = 0;
-          foreach($data['articles'] as $entry) { ?>
-        <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-article="<?php echo $entry['id']; ?>">
-          <td ><?php echo ($i+1); ?></td>
-          <td ><?php echo $entry['id']; ?></td>
-          <td class="title"><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
-          <td ><?php echo $entry['hits']; ?></td>
-          <td ><?php echo $entry['per_day']; ?></td>
-          <td ><?php echo $entry['date']; ?></td>
-          <td class="actions">
-            <div>
-              <a class="edit"  title="<?php I18n::e('admin.article.overview.edit.title'); ?>" href="/newsedit/a/<?php echo $entry['id']; ?>">
-                <?php I18n::e('admin.article.overview.edit.text'); ?>
-              </a>
-              <a class="delete" title="<?php I18n::e('admin.article.overview.delete.title'); ?>">
-                <?php I18n::e('admin.article.overview.delete.text'); ?>
-              </a>
-            </div>
-          </td>
-        </tr>
-      <?php
-            $i++;
-          }
-        } ?>
-      </tbody>
-    </table>
+    <?php foreach ($data['article_lists'] as $list_name => $articles) { ?>
+      <h2 class="entry_list_header"><?php I18n::e('admin.article.overview.subheader.'.$list_name); ?></h2>
+      <?php if (count($articles)) { ?>
+        <table class="entry_list articles">
+          <thead>
+            <tr>
+              <th class="smallNumber">#</th>
+              <th class="smallNumber"><?php I18n::e('admin.article.overview.table_header.id'); ?></th>
+              <th><?php I18n::e('admin.article.overview.table_header.article'); ?></th>
+              <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits'); ?></th>
+              <th class="bigNumber"><?php I18n::e('admin.article.overview.table_header.hits_per_day'); ?></th>
+              <th class="date"><?php I18n::e('admin.article.overview.table_header.date'); ?></th>
+              <th class="button"><?php I18n::e('admin.snippet.overview.table_header.actions'); ?></th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php
+            $i = 0;
+            foreach($articles as $entry) {
+              $article = $entry['article']; ?>
+          <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-article="<?php echo $article->getId(); ?>">
+            <td ><?php echo ($i+1); ?></td>
+            <td ><?php echo $article->getId(); ?></td>
+            <td class="title"><a href="<?php echo $article->getLink(); ?>"><?php echo $article->getTitle(); ?></a></td>
+            <td ><?php echo $entry['hits']; ?></td>
+            <td ><?php echo $entry['per_day']; ?></td>
+            <td ><?php echo $article->getDateFormatted("d.m.Y H:i"); ?></td>
+            <td class="actions">
+              <div>
+                <a class="edit"  title="<?php I18n::e('admin.article.overview.edit.title'); ?>" href="/newsedit/a/<?php echo $article->getId(); ?>">
+                  <?php I18n::e('admin.article.overview.edit.text'); ?>
+                </a>
+                <a class="delete" title="<?php I18n::e('admin.article.overview.delete.title'); ?>">
+                  <?php I18n::e('admin.article.overview.delete.text'); ?>
+                </a>
+              </div>
+            </td>
+          </tr>
+        <?php
+              $i++;
+            } ?>
+          </tbody>
+        </table>
+      <?php } else { ?>
+        <p class="empty"><?php I18n::e('admin.article.overview.empty.'.$list_name); ?></p>
+      <?php  } ?>
+    <?php } ?>
   </section>
 
   <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>

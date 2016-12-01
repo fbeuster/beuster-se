@@ -75,6 +75,16 @@ input[name=article_filter] {
   padding: 0.5em;
 }
 
+h2.entry_list_header {
+  font-weight: bold;
+  margin-top: 2em;
+}
+
+p.empty {
+  font-style: italic;
+  text-align-last: center;
+}
+
 table.commentlist,
 table.entry_list {
   margin-top: 1em;
@@ -121,6 +131,7 @@ table.entry_list {
   }
 
   td, th {
+    padding-top: 0.5em;
     text-align: left;
   }
 

@@ -152,11 +152,21 @@
           "text" : "Edit",
           "title" : "Click to edit"
         },
+        "empty" : {
+          "planned_articles" : "There are no planned articles.",
+          "released_articles" : "There are no released articles.",
+          "unlisted_articles" : "There are no unlisted articles."
+        },
         "filter" : {
           "label" : "Filter article list",
           "placeholder" : "Article title"
         },
         "label" : "Article overview list",
+        "subheader" : {
+          "planned_articles" : "Planned Articles",
+          "released_articles" : "Released Articles",
+          "unlisted_articles" : "Unlisted Articles"
+        },
         "summary" : "A total of %s articles and %s comments have been written. %s articles are not published yet.",
         "table_header" : {
           "article" : "Article",

@@ -9,23 +9,50 @@
 
     $a['filename']  = 'newsoverview.php';
     $a['data']      = array();
+    $article_lists  = array();
 
-    # get articles
-    $fields   = array('ID', 'Hits', 'TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp', 'enable');
+    # commen vars
+    $fields   = array('ID', 'Hits', 'TO_DAYS(NOW()) - TO_DAYS(Datum) AS TimeUp');
     $options  = 'ORDER BY Datum DESC';
-    $articles = $db->select('news', $fields, null, $options);
 
-    foreach ($articles as $k => $article) {
-      $ar = new Article($article['ID']);
-      $articles[$k] = array(
-                  'title'     => Parser::parse($ar->getTitle(), Parser::TYPE_PREVIEW),
-                  'link'      => $ar->getLink(),
-                  'id'        => $article['ID'],
-                  'date'      => $ar->getDateFormatted("d.m.Y H:i"),
+    # unlisted
+    $conds    = array('enable = ?', 'i', array(0));
+    $unlisted = $db->select('news', $fields, $conds, $options);
+
+    foreach ($unlisted as $k => $article) {
+      $unlisted[$k] = array(
+                  'article'   => new Article($article['ID']),
                   'hits'      => $article['Hits'],
-                  'per_day'   => number_format($article['Hits'] / ($article['TimeUp'] < 1 ? 1 : $article['TimeUp']), 2, '.', ','),
-                  'enabled'   => $article['enable']);
+                  'per_day'   => number_format($article['Hits'] / ($article['TimeUp'] < 1 ? 1 : $article['TimeUp']), 2, '.', ','));
     }
+
+    $article_lists['unlisted_articles'] = $unlisted;
+
+    # future
+    $conds    = array('Datum > NOW() AND enable = ?', 'i', array(1));
+    $planned  = $db->select('news', $fields, $conds, $options);
+
+    foreach ($planned as $k => $article) {
+      $planned[$k] = array(
+                  'article'   => new Article($article['ID']),
+                  'hits'      => $article['Hits'],
+                  'per_day'   => number_format($article['Hits'] / ($article['TimeUp'] < 1 ? 1 : $article['TimeUp']), 2, '.', ','));
+    }
+
+    $article_lists['planned_articles'] = $planned;
+
+    # released
+    $conds    = array('Datum < NOW() AND enable = ?', 'i', array(1));
+    $released = $db->select('news', $fields, $conds, $options);
+
+    foreach ($released as $k => $article) {
+      $released[$k] = array(
+                  'article'   => new Article($article['ID']),
+                  'hits'      => $article['Hits'],
+                  'per_day'   => number_format($article['Hits'] / ($article['TimeUp'] < 1 ? 1 : $article['TimeUp']), 2, '.', ','));
+    }
+
+    $article_lists['released_articles'] = $released;
 
     # get number of comments
     $total_comments = 0;
@@ -36,20 +63,10 @@
       $total_comments = $res[0]['total_comments'];
     }
 
-    # get number of unlisted articles
-    $unlisted = 0;
-    $fields   = array('COUNT(news.ID) AS unlisted');
-    $conds    = array('enable = ? AND newscatcross.Cat != ?', 'ii', array(0, 12));
-    $joins    = 'LEFT JOIN newscatcross ON news.ID = newscatcross.NewsID';
-    $res      = $db->select('news', $fields, $conds, null, null, $joins);
-
-    if (count($res)) {
-      $unlisted = $res[0]['unlisted'];
-    }
-
-    $a['data']['articles']        = $articles;
+    $a['data']['article_lists']   = $article_lists;
+    $a['data']['total_articles']  = count($planned) + count($released) + count($unlisted);
     $a['data']['total_comments']  = $total_comments;
-    $a['data']['unlisted']        = $unlisted;
+    $a['data']['unlisted']        = count($unlisted);
     $a['data']['admin_news']      = true;
 
     return $a;

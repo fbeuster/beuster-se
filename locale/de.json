@@ -152,11 +152,21 @@
           "text" : "Bearbeiten",
           "title" : "Klicken zum Bearbeiten"
         },
+        "empty" : {
+          "planned_articles" : "Es sind keine Artikel geplant.",
+          "released_articles" : "Es sind keine Artikel veröffentlicht.",
+          "unlisted_articles" : "Es sind keine Artikel nicht gelistet."
+        },
         "filter" : {
           "label" : "Filter Artikelübersicht",
           "placeholder" : "Artikeltitel"
         },
         "label" : "Artikelübersichtsliste",
+        "subheader" : {
+          "planned_articles" : "Geplante Artikel",
+          "released_articles" : "Veröffentlichte Artikel",
+          "unlisted_articles" : "Nicht gelistete Artikel"
+        },
         "summary" : "Insgesamt wurden %s Artikel und %s Kommentare verfasst. %s Artikel sind noch nicht veröffentlicht.",
         "table_header" : {
           "article" : "Artikel",
