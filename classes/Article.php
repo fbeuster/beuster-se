@@ -335,13 +335,7 @@ class Article {
 
     # article itself
     $fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status');
-
-    if (Utilities::isDevServer()) {
-      $conds = array('ID = ?', 'i', array($this->id));
-
-    } else {
-      $conds = array('ID = ? AND enable = ?', 'ii', array($this->id, 1));
-    }
+    $conds  = array('ID = ?', 'i', array($this->id));
 
     $db   = Database::getDB();
     $res  = $db->select('news', $fields, $conds);
