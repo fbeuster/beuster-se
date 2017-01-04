@@ -141,7 +141,7 @@
                     if('' == $newPar = trim($_POST['catCreateNewPar'])) {
                         $err = 6;
                     } else {
-                        if(isCat($newPar)) {
+                        if(Category::exists($newPar)) {
                             $err = 10;
                         } else {
                             // Parent anlegen
@@ -158,7 +158,7 @@
                 if(isset($_POST['catCreateNewCat'], $_POST['catCreateNewCatPar'])) {
                     if('' != $newCat = trim($_POST['catCreateNewCat'])) {
                         if('err' != $newCatPar = $_POST['catCreateNewCatPar']) {
-                            if(!isCat($newCat)) {
+                            if(!Category::exists($newCat)) {
                                 // Cat unter Parent anlegen
                                 $er = Category::create($newCat, $newCatPar, 2);
                                 if(!$er) {

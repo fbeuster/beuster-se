@@ -126,9 +126,9 @@
                 echo '<li class="between">&gt;</li><li><a href="/'.lowerCat($cat).'">'.$cat.'</a></li>'."\r";
             }
         } else {
-            if(isset($_GET['c']) && isCat($_GET['c'])) {
+            if(isset($_GET['c']) && Category::exists($_GET['c'])) {
                 $catID = $_GET['c'];
-            } else if(isset($_GET['p']) && isCat($_GET['p'])) {
+            } else if(isset($_GET['p']) && Category::exists($_GET['p'])) {
                 $catID = $_GET['p'];
             } else {
                 $catID = getCatID('Blog');

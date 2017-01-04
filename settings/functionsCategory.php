@@ -109,21 +109,6 @@
         return $r;
     }
 
-    function isCat($c) {
-        if(!is_numeric($c)) {
-            $c = getCatID($c);
-            if($c == 0) {
-                return false;
-            }
-        }
-        $cs = getCats();
-        $i = count($cs) - 1;
-        for($i = count($cs) - 1; $i >= 0; $i--) {
-            if(getCatID($cs[$i]) == $c) return true;
-        }
-        return false;
-    }
-
     function isTopCat($c) {
         $db = Database::getDB()->getCon();
         $cID = $c;

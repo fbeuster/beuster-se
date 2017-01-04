@@ -47,6 +47,20 @@ class Category {
 		return $db->insert('newscat', $fields, $values);
 	}
 
+	public static function exists($id_or_name) {
+		$db 		= Database::getDB();
+		$fields = array('ID');
+
+		if (is_numeric($id_or_name)) {
+			$conds = array('ID = ?', 'i', array($id_or_name));
+
+		} else {
+			$conds = array('Cat = ?', 's', array($id_or_name));
+		}
+
+		return $db->select('newscat', $fields, $conds) == true;
+	}
+
 	/**
 	 * check, if a given name is a category
 	 * @param String $name name of category to check
