@@ -1,33 +1,5 @@
 <?php
 
-    function isCatPlaylist($catId) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Typ
-                FROM
-                    newscat
-                WHERE
-                    ID = ?";
-        $stmt = $db->prepare($sql);
-        if($stmt === false) {
-            return false;
-        }
-        $stmt->bind_param('i', $catId);
-        if(!$stmt->execute()) {
-            return false;
-        }
-        $tags = array();
-        $stmt->bind_result($type);
-        if(!$stmt->fetch()) {
-            return false;
-        }
-        $stmt->close();
-        if($type == 1) {
-            return true;
-        }
-        return false;
-    }
-
     function createCat($cat, $parID, $typ) {
         $db = Database::getDB()->getCon();
         $sql = "INSERT INTO

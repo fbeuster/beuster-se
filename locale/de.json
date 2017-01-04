@@ -23,6 +23,32 @@
           "placeholder" : "Bitte wählen...",
           "submit" : "Gewählten Artikel bearbeiten"
         },
+        "content_label" : "Inhalt",
+        "error" : {
+          "category_old_new" : "Alte und neue Kategorie können nicht gleichzeitig verwendet werden.",
+          "empty_content" : "Der Inhalt darf nicht leer sein.",
+          "empty_tags" : "Die Tags dürfen nicht leer sein.",
+          "empty_title" : "Der Titel darf nicht leer sein.",
+          "image_save_error" : "Bei der Bildspeicherung ist ein Fehler aufgetreten.",
+          "invalid_category_parent" : "Die alte Kategorie kann keiner anderen Oberkategorie zugeordnet werden.",
+          "invalid_category_playlist" : "Playlist und Kategorie können nicht gleichzeitig verwendet werden.",
+          "invalid_image_format" : "Das Bildformat für '%s' ist ungültig.",
+          "invalid_image_size" : "Die Bildgröße für '%s' ist ungültig.",
+          "invalid_release_date" : "Das eingegebene Datum is ungültig.",
+          "invalid_release_time" : "Die eingegebene Zeit ist ungültig.",
+          "invalid_thumbnail_number" : "Das eingegebene Vorschaubild ist keine Zahl.",
+          "missing_article_id" : "Die ID des Artikels fehlt.",
+          "missing_category_name" : "Der Name für die neue Kategorie fehlt.",
+          "missing_category_parent" : "Die neue Kategorie benöigt eine Oberkategorie.",
+          "missing_category_playlist" : "Du musst eine Kategorie oder Playlist zuweisen.",
+          "missing_playlist_id" : "Die ID für die neue Playlist fehlt.",
+          "missing_playlist_name" : "Der Name für die neue Playlist fehlt.",
+          "missing_project_status" : "Das Projekt benötigt die Angabe eines Status.",
+          "no_article_selected" : "Es wurde kein Artikel ausgewählt.",
+          "playlist_old_new" : "Alte und neue Playlist können nicht gleichzeitig verwendet werden.",
+          "thumbnail_too_big" : "Das eingegebene Vorschaubild ist zu groß.",
+          "thumbnail_too_small" : "Das eingegebene Vorschaubild ist zu klein."
+        },
         "label" : "Artikel bearbeiten",
         "manual_release_label" : "Manuelle Freigabe",
         "new_category" : {
@@ -47,6 +73,14 @@
         "playlist" : {
           "label" : "Playlist",
           "placeholder" : "Playlist wählen..."
+        },
+        "release_date" : {
+          "label" : "Veröffentlichungsdatum (YYYY-MM-TT)",
+          "placeholder" : "Datum auswählen"
+        },
+        "release_time" : {
+          "label" : "Veröffentlichungszeit (HH:MM)",
+          "placeholder" : "Uhrzeit auswählen"
         },
         "submit" : "Artikel ändern",
         "success" : "Der Artikel wurde geändert.",

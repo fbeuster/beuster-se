@@ -7,7 +7,6 @@
 
     $a['filename']  = 'newsnew.php';
     $a['data']      = array();
-    $err    = 0;
 
     $is_new_category  = false;
     $is_new_playlist  = false;
@@ -196,7 +195,8 @@
           'value'   => $category_new);
       }
 
-      if (Category::newFromName('Projekte')->getId() == Category::newFromName($category)->getId()) {
+      if (Category::isCategoryName('Projekte') &&
+          Category::newFromName('Projekte')->getId() == Category::newFromName($category)->getId()) {
         if ($project_status == 0) {
           # missing project status
           $errors['project_status'] = array(

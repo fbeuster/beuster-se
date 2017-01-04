@@ -23,6 +23,31 @@
           "placeholder" : "Please select...",
           "submit" : "Edit selected article"
         },
+        "error" : {
+          "category_old_new" : "Old and new category can't be used at the same time.",
+          "empty_content" : "The content cannot be empty.",
+          "empty_tags" : "The tags cannot be empty.",
+          "empty_title" : "The title cannot be empty.",
+          "image_save_error" : "An error occured while saving the image.",
+          "invalid_category_parent" : "The old category can't be assigned to a different parent category.",
+          "invalid_category_playlist" : "Playlist and category cannot be used at the same time.",
+          "invalid_image_format" : "The file type for '%s' is invalid.",
+          "invalid_image_size" : "The file size for '%s' is invalid.",
+          "invalid_release_date" : "The entered date is invalid.",
+          "invalid_release_time" : "The entered time is invalid.",
+          "invalid_thumbnail_number" : "The entered thumbnail is not a number.",
+          "missing_article_id" : "The article ID is missing.",
+          "missing_category_name" : "The name for the new category is missing.",
+          "missing_category_parent" : "The new category needs to be assigned to a new category.",
+          "missing_category_playlist" : "You need to assign either a category or a playlist.",
+          "missing_playlist_id" : "The ID for the new playlist is missing.",
+          "missing_playlist_name" : "The name for the new playlist is missing.",
+          "missing_project_status" : "The project has to have a state.",
+          "no_article_selected" : "No article was selected.",
+          "playlist_old_new" : "Old and new playlist can't be used at the same time.",
+          "thumbnail_too_big" : "The entered thumbnail is too big.",
+          "thumbnail_too_small" : "The entered thumbnail is too small."
+        },
         "label" : "Edit article",
         "manual_release_label" : "Manual release",
         "new_category" : {
@@ -47,6 +72,14 @@
         "playlist" : {
           "label" : "Playlist",
           "placeholder" : "Select playlist..."
+        },
+        "release_date" : {
+          "label" : "Release date (YYYY-MM-TT)",
+          "placeholder" : "Select date"
+        },
+        "release_time" : {
+          "label" : "Release time (HH:MM)",
+          "placeholder" : "Select time"
         },
         "submit" : "Change article",
         "success" : "The article has been changed.",

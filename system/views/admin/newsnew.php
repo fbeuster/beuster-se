@@ -26,7 +26,7 @@
         <legend><?php I18n::e('admin.article.new.label'); ?></legend>
         <label class="required long <?php if(isset($data['errors']['title'])) { echo ' has_error'; } ?>">
           <span><?php I18n::e('admin.article.new.title.label'); ?></span>
-          <input type="text" name="title" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.new.title.placeholder'); ?>" value="<?php if (isset($data['values'], $data['values']['name'])) { echo $data['values']['name']; } ?>">
+          <input type="text" name="title" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.new.title.placeholder'); ?>" value="<?php if (isset($data['values'], $data['values']['title'])) { echo $data['values']['title']; } ?>">
         </label>
 
         <label>
@@ -82,7 +82,7 @@
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
-                    } ?> ?>
+                    } ?>
             <option <?php echo 'value="'.$par.'"'.$selected; ?>><?php echo getCatName($par); ?></option>
             <?php } ?>
           </select>
@@ -121,7 +121,7 @@
           <span>
             <?php I18n::e('admin.article.new.tags.label'); ?>
           </span>
-          <input type="text" name="tags" title="<?php I18n::e('admin.article.new.tags.placeholder'); ?>" value="<?php if (isset($data['values']['newstags'])) echo $data['values']['newstags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.new.tags.placeholder'); ?>">
+          <input type="text" name="tags" title="<?php I18n::e('admin.article.new.tags.placeholder'); ?>" value="<?php if (isset($data['values']['tags'])) echo $data['values']['tags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.new.tags.placeholder'); ?>">
         </label>
 
         <p class="newsNewHelp">
