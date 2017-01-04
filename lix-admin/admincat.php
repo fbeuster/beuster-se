@@ -145,7 +145,7 @@
                             $err = 10;
                         } else {
                             // Parent anlegen
-                            if($er = createCat($newPar, 0, 0) !== true) {
+                            if($er = Category::create($newPar, 0, 0) != true) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
@@ -160,8 +160,8 @@
                         if('err' != $newCatPar = $_POST['catCreateNewCatPar']) {
                             if(!isCat($newCat)) {
                                 // Cat unter Parent anlegen
-                                $er = createCat($newCat, $newCatPar, 2);
-                                if($er !== true) {
+                                $er = Category::create($newCat, $newCatPar, 2);
+                                if(!$er) {
                                     $errMessages[11] .= $er;
                                     $err = 11;
                                 }

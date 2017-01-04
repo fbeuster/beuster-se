@@ -351,9 +351,7 @@
             }
 
             # create new category
-            $fields = array('Cat', 'ParentID', 'Typ');
-            $values = array('sii', array($category, $category_parent, $category_type));
-            $category_id  = $dbo->insert('newscat', $fields, $values);
+            Category::cerate($category, $category_parent, $category_type);
 
             # create new playlist
             if ($is_new_playlist) {

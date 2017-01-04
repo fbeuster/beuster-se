@@ -39,6 +39,14 @@ class Category {
 
 	/*** STATIC ***/
 
+	public static function create($name, $parent_id, $type = self::CAT_TYPE_SUB) {
+		$db 		= Database::getDB();
+		$fields	= array('Cat', 'ParentID', 'Typ');
+		$values = array('sii', array($name, $parent_id, $type));
+
+		return $db->insert('newscat', $fields, $values);
+	}
+
 	/**
 	 * check, if a given name is a category
 	 * @param String $name name of category to check

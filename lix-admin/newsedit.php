@@ -331,10 +331,15 @@
           $category_old     = getNewsCat($article_id);
 
           if ($is_new_category) {
+            if ($is_new_playlist) {
+              $category_type   = Category::CAT_TYPE_PLAYLIST;
+
+            } else {
+              $category_type   = Category::CAT_TYPE_SUB;
+            }
+
             # new category
-            $fields = array('Cat', 'ParentID');
-            $values = array('s', array($category_new, $category_parent));
-            $res    = $dbo->insert('newscat', $fields, $values);
+            Category::create($category_new, $category_parent, $category_type);
 
             $fields = array('MAX(ID) as idn');
             $res    = $dbo->select('newscat', $fields);

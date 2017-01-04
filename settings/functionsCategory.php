@@ -1,18 +1,5 @@
 <?php
 
-    function createCat($cat, $parID, $typ) {
-        $db = Database::getDB()->getCon();
-        $sql = "INSERT INTO
-                    newscat(Cat, ParentID, Typ)
-                VALUES
-                    (?,?,?)";
-        if(!$stmt = $db->prepare($sql)){return $db->error;}
-        $stmt->bind_param('sii', $cat, $parID, $typ);
-        if(!$stmt->execute()){return $stmt->error;}
-        $stmt->close();
-        return true;
-    }
-
     function transformCat($table, $col, $tar, $old, $col2 = '') {
         $db = Database::getDB()->getCon();
         if($col2 == '') {
