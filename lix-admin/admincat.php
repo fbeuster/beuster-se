@@ -64,8 +64,8 @@
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
-                            $er = removeCat($del);
-                            if($err == 0 && $er !== true) {
+                            $er = Category::delete($del);
+                            if($err == 0 && !$er) {
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             }
@@ -119,8 +119,8 @@
                                 $errMessages[11] .= $er;
                                 $err = 11;
                             } else {
-                                $er = removeCat($del);
-                                if($err == 0 && $er !== true) {
+                                $er = Category::delete($del);
+                                if($err == 0 && !$er) {
                                     $errMessages[11] .= $er;
                                     $err = 11;
                                 }

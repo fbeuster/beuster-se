@@ -47,6 +47,13 @@ class Category {
 		return $db->insert('newscat', $fields, $values);
 	}
 
+	public static function delete($id) {
+		$db 	= Database::getDB();
+		$cond = array('ID = ?', 'i', array($id));
+
+		return $db->delete('newscat', $cond);
+	}
+
 	public static function exists($id_or_name) {
 		$db 		= Database::getDB();
 		$fields = array('ID');

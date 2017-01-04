@@ -24,19 +24,6 @@
         return true;
     }
 
-    function removeCat($cat) {
-        $db = Database::getDB()->getCon();
-        $sql = "DELETE FROM
-                    newscat
-                WHERE
-                    ID = ?";
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        $stmt->bind_param('i', $cat);
-        if(!$stmt->execute()) {return $stmt->error;}
-        $stmt->close();
-        return true;
-    }
-
     function transformNews($cat, $new, $max) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
