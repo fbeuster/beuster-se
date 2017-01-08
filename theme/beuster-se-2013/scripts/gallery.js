@@ -103,7 +103,21 @@ beusterse.gallery = {
   },
 
   getImageSource: function(thumb) {
-    return thumb.attr('src').replace('_295x190.jpg','.jpg');
+    var src = thumb.attr('src').toLowerCase();
+
+    if (src.endsWith('_295x190.jpg')) {
+      return src.replace('_295x190.jpg','.jpg');
+    }
+
+    if (src.endsWith('_295x190.png')) {
+      return src.replace('_295x190.png','.png');
+    }
+
+    if (src.endsWith('_295x190.gif')) {
+      return src.replace('_295x190.gif','.gif');
+    }
+
+    return src;
   },
 
   hideBigImage: function(event) {
