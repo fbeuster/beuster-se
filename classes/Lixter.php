@@ -53,8 +53,8 @@ class Lixter {
    * loading content
    */
   public function run() {
-    $this->loadPage();
     $this->loadTheme();
+    $this->loadPage();
 
     if ($this->page->getType() == Page::ADMIN_PAGE) {
       $this->buildAdmin();
@@ -222,6 +222,7 @@ class Lixter {
 
   private function loadTheme() {
     $this->theme = new Theme( Config::getConfig()->get('theme') );
+    include($this->theme->getFile('functions.php'));
   }
 
   private function buildAdmin() {
@@ -266,7 +267,6 @@ class Lixter {
     $currPage = getPage();
     $config   = Config::getConfig();
 
-    include($this->theme->getFile('functions.php'));
     include($this->theme->getFile('htmlheader.php'));
 
     if (Utilities::isDevServer() || $config->get('debug')) {

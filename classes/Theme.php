@@ -5,6 +5,7 @@ class Theme {
 
   private $name;
   private $path;
+  private $thumbnail_sizes = array();
   private $user_path  = 'user/theme/';
 
   public function __construct($name) {
@@ -14,6 +15,12 @@ class Theme {
 
     $this->name = $name;
     $this->path = 'theme/'.$name.'/';
+  }
+
+  public function addThumbnailSize($width, $height) {
+    if ($width > 0 && $height > 0) {
+      $this->thumbnail_sizes[] = array($width, $height);
+    }
   }
 
   public function getFile($filename) {
@@ -28,6 +35,10 @@ class Theme {
 
   public function getName() {
     return $this->name;
+  }
+
+  public function getThumbnailSizes() {
+    return $this->thumbnail_sizes;
   }
 }
 

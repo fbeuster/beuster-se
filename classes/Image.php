@@ -93,6 +93,7 @@ class Image {
       $file_extension = pathinfo($file, PATHINFO_EXTENSION);
       $path           = $pre_path.$file_name . '.' . $file_extension;
       $save_name      = $file_name . '.' . $file_extension;
+      $thumb_sizes    = Lixter::getLix()->getTheme()->getThumbnailSizes();
 
       while (file_exists($path)) {
         $save_name  = $file_name . '_' . $counter . '.' . $file_extension;
@@ -115,13 +116,9 @@ class Image {
       $maxid  = $db->insert('images', $fields, $values);
 
       # create thumbnail
-      Image::createThumbnail($pre_path . $save_name, 295, 190);
-      Image::createThumbnail($pre_path . $save_name, 800, 450);
-
-      # todo
-      # this needs to be improved so that i
-      #   don#t have to list all resolutions
-      #   unused sizes are not necessarily created
+      foreach ($thumb_sizes as $thumb_size) {
+        Image::createThumbnail($pre_path . $save_name, $thumb_size[0], $thumb_size[1]);
+      }
 
       return $maxid;
     }

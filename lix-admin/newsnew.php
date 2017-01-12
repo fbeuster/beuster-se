@@ -1,4 +1,5 @@
 <?php
+
   $a    = array();
   $user = User::newFromCookie();
 

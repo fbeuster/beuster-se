@@ -1,5 +1,7 @@
 <?php
 
+  Lixter::getLix()->getTheme()->addThumbnailSize(800, 450);
+
   function genPager($total_pages, $current_age, $destination) {
     $ret    = '';
     $pager  = new Pager(false, $total_pages, $current_age, $destination);
