@@ -101,10 +101,8 @@ class Image {
         $counter++;
       }
 
-
       $thumb = 0;
-      if (is_int($thumb_key) && '' != $thumb_key
-        && $thumb_key == $key + 1) {
+      if (ctype_digit($thumb_key) && $thumb_key == $key + 1) {
         $thumb = 1;
       }
 
