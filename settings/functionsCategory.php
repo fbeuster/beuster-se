@@ -192,7 +192,6 @@
                     Typ = 2 OR
                     Typ = 3
                 ORDER BY
-                    ParentID ASC,
                     Cat ASC";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         if(!$result->execute()) {return $result->error;}

@@ -423,6 +423,8 @@
     $a['data']['cats'][]  = 'Blog';
     $a['data']['pls']     = getPlaylists();
 
+    sort($a['data']['cats']);
+
     return $a;
 
   } else if ($user) {
