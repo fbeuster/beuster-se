@@ -9,7 +9,7 @@ class Theme {
   private $user_path  = 'user/theme/';
 
   public function __construct($name) {
-    if ($name === null || trim($name) === '' || !file_exists('theme/'.$name.'/')) {
+    if (!Theme::isValidTheme($name)) {
       $name = 'default';
     }
 
@@ -39,6 +39,10 @@ class Theme {
 
   public function getThumbnailSizes() {
     return $this->thumbnail_sizes;
+  }
+
+  public static function isValidTheme($name) {
+    return $name !== null && $name !== '' && file_exists('theme/'.$name.'/');
   }
 }
 

@@ -221,7 +221,13 @@ class Lixter {
   }
 
   private function loadTheme() {
-    $this->theme = new Theme( Config::getConfig()->get('theme') );
+    if (isset($_GET['theme']) && Theme::isValidTheme($_GET['theme'])) {
+      $this->theme = new Theme( $_GET['theme'] );
+
+    } else {
+      $this->theme = new Theme( Config::getConfig()->get('theme') );
+    }
+
     include($this->theme->getFile('functions.php'));
   }
 
