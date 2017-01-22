@@ -51,21 +51,23 @@ beusterse.gallery = {
     beusterse.gallery.openLightbox();
 
     view.attr({
-      'title' : $image.attr('title'),
-      'name'  : $image.attr('name'),
-      'alt'   : $image.attr('alt')
+      'alt'           : $image.attr('alt'),
+      'data-caption'  : $image.attr('data-caption'),
+      'title'         : $image.attr('title')
     });
 
     newImg.onload = function() {
       view.attr('src', $image.attr('src')).load(function(){
-        var newScale  = beusterse.gallery.scaleLightbox(newImg.width, newImg.height)
+        var textHeight = $('.lightbox .wrapper .text').outerHeight(true),
+            newScale  = beusterse.gallery.scaleLightbox(newImg.width + textHeight,
+                                                        newImg.height + textHeight)
             imgHeight = newScale.height,
             imgWidth  = newScale.width;
 
         $('.lightbox .wrapper').css({
-          'marginTop' : (window.innerHeight - (imgHeight + 30)) / 2,
+          'marginTop' : (window.innerHeight - (imgHeight + textHeight)) / 2,
           'width'     : imgWidth,
-          'height'    : imgHeight + 30
+          'height'    : imgHeight + textHeight
         });
         view.css({
           'width'   : imgWidth,
@@ -74,7 +76,15 @@ beusterse.gallery = {
       });
     }
     newImg.src = $image.attr('src');
-    $('.lightbox .description').text(view.attr('name'));
+
+    if (view.attr('data-caption') != undefined &&
+        view.attr('data-caption') != null &&
+        view.attr('data-caption') != '') {
+      $('.lightbox .description').text(view.attr('data-caption'));
+
+    } else {
+      $('.lightbox .description').text(view.attr('alt'));
+    }
   },
 
   openLightbox: function() {
@@ -83,8 +93,8 @@ beusterse.gallery = {
   },
 
   scaleLightbox: function(_width, _height) {
-    while(  (_width + 30) >= window.innerWidth ||
-            (_height + 30) >= window.innerHeight ) {
+    while(  _width >= window.innerWidth ||
+            _height >= window.innerHeight ) {
       _width  = _width * 0.9;
       _height = _height * 0.9;
     }

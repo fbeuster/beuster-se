@@ -22,11 +22,11 @@
 
       <?php if(count($article->getGallery()) > 0) { ?>
         <section class="gallery">
-          <h2><?php I18n::e('article.gallery'); ?></h2>
+          <h2><?php I18n::e('article.gallery.title'); ?></h2>
           <ul>
           <?php foreach ($article->getGallery() as $image) { ?>
             <li>
-              <img src="<?php echo $image->getAbsolutePath(); ?>" alt="<?php echo $image->getTitle(); ?>">
+              <img src="<?php echo $image->getAbsolutePath(); ?>" alt="<?php echo $image->getPath(); ?>" data-caption="<?php echo $image->getTitle(); ?>">
             </li>
           <?php } ?>
           </ul>

@@ -361,7 +361,10 @@
   },
   "article" : {
     "back_link" : "< Zurück zu %s",
-    "gallery" : "Gallerie",
+    "gallery" : {
+      "close" : "Schließen",
+      "title" : "Gallerie"
+    },
     "info" : "geschrieben von %s am"
   },
   "category" : {

@@ -360,7 +360,10 @@
   },
   "article" : {
     "back_link" : "< Back to %s",
-    "gallery" : "Gallery",
+    "gallery" : {
+      "close" : "Close",
+      "title" : "Gallery"
+    },
     "info" : "written by %s on"
   },
   "category" : {

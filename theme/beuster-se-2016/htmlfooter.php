@@ -23,8 +23,8 @@
           <img src="/images/spacer.gif" alt="" id="imgViewport">
         </div>
         <div class="text">
-          <span class="decription">Ich bin ein Test.</span>
-          <span class="close">Close</span>
+          <span class="description">Ich bin ein Test.</span>
+          <span class="close" title="<?php I18n::e('article.gallery.close'); ?>"><?php I18n::e('article.gallery.close'); ?></span>
         </div>
       </div>
     </div>
