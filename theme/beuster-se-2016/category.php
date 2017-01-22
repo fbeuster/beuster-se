@@ -19,7 +19,7 @@
         $thumb_src = $article->getThumbnail()->getPathThumb(800, 450);
       }
     } else {
-      $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/default_thumbanil_800_450.jpg');
+      $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/default_thumbnail_800_450.jpg');
     } ?>
 
   <section class="article">
