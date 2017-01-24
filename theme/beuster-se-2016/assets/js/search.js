@@ -2,13 +2,14 @@
 
 beusterse.search = {
   div: 'div.search',
+  init_delay: 1500,
 
   init: function () {
     this.bindHandlers();
 
     if (!$(this.div + ' input[type=text]').val() ||
       $(this.div + ' input[type=text]').val().trim() == '') {
-      this.deactivateSearch();
+      setTimeout(this.deactivateSearch, this.init_delay);
     }
   },
 
