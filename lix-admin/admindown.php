@@ -1,148 +1,147 @@
 <?php
-$a = array();
-$user = User::newFromCookie();
-if ($user && $user->isAdmin()) {
-  refreshCookies();
-  $a['filename'] = 'admindown.php';
-  $a['data'] = array();
+  $a    = array();
+  $user = User::newFromCookie();
 
-  if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    if (!isset($_POST['downname'], $_POST['downdescr'], $_POST['downver'], $_FILES['file'], $_POST['formaction'])) {
-      return INVALID_FORM;
-    }
-    if (('' == $downname = Parser::parse($_POST['downname'], Parser::TYPE_NEW)) OR
-        ('' == $downdescr = Parser::parse($_POST['downdescr'], Parser::TYPE_NEW)) OR
-        ('' == $downver = $_POST['downver'])) {
-      return EMPTY_FORM;
-    }
-    $db = Database::getDB()->getCon();
-    if(0 == $downlic = $_POST['downlic']) {
-      $downlic = 'by-sa';
-    }
-    $logid = 0;
-    if(!empty($_FILES['file'])) {
-      $e = array();
-      if($_FILES['file']['size'] > 0 && $_FILES['file']['size'] < 5242880) {
-        if(!file_exists($pfad)) {
-          $name = $_FILES['file']['name'];
-          move_uploaded_file($_FILES['file']['tmp_name'], $pfad);
-          $sql = "INSERT INTO
-                    files(Name, Path)
-                  VALUES
-                    (?, ?);";
-          if(!$stmt = $db->prepare($sql)) {
-            return $db->error;
-          }
-          $stmt->bind_param('ss', $name, $pfad);
-          if(!$stmt->execute()){
-            return $stmt->error;
-          }
-          $stmt->close();
+  if ($user && $user->isAdmin()) {
+    refreshCookies();
 
-          $sql = "SELECT
-                    ID
-                  FROM
-                    files
-                  WHERE
-                    Path = ?";
-          if(!$stmt = $db->prepare($sql)){
-            return $db->error;
+    $a['filename']  = 'admindown.php';
+    $a['data']      = array();
+
+    $max_file_size = 5242880;
+    $min_file_size = 0;
+
+    if ('POST' == $_SERVER['REQUEST_METHOD']) {
+      if (!isset( $_POST['title'], $_POST['description'],
+                  $_POST['version'], $_FILES['file'],
+                  $_POST['formaction'])) {
+        return INVALID_FORM;
+      }
+
+      $db           = Database::getDB();
+      $description  = Parser::parse($_POST['description'], Parser::TYPE_NEW);
+      $license      = $_POST['license'];
+      $title        = Parser::parse($_POST['title'], Parser::TYPE_NEW);
+      $version      = $_POST['version'];
+
+      if ('' == $title OR '' == $description OR '' == $version) {
+        return EMPTY_FORM;
+      }
+
+      if (0 == $license) {
+        $license = 'by-sa';
+      }
+
+      $log_id = 0;
+
+      if (!empty($_FILES['file'])) {
+        $e = array();
+
+        if ($_FILES['file']['size'] > $min_file_size &&
+            $_FILES['file']['size'] < $max_file_size) {
+          $file_path = 'files/' . $_FILES['file']['name'];
+
+          if (!file_exists($file_path)) {
+
+            # upload file
+            move_uploaded_file($_FILES['file']['tmp_name'], $file_path);
+
+            $file_name  = $_FILES['file']['name'];
+            $fields     = array('Name', 'Path');
+            $values     = array('ss', array($file_name, $file_path));
+            $file_id    = $db->insert('files', $fields, $values);
+
+          } else {
+
+            # file already_exists
+            $e[] = $_FILES['file']['name'];
           }
-          $stmt->bind_param('s', $pfad);
-          if(!$stmt->execute()){
-            return $stmt->error;
-          }
-          $stmt->bind_result($fileid);
-          $stmt->close();
-        } else {
+
+        } else if($_FILES['file']['size'] != 0){
+
+          # file too large
           $e[] = $_FILES['file']['name'];
         }
-      } else if($_FILES['file']['size'] != 0){
-        $e[] = $_FILES['file']['name'];
-      }
-      if(empty($e)) {
-        if(!empty($_FILES['log'])) {
-          if($_FILES['log']['size'] > 0 && $_FILES['log']['size'] < 5242880) {
-            $logpfad = 'files/'.pathinfo($FILES['log']['name'], PATHINFO_EXTENSION);
-            if(!file_exists($pfad)) {
-              $logname = $_FILES['log']['name'];
-              move_uploaded_file($_FILES['log']['tmp_name'], $logpfad);
-              $sql = "INSERT INTO
-                        files(Name, Path)
-                      VALUES
-                        (?, ?);";
-              if(!$stmt = $db->prepare($sql)) {
-                return $db->error;
-              }
-              $stmt->bind_param('ssi', $logname, $logpfad, 0);
-              if(!$stmt->execute()) {
-                return $stmt->error;
-              }
-              $stmt->close();
 
-              $sql = "SELECT
-                        ID
-                      FROM
-                        files
-                      WHERE
-                        Path = ?";
-              if(!$stmt = $db->prepare($sql)) {
-                return $db->error;
+        if (empty($e)) {
+          if (!empty($_FILES['log'])) {
+            if ($_FILES['log']['size'] > $min_file_size &&
+                $_FILES['log']['size'] < $max_file_size) {
+              $log_path = 'files/'.$_FILES['log']['name'];
+
+              if (!file_exists($log_path)) {
+
+                # upload log file
+                move_uploaded_file($_FILES['log']['tmp_name'], $log_path);
+
+                $log_name = $_FILES['log']['name'];
+                $fields   = array('Name', 'Path');
+                $values   = array('ss', array($log_name, $log_path));
+                $log_id   = $db->insert('files', $fields, $values);
+
+              } else {
+
+                # log file already exists
+                $e[] = $_FILES['log']['name'];
+
+                $cond = array('ID = ?', 'i', array($file_id));
+                $db->delete('files', $cond);
+
+                unlink($file_path);
               }
-              $stmt->bind_param('s', $logpfad);
-              if(!$stmt->execute()) {
-                return $stmt->error;
-              }
-              $stmt->bind_result($logid);
-              $stmt->close();
+
+            } else if($_FILES['log']['size'] != 0) {
+
+              # log file too large
+              $e[] = $_FILES['log']['name'];
+
+              $cond = array('ID = ?', 'i', array($file_id));
+              $db->delete('files', $cond);
+
+              unlink($file_path);
             }
-          } else if($_FILES['log']['size'] != 0) {
-            $e[] = $_FILES['log']['name'];
-            $sql = "DELETE FROM
-                      downloads
-                    WHERE
-                      ID = ?;";
-            if(!$stmt = $db->prepare($sql)) {
-              return $db->error;
-            }
-            $stmt->bind_param('i', $fileid);
-            if(!$stmt->execute()){
-              return $stmt->error;
-            }
-            $stmt->close();
-            unlink($pfad);
           }
-        }
-        if(empty($e)) {
-          $sql = "INSERT INTO
-                    downloads(Name, Description, Version, License, File, Log)
-                  VALUES
-                    (?, ?, ?, ?, ?, ?);";
-          if(!$stmt = $db->prepare($sql)) {
-            return $db->error;
+
+          if (empty($e)) {
+
+            # insert download page entry
+            $fields = array('Name', 'Description', 'Version',
+                            'License', 'File', 'Log');
+            $values = array('ssssii', array($title, $description,
+                                            $version, $license,
+                                            $file_id, $log_id));
+            $download_id = $db->insert('downloads', $fields, $values);
+
+            return showInfo('Der Download wurde hinzugefügt. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
+
+          } else {
+            # error with log file
+            $a['data']['fe'] = array( 'name'  => $title,
+                                      'descr' => $description);
+            $a['data']['fm'] = $e;
           }
-          $stmt->bind_param('ssssii', $downname, $downdescr, $downver, $downlic, $fileid, $logid);
-          if(!$stmt->execute()) {
-            return $stmt->error;
-          }
-          $stmt->close();
-          return showInfo('Der Download wurde hinzugefügt. <br /><a href="/admin" class="back">Zurück zur Administration</a>', 'admin');
+
         } else {
-          $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);
+          # error with file
+          $a['data']['fe'] = array( 'name'  => $title,
+                                    'descr' => $description);
           $a['data']['fm'] = $e;
         }
+
       } else {
-        $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);
-        $a['data']['fm'] = $e;
+        # no files attaced
+        $a['data']['fe'] = array( 'name'  => $title,
+                                  'descr' => $description);
       }
-    } else {
-      $a['data']['fe'] = array('name' => $downname, 'descr' => $downdescr);
     }
+    return $a;
+
+  } else if($user){
+    return showInfo(I18n::t('admin.no_access'), 'blog');
+
+  } else {
+    $link = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
+    return showInfo(I18n::t('admin.not_logged_in').$link, 'login');
   }
-  return $a; // nicht Vergessen, sonst enthält $ret nur den Wert int(1)
-} else if($user){
-        return showInfo('Sie haben hier keine Zugriffsrechte.', 'blog');
-} else {
-  return showInfo('Sie sind nicht eingeloggt. <a href="/login" class="back">Erneut versuchen</a>', 'login');
-}
+
 ?>

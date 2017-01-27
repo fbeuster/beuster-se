@@ -1,6 +1,6 @@
 ﻿
 <article>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
     <?php if(isset($data['fm'])){ ?>
       <p>Fehler bei einer oder mehreren Dateien:</p>
@@ -12,12 +12,12 @@
         <legend>Download hinzufügen</legend>
         <label class="required long">
           <span>Name</span>
-          <input type="text" name="downname" value="<?php if(isset($data['fe']['titel']))echo $data['fe']['titel']; ?>" placeholder="Name des Downloads">
+          <input type="text" name="title" value="<?php if(isset($data['fe']['titel']))echo $data['fe']['titel']; ?>" placeholder="Name des Downloads">
         </label>
 
         <label class="required">
           <span>Lizenz</span>
-          <select name="downlic">
+          <select name="license">
             <option value="0">Bitte wählen...</option>
             <option value="by">by</option>
             <option value="by-sa">by-sa</option>
@@ -29,14 +29,14 @@
 
         <label class="required">
           <span>Version</span>
-          <input type="text" name="downver" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>" placeholder="Version number">
+          <input type="text" name="version" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>" placeholder="Version number">
         </label>
 
         <label class="required long">
           <span>Beschreibung</span>
           <?php
             $content  = isset($data['fe']['inhalt']) ? $data['fe']['inhalt'] : '';
-            $editor   = new Editor('newsinhalt', 'downdescr', $content);
+            $editor   = new Editor('newsinhalt', 'description', $content);
             $editor->show();
           ?>
         </label>
@@ -46,7 +46,7 @@
           <input type="file" name="file">
         </label>
 
-        <label class="required">
+        <label>
           <span>Logfile</span>
           <input type="file" name="log">
         </label>
@@ -55,5 +55,5 @@
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back">&lt; Zurück zur Administration</a>
+  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>
