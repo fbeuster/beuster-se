@@ -134,7 +134,7 @@ class Category {
 		$conds  = array('Cat = ?', 'i', array($this->id));
 		$res   	= $db->select('newscatcross', $fields, $conds);
 
-		if (count($res)) {
+		if (count($res) && $res[0]['max_article_id'] !== null) {
 			return $res[0]['max_article_id'];
 		}
 
