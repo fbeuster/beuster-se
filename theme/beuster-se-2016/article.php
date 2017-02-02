@@ -33,6 +33,25 @@
         </section>
       <?php } ?>
 
+      <?php if(count($article->getAttachments()) > 0) { ?>
+        <section class="attachments">
+          <h2>Attachments</h2>
+          <ul>
+          <?php foreach ($article->getAttachments() as $attachment) { ?>
+            <li>
+              <a href="<?php echo $attachment->getPath(); ?>">
+                <?php echo $attachment->getName(); ?>
+              </a>
+              <br>
+              <span>Version: <?php echo $attachment->getVersion(); ?></span>
+              <span>License: <?php echo $attachment->getLicense(); ?></span>
+              <span>Downlaods: <?php echo $attachment->getDownloads(); ?></span>
+            </li>
+          <?php } ?>
+          </ul>
+        </section>
+      <?php } ?>
+
       <section class="comments">
         <h2><?php I18n::e('comment.title'); ?></h2>
         <?php if(count($article->getComments()) > 0) { ?>

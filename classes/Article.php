@@ -29,6 +29,7 @@ class Article {
   private $thumbnail = null;      /**< article's thumbnail */
   private $playlist = false;      /**< playlist state */
 
+  private $attachments = array();
   private $comments = array();  /**< article comments */
   private $commentsCount;   /**< article comments count */
   private $gallery = array();
@@ -281,6 +282,13 @@ class Article {
 
 
   /**
+   * getter for gallery
+   * @return array(Image)
+   */
+  public function getAttachments() { return $this->attachments; }
+
+
+  /**
    * getter for comments
    * @return array(Comment)
    */
@@ -418,6 +426,17 @@ class Article {
 
     foreach ($res as $image) {
       $this->gallery[] = new Image($image['id']);
+    }
+
+    # attachments
+    $fields = array('attachments.id');
+    $conds  = array('article_attachments.article_id = ?', 'i', array($this->id));
+    $joins  = ' JOIN article_attachments ON article_attachments.attachment_id = attachments.id'.
+              ' JOIN news ON news.ID = article_attachments.article_id';
+    $attachments = $db->select('attachments', $fields, $conds, null, null, $joins);
+
+    foreach ($attachments as $attachment) {
+      $this->attachments[] = new File($attachment['id']);
     }
 
     # check playlist entry

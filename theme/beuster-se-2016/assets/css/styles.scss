@@ -84,3 +84,39 @@ div.wrapper footer {
     }
   }
 }
+
+body.article {
+  section.attachments {
+    @include section_style_info;
+    @include section_title;
+
+    ul {
+      list-style: none;
+
+      li {
+
+        &:not(:first-child) {
+          margin-top: 1em;
+        }
+
+        a {
+          @include default_link($green, $blue);
+          font-size: 1.1em;
+        }
+
+        span {
+          color: $darker_grey;
+
+          &:not(:first-of-type) {
+            padding-left: 1em;
+          }
+
+          &:not(:last-of-type) {
+            border-right: 1px solid $darker_grey;
+            padding-right: 1em;
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,6 +24,25 @@
     <?php if(count($article->getGallery()) > 0) { echo '<section>'.genGal($article->getGallery()).'</section>'; } ?>
   </article>
 
+  <?php if(count($article->getAttachments()) > 0) { ?>
+    <section>
+      <h2>Attachments</h2>
+      <ul>
+      <?php foreach ($article->getAttachments() as $attachment) { ?>
+        <li>
+          <a href="<?php echo $attachment->getPath(); ?>">
+            <?php echo $attachment->getName(); ?>
+          </a>
+          <br>
+          <span>Version: <?php echo $attachment->getVersion(); ?></span>
+          <span>License: <?php echo $attachment->getLicense(); ?></span>
+          <span>Downlaods: <?php echo $attachment->getDownloads(); ?></span>
+        </li>
+      <?php } ?>
+      </ul>
+    </section>
+  <?php } ?>
+
   <!-- comments -->
   <div>
     <h2 id="comments">

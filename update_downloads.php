@@ -20,29 +20,6 @@
   }
 
   #
-  # restore backup
-  #
-
-  $sql    = 'DROP TABLE IF EXISTS `'.DB_NAME.'`.`attachments`;';
-  $result = $mysqli->query($sql);
-
-  $sql    = 'DROP TABLE IF EXISTS `'.DB_NAME.'`.`article_attachments`;';
-  $result = $mysqli->query($sql);
-
-  $sql_file = 'backup_beusterse.sql';
-  $sql      = file_get_contents($sql_file);
-  $result   = $mysqli->multi_query($sql);
-
-  if (!$result) {
-    echo 'Error: Could not restore database backup.' . $line_end;
-    die('Error: ' . $mysqli->error . $line_end);
-
-  } else {
-    while ($mysqli->next_result()) {;}
-    echo 'Success: Restored database backup.' . $line_end;
-  }
-
-  #
   # alter table `files`
   #
 
@@ -83,8 +60,8 @@
   #
 
   $sql    = 'CREATE TABLE `article_attachments` (
-              `article_id` TINYINT(4) NOT NULL,
-              `attachment_id` TINYINT(4) COLLATE utf8_unicode_ci NOT NULL
+              `article_id` SMALLINT(6) NOT NULL,
+              `attachment_id` TINYINT(6) COLLATE utf8_unicode_ci NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;';
   $result = $mysqli->query($sql);
 
@@ -251,8 +228,16 @@
                                         'NOW()', 1));
     $article_id = $db->insert('news', $fields, $values);
 
-    $axa    = array(array($article_id, $download['File']),
-                    array($article_id, $download['Log']));
+    $axa    = array();
+
+    if ($download['File'] > 0) {
+      $axa[] = array($article_id, $download['File']);
+    }
+
+    if ($download['Log'] > 0) {
+      $axa[] = array($article_id, $download['Log']);
+    }
+
     $fields = array('article_id', 'attachment_id');
     $values = array('ii', $axa);
     $result = $db->insertMany('article_attachments', $fields, $values);

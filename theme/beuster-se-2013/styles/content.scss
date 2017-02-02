@@ -120,3 +120,31 @@ article p.image {
     vertical-align: middle;
   }
 }
+
+.beContentEntryAttachments {
+  h2 {
+    padding: 0 10px;
+    border-bottom: 2px solid $highlight_blue_light;
+    color: $highlight_blue_darkest;
+  }
+
+  ul {
+    background: $lighterer_gray;
+    list-style: none;
+
+    li {
+      padding: 20px;
+      border: 1px solid $gray;
+      border-top: 0;
+
+      span:not(:last-of-type) {
+        border-right: 1px solid $gray;
+        padding-right: 0.5em;
+      }
+
+      span:not(:first-of-type) {
+        padding-left: 0.5em;
+      }
+    }
+  }
+}
