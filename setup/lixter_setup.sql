@@ -23,50 +23,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `downcats`
+-- Table structure for table `attachments`
 --
 
-CREATE TABLE IF NOT EXISTS `downcats` (
-  `ID` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `Catname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `downloads`
---
-
-CREATE TABLE IF NOT EXISTS `downloads` (
-  `ID` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `Description` text COLLATE utf8_unicode_ci NOT NULL,
-  `Version` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `License` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `File` tinyint(4) NOT NULL,
-  `Log` tinyint(4) NOT NULL,
-  `CatID` tinyint(4) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `files`
---
-
-CREATE TABLE IF NOT EXISTS `files` (
-  `ID` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `Path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `attachments` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `file_path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `license` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `type` tinyint(4) NOT NULL,
   `downloads` smallint(6) NOT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `files`
+-- Table structure for table `attachments`
 --
+
+CREATE TABLE IF NOT EXISTS `article_attachments` (
+  `article_id` smallint(6) NOT NULL,
+  `attachment_id` smallint(6) NOT NULL,
+  PRIMARY KEY (`article_id`, `attachment_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `newscat` (
   `Typ` tinyint(4) NOT NULL DEFAULT '2',
   `Beschreibung` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `newscat`
@@ -141,6 +122,8 @@ CREATE TABLE IF NOT EXISTS `newscat` (
 
 INSERT INTO `newscat` (`ID`, `Cat`, `ParentID`, `Typ`, `Beschreibung`) VALUES
 (1, 'Blog', 0, 0, 'Default category');
+INSERT INTO `newscat` (`ID`, `Cat`, `ParentID`, `Typ`, `Beschreibung`) VALUES
+(1, 'Downloads', 0, 0, 'Download category');
 
 -- --------------------------------------------------------
 
