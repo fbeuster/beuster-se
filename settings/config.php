@@ -8,9 +8,7 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
  // Dateien
  $file = array(
   'blog'            => array("news.php",            "Blog"),
-  'downloads'       => array("downloads.php",       "Downloadbereich"),
   'about'           => array("about.php",           "Über und Feedback"),
-  'impressum'       => array("impressum.php",       "Impressum"),
   'login'           => array("login.php",           "Login"),
   'logout'          => array("logout.php",          "Logout"),
   'admin'           => array("admin.php",           "AdminCP"),
@@ -28,7 +26,6 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
   'snippetdelete'   => array("snippetdel.php",      "AdminCP - Snippet löschen"),
   'snippetoverview' => array("snippetoverview.php", "AdminCP - Snippetübersicht"),
   'userdata'        => array("userdata.php",        "Deine Daten bearbeiten"),
-  'error'           => array("error.php",           "Fehler!"),
   'search'          => array("search.php",          "Suchergebnisse"));
 
  // Konstanten
