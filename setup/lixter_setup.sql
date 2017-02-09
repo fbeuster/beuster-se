@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `attachments` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `file_path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `license` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `version` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `file_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `file_path` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `license` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` tinyint(4) NOT NULL,
   `downloads` smallint(6) NOT NULL,
   PRIMARY KEY (`id`)

@@ -25,10 +25,10 @@
 
   $sql = 'ALTER TABLE `files`
           CHANGE `ID` `id` SMALLINT( 6 ) NOT NULL AUTO_INCREMENT ,
-          CHANGE `Name` `file_name` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
-          CHANGE `Path` `file_path` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
-          ADD `version` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-          ADD `license` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+          CHANGE `Name` `file_name` VARCHAR( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+          CHANGE `Path` `file_path` VARCHAR( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+          ADD `version` VARCHAR( 64 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+          ADD `license` VARCHAR( 64 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
           ADD `type` TINYINT(4) NOT NULL;';
   $result = $mysqli->query($sql);
 
