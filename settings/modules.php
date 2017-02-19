@@ -94,7 +94,7 @@
     return $adsense->getHTML();
   }
 
-  function moduleAmazon() {
+  function moduleAmazon($noGA) {
     if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
       $content = 'Google AdSense'."\n";
 
