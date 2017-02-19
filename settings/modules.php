@@ -99,10 +99,10 @@
       $content = 'Google AdSense'."\n";
 
     } else {
-      $content = '<script type="text/javascript"><!--';
+      $content = '<script type="text/javascript"><!--'."\n";
       $content .= 'amazon_ad_tag = "beustersede-21"; amazon_ad_width = "180"; amazon_ad_height = "150";';
-      $content .= '//--></script>';
-      $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>';
+      $content .= '//--></script>'."\n";
+      $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>'."\n";
     }
 
     $config = array("title"   => "",
