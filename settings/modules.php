@@ -95,10 +95,15 @@
   }
 
   function moduleAmazon() {
-    $content = '<script type="text/javascript"><!--';
-    $content .= 'amazon_ad_tag = "beustersede-21"; amazon_ad_width = "180"; amazon_ad_height = "150";';
-    $content .= '//--></script>';
-    $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>';
+    if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
+      $content = 'Google AdSense'."\n";
+
+    } else {
+      $content = '<script type="text/javascript"><!--';
+      $content .= 'amazon_ad_tag = "beustersede-21"; amazon_ad_width = "180"; amazon_ad_height = "150";';
+      $content .= '//--></script>';
+      $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>';
+    }
 
     $config = array("title"   => "",
                     "classes" => "amazon",
