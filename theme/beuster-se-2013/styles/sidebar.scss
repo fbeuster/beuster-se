@@ -20,7 +20,8 @@
       color: $darkerer_gray;
     }
 
-    &.adSense {
+    &.adSense,
+    &.amazon {
       overflow: hidden;
       text-align: center;
     }
