@@ -94,6 +94,20 @@
     return $adsense->getHTML();
   }
 
+  function moduleAmazon() {
+    $content = '<script type="text/javascript"><!--';
+    $content .= 'amazon_ad_tag = "beustersede-21"; amazon_ad_width = "180"; amazon_ad_height = "150";';
+    $content .= '//--></script>';
+    $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>';
+
+    $config = array("title"   => "",
+                    "classes" => "amazon",
+                    "id"      => "amazon-ads-1",
+                    "content" => $content);
+    $amazon = new SidebarContentModule($config);
+    return $amazon->getHTML();
+  }
+
   function moduleSocialShare() {
     $config = array("title" => '',
                     "classes" => "socialInteraction",
