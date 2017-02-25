@@ -30,7 +30,7 @@
       <ul>
       <?php foreach ($article->getAttachments() as $attachment) { ?>
         <li>
-          <a href="<?php echo $attachment->getPath(); ?>">
+          <a href="/<?php echo $attachment->getPath(); ?>">
             <?php echo $attachment->getName(); ?>
           </a>
           <br>
