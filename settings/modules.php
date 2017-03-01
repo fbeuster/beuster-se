@@ -94,13 +94,20 @@
     return $adsense->getHTML();
   }
 
-  function moduleAmazon($noGA) {
+  /**
+   * self optimizing link widget
+   *
+   * Colors are default for now, size can be adjusted.
+   */
+  function moduleAmazon($noGA, $width, $height) {
+    $amazon_tag = Config::getConfig()->get('amazon_tag');
+
     if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
-      $content = 'Google AdSense'."\n";
+      $content = 'Amazon Widget'."\n";
 
     } else {
       $content = '<script type="text/javascript"><!--'."\n";
-      $content .= 'amazon_ad_tag = "beustersede-21"; amazon_ad_width = "180"; amazon_ad_height = "150";';
+      $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
       $content .= '//--></script>'."\n";
       $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>'."\n";
     }
