@@ -86,6 +86,14 @@ div.wrapper footer {
 }
 
 body.article {
+  section.amazon {
+    @include section_style_info;
+
+    background: none;
+    padding: 0;
+    text-align: center;
+  }
+
   section.attachments {
     @include section_style_info;
     @include section_title;

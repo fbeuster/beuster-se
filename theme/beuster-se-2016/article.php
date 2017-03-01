@@ -20,6 +20,8 @@
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
 
+      <?php echo moduleAmazon($noGA, 768, 90); ?>
+
       <?php if(count($article->getGallery()) > 0) { ?>
         <section class="gallery">
           <h2><?php I18n::e('article.gallery.title'); ?></h2>
@@ -52,6 +54,13 @@
         </section>
       <?php } ?>
 
+      <?php if (count($article->getAttachments()) > 0 &&
+                count($article->getGallery()) > 0) { ?>
+      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+        <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
+      </a>
+      <?php } ?>
+
       <section class="comments">
         <h2><?php I18n::e('comment.title'); ?></h2>
         <?php if(count($article->getComments()) > 0) { ?>
@@ -68,5 +77,9 @@
                         I18n::t('comment.form.legend'), 'commentForm', $page->getCommentReply());
         ?>
       </section>
+
+      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+        <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
+      </a>
 
     </article>
