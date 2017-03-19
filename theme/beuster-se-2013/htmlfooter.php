@@ -53,7 +53,15 @@
   </div>
   <!-- ende lightbox -->
 
-  <?php if(!Utilities::isDevServer() && (!isset($_GET['p']) || (isset($_GET['p']) && !in_array($_GET['p'], $noGA)))) { ?>
+  <?php
+    if (  !Utilities::isDevServer() &&
+          ( !isset($_GET['p']) ||
+            (isset($_GET['p']) &&
+            !in_array($_GET['p'], $noGA)))) {
+      $user =  User::newFromCookie();
+
+    if (!$user || !$user->isAdmin()) {
+  ?>
   <!-- Google Analytics -->
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -67,7 +75,10 @@
     })();
   </script>
   <!-- ende Google Anlaytics -->
-  <?php } ?>
+  <?php
+      }
+    }
+  ?>
   <?php
   if(time() >= strtotime('28-03-2014') && time() <= strtotime('27-04-2014')) { ?>
   <!-- Give me a cake, it's my birthday :) -->

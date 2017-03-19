@@ -29,7 +29,7 @@
     }
 
     protected function isValid($config) {
-      $requirements = isset($config['requirements']) ? $config['requirements'] : '';
+      $requirements = isset($config['requirements']) ? $config['requirements'] : array();
       $requirements[] = 'title';
 
       foreach ($requirements as $requirement) {

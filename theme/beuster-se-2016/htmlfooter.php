@@ -28,5 +28,33 @@
         </div>
       </div>
     </div>
+
+  <?php
+    if (  !Utilities::isDevServer() &&
+          ( !isset($_GET['p']) ||
+            (isset($_GET['p']) &&
+            !in_array($_GET['p'], $noGA)))) {
+      $user =  User::newFromCookie();
+
+    if (!$user || !$user->isAdmin()) {
+  ?>
+  <!-- Google Analytics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1710454-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- / Google Anlaytics -->
+  <?php
+      }
+    }
+  ?>
+
   </body>
 </html>
