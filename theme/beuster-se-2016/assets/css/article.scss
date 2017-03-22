@@ -109,7 +109,7 @@ body.article article {
 
     h3 {
       font-size: 1em;
-      margin-top: 1em;
+      margin-top: 1.25em;
     }
 
     .info {
@@ -133,6 +133,14 @@ body.article article {
 
     p {
       margin-bottom: 1em;
+
+      &:empty {
+        display: none;
+      }
+
+      &:first-of-type {
+        margin-top: 1.25em;
+      }
 
       &.image {
         text-align: center;
