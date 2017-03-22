@@ -858,16 +858,22 @@ class ContentParser extends ArticleParser {
     }
 
     public function embedVideo() {
+        $width      = 560;
+        $height     = 315;
         $pre_wrap   = '<div class="video"><div class="wrapper">';
         $post_wrap  = '</div></div>';
 
-        $iframe = '<iframe class="embeddedVideo video" width="560" height="315"  src="https://www.youtube.com/embed/$1?wmode=transparent" frameborder="0" wmode="Opaque" allowfullscreen></iframe>';
+        $iframe_pre   = '<iframe width="'.$width.'" height="'.$height.'" ';
+        $iframe_post  = ' frameborder="0" allowfullscreen></iframe>';
+
+        $play   = $iframe_pre.'src="https://www.youtube.com/embed/videoseries?list=$1"'.$iframe_post;
+        $video  = $iframe_pre.'src="https://www.youtube.com/embed/$1"'.$iframe_post;
 
         $p_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p>';
         $v_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>';
 
-        $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', $pre_wrap.$iframe.$v_note.$post_wrap, $this->str);
-        $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', $pre_wrap.$iframe.$p_note.$post_wrap, $this->str);
+        $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', $pre_wrap.$play.$p_note.$post_wrap, $this->str);
+        $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', $pre_wrap.$video.$v_note.$post_wrap, $this->str);
     }
 }
 
