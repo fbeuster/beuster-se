@@ -2,7 +2,7 @@
   <!-- beMainFooter -->
   <footer>
     <a href="/about">Über und Feedback</a> | <a href="/impressum">Impressum und Datenschutz</a><br>
-    &copy; Copyright 2010-2013 Felix Beuster
+    &copy; Copyright 2010-2017 Felix Beuster
   </footer>
   <!-- Ende beMainFooter -->
 

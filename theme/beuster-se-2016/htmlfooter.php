@@ -12,7 +12,7 @@
           <a href="/impressum">Impressum und Datenschutz</a>
         </div>
         <div class="copy">
-          &copy; Copyright 2010 - 2016 Felix Beuster
+          &copy; Copyright 2010 - 2017 Felix Beuster
         </div>
       </footer>
     </div>
