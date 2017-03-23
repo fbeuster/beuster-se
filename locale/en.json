@@ -359,6 +359,7 @@
     "try_again" : "Try again."
   },
   "article" : {
+    "amazon_disclaimer" : "Disclaimer: With * marked links are Amazon affiliate links.",
     "back_link" : "< Back to %s",
     "content" : {
       "playlist" : {

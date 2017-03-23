@@ -360,6 +360,7 @@
     "try_again" : "Erneut versuchen."
   },
   "article" : {
+    "amazon_disclaimer" : "Hinweis: Mit * gekennzeichnet Links sind Amazon Affiliate Links.",
     "back_link" : "< Zurück zu %s",
     "content" : {
       "playlist" : {

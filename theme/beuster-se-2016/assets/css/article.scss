@@ -178,3 +178,11 @@ body.article article {
     }
   }
 }
+
+aside {
+  @include section_style_info;
+
+  .amazon_disclaimer {
+    color: $darker_grey;
+  }
+}
