@@ -360,11 +360,26 @@
   },
   "article" : {
     "back_link" : "< Back to %s",
+    "content" : {
+      "playlist" : {
+        "link_text" : "here on YouTube",
+        "player_too_small" : "Your browser is too small for the embedded player. You can watch the playlist %s."
+      },
+      "video" : {
+        "link_text" : "here on YouTube",
+        "player_too_small" : "Your browser is too small for the embedded player. You can watch the video %s."
+      }
+    },
     "gallery" : {
       "close" : "Close",
       "title" : "Gallery"
     },
-    "info" : "written by %s on"
+    "info" : "written by %s on",
+    "preview" : {
+      "code" : "Click here to see the source code.",
+      "playlist" : "Click here to watch the playlist.",
+      "video" : "Click here to watch the video."
+    }
   },
   "category" : {
     "no_articles_found" : "No articles have been found here."

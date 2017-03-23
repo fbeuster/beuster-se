@@ -361,11 +361,26 @@
   },
   "article" : {
     "back_link" : "< Zurück zu %s",
+    "content" : {
+      "playlist" : {
+        "link_text" : "hier auf YouTube",
+        "player_too_small" : "Dein Browser ist zu klein für den eingebetteten Player. Du kannst die Playlist %s ansehen."
+      },
+      "video" : {
+        "link_text" : "hier auf YouTube",
+        "player_too_small" : "Dein Browser ist zu klein für den eingebetteten Player. Du kannst das Video %s ansehen."
+      }
+    },
     "gallery" : {
       "close" : "Schließen",
       "title" : "Gallerie"
     },
-    "info" : "geschrieben von %s am"
+    "info" : "geschrieben von %s am",
+    "preview" : {
+      "code" : "Hier klicken, um den Quellcode zu sehen.",
+      "playlist" : "Hier klicken, um die Playlist zu sehen.",
+      "video" : "Hier klicken, um das Video zu sehen."
+    }
   },
   "category" : {
     "no_articles_found" : "Hier wurden keine News gefunden."

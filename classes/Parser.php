@@ -654,8 +654,8 @@ class PreviewParser extends ArticleParser {
      * For previews code shouldn't be shown, generate a article link instead.
      */
     public function code() {
-        $this->str = preg_replace('#\[code\](.*)\[/code\]#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
-        $this->str = preg_replace('#<code>(.*)</code>#Uis','<a href="###link###">Hier klicken um den Code zu sehen.</a> ', $this->str);
+        $this->str = preg_replace('#\[code\](.*)\[/code\]#Uis','<a href="###link###">'.I18n::t('article.preview.code').'</a> ', $this->str);
+        $this->str = preg_replace('#<code>(.*)</code>#Uis','<a href="###link###">'.I18n::t('article.preview.code').'</a> ', $this->str);
     }
 
     /**
@@ -664,8 +664,8 @@ class PreviewParser extends ArticleParser {
      * In oreview texts an embedded video is better replaces by a link.
      */
     public function embedVideo() {
-        $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="###link###">Hier klicken um das Video zu sehen.</a>', $this->str);
-        $this->str = preg_replace('#\[play\](.*)\[/play\]#Ui', '<a href="###link###">Hier klicken um das Video zu sehen.</a>', $this->str);
+        $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="###link###">'.I18n::t('article.preview.video').'</a>', $this->str);
+        $this->str = preg_replace('#\[play\](.*)\[/play\]#Ui', '<a href="###link###">'.I18n::t('article.preview.playlist').'</a>', $this->str);
     }
 }
 
@@ -869,8 +869,13 @@ class ContentParser extends ArticleParser {
         $play   = $iframe_pre.'src="https://www.youtube.com/embed/videoseries?list=$1"'.$iframe_post;
         $video  = $iframe_pre.'src="https://www.youtube.com/embed/$1"'.$iframe_post;
 
-        $p_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/playlist?list=$1">hier auf YouTube</a> ansehen.</p>';
-        $v_note = '<p class="embeddedVideo link">Dein Browser ist zu klein, für den eingebetteten Player. Du kannst das Video aber <a href="http://www.youtube.com/watch?v=$1">hier auf YouTube</a> ansehen.</p>';
+        $p_link = '<a href="http://www.youtube.com/playlist?list=$1">'.I18n::t('article.content.playlist.link_text').'</a>';
+        $p_note = I18n::t('article.content.playlist.player_too_small',
+                          $p_link);
+
+        $v_link = '<a href="http://www.youtube.com/watch?v=$1">'.I18n::t('article.content.video.link_text').'</a>';
+        $v_note = I18n::t('article.content.video.player_too_small',
+                          $v_link);
 
         $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', $pre_wrap.$play.$p_note.$post_wrap, $this->str);
         $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', $pre_wrap.$video.$v_note.$post_wrap, $this->str);
