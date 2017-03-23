@@ -101,11 +101,14 @@
    */
   function moduleAmazon($noGA, $width, $height) {
     $amazon_tag = Config::getConfig()->get('amazon_tag');
+    $classes    = "amazon";
 
     if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
       $content = 'Amazon Widget'."\n";
 
     } else {
+      $classes = " w".$width;
+
       $content = '<script type="text/javascript"><!--'."\n";
       $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
       $content .= '//--></script>'."\n";
@@ -113,7 +116,7 @@
     }
 
     $config = array("title"   => "",
-                    "classes" => "amazon",
+                    "classes" => $classes,
                     "id"      => "amazon-ads-1",
                     "content" => $content);
     $amazon = new SidebarContentModule($config);
