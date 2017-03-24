@@ -148,7 +148,7 @@ class CategoryPage extends Page {
   public function getPageLength() {
     $length = $this->config->get('category_page_length');
 
-    if ($length == null || !is_int($length)) {
+    if ($length == null || !(is_int($length) || ctype_digit($length))) {
       return self::DEFAULT_PAGE_LENGTH;
     }
 
