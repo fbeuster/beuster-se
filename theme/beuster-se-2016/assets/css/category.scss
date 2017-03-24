@@ -22,6 +22,10 @@ body.article section.recommended {
       a:not(.more) {
         @include default_link($blue, $green);
       }
+
+      a.header {
+        @include default_link($cold_black, $cold_black);
+      }
     }
 
     .more {

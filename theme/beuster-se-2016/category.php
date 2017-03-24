@@ -24,10 +24,14 @@
 
   <section class="article">
     <div class="thumb">
-      <img src="/<?php echo $thumb_src; ?>" alt="thumb">
+      <a href="<?php echo $article->getLink();?>">
+        <img src="/<?php echo $thumb_src; ?>" alt="<?php echo $article->getTitle(); ?>">
+      </a>
     </div>
     <div class="content">
-      <h2><?php echo $article->getTitle(); ?></h2>
+      <a class="header" href="<?php echo $article->getLink();?>">
+        <h2><?php echo $article->getTitle(); ?></h2>
+      </a>
       <p>
         <?php
           $length = 500;
