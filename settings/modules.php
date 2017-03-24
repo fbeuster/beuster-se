@@ -107,7 +107,7 @@
       $content = 'Amazon Widget'."\n";
 
     } else {
-      $classes = " w".$width;
+      $classes .= " w".$width;
 
       $content = '<script type="text/javascript"><!--'."\n";
       $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
