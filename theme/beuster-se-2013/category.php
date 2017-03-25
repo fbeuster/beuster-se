@@ -38,7 +38,8 @@
           <?php } ?>
           <p>
             <time class="beContentEntryTime"  datetime="<?php echo date('c', $article->getDate()); ?>"><?php echo date('d.m.Y', $article->getDate()); ?></time>
-            <?php echo str_replace('###link###', $article->getLink(), $article->getContentPreview())."\n"; ?>
+            <?php echo $article->getContentPreview(); ?>
+            <a href="<?php echo $article->getLink(); ?>"> weiter</a>
           </p>
         </article>
 

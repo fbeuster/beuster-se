@@ -25,11 +25,7 @@
         <div class="content">
           <h2><?php echo $result->getMarkedTitle(); ?></h2>
           <p>
-            <?php
-              echo str_replace( '###link###',
-                                $article->getLink(),
-                                $result->getMarkedContent())."\n";
-            ?>
+            <?php echo $result->getMarkedContent();?>
           </p>
           <i class="info">
             by <?php echo $article->getAuthor()->getClearname(); ?> on

@@ -179,7 +179,8 @@
     $preApp     = "<p class='randomText' $style >";
     $backApp    = "</p>\n";
     $art_title  = '<h5 class="randomTitle">'.Parser::parse($article->getTitle(), Parser::TYPE_PREVIEW, 250).'</h5>'."\n";
-    $art_text   = str_replace('###link###', $article->getLink(), $article->getContentPreview());
+    $art_text   = $article->getContentPreview();
+    $art_text .= '<a href="'.$article->getLink().'"> weiter</a>';
     $article_html    = $art_title . $preApp . $art_text . $backApp;
 
     $config = array("title" => "Kennst du schon...",

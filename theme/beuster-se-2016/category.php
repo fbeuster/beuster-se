@@ -35,9 +35,7 @@
       <p>
         <?php
           $length = 500;
-          echo str_replace( '###link###',
-                            $article->getLink(),
-                            $article->getContentPreview($length))."\n";
+          echo $article->getContentPreview($length)."\n";
         ?>
       </p>
       <i class="info">

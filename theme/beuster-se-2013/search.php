@@ -23,7 +23,10 @@
           </span>
         </p>
       </header>
-      <p><?php echo str_replace('###link###', $article->getLink(), $result->getMarkedContent())."\n";?></p>
+      <p>
+        <?php echo $result->getMarkedContent();?>
+        <a href="<?php echo $article->getLink(); ?>"> weiter</a>
+      </p>
     </article><?php
         } ?>
   </div>

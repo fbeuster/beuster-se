@@ -634,7 +634,7 @@ class PreviewParser extends ArticleParser {
         $this->embedVideo();
         parent::hideArticleImages();
         parent::removeAffiliateImage();
-        parent::shorten(' <a href="###link###"> weiter...</a>');
+        parent::shorten('...');
         return $this->str;
     }
 
