@@ -27,5 +27,17 @@ $(document).ready(function(){
       $(this).toggleClass('activated');
       $('body').toggleClass('highlighted');
     });
+
+    var $expander = $('header nav .expander');
+    $expander.click(function(){
+      $expander.toggleClass('expanded');
+      $('header menu').toggleClass('expanded');
+
+      if ($expander.hasClass('expanded')) {
+        $expander.text('Menü ausblenden');
+      } else {
+        $expander.text('Menü anzeigen');
+      }
+    });
   }
 });

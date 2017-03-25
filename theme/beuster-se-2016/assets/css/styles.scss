@@ -14,12 +14,40 @@
 @import 'search';
 
 nav {
+  color: white;
   margin-left: 1em;
   margin-top: 1px;
 
+  .expander {
+    cursor: pointer;
+    display: none;
+    font-size: 1.1em;
+    height: 1.2em;
+    padding: 0.6em 1em;
+
+    &:after {
+      content: "\25be";
+      display: inline-block;
+      margin-left: 0.25em;
+      transition: transform 0.25s;
+    }
+
+    &:hover {
+      background: $grey;
+      color: $cold_black;
+    }
+
+    &.expanded {
+      font-weight: bold;
+
+      &:after {
+        transform: rotate(60deg);
+      }
+    }
+  }
+
   li {
     background: transparent;
-    color: white;
     display: block;
     transition: all 0.25s;
 

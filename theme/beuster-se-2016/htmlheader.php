@@ -57,7 +57,10 @@
         </div>
       </div>
       <nav>
-        <menu class="clearfix"><?php genMenu(); ?></menu>
+        <span class="expander">Menü anzeigen</span>
+        <menu class="clearfix">
+          <?php genMenu(); ?>
+        </menu>
       </nav>
     </div>
   </header>

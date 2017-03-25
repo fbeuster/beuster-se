@@ -119,6 +119,19 @@
 }
 
 @media(max-width: 44.99em) {
+  nav {
+    .expander {
+      display: block !important;
+    }
+
+    menu {
+      display: none;
+
+      &.expanded {
+        display: block;
+      }
+    }
+  }
   section.article {
     .thumb {
       height: 7.5em;

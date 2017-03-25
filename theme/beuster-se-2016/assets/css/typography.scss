@@ -11,19 +11,21 @@ h2 {
 }
 
 header {
-  h1,
-  span {
-    @include title_font;
-    color: $cold_grey;
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
-    padding: 0.5em 0 0.5em 1em;
-    position: relative;
-
-    a {
+  .row {
+    h1,
+    span {
+      @include title_font;
       color: $cold_grey;
-      text-decoration: none;
+      display: block;
+      font-size: 2em;
+      font-weight: bold;
+      padding: 0.5em 0 0.5em 1em;
+      position: relative;
+
+      a {
+        color: $cold_grey;
+        text-decoration: none;
+      }
     }
   }
 }
