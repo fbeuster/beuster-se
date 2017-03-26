@@ -19,7 +19,7 @@ body.article {
 
         &:before {
           color: $red;
-          content: "•";
+          content: "\2022";
           font-weight: bold;
           padding-right: 0.5em;
         }

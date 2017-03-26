@@ -16,7 +16,7 @@ body.article {
         text-indent: -0.7em;
 
         &:before {
-          content: "•";
+          content: "\2022";
           font-weight: bold;
           padding-right: 0.5em;
         }
