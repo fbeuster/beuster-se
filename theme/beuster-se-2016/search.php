@@ -25,7 +25,7 @@
         <div class="content">
           <h2><?php echo $result->getMarkedTitle(); ?></h2>
           <p>
-            <?php echo $result->getMarkedContent();?>
+            <?php echo $result->getMarkedContent(250);?>
           </p>
           <i class="info">
             <?php I18n::e('article.info.by'); ?>

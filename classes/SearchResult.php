@@ -22,10 +22,10 @@
       return Parser::parse($marked_title, Parser::TYPE_PREVIEW);
     }
 
-    public function getMarkedContent() {
+    public function getMarkedContent($length = Parser::DEFAULT_PREVIEW_LENGTH) {
       $content        = $this->article->getContent();
       $marked_content = $this->search_marks ? $this->addSearchMarks($content) : $content;
-      return Parser::parse($marked_content, Parser::TYPE_PREVIEW);
+      return Parser::parse($marked_content, Parser::TYPE_PREVIEW, $length);
     }
 
     private function addSearchMarks($text) {

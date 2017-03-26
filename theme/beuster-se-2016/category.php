@@ -34,7 +34,7 @@
       </a>
       <p>
         <?php
-          $length = 500;
+          $length = 250;
           echo $article->getContentPreview($length)."\n";
         ?>
       </p>
