@@ -39,16 +39,24 @@
         ?>
       </p>
       <i class="info">
-        by <?php echo $article->getAuthor()->getClearname(); ?> on
+        <?php I18n::e('article.info.by'); ?>
+        <a href="/<?php echo $article->getAuthor()->getName(); ?>">
+          <?php echo $article->getAuthor()->getClearname(); ?>
+        </a>
+
+        <?php I18n::e('article.info.on'); ?>
         <time datetime="<?php echo date('c', $article->getDate()); ?>">
           <?php echo date('d.m.Y', $article->getDate()); ?>
         </time>
-        in
+
+        <?php I18n::e('article.info.in'); ?>
         <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>">
           <?php echo $article->getCategory()->getName(); ?>
         </a>
       </i>
-      <a class="more" href="<?php echo $article->getLink();?>">Read more</a>
+      <a class="more" href="<?php echo $article->getLink();?>">
+        <?php I18n::e('article.preview.read_more'); ?>
+      </a>
     </div>
   </section>
 

@@ -375,10 +375,15 @@
       "close" : "Close",
       "title" : "Gallery"
     },
-    "info" : "written by %s on",
+    "info" : {
+      "by" : "written by ",
+      "in" : "in ",
+      "on" : "on "
+    },
     "preview" : {
       "code" : "Click here to see the source code.",
       "playlist" : "Click here to watch the playlist.",
+      "read_more" : "Read more",
       "video" : "Click here to watch the video."
     }
   },

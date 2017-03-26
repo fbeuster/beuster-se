@@ -376,10 +376,15 @@
       "close" : "Schließen",
       "title" : "Gallerie"
     },
-    "info" : "geschrieben von %s am",
+    "info" : {
+      "by" : "geschrieben von ",
+      "in" : "in ",
+      "on" : "am "
+    },
     "preview" : {
       "code" : "Hier klicken, um den Quellcode zu sehen.",
       "playlist" : "Hier klicken, um die Playlist zu sehen.",
+      "read_more" : "Weiterlesen",
       "video" : "Hier klicken, um das Video zu sehen."
     }
   },

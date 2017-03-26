@@ -6,12 +6,17 @@
       <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
-      <section class="article">
-        <h1><?php echo $article->getTitle(); ?></h1>
-        <i>
-          <?php I18n::e('article.info', array($article->getAuthor()->getClearname())); ?>
-          <time datetime="<?php echo date('c', $article->getDate()); ?>" class="long">
-            <?php echo date('d.m.Y H:i', $article->getDate()); ?>
+        <section class="article">
+          <h1><?php echo $article->getTitle(); ?></h1>
+          <i>
+          <?php I18n::e('article.info.by'); ?>
+          <a href="/<?php echo $article->getAuthor()->getName(); ?>">
+            <?php echo $article->getAuthor()->getClearname(); ?>
+          </a>
+
+          <?php I18n::e('article.info.on'); ?>
+          <time datetime="<?php echo date('c', $article->getDate()); ?>">
+            <?php echo date('d.m.Y', $article->getDate()); ?>
           </time>
         </i>
         <?php echo $article->getContentDecorated(); ?>
