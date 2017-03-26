@@ -8,7 +8,7 @@
       $article = $result->getArticle();
 
       if($article->getThumbnail() == null) {
-        $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/sample_800_450.jpg');
+        $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/default_thumbnail_800_450.jpg');
 
       } else {
         if($article->isPlaylist()) {
