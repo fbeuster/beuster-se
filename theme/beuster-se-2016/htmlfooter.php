@@ -29,15 +29,18 @@
       </div>
     </div>
 
-  <?php
-    if (  !Utilities::isDevServer() &&
-          ( !isset($_GET['p']) ||
-            (isset($_GET['p']) &&
-            !in_array($_GET['p'], $noGA)))) {
-      $user =  User::newFromCookie();
+  <?php if (Utilities::isDevServer()) { ?>
+  <!-- No Google Analytics, dev server -->
 
-    if (!$user || !$user->isAdmin()) {
+  <?php } else { ?>
+  <?php
+    $user =  User::newFromCookie();
+
+    if ($user && !$user->isAdmin()) {
   ?>
+  <!-- No Google Analytics, logged in admin -->
+
+  <?php } else { ?>
   <!-- Google Analytics -->
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -51,10 +54,7 @@
     })();
   </script>
   <!-- / Google Anlaytics -->
-  <?php
-      }
-    }
-  ?>
+  <?php } } ?>
 
   </body>
 </html>

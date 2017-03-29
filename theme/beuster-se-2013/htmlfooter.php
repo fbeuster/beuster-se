@@ -3,7 +3,7 @@
 
   <!-- Google AdSense -->
   <div class="adSense footer" id="google-ads-2">
-  <?php if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) { ?>
+  <?php if(Utilities::isDevServer()) { ?>
     Google AdSense
   <?php } else { ?>
     <script type="text/javascript"><!--
@@ -54,10 +54,7 @@
   <!-- ende lightbox -->
 
   <?php
-    if (  !Utilities::isDevServer() &&
-          ( !isset($_GET['p']) ||
-            (isset($_GET['p']) &&
-            !in_array($_GET['p'], $noGA)))) {
+    if (!Utilities::isDevServer()) {
       $user =  User::newFromCookie();
 
     if (!$user || !$user->isAdmin()) {
