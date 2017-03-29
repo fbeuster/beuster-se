@@ -26,6 +26,7 @@ class Image {
   public static function createThumbnail($path, $width, $height) {
     $pic      = array();
     $path_arr = pathinfo($path);
+    $path     = self::ARTICLE_IMAGE_PATH . $path;
 
     $dimensions   = '_' . $width . 'x'. $height;
     $pic['path']  = self::ARTICLE_IMAGE_PATH . $path_arr['filename'] . $dimensions .'.'. $path_arr['extension'];
