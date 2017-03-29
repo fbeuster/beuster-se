@@ -238,13 +238,13 @@
     width: 60em;
   }
 
-  article {
-    section.article {
-      .content {
-        width: 42.5em;
-      }
+  section.article {
+    .content {
+      width: 42.5em;
     }
+  }
 
+  article {
     .amazon.w728 {
       iframe {
         margin-left: 0px;
