@@ -15,7 +15,7 @@
 
       } else if($page->getType() == Page::ARTICLE_PAGE) {
         echo moduleArticleInfo($page);
-        echo moduleAmazon($noGA, 180, 150);
+        echo moduleAmazon(180, 150);
         echo moduleRandomArticle();
 
       } else if($currPage == 'page') {

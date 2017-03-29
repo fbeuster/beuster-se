@@ -220,19 +220,13 @@
   }
 }
 
-@media(max-width: 47.99em) {
-  article {
-    .amazon.w768 {
-      display: none;
-    }
-  }
-}
+@media(min-width: 45.5em) {
+  body.article {
+    .amazon.w728 {
+      display: block;
 
-@media(min-width: 48em) {
-  article {
-    .amazon.w768 {
       iframe {
-        margin-left: -24px;
+        margin-left: -4px;
       }
     }
   }
@@ -251,7 +245,7 @@
       }
     }
 
-    .amazon.w768 {
+    .amazon.w728 {
       iframe {
         margin-left: 0px;
       }

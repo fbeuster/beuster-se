@@ -118,6 +118,7 @@ body.article {
     @include section_style_info;
 
     background: none;
+    display: none;
     padding: 0;
     text-align: center;
   }

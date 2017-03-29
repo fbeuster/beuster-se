@@ -99,11 +99,11 @@
    *
    * Colors are default for now, size can be adjusted.
    */
-  function moduleAmazon($noGA, $width, $height) {
+  function moduleAmazon($width, $height) {
     $amazon_tag = Config::getConfig()->get('amazon_tag');
     $classes    = "amazon";
 
-    if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
+    if (Utilities::isDevServer()) {
       $content = 'Amazon Widget'."\n";
 
     } else {
