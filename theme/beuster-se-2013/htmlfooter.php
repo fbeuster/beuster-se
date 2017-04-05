@@ -54,7 +54,9 @@
   <!-- ende lightbox -->
 
   <?php
-    if (!Utilities::isDevServer()) {
+    if (!Utilities::isDevServer() &&
+        Config::getConfig()->get('google_analytics') != null) {
+
       $user =  User::newFromCookie();
 
     if (!$user || !$user->isAdmin()) {
@@ -62,7 +64,7 @@
   <!-- Google Analytics -->
   <script type="text/javascript">
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-1710454-3']);
+    _gaq.push(['_setAccount', '<?php echo Config::getConfig()->get('google_analytics'); ?>']);
     _gaq.push(['_trackPageview']);
 
     (function() {
