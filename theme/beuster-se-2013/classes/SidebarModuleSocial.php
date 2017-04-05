@@ -1,6 +1,6 @@
 <?php
 
-  class SidebarModuleSocial extends SidebarListModule {
+  class SidebarModuleSocial extends SidebarModuleList {
 
     public function __construct() {
       $config = array("title" => '',

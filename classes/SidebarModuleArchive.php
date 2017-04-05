@@ -1,6 +1,6 @@
 <?php
 
-  class SidebarModuleArchive extends SidebarListModule {
+  class SidebarModuleArchive extends SidebarModuleList {
 
     private $list;
 

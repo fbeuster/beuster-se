@@ -22,7 +22,7 @@
     $config = array("title" => "viel gelesene Artikel",
                     "classes" => "top list",
                     "list" => getTopArticles());
-    $top    = new SidebarListModule($config);
+    $top    = new SidebarModuleList($config);
     return $top->getHTML();
   }
 
@@ -31,7 +31,7 @@
     $config = array("title" => "Letzten $n Artikel",
                     "classes" => "list",
                     "list" => getLastArticles($n));
-    $last   = new SidebarListModule($config);
+    $last   = new SidebarModuleList($config);
     return $last->getHTML();
   }
 
