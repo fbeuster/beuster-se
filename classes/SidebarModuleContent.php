@@ -1,6 +1,6 @@
 <?php
 
-  class SidebarContentModule extends SidebarModule {
+  class SidebarModuleContent extends SidebarModule {
 
     private $content = null;
 

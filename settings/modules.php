@@ -14,7 +14,7 @@
     $config = array("title" => "",
                     "classes" => "donate",
                     "content" => $content);
-    $donate   = new SidebarContentModule($config);
+    $donate   = new SidebarModuleContent($config);
     return $donate->getHTML();
   }
 
@@ -90,7 +90,7 @@
                     "classes" => "adSense",
                     "id" => $id,
                     "content" => $content);
-    $adsense   = new SidebarContentModule($config);
+    $adsense   = new SidebarModuleContent($config);
     return $adsense->getHTML();
   }
 
@@ -119,7 +119,7 @@
                     "classes" => $classes,
                     "id"      => "amazon-ads-1",
                     "content" => $content);
-    $amazon = new SidebarContentModule($config);
+    $amazon = new SidebarModuleContent($config);
     return $amazon->getHTML();
   }
 
@@ -145,7 +145,7 @@
     $config = array("title" => $title,
                     "classes" => "articleInfo",
                     "content" => $content);
-    $info   = new SidebarContentModule($config);
+    $info   = new SidebarModuleContent($config);
     return $info->getHTML();
   }
 
@@ -168,7 +168,7 @@
     $config = array("title" => "Kennst du schon...",
                     "classes" => "randomArticle",
                     "content" => $article_html);
-    $random = new SidebarContentModule($config);
+    $random = new SidebarModuleContent($config);
     return $random->getHTML();
   }
 
@@ -179,7 +179,7 @@
     $config = array("title" => "Empfohlener Artikel:",
                     "classes" => "recommend",
                     "content" => "<a href='" . $article->getLink() . "'>\n  " . $article->getTitle() . "\n </a>\n");
-    $recommend  = new SidebarContentModule($config);
+    $recommend  = new SidebarModuleContent($config);
 
     return $recommend->getHTML();
   }
