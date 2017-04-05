@@ -485,9 +485,4 @@
         }
         return 0;
     }
-
-    function makeMonthName($month) {
-        $names = array('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember');
-        return $names[$month - 1];
-    }
 ?>

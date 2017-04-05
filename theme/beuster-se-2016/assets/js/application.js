@@ -5,6 +5,7 @@ var beusterse = beusterse || {};
 //@ lib/_jquery
 //@ lib/_i18n
 //@ lib/_utilities
+//@ archive
 //@ comment_form
 //@ gallery
 //@ search
@@ -14,6 +15,7 @@ $(document).ready(function(){
                 .complete( runApp );
 
   function runApp() {
+    beusterse.archive.init();
     beusterse.comment_form.init();
     beusterse.gallery.init();
     beusterse.search.init();

@@ -116,6 +116,14 @@
       }
     }
   }
+
+  aside {
+    .archive.list {
+      .module_inside > ul > li {
+        width: 50%;
+      }
+    }
+  }
 }
 
 @media(max-width: 44.99em) {
@@ -215,6 +223,14 @@
     label {
       textarea {
         width: 32.5em;
+      }
+    }
+  }
+
+  aside {
+    .archive.list {
+      .module_inside > ul > li {
+        width: 25%;
       }
     }
   }

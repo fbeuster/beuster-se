@@ -157,3 +157,48 @@ body.article {
     }
   }
 }
+
+aside {
+  @include section_style_info;
+
+  .amazon_disclaimer {
+    color: $darker_grey;
+    margin-top: 2em;
+  }
+
+  .archive {
+    h4 {
+      margin-bottom: 1em;
+    }
+
+    .module_inside > ul {
+      @include display_flex;
+      flex-wrap: wrap;
+      justify-content: left;
+
+      & > li {
+        width: 100%;
+      }
+    }
+
+    li {
+      list-style: none;
+
+      .articleArchiveYear:hover {
+        font-weight: bold;
+      }
+
+      li {
+
+        &:before {
+          content: "-";
+          margin-right: 1em;
+        }
+
+        a {
+          @include default_link($cold_black, $green);
+        }
+      }
+    }
+  }
+}

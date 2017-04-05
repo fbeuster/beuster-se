@@ -190,40 +190,6 @@
     return $random->getHTML();
   }
 
-  function moduleArchive() {
-    $list = array();
-
-    for($year = (int)date("Y"); $year >= 2010; $year--) {
-
-      if(articlesInDate($year) === 0) continue;
-
-      $month_list = array();
-      for($month = 12; $month >= 1; $month--) {
-
-        $numberMonth = articlesInDate($year, $month);
-        if($numberMonth === 0)
-          continue;
-
-        $month_str  = '<a href="/'.$year.'/'.$month.'">';
-        $month_str  .= makeMonthName($month);
-        $month_str  .= ' <span class="number" style="color: #999999;">('.$numberMonth.')</span>';
-        $month_str  .= '</a>';
-        $month_list[] = $month_str;
-      }
-
-      $year_title = '<span class="articleArchiveYear" style="cursor: pointer;">'.$year."</span>";
-
-      $list[$year_title] = $month_list;
-    }
-
-    $config = array("title" => "Schau mal ins Archiv",
-                    "classes" => "archive list",
-                    "list" => $list);
-
-    $archive  = new SidebarListModule($config);
-    return $archive->getHTML();
-  }
-
   function moduleRecommendedArticle($article_id) {
     if($article_id === null) return;
 

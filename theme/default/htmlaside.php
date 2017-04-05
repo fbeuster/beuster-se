@@ -20,5 +20,5 @@
         echo moduleRandomArticle();
       }
       echo moduleAdSenseAside($noGA);
-      echo moduleArchive(); ?>
+      SidebarModuleArchive::html(); ?>
     </aside>
