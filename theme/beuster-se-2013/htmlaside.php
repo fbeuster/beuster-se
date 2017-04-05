@@ -6,7 +6,7 @@
       <?php
       $page = Lixter::getLix()->getPage();
 
-      echo moduleSearch();
+      echo (new SidebarModuleSearch( array("classes" => "searchBox") ))->getHTML();
       echo moduleSocialShare();
       echo moduleDonate();
 

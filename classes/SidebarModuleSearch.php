@@ -1,6 +1,6 @@
 <?php
 
-  class SidebarSearchModule extends SidebarModule {
+  class SidebarModuleSearch extends SidebarModule {
 
       public function __construct($config) {
         $config["title"] = "";

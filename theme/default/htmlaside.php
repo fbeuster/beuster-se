@@ -2,8 +2,7 @@
       <?php
       $page = Lixter::getLix()->getPage();
 
-      echo moduleSearch();
-      echo moduleSocialShare();
+      echo (new SidebarModuleSearch( array("classes" => "searchBox") ))->getHTML();
       echo moduleDonate();
 
       if($currPage == 'index') {

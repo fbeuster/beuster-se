@@ -161,12 +161,6 @@
     return $info->getHTML();
   }
 
-  function moduleSearch() {
-    $config = array("classes" => "searchBox");
-    $search = new SidebarSearchModule($config);
-    return $search->getHTML();
-  }
-
   function moduleRandomArticle() {
     $article  = getRandomArticle();
     $style    = '';
