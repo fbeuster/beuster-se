@@ -123,18 +123,6 @@
     return $amazon->getHTML();
   }
 
-  function moduleSocialShare() {
-    $config = array("title" => '',
-                    "classes" => "socialInteraction",
-                    "list" => array(
-                      '<a href="http://www.youtube.com/user/waterwebdesign" class="socialLinkYoutube" title="YouTube"></a>',
-                      '<a href="https://twitter.com/#!/FBeuster" class="socialLinkTwitter" title="Twitter"></a>',
-                      '<a href="https://www.facebook.com/beusterse" class="socialLinkFacebook" title="Facebook"></a>',
-                      '<a href="https://plus.google.com/102857640059997003370" class="socialLinkGoogle" title="Google+" rel="publisher"></a>'));
-    $test = new SidebarListModule($config);
-    return $test->getHTML();
-  }
-
   function moduleArticleInfo($page) {
     $author   = $page->getArticle()->getAuthor();
     $title    = "informationen zum artikel";

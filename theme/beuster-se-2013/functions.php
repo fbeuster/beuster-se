@@ -1,5 +1,7 @@
 <?php
 
+  include($this->theme->getFile('classes/SidebarModuleSocial.php'));
+
   Lixter::getLix()->getTheme()->addThumbnailSize(295, 190);
 
   function genPager($anzPages, $currPage, $dest) {

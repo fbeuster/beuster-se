@@ -7,7 +7,7 @@
       $page = Lixter::getLix()->getPage();
 
       echo (new SidebarModuleSearch( array("classes" => "searchBox") ))->getHTML();
-      echo moduleSocialShare();
+      SidebarModuleSocial::html();
       echo moduleDonate();
 
       if($currPage == 'index') {
