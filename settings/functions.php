@@ -277,33 +277,6 @@
 
     /*** other ***/
 
-    function getArticleLinks($options, $n) {
-        $db         = Database::getDB();
-        $res        = array();
-        $fields     = array('ID');
-        $conds      = array('enable = ? AND Datum < NOW()', 'i', array(1));
-        $limit      = array('LIMIT 0, ?', 'i', array($n));
-        $articles   = $db->select('news', $fields, $conds, $options, $limit);
-
-        foreach ($articles as $article) {
-            $article    = new Article($article['ID']);
-            $title      = $article->getTitle();
-            $res[]      = '<a href="'.$article->getLink().'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
-        }
-
-        return $res;
-    }
-
-    function getTopArticles($n = 5) {
-        $options = 'GROUP BY ID ORDER BY Hits DESC, Datum DESC';
-        return getArticleLinks($options, $n);
-    }
-
-    function getlastArticles($n) {
-        $options = 'GROUP BY ID ORDER BY Datum DESC';
-        return getArticleLinks($options, $n);
-    }
-
     function getOffset($a, $o, $s) {
         if($a == 0) {
             return 0;

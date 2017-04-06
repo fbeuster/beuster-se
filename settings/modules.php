@@ -18,23 +18,6 @@
     return $donate->getHTML();
   }
 
-  function moduleTopArticles() {
-    $config = array("title" => "viel gelesene Artikel",
-                    "classes" => "top list",
-                    "list" => getTopArticles());
-    $top    = new SidebarModuleList($config);
-    return $top->getHTML();
-  }
-
-  function moduleLastArticles() {
-    $n      = 5;
-    $config = array("title" => "Letzten $n Artikel",
-                    "classes" => "list",
-                    "list" => getLastArticles($n));
-    $last   = new SidebarModuleList($config);
-    return $last->getHTML();
-  }
-
   function moduleAdSenseAside($noGA) {
     $id = "google-ads-1";
 

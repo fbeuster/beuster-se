@@ -6,7 +6,7 @@
       echo moduleDonate();
 
       if($currPage == 'index') {
-        echo moduleTopArticles();
+        SidebarModuleListArticles::html(5, SidebarModuleListArticles::TYPE_MOST);
 
       } else if($page->getType() == Page::ARTICLE_PAGE) {
         echo moduleArticleInfo($page);

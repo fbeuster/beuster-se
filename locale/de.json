@@ -703,6 +703,12 @@
     "module" : {
       "archive" : {
         "title" : "Schau mal ins Archiv"
+      },
+      "most_read" : {
+        "title" : "Meist gelesene Artikel"
+      },
+      "last" : {
+        "title" : "Neueste Artikel"
       }
     }
   }

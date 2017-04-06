@@ -702,6 +702,12 @@
     "module" : {
       "archive" : {
         "title" : "Take a look in the archive"
+      },
+      "most_read" : {
+        "title" : "Most read articles"
+      },
+      "last" : {
+        "title" : "Newest articles"
       }
     }
   }
