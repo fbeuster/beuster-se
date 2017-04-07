@@ -17,75 +17,45 @@
     }
 
     private function generateList() {
-      $counts   = '';
-      $db       = Database::getDB()->getCon();
-      $max_year = (int) date("Y");
-      $min_year = 2010;
+      $counts     = '';
+      $db         = Database::getDB();
+      $last_year  = null;
 
-      for ($year = $max_year; $year >= $min_year; $year--) {
-        for ($month = 12; $month >= 1; $month--) {
-          $counts     .= 'COUNT(case when YEAR(`Datum`) = ' . $year . ' and MONTH(`Datum`) = ' . $month . ' then ID end) AS `' . $month . '-' . $year .'`, ';
-        }
-      }
+      $fields     = array('COUNT(`ID`) AS `amount`',
+                          'MONTH(`Datum`) AS `month`',
+                          'YEAR(`Datum`) AS `year`');
+      $group      = 'GROUP BY MONTH(`Datum`), YEAR(`Datum`) '.
+                    'ORDER BY YEAR(`Datum`) DESC, MONTH(`Datum`) DESC';
+      $months     = $db->select('news', $fields, null, $group);
 
-      $counts = substr($counts, 0, strlen($counts) - 2);
-      $sql    = "SELECT $counts FROM news";
+      $month_list = array();
+      foreach ($months as $key => $row) {
+        if ($row['year'] !== $last_year) {
+          if ($last_year !== null) {
+            $year_title   = '<span class="articleArchiveYear" style="cursor: pointer;">';
+            $year_title   .= $last_year;
+            $year_title   .= '</span>';
 
-      # todo improve error handling, maybe just logging and leave method?
-      if (!$result = $db->prepare($sql)) {
-          $this->list['error'] = $db->error;
-      }
-
-      if (!$result->execute()) {
-          $this->list['error'] = $result->error;
-      }
-
-      $rs   = array();
-      $meta = $result->result_metadata();
-
-      while ($f = $meta->fetch_field()) {
-        $var      = $f->name;
-        $$var     = null;
-        $rs[$var] = &$$var;
-      }
-
-      call_user_func_array(array($result, 'bind_result'), $rs);
-
-      if (!$result->fetch()) {
-          $return = $result->error;
-      }
-
-      for ($year = $max_year; $year >= $min_year; $year--) {
-        $month_list = array();
-
-        for ($month = 12; $month >= 1; $month--) {
-
-          $numberMonth = $rs[$month . '-' . $year];
-          if ($numberMonth === 0) {
-            continue;
+            $this->list[$year_title] = $month_list;
           }
 
-          $month_str    = '<a href="/'.$year.'/'.$month.'">';
-          $month_str    .= I18n::t('datetime.month.' . $month);
-          $month_str    .= ' <span class="number" style="color: #999999;">';
-          $month_str    .= '('.$numberMonth.')';
-          $month_str    .= '</span>';
-          $month_str    .= '</a>';
-          $month_list[] = $month_str;
+          $month_list = array();
+          $last_year = $row['year'];
         }
 
-        if (empty($month_list)) {
-          continue;
-        }
-
-        $year_title = '<span class="articleArchiveYear" style="cursor: pointer;">';
-        $year_title .= $year;
-        $year_title .= '</span>';
-
-        $this->list[$year_title] = $month_list;
+        $month_str    = '<a href="/'.$row['year'].'/'.$row['month'].'">';
+        $month_str    .= I18n::t('datetime.month.' . $row['month']);
+        $month_str    .= ' <span class="number" style="color: #999999;">';
+        $month_str    .= '('.$row['amount'].')';
+        $month_str    .= '</span>';
+        $month_str    .= '</a>';
+        $month_list[] = $month_str;
       }
 
-      $result->close();
+      $year_title   = '<span class="articleArchiveYear" style="cursor: pointer;">';
+      $year_title   .= $last_year;
+      $year_title   .= '</span>';
+      $this->list[$year_title] = $month_list;
     }
 
     public static function html() {
