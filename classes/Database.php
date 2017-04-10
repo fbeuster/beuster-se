@@ -25,6 +25,9 @@ class Database {
 	/** most recent error message */
 	public $error;
 
+	/** most recent sql query */
+	public $sql;
+
 	/**
 	 * constructor
 	 */
@@ -62,8 +65,8 @@ class Database {
 	}
 
 	public function tableExists($table) {
-		$sql 		= 'SELECT 1 FROM '.$table;
-		$result = $this->con->query($sql);
+		$this->sql 	= 'SELECT 1 FROM '.$table;
+		$result 		= $this->con->query($this->sql);
 		return isset($result->num_rows);
 	}
 
@@ -130,10 +133,10 @@ class Database {
 		}
 
 		// buildung sql
-		$sql = 'DELETE FROM '.$table.$cond_string;
+		$this->sql = 'DELETE FROM '.$table.$cond_string;
 
 		// prepare request
-		$stmt = $this->con->prepare($sql);
+		$stmt = $this->con->prepare($this->sql);
 		if(!$stmt) {
 			$this->error = $this->con->error;
 			return false;
@@ -238,10 +241,10 @@ class Database {
 		}
 
 		// buildung sql
-		$sql = 'INSERT INTO '.$table.'('.$fields.') '.$value_string.';';
+		$this->sql = 'INSERT INTO '.$table.'('.$fields.') '.$value_string.';';
 
 		// prepare request
-		$stmt = $this->con->prepare($sql);
+		$stmt = $this->con->prepare($this->sql);
 		if(!$stmt) {
 			$this->error = $this->con->error;
 			return null;
@@ -429,10 +432,10 @@ class Database {
 		$options = ' '.$options;
 
 		// buildung sql
-		$sql = 'SELECT '.$fields.' FROM '.$table.$join.$cond_string.$options.$limit_string;
+		$this->sql = 'SELECT '.$fields.' FROM '.$table.$join.$cond_string.$options.$limit_string;
 
 		// prepare request
-		$stmt = $this->con->prepare($sql);
+		$stmt = $this->con->prepare($this->sql);
 		if(!$stmt) {
 			$this->error = $this->con->error;
 			return null;
