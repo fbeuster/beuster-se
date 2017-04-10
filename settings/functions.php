@@ -71,20 +71,6 @@
         $xml->save($feedURL);*/
     }
 
-    function analyseErrNewsEdit($err) {
-        $ret = '';
-        switch($err) {
-            case 0: return 'Ist doch alles okay?';
-            case 1: return 'Titel oder Inhalt sind leer.';
-            case 2: return 'Du hast keine Kategorie und keine Playlist vergeben.';
-            case 3: return 'Du kannst nicht eine alte Playlist wählen, und trotzdem eine neue angeben.';
-            case 4: return 'Neue Playlist erkannt, aber ID fehlt.';
-            case 5: return 'Du kannst nicht eine alte Kategorie wählen, und trotzdem eine neue angeben.';
-            case 6: return 'Wähle einen Parent für die neue Kategorie.';
-            case 7: return 'Du kannst nur neue Playlist ODER kategorie auswählen.';
-        }
-    }
-
     function showInfo($msg, $refr, $title = null) {
         if ($title === null ) {
             $title = I18n::t('page.info.title');
@@ -107,18 +93,6 @@
         }
         setcookie('UserID', $UserID, strtotime("+1 day"), '/');
         setcookie('Password', $Hash, strtotime("+1 day"), '/');
-    }
-
-    function buildLinkTitle($title){
-        $removes = '#?|().,;:{}[]/';
-        $strokes = array(' ', '---', '--');
-        for($i = 0; $i < strlen($removes); $i++) {
-            $title = str_replace($removes[$i], '', $title);
-        }
-        foreach($strokes as $char) {
-            $title = str_replace($char, '-', $title);
-        }
-        return $title;
     }
 
     function shortenTitle($title, $l = 20) {
@@ -225,16 +199,6 @@
         return false;
     }
 
-    function isImage($a) {
-        if( $a == 'image/gif' ||
-            $a == 'image/pjepg' ||
-            $a == 'image/jpeg' ||
-            $a == 'image/png')
-            return true;
-        else
-            return false;
-    }
-
     function checkReplyId($id) {
         $db = Database::getDB()->getCon();
         if(!is_numeric($id)) {
@@ -299,19 +263,6 @@
         if($res != null)
             return $res[0]['n'];
         return 0;
-    }
-
-    function lic($l) {
-        $ls = array('by' => 'Creative Commons Namensnennung',
-                    'sa' => 'Weitergabe unter gleichen Bedingungen',
-                    'nd' => 'Keine Bearbeitung',
-                    'nc' => 'Nicht kommerziell');
-        $l = str_replace('by', $ls['by'], $l);
-        $l = str_replace('sa', $ls['sa'], $l);
-        $l = str_replace('nd', $ls['nd'], $l);
-        $l = str_replace('nc', $ls['nc'], $l);
-        $l .= ' 3.0 Unported Lizenz';
-        return $l;
     }
 
     function isDoubleBB($cnt, $bb) {
