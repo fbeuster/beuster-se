@@ -85,17 +85,6 @@
         }
     }
 
-    function getSize($s) {
-        $i = 0;
-        $t = array(' B',' kiB',' MiB',' GiB');
-        while($s > 1024) {
-            $s = $s / 1024;
-            $i++;
-        }
-        $s = round($s, 2).$t[$i];
-        return $s;
-    }
-
     function showInfo($msg, $refr, $title = null) {
         if ($title === null ) {
             $title = I18n::t('page.info.title');
