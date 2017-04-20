@@ -5,7 +5,7 @@
   if ($user && $user->isAdmin()) {
     refreshCookies();
 
-    $a['filename']  = 'newsedit.php';
+    $a['filename']  = 'article_editor.php';
     $a['data']      = array();
 
     $is_new_category  = false;
@@ -619,6 +619,12 @@
     $a['data']['categories'][]  = 'Blog';
     $a['data']['parents']       = $parents;
     $a['data']['playlists']     = getPlaylists();
+
+    $a['data']['action']        = 'edit';
+    $a['data']['form_action']   = 'newsedit';
+    $a['data']['submit']        = 'formactionchange';
+
+    sort($a['data']['categories']);
 
     return $a;
 

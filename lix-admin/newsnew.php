@@ -6,7 +6,7 @@
   if ($user && $user->isAdmin()) {
     refreshCookies();
 
-    $a['filename']  = 'newsnew.php';
+    $a['filename']  = 'article_editor.php';
     $a['data']      = array();
 
     $is_new_category  = false;
@@ -418,12 +418,16 @@
       }
     }
 
-    $a['data']['pars']    = getTopCats();
-    $a['data']['cats']    = getSubCats();
-    $a['data']['cats'][]  = 'Blog';
-    $a['data']['pls']     = getPlaylists();
+    $a['data']['parents']       = getTopCats();
+    $a['data']['categories']    = getSubCats();
+    $a['data']['categories'][]  = 'Blog';
+    $a['data']['playlists']     = getPlaylists();
 
-    sort($a['data']['cats']);
+    $a['data']['action']        = 'new';
+    $a['data']['form_action']   = 'newsnew';
+    $a['data']['submit']        = 'formaction';
+
+    sort($a['data']['categories']);
 
     return $a;
 

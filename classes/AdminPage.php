@@ -16,7 +16,8 @@ class AdminPage extends Page {
   }
 
   public static function exists($id) {
-    return $id === 'logout' || (file_exists('lix-admin/'.$id.'.php') && file_exists('system/views/admin/'.$id.'.php'));
+    return
+      $id === 'logout' || file_exists('lix-admin/'.$id.'.php');
   }
 
   public function getContent() {
