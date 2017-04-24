@@ -52,7 +52,7 @@
           <input type="text" name="name" title="<?php I18n::e('admin.snippet.edit.name.placeholder'); ?>" placeholder="<?php I18n::e('admin.snippet.edit.name.placeholder'); ?>" value="<?php echo $values['name']; ?>" role="newEntryTags">
         </label>
 
-        <label class="required long">
+        <label class="required long" for="newsinhalt">
           <span>
             <?php I18n::e('admin.snippet.edit.content_label'); ?>
           </span>

@@ -32,7 +32,7 @@
           <input type="text" name="version" value="<?php if(isset($data['fe']['rel']))echo $data['fe']['rel']; ?>" placeholder="Version number">
         </label>
 
-        <label class="required long">
+        <label class="required long" for="newsinhalt">
           <span>Beschreibung</span>
           <?php
             $content  = isset($data['fe']['inhalt']) ? $data['fe']['inhalt'] : '';

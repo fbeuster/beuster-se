@@ -60,7 +60,7 @@
           <input type="text" name="downver" value="<?php echo $version; ?>">
         </label>
 
-        <label class="required long">
+        <label class="required long" for="newsinhalt">
           <span>Beschreibung</span>
           <?php
             $content  = isset($data['fe']) ? $data['fe']['descr'] : (isset($data['down']) ? $data['down']['descr'] : '');

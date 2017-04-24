@@ -20,7 +20,7 @@
           <input type="text" name="name" title="<?php I18n::e('admin.snippet.new.name.placeholder'); ?>" placeholder="<?php I18n::e('admin.snippet.new.name.placeholder'); ?>"
           value="<?php if (isset($data['values'], $data['values']['name'])) { echo $data['values']['name']; } ?>">
         </label>
-        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>">
+        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>" for="newsinhalt">
           <span><?php I18n::e('admin.snippet.new.content_label'); ?></span>
           <?php
             $content  = isset($data['values'], $data['values']['content']) ? $data['values']['content'] : '';

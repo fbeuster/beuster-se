@@ -175,7 +175,7 @@
           </span>
         </p>
 
-        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>">
+        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>" for="newsinhalt">
           <span>
             <?php I18n::e('admin.article.'.$action.'.content_label'); ?>
           </span>
