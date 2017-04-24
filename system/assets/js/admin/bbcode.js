@@ -32,10 +32,10 @@ admin.bbCode = {
     $('#btncode').click(  { o: '[code]',  c: '[/code]' },   this.wrapSelection);
     $('#btnquote').click( { o: '[quote]', c: '[/quote]' },  this.wrapSelection);
 
-    $('#smsmile').click(  { o: '', c: ':)' }, this.wrapSelection);
-    $('#smlaugh').click(  { o: '', c: ':D' }, this.wrapSelection);
-    $('#smsad').click(    { o: '', c: ':(' }, this.wrapSelection);
-    $('#smone').click(    { o: '', c: ';)' }, this.wrapSelection);
+    $('#smsmile').click(  { o: ':)', c: '' }, this.wrapSelection);
+    $('#smlaugh').click(  { o: ':D', c: '' }, this.wrapSelection);
+    $('#smsad').click(    { o: ':(', c: '' }, this.wrapSelection);
+    $('#smone').click(    { o: ';)', c: '' }, this.wrapSelection);
 
     if(this.isNewsForm()) {
       $('#btnpar').click( { o: '[/p]', c: '[p]' },   this.wrapSelection);
@@ -75,7 +75,7 @@ admin.bbCode = {
     return { data: { o: open, c: close } };
   },
 
-  wrapSelection: function(event) {
+  wrapSelection: function(event, length = 0) {
     var textArea  = $(admin.bbCode.target);
         value     = textArea.val(),
         start     = textArea[0].selectionStart,
@@ -84,6 +84,18 @@ admin.bbCode = {
         text      = value.substring(start, end),
         post      = value.substring(end, value.length);
     textArea.val(pre + event.data.o + text + event.data.c + post);
+    textArea.focus();
+
+    if (length ==  0) {
+      length = text.length;
+    }
+
+    if (length == 0) {
+      textArea.selectRange(start + event.data.o.length);
+
+    } else {
+      textArea.selectRange(start + event.data.o.length + length + event.data.c.length);
+    }
   },
 
   wrapUrl: function(event) {
@@ -96,6 +108,6 @@ admin.bbCode = {
       admin.bbCode.makeEventData(
         '[' + event.data.tag + '=' + url + ']' + ext,
         '[/' + event.data.tag + ']'
-      ));
+      ), ext.length);
   }
 };
