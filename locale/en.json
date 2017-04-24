@@ -12,6 +12,9 @@
   },
   "admin" : {
     "article" : {
+      "delete" : {
+        "label" : "Delete article"
+      },
       "edit" : {
         "category" : {
           "label" : "Category",
@@ -558,6 +561,7 @@
     },
     "invalid_password" : "The entered password is invalid.",
     "invalid_user" : "The entered username could not be found.",
+    "label" : "Login",
     "success" : "You're signed in now.",
     "try_again" : "Try again."
   },

@@ -6,6 +6,7 @@
     refreshCookies();
     $a['filename'] = 'admin.php';
     $a['data'] = array();
+    $a['title'] = I18n::t('admin.label');
     return $a;
 
   } else if ($user) {
@@ -14,6 +15,7 @@
   } else {
     $a['filename'] = 'login.php';
     $a['data'] = array();
+    $a['title'] = I18n::t('login.label');
     return $a;
   }
 ?>

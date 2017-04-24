@@ -7,6 +7,7 @@
 
     $a['filename']  = 'snippetnew.php';
     $a['data']      = array();
+    $a['title']     = I18n::t('admin.snippet.new.label');
 
     $db = Database::getDB();
 

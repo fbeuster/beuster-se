@@ -9,6 +9,8 @@
 
     $a['filename']  = 'newsoverview.php';
     $a['data']      = array();
+    $a['title']     = I18n::t('admin.article.overview.label');
+
     $article_lists  = array();
 
     # commen vars

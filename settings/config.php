@@ -7,26 +7,13 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
 
  // Dateien
  $file = array(
-  'blog'            => array("news.php",            "Blog"),
   'about'           => array("about.php",           "Über und Feedback"),
-  'login'           => array("login.php",           "Login"),
-  'logout'          => array("logout.php",          "Logout"),
-  'admin'           => array("admin.php",           "AdminCP"),
-  'newsnew'         => array("newsnew.php",         "AdminCP - Neue News verfassen"),
-  'newsedit'        => array("newsedit.php",         "AdminCP - News überarbeiten"),
-  'newsdel'         => array("newsdel.php",         "AdminCP - News löschen"),
-  'newsoverview'    => array("newsoverview.php",    "AdminCP - Newsübersicht"),
   'stats'           => array("stats.php",           "AdminCP - Statistiken"),
   'admindown'       => array("admindown.php",       "AdminCP - Download hinzufügen"),
   'admindownbea'    => array("admindownbea.php",    "AdminCP - Download bearbeiten"),
   'admincat'        => array("admincat.php",        "AdminCP - Kategorien"),
   'admincmtenable'  => array("admincmtenable.php",  "AdminCP - Kommentare"),
-  'snippetnew'      => array("snippetnew.php",      "AdminCP - Snippet erstellen"),
-  'snippetedit'     => array("snippetedit.php",     "AdminCP - Snippet bearbeiten"),
-  'snippetdelete'   => array("snippetdel.php",      "AdminCP - Snippet löschen"),
-  'snippetoverview' => array("snippetoverview.php", "AdminCP - Snippetübersicht"),
-  'userdata'        => array("userdata.php",        "Deine Daten bearbeiten"),
-  'search'          => array("search.php",          "Suchergebnisse"));
+  'userdata'        => array("userdata.php",        "Deine Daten bearbeiten"));
 
  // Konstanten
 

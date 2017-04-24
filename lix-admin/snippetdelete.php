@@ -7,6 +7,7 @@
 
     $a['filename']  = 'snippetdelete.php';
     $a['data']      = array();
+    $a['title']     = I18n::t('admin.snippet.delete.label');
 
     $db = Database::getDB();
 

@@ -8,6 +8,7 @@
 
     $a['filename']  = 'snippetoverview.php';
     $a['data']      = array();
+    $a['title']     = I18n::t('admin.snippet.overview.label');
 
     # get articles
     $snippets = array();

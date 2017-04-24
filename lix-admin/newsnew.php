@@ -8,6 +8,7 @@
 
     $a['filename']  = 'article_editor.php';
     $a['data']      = array();
+    $a['title']     = I18n::t('admin.article.new.label');
 
     $is_new_category  = false;
     $is_new_playlist  = false;

@@ -5,6 +5,7 @@
         refreshCookies();
         $a['filename'] = 'newsdel.php';
         $a['data'] = array();
+        $a['title']     = I18n::t('admin.article.delete.label');
         $db = Database::getDB();
 
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
