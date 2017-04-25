@@ -49,7 +49,7 @@
         <?php } else { ?>
         <span><a href="/">beuster{se}</a></span>
         <?php } ?>
-        <div class="search">
+        <div class="search inactive">
           <form action="/search" method="post">
             <input type="text" placeholder="<?php I18n::e('search.form.placeholder'); ?>" name="s">
             <input type="submit" value="" alt="<?php I18n::e('search.form.submit'); ?>" name="search">
