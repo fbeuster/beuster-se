@@ -245,7 +245,7 @@
         "label" : "Miscellanious",
         "logout" : "Logout",
         "settings" : "Settings",
-        "stats" : "View statistics"
+        "statistics" : "View statistics"
       },
       "snippet" : {
         "delete" : "Delete snippet",
@@ -339,7 +339,7 @@
         }
       }
     },
-    "stats" : {
+    "statistics" : {
       "label" : "Page statistics",
       "downloads_table" : {
         "label" : "Downloads",

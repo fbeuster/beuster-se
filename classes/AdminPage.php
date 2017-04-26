@@ -29,6 +29,8 @@ class AdminPage extends Page {
   }
 
   public function getParsedContent() {
+    echo '<pre>'; print_r('getcontent'); echo '</pre>';
+    echo '<pre>'; print_r($this->file_name); echo '</pre>';
     return $this->content;
   }
 

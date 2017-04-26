@@ -3,12 +3,11 @@ $noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
               'login', 'logout',
               'newsedit', 'newsnew', 'newsdel', 'newsoverview',
               'snippetnew', 'snippetedit', 'snippetdelete',
-              'stats', 'userdata');
+              'statistics', 'userdata');
 
  // Dateien
  $file = array(
   'about'           => array("about.php",           "Über und Feedback"),
-  'stats'           => array("stats.php",           "AdminCP - Statistiken"),
   'admindown'       => array("admindown.php",       "AdminCP - Download hinzufügen"),
   'admindownbea'    => array("admindownbea.php",    "AdminCP - Download bearbeiten"),
   'admincat'        => array("admincat.php",        "AdminCP - Kategorien"),

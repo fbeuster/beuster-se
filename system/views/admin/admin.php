@@ -36,7 +36,7 @@
 
     <h2><?php I18n::e('admin.navigation.misc.label'); ?></h2>
     <ul class="pagesList">
-      <li><a href="/stats"><?php I18n::e('admin.navigation.misc.stats'); ?></a></li>
+      <li><a href="/statistics"><?php I18n::e('admin.navigation.misc.statistics'); ?></a></li>
       <li><a href="/userdata"><?php I18n::e('admin.navigation.misc.settings'); ?></a></li>
       <li><a href="/logout"><?php I18n::e('admin.navigation.misc.logout'); ?></a></li>
     </ul>

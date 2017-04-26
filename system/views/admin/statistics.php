@@ -2,17 +2,17 @@
 <article>
   <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
-    <h1><?php I18n::e('admin.stats.label'); ?></h1>
+    <h1><?php I18n::e('admin.statistics.label'); ?></h1>
 
-    <h2><?php I18n::e('admin.stats.rankings_table.last_label'); ?></h2>
-    <table class="newslist">
+    <h2><?php I18n::e('admin.statistics.rankings_table.last_label'); ?></h2>
+    <table class="entry_list">
       <thead>
         <tr>
           <th class="smallNumber">#</th>
-          <th><?php I18n::e('admin.stats.rankings_table.header.article'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.stats.rankings_table.header.hits'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.stats.rankings_table.header.hits_per_day'); ?></th>
-          <th class="date"><?php I18n::e('admin.stats.rankings_table.header.date'); ?></th>
+          <th><?php I18n::e('admin.statistics.rankings_table.header.article'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.statistics.rankings_table.header.hits'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.statistics.rankings_table.header.hits_per_day'); ?></th>
+          <th class="date"><?php I18n::e('admin.statistics.rankings_table.header.date'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -34,15 +34,15 @@
       </tbody>
     </table>
 
-    <h2><?php I18n::e('admin.stats.rankings_table.top_label'); ?></h2>
-    <table class="newslist">
+    <h2><?php I18n::e('admin.statistics.rankings_table.top_label'); ?></h2>
+    <table class="entry_list">
       <thead>
         <tr>
           <th class="smallNumber">#</th>
-          <th><?php I18n::e('admin.stats.rankings_table.header.article'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.stats.rankings_table.header.hits'); ?></th>
-          <th class="bigNumber"><?php I18n::e('admin.stats.rankings_table.header.hits_per_day'); ?></th>
-          <th class="date"><?php I18n::e('admin.stats.rankings_table.header.date'); ?></th>
+          <th><?php I18n::e('admin.statistics.rankings_table.header.article'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.statistics.rankings_table.header.hits'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.statistics.rankings_table.header.hits_per_day'); ?></th>
+          <th class="date"><?php I18n::e('admin.statistics.rankings_table.header.date'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -64,12 +64,12 @@
       </tbody>
     </table>
 
-    <h2><?php I18n::e('admin.stats.downloads_table.label'); ?></h2>
-    <table class="newslist">
+    <h2><?php I18n::e('admin.statistics.downloads_table.label'); ?></h2>
+    <table class="entry_list">
       <thead>
         <tr>
-          <th class="bigNumber"><?php I18n::e('admin.stats.downloads_table.header.downloads'); ?></th>
-          <th><?php I18n::e('admin.stats.downloads_table.header.file'); ?></th>
+          <th class="bigNumber"><?php I18n::e('admin.statistics.downloads_table.header.downloads'); ?></th>
+          <th><?php I18n::e('admin.statistics.downloads_table.header.file'); ?></th>
         </tr>
       </thead>
       <tbody>
