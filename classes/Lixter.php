@@ -99,7 +99,7 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global  $file, $noGA;
+    global $file;
 
     // non-catched exceptions should be logged
     set_exception_handler(function($exception) {
@@ -232,7 +232,7 @@ class Lixter {
   }
 
   private function buildAdmin() {
-    global $file, $noGA;
+    global $file;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
@@ -265,7 +265,7 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file, $noGA;
+    global $file;
 
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 

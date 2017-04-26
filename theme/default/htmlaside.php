@@ -18,6 +18,6 @@
       } else {
         echo moduleRandomArticle();
       }
-      echo moduleAdSenseAside($noGA);
+      echo moduleAdSenseAside();
       SidebarModuleArchive::html(); ?>
     </aside>

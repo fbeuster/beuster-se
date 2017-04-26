@@ -1,9 +1,4 @@
 <?php
-$noGA = array('admin', 'admindown', 'admincat', 'admincmtenable',
-              'login', 'logout',
-              'newsedit', 'newsnew', 'newsdel', 'newsoverview',
-              'snippetnew', 'snippetedit', 'snippetdelete',
-              'statistics', 'userdata');
 
  // Dateien
  $file = array(

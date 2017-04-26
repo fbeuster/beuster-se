@@ -32,7 +32,7 @@
   <!-- wanna play javascript? -->
   <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/js/beusterse.js'); ?>"></script>
 
-  <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
+  <?php if (isset($_GET['p']) && AdminPage::exists($_GET['p'])) { ?>
   <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/js/scriptAdm.js'); ?>"></script>
   <?php } ?>
 

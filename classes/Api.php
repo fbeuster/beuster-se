@@ -40,7 +40,7 @@ class Api {
   }
 
   private function loadConfig() {
-    global  $file, $noGA;
+    global  $file;
 
     // non-catched exceptions should be logged
     set_exception_handler(function($exception) {

@@ -18,11 +18,13 @@
     return $donate->getHTML();
   }
 
-  function moduleAdSenseAside($noGA) {
+  function moduleAdSenseAside() {
     $id = "google-ads-1";
 
-    if(Utilities::isDevServer() || (isset($_GET['p']) && in_array($_GET['p'], $noGA))) {
+    if (Utilities::isDevServer() ||
+        (isset($_GET['p']) && AdminPage::exists($_GET['p']))) {
       $content = 'Google AdSense'."\n";
+
     } else {
       $content = '<script type="text/javascript"><!--'."\n";
       $content .= '  adUnit = document.getElementById("google-ads-1");'."\r";

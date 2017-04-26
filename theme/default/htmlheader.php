@@ -28,7 +28,7 @@
   <title><?php echo $page->getTitle().' - '.$config->get('site_name'); ?></title>
 
   <!-- wanna play javascript? -->
-  <?php if(isset($_GET['p']) && in_array($_GET['p'], $noGA)) { ?>
+  <?php if (isset($_GET['p']) && AdminPage::exists($_GET['p'])) { ?>
   <script type="text/javascript" src="<?php echo Lixter::getLix()->getTheme()->getFile('scripts/scriptAdm.js'); ?>"></script>
   <?php } ?>
   <?php if($page->getType() == Page::CONTENT_PAGE && $page->getRefreshName() !== '') {
