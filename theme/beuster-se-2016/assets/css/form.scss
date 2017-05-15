@@ -1,7 +1,62 @@
 @import 'lib/_color';
 
+body.article {
+  div.error,
+  div.success {
+    margin-bottom: 2em;
+
+    .title {
+      color: $white;
+      font-weight: bold;
+      padding: 0.25em 1em;
+    }
+  }
+
+  div.success {
+    border: 1px solid $green;
+
+    p {
+      background: $white;
+      color: $cold_black;
+      padding: 0.25em 1em;
+    }
+
+    .title {
+      background: $green;
+    }
+  }
+
+  div.error {
+    border: 1px solid $red;
+
+    ul.messages {
+      background: $white;
+      color: $cold_black;
+      list-style: none;
+      margin: 0;
+      padding: 0.25em 1em;
+
+      li {
+        padding-left: 1em;
+        text-indent: -0.7em;
+
+        &:before {
+          color: $red;
+          content: "\2022";
+          font-weight: bold;
+          padding-right: 0.5em;
+        }
+      }
+    }
+
+    .title {
+      background: $red;
+    }
+  }
+}
+
 form.userform {
-  margin-top: 3em;
+  margin-top: 1em;
 
   fieldset {
     border: 0;
@@ -27,6 +82,7 @@ form.userform {
       select,
       textarea {
         background: $white;
+        font-size: 1em;
         vertical-align: baseline;
       }
 
@@ -50,6 +106,14 @@ form.userform {
         display: inline-block;
         margin-left: 0.25em;
       }
+
+      &.has_error {
+        input,
+        select,
+        textarea {
+          border: 1px solid $red;
+        }
+      }
     }
 
     input[type=reset],
@@ -58,6 +122,7 @@ form.userform {
       cursor: pointer;
       font-size: 1.1em;
       margin-bottom: 1em;
+      margin-top: 1em;
       padding: 0.5em 1em;
     }
 
@@ -82,6 +147,7 @@ form.userform {
     input[type=reset] {
       background: $dark_grey;
       color: $darker_grey;
+      margin-left: 1em;
 
       &:hover {
         color: $cold_black;

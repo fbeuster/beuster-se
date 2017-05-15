@@ -217,7 +217,7 @@
     "back_link" : "< Zurück zur Seitenverwaltung",
     "footer" : {
       "cms" : "Lixter CMS von Felix Beuster",
-      "copy" : "&copy; Copyright 2010 - 2016",
+      "copy" : "&copy; Copyright 2010 - 2017",
       "runs_with" : "Läuft mit"
     },
     "label" : "Seitenverwaltung",
@@ -513,9 +513,13 @@
   "general_form" : {
     "clear" : "Eingaben löschen",
     "disclaimer" : "Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im %s.",
+    "error" : "Fehler",
     "errors" : {
       "incomplete_form" : "Das Formular ist unvollständig. Markierte Felder sind Pflicht.",
       "invalid_mail" : "Die eingegebene Email-Adresse ist ungültig.",
+      "invalid_message" : "Die eingegebene Nachricht ist ungültig.",
+      "invalid_name" : "Der eingegebene Name ist ungültig.",
+      "send_error" : "Beim Senden der E-Mail ist ein Fehler aufgetreten. Bitte versuche es später noch einmal.",
       "too_long" : "Deine Nachricht ist zu lang, das Limit liegt bei %s Zeichen.",
       "too_quick" : "Du musst die Wartezeit abwarten."
     },
@@ -534,6 +538,12 @@
     "name" : {
       "label" : "Name",
       "placeholder" : "Dein Name"
+    },
+    "notification" : {
+      "description" : "Von deiner Seite %s, der Nutzer %s %s hat dir die folgende Nachricht gesendet:",
+      "footer" : "Dies ist eine automatisierte Nachricht von deiner Seite %s (%s).",
+      "subject" : "Nachricht von %s - %s",
+      "title" : "Nachricht von %s"
     },
     "remain" : "Noch %s Zeichen übrig.",
     "submit" : "Absenden",

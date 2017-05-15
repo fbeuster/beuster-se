@@ -209,8 +209,8 @@
     $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
     $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
 
-    $ret .= '  <input type="submit" name="formaction" value="'.I18n::t('general_form.submit').'" class="button" id="formSubmit">'."\r";
-    $ret .= '  <input type="reset" name="formreset" value="'.I18n::t('general_form.clear').'" class="button" id="formReset">'."\r";
+    $ret .= '  <input type="submit" name="formaction" value="'.I18n::t('general_form.submit').'" class="button" id="formaction">'."\r";
+    $ret .= '  <input type="reset" name="formreset" value="'.I18n::t('general_form.clear').'" class="button" id="formreset">'."\r";
 
     $ret .= ' </fieldset>'."\r";
     $ret .= '</form>'."\r";

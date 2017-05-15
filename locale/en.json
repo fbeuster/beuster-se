@@ -216,7 +216,7 @@
     "back_link" : "< Back to page administration",
     "footer" : {
       "cms" : "Lixter CMS by Felix Beuster",
-      "copy" : "&copy; Copyright 2010 - 2016",
+      "copy" : "&copy; Copyright 2010 - 2017",
       "runs_with" : "Runs with"
     },
     "label" : "Page administration",
@@ -512,9 +512,13 @@
   "general_form" : {
     "clear" : "Clear form",
     "disclaimer" : "Marked fields (*) are required, your mail adress won't be published. Furter information can be found under %s.",
+    "error" : "Error",
     "errors" : {
       "incomplete_form" : "The formular is incomplete. Marked fields are required.",
       "invalid_mail" : "The entered mail address is invalid.",
+      "invalid_message" : "The entered message is invalid.",
+      "invalid_name" : "The entered name is invalid.",
+      "send_error" : "There was an error while sending the email. Please try again later.",
       "too_long" : "Your message is too long, the limit is %s characters.",
       "too_quick" : "You have to wait for the countdown."
     },
@@ -533,6 +537,12 @@
     "name" : {
       "label" : "Name",
       "placeholder" : "Your name"
+    },
+    "notification" : {
+      "description" : "From your site %s, the user %s %s sent you the following message:",
+      "footer" : "This is an automated messegae from your site %s at %s.",
+      "subject" : "Message from %s - %s",
+      "title" : "Message from %s"
     },
     "remain" : "%s characters left.",
     "submit" : "Post",

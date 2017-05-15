@@ -5,9 +5,10 @@ abstract class Page {
   const ARTICLE_PAGE  = 2;
   const CATEGORY_PAGE = 3;
   const CONTENT_PAGE  = 4;
-  const INDEX_PAGE    = 5;
-  const SEARCH_PAGE   = 6;
-  const STATIC_PAGE   = 7;
+  const FEEDBACK_PAGE = 5;
+  const INDEX_PAGE    = 6;
+  const SEARCH_PAGE   = 7;
+  const STATIC_PAGE   = 8;
 
   public function __construct() {
   }

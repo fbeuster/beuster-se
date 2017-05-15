@@ -168,6 +168,10 @@ class Lixter {
             $this->page = new ErrorPage($this->page->getError());
           }
 
+        } else if (FeedbackPage::exists($_GET['p'])) {
+          # page argument is static page
+          $this->page = new FeedbackPage($_GET['p']);
+
         } else if (StaticPage::exists($_GET['p'])) {
           # page argument is static page
           $this->page = new StaticPage($_GET['p']);
