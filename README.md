@@ -18,33 +18,19 @@ Code documentation can be found under [doc.beusterse.de](http://doc.beusterse.de
 - [JS Build](https://github.com/fbeuster/js-build)
 
 ## Build instructions
-After cloning the repository or making a pull, you need to build the `.scss` and `.js` files in the theme and admin view folders. Starting from your base directory, you should run the following commands:
+After cloning the repository or making a pull, you need to build the `.scss` and `.js`. For your convenience, a build script is included, that will do this for you. Simply run the following command in the project's root directory
 
-### Page administration asset files
 ```
-$ cd system/assets/css/admin
-$ sass styles.scss styles.css
-$ cd ../../js/admin
-$ js-build application.js admin.js
+$ ./BUILD
 ```
 
-### Beuster{se} 2013 theme asset files
+If the script doesn't start, make sure that it is executable, eg. it has 744. If it's not and you can't change it, try running
+
 ```
-$ cd theme/beuster-se-2013/styles
-$ sass application.scss application.css
-$ cd ../scripts
-$ js-build application.js beusterse.js
+$ bash ./BUILD
 ```
 
-### Beuster{se} 2016 theme asset files
-```
-$ cd theme/beuster-se-2016/assets/css
-$ sass styles.scss styles.css
-$ cd ../js
-$ js-build application.js beusterse.js
-```
-
-**Note:** Future plans for this part are to provide a small build script as well as a download version of the CMS.
+Future releases with download version of this CMS won't need to do this any more.
 
 ## Installation
 
