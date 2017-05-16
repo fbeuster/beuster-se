@@ -128,8 +128,9 @@ class FeedbackPage extends Page {
       return;
     }
 
+    $protocol   = Lixter::getLix()->getProtocol();
     $site_link  = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $site_link  = '<a href="http://'.$site_link.'">'.$site_link.'</a>';
+    $site_link  = '<a href="'.$protocol.'://'.$site_link.'">'.$site_link.'</a>';
     $site_name  = Config::getConfig()->get('site_name');
 
     # mail info
@@ -160,7 +161,7 @@ class FeedbackPage extends Page {
                             array($site_name, $site_link));
 
     $copy         = I18n::t('admin.footer.runs_with');
-    $copy         .= ' <a href="http://fixel.me">'.I18n::t('admin.footer.cms').'</a><br>';
+    $copy         .= ' <a href="https://fixel.me">'.I18n::t('admin.footer.cms').'</a><br>';
     $copy         .= I18n::t('admin.footer.copy');
 
     # get and fill mail content

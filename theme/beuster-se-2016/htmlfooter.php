@@ -5,7 +5,7 @@
           <a href="https://www.youtube.com/user/waterwebdesign" class="yt">YouTube</a>
           <a href="https://github.com/fbeuster" class="gh">GitHub</a>
           <a href="https://www.instagram.com/felixbeuster/" class="ig">Instagram</a>
-          <a href="http://fixel.me" class="lk">fixel.me</a>
+          <a href="https://fixel.me" class="lk">fixel.me</a>
         </div>
         <div class="links">
           <a href="/about">Über und Feedback</a>

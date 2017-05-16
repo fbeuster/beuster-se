@@ -36,27 +36,29 @@
     if(isset($data['th_og'])) {
       return $data['th_og'];
     } else {
-      return 'http://beusterse.de/images/prev.png';
+      return 'https://beusterse.de/images/prev.png';
     }
   }
 
   function getPageUrl() {
-    $curPage = getCurrentPage();
+    $curPage  = getCurrentPage();
+    $protocol = Lixter::getLix()->getProtocol();
+
     switch($curPage) {
       case 'blog':
-        return 'http://'.$_SERVER['HTTP_HOST'];
+        return $protocol.'://'.$_SERVER['HTTP_HOST'];
       case 'entry':
         $id = $_GET['n'];
         $article = new Article($id);
         $title = $article->getTitle();
         $cat = getCatName(getNewsCat($id));
-        return 'http://'.$_SERVER['HTTP_HOST'].$article->getLink();
+        return $protocol.'://'.$_SERVER['HTTP_HOST'].$article->getLink();
       case 'topCategory':
-        return 'http://'.$_SERVER['HTTP_HOST'];
+        return $protocol.'://'.$_SERVER['HTTP_HOST'];
       case 'category':
-        return 'http://'.$_SERVER['HTTP_HOST'];
+        return $protocol.'://'.$_SERVER['HTTP_HOST'];
       default:
-        return 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.http_build_query ($_GET);
+        return $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.http_build_query ($_GET);
     }
   }
 

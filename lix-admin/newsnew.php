@@ -399,7 +399,8 @@
           # add rss entry
           if ($is_public && isset($rssFeedPath)) {
             $article  = new Article($id);
-            $url      = 'http://'.Utilities::getSystemAddress().$article->getLink();
+            $protocol = Lixter::getLix()->getProtocol();
+            $url      = $protocol.'://'.Utilities::getSystemAddress().$article->getLink();
             addRssItem( $rssFeedPath,
                         $title,
                         str_replace('###link###', $url, Parser::parse($content, Parser::TYPE_PREVIEW)),

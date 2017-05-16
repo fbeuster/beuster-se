@@ -9,8 +9,8 @@
     $parsedUrl  = $parsingUrl->doParse();
 
     # redirect
-    echo 'Location: http://'.Utilities::getSystemAddress().$parsedUrl;
-    header('Location: http://'.Utilities::getSystemAddress().$parsedUrl);
+    echo 'Location: '.Utilities::getProtocol().'://'.Utilities::getSystemAddress().$parsedUrl;
+    header('Location: '.Utilities::getProtocol().'://'.Utilities::getSystemAddress().$parsedUrl);
 
     /* This class parse in Url in my old format and transfer it
      * to the new one. Categories and titles are important,

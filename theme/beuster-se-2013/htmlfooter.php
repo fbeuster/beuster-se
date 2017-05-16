@@ -81,7 +81,7 @@
   <?php
   if(time() >= strtotime('28-03-2014') && time() <= strtotime('27-04-2014')) { ?>
   <!-- Give me a cake, it's my birthday :) -->
-  <div class="birth4"><a href="http://beusterse.de/305/blog/4-Jahre-beusterse">4 Jahre beuster{se}</a></div>
+  <div class="birth4"><a href="https://beusterse.de/305/blog/4-Jahre-beusterse">4 Jahre beuster{se}</a></div>
   <?php } ?>
  </body>
 </html>

@@ -2,6 +2,15 @@
 
 class Utilities {
 
+  public static function getProtocol() {
+    if (isset($_SERVER['https']) && $_SERVER['https'] != 'off') {
+      return 'https';
+
+    } else {
+      return 'http';
+    }
+  }
+
   public static function getRemoteAddress() {
     return Config::getConfig()->get('remote_address');
   }

@@ -60,7 +60,8 @@ class ArticlePage extends RequestPage {
   }
 
   public function getLink() {
-    return 'http://'.$_SERVER['HTTP_HOST'].$this->article->getLink();
+    return  Lixter::getLix()->getProtocol().
+            '://'.$_SERVER['HTTP_HOST'].$this->article->getLink();
   }
 
   public function getParsedContent() {

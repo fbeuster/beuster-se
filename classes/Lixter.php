@@ -17,6 +17,7 @@ class Lixter {
 
   private static $lix; /**< Lixter instance */
   private $page; /**< loaded page */
+  private $protocal;
   private $isPage = false;
   private $theme;
 
@@ -66,6 +67,10 @@ class Lixter {
 
   public function getPage() {
     return $this->page;
+  }
+
+  public function getProtocol() {
+    return $this->protocol;
   }
 
   public function getTheme() {
@@ -120,6 +125,9 @@ class Lixter {
     } else {
       error_reporting(NULL);
     }
+
+    // set the protocol
+    $this->protocol = Utilities::getProtocol();
 
     // loading configuration and functions
     include('settings/config.php');

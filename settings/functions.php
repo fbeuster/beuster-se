@@ -103,10 +103,12 @@
     }
 
     function makeAbsolutePath($path, $append = '', $stay_local = false) {
+        $protocol = Lixter::getLix()->getProtocol();
+
         if($stay_local || Utilities::getRemoteAddress() === null)
-            return 'http://'.Utilities::getSystemAddress().'/'.$path.$append;
+            return $protocol.'://'.Utilities::getSystemAddress().'/'.$path.$append;
         else
-            return 'http://'.Utilities::getRemoteAddress().'/'.$path.$append;
+            return $protocol.'://'.Utilities::getRemoteAddress().'/'.$path.$append;
     }
 
     /*** validation ***/
@@ -336,7 +338,7 @@
 
     function rewriteUrl($url) {
         if(preg_match('#^(http(s)?://)(.*)#', $url) == 0) {
-            return 'http://'.$url;
+            return Lixter::getLix()->getProtocol().'://'.$url;
         }
         return $url;
     }
