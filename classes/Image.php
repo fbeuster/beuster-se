@@ -24,9 +24,20 @@ class Image {
   }
 
   public static function createThumbnail($path, $width, $height) {
+    if (!file_exists($path)) {
+      return false;
+    }
+
     $pic      = array();
     $path_arr = pathinfo($path);
-    $path     = self::ARTICLE_IMAGE_PATH . $path;
+
+    if (!preg_match('#^'.self::ARTICLE_IMAGE_PATH.'.*#', $path)) {
+      $path   = self::ARTICLE_IMAGE_PATH . $path;
+    }
+
+    if (!file_exists($path)) {
+      return false;
+    }
 
     $dimensions   = '_' . $width . 'x'. $height;
     $pic['path']  = self::ARTICLE_IMAGE_PATH . $path_arr['filename'] . $dimensions .'.'. $path_arr['extension'];
