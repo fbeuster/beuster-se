@@ -43,7 +43,7 @@
   <div class="beLightbox">
     <div class="beLightboxWrapper">
       <div class="beLightboxImage">
-        <img src="/images/spacer.gif" alt="" id="imgViewport">
+        <img src="/<?php echo Lixter::getLix()->getSystemFile('assets/img/spacer.gif'); ?>" alt="" id="imgViewport">
       </div>
       <div class="beLightboxText">
         <span class="beLightboxDecription">Ich bin ein Test.</span>

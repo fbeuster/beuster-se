@@ -31,12 +31,14 @@
     }
   }
 
-  function getPageOGImage() {
+  function getPageOGImage($theme_file = '') {
     $data = Lixter::getLix()->getPage()->getContent();
-    if(isset($data['th_og'])) {
+    if (isset($data['th_og'])) {
       return $data['th_og'];
-    } else {
-      return 'https://beusterse.de/images/prev.png';
+
+    } else if ($theme_file != '') {
+      $prev = Lixter::getLix()->getTheme()->getFile($theme_file);
+      return Utilities::getProtocol().'://'.Utilities::getSystemAddress().'/'.$prev;
     }
   }
 

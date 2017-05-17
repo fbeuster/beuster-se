@@ -20,7 +20,7 @@
     <div class="lightbox">
       <div class="wrapper">
         <div class="image">
-          <img src="/images/spacer.gif" alt="" id="imgViewport">
+          <img src="/<?php echo Lixter::getLix()->getSystemFile('assets/img/spacer.gif'); ?>" alt="" id="imgViewport">
         </div>
         <div class="text">
           <span class="description">Ich bin ein Test.</span>

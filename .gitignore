@@ -17,6 +17,7 @@ cache/locale/*
 user/*
 themes/*
 files/*
+images/*
 images/blog/*
 images/foren/*
 images/mods/*

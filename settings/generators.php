@@ -16,7 +16,7 @@
         $ret .= '  <br class="clear">'."\r";
         $ret .= '  <span id="galL" title="Zurück">&nbsp;</span>';
         $ret .= '  <div class="beContentEntryGalleryBigImage">';
-        $ret .= '   <img src="'.Lixter::getLix()->getProtocol().'://'.Utilities::getSystemAddress().'/images/spacer.gif" alt="picL.0" id="pic">';
+        $ret .= '   <img src="/'.Lixter::getLix()->getSystemFile('assets/img/spacer.gif').'" alt="picL.0" id="pic">';
         $ret .= '  </div>';
         $ret .= '  <span id="galR" title="Weiter">&nbsp;</span>';
         $ret .= '  <br class="clear">';

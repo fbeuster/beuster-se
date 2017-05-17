@@ -21,7 +21,7 @@
   <meta property='og:url' content='<?php echo getPageUrl(); ?>'/>
   <meta property='og:site_name' content='beusterse.de'/>
   <meta property='og:type' content='website'/>
-  <meta property='og:image' content='<?php echo getPageOGImage(); ?>'/>
+  <meta property='og:image' content='<?php echo getPageOGImage('assets/img/prev.png'); ?>'/>
   <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />

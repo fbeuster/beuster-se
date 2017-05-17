@@ -215,7 +215,7 @@
             </tbody>
           </table>
           <div class="adImg">
-            <img src="/images/spacer.gif" alt="">
+            <img src="/<?php echo Lixter::getLix()->getSystemFile('assets/img/spacer.gif'); ?>" alt="">
           </div>
         <?php } ?>
 
