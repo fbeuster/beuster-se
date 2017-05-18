@@ -253,6 +253,12 @@
         "label" : "Snippets",
         "new" : "New snippet",
         "overview" : "Snippet overview"
+      },
+      "static_page" : {
+        "edit" : "Edit static page",
+        "label" : "Static pages",
+        "new" : "New static page",
+        "overview" : "Static page overview"
       }
     },
     "no_access" : "You have no access to this page.",
@@ -336,6 +342,82 @@
           "created" : "Created",
           "edited" : "Last edited",
           "name" : "Name"
+        }
+      }
+    },
+    "static_page" : {
+      "edit" : {
+        "choose" : {
+          "label" : "Select static page",
+          "placeholder" : "Please select...",
+          "submit" : "View selected static page"
+        },
+        "content_label" : "Content",
+        "errors" : {
+          "empty_content" : "The content of a static page can't be empty.",
+          "empty_title" : "The title of a static page can't be empty.",
+          "empty_url" : "The URL of a static page can't be empty.",
+          "exists" : "This static page already exists.",
+          "invalid_characters" : "The static page URL has invalid characters.",
+          "long_title" : "The snipppet title is too long.",
+          "long_url" : "The snipppet URL is too long.",
+          "no_old_exists" : "A static page with the old URL does not exist."
+        },
+        "feedback_label" : "Feedback form",
+        "label" : "Edit static page",
+        "submit" : "Save changes",
+        "success" : "The static page has been changed.",
+        "title" : {
+          "label" : "Title",
+          "placeholder" : "Title of the snippet"
+        },
+        "url" : {
+          "label" : "URL",
+          "placeholder" : "URL of the snippet"
+        }
+      },
+      "new" : {
+        "content_label" : "Content",
+        "errors" : {
+          "empty_content" : "The content of a static page can't be empty.",
+          "empty_title" : "The title of a static page can't be empty.",
+          "empty_url" : "The URL of a static page can't be empty.",
+          "exists" : "This static page already exists.",
+          "invalid_characters" : "The static page URL has invalid characters.",
+          "long_title" : "The static page title is too long.",
+          "long_url" : "The static page URL is too long."
+        },
+        "feedback_label" : "Feedback form",
+        "label" : "Create new static page",
+        "submit" : "Create static page",
+        "success" : "The static page has been added.",
+        "title" : {
+          "label" : "Title",
+          "placeholder" : "Title of the static page"
+        },
+        "url" : {
+          "label" : "URL",
+          "placeholder" : "URL of the static page"
+        }
+      },
+      "overview" : {
+        "delete" : {
+          "text" : "Delete",
+          "title" : "Click to delete"
+        },
+        "edit" : {
+          "text" : "Edit",
+          "title" : "Click to edit"
+        },
+        "filter" : {
+          "label" : "Filter static page overview",
+          "placeholder" : "Static page title"
+        },
+        "label" : "Static page overview list",
+        "table_header" : {
+          "actions" : "Actions",
+          "title" : "Title",
+          "url" : "URL"
         }
       }
     },

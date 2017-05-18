@@ -10,6 +10,13 @@
       <li><a href="/newsdel"><?php I18n::e('admin.navigation.article.delete'); ?></a></li>
     </ul>
 
+    <h2><?php I18n::e('admin.navigation.static_page.label'); ?></h2>
+    <ul class="pagesList">
+      <li><a href="/staticpageoverview"><?php I18n::e('admin.navigation.static_page.overview'); ?></a></li>
+      <li><a href="/staticpagenew"><?php I18n::e('admin.navigation.static_page.new'); ?></a></li>
+      <li><a href="/staticpageedit"><?php I18n::e('admin.navigation.static_page.edit'); ?></a></li>
+    </ul>
+
     <h2><?php I18n::e('admin.navigation.category.label'); ?></h2>
     <ul class="pagesList">
       <li><a href="/admincat"><?php I18n::e('admin.navigation.category.manage'); ?></a></li>
