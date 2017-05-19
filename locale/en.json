@@ -12,9 +12,6 @@
   },
   "admin" : {
     "article" : {
-      "delete" : {
-        "label" : "Delete article"
-      },
       "edit" : {
         "category" : {
           "label" : "Category",
@@ -222,7 +219,6 @@
     "label" : "Page administration",
     "navigation" : {
       "article" : {
-        "delete" : "Delete article",
         "edit" : "Edit article",
         "label" : "Articles",
         "new" : "New article",
@@ -248,7 +244,6 @@
         "statistics" : "View statistics"
       },
       "snippet" : {
-        "delete" : "Delete snippet",
         "edit" : "Edit snippet",
         "label" : "Snippets",
         "new" : "New snippet",
@@ -264,21 +259,6 @@
     "no_access" : "You have no access to this page.",
     "not_logged_in" : "You're not logged in.",
     "snippet" : {
-      "delete" : {
-        "choose" : {
-          "label" : "Select snippet",
-          "placeholder" : "Please select...",
-          "submit" : "View selected snippet"
-        },
-        "content_label" : "Content",
-        "label" : "Delete snippet",
-        "name" : {
-          "label" : "Name",
-          "placeholder" : "Name of the snippet"
-        },
-        "submit" : "Delete snippet",
-        "success" : "The snippet has been deleted."
-      },
       "edit" : {
         "choose" : {
           "label" : "Select snippet",

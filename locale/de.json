@@ -12,9 +12,6 @@
   },
   "admin" : {
     "article" : {
-      "delete" : {
-        "label" : "Artikel löschen"
-      },
       "edit" : {
         "category" : {
           "label" : "Kategorie",
@@ -223,7 +220,6 @@
     "label" : "Seitenverwaltung",
     "navigation" : {
       "article" : {
-        "delete" : "Artikel löschen",
         "edit" : "Artikel bearbeiten",
         "label" : "Artikel",
         "new" : "Artikel erstellen",
@@ -249,7 +245,6 @@
         "statistics" : "Statistiken ansehen"
       },
       "snippet" : {
-        "delete" : "Snippet löschen",
         "edit" : "Snippet bearbeiten",
         "label" : "Snippets",
         "new" : "Snippet erstellen",
@@ -265,21 +260,6 @@
     "no_access" : "Du hast hier keine Zugriffsrechte.",
     "not_logged_in" : "Du bist nicht eingeloggt.",
     "snippet" : {
-      "delete" : {
-        "choose" : {
-          "label" : "Snippet wählen",
-          "placeholder" : "Bitte wählen...",
-          "submit" : "Gewähltes Snippet ansehen"
-        },
-        "content_label" : "Inhalt",
-        "label" : "Snippet löschen",
-        "name" : {
-          "label" : "Name",
-          "placeholder" : "Name des Snippets"
-        },
-        "submit" : "Snippet löschen",
-        "success" : "Das Snippet wurde gelöscht."
-      },
       "edit" : {
         "choose" : {
           "label" : "Snippet wählen",

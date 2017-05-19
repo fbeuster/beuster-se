@@ -7,7 +7,6 @@
       <li><a href="/newsoverview"><?php I18n::e('admin.navigation.article.overview'); ?></a></li>
       <li><a href="/newsnew"><?php I18n::e('admin.navigation.article.new'); ?></a></li>
       <li><a href="/newsedit"><?php I18n::e('admin.navigation.article.edit'); ?></a></li>
-      <li><a href="/newsdel"><?php I18n::e('admin.navigation.article.delete'); ?></a></li>
     </ul>
 
     <h2><?php I18n::e('admin.navigation.static_page.label'); ?></h2>
@@ -38,7 +37,6 @@
       <li><a href="/snippetoverview"><?php I18n::e('admin.navigation.snippet.overview'); ?></a></li>
       <li><a href="/snippetnew"><?php I18n::e('admin.navigation.snippet.new'); ?></a></li>
       <li><a href="/snippetedit"><?php I18n::e('admin.navigation.snippet.edit'); ?></a></li>
-      <li><a href="/snippetdelete"><?php I18n::e('admin.navigation.snippet.delete'); ?></a></li>
     </ul>
 
     <h2><?php I18n::e('admin.navigation.misc.label'); ?></h2>
