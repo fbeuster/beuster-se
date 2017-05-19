@@ -632,6 +632,7 @@
       },
       "submit" : "Anmelden"
     },
+    "incomplete_form" : "Bitte fülle das Formular aus.",
     "invalid_password" : "Das eingegebene Password ist ungültig.",
     "invalid_user" : "Es wurde kein Benutzer mit den angegebenen Namen gefunden.",
     "label" : "Anmeldung",

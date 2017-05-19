@@ -3,7 +3,7 @@
   $user = User::newFromCookie();
 
   if ($user && $user->isAdmin()) {
-    refreshCookies();
+    $user->refreshCookies();
 
     $a['filename']  = 'snippetedit.php';
     $a['data']      = array();

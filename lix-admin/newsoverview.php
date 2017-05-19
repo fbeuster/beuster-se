@@ -5,7 +5,7 @@
   if ($user && $user->isAdmin()) {
     $db = Database::getDB();
 
-    refreshCookies();
+    $user->refreshCookies();
 
     $a['filename']  = 'newsoverview.php';
     $a['data']      = array();

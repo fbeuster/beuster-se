@@ -3,7 +3,7 @@
   $user = User::newFromCookie();
 
   if ($user && $user->isAdmin()) {
-    refreshCookies();
+    $user->refreshCookies();
     $a['filename'] = 'admin.php';
     $a['data'] = array();
     $a['title'] = I18n::t('admin.label');

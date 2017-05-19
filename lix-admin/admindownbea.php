@@ -4,7 +4,7 @@ $user = User::newFromCookie();
 $db = Database::getDB()->getCon();
 
 if ($user && $user->isAdmin()) {
-  refreshCookies();
+  $user->refreshCookies();
   $a['filename'] = 'admindownbea.php';
   $a['data'] = array();
 

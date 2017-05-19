@@ -2,7 +2,7 @@
 $a = array();
 $user = User::newFromCookie();
 if ($user && $user->isAdmin()) {
-  refreshCookies();
+  $user->refreshCookies();
   $a['filename'] = 'admincmtenable.php';
   $a['data'] = array();
 

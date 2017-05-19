@@ -102,7 +102,7 @@ class ArticlePage extends RequestPage {
     $cookie_user  = User::newFromCookie();
 
     if ($cookie_user && $cookie_user->isAdmin()) {
-      refreshCookies();
+      $cookie_user->refreshCookies();
       $enable   = 2;
       $usermail = strtolower(ADMIN_GRAV_MAIL);
       $website  = ADMIN_WEBPAGE;

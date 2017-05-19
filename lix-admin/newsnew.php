@@ -4,7 +4,7 @@
   $user = User::newFromCookie();
 
   if ($user && $user->isAdmin()) {
-    refreshCookies();
+    $user->refreshCookies();
 
     $a['filename']  = 'article_editor.php';
     $a['data']      = array();

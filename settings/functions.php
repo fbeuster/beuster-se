@@ -84,17 +84,6 @@
       );
     }
 
-    function refreshCookies($pass = ''){
-        $UserID = $_COOKIE['UserID'];
-        if($pass == '') {
-            $Hash = $_COOKIE['Password'];
-        } else {
-            $Hash = $pass;
-        }
-        setcookie('UserID', $UserID, strtotime("+1 day"), '/');
-        setcookie('Password', $Hash, strtotime("+1 day"), '/');
-    }
-
     function shortenTitle($title, $l = 20) {
         if(strlen($title) > $l) {
             $title = substr($title, 0, $l - 1).'...';

@@ -3,7 +3,7 @@
   $user = User::newFromCookie();
 
   if ($user && $user->isAdmin()) {
-    refreshCookies();
+    $user->refreshCookies();
 
     $a['data']      = array();
     $a['filename']  = 'statistics.php';

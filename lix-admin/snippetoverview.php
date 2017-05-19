@@ -4,7 +4,7 @@
 
   if ($user && $user->isAdmin()) {
     $db = Database::getDB()->getCon();
-    refreshCookies();
+    $user->refreshCookies();
 
     $a['filename']  = 'snippetoverview.php';
     $a['data']      = array();

@@ -631,6 +631,7 @@
       },
       "submit" : "Sign in"
     },
+    "incomplete_form" : "Please fill out the login form.",
     "invalid_password" : "The entered password is invalid.",
     "invalid_user" : "The entered username could not be found.",
     "label" : "Login",

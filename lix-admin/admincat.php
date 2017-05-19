@@ -2,7 +2,7 @@
     $a = array();
     $user = User::newFromCookie();
     if ($user && $user->isAdmin()) {
-        refreshCookies();
+        $user->refreshCookies();
         $a['filename'] = 'admincat.php';
         $a['data'] = array();
 

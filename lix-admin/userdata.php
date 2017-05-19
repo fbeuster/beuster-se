@@ -2,7 +2,7 @@
   $a = array();
   $user = User::newFromCookie();
   if ($user) {
-    refreshCookies();
+    $user->refreshCookies();
     $db = Database::getDB()->getCon();
     $a['filename'] = 'userdata.php';
     $a['data'] = array();
@@ -108,7 +108,7 @@
             return $stmt->error;
           }
           $stmt->close();
-          refreshCookies($Hash);
+          $user->refreshCookies($Hash);
         }
       }
       if($err == '') {

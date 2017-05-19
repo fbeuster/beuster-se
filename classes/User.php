@@ -127,14 +127,14 @@ class User {
 	}
 
 	public static function newFromCookie() {
-    if (!isset($_COOKIE['UserID'], $_COOKIE['Password']))
+    if (!isset($_COOKIE['user_id'], $_COOKIE['password']))
       return null;
 
     $u = new self(self::BY_ID);
-    $u->setID($_COOKIE['UserID']);
+    $u->setID($_COOKIE['user_id']);
     $u->loadUser();
 
-    if(!$u->checkPassword($_COOKIE['Password']))
+    if(!$u->checkPassword($_COOKIE['password']))
       return null;
 
     return $u;
@@ -236,6 +236,23 @@ class User {
 	public function isLoaded() {
 		return $this->loaded;
 	}
+
+	/**
+	 * Refresh existing cookies.
+	 *
+	 * @param String $pass set a new password (optional)
+	 */
+  public function refreshCookies($pass = ''){
+    if ($pass == '') {
+      $password_hash = $_COOKIE['password'];
+
+    } else {
+      $password_hash = $pass;
+    }
+
+    setcookie('user_id', $this->id, strtotime("+1 day"), '/');
+    setcookie('password', $password_hash, strtotime("+1 day"), '/');
+  }
 
 	/*** GET / SET ***/
 

@@ -14,6 +14,5 @@
  define('DATE_STYLE', '%d.%m.%Y');
  define('INVALID_FORM', 'Benutzen Sie nur Formulare von dieser Homepage.');
  define('EMPTY_FORM', 'Bitte füllen Sie das Formular vollständig aus.');
- define('NOT_LOGGED_IN', 'Sie müssen eingeloggt sein um diese Funktion nutzen zu können.');
 
 ?>
