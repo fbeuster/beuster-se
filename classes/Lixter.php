@@ -291,8 +291,6 @@ class Lixter {
       include('system/views/debug.php');
     }
 
-    include($this->theme->getFile('htmlwarning.php'));
-
     if (!empty($this->page->getInfo())) {
       echo '<div class="info '.$this->page->getInfo()[0].'">
         <div class="title">'.$this->page->getInfo()[1].'</div>

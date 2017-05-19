@@ -102,3 +102,14 @@
   <div id="beMainContainer" class="<?php echo $pageType; ?>">
     <div id="beMainContent">
   <?php } ?>
+
+  <?php if(Utilities::isOldIE()) { ?>
+    <p class="alert notice">
+      <br>
+      Sie verwenden einen veralteten oder nicht unterstützten Browser.
+      <br>
+      Um Darstellungsfehlern konsquent vozubeugen, wird der Blog ohne Stile angezeigt. Hey, so war das halt früher.
+      <br>
+      Ich empfehle Mozilla Firefox oder Google Chrome.
+    </p>
+  <?php } ?>
