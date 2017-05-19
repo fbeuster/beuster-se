@@ -191,7 +191,7 @@
     }
     $ret .= ' placeholder="'.I18n::t('general_form.website.placeholder').'"></label>'."\r";
 
-    $ret .= '  <label class="required"><span>'.I18n::t('comment.form.message.label').'</span>';
+    $ret .= '  <label class="required"><span class="textarea">'.I18n::t('comment.form.message.label').'</span>';
     $ret .= '  <textarea name="usrcnt" id="usrcnt" required="required"';
     $ret .= ' placeholder="'.I18n::t('comment.form.message.placeholder').'">';
     if($err['t'] != 0 && $err['c'] != '') {

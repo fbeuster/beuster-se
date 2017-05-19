@@ -148,7 +148,13 @@
       }
 
       $label_html = '<label class="'.$label_class.'">';
-      $label_html .= '<span>'.I18n::t('general_form.'.$element['label'].'.label').'</span>';
+      $label_html .= '<span';
+
+      if ($element['element'] == self::ELEMENT_TEXTAREA) {
+        $label_html .= ' class="textarea"';
+      }
+
+      $label_html .= '>'.I18n::t('general_form.'.$element['label'].'.label').'</span>';
       return $label_html;
     }
 

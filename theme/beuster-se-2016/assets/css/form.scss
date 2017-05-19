@@ -96,8 +96,14 @@ form.userform {
 
       textarea {
         @include default_font;
+        display: inline-block;
         min-height: 5em;
         resize: vertical;
+        vertical-align: top;
+      }
+
+      span.textarea {
+        padding-top: 0.25em;
       }
 
       &.required span:after {
