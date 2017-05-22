@@ -604,7 +604,7 @@
     }
 
     $fields   = array('ID', 'Titel',
-                      "DATE_FORMAT(Datum, '".DATE_STYLE."') AS date_formatted");
+                      "DATE_FORMAT(Datum, '%d.%m.%Y') AS date_formatted");
     $options  = 'ORDER BY Datum DESC';
     $res      = $dbo->select('news', $fields, null, $options);
     $articles = array();

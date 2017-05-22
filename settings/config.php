@@ -11,7 +11,6 @@
 
  // Konstanten
 
- define('DATE_STYLE', '%d.%m.%Y');
  define('INVALID_FORM', 'Benutzen Sie nur Formulare von dieser Homepage.');
  define('EMPTY_FORM', 'Bitte füllen Sie das Formular vollständig aus.');
 
