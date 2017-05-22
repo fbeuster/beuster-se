@@ -354,7 +354,7 @@
             if ($is_new_playlist) {
               $fields = array('ytID', 'CatID');
               $values = array('si', array( $playlist_new_id, $categoryID));
-              $res    = $dbo->insert('playlist');
+              $res    = $dbo->insert('playlist', $fields, $values);
             }
 
           } else {
@@ -576,6 +576,10 @@
             'tags'          => getNewsTags($id, true),
             'category'      => $cat->getName(),
             'is_playlist'   => $cat->isPlaylist());
+
+          if ($cat->isPlaylist()) {
+            $selected_article['playlist'] = $cat->getName();
+          }
 
           $a['data']['values'] = $selected_article;
         }
