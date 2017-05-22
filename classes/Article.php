@@ -444,7 +444,7 @@ class Article {
     $category = $this->getCategory();
 
     if ($category->isPlaylist()) {
-      $playlistID = $category->getPlaylistId(getNewsCat($this->id));
+      $playlistID = $category->getPlaylistId();
       $video_id   = getYouTubeIDFromArticle($this->id);
       $path       = 'images/tmp/'.$playlistID.'-'.$video_id.'.jpg';
 
