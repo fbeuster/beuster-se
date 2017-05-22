@@ -1,44 +1,5 @@
 <?php
 
-    function getNewsTags($newsId, $returnString) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    tag
-                FROM
-                    tags
-                WHERE
-                    news_id = ?
-                ORDER BY
-                    ID ASC";
-        $stmt = $db->prepare($sql);
-        if($stmt === false) {
-            if($returnString) {
-                return '';
-            } else {
-                return array();
-            }
-        }
-        $stmt->bind_param('i', $newsId);
-        if(!$stmt->execute()) {
-            if($returnString) {
-                return '';
-            } else {
-                return array();
-            }
-        }
-        $tags = array();
-        $stmt->bind_result($tag);
-        while($stmt->fetch()) {
-            $tags[] = $tag;
-        }
-        $stmt->close();
-        if($returnString) {
-            return implode(',', $tags);
-        } else {
-            return $tags;
-        }
-    }
-
     function getNewsCat($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -71,33 +32,6 @@
         if(!$result->fetch()) {return 'Es wurde keine News zu dieser ID gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
         $result->close();
         return $a;
-    }
-
-    function getArticleAttribute($article, $attribute) {
-        $db = Database::getDB()->getCon();
-        switch ($attribute) {
-            case 'enable':
-                $sql = "SELECT
-                            enable
-                        FROM
-                            news
-                        WHERE
-                            ID = ?";
-                if(!$result = $db->prepare($sql))
-                    return -1;
-                $result->bind_param('i', $article);
-                if(!$result->execute())
-                    return -1;
-                $result->bind_result($attributeValue);
-                if(!($result->fetch())) {
-                    $result->close();
-                    return -1;
-                }
-                $result->close();
-                return $attributeValue;
-            default:
-                return -1;
-        }
     }
 
     function getRandomArticle() {

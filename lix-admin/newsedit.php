@@ -553,33 +553,29 @@
 
       } else {
         # get article for edit
-        $fields = array(  'news.Titel', 'news.Inhalt',
-                          'news.enable', 'newscat.ID',
-                          "DATE_FORMAT(news.Datum, '%Y-%m-%d') AS release_date",
-                          "DATE_FORMAT(news.Datum, '%H:%i') AS release_time" );
-        $join   = 'LEFT JOIN newscatcross ON news.ID = newscatcross.NewsID
-                  LEFT JOIN newscat ON newscat.ID = newscatcross.Cat';
-        $cond   = array('news.ID = ?', 'i', array($id));
-        $res    = $dbo->select('news', $fields, $cond, null, null, $join);
+        $fields = array('Cat');
+        $cond   = array('NewsID = ?', 'i', array($id));
+        $res    = $dbo->select('newscatcross', $fields, $cond);
 
         if (count($res) == 0) {
           return showInfo(I18n::t('admin.article.edit.not_found'), 'newsedit');
 
         } else {
-          $cat = new Category($res[0]['ID']);
+          $article  = new Article($id);
+          $cat      = new Category($res[0]['Cat']);
 
           $selected_article = array(
             'article_id'    => $id,
-            'content'       => Parser::parse( $res[0]['Inhalt'],
-                                              Parser::TYPE_EDIT),
-            'release_date'  => $res[0]['release_date'],
-            'release_time'  => $res[0]['release_time'],
-            'title'         => Parser::parse( $res[0]['Titel'],
-                                              Parser::TYPE_EDIT),
-            'unlisted'      => $res[0]['enable'] ? false : true,
-            'tags'          => getNewsTags($id, true),
             'category'      => $cat->getName(),
-            'is_playlist'   => $cat->isPlaylist());
+            'content'       => Parser::parse( $article->getContent(),
+                                              Parser::TYPE_EDIT),
+            'is_playlist'   => $cat->isPlaylist(),
+            'release_date'  => $article->getDateFormatted('Y-m-d'),
+            'release_time'  => $article->getDateFormatted('H:i'),
+            'tags'          => implode($article->getTags(), ','),
+            'title'         => Parser::parse( $article->getTitle(),
+                                              Parser::TYPE_EDIT),
+            'unlisted'      => $article->getEnable() ? false : true);
 
           if ($cat->isPlaylist()) {
             $selected_article['playlist'] = $cat->getName();

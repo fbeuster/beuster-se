@@ -342,7 +342,7 @@ class Article {
   private function loadArticle() {
 
     # article itself
-    $fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status');
+    $fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status', 'enable');
     $conds  = array('ID = ?', 'i', array($this->id));
 
     $db   = Database::getDB();
@@ -356,6 +356,7 @@ class Article {
     $this->author     = User::newFromId($res[0]['Autor']);
     $this->content    = $res[0]['Inhalt'];
     $this->date       = $res[0]['Date'];
+    $this->enable     = $res[0]['enable'];
     $this->projState  = $res[0]['Status'];
 
     # category
