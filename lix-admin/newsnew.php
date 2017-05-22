@@ -210,25 +210,29 @@
         $project_status = 0;
       }
 
-      if (!preg_match('/^[0-9]*$/', $thumbnail)) {
-        # thumbnail number invalid
-        $errors['thumbnail'] = array(
-          'message' => I18n::t('admin.article.new.error.invalid_thumbnail_number'),
-          'value'   => $thumbnail);
+      if (!$has_uploads || $playlist != 'error' || $playlist_new != '') {
+        $thumbnail = 0;
 
-      } else if ($has_uploads && $thumbnail > count($_FILES['file']['name'])) {
-        # thumbnail number too big
-        $errors['thumbnail'] = array(
-          'message' => I18n::t('admin.article.new.error.thumbnail_too_big'),
-          'value'   => $thumbnail);
+      } else {
+        if (!preg_match('/^[0-9]*$/', $thumbnail)) {
+          # thumbnail number invalid
+          $errors['thumbnail'] = array(
+            'message' => I18n::t('admin.article.new.error.invalid_thumbnail_number'),
+            'value'   => $thumbnail);
 
-      } else if ($has_uploads && $thumbnail < 1) {
-        # thumbnail number too small
-        $errors['thumbnail'] = array(
-          'message' => I18n::t('admin.article.new.error.thumbnail_too_small'),
-          'value'   => $thumbnail);
+        } else if ($thumbnail > count($_FILES['file']['name'])) {
+          # thumbnail number too big
+          $errors['thumbnail'] = array(
+            'message' => I18n::t('admin.article.new.error.thumbnail_too_big'),
+            'value'   => $thumbnail);
+
+        } else if ($thumbnail < 1) {
+          # thumbnail number too small
+          $errors['thumbnail'] = array(
+            'message' => I18n::t('admin.article.new.error.thumbnail_too_small'),
+            'value'   => $thumbnail);
+        }
       }
-
 
       if (empty($errors)) {
         $release_date = $release_date . ' ' . $release_time;
