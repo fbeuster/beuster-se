@@ -29,8 +29,16 @@
       return preg_match($this->pattern, $this->content);
     }
 
-    public function replaceDecoration($replace) {
-      $this->content = preg_replace($this->pattern, $replace, $this->content);
+    public function replaceDecoration($replace, $value = null) {
+      if ($value == null) {
+        $pattern = $this->pattern;
+
+      } else {
+        $value_pattern  = substr($this->value_pattern, 1, strlen($this->value_pattern) - 2);
+        $pattern        = str_replace($value_pattern, $value, $this->pattern);
+      }
+
+      $this->content = preg_replace($pattern, $replace, $this->content);
     }
   }
 

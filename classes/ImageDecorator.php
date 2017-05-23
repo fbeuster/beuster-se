@@ -10,7 +10,7 @@
       while($this->hasDecoration()) {
         $id = $this->getDecorationValue();
 
-        $this->replaceDecoration($this->getImage($id));
+        $this->replaceDecoration($this->getImage($id), $id);
       }
     }
 
