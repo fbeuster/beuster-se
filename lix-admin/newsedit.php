@@ -235,7 +235,8 @@
             'value'   => $thumbnail);
 
         } else if ( $thumbnail < 1 &&
-                    ($playlist == 'error' && $playlist_new == '')) {
+                    ($playlist == 'error' && $playlist_new == '') &&
+                    !isset($_POST['thumbnail_old'])) {
           # thumbnail number too small
           # only matters for non-playlist articles
           $errors['thumbnail'] = array(
