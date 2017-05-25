@@ -17,9 +17,9 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['last'])) {
+        if(count($this->last)) {
           $i = 0;
-          foreach($data['last'] as $entry) { ?>
+          foreach($this->last as $entry) { ?>
         <tr>
           <td><?php echo ($i+1); ?></td>
           <td><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
@@ -47,9 +47,9 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['top'])) {
+        if(count($this->top)) {
           $i = 0;
-          foreach($data['top'] as $entry) { ?>
+          foreach($this->top as $entry) { ?>
         <tr>
           <td><?php echo ($i+1); ?></td>
           <td><a href="<?php echo $entry['link']; ?>"><?php echo $entry['title']; ?></a></td>
@@ -74,9 +74,9 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['down'])){
+        if(count($this->down)){
           $i = 0;
-          foreach($data['down'] as $down){ ?>
+          foreach($this->down as $down){ ?>
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?>>
           <td><?php echo $down['down']; ?></td>
           <td><?php echo $down['name']; ?></td>

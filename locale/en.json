@@ -211,6 +211,90 @@
       }
     },
     "back_link" : "< Back to page administration",
+    "category" : {
+      "label" : "Category management",
+      "new" : {
+        "error" : {
+          "already_exists" : "This category already exists.",
+          "empty_name" : "The category name cannot be empty.",
+          "empty_parent" : "The category parent cannot be empty.",
+          "parent_not_set" : "No category parent is choosen.",
+          "save_error" : "The new category could not be created."
+        },
+        "label" : "Create new category",
+        "new_category" : {
+          "label" : "Name",
+          "placeholder" : "New category name"
+        },
+        "new_category_parent" : {
+          "label" : "New category's parent"
+        },
+        "submit" : "Create category"
+      },
+      "new_parent" : {
+        "error" : {
+          "already_exists" : "This category already exists.",
+          "empty_name" : "The category name cannot be empty.",
+          "save_error" : "The new category could not be created."
+        },
+        "label" : "Create new parent cateogry",
+        "new_parent" : {
+          "label" : "Name",
+          "placeholder" : "New parent category name"
+        },
+        "submit" : "Create parent category"
+      },
+      "parent_category" : {
+        "delete" : {
+          "title" : "Check to mark category for deletion."
+        },
+        "error" : {
+          "missing_target" : "Target category is missing.",
+          "target_deleted" : "The target category is selected for deletion."
+        },
+        "label" : "Manage parent cateogries",
+        "submit" : "Save parent category changes",
+        "table_header" : {
+          "delete" : "Delete",
+          "name" : "Name",
+          "target" : "Target after deletion"
+        },
+        "target" : {
+          "label" : "Select target category",
+          "title" : "Subcategories of the deleted category will be moved here"
+        }
+      },
+      "sub_category" : {
+        "delete" : {
+          "title" : "Check to mark category for deletion."
+        },
+        "error" : {
+          "missing_target" : "Target category is missing.",
+          "parent_and_delete" : "The category is assigned to a new parent and marked for deletion.",
+          "target_deleted" : "The target category is selected for deletion."
+        },
+        "label" : "Mange sub categories",
+        "new_parent" : {
+          "label" : "Select parent cateogry"
+        },
+        "submit" : "Save sub category changes",
+        "table_header" : {
+          "delete" : "Delete",
+          "name" : "Name",
+          "parent" : "Parent category",
+          "parent_new" : "New parent category",
+          "target" : "Target after deletion"
+        },
+        "target" : {
+          "label" : "Select target category",
+          "title" : "Articles frome the deleted category will be moved here"
+        }
+      },
+      "success" : "All category changes have been saved."
+    },
+    "comment" : {
+      "label" : ""
+    },
     "footer" : {
       "cms" : "Lixter CMS by Felix Beuster",
       "copy" : "&copy; Copyright 2010 - 2017",
@@ -232,16 +316,11 @@
         "enable" : "Enable comments",
         "label" : "Comments"
       },
-      "download" : {
-        "delete" : "Delete download",
-        "label" : "Downloads",
-        "new" : "New download"
-      },
       "misc" : {
         "label" : "Miscellanious",
         "logout" : "Logout",
-        "settings" : "Settings",
-        "statistics" : "View statistics"
+        "statistics" : "View statistics",
+        "user_settings" : "User settings"
       },
       "snippet" : {
         "edit" : "Edit snippet",
@@ -639,6 +718,7 @@
     "try_again" : "Try again."
   },
   "logout" : {
+    "label" : "Logout",
     "success" : "You're logged out now."
   },
   "page" : {
@@ -785,6 +865,55 @@
       },
       "last" : {
         "title" : "Newest articles"
+      }
+    }
+  },
+  "user" : {
+    "settings" : {
+      "all" : {
+        "submit" : "Change all",
+        "success" : "All settings have been changed."
+      },
+      "email" : {
+        "error" : {
+          "empty_new" : "New email address cannot be empty.",
+          "empty_old" : "Old email address cannot be empty.",
+          "invalid_new" : "New email address is invalid.",
+          "invalid_old" : "Old email address is invalid"
+        },
+        "new" : {
+          "label" : "New email",
+          "placeholder" : "Your new email address"
+        },
+        "old" : {
+          "label" : "Old email"
+        },
+        "submit" : "Change email address",
+        "success" : "The email address has been changed."
+      },
+      "label" : "Change user settings",
+      "password" : {
+        "error" : {
+          "empty_new" : "The new password cannot be empty.",
+          "empty_old" : "The old password cannot be empty.",
+          "empty_repeat" : "You have to repeat your new password.",
+          "invalid_old" : "The old password is incorrect.",
+          "unequal_password" : "The repetition doesn't match the new password."
+        },
+        "new" : {
+          "label" : "New password",
+          "placeholder" : "Your new password"
+        },
+        "old" : {
+          "label" : "Old password",
+          "placeholder" : "Your old password"
+        },
+        "repeat" : {
+          "label" : "New password (repeat)",
+          "placeholder" : "Your old password (repeat)"
+        },
+        "submit" : "Change password",
+        "success" : "The password has been changed."
       }
     }
   }

@@ -3,11 +3,13 @@
 class ErrorPage extends Page {
   private $file_name = 'static.php';
   private $message;
+  private $refresh = '';
   private $type = Page::STATIC_PAGE;
   private $title;
 
-  public function __construct($message) {
+  public function __construct($message, $refresh = '') {
     $this->message  = $message;
+    $this->refresh  = $refresh;
     $this->title    = I18n::t('page.error.title');
   }
 
@@ -25,6 +27,10 @@ class ErrorPage extends Page {
 
   public function getFileName() {
     return $this->file_name;
+  }
+
+  public function getRefreshName() {
+    return $this->refresh;
   }
 
   public function getType() {

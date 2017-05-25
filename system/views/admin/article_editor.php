@@ -1,18 +1,12 @@
-<?php
-  $page         = Lixter::getLix()->getPage();
-  $action       = $page->getContent()['action'];
-  $form_action  = $page->getContent()['form_action'];
-  $submit       = $page->getContent()['submit'];
-?>
 
 <article>
   <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
-    <?php if(isset($data['errors'])){ ?>
+    <?php if(count($this->errors)){ ?>
       <div class="error">
         <div class="title">Error</div>
         <ul class="messages">
-        <?php foreach ($data['errors'] as $name => $error) { ?>
+        <?php foreach ($this->errors as $name => $error) { ?>
 
           <?php if (!isset($error['message'])) { ?>
             <?php foreach ($error as $single) { ?>
@@ -28,13 +22,13 @@
       </div>
     <?php } ?>
 
-    <form action="/<?php echo $form_action; ?>" method="post" enctype="multipart/form-data" class="userform articleform">
+    <form action="/<?php echo $this->form_action; ?>" method="post" enctype="multipart/form-data" class="userform articleform">
       <fieldset>
-        <legend><?php I18n::e('admin.article.'.$action.'.label'); ?></legend>
+        <legend><?php I18n::e('admin.article.'.$this->action.'.label'); ?></legend>
 
-        <?php if ($action == 'edit') { ?>
+        <?php if ($this->action == 'edit') { ?>
 
-          <label class="required long <?php if(isset($data['errors']['article'])) { echo ' has_error'; } ?>">
+          <label class="required long <?php if(isset($this->errors['article'])) { echo ' has_error'; } ?>">
             <span>
               <?php I18n::e('admin.article.edit.choose.label'); ?>
             </span>
@@ -42,7 +36,7 @@
               <option value="0">
                 <?php I18n::e('admin.article.edit.choose.placeholder'); ?>
               </option>
-              <?php foreach($data['articles'] as $article) { ?>
+              <?php foreach($this->articles as $article) { ?>
                 <option value="<?php echo $article['id']; ?>">
                 <?php echo $article['date']; ?> |
                 <?php echo $article['title']; ?>
@@ -55,48 +49,48 @@
 
         <?php } ?>
 
-        <label class="required long <?php if(isset($data['errors']['title'])) { echo ' has_error'; } ?>">
-          <span><?php I18n::e('admin.article.'.$action.'.title.label'); ?></span>
-          <input type="text" name="title" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.'.$action.'.title.placeholder'); ?>" value="<?php if (isset($data['values'], $data['values']['title'])) { echo $data['values']['title']; } ?>">
+        <label class="required long <?php if(isset($this->errors['title'])) { echo ' has_error'; } ?>">
+          <span><?php I18n::e('admin.article.'.$this->action.'.title.label'); ?></span>
+          <input type="text" name="title" role="newEntryTitle" placeholder="<?php I18n::e('admin.article.'.$this->action.'.title.placeholder'); ?>" value="<?php if (isset($this->values, $this->values['title'])) { echo $this->values['title']; } ?>">
         </label>
 
-        <?php if ($action == 'edit') { ?>
+        <?php if ($this->action == 'edit') { ?>
 
-          <input type="hidden" name="article_id" size="5" value="<?php if (isset($data['values']['article_id'])) { echo $data['values']['article_id']; } ?>">
+          <input type="hidden" name="article_id" size="5" value="<?php if (isset($this->values['article_id'])) { echo $this->values['article_id']; } ?>">
 
         <?php } ?>
 
         <label>
           <span>
-            <?php I18n::e('admin.article.'.$action.'.manual_release_label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.manual_release_label'); ?>
           </span>
-          <input type="checkbox" name="unlisted" <?php echo isset($data['values']) && $data['values']['unlisted'] ? ' checked="checked"' : ''; ?>>
+          <input type="checkbox" name="unlisted" <?php echo isset($this->values, $this->values['unlisted']) && $this->values['unlisted'] ? ' checked="checked"' : ''; ?>>
         </label>
 
-        <label class="<?php if(isset($data['errors']['release_date'])) { echo ' has_error'; } ?>">
+        <label class="<?php if(isset($this->errors['release_date'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.release_date.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.release_date.label'); ?>
           </span>
-          <input type="date" name="release_date" value="<?php if(isset($data['values']['release_date'])) echo $data['values']['release_date']; ?>" placeholder="<?php I18n::e('admin.article.'.$action.'.release_date.placeholder'); ?>">
+          <input type="date" name="release_date" value="<?php if(isset($this->values['release_date'])) echo $this->values['release_date']; ?>" placeholder="<?php I18n::e('admin.article.'.$this->action.'.release_date.placeholder'); ?>">
         </label>
 
-        <label class="<?php if(isset($data['errors']['release_time'])) { echo ' has_error'; } ?>">
+        <label class="<?php if(isset($this->errors['release_time'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.release_time.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.release_time.label'); ?>
           </span>
-          <input type="time" name="release_time" value="<?php if(isset($data['values']['release_time'])) echo $data['values']['release_time']; ?>" placeholder="<?php I18n::e('admin.article.'.$action.'.release_time.placeholder'); ?>">
+          <input type="time" name="release_time" value="<?php if(isset($this->values['release_time'])) echo $this->values['release_time']; ?>" placeholder="<?php I18n::e('admin.article.'.$this->action.'.release_time.placeholder'); ?>">
         </label>
 
-        <label class="required <?php if(isset($data['errors']['category'])) { echo ' has_error'; } ?>">
+        <label class="required <?php if(isset($this->errors['category'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.category.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.category.label'); ?>
           </span>
           <select name="category" class="catSelect">
             <option value="error">
-              <?php I18n::e('admin.article.'.$action.'.category.placeholder'); ?>
+              <?php I18n::e('admin.article.'.$this->action.'.category.placeholder'); ?>
             </option>
-            <?php foreach($data['categories'] as $category) {
-                    if(isset($data['values']['category']) && $data['values']['category'] == $category) {
+            <?php foreach($this->categories as $category) {
+                    if(isset($this->values['category']) && $this->values['category'] == $category) {
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
@@ -106,16 +100,16 @@
           </select>
         </label>
 
-        <label class="<?php if(isset($data['errors']['category_new']) || isset($data['errors']['category_parent'])) { echo ' has_error'; } ?>">
+        <label class="<?php if(isset($this->errors['category_new']) || isset($this->errors['category_parent'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.new_category.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.new_category.label'); ?>
           </span>
           <select name="category_parent">
             <option value="error">
               <?php I18n::e('admin.article.edit.new_category.placeholder_select'); ?>
             </option>
-            <?php foreach($data['parents'] as $parent) {
-                    if(isset($data['values']['category_parent']) && $data['values']['category_parent'] == $parent) {
+            <?php foreach($this->parents as $parent) {
+                    if(isset($this->values['category_parent']) && $this->values['category_parent'] == $parent) {
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
@@ -123,19 +117,19 @@
             <option <?php echo 'value="'.$parent.'"'.$selected; ?>><?php echo getCatName($parent); ?></option>
             <?php } ?>
           </select>
-          <input type="text" name="category_new" placeholder="<?php I18n::e('admin.article.'.$action.'.new_category.placeholder_input'); ?>" title="<?php I18n::e('admin.article.'.$action.'.new_category.placeholder_input'); ?>" value="<?php if(isset($data['values']['category_new'])) echo $data['values']['category_new']; ?>">
+          <input type="text" name="category_new" placeholder="<?php I18n::e('admin.article.'.$this->action.'.new_category.placeholder_input'); ?>" title="<?php I18n::e('admin.article.'.$this->action.'.new_category.placeholder_input'); ?>" value="<?php if(isset($this->values['category_new'])) echo $this->values['category_new']; ?>">
         </label>
 
-        <label class="<?php if(isset($data['errors']['playlist'])) { echo ' has_error'; } ?>">
+        <label class="<?php if(isset($this->errors['playlist'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.playlist.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.playlist.label'); ?>
           </span>
           <select name="playlist">
             <option value="error">
-              <?php I18n::e('admin.article.'.$action.'.playlist.placeholder'); ?>
+              <?php I18n::e('admin.article.'.$this->action.'.playlist.placeholder'); ?>
             </option>
-            <?php foreach($data['playlists'] as $playlist) {
-                    if(isset($data['values']['playlist']) && $data['values']['playlist'] == $playlist) {
+            <?php foreach($this->playlists as $playlist) {
+                    if(isset($this->values['playlist']) && $this->values['playlist'] == $playlist) {
                       $selected = ' selected="selected"';
                     } else {
                       $selected = '';
@@ -145,20 +139,20 @@
           </select>
         </label>
 
-        <label class="<?php if(isset($data['errors']['playlist_new']) || isset($data['errors']['laylist_new_id'])) { echo ' has_error'; } ?>">
+        <label class="<?php if(isset($this->errors['playlist_new']) || isset($this->errors['laylist_new_id'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.new_playlist.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.new_playlist.label'); ?>
           </span>
-          <input type="text" name="playlist_new" placeholder="<?php I18n::e('admin.article.'.$action.'.new_playlist.placeholder_name'); ?>" title="<?php I18n::e('admin.article.'.$action.'.new_playlist.placeholder_name'); ?>" value="<?php if(isset($data['values']['playlist_new'])) echo $data['values']['playlist_new']; ?>">
+          <input type="text" name="playlist_new" placeholder="<?php I18n::e('admin.article.'.$this->action.'.new_playlist.placeholder_name'); ?>" title="<?php I18n::e('admin.article.'.$this->action.'.new_playlist.placeholder_name'); ?>" value="<?php if(isset($this->values['playlist_new'])) echo $this->values['playlist_new']; ?>">
 
-          <input type="text" name="playlist_new_id" placeholder="<?php I18n::e('admin.article.'.$action.'.new_playlist.placeholder_id'); ?>" title="<?php I18n::e('admin.article.'.$action.'.new_playlist.placeholder_id'); ?>" value="<?php if(isset($data['values']['playlist_new_id'])) echo $data['values']['playlist_new_id']; ?>">
+          <input type="text" name="playlist_new_id" placeholder="<?php I18n::e('admin.article.'.$this->action.'.new_playlist.placeholder_id'); ?>" title="<?php I18n::e('admin.article.'.$this->action.'.new_playlist.placeholder_id'); ?>" value="<?php if(isset($this->values['playlist_new_id'])) echo $this->values['playlist_new_id']; ?>">
         </label>
 
-        <label class="required long <?php if(isset($data['errors']['tags'])) { echo ' has_error'; } ?>">
+        <label class="required long <?php if(isset($this->errors['tags'])) { echo ' has_error'; } ?>">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.tags.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.tags.label'); ?>
           </span>
-          <input type="text" name="tags" title="<?php I18n::e('admin.article.'.$action.'.tags.placeholder'); ?>" value="<?php if (isset($data['values']['tags'])) echo $data['values']['tags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.'.$action.'.tags.placeholder'); ?>">
+          <input type="text" name="tags" title="<?php I18n::e('admin.article.'.$this->action.'.tags.placeholder'); ?>" value="<?php if (isset($this->values['tags'])) echo $this->values['tags']; ?>" role="newEntryTags" placeholder="<?php I18n::e('admin.article.'.$this->action.'.tags.placeholder'); ?>">
         </label>
 
         <p class="newsNewHelp">
@@ -175,19 +169,19 @@
           </span>
         </p>
 
-        <label class="required long <?php if(isset($data['errors']['content'])) { echo ' has_error'; } ?>" for="newsinhalt">
+        <label class="required long <?php if(isset($this->errors['content'])) { echo ' has_error'; } ?>" for="newsinhalt">
           <span>
-            <?php I18n::e('admin.article.'.$action.'.content_label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.content_label'); ?>
           </span>
           <?php
-            $content  = isset($data['values']['content']) ? $data['values']['content'] : '';
+            $content  = isset($this->values['content']) ? $this->values['content'] : '';
             $editor   = new Editor('newsinhalt', 'content', $content);
             $editor->show();
           ?>
         </label>
 
-        <?php if ($action == 'edit' &&
-                  !empty($data['images'])) { ?>
+        <?php if ($this->action == 'edit' &&
+                  !empty($this->images)) { ?>
           <table>
             <thead>
               <tr>
@@ -204,7 +198,7 @@
               </tr>
             </thead>
             <tbody class="adThumb">
-            <?php  foreach($data['images'] as $image) { ?>
+            <?php  foreach($this->images as $image) { ?>
               <tr>
                 <td><img src="<?php echo makeAbsolutePath(Image::ARTICLE_IMAGE_PATH . $image['path'], '', true); ?>" name="" class="adThumb"></td>
                 <td><input type="radio" name="thumbnail_old" value="<?php echo $image['id']; ?>"<?php if($image['thumb'] == 1) { echo ' checked="checked"'; } ?>></td>
@@ -220,22 +214,22 @@
         <?php } ?>
 
         <p>
-          <?php I18n::e('admin.article.'.$action.'.pictures.info', array('5MB')); ?>
+          <?php I18n::e('admin.article.'.$this->action.'.pictures.info', array('5MB')); ?>
         </p>
-        <label<?php if (isset($data['errors']['thumbnail'])) { echo ' class="has_error"'; } ?>>
+        <label<?php if (isset($this->errors['thumbnail'])) { echo ' class="has_error"'; } ?>>
           <span>
-            <?php I18n::e('admin.article.'.$action.'.thumbnail.label'); ?>
+            <?php I18n::e('admin.article.'.$this->action.'.thumbnail.label'); ?>
           </span>
-          <input type="number" name="thumbnail" value="<?php if (isset($data['values']['thumbnail'])) echo $data['values']['thumbnail']; ?>" placeholder="<?php I18n::e('admin.article.'.$action.'.thumbnail.placeholder'); ?>">
+          <input type="number" name="thumbnail" value="<?php if (isset($this->values['thumbnail'])) echo $this->values['thumbnail']; ?>" placeholder="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.placeholder'); ?>">
         </label>
 
         <ol id="files">
           <li><input type="file" name="file[]"></li>
         </ol>
 
-        <input type="button" value="<?php I18n::e('admin.article.'.$action.'.thumbnail.remove_field'); ?>" class="delInp">
-        <input type="button" value="<?php I18n::e('admin.article.'.$action.'.thumbnail.add_field'); ?>" id="addInp"><br><br>
-        <input type="submit" name="<?php echo $submit; ?>" value="<?php I18n::e('admin.article.'.$action.'.submit'); ?>" />
+        <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.remove_field'); ?>" class="delInp">
+        <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.add_field'); ?>" id="addInp"><br><br>
+        <input type="submit" name="<?php echo $this->submit; ?>" value="<?php I18n::e('admin.article.'.$this->action.'.submit'); ?>" />
       </fieldset>
     </form>
   </section>

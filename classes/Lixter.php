@@ -161,9 +161,26 @@ class Lixter {
       if (isset($_GET['p'])) {
         # page argument found
 
-        if (AdminPage::exists($_GET['p'])) {
+        if (AbstractAdminPage::exists($_GET['p'])) {
           # page argument is admin page
-          $this->page = new AdminPage($_GET['p']);
+          $user = User::newFromCookie();
+
+          if ($user && $user->isAdmin()) {
+            $class_name = AbstractAdminPage::getClass($_GET['p']);
+            $this->page = new $class_name();
+
+          } else if ($user) {
+
+          } else {
+            if ($_GET['p'] == 'login') {
+              $this->page = new LoginPage();
+
+            } else {
+              $link       = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
+              $message    = I18n::t('admin.not_logged_in').$link;
+              $this->page = new ErrorPage($message, 'login');
+            }
+          }
 
         } else if ($_GET['p'] == 'search') {
           # page argument is search page
@@ -252,23 +269,13 @@ class Lixter {
     $currPage = getPage();
     $config   = Config::getConfig();
 
-    include('system/views/admin/functions.php');
     include('system/views/admin/htmlheader.php');
 
     if (Utilities::isDevServer() || $config->get('debug')) {
       include('system/views/debug.php');
     }
 
-    $file = 'system/views/admin/' . $this->page->getFilename();
-
-    if ($file !== false) {
-      $data = $this->page->getContent();
-      include $file;
-
-    } else {
-      $this->page = new ErrorPage( I18n::t('lixter.build.template_not_found', array($file)) );
-      include $this->theme->getFile('static.php');
-    }
+    $this->page->show();
 
     include('system/views/admin/htmlfooter.php');
   }

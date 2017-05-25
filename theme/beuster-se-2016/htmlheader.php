@@ -36,7 +36,9 @@
   <script type="text/javascript" src="/<?php echo Lixter::getLix()->getTheme()->getFile('assets/js/scriptAdm.js'); ?>"></script>
   <?php } ?>
 
-  <?php if($page->getType() == Page::CONTENT_PAGE && $page->getRefreshName() !== '') {
+  <?php if( ( $page->getType() == Page::CONTENT_PAGE ||
+              $page->getType() == Page::STATIC_PAGE) &&
+            $page->getRefreshName() !== '') {
     echo '<meta http-equiv="refresh" content="3; url=/'.$page->getRefreshName().'">';
   } ?>
  </head>

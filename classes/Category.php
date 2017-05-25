@@ -74,20 +74,19 @@ class Category {
 	 * @return int
 	 */
 	public static function isCategoryName($name) {
-
-		$name = replaceUml(self::getNameUrlStatic($name));
-
 		$return = 0;
-
-		$dbs = Database::getDB();
+		$name 	= replaceUml(self::getNameUrlStatic($name));
+		$dbs 		= Database::getDB();
 		$fields = array('ID', 'Cat');
-        $res = $dbs->select('newscat', $fields);
-        foreach ($res as $cId) {
-        	if($name == replaceUml(self::getNameUrlStatic($cId['Cat'])))
-        		$return = $cId['ID'];
-        }
+    $res 		= $dbs->select('newscat', $fields);
 
-        return $return;
+    foreach ($res as $cId) {
+    	if ($name == replaceUml(self::getNameUrlStatic($cId['Cat']))) {
+    		$return = $cId['ID'];
+    	}
+    }
+
+    return $return;
 	}
 
 	public static function newFromName($name) {
@@ -114,6 +113,28 @@ class Category {
 	}
 
 	/*** PUBLIC ***/
+
+	public function assignToParent($parent_id) {
+    $con = Database::getDB()->getCon();
+    $sql = 'UPDATE
+              newscat
+            SET
+              ParentID = ?
+            WHERE
+              ID = ?';
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+      return $con->error;
+    }
+
+    $stmt->bind_param('ii', $parent_id, $this->id);
+    if (!$stmt->execute()) {
+      return $stmt->error;
+    }
+
+    $stmt->close();
+	}
 
 	public function isLoaded() {
 		return $this->loaded;
@@ -153,6 +174,50 @@ class Category {
 		}
 
 		return '';
+	}
+
+	public function moveArticles($target_category) {
+    $con = Database::getDB()->getCon();
+    $sql = 'UPDATE
+              newscatcross
+            SET
+              Cat = ?
+            WHERE
+              Cat = ?';
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+      return $con->error;
+    }
+
+    $stmt->bind_param('ii', $target_category, $this->id);
+    if (!$stmt->execute()) {
+      return $stmt->error;
+    }
+
+    $stmt->close();
+	}
+
+	public function moveChildren($target_category) {
+    $con = Database::getDB()->getCon();
+    $sql = 'UPDATE
+              newscat
+            SET
+              ParentID = ?
+            WHERE
+              ParentID = ?';
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+      return $con->error;
+    }
+
+    $stmt->bind_param('ii', $target_category, $this->id);
+    if (!$stmt->execute()) {
+      return $stmt->error;
+    }
+
+    $stmt->close();
 	}
 
 	/*** GET / SET ***/

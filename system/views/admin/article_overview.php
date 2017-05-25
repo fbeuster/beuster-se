@@ -4,11 +4,10 @@
   <section class="article">
   	<h1><?php I18n::e('admin.article.overview.label'); ?></h1>
   	<p>
-      <?php I18n::e('admin.article.overview.summary', array(
-        $data['total_articles'],
-        $data['total_comments'],
-        $data['unlisted']
-      )); ?>
+      <?php I18n::e('admin.article.overview.summary',
+                    array($this->total_articles,
+                          $this->total_comments,
+                          $this->unlisted )); ?>
   	</p>
     <form>
       <label>
@@ -16,7 +15,7 @@
         <input type="text" name="article_filter" placeholder="<?php I18n::e('admin.article.overview.filter.placeholder'); ?>">
       </label>
     </form>
-    <?php foreach ($data['article_lists'] as $list_name => $articles) { ?>
+    <?php foreach ($this->article_lists as $list_name => $articles) { ?>
       <h2 class="entry_list_header"><?php I18n::e('admin.article.overview.subheader.'.$list_name); ?></h2>
       <?php if (count($articles)) { ?>
         <table class="entry_list articles">
@@ -45,7 +44,7 @@
             <td ><?php echo $article->getDateFormatted("d.m.Y H:i"); ?></td>
             <td class="actions">
               <div>
-                <a class="edit"  title="<?php I18n::e('admin.article.overview.edit.title'); ?>" href="/newsedit/a/<?php echo $article->getId(); ?>">
+                <a class="edit"  title="<?php I18n::e('admin.article.overview.edit.title'); ?>" href="/article-edit/a/<?php echo $article->getId(); ?>">
                   <?php I18n::e('admin.article.overview.edit.text'); ?>
                 </a>
                 <a class="delete" title="<?php I18n::e('admin.article.overview.delete.title'); ?>">

@@ -20,16 +20,16 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['pages'])) {
+        if(count($this->pages)) {
           $i = 0;
-          foreach($data['pages'] as $entry) { ?>
+          foreach($this->pages as $entry) { ?>
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-static-page="<?php echo $entry['url']; ?>">
           <td ><?php echo ($i+1); ?></td>
           <td><?php echo $entry['url']; ?></td>
           <td class="title"><?php echo $entry['title']; ?></td>
           <td class="actions">
             <div>
-              <a class="edit"  title="<?php I18n::e('admin.static_page.overview.edit.title'); ?>" href="/staticpageedit/p/<?php echo $entry['url']; ?>">
+              <a class="edit"  title="<?php I18n::e('admin.static_page.overview.edit.title'); ?>" href="/static-page-edit/p/<?php echo $entry['url']; ?>">
                 <?php I18n::e('admin.static_page.overview.edit.text'); ?>
               </a>
               <a class="delete" title="<?php I18n::e('admin.static_page.overview.delete.title'); ?>">

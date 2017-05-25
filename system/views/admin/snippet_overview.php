@@ -21,9 +21,9 @@
       </thead>
       <tbody>
       <?php
-        if(count($data['snippets'])) {
+        if(count($this->snippets)) {
           $i = 0;
-          foreach($data['snippets'] as $entry) { ?>
+          foreach($this->snippets as $entry) { ?>
         <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-snippet="<?php echo $entry['name']; ?>">
           <td ><?php echo ($i+1); ?></td>
           <td class="title" title="<?php I18n::e('admin.snippet.overview.preview.title'); ?>"><?php echo $entry['name']; ?></td>

@@ -42,6 +42,40 @@ class Comment {
 
 	/*** PUBLIC ***/
 
+	public static function delete($id) {
+		# TODO
+		# comments can be threaded, so should the delete of one
+		# trigger delete of others?
+		# maybe mark as deleted?
+		$db 	= Database::getDB();
+		$cond = array('ID = ?', 'i', array($id));
+
+		return $db->delete('kommentare', $cond);
+	}
+
+	public static function enable($id) {
+		$status = self::ENA_DEFAULT;
+    $con = Database::getDB()->getCon();
+    $sql = 'UPDATE
+              kommentare
+            SET
+              Frei = ?
+            WHERE
+              ID = ?';
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+      return $con->error;
+    }
+
+    $stmt->bind_param('ii', $status, $id);
+    if (!$stmt->execute()) {
+      return $stmt->error;
+    }
+
+    $stmt->close();
+	}
+
 	/**
 	 * Load replies.
 	 *

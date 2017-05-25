@@ -1,80 +1,5 @@
 <?php
 
-    function transformCat($table, $col, $tar, $old, $col2 = '') {
-        $db = Database::getDB()->getCon();
-        if($col2 == '') {
-            $sql = "UPDATE
-                    ".$table."
-                    SET
-                    ".$col." = ?
-                    WHERE
-                    ".$col." = ?";
-        } else {
-            $sql = "UPDATE
-                    ".$table."
-                    SET
-                    ".$col." = ?
-                    WHERE
-                    ".$col2." = ?";
-        }
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        $stmt->bind_param('ii', $tar, $old);
-        if(!$stmt->execute()) {return $stmt->error;}
-        $stmt->close();
-        return true;
-    }
-
-    function transformNews($cat, $new, $max) {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    NewsID
-                FROM
-                    newscatcross
-                WHERE
-                    Cat = ?";
-        if(!$stmt = $db->prepare($sql)) {return $db->error;}
-        $stmt->bind_param('i', $cat);
-        if(!$stmt->execute()) {return $stmt->error;}
-        $stmt->bind_result($c);
-        $r = array();
-        while($stmt->fetch()) {
-            $r[] = $c;
-        }
-        $stmt->close();
-        foreach($r as $news) {
-            $max += 1;
-            $sql = "UPDATE
-                        newscatcross
-                    SET
-                        Cat = ?
-                        CatID = ?
-                    WHERE
-                        NewsID = ?";
-            if(!$stmt = $db->prepare($sql)) {return $db->error;}
-            $stmt->bind_param('iii', $new, $max, $news);
-            if(!$stmt->execute()) {return $stmt->error;}
-            $stmt->close();
-        }
-        return true;
-    }
-
-    function getMaxCatID($catID) {
-        $db = Database::getDB()->getCon();
-        $sql = " SELECT
-                    MAX(CatID) AS n
-                FROM
-                    newscatcross
-                WHERE
-                    Cat = ?";
-        if(!$stmt = $db->prepare($sql)){return $db->error;}
-        $stmt->bind_param('i', $catID);
-        if(!$stmt->execute()) {return $result->error;}
-        $stmt->bind_result($catNewsID);
-        if(!$stmt->fetch()) {return 'Es wurde keine solche Kategorie gefunden. <br /><a href="/blog">Zurück zum Blog</a>';}
-        $stmt->close();
-        return $catNewsID;
-    }
-
     function getPlaylists() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
@@ -144,23 +69,6 @@
         $a = str_replace('--', '-', $a);
         $a = mb_strtolower($a, 'UTF-8');
         return $a;
-    }
-
-    function getCats() {
-        $db = Database::getDB()->getCon();
-        $sql = "SELECT
-                    Cat
-                FROM
-                    newscat";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($c);
-        $r = array();
-        while($result->fetch()) {
-            $r[] = $c;
-        }
-        $result->close();
-        return $r;
     }
 
     function getTopCats() {

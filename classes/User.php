@@ -240,7 +240,7 @@ class User {
 	/**
 	 * Refresh existing cookies.
 	 *
-	 * @param String $pass set a new password (optional)
+	 * @param String $pass set a new password hash (optional)
 	 */
   public function refreshCookies($pass = ''){
     if ($pass == '') {
@@ -252,6 +252,9 @@ class User {
 
     setcookie('user_id', $this->id, strtotime("+1 day"), '/');
     setcookie('password', $password_hash, strtotime("+1 day"), '/');
+
+    $_COOKIE['user_id']   = $this->id;
+    $_COOKIE['password']  = $password_hash;
   }
 
 	/*** GET / SET ***/

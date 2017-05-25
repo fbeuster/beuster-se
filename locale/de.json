@@ -212,6 +212,87 @@
       }
     },
     "back_link" : "< Zurück zur Seitenverwaltung",
+    "category" : {
+      "label" : "Kategorieverwaltung",
+      "new" : {
+        "error" : {
+          "already_exists" : "Die Kategorie existiert bereits.",
+          "empty_name" : "Der Name der Kategorie darf nicht leer sein.",
+          "empty_parent" : "Die Elternkategorie darf nicht leer sein.",
+          "parent_not_set" : "Es wurde keine Elternkategorie gewählt.",
+          "save_error" : "Die neue Kategorie konnte nicht gespeichert werden."
+        },
+        "label" : "Neue Kategorie erstellen",
+        "new_category" : {
+          "label" : "Name",
+          "placeholder" : "Name der neuen Kategorie"
+        },
+        "new_category_parent" : {
+          "label" : "Elternkategorie wählen"
+        },
+        "submit" : "Kategorie erstellen"
+      },
+      "new_parent" : {
+        "error" : {
+          "already_exists" : "Die Kategorie existiert bereits.",
+          "empty_name" : "Der Name der Kategorie darf nicht leer sein.",
+          "save_error" : "Die neue Elternkategorie konnte nicht gespeichert werden."
+        },
+        "label" : "Neue Elternkategorie erstellen",
+        "new_parent" : {
+          "label" : "Name",
+          "placeholder" : "Name der neuen Elternkategorie"
+        },
+        "submit" : "Elternkategorie erstellen"
+      },
+      "parent_category" : {
+        "delete" : {
+          "title" : "Auswählen um Kategorie zum Läschen zu markieren"
+        },
+        "error" : {
+          "missing_target" : "Zielkategorie fehlt.",
+          "target_deleted" : "Die Zielkategorie wurde zum Löschen markiert."
+        },
+        "label" : "Elternkategorien verwalten",
+        "submit" : "Änderungen an Elternkategorien speichern",
+        "table_header" : {
+          "delete" : "Löschen",
+          "name" : "Name",
+          "target" : "Zielkategorie nach Löschen"
+        },
+        "target" : {
+          "label" : "Zielkategorie auswählen",
+          "title" : "Unterkategorien der gelöschten Kategorie werden hier zugeordnet."
+        }
+      },
+      "sub_category" : {
+        "delete" : {
+          "title" : "Auswählen um Kategorie zum Läschen zu markieren"
+        },
+        "error" : {
+          "missing_target" : "Zielkategorie fehlt.",
+          "parent_and_delete" : "Die Kategorie wurde einer neuen Elternkategorie zugeordnet und zum Löschen markiert.",
+          "target_deleted" : "Die Zielkategorie wurde zum Löschen markiert."
+        },
+        "label" : "Unterkategorien verwalten",
+        "new_parent" : {
+          "label" : "Elternkategorie auswählen"
+        },
+        "submit" : "Änderungen an Unterkategorien speichern",
+        "table_header" : {
+          "delete" : "Löschen",
+          "name" : "Name",
+          "parent" : "Elternkategorie",
+          "parent_new" : "Elternkategorie (neu)",
+          "target" : "Zielkategorie nach Löschen"
+        },
+        "target" : {
+          "label" : "Zielkategorie auswählen",
+          "title" : "Artikel aus der gelöschten Kateogire werden hier zugeordnet."
+        }
+      },
+      "success" : "Alle Änderungen wurden erfolgreich gespeichert."
+    },
     "footer" : {
       "cms" : "Lixter CMS von Felix Beuster",
       "copy" : "&copy; Copyright 2010 - 2017",
@@ -233,16 +314,11 @@
         "enable" : "Kommentare freischalten",
         "label" : "Kommentare"
       },
-      "download" : {
-        "delete" : "Download löschen",
-        "label" : "Downloads",
-        "new" : "Download erstellen"
-      },
       "misc" : {
         "label" : "Sonstiges",
         "logout" : "Logout",
-        "settings" : "Einstellungen",
-        "statistics" : "Statistiken ansehen"
+        "statistics" : "Statistiken ansehen",
+        "user_settings" : "Nutzereinstellungen"
       },
       "snippet" : {
         "edit" : "Snippet bearbeiten",
@@ -254,7 +330,7 @@
         "edit" : "Statische Seite bearbeiten",
         "label" : "Statische Seiten",
         "new" : "Statische Seite erstellen",
-        "overview" : "Statische Seiten Übersicht"
+        "overview" : "Statische Seiten - Übersicht"
       }
     },
     "no_access" : "Du hast hier keine Zugriffsrechte.",
@@ -366,7 +442,7 @@
           "exists" : "Diese statische Seite existiert bereits.",
           "invalid_characters" : "Die URL der statischen Seite enthält ungültige Zeichen.",
           "long_title" : "Der Titel der statischen Seite ist zu lang.",
-          "long_url" : "Die URL der statischen Seite ist zu lang.",
+          "long_url" : "Die URL der statischen Seite ist zu lang."
         },
         "feedback_label" : "Feedback Formular",
         "label" : "Neue statische Seite erstellen",
@@ -640,6 +716,7 @@
     "try_again" : "Nochmal versuchen."
   },
   "logout" : {
+    "label" : "Logout",
     "success" : "Du bist nun ausgeloggt."
   },
   "page" : {
@@ -786,6 +863,55 @@
       },
       "last" : {
         "title" : "Neueste Artikel"
+      }
+    }
+  },
+  "user" : {
+    "settings" : {
+      "all" : {
+        "submit" : "Alles speichern",
+        "success" : "ALle Einstellungen wurden gespeichert."
+      },
+      "email" : {
+        "error" : {
+          "empty_new" : "Die neue E-Mail-Adresse darf nicht leer sein.",
+          "empty_old" : "Die alte E-Mail-Adresse darf nicht leer sein.",
+          "invalid_new" : "Die neue E-Mail-Adresse ist ungültig.",
+          "invalid_old" : "Die alte E-Mail-Adresse ist ungültig."
+        },
+        "new" : {
+          "label" : "Neue E-Mail",
+          "placeholder" : "Deine neue E-Mail-Adresse"
+        },
+        "old" : {
+          "label" : "Alte E-Mail"
+        },
+        "submit" : "E-Mail-Adresse ändern",
+        "success" : "Die E-Mail-Adresse wurde geändert."
+      },
+      "label" : "Nutzereinstellungen ändern",
+      "password" : {
+        "error" : {
+          "empty_new" : "Das neue Passwort darf nicht leer sein.",
+          "empty_old" : "Das alte Passwort darf nicht leer sein.",
+          "empty_repeat" : "Das wiederholte Passwort darf nicht leer sein.",
+          "invalid_old" : "Das alte Passwort ist falsch.",
+          "unequal_password" : "Das wiederholte Passwort stimmt nicht mit dem neuen Passwort überein."
+        },
+        "new" : {
+          "label" : "Neues Passwort",
+          "placeholder" : "Dein neues Passwort"
+        },
+        "old" : {
+          "label" : "Alter Passwort",
+          "placeholder" : "Dein altes Passwort"
+        },
+        "repeat" : {
+          "label" : "Neues Passwort (Wiederholung)",
+          "placeholder" : "Dein neues Passwort (Wiederholung)"
+        },
+        "submit" : "Passwort ändern",
+        "success" : "Das Passwort wurde geändert."
       }
     }
   }
