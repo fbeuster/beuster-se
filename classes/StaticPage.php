@@ -35,6 +35,10 @@ class StaticPage extends Page {
     return '<p>'.Parser::parse($this->content, Parser::TYPE_CONTENT).'</p>';
   }
 
+  public function getRefreshName() {
+    return '';
+  }
+
   public function getTitle() {
     return $this->title;
   }

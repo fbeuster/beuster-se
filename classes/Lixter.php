@@ -104,8 +104,6 @@ class Lixter {
    * loading Lixter config
    */
   private function loadConfig() {
-    global $file;
-
     // non-catched exceptions should be logged
     set_exception_handler(function($exception) {
       echo 'Oups, something went wrong :(';
@@ -130,7 +128,6 @@ class Lixter {
     $this->protocol = Utilities::getProtocol();
 
     // loading configuration and functions
-    include('settings/config.php');
     include('settings/functions.php');
     include('settings/generators.php');
     include('settings/modules.php');
@@ -150,8 +147,6 @@ class Lixter {
    * generating and loading current page content
    */
   private function loadPage() {
-    global $file;
-
     $db = Database::getDB()->getCon();
     if ($db->connect_errno) {
       $message    = I18n::t( 'lixter.load.mysql_connection_error', array(mysqli_connect_error()) );
@@ -224,19 +219,6 @@ class Lixter {
           # page argument is category page
           $this->page = new CategoryPage(null, $_GET['p']);
 
-        } else if (isset($file[$_GET['p']][0])) {
-          # page argument has specific file
-
-          if (ContentPage::exists($_GET['p'])) {
-            # specific file is found
-            $this->page = new ContentPage($_GET['p']);
-
-          } else {
-            # specif file is not found
-            $message    = I18n::t( 'lixter.load.include_not_found', array('includes/' . $file[$_GET['p']][0]) );
-            $this->page = new ErrorPage($message);
-          }
-
         } else {
           # page argument has no declaration and is not a static page
           $this->page = new CategoryPage('blog');
@@ -261,8 +243,6 @@ class Lixter {
   }
 
   private function buildAdmin() {
-    global $file;
-
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
     $pageType = $this->page->getPageClass();
@@ -284,8 +264,6 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    global $file;
-
     setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
 
     $pageType = $this->page->getPageClass();

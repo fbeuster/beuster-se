@@ -40,8 +40,6 @@ class Api {
   }
 
   private function loadConfig() {
-    global  $file;
-
     // non-catched exceptions should be logged
     set_exception_handler(function($exception) {
       echo 'Oups, something went wrong :(';
@@ -63,7 +61,6 @@ class Api {
     }
 
     // loading configuration and functions
-    include('settings/config.php');
     include('settings/functions.php');
     include('settings/generators.php');
     include('settings/modules.php');

@@ -1,5 +1,4 @@
 <?php
-    include('config.php');
     include('functions.php');
     include('../user/local.php');
     include('../classes/Database.php');
