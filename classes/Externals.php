@@ -15,7 +15,7 @@ class Externals {
    * @source http://gravatar.com/site/implement/images/php/
    */
   public static function getGravatar( $email, $s = 100, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
-    $url = 'http://www.gravatar.com/avatar/';
+    $url = 'https://secure.gravatar.com/avatar/';
     $url .= md5( strtolower( trim( $email ) ) );
     $url .= "?s=$s&d=$d&r=$r";
     if ( $img ) {
