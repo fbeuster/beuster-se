@@ -3,7 +3,7 @@
 class Utilities {
 
   public static function getProtocol() {
-    if (isset($_SERVER['https']) && $_SERVER['https'] != 'off') {
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
       return 'https';
 
     } else {
