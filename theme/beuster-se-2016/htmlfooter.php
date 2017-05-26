@@ -39,7 +39,7 @@
   <?php
     $user =  User::newFromCookie();
 
-    if ($user && !$user->isAdmin()) {
+    if ($user && $user->isAdmin()) {
   ?>
   <!-- No Google Analytics, logged in admin -->
 

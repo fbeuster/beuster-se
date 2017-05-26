@@ -160,25 +160,29 @@ class ArticlePage extends RequestPage {
 
   private function increaseHitCount() {
     if (!Utilities::isDevServer()) {
-      $db   = Database::getDB()->getCon();
-      $sql  = 'UPDATE
-                news
-              SET
-                Hits = Hits + 1
-              WHERE
-                ID = ?';
+      $user = User::newFromCookie();
 
-      if (!$stmt = $db->prepare($sql)) {
-        return $db->error;
+      if (!$user || ($user && !$user->isAdmin())) {
+        $db   = Database::getDB()->getCon();
+        $sql  = 'UPDATE
+                  news
+                SET
+                  Hits = Hits + 1
+                WHERE
+                  ID = ?';
+
+        if (!$stmt = $db->prepare($sql)) {
+          return $db->error;
+        }
+
+        $stmt->bind_param('i', $this->article_id);
+
+        if (!$stmt->execute()) {
+          return $stmt->error;
+        }
+
+        $stmt->close();
       }
-
-      $stmt->bind_param('i', $this->article_id);
-
-      if (!$stmt->execute()) {
-        return $stmt->error;
-      }
-
-      $stmt->close();
     }
   }
 
