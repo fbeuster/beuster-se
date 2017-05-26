@@ -162,7 +162,13 @@ abstract class ArticleParser {
                 $line = preg_replace('+<code>(.*?)</code>+Uis', '\1', $line);
                 $line = preg_replace('#&amp;#Uis', '&', $line);
                 $line = preg_replace('#\n#Uis', '', $line);
-                $lines[] = '<code class="'.$class.'"><span class="no">'.$i.'</span>'.$line.'</code>';
+
+                $start = preg_replace('#^((&nbsp;)*?)(.*)$#Uis', '\1', $line);
+                $end = preg_replace('#^((&nbsp;)*?)(.*)$#Uis', '\3', $line);
+                $end = preg_replace('#&nbsp;#Uis', ' ', $end);
+                $line = $start.$end;
+
+                $lines[] = '<code class="'.$class.'"><span class="no">'.$i.'</span><div>'.$line.'</div></code>';
                 $i++;
             }
             $strCode = implode($lines);
