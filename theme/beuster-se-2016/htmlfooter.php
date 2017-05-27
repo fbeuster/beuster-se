@@ -39,7 +39,9 @@
   <?php
     $user =  User::newFromCookie();
 
-    if ($user && $user->isAdmin()) {
+    if (  ($user && $user->isAdmin()) ||
+          $_GET['p'] == 'admin' ||
+          $_GET['p'] == 'phpmyadmin') {
   ?>
   <!-- No Google Analytics, logged in admin -->
 
