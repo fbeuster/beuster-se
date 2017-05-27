@@ -32,11 +32,11 @@
       return $header;
     }
 
-    public static function commentNotification($title, $content, $user_name, $user_page, $user_mail = null) {
+    public static function commentNotification($title, $content, $commenter, $user_mail = null) {
       if (!$title     || trim($title) == '' ||
           !$content   || trim($content) == '' ||
-          !$user_name || trim($user_name) == '' ||
-          !Utilities::isDevServer()) {
+          !isset($commenter) ||
+          Utilities::isDevServer()) {
         return false;
       }
 
@@ -46,9 +46,10 @@
         return false;
       }
 
-      if ($user_page != '') {
-        $page_link  = '<a href="'.$user_page.'">'.$user_page.'</a>';
-        $user_page = '('.$page_link.')';
+      if ($commenter->getWebsite() != '') {
+        $page_link  = '<a href="'.$commenter->getWebsite().'">'.
+                      $commenter->getWebsite().'</a>';
+        $user_page  = '('.$page_link.')';
       }
 
       $site_name  = Config::getConfig()->get('site_name');
@@ -66,7 +67,8 @@
       $copy         .= I18n::t('admin.footer.copy');
 
       $description  = I18n::t('comment.notification.'.$type.'.description',
-                              array($site_name, $user_name, $user_page));
+                              array($site_name, $commenter->getName(),
+                                    $user_page));
 
       $footer       = I18n::t('comment.notification.'.$type.'.footer',
                               array($site_name));
