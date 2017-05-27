@@ -546,6 +546,18 @@
       "message" : "Dein Kommentar wurde hinzugefügt.",
       "title" : "Erfolg!"
     },
+    "notification" : {
+      "admin" : {
+        "description" : "Auf dein Seite %s, der Nutzer %s %s hat folgenden Kommentar geschrieben:",
+        "footer" : "Dies ist eine automatisierte Nachricht von deiner Seite %s.",
+        "subject" : "Neuer Kommentar zu %s - %s"
+      },
+      "answer" : {
+        "description" : "Auf %s, der Nutzer %s %s hat folgende Antwort auf deinen Kommentar geschrieben:",
+        "footer" : "Dies ist eine automatisierte Nachricht von %s (%s).",
+        "subject" : "Neue Antwort auf deinen Kommentar zu %s - %s"
+      }
+    },
     "reply" : {
       "cancel" : "Antwort abbrechen",
       "legend" : "Schreibe eine Antwort an %s!",

@@ -60,41 +60,4 @@
         return new Article($id);
     }
 
-    function notifyAdmin($title, $content, $user) {
-        $db     = Database::getDB();
-        $fields = array('Email');
-        $conds  = array('Rights = ?', 's', array('admin'));
-        $res    = $db->select('users', $fields, $conds);
-
-        if (count($res) == 0) {
-            return false;
-        }
-
-        $admin_mail   = $res[0]['Email'];
-        $mail_topic   = 'Neuer Kommentar zu "'.$title.'"';
-
-        $mail_content = '<h1>'.$title.'</h1>';
-        $mail_content .= '<p>'.$content.'</p>';
-        $mail_content .= '<p>von: '.$user.'</p>';
-
-        $mail_body    = '<html>';
-        $mail_body    .= '<head><title>Neuer Kommentar</title>';
-        $mail_body    .= '</head>';
-        $mail_body    .= '<body>';
-        $mail_body    .= $mail_content;
-        $mail_body    .= '</body></html>';
-
-        $mail_header  = 'MIME-Version: 1.0'."\n";
-        $mail_header  .= 'Content-Type: text/html; charset=utf-8'."\n";
-        $mail_header  .= 'From: beuster{se} Kommentare <info@beusterse.de>'."\n";
-        $mail_header  .= 'Reply-To: beuster{se} Kommentare <info@beusterse.de>'."\n";
-        $mail_header  .= 'X-Mailer: PHP/'.phpversion().'\r\n';
-
-        // return
-        if (!Utilities::isDevServer()) {
-            return mail($admin_mail, $mail_topic, $mail_body, $mail_header);
-        }
-        return false;
-    }
-
 ?>

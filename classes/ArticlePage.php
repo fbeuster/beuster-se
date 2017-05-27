@@ -139,7 +139,7 @@ class ArticlePage extends RequestPage {
       $res = $db->insert('kommentare', $fields, $values);
 
       # notification mails
-      notifyAdmin($this->article->getTitle(), $content, $username);
+      $this->sendNotifications($content, $username, $website, $reply_to);
 
       # add info
       $this->info = array('success',
@@ -194,6 +194,39 @@ class ArticlePage extends RequestPage {
     $this->article  = new Article($this->article_id);
     $this->title    = $this->article->getTitle();
     $this->valid    = true;
+  }
+
+  private function sendNotifications($user_content, $user_name, $user_page, $user_reply) {
+    # notify admin about comment
+    MailService::commentNotification(
+        $this->title, $user_content, $user_name, $user_page );
+
+    # notify users about answer
+    if ($user_reply > 0) {
+      $notified = array();
+      $comment  = new Comment($user_reply);
+
+      MailService::commentNotification(
+          $this->title, $user_content, $user_name, $user_page,
+          $comment->getAuthor()->getMail() );
+
+      $notified[] = $comment->getAuthor()->getId();
+
+      $comment->loadReplies();
+
+      # notify whole thread
+      if ($comment->hasReplies()) {
+        foreach ($comment->getReplies() as $reply) {
+          if (!in_array($reply->getAuthor()->getId(), $notified)) {
+            MailService::commentNotification(
+                $this->title, $user_content, $user_name, $user_page,
+                $reply->getAuthor()->getMail() );
+
+            $notified[] = $reply->getAuthor()->getId();
+          }
+        }
+      }
+    }
   }
 }
 

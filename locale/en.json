@@ -548,6 +548,18 @@
       "message" : "Your comment has been added.",
       "title" : "Success!"
     },
+    "notification" : {
+      "admin" : {
+        "description" : "On your site %s, the user %s %s wrote the following commment:",
+        "footer" : "This is an automated message from your site %s.",
+        "subject" : "New comment on %s - %s"
+      },
+      "answer" : {
+        "description" : "On %s, the user %s %s wrote the following answer to your commment:",
+        "footer" : "This is an automated message from %s.",
+        "subject" : "New answer to your comment on %s - %s"
+      }
+    },
     "reply" : {
       "cancel" : "Cancel reply",
       "legend" : "Write a reply to %s!",
@@ -681,7 +693,7 @@
     },
     "notification" : {
       "description" : "From your site %s, the user %s %s sent you the following message:",
-      "footer" : "This is an automated messegae from your site %s at %s.",
+      "footer" : "This is an automated message from your site %s at %s.",
       "subject" : "Message from %s - %s",
       "title" : "Message from %s"
     },
