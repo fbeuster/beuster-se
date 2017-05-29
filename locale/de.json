@@ -556,7 +556,8 @@
         "description" : "Auf %s, der Nutzer %s %s hat folgende Antwort auf deinen Kommentar geschrieben:",
         "footer" : "Dies ist eine automatisierte Nachricht von %s (%s).",
         "subject" : "Neue Antwort auf deinen Kommentar zu %s - %s"
-      }
+      },
+      "forward" : "Klick %s, um zum Kommentar zu gehen."
     },
     "reply" : {
       "cancel" : "Antwort abbrechen",
@@ -926,5 +927,8 @@
         "success" : "Das Passwort wurde geändert."
       }
     }
+  },
+  "utilities" : {
+    "here" : "here"
   }
 }

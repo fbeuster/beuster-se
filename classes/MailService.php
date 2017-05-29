@@ -65,6 +65,18 @@
         $user_mail = $user->getMail();
       }
 
+
+      if (Utilities::getRemoteAddress() === null) {
+        $system = Utilities::getSystemAddress();
+
+      } else {
+        $system = Utilities::getRemoteAddress();
+      }
+
+      $comment_link = Utilities::getProtocol().'://'.$system.$comment->getLink();
+      $comment_link = '<a href="'.$comment_link.'">'.
+                      I18n::t('utilities.here').'</a>';
+
       $copy         = I18n::t('admin.footer.runs_with');
       $copy         .= ' <a href="https://fixel.me">'.I18n::t('admin.footer.cms').'</a><br>';
       $copy         .= I18n::t('admin.footer.copy');
@@ -76,12 +88,16 @@
       $footer       = I18n::t('comment.notification.'.$type.'.footer',
                               array($site_name));
 
+      $forward      = I18n::t('comment.notification.forward',
+                              array($comment_link));
+
       $subject      = I18n::t('comment.notification.'.$type.'.subject',
                               array($article->getTitle(), $site_name) );
 
       $body = file_get_contents('system/views/comment_mail.php');
       $body = preg_replace('/{{title}}/',       $subject,               $body);
       $body = preg_replace('/{{description}}/', $description,           $body);
+      $body = preg_replace('/{{forward}}/',     $forward,               $body);
       $body = preg_replace('/{{footer}}/',      $footer,                $body);
       $body = preg_replace('/{{copy}}/',        $copy,                  $body);
       $body = preg_replace('/{{message}}/',     $comment->getContent(), $body);

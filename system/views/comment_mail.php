@@ -38,7 +38,7 @@
     <p>{{description}}</p>
     <p>{{message}}</p>
     <footer>
-      {{footer}}
+      {{forward}} {{footer}}
       <br><br>
       {{copy}}
     </footer>

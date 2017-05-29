@@ -110,6 +110,21 @@ class Comment {
 	 */
 	public function getId() { return $this->id; }
 
+	public function getLink() {
+		$db 		= Database::getDB();
+		$fields = array('NewsID');
+		$conds  = array('ID = ?', 'i', array($this->id));
+		$aid    = $db->select('kommentare', $fields, $conds);
+
+		if (count($aid) != 1) {
+			return '';
+		}
+
+		$article = new Article($aid[0]['NewsID']);
+
+		return $article->getLink().'#comment'.$this->id;
+	}
+
 	/**
 	 * getter for comment date
 	 * @return int

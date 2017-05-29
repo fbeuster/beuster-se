@@ -558,7 +558,8 @@
         "description" : "On %s, the user %s %s wrote the following answer to your commment:",
         "footer" : "This is an automated message from %s.",
         "subject" : "New answer to your comment on %s - %s"
-      }
+      },
+      "forward" : "Click %s to go to the comment."
     },
     "reply" : {
       "cancel" : "Cancel reply",
@@ -928,5 +929,8 @@
         "success" : "The password has been changed."
       }
     }
+  },
+  "utilities" : {
+    "here" : "here"
   }
 }
