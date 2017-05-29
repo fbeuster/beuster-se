@@ -32,11 +32,10 @@
       return $header;
     }
 
-    public static function commentNotification($title, $content, $commenter, $user_mail = null) {
-      if (!$title     || trim($title) == '' ||
-          !$content   || trim($content) == '' ||
-          !isset($commenter) ||
-          Utilities::isDevServer()) {
+    public static function commentNotification($article, $comment, $user = null) {
+      if (!isset($article) ||
+          !isset($comment) ||
+          !Utilities::isDevServer()) {
         return false;
       }
 
@@ -46,20 +45,24 @@
         return false;
       }
 
-      if ($commenter->getWebsite() != '') {
-        $page_link  = '<a href="'.$commenter->getWebsite().'">'.
-                      $commenter->getWebsite().'</a>';
+      if ($comment->getAuthor()->getWebsite() == '') {
+        $user_page = '';
+
+      } else {
+        $page_link  = '<a href="'.$comment->getAuthor()->getWebsite().'">'.
+                      $comment->getAuthor()->getWebsite().'</a>';
         $user_page  = '('.$page_link.')';
       }
 
       $site_name  = Config::getConfig()->get('site_name');
 
-      if ($user_mail == null) {
+      if ($user == null) {
         $type = 'admin';
         $user_mail = MailService::getAdminNotificationMail();
 
       } else {
         $type = 'answer';
+        $user_mail = $user->getMail();
       }
 
       $copy         = I18n::t('admin.footer.runs_with');
@@ -67,21 +70,21 @@
       $copy         .= I18n::t('admin.footer.copy');
 
       $description  = I18n::t('comment.notification.'.$type.'.description',
-                              array($site_name, $commenter->getName(),
+                              array($site_name, $comment->getAuthor()->getName(),
                                     $user_page));
 
       $footer       = I18n::t('comment.notification.'.$type.'.footer',
                               array($site_name));
 
       $subject      = I18n::t('comment.notification.'.$type.'.subject',
-                              array($title, $site_name) );
+                              array($article->getTitle(), $site_name) );
 
       $body = file_get_contents('system/views/comment_mail.php');
-      $body = preg_replace('/{{title}}/',       $subject,     $body);
-      $body = preg_replace('/{{description}}/', $description, $body);
-      $body = preg_replace('/{{footer}}/',      $footer,      $body);
-      $body = preg_replace('/{{copy}}/',        $copy,        $body);
-      $body = preg_replace('/{{message}}/',     $content,     $body);
+      $body = preg_replace('/{{title}}/',       $subject,               $body);
+      $body = preg_replace('/{{description}}/', $description,           $body);
+      $body = preg_replace('/{{footer}}/',      $footer,                $body);
+      $body = preg_replace('/{{copy}}/',        $copy,                  $body);
+      $body = preg_replace('/{{message}}/',     $comment->getContent(), $body);
 
       return mail( $user_mail, $subject, $body, $header );
     }

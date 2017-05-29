@@ -5,7 +5,6 @@ class ArticlePage extends RequestPage {
   private $article;
   private $article_id;
   private $content;
-  private $commenter;
   private $error;
   private $filename;
   private $info;
@@ -133,25 +132,25 @@ class ArticlePage extends RequestPage {
         $user_id  = $db->insert('users', $fields, $values);
       }
 
-      $this->commenter = User::newFromId($user_id);
-
       # insert comment
       $fields = array('Inhalt', 'Datum', 'NewsID', 'Frei', 'ParentID', 'UID');
       $values = array('s&iiii', array(
                  $content, 'NOW()', $this->article_id, $enable, $reply_to, $user_id ));
-      $res = $db->insert('kommentare', $fields, $values);
+      $id     = $db->insert('kommentare', $fields, $values);
 
-      # notification mails
-      $this->sendNotifications($content, $reply_to);
+      if ($id) {
+        # reload comments
+        # TODO shold actually be article->reloadComments()
+        $this->article = new Article($this->article_id);
 
-      # add info
-      $this->info = array('success',
-                          I18n::t('comment.info.title'),
-                          I18n::t('comment.info.message'));
+        # notification mails
+        $this->sendNotifications(new Comment($id));
 
-      # reload comments
-      # TODO shold actually be article->reloadComments()
-      $this->article = new Article($this->article_id);
+        # add info
+        $this->info = array('success',
+                            I18n::t('comment.info.title'),
+                            I18n::t('comment.info.message'));
+      }
 
     } else {
       $this->values = array('user' => $username,
@@ -199,35 +198,31 @@ class ArticlePage extends RequestPage {
     $this->valid    = true;
   }
 
-  private function sendNotifications($user_content, $user_reply) {
+  private function sendNotifications($comment) {
+    $notified   = array();
+    $notified[] = $comment->getAuthor()->getId();
+
     # notify admin about comment
-    MailService::commentNotification(
-        $this->title, $user_content, $this->commenter);
+    MailService::commentNotification($this->article, $comment);
+    $notified[] = $comment->getAuthor()->getId();
 
     # notify users about answer
-    if ($user_reply > 0) {
-      $notified = array();
-      $comment  = new Comment($user_reply);
+    if ($comment->getParentId() > 0) {
 
-      if ($comment->getAuthor()->getId() != $this->commenter->getId()) {
-        MailService::commentNotification(
-            $this->title, $user_content, $this->commenter,
-            $comment->getAuthor()->getMail() );
+      $parent = new Comment($comment->getParentId());
 
+      if (!in_array($parent->getAuthor()->getId(), $notified)) {
+        MailService::commentNotification($this->article, $comment, $parent->getAuthor());
         $notified[] = $comment->getAuthor()->getId();
       }
 
-      $comment->loadReplies();
+      $parent->loadReplies();
 
       # notify whole thread
-      if ($comment->hasReplies()) {
-        foreach ($comment->getReplies() as $reply) {
-          if (!in_array($reply->getAuthor()->getId(), $notified) &&
-              $reply->getAuthor()->getId() != $this->commenter->getId()) {
-            MailService::commentNotification(
-                $this->title, $user_content, $this->commenter,
-                $reply->getAuthor()->getMail() );
-
+      if ($parent->hasReplies()) {
+        foreach ($parent->getReplies() as $reply) {
+          if (!in_array($reply->getAuthor()->getId(), $notified)) {
+            MailService::commentNotification($this->article, $comment, $reply->getAuthor());
             $notified[] = $reply->getAuthor()->getId();
           }
         }
