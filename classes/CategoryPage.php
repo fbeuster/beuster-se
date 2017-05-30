@@ -45,6 +45,10 @@ class CategoryPage extends Page {
     return array($cat_sql, $cat_params, $cat_vars);
   }
 
+  public function getCategory() {
+    return $this->category;
+  }
+
   private function getCategoryConditions() {
     if ($this->category->isTopCategory()) {
       $cat_sql    = ' AND (newscat.ParentID = ? OR newscat.ID = ?)';

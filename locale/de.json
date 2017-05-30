@@ -929,6 +929,7 @@
     }
   },
   "utilities" : {
+    "back_link" : "< Zurück zu %s",
     "here" : "here"
   }
 }

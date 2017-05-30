@@ -9,6 +9,26 @@
     <span class="categoryTitle"><?php echo $page->getTitle(); ?></span>
   <?php } ?>
 
+  <?php if ($page->getCategory()) { ?>
+    <?php $parent = $page->getCategory()->getParent(); ?>
+    <?php if ($parent) { ?>
+      <a href="/<?php echo $parent->getNameUrl(); ?>" class="back">
+        <?php I18n::e('utilities.back_link', array($parent->getName())); ?>
+      </a>
+
+    <?php } else if (count($page->getCategory()->getChildren())) { ?>
+      <menu class="subcategories">
+        <?php foreach ($page->getCategory()->getChildren() as $child) { ?>
+          <li>
+            <a href="/<?php echo $child->getNameUrl(); ?>">
+              <?php echo $child->getName(); ?>
+            </a>
+          </li>
+        <?php } ?>
+      </menu>
+    <?php } ?>
+  <?php } ?>
+
 <?php
 
   foreach ($page->getArticles() as $article) {

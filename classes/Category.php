@@ -148,6 +148,10 @@ class Category {
 		return $this->type == self::CAT_TYPE_TOP;
 	}
 
+  public function getChildren() {
+    return $this->children;
+  }
+
 	public function getMaxArticleId() {
 		$db = Database::getDB();
 
@@ -319,6 +323,20 @@ class Category {
 		$this->type = $res[0]['Typ'];
 		$this->parent = $res[0]['ParentID'];
 		$this->description = $res[0]['Beschreibung'];
+
+    $this->children = array();
+
+    if ($this->type == self::CAT_TYPE_TOP) {
+      $fields = array('ID');
+      $conds  = array('ParentID = ?', 'i', array($this->id));
+      $res    = $dbs->select('newscat', $fields, $conds);
+
+      if (count($res)) {
+        foreach ($res as $sub_category) {
+          $this->children[] = new Category($sub_category['ID']);
+        }
+      }
+    }
 
 
 		$this->loaded = true;

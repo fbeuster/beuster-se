@@ -61,6 +61,33 @@ body.category {
     margin-left: 1.33em;
     margin-top: 1.5em;
   }
+
+  a.back {
+    @include default_link($cold_black, $green);
+  }
+
+  menu.subcategories {
+    display: flex;
+    list-style: none;
+    margin-left: 2em;
+    margin-top: 1.5em;
+
+    li {
+      font-size: 1em;
+      margin-right: 0.5em;
+
+      &:not(:last-child) {
+        &:after {
+          content: "-";
+        }
+      }
+
+      a {
+        @include default_link($cold_black, $green);
+        margin-right: 0.5em;
+      }
+    }
+  }
 }
 
 body.article {
