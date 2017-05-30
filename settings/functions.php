@@ -71,19 +71,6 @@
         $xml->save($feedURL);*/
     }
 
-    function showInfo($msg, $refr, $title = null) {
-        if ($title === null ) {
-            $title = I18n::t('page.info.title');
-        }
-
-      return array(
-        'filename'  => 'static.php',
-        'title'     => $title,
-        'data'      => $msg,
-        'refresh'   => $refr
-      );
-    }
-
     function shortenTitle($title, $l = 20) {
         if(strlen($title) > $l) {
             $title = substr($title, 0, $l - 1).'...';
