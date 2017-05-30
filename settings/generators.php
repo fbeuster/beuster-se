@@ -115,36 +115,56 @@
     }
 
     function genSubMenu() {
-        if(isset($_GET['n'])) {
-            $catID = getNewsCat($_GET['n']);
-            $cat = getCatName($catID);
-            $catParentID = getCatParent($catID);
-            $catParentName = getCatname($catParentID);
+        if (isset($_GET['n'])) {
+            # TODO
+            # rework breadcrumbs
+            $article    = new Article($_GET['n']);
+            $category   = $article->getCategory();
+            $parent     = $category->getParent();
+
             echo '<li class="between">&gt;</li><li><a href="/">Blog</a></li>'."\r";
-            if(lowerCat($cat) !== 'blog') {
-                echo '<li class="between">&gt;</li><li><a href="/'.lowerCat($catParentName).'">'.$catParentName.'</a></li>'."\r";
-                echo '<li class="between">&gt;</li><li><a href="/'.lowerCat($cat).'">'.$cat.'</a></li>'."\r";
+            if ($category->getNameUrl() !== 'blog') {
+                echo    '<li class="between">&gt;</li><li><a href="/'
+                        .$parent->getNameUrl().'">'.$parent->getName().'</a></li>'."\r";
+                echo    '<li class="between">&gt;</li><li><a href="/'.
+                        $category->getNameUrl().'">'.$category->getName().'</a></li>'."\r";
             }
         } else {
-            if(isset($_GET['c']) && Category::exists($_GET['c'])) {
+            if (isset($_GET['c']) &&
+                (Category::exists($_GET['c']) || Category::isCategoryName($_GET['c']))) {
                 $catID = $_GET['c'];
-            } else if(isset($_GET['p']) && Category::exists($_GET['p'])) {
+
+            } else if ( isset($_GET['p']) &&
+                        (Category::exists($_GET['p']) || Category::isCategoryName($_GET['p']))) {
                 $catID = $_GET['p'];
+
             } else {
                 $catID = getCatID('Blog');
             }
-            if(!is_numeric($catID)) {
+
+            if (!is_numeric($catID)) {
                 $catID = getCatID($catID);
             }
-            $catParentID = getCatParent($catID);
-            $children = getChildrenNames($catParentID);
+
             $noborder = ' class="noborder"';
             if($catID == getCatID('blog')) {
                 echo ' <li'.$noborder.'><a href="/blog">Blog</a></li>'."\r";
                 $noborder = '';
             }
+
+            $category   = new Category($catID);
+            $parent     = $category->getParent();
+
+            if ($parent) {
+                $children = $parent->getChildren();
+
+            } else {
+                $children = $category->getChildren();
+            }
+
             foreach($children as $child) {
-                echo ' <li'.$noborder.'><a href="/'.lowerCat($child).'">'.$child.'</a></li>'."\r";
+                echo    ' <li'.$noborder.'><a href="/'.$child->getNameUrl().'">'.
+                        $child->getName().'</a></li>'."\r";
                 $noborder = '';
             }
         }
