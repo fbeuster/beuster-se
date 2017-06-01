@@ -177,6 +177,34 @@ table.commentlist {
   }
 }
 
+table.categoryTable {
+  thead {
+    tr {
+      th {
+        padding-right: 1em;
+        text-align: left;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        &.radio {
+          text-align: center;
+          padding-right: 1em;
+        }
+
+        &.select,
+        &.text {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+}
+
 ul.pagesList {
   list-style: none;
 }
@@ -189,5 +217,15 @@ div.preview {
   i.info {
     color: $darker_grey;
     cursor: pointer;
+  }
+}
+
+.multiFieldset {
+  fieldset + fieldset {
+    margin-top: 2em;
+  }
+
+  input[type=submit] {
+    margin-top: 1em;
   }
 }
