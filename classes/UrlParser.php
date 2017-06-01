@@ -1,8 +1,8 @@
 <?php
-    include('functions.php');
+    include('../settings/functions.php');
     include('../user/local.php');
-    include('../classes/Database.php');
-    include('../classes/Utilities.php');
+    include('Database.php');
+    include('Utilities.php');
 
     $parsingUrl = new UrlParser('/#id#/#cat#/#title#', '/#id#/#cat#');
     $parsedUrl  = $parsingUrl->doParse();
