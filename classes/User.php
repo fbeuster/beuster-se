@@ -148,7 +148,8 @@ class User {
 		if(count($res) !== 1)
 			return false;
 
-		return $password === $res[0]['Password'];
+		# this compares the sha2 hashes, which are case insensitive
+		return strtolower( $password ) === strtolower( $res[0]['Password'] );
 	}
 
 	/**
