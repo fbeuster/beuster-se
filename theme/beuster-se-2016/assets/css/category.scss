@@ -16,6 +16,10 @@ body.article section.recommended {
       opacity: 1;
     }
 
+    &.no_article {
+      padding: 2em;
+    }
+
     .content {
       padding: 1em 2em 0 2em;
 

@@ -4,9 +4,7 @@
 
   if ($page->getType() === Page::INDEX_PAGE) {
     $category = Category::newFromName('Blog');
-  }
-
-  if ($page->hasArticles()) {  ?>
+  } ?>
 
 <section class="content">
   <?php if ($page->getType() !== Page::INDEX_PAGE) { ?>
@@ -49,7 +47,7 @@
     </menu>
   <?php } ?>
 
-<?php
+<?php if ($page->hasArticles()) {
 
   foreach ($page->getArticles() as $article) {
     if($article->getThumbnail() != null) {
@@ -114,12 +112,11 @@
 
 ?>
 
-</section>
-
   <?php } else { ?>
-  <section class="content">
-    <section class="article">
+
+    <section class="article no_article">
       <p><?php I18n::e('category.no_articles_found'); ?></p>
     </section>
-  </section><?php
- }?>
+  <?php } ?>
+
+</section>
