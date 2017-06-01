@@ -12,7 +12,7 @@
         </ul>
       </div>
     <?php } ?>
-    <form action="/user-settings" method="post" class="userform articleform">
+    <form action="/user-settings" method="post" class="userform articleform multiFieldset">
       <fieldset>
         <legend><?php I18n::e('user.settings.label'); ?></legend>
 
