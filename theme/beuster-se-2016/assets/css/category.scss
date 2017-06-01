@@ -76,7 +76,7 @@ body.category {
       font-size: 1em;
       margin-right: 0.5em;
 
-      &:not(:last-child) {
+      &:not(:last-child):not(:first-child) {
         &:after {
           content: "-";
         }
