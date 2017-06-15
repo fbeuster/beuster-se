@@ -2,11 +2,16 @@
 
   $page = Lixter::getLix()->getPage();
 
-  if ($page->hasArticles()) {  ?>
+  if ($page->getType() === Page::INDEX_PAGE) {
+    $category = Category::newFromName('Blog');
+  } ?>
 
 <section class="content">
   <?php if ($page->getType() !== Page::INDEX_PAGE) { ?>
     <span class="categoryTitle"><?php echo $page->getTitle(); ?></span>
+
+  <?php } else { ?>
+    <span class="categoryTitle"><?php echo $category->getName(); ?></span>
   <?php } ?>
 
   <?php if ($page->getCategory()) { ?>
@@ -18,6 +23,7 @@
 
     <?php } else if (count($page->getCategory()->getChildren())) { ?>
       <menu class="subcategories">
+        <li><?php I18n::e('utilities.subcategories'); ?>:</li>
         <?php foreach ($page->getCategory()->getChildren() as $child) { ?>
           <li>
             <a href="/<?php echo $child->getNameUrl(); ?>">
@@ -27,9 +33,21 @@
         <?php } ?>
       </menu>
     <?php } ?>
+
+  <?php } else if ($page->getType() === Page::INDEX_PAGE) { ?>
+    <menu class="subcategories">
+      <li><?php I18n::e('utilities.subcategories'); ?>:</li>
+      <?php foreach ($category->getChildren() as $child) { ?>
+        <li>
+          <a href="/<?php echo $child->getNameUrl(); ?>">
+            <?php echo $child->getName(); ?>
+          </a>
+        </li>
+      <?php } ?>
+    </menu>
   <?php } ?>
 
-<?php
+<?php if ($page->hasArticles()) {
 
   foreach ($page->getArticles() as $article) {
     if($article->getThumbnail() != null) {
@@ -94,12 +112,11 @@
 
 ?>
 
-</section>
-
   <?php } else { ?>
-  <section class="content">
-    <section class="article">
+
+    <section class="article no_article">
       <p><?php I18n::e('category.no_articles_found'); ?></p>
     </section>
-  </section><?php
- }?>
+  <?php } ?>
+
+</section>

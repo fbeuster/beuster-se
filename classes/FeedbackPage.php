@@ -119,61 +119,7 @@ class FeedbackPage extends Page {
   }
 
   private function sendFeedback() {
-    $db     = Database::getDB();
-    $fields = array('Contactmail');
-    $conds  = array('Rights = ?', 's', array('admin'));
-    $res    = $db->select('users', $fields, $conds);
-
-    if (count($res) == 0) {
-      return;
-    }
-
-    $protocol   = Lixter::getLix()->getProtocol();
-    $site_link  = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $site_link  = '<a href="'.$protocol.'://'.$site_link.'">'.$site_link.'</a>';
-    $site_name  = Config::getConfig()->get('site_name');
-
-    # mail info
-    $from       = $this->values[self::NAME_NAME].'<'.$this->values[self::NAME_MAIL].'>';
-    $page_link  = '<a href="'.$this->values[self::NAME_PAGE].'">'.$this->values[self::NAME_PAGE].'</a>';
-    $subject    = I18n::t('general_form.notification.subject',
-                          array($this->values[self::NAME_NAME], $site_name));
-    $to         = $res[0]['Contactmail'];
-
-    # mail header
-    $header = 'MIME-Version: 1.0'."\n";
-    $header .= 'Content-Type: text/html; charset=utf-8'."\n";
-    $header .= 'From: '.$from."\n";
-    $header .= 'Reply-To: '.$from."\n";
-    $header .= 'X-Mailer: PHP/'.phpversion().'\r\n';
-
-
-    # mail replacements
-    $title        = I18n::t('general_form.notification.title',
-                            array($this->values[self::NAME_NAME]));
-
-    $description  = I18n::t('general_form.notification.description',
-                            array($site_name, $this->values[self::NAME_NAME], '('.$page_link.')'));
-
-    $message      = $this->values[self::NAME_MESSAGE];
-
-    $footer       = I18n::t('general_form.notification.footer',
-                            array($site_name, $site_link));
-
-    $copy         = I18n::t('admin.footer.runs_with');
-    $copy         .= ' <a href="https://fixel.me">'.I18n::t('admin.footer.cms').'</a><br>';
-    $copy         .= I18n::t('admin.footer.copy');
-
-    # get and fill mail content
-    $content = file_get_contents('system/views/feedback_mail.php');
-    $content = preg_replace('/{{title}}/',        $title,       $content);
-    $content = preg_replace('/{{description}}/',  $description, $content);
-    $content = preg_replace('/{{footer}}/',       $footer,      $content);
-    $content = preg_replace('/{{copy}}/',         $copy,        $content);
-    $content = preg_replace('/{{message}}/',      $message,     $content);
-
-    # send mail
-    $this->status = mail($to, $subject, $content, $header);
+    $this->status = MailService::feedbackNotification($this->values);
 
     if ($this->status) {
       $this->values = null;

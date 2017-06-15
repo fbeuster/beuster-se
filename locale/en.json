@@ -933,6 +933,7 @@
   },
   "utilities" : {
     "back_link" : "< Back to %s",
-    "here" : "here"
+    "here" : "here",
+    "subcategories" : "Subcategories"
   }
 }

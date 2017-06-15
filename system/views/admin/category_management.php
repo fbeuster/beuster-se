@@ -6,16 +6,16 @@
     <?php if( count($this->categories) &&
               count($this->parent_categories)) {
         $i = 0; ?>
-      <form action="/category-management" method="post" class="userform articleform">
+      <form action="/category-management" method="post" class="userform articleform multiFieldset">
         <fieldset>
           <fieldset>
             <legend>
               <?php I18n::e('admin.category.parent_category.label'); ?>
             </legend>
-            <table class="newslist">
+            <table class="categoryTable">
               <thead>
                 <tr>
-                  <th>
+                  <th class="text">
                     <?php I18n::e('admin.category.parent_category.table_header.name'); ?>
                   </th>
                   <th class="radio">
@@ -30,17 +30,17 @@
               <?php foreach($this->parent_categories as $parent_category) { ?>
                 <?php if($parent_category['name'] != 'Blog') { ?>
                   <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?>>
-                    <td>
+                    <td class="text">
                       <?php echo $parent_category['name']; ?>
                     </td>
-                    <td>
+                    <td class="radio">
                       <?php if($parent_category['name'] != 'Blog') { ?>
                         <input type="checkbox"
                               name="delete_parent_<?php echo $parent_category['id']; ?>"
                               title="<?php I18n::e('admin.category.parent_category.delete.title'); ?>">
                       <?php } ?>
                     </td>
-                    <td>
+                    <td class="select">
                       <select name="delete_parent_<?php echo $parent_category['id']; ?>_target"<?php echo (isset($this->errors['delete_parent_'.$parent_category['id'].'_target']) ? 'class="has_error"' : ''); ?> title="<?php I18n::e('admin.category.parent_category.target.title'); ?>">
                         <option value="error">
                           <?php I18n::e('admin.category.parent_category.target.label'); ?>
@@ -68,13 +68,13 @@
             <legend>
               <?php I18n::e('admin.category.sub_category.label'); ?>
             </legend>
-            <table class="newslist">
+            <table class="categoryTable">
               <thead>
                 <tr>
-                  <th>
+                  <th class="text">
                     <?php I18n::e('admin.category.sub_category.table_header.name'); ?>
                   </th>
-                  <th>
+                  <th class="text">
                     <?php I18n::e('admin.category.sub_category.table_header.parent'); ?>
                   </th>
                   <th>
@@ -92,9 +92,9 @@
               <?php $i = 0;
                 foreach($this->categories as $category) { ?>
                 <tr>
-                  <td><?php echo $category['name']; ?></td>
-                  <td><?php echo $category['parent']; ?></td>
-                  <td>
+                  <td class="text"><?php echo $category['name']; ?></td>
+                  <td class="text"><?php echo $category['parent']; ?></td>
+                  <td class="select">
                     <select name="category_<?php  echo $category['id']; ?>_new_parent">
                       <option value="error">
                           <?php I18n::e('admin.category.sub_category.new_parent.label'); ?>
@@ -108,12 +108,12 @@
                       <?php } ?>
                     </select>
                   </td>
-                  <td>
+                  <td class="radio">
                     <input type="checkbox"
                           name="delete_category_<?php echo $category['id'];?>"
                           class="del"
                           title="<?php I18n::e('admin.category.parent_category.delete.title'); ?>"></td>
-                  <td>
+                  <td class="select">
                     <select name="delete_category_<?php echo $category['id'];?>_target" title="<?php I18n::e('admin.category.sub_category.target.title'); ?>">
                       <option value="error">
                           <?php I18n::e('admin.category.sub_category.target.label'); ?>
