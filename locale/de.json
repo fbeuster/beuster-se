@@ -663,6 +663,7 @@
   },
   "general_form" : {
     "clear" : "Eingaben löschen",
+    "commenting_as" : "Du kommentierst als %s (%s).",
     "disclaimer" : "Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im %s.",
     "error" : "Fehler",
     "errors" : {

@@ -86,12 +86,25 @@ class ArticlePage extends RequestPage {
   }
 
   protected function handleRequest() {
-    $db       = Database::getDB();
-    $enable   = 0;
-    $username = trim($_POST['usr']);
-    $content  = Parser::parse(trim($_POST['usrcnt']), Parser::TYPE_NEW);
-    $usermail = strtolower(trim($_POST['usrml']));
-    $website  = trim($_POST['usrpg']);
+    $db           = Database::getDB();
+    $content      = Parser::parse(trim($_POST['usrcnt']),
+                                  Parser::TYPE_NEW);
+    $cookie_user  = User::newFromCookie();
+
+    if ($cookie_user) {
+      $cookie_user->refreshCookies();
+
+      $enable   = 2;
+      $usermail = $cookie_user->getMail();
+      $username = $cookie_user->getClearName();
+      $website  = $cookie_user->getWebsite();
+
+    } else {
+      $enable   = 0;
+      $usermail = strtolower(trim($_POST['usrml']));
+      $username = trim($_POST['usr']);
+      $website  = trim($_POST['usrpg']);
+    }
 
     $this->error = checkStandForm($username, $content, $usermail, $website,
                                   trim($_POST['date']), $_POST['email'],
@@ -99,14 +112,6 @@ class ArticlePage extends RequestPage {
 
     $content      = remDoubles($content, array('[b]','[i]','[u]'));
     $reply_to     = checkReplyId(trim($_POST['reply']));
-    $cookie_user  = User::newFromCookie();
-
-    if ($cookie_user && $cookie_user->isAdmin()) {
-      $cookie_user->refreshCookies();
-      $enable   = 2;
-      $usermail = strtolower(ADMIN_GRAV_MAIL);
-      $website  = ADMIN_WEBPAGE;
-    }
 
     $error_return = $this->article->getLink();
 

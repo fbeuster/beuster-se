@@ -665,6 +665,7 @@
   },
   "general_form" : {
     "clear" : "Clear form",
+    "commenting_as" : "You're commenting as %s (%s).",
     "disclaimer" : "Marked fields (*) are required, your mail adress won't be published. Furter information can be found under %s.",
     "error" : "Error",
     "errors" : {

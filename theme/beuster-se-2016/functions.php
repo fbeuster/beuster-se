@@ -138,6 +138,8 @@
 
   function makeForm($err, $dest, $time, $title, $formType, $reply = 'null') {
     $ret = '';
+    $user = User::newFromCookie();
+
     switch($err['t']) {
       case 1:
         $ret .= '<p class="alert">'.I18n::t('general_form.errors.incomplete').'</p>'."\r";
@@ -159,12 +161,14 @@
     $ret .= ' <fieldset>'."\r";
     $ret .= '  <legend>'.$title.'</legend>'."\r";
 
-    $ret .= '  <label class="required"><span>'.I18n::t('general_form.name.label').'</span>';
-    $ret .= '  <input type="text" name="usr" required="required"';
-    if($err['t'] != 0 && $err['c'] != '') {
-      $ret .= ' value="'.$err['c']['user'].'"';
+    if (!$user) {
+      $ret .= '  <label class="required"><span>'.I18n::t('general_form.name.label').'</span>';
+      $ret .= '  <input type="text" name="usr" required="required"';
+      if($err['t'] != 0 && $err['c'] != '') {
+        $ret .= ' value="'.$err['c']['user'].'"';
+      }
+      $ret .= ' placeholder="'.I18n::t('general_form.name.placeholder').'"></label>'."\r";
     }
-    $ret .= ' placeholder="'.I18n::t('general_form.name.placeholder').'"></label>'."\r";
 
     $ret .= '  <span class="antSp">'."\r";
     $ret .= '   <label for="email">'.I18n::t('general_form.mail_spam.label').'</label>'."\r";
@@ -177,19 +181,37 @@
     $ret .= '   <input type="text" name="homepage">'."\r";
     $ret .= '  </span>'."\r";
 
-    $ret .= '  <label class="required"><span>'.I18n::t('general_form.mail.label').'</span>';
-    $ret .= '  <input type="text" name="usrml" required="required"';
-    if($err['t'] != 0 && $err['c'] != '') {
-      $ret .= ' value="'.$err['c']['mail'].'"';
-    }
-    $ret .= ' placeholder="'.I18n::t('general_form.mail.placeholder').'"></label>'."\r";
+    if (!$user) {
+      $ret .= '  <label class="required"><span>'.I18n::t('general_form.mail.label').'</span>';
+      $ret .= '  <input type="text" name="usrml" required="required"';
+      if($err['t'] != 0 && $err['c'] != '') {
+        $ret .= ' value="'.$err['c']['mail'].'"';
+      }
+      $ret .= ' placeholder="'.I18n::t('general_form.mail.placeholder').'"></label>'."\r";
 
-    $ret .= '  <label><span>'.I18n::t('general_form.website.label').'</span>';
-    $ret .= '  <input type="text" name="usrpg"';
-    if($err['t'] != 0 && $err['c'] != '') {
-      $ret .= ' value="'.$err['c']['page'].'"';
+      $ret .= '  <label><span>'.I18n::t('general_form.website.label').'</span>';
+      $ret .= '  <input type="text" name="usrpg"';
+      if($err['t'] != 0 && $err['c'] != '') {
+        $ret .= ' value="'.$err['c']['page'].'"';
+      }
+      $ret .= ' placeholder="'.I18n::t('general_form.website.placeholder').'"></label>'."\r";
     }
-    $ret .= ' placeholder="'.I18n::t('general_form.website.placeholder').'"></label>'."\r";
+
+    if ($user) {
+      if ($user->getWebsite() == '') {
+        $name = $user->getClearname();
+
+      } else {
+        $name = '<a href="'.rewriteUrl($user->getWebsite()).'">';
+        $name .= $user->getClearname();
+        $name .= '</a>';
+      }
+
+      $ret .= '<p>';
+      $ret .= I18n::t('general_form.commenting_as',
+                      array($name, $user->getMail()));
+      $ret .= '</p>';
+    }
 
     $ret .= '  <label class="required"><span class="textarea">'.I18n::t('comment.form.message.label').'</span>';
     $ret .= '  <textarea name="usrcnt" id="usrcnt" required="required"';
