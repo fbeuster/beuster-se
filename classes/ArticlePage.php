@@ -205,11 +205,18 @@ class ArticlePage extends RequestPage {
 
   private function sendNotifications($comment) {
     $notified   = array();
+
+    # don't notify author of comment
     $notified[] = $comment->getAuthor()->getId();
 
     # notify admin about comment
-    MailService::commentNotification($this->article, $comment);
-    $notified[] = $comment->getAuthor()->getId();
+    $admin_mail = MailService::getAdminNotificationMail();
+    $admin      = User::newFromMail( $admin_mail );
+
+    if (!in_array($admin->getId(), $notified)) {
+      MailService::commentNotification($this->article, $comment);
+      $notified[] = $admin->getId();
+    }
 
     # notify users about answer
     if ($comment->getParentId() > 0) {

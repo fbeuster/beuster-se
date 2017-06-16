@@ -66,7 +66,6 @@
         $user_mail = $user->getMail();
       }
 
-
       if (Utilities::getRemoteAddress() === null) {
         $system = Utilities::getSystemAddress();
 
