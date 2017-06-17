@@ -32,7 +32,7 @@
     public static function commentNotification($article, $comment, $user = null) {
       if (!isset($article) ||
           !isset($comment) ||
-          !Utilities::isDevServer()) {
+          Utilities::isDevServer()) {
         return false;
       }
 
@@ -44,7 +44,7 @@
       }
 
       $from   = $site_name.' <'.$server_mail.'>';
-      $header = MailService::getNotificationMailHeader();
+      $header = MailService::getNotificationMailHeader($from);
 
       if ($comment->getAuthor()->getWebsite() == '') {
         $user_page = '';
