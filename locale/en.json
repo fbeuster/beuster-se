@@ -293,7 +293,7 @@
       "success" : "All category changes have been saved."
     },
     "comment" : {
-      "label" : ""
+      "label" : "Comment management"
     },
     "footer" : {
       "cms" : "Lixter CMS by Felix Beuster",

@@ -28,7 +28,7 @@
         $ret = '';
         switch($err['t']) {
             case 1:
-                $ret .= '<p class="alert">'.I18n::t('general_form.errors.incomplete').'</p>'."\r";
+                $ret .= '<p class="alert">'.I18n::t('general_form.errors.incomplete_form').'</p>'."\r";
                 break;
             case 2:
                 $ret .= '<p class="alert">'.I18n::t('general_form.errors.too_quick').'</p>'."\r";

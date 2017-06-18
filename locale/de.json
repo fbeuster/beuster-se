@@ -293,6 +293,9 @@
       },
       "success" : "Alle Änderungen wurden erfolgreich gespeichert."
     },
+    "comment" : {
+      "label" : "Kommentarverwaltung"
+    },
     "footer" : {
       "cms" : "Lixter CMS von Felix Beuster",
       "copy" : "&copy; Copyright 2010 - 2017",
