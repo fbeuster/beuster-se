@@ -156,30 +156,12 @@ class Lixter {
       if (isset($_GET['p'])) {
         # page argument found
 
-        if (AbstractAdminPage::exists($_GET['p'])) {
-          # page argument is admin page
-          $user = User::newFromCookie();
-
-          if ($user && $user->isAdmin()) {
-            $class_name = AbstractAdminPage::getClass($_GET['p']);
-            $this->page = new $class_name();
-
-          } else if ($user) {
-
-          } else {
-            if ($_GET['p'] == 'login') {
-              $this->page = new LoginPage();
-
-            } else {
-              $link       = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
-              $message    = I18n::t('admin.not_logged_in').$link;
-              $this->page = new ErrorPage($message, 'login');
-            }
-          }
-
-        } else if ($_GET['p'] == 'search') {
+        if ($_GET['p'] == 'search') {
+          echo '<pre>'; print_r('test'); echo '</pre>';
           # page argument is search page
           $this->page = new SearchPage();
+
+          echo '<pre>'; print_r($this->page->isValid()); echo '</pre>';
 
           if ($this->page->isValid()) {
             $this->page->search();
@@ -204,6 +186,27 @@ class Lixter {
           if (!$this->page->isValid()) {
             # add note at the top of the page
             $this->page = new CategoryPage();
+          }
+
+        } else if (AbstractAdminPage::exists($_GET['p'])) {
+          # page argument is admin page
+          $user = User::newFromCookie();
+
+          if ($user && $user->isAdmin()) {
+            $class_name = AbstractAdminPage::getClass($_GET['p']);
+            $this->page = new $class_name();
+
+          } else if ($user) {
+
+          } else {
+            if ($_GET['p'] == 'login') {
+              $this->page = new LoginPage();
+
+            } else {
+              $link       = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
+              $message    = I18n::t('admin.not_logged_in').$link;
+              $this->page = new ErrorPage($message, 'login');
+            }
           }
 
         } else if ($_GET['p'] == 'blog' && isset($_GET['c'])
