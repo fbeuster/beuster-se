@@ -67,7 +67,7 @@
       $content .= '  }                                       '."\r";
       $content .= ' //-->'."\n";
       $content .= '</script>'."\n";
-      $content .= '<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">'."\n";
+      $content .= '<script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js">'."\n";
       $content .= '</script>'."\n";
     }
 
@@ -97,7 +97,7 @@
       $content = '<script type="text/javascript"><!--'."\n";
       $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
       $content .= '//--></script>'."\n";
-      $content .= '<script type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/ads.js"></script>'."\n";
+      $content .= '<script type="text/javascript" src="https://ir-de.amazon-adsystem.com/s/ads.js"></script>'."\n";
     }
 
     $config = array("title"   => "",
