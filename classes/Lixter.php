@@ -157,11 +157,8 @@ class Lixter {
         # page argument found
 
         if ($_GET['p'] == 'search') {
-          echo '<pre>'; print_r('test'); echo '</pre>';
           # page argument is search page
           $this->page = new SearchPage();
-
-          echo '<pre>'; print_r($this->page->isValid()); echo '</pre>';
 
           if ($this->page->isValid()) {
             $this->page->search();
