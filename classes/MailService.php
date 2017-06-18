@@ -95,12 +95,12 @@
                               array($article->getTitle(), $site_name) );
 
       $body = file_get_contents('system/views/comment_mail.php');
-      $body = preg_replace('/{{title}}/',       $subject,               $body);
-      $body = preg_replace('/{{description}}/', $description,           $body);
-      $body = preg_replace('/{{forward}}/',     $forward,               $body);
-      $body = preg_replace('/{{footer}}/',      $footer,                $body);
-      $body = preg_replace('/{{copy}}/',        $copy,                  $body);
-      $body = preg_replace('/{{message}}/',     $comment->getContent(), $body);
+      $body = preg_replace('/{{title}}/',       $subject,     $body);
+      $body = preg_replace('/{{description}}/', $description, $body);
+      $body = preg_replace('/{{forward}}/',     $forward,     $body);
+      $body = preg_replace('/{{footer}}/',      $footer,      $body);
+      $body = preg_replace('/{{copy}}/',        $copy,        $body);
+      $body = preg_replace('/{{message}}/',     $comment->getContentParsed(), $body);
 
       return mail( $user_mail, $subject, $body, $header );
     }
