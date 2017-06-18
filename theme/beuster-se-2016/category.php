@@ -35,16 +35,18 @@
     <?php } ?>
 
   <?php } else if ($page->getType() === Page::INDEX_PAGE) { ?>
-    <menu class="subcategories">
-      <li><?php I18n::e('utilities.subcategories'); ?>:</li>
-      <?php foreach ($category->getChildren() as $child) { ?>
-        <li>
-          <a href="/<?php echo $child->getNameUrl(); ?>">
-            <?php echo $child->getName(); ?>
-          </a>
-        </li>
-      <?php } ?>
-    </menu>
+    <?php if (count($category->getChildren())) { ?>
+      <menu class="subcategories">
+        <li><?php I18n::e('utilities.subcategories'); ?>:</li>
+        <?php foreach ($category->getChildren() as $child) { ?>
+          <li>
+            <a href="/<?php echo $child->getNameUrl(); ?>">
+              <?php echo $child->getName(); ?>
+            </a>
+          </li>
+        <?php } ?>
+      </menu>
+    <?php } ?>
   <?php } ?>
 
 <?php if ($page->hasArticles()) {
