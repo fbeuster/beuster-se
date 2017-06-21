@@ -106,10 +106,22 @@
     }
 
     public static function feedbackNotification($values) {
+      $page_title = '';
       $protocol   = Lixter::getLix()->getProtocol();
       $site_link  = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
       $site_link  = '<a href="'.$protocol.'://'.$site_link.'">'.$site_link.'</a>';
       $site_name  = Config::getConfig()->get('site_name');
+
+
+      $fields = array('title');
+      $conds = array('url = ?', 's', array($_GET['p']));
+
+      $db   = Database::getDB();
+      $res  = $db->select('static_pages', $fields, $conds);
+
+      foreach ($res as $page) {
+        $page_title = $page['title'] . ' - ';
+      }
 
       # mail info
       $from       = $values[FeedbackPage::NAME_NAME].
@@ -136,7 +148,7 @@
                               array($values[FeedbackPage::NAME_NAME]));
 
       $description  = I18n::t('general_form.notification.description',
-                              array($site_name,
+                              array($page_title . $site_name,
                                     $values[FeedbackPage::NAME_NAME],
                                     $page_link));
 
