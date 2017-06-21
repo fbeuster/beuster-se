@@ -10,7 +10,13 @@
 
     <?php if ($static_page->getType() == Page::FEEDBACK_PAGE) { ?>
       <section class="comments">
-        <h2>Hast du Feedback?</h2>
-      <?php $static_page->getForm()->show('userform'); ?>
+        <?php # TODO title should be set in the static page form ?>
+        <?php if ($static_page->getUrl() == 'kontakt') { ?>
+          <h2>Kontaktformular</h2>
+
+        <?php } else { ?>
+          <h2>Hast du Feedback?</h2>
+        <?php } ?>
+        <?php $static_page->getForm()->show('userform'); ?>
       </section>
     <?php } ?>

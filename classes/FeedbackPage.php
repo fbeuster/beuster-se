@@ -80,6 +80,10 @@ class FeedbackPage extends Page {
     return $this->title;
   }
 
+  public function getUrl() {
+    return $this->url;
+  }
+
   public function getFileName() {
     return $this->file_name;
   }
