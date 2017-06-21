@@ -128,7 +128,7 @@
                     '<'.$values[FeedbackPage::NAME_MAIL].'>';
       $subject    = I18n::t('general_form.notification.subject',
                             array($values[FeedbackPage::NAME_NAME],
-                                  $site_name));
+                                  $page_title . $site_name));
       $to         = MailService::getAdminNotificationMail();
 
       if ($values[FeedbackPage::NAME_PAGE] == '') {
