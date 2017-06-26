@@ -475,16 +475,16 @@ abstract class ArticleParser {
             $text       = $asins[2][$k];
 
             if ($tag === null || $tag === '') {
-                $href       = 'http://www.amazon.de/gp/product/'.$asin;
+                $href       = 'https://www.amazon.de/gp/product/'.$asin;
                 $replace    = '<a href="'.$href.'">'.$text.'</a>';
 
             } else {
-                $href       = 'http://www.amazon.de/gp/product/'.$asin;
-                $href       .= '/ref=as_li_ss_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=';
+                $href       = 'https://www.amazon.de/gp/product/'.$asin;
+                $href       .= '/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=';
                 $href       .= $asin.'&linkCode=as2&tag='.$tag;
                 $replace    = '<a href="'.$href.'">'.$text.' *</a>';
 
-                $src        = 'http://ir-de.amazon-adsystem.com/e/ir?t='.$tag.'&l=as2&o=3&a='.$asin;
+                $src        = 'https://ir-de.amazon-adsystem.com/e/ir?t='.$tag.'&l=am2&o=3&a='.$asin;
                 $replace    .= '<img src="'.$src.'" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />';
             }
 
@@ -875,11 +875,11 @@ class ContentParser extends ArticleParser {
         $play   = $iframe_pre.'src="https://www.youtube.com/embed/videoseries?list=$1"'.$iframe_post;
         $video  = $iframe_pre.'src="https://www.youtube.com/embed/$1"'.$iframe_post;
 
-        $p_link = '<a href="http://www.youtube.com/playlist?list=$1">'.I18n::t('article.content.playlist.link_text').'</a>';
+        $p_link = '<a href="https://www.youtube.com/playlist?list=$1">'.I18n::t('article.content.playlist.link_text').'</a>';
         $p_note = I18n::t('article.content.playlist.player_too_small',
                           $p_link);
 
-        $v_link = '<a href="http://www.youtube.com/watch?v=$1">'.I18n::t('article.content.video.link_text').'</a>';
+        $v_link = '<a href="https://www.youtube.com/watch?v=$1">'.I18n::t('article.content.video.link_text').'</a>';
         $v_note = I18n::t('article.content.video.player_too_small',
                           $v_link);
 
@@ -935,7 +935,7 @@ class CommentParser extends ArticleParser {
     }
 
     public function embedVideo() {
-        $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="http://youtu.be/$1">Video ansehen</a> ', $this->str);
+        $this->str = preg_replace('#\[yt\](.*)\[/yt\]#Ui', '<a href="https://youtu.be/$1">Video ansehen</a> ', $this->str);
     }
 }
 ?>
