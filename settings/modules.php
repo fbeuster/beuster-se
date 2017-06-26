@@ -86,14 +86,12 @@
    */
   function moduleAmazon($width, $height) {
     $amazon_tag = Config::getConfig()->get('amazon_tag');
-    $classes    = "amazon";
+    $classes    = "amazon w".$width;
 
-    if (Utilities::isDevServer()) {
+    if (Utilities::isDevServer() || User::newFromCookie()) {
       $content = 'Amazon Widget'."\n";
 
     } else {
-      $classes .= " w".$width;
-
       $content = '<script type="text/javascript"><!--'."\n";
       $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
       $content .= '//--></script>'."\n";
