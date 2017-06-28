@@ -3,8 +3,7 @@
     <article>
       <section class="article">
         <h1><?php echo $static_page->getTitle(); ?></h1>
-        <?php echo $static_page->getParsedContent(); ?>
-        <?php echo $static_page->addUriSnippets(); ?>
+        <?php echo $static_page->getDecoratedContent(); ?>
       </section>
     </article>
 

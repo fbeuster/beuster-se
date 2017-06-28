@@ -31,6 +31,13 @@ class StaticPage extends Page {
     return $this->content;
   }
 
+  public function getDecoratedContent() {
+    $id = new ImageDecorator($this->getParsedContent());
+    $sd = new SnippetDecorator($id->getContent());
+
+    return $sd->getContent();
+  }
+
   public function getParsedContent() {
     return '<p>'.Parser::parse($this->content, Parser::TYPE_CONTENT).'</p>';
   }
