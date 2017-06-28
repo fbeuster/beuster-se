@@ -62,6 +62,7 @@
         <span class="expander">Menü anzeigen</span>
         <menu class="clearfix">
           <?php genMenu(); ?>
+          <li><a href="/kontakt">Kontakt</a></li>
         </menu>
       </nav>
     </div>
