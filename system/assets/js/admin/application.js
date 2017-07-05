@@ -6,6 +6,7 @@ var admin = admin || {};
 //@ lib/_i18n
 //@ lib/_utilities
 //@ articleactions
+//@ attachmentActions
 //@ staticPageActions
 //@ bbcode
 //@ snippetpreview
@@ -16,6 +17,7 @@ $(document).ready(function(){
 
   function runApp() {
     admin.articleActions.init();
+    admin.attachmentActions.init();
     admin.staticPageActions.init();
     admin.bbCode.init();
     admin.snippetPreview.init();

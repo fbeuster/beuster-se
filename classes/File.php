@@ -35,6 +35,16 @@ class File {
 		$this->loadFile();
 	}
 
+	public static function exists($id) {
+    $db = Database::getDB();
+
+    $fields = array('file_name');
+    $conds  = array('id = ?', 'i', array($id));
+    $res    = $db->select('attachments', $fields, $conds);
+
+    return count($res) == 1;
+	}
+
 	public function getDownloads() {
 		return $this->downloads;
 	}

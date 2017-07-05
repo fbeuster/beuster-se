@@ -14,7 +14,7 @@
       </label>
     </form>
     <?php if (count($this->attachments)) { ?>
-      <table class="entry_list articles">
+      <table class="entry_list attachments">
         <thead>
           <tr>
             <th class="smallNumber">#</th>
@@ -29,7 +29,7 @@
         <?php
           $i = 0;
           foreach($this->attachments as $entry) { ?>
-        <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-article="<?php echo $entry['id']; ?>">
+        <tr class=<?php echo '"backendTableRow'.($i%2).'"'; ?> data-attachment="<?php echo $entry['id']; ?>">
           <td ><?php echo ($i+1); ?></td>
           <td class="title"><?php echo $entry['file_name']; ?></td>
           <td class="title"><?php echo $entry['file_path']; ?></td>
