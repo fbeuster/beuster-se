@@ -211,6 +211,31 @@
         }
       }
     },
+    "attachment" : {
+      "overview" : {
+        "delete" : {
+          "text" : "Löschen",
+          "title" : "Klicken zum Löschen"
+        },
+        "edit" : {
+          "text" : "Bearbeiten",
+          "title" : "Klicken zum Bearbeiten"
+        },
+        "empty" : "Es sind keine Dateianhänge vorhanden.",
+        "filter" : {
+          "label" : "Filter Dateianhangliste",
+          "placeholder" : "Dateianhangname"
+        },
+        "label" : "Dateianhangliste",
+        "summary" : "Es sind insgesamt %s Dateianhänge vorhanden.",
+        "table_header" : {
+          "downloads" : "Downloads",
+          "file_name" : "Dateiname",
+          "file_path" : "Dateipfad",
+          "version" : "Version"
+        }
+      }
+    },
     "back_link" : "< Zurück zur Seitenverwaltung",
     "category" : {
       "label" : "Kategorieverwaltung",
@@ -308,6 +333,12 @@
         "label" : "Artikel",
         "new" : "Artikel erstellen",
         "overview" : "Artikelübersicht"
+      },
+      "attachment" : {
+        "edit" : "Dateianhang bearbeiten",
+        "label" : "Dateianhänge",
+        "new" : "Dateianhang erstellen",
+        "overview" : "Dateianhangübersicht"
       },
       "category" : {
         "label" : "Kategorien",

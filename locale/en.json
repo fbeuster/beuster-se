@@ -210,6 +210,31 @@
         }
       }
     },
+    "attachment" : {
+      "overview" : {
+        "delete" : {
+          "text" : "Delete",
+          "title" : "Click to delete"
+        },
+        "edit" : {
+          "text" : "Edit",
+          "title" : "Click to edit"
+        },
+        "empty" : "There are no attachments yet.",
+        "filter" : {
+          "label" : "Filter attachment list",
+          "placeholder" : "Attachment name"
+        },
+        "label" : "Attachment overview list",
+        "summary" : "A total of %s attachments are available.",
+        "table_header" : {
+          "downloads" : "Downloads",
+          "file_name" : "File name",
+          "file_path" : "File path",
+          "version" : "Version"
+        }
+      }
+    },
     "back_link" : "< Back to page administration",
     "category" : {
       "label" : "Category management",
@@ -307,6 +332,12 @@
         "label" : "Articles",
         "new" : "New article",
         "overview" : "Article overview"
+      },
+      "attachment" : {
+        "edit" : "Edit attachment",
+        "label" : "Attachments",
+        "new" : "New attachment",
+        "overview" : "Attachments overview"
       },
       "category" : {
         "label" : "Categories",
