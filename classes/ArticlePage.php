@@ -23,7 +23,6 @@ class ArticlePage extends RequestPage {
 
     if (isset($_GET['n']) && is_numeric($_GET['n'])) {
       $this->article_id = $_GET['n'];
-      $this->increaseHitCount();
       $this->loadPage();
       $this->setExpectedRequestMethod(RequestPage::METHOD_POST);
       $this->setRequestMethod($_SERVER['REQUEST_METHOD']);
@@ -199,8 +198,17 @@ class ArticlePage extends RequestPage {
 
   private function loadPage() {
     $this->article  = new Article($this->article_id);
-    $this->title    = $this->article->getTitle();
-    $this->valid    = true;
+    $cookie_user    = User::newFromCookie();
+
+    if ($this->article->getEnable()
+        || (!$this->article->getEnable()
+            && $cookie_user
+            && $cookie_user->isAdmin())
+        ) {
+      $this->title    = $this->article->getTitle();
+      $this->valid    = true;
+      $this->increaseHitCount();
+    }
   }
 
   private function sendNotifications($comment) {
