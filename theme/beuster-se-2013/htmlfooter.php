@@ -53,6 +53,8 @@
   </div>
   <!-- ende lightbox -->
 
+  <?php EUCookieNotifier::embed('/impressum'); ?>
+
   <?php
     if (!Utilities::isDevServer() &&
         Config::getConfig()->get('google_analytics') != null) {

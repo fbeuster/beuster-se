@@ -29,6 +29,8 @@
       </div>
     </div>
 
+    <?php EUCookieNotifier::embed('/impressum'); ?>
+
   <?php if (Utilities::isDevServer()) { ?>
   <!-- No Google Analytics, dev server -->
 
