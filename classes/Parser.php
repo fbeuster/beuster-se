@@ -860,7 +860,7 @@ class ContentParser extends ArticleParser {
 
     public function blockquotes() {
         parent::collectQuotes();
-        $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '</p><blockquote cite="$1">$2<br><span class="source">Quelle: $1</span></blockquote><p>', $this->str);
+        $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '</p><blockquote cite="$1"><p>$2</p><span class="source">Quelle: $1</span></blockquote><p>', $this->str);
     }
 
     public function embedVideo() {
