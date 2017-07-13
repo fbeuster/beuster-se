@@ -15,6 +15,11 @@
  */
 class File {
 
+  const ATTACHMENT_PATH = 'files/';
+  const DEFAULT_TYPE    = 0;
+  const FILE_MAX_SIZE   = 5242880;
+  const FILE_MIN_SIZE   = 0;
+
 	private $id;		/**< id of File */
 	private $name;		/**< name of File */
 	private $path;		/**< path to File */
@@ -64,6 +69,35 @@ class File {
 	public function getVersion() {
 		return $this->version;
 	}
+
+  public static function isValidSize($size) {
+    return $size > self::FILE_MIN_SIZE && $size <= self::FILE_MAX_SIZE;
+  }
+
+  public static function saveUploadedFile($file, $tmp_name) {
+    $pre_path = self::ATTACHMENT_PATH;
+
+    if (!is_writable($pre_path)) {
+      return false;
+
+    } else {
+      $counter        = 0;
+      $file_name      = pathinfo($file, PATHINFO_FILENAME);
+      $file_extension = pathinfo($file, PATHINFO_EXTENSION);
+      $path           = $pre_path.$file_name . '.' . $file_extension;
+      $save_name      = $file_name . '.' . $file_extension;
+
+      while (file_exists($path)) {
+        $save_name  = $file_name . '_' . $counter . '.' . $file_extension;
+        $path       = $pre_path . $save_name;
+        $counter++;
+      }
+
+      move_uploaded_file($tmp_name, $path);
+
+      return $path;
+    }
+  }
 
 	/*** PRIVATE ***/
 

@@ -17,7 +17,6 @@
           "label" : "Kategorie",
           "placeholder" : "Kategorie wählen..."
         },
-        "content_label" : "Inhalt",
         "choose" : {
           "label" : "Artikel wählen",
           "placeholder" : "Bitte wählen...",
@@ -212,6 +211,36 @@
       }
     },
     "attachment" : {
+      "new" : {
+        "error" : {
+          "empty_license" : "Lizenz kann nicht leer sein.",
+          "empty_name" : "Name kann nicht leer sein.",
+          "empty_version" : "Version kann nicht leer sein.",
+          "license_too_long" : "Lizenz ist zu lang, Maximum ist %s Zeichen.",
+          "name_too_long" : "Name ist zu lang, Maximum ist %s Zeichen.",
+          "no_file" : "Es wurde keine Datei hochgeladen.",
+          "version_too_long" : "Version ist zu lang, Maximum ist %s Zeichen."
+        },
+        "file" : {
+          "label" :  "Datei, max %s",
+          "placeholder" :  "Füge eine Datei hinyu, Maximalgröße %s"
+        },
+        "label" : "Dateianhang erstellen",
+        "license" : {
+          "label" : "Lizenz",
+          "placeholder" : "Lizenz des Anhangs"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name des Anhangs"
+        },
+        "submit" : "Dateianhang erstellen",
+        "success" : "Der Dateianhang wurde erstellt.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version des Anhangs"
+        }
+      },
       "overview" : {
         "delete" : {
           "text" : "Löschen",

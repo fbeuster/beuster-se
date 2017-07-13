@@ -17,12 +17,12 @@
           "label" : "Category",
           "placeholder" : "Select category..."
         },
-        "content_label" : "Content",
         "choose" : {
           "label" : "Select article",
           "placeholder" : "Please select...",
           "submit" : "Edit selected article"
         },
+        "content_label" : "Content",
         "error" : {
           "category_old_new" : "Old and new category can't be used at the same time.",
           "empty_content" : "The content cannot be empty.",
@@ -211,6 +211,36 @@
       }
     },
     "attachment" : {
+      "new" : {
+        "error" : {
+          "empty_license" : "License cannot be empty.",
+          "empty_name" : "Name cannot be empty.",
+          "empty_version" : "Version cannot be empty.",
+          "license_too_long" : "License is too long, maximum is %s characters.",
+          "name_too_long" : "Name is too long, maximum is %s characters.",
+          "no_file" : "You have to upload a file.",
+          "version_too_long" : "Version is too long, maximum is %s characters."
+        },
+        "file" : {
+          "label" :  "File, max %s",
+          "placeholder" :  "Add a file, maximum size %s"
+        },
+        "label" : "Create attachment",
+        "license" : {
+          "label" : "License",
+          "placeholder" : "License of the attachment"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name of attachment"
+        },
+        "submit" : "Create attachment",
+        "success" : "The attachment has been created.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version of the attachment"
+        }
+      },
       "overview" : {
         "delete" : {
           "text" : "Delete",

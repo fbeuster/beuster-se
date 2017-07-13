@@ -19,6 +19,7 @@
     <h2><?php I18n::e('admin.navigation.attachment.label'); ?></h2>
     <ul class="pagesList">
       <li><a href="/attachment-overview"><?php I18n::e('admin.navigation.attachment.overview'); ?></a></li>
+      <li><a href="/attachment-create"><?php I18n::e('admin.navigation.attachment.new'); ?></a></li>
     </ul>
 
     <h2><?php I18n::e('admin.navigation.category.label'); ?></h2>
