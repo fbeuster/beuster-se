@@ -40,6 +40,14 @@ class File {
 		$this->loadFile();
 	}
 
+  public static function delete($path) {
+    if (file_exists($path)) {
+      return unlink($path);
+    }
+
+    return false;
+  }
+
 	public static function exists($id) {
     $db = Database::getDB();
 
