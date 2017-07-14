@@ -211,6 +211,41 @@
       }
     },
     "attachment" : {
+      "edit" : {
+        "choose" : {
+          "label" : "Select attachment",
+          "placeholder" : "Please select...",
+          "submit" : "Edit selected attachment"
+        },
+        "error" : {
+          "empty_license" : "License cannot be empty.",
+          "empty_name" : "Name cannot be empty.",
+          "empty_version" : "Version cannot be empty.",
+          "invalid_attachment_id" : "The attachment ID is invalid.",
+          "license_too_long" : "License is too long, maximum is %s characters.",
+          "name_too_long" : "Name is too long, maximum is %s characters.",
+          "no_attachment_selected" : "No attachment was selected.",
+          "version_too_long" : "Version is too long, maximum is %s characters."
+        },
+        "file" : {
+          "label" :  "Current file on disk: %s"
+        },
+        "label" : "Change attachment",
+        "license" : {
+          "label" : "License",
+          "placeholder" : "License of the attachment"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name of attachment"
+        },
+        "submit" : "Change attachment",
+        "success" : "The attachment has been changed.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version of the attachment"
+        }
+      },
       "new" : {
         "error" : {
           "empty_license" : "License cannot be empty.",

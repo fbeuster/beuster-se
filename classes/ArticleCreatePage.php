@@ -16,9 +16,6 @@
 
     private function handlePost() {
       if ('POST' == $_SERVER['REQUEST_METHOD']) {
-        $is_new_category  = false;
-        $is_new_playlist  = false;
-
         $db       = Database::getDB()->getCon();
         $dbo      = Database::getDB();
         $user     = User::newFromCookie();

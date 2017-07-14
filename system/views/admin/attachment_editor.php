@@ -26,6 +26,30 @@
       <fieldset>
         <legend><?php I18n::e('admin.attachment.'.$this->action.'.label'); ?></legend>
 
+        <?php if ($this->action == 'edit') { ?>
+
+          <label class="required long <?php if(isset($this->errors['attachment'])) { echo ' has_error'; } ?>">
+            <span>
+              <?php I18n::e('admin.attachment.edit.choose.label'); ?>
+            </span>
+            <select name="attachment">
+              <option value="0">
+                <?php I18n::e('admin.attachment.edit.choose.placeholder'); ?>
+              </option>
+              <?php foreach($this->attachments as $attachments) { ?>
+                <option value="<?php echo $attachments['id']; ?>">
+                <?php echo $attachments['file_name']; ?>
+                </option>
+              <?php } ?>
+            </select>
+          </label>
+          <input type="submit" name="formselect" value="<?php I18n::e('admin.attachment.edit.choose.submit'); ?>">
+          <br>
+
+          <input type="hidden" name="attachment_id" size="5" value="<?php if (isset($this->values['id'])) { echo $this->values['id']; } ?>">
+
+        <?php } ?>
+
         <label class="required <?php if(isset($this->errors['name'])) { echo ' has_error'; } ?>">
           <span><?php I18n::e('admin.attachment.'.$this->action.'.name.label'); ?></span>
           <input type="text" name="name" role="newEntryTitle" placeholder="<?php I18n::e('admin.attachment.'.$this->action.'.name.placeholder'); ?>" title="<?php I18n::e('admin.attachment.'.$this->action.'.name.placeholder'); ?>" value="<?php if (isset($this->values, $this->values['name'])) { echo $this->values['name']; } ?>">
@@ -45,12 +69,22 @@
           <input type="text" name="version" placeholder="<?php I18n::e('admin.attachment.'.$this->action.'.version.placeholder'); ?>" title="<?php I18n::e('admin.attachment.'.$this->action.'.version.placeholder'); ?>" value="<?php if(isset($this->values['version'])) echo $this->values['version']; ?>">
         </label>
 
-        <label class="required long <?php if(isset($this->errors['version']) || isset($this->errors['category_parent'])) { echo ' has_error'; } ?>">
-          <span>
-            <?php I18n::e('admin.attachment.'.$this->action.'.file.label', array('5MB')); ?>
-          </span>
-          <input type="file" name="file[]" title="<?php I18n::e('admin.attachment.'.$this->action.'.file.placeholder', array('5MB')); ?>" >
-        </label>
+        <?php if ($this->action == 'new') { ?>
+
+          <label class="required long <?php if(isset($this->errors['version']) || isset($this->errors['category_parent'])) { echo ' has_error'; } ?>">
+            <span>
+              <?php I18n::e('admin.attachment.new.file.label', array('5MB')); ?>
+            </span>
+            <input type="file" name="file[]" title="<?php I18n::e('admin.attachment.new.file.placeholder', array('5MB')); ?>" >
+          </label>
+
+        <?php } else if ( $this->action == 'edit' &&
+                          isset($this->values['id'])) { ?>
+          <p class="current_file">
+            <?php I18n::e('admin.attachment.edit.file.label',
+                          $this->values['path']); ?>
+          </p>
+        <?php } ?>
 
         <input type="submit" name="<?php echo $this->submit; ?>" value="<?php I18n::e('admin.attachment.'.$this->action.'.submit'); ?>" />
       </fieldset>

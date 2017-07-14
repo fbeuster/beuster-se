@@ -37,7 +37,7 @@
           <td ><?php echo $entry['version']; ?></td>
           <td class="actions">
             <div>
-              <a class="edit"  title="<?php I18n::e('admin.attachment.overview.edit.title'); ?>" href="/attachment-edit/a/<?php echo $entry['id']; ?>">
+              <a class="edit"  title="<?php I18n::e('admin.attachment.overview.edit.title'); ?>" href="/attachment-edit/at/<?php echo $entry['id']; ?>">
                 <?php I18n::e('admin.attachment.overview.edit.text'); ?>
               </a>
               <a class="delete" title="<?php I18n::e('admin.attachment.overview.delete.title'); ?>">

@@ -211,6 +211,41 @@
       }
     },
     "attachment" : {
+      "edit" : {
+        "choose" : {
+          "label" : "Anhang wählen",
+          "placeholder" : "Bitte wählen...",
+          "submit" : "Gewählten Anhang bearbeiten"
+        },
+        "error" : {
+          "empty_license" : "Lizenz kann nicht leer sein.",
+          "empty_name" : "Name kann nicht leer sein.",
+          "empty_version" : "Version kann nicht leer sein.",
+          "invalid_attachment_id" : "Die ID des Anhangs ist ungültig.",
+          "license_too_long" : "Lizenz ist zu lang, Maximum ist %s Zeichen.",
+          "name_too_long" : "Name ist zu lang, Maximum ist %s Zeichen.",
+          "no_attachment_selected" : "Es wurde kein Anhang ausgewählt",
+          "version_too_long" : "Version ist zu lang, Maximum ist %s Zeichen."
+        },
+        "file" : {
+          "label" :  "Aktuell gespeicherte Datei: %s"
+        },
+        "label" : "Dateianhang ändern",
+        "license" : {
+          "label" : "Lizenz",
+          "placeholder" : "Lizenz des Anhangs"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name des Anhangs"
+        },
+        "submit" : "Dateianhang ändern",
+        "success" : "Der Dateianhang wurde geändert.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version des Anhangs"
+        }
+      },
       "new" : {
         "error" : {
           "empty_license" : "Lizenz kann nicht leer sein.",
