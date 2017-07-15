@@ -13,6 +13,11 @@
   "admin" : {
     "article" : {
       "edit" : {
+        "attachments" : {
+          "label" : "Dateianhänge",
+          "placeholder" : "Dateianhang auswählen",
+          "title" : "Zum Entfernen klicken"
+        },
         "category" : {
           "label" : "Kategorie",
           "placeholder" : "Kategorie wählen..."
@@ -81,6 +86,10 @@
           "label" : "Veröffentlichungszeit (HH:MM)",
           "placeholder" : "Uhrzeit auswählen"
         },
+        "section" : {
+          "attachments" : "Dateianhänge hinzufügen",
+          "images" : "Bilder hinzufügen"
+        },
         "submit" : "Artikel ändern",
         "success" : "Der Artikel wurde geändert.",
         "tags" : {
@@ -99,6 +108,10 @@
         }
       },
       "new" : {
+          "label" : "Dateianhänge",
+          "placeholder" : "Dateianhang auswählen",
+          "title" : "Zum Entfernen klicken"
+        },
         "category" : {
           "label" : "Kategorie",
           "placeholder" : "Kategorie wählen..."
@@ -158,6 +171,10 @@
         "release_time" : {
           "label" : "Veröffentlichungszeit (HH:MM)",
           "placeholder" : "Uhrzeit auswählen"
+        },
+        "section" : {
+          "attachments" : "Dateianhänge hinzufügen",
+          "images" : "Bilder hinzufügen"
         },
         "submit" : "Artikel erstellen",
         "success" : "Der Artikel wurde erstellt.",

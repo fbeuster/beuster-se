@@ -13,6 +13,11 @@
   "admin" : {
     "article" : {
       "edit" : {
+        "attachments" : {
+          "label" : "Attachments",
+          "placeholder" : "Select attachment...",
+          "title" : "Click to remove"
+        },
         "category" : {
           "label" : "Category",
           "placeholder" : "Select category..."
@@ -81,6 +86,10 @@
           "label" : "Release time (HH:MM)",
           "placeholder" : "Select time"
         },
+        "section" : {
+          "attachments" : "Add attachments",
+          "images" : "Add images"
+        },
         "submit" : "Change article",
         "success" : "The article has been changed.",
         "tags" : {
@@ -99,6 +108,11 @@
         }
       },
       "new" : {
+        "attachments" : {
+          "label" : "Attachments",
+          "placeholder" : "Select attachment...",
+          "title" : "Click to remove"
+        },
         "category" : {
           "label" : "Category",
           "placeholder" : "Select category..."
@@ -158,6 +172,10 @@
         "release_time" : {
           "label" : "Release time (HH:MM)",
           "placeholder" : "Select time"
+        },
+        "section" : {
+          "attachments" : "Add attachments",
+          "images" : "Add images"
         },
         "submit" : "Create article",
         "success" : "The article has been created.",
