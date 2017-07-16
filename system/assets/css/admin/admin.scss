@@ -5,6 +5,18 @@ form.userform {
 
   &.articleform {
     margin-top: 0;
+
+    .section_header {
+      color: $green;
+      font-size: 1.1em;
+      margin-top: 1.5em;
+      margin-bottom: 0;
+    }
+
+    ul.current_attachments li:hover {
+      cursor: pointer;
+      font-weight: bold;
+    }
   }
 
   .bbDiv {
@@ -50,7 +62,6 @@ form.userform {
     border: 0;
     cursor: pointer;
     font-size: 1.1em;
-    margin-bottom: 1em;
     margin-right: 1em;
     padding: 0.5em 1em;
 

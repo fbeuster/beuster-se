@@ -53,8 +53,15 @@
             $article  = new Article($id);
             $cat      = new Category($res[0]['Cat']);
 
+            $attachments = ';';
+
+            foreach ($article->getAttachments() as $attachment) {
+              $attachments .= $attachment->getId() . ';';
+            }
+
             $this->values = array(
               'article_id'    => $id,
+              'attachments'   => $attachments,
               'category'      => $cat->getName(),
               'content'       => Parser::parse( $article->getContent(),
                                                 Parser::TYPE_EDIT),
@@ -101,6 +108,7 @@
         $content  = Parser::parse($_POST['content'], Parser::TYPE_NEW);
 
         $article_id   = $_POST['article_id'];
+        $attachments  = trim($_POST['attachments']);
         $release_date = trim($_POST['release_date']);
         $release_time = trim($_POST['release_time']);
         $tag_string   = trim($_POST['tags']);
@@ -138,6 +146,7 @@
 
         $this->values = array(
                           'article_id'      => $article_id,
+                          'attachments'     => $attachments,
                           'category'        => $category,
                           'category_new'    => $category_new,
                           'category_parent' => $category_parent,
@@ -522,6 +531,27 @@
               $res    = $dbo->insertMany('tags', $fields, $values);
             }
 
+            # delete old attachments
+            $dbo->delete( 'article_attachments',
+                          array('article_id = ?', 'i', array($article_id)) );
+
+            # insert new attachments to DB
+            $attachments_write = array();
+
+            foreach (explode(';', $attachments) as $attachment) {
+              if (trim($attachment) !== '' &&
+                  !in_array($attachment, $attachments_write)) {
+                $attachments_write[] = array($article_id, $attachment);
+              }
+            }
+
+            if (!empty($attachments_write)) {
+              $fields = array('article_id', 'attachment_id');
+              $values = array('ii', $attachments_write);
+              $res    = $dbo->insertMany('article_attachments',
+                                          $fields, $values);
+            }
+
             # update thumbnail
             if (isset($_POST['thumbnail_old'])) {
               $pidF = trim($_POST['thumbnail_old']);
@@ -631,6 +661,10 @@
       $this->categories   = getSubCats();
       $this->categories[] = 'Blog';
       $this->playlists    = getPlaylists();
+
+      $db     = Database::getDB();
+      $fields = array('id', 'file_name');
+      $this->attachments = $db->select('attachments', $fields);
     }
 
     public function show() {

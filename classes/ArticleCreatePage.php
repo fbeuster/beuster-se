@@ -16,9 +16,6 @@
 
     private function handlePost() {
       if ('POST' == $_SERVER['REQUEST_METHOD']) {
-        $is_new_category  = false;
-        $is_new_playlist  = false;
-
         $db       = Database::getDB()->getCon();
         $dbo      = Database::getDB();
         $user     = User::newFromCookie();
@@ -26,6 +23,7 @@
         $title    = Parser::parse($_POST['title'], Parser::TYPE_NEW);
         $content  = Parser::parse($_POST['content'], Parser::TYPE_NEW);
 
+        $attachments  = trim($_POST['attachments']);
         $release_date = trim($_POST['release_date']);
         $release_time = trim($_POST['release_time']);
         $tag_string   = trim($_POST['tags']);
@@ -61,6 +59,7 @@
         }
 
         $this->values = array(
+                          'attachments'     => $attachments,
                           'category'        => $category,
                           'category_new'    => $category_new,
                           'category_parent' => $category_parent,
@@ -240,7 +239,7 @@
           }
         }
 
-        if (empty($errors)) {
+        if (empty($this->errors)) {
           $release_date = $release_date . ' ' . $release_time;
 
           # category, sub-category or playlist?
@@ -401,6 +400,23 @@
               $res    = $dbo->insertMany('tags', $fields, $values);
             }
 
+            # insert attachments to DB
+            $attachments_write = array();
+
+            foreach (explode(';', $attachments) as $attachment) {
+              if (trim($attachment) !== '' &&
+                  !in_array($attachment, $attachments_write)) {
+                $attachments_write[] = array($id, $attachment);
+              }
+            }
+
+            if (!empty($attachments_write)) {
+              $fields = array('article_id', 'attachment_id');
+              $values = array('ii', $attachments_write);
+              $res    = $dbo->insertMany('article_attachments',
+                                          $fields, $values);
+            }
+
             # connect category and article
             $fields = array('NewsID', 'Cat', 'CatID');
             $values = array('iii', array($id, $o_category->getId(), $category_article_id));
@@ -435,6 +451,10 @@
       $this->categories   = getSubCats();
       $this->categories[] = 'Blog';
       $this->playlists    = getPlaylists();
+
+      $db     = Database::getDB();
+      $fields = array('id', 'file_name');
+      $this->attachments = $db->select('attachments', $fields);
 
       sort($this->categories);
     }

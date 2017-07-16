@@ -13,16 +13,21 @@
   "admin" : {
     "article" : {
       "edit" : {
+        "attachments" : {
+          "label" : "Attachments",
+          "placeholder" : "Select attachment...",
+          "title" : "Click to remove"
+        },
         "category" : {
           "label" : "Category",
           "placeholder" : "Select category..."
         },
-        "content_label" : "Content",
         "choose" : {
           "label" : "Select article",
           "placeholder" : "Please select...",
           "submit" : "Edit selected article"
         },
+        "content_label" : "Content",
         "error" : {
           "category_old_new" : "Old and new category can't be used at the same time.",
           "empty_content" : "The content cannot be empty.",
@@ -81,6 +86,10 @@
           "label" : "Release time (HH:MM)",
           "placeholder" : "Select time"
         },
+        "section" : {
+          "attachments" : "Add attachments",
+          "images" : "Add images"
+        },
         "submit" : "Change article",
         "success" : "The article has been changed.",
         "tags" : {
@@ -99,6 +108,11 @@
         }
       },
       "new" : {
+        "attachments" : {
+          "label" : "Attachments",
+          "placeholder" : "Select attachment...",
+          "title" : "Click to remove"
+        },
         "category" : {
           "label" : "Category",
           "placeholder" : "Select category..."
@@ -159,6 +173,10 @@
           "label" : "Release time (HH:MM)",
           "placeholder" : "Select time"
         },
+        "section" : {
+          "attachments" : "Add attachments",
+          "images" : "Add images"
+        },
         "submit" : "Create article",
         "success" : "The article has been created.",
         "tags" : {
@@ -207,6 +225,96 @@
           "id" : "ID",
           "hits" : "Hits",
           "hits_per_day" : "Hits/day"
+        }
+      }
+    },
+    "attachment" : {
+      "edit" : {
+        "choose" : {
+          "label" : "Select attachment",
+          "placeholder" : "Please select...",
+          "submit" : "Edit selected attachment"
+        },
+        "error" : {
+          "empty_license" : "License cannot be empty.",
+          "empty_name" : "Name cannot be empty.",
+          "empty_version" : "Version cannot be empty.",
+          "invalid_attachment_id" : "The attachment ID is invalid.",
+          "license_too_long" : "License is too long, maximum is %s characters.",
+          "name_too_long" : "Name is too long, maximum is %s characters.",
+          "no_attachment_selected" : "No attachment was selected.",
+          "version_too_long" : "Version is too long, maximum is %s characters."
+        },
+        "file" : {
+          "label" :  "Current file on disk: %s"
+        },
+        "label" : "Change attachment",
+        "license" : {
+          "label" : "License",
+          "placeholder" : "License of the attachment"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name of attachment"
+        },
+        "submit" : "Change attachment",
+        "success" : "The attachment has been changed.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version of the attachment"
+        }
+      },
+      "new" : {
+        "error" : {
+          "empty_license" : "License cannot be empty.",
+          "empty_name" : "Name cannot be empty.",
+          "empty_version" : "Version cannot be empty.",
+          "license_too_long" : "License is too long, maximum is %s characters.",
+          "name_too_long" : "Name is too long, maximum is %s characters.",
+          "no_file" : "You have to upload a file.",
+          "version_too_long" : "Version is too long, maximum is %s characters."
+        },
+        "file" : {
+          "label" :  "File, max %s",
+          "placeholder" :  "Add a file, maximum size %s"
+        },
+        "label" : "Create attachment",
+        "license" : {
+          "label" : "License",
+          "placeholder" : "License of the attachment"
+        },
+        "name" : {
+          "label" : "Name",
+          "placeholder" : "Name of attachment"
+        },
+        "submit" : "Create attachment",
+        "success" : "The attachment has been created.",
+        "version" : {
+          "label" : "Version",
+          "placeholder" : "Version of the attachment"
+        }
+      },
+      "overview" : {
+        "delete" : {
+          "text" : "Delete",
+          "title" : "Click to delete"
+        },
+        "edit" : {
+          "text" : "Edit",
+          "title" : "Click to edit"
+        },
+        "empty" : "There are no attachments yet.",
+        "filter" : {
+          "label" : "Filter attachment list",
+          "placeholder" : "Attachment name"
+        },
+        "label" : "Attachment overview list",
+        "summary" : "A total of %s attachments are available.",
+        "table_header" : {
+          "downloads" : "Downloads",
+          "file_name" : "File name",
+          "file_path" : "File path",
+          "version" : "Version"
         }
       }
     },
@@ -307,6 +415,12 @@
         "label" : "Articles",
         "new" : "New article",
         "overview" : "Article overview"
+      },
+      "attachment" : {
+        "edit" : "Edit attachment",
+        "label" : "Attachments",
+        "new" : "New attachment",
+        "overview" : "Attachments overview"
       },
       "category" : {
         "label" : "Categories",

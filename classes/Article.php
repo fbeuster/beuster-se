@@ -282,7 +282,7 @@ class Article {
 
 
   /**
-   * getter for gallery
+   * getter for attachments
    * @return array(Image)
    */
   public function getAttachments() { return $this->attachments; }

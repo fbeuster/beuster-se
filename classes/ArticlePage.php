@@ -208,6 +208,20 @@ class ArticlePage extends RequestPage {
       $this->title    = $this->article->getTitle();
       $this->valid    = true;
       $this->increaseHitCount();
+
+      if (count($this->article->getAttachments())) {
+        $this->addScript('/system/assets/js/download.js');
+
+        if (!isset($_COOKIE['api_token'])) {
+          $token = new ApiToken(true);
+
+        } else {
+          if (!ApiToken::isValid($_COOKIE['api_token'])) {
+            ApiToken::delete($_COOKIE['api_token']);
+            $token = new ApiToken(true);
+          }
+        }
+      }
     }
   }
 

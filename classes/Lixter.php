@@ -318,6 +318,11 @@ class Lixter {
     }
 
     include($this->theme->getFile('htmlaside.php'));
+
+    if ($this->page->hasScripts()) {
+      $this->page->includeScripts();
+    }
+
     include($this->theme->getFile('htmlfooter.php'));
   }
 
