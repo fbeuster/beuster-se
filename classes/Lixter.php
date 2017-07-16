@@ -243,7 +243,9 @@ class Lixter {
   }
 
   private function buildAdmin() {
-    setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
+    if (EUCookieNotifier::areCookiesAccepted()) {
+      setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
+    }
 
     $pageType = $this->page->getPageClass();
     $currPage = getPage();
@@ -264,7 +266,9 @@ class Lixter {
    * building the user interface
    */
   private function buildContent() {
-    setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
+    if (EUCookieNotifier::areCookiesAccepted()) {
+      setcookie('choco-cookie', 'i-love-it', strtotime("+1 day"));
+    }
 
     $pageType = $this->page->getPageClass();
     $currPage = getPage();

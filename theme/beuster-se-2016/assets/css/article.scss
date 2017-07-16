@@ -58,6 +58,10 @@ body.article article {
       margin-bottom: 1em;
       padding: 1em;
 
+      p:first-of-type {
+        margin-top: 0;
+      }
+
       span {
         color: $darker_grey;
         font-size: 0.85em;

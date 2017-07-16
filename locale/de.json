@@ -776,6 +776,12 @@
       }
     }
   },
+  "eu_cookie_notifier" : {
+    "confirm" : "Ok",
+    "here" : "hier",
+    "text" : "Diese Seite verwendet eigene und Drittanbieter-Cookies. Mehr dazu %s.",
+    "title" : "Zum Bestätigen klicken."
+  },
   "general_form" : {
     "clear" : "Eingaben löschen",
     "commenting_as" : "Du kommentierst als %s (%s).",

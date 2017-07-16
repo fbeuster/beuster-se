@@ -777,6 +777,12 @@
       }
     }
   },
+  "eu_cookie_notifier" : {
+    "confirm" : "Ok",
+    "here" : "here",
+    "text" : "This site is using first- and third-party cookies. Find out more %s.",
+    "title" : "Click to confirm the policy."
+  },
   "general_form" : {
     "clear" : "Clear form",
     "commenting_as" : "You're commenting as %s (%s).",

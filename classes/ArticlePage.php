@@ -23,7 +23,6 @@ class ArticlePage extends RequestPage {
 
     if (isset($_GET['n']) && is_numeric($_GET['n'])) {
       $this->article_id = $_GET['n'];
-      $this->increaseHitCount();
       $this->loadPage();
       $this->setExpectedRequestMethod(RequestPage::METHOD_POST);
       $this->setRequestMethod($_SERVER['REQUEST_METHOD']);
@@ -199,19 +198,28 @@ class ArticlePage extends RequestPage {
 
   private function loadPage() {
     $this->article  = new Article($this->article_id);
-    $this->title    = $this->article->getTitle();
-    $this->valid    = true;
+    $cookie_user    = User::newFromCookie();
 
-    if (count($this->article->getAttachments())) {
-      $this->addScript('/system/assets/js/download.js');
+    if ($this->article->getEnable()
+        || (!$this->article->getEnable()
+            && $cookie_user
+            && $cookie_user->isAdmin())
+        ) {
+      $this->title    = $this->article->getTitle();
+      $this->valid    = true;
+      $this->increaseHitCount();
 
-      if (!isset($_COOKIE['api_token'])) {
-        $token = new ApiToken(true);
+      if (count($this->article->getAttachments())) {
+        $this->addScript('/system/assets/js/download.js');
 
-      } else {
-        if (!ApiToken::isValid($_COOKIE['api_token'])) {
-          ApiToken::delete($_COOKIE['api_token']);
+        if (!isset($_COOKIE['api_token'])) {
           $token = new ApiToken(true);
+
+        } else {
+          if (!ApiToken::isValid($_COOKIE['api_token'])) {
+            ApiToken::delete($_COOKIE['api_token']);
+            $token = new ApiToken(true);
+          }
         }
       }
     }

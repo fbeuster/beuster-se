@@ -1,0 +1,33 @@
+div.eu_cookie_notifier {
+  background: rgba(25, 31, 31, 0.9);
+  bottom: 0;
+  color: #f3f9f9;
+  padding: 1em 2em;
+  position: fixed;
+  width: 100%;
+}
+
+div.eu_cookie_notifier .close {
+  background: #f3f9f9;
+  border: 1px solid #f3f9f9;
+  border-radius: 3px;
+  color: #191f1f;
+  cursor: pointer;
+  margin-left: 1em;
+  padding: 0.25em 1em;
+}
+
+div.eu_cookie_notifier .close:hover {
+  background: #0ea86c;
+  border-color: #0ea86c;
+  color: #f3f9f9;
+}
+
+div.eu_cookie_notifier .text a {
+  color: #0ea86c;
+  text-decoration: none;
+}
+
+div.eu_cookie_notifier .text a:hover {
+  text-decoration: underline;
+}
