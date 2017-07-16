@@ -82,6 +82,28 @@ class File {
 		return $this->version;
 	}
 
+  public static function incrementDownloadCount($id) {
+    $db   = Database::getDB()->getCon();
+    $sql  = " UPDATE
+                attachments
+              SET
+                downloads = downloads + 1
+              WHERE
+                id = ?";
+
+    if (!$stmt = $db->prepare($sql)) {
+      return $db->error;
+    }
+
+    $stmt->bind_param('i', $id);
+
+    if (!$stmt->execute()) {
+      return $stmt->error;
+    }
+
+    $stmt->close();
+  }
+
   public static function isValidSize($size) {
     return $size > self::FILE_MIN_SIZE && $size <= self::FILE_MAX_SIZE;
   }

@@ -25,18 +25,22 @@
   </article>
 
   <?php if(count($article->getAttachments()) > 0) { ?>
-    <section>
+    <section class="attachments">
       <h2>Attachments</h2>
       <ul>
       <?php foreach ($article->getAttachments() as $attachment) { ?>
         <li>
-          <a href="/<?php echo $attachment->getPath(); ?>">
+          <a href="/<?php echo $attachment->getPath(); ?>" data-file="<?php echo md5($attachment->getId()); ?>">
             <?php echo $attachment->getName(); ?>
           </a>
           <br>
           <span>Version: <?php echo $attachment->getVersion(); ?></span>
           <span>License: <?php echo $attachment->getLicense(); ?></span>
-          <span>Downlaods: <?php echo $attachment->getDownloads(); ?></span>
+          <span>Downlaods:
+            <span class="counter" data-file="<?php echo md5($attachment->getId()); ?>">
+              <?php echo $attachment->getDownloads(); ?>
+            </span>
+          </span>
         </li>
       <?php } ?>
       </ul>

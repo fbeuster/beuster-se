@@ -44,7 +44,7 @@ class Api {
     set_exception_handler(function($exception) {
       echo 'Oups, something went wrong :(';
 
-      foreach (split("\n", $exception) as $line) {
+      foreach (explode("\n", $exception) as $line) {
         error_log($line);
       }
     });

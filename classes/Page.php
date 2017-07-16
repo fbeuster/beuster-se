@@ -11,6 +11,11 @@ abstract class Page {
   const STATIC_PAGE   = 8;
 
   public function __construct() {
+    $this->script = array();
+  }
+
+  protected function addScript($script) {
+    $this->scripts[] = $script;
   }
 
   public function addUriSnippets() {
@@ -64,6 +69,18 @@ abstract class Page {
   public abstract function getParsedContent();
 
   public abstract function getTitle();
+
+  public function hasScripts() {
+    return count($this->scripts);
+  }
+
+  public function includeScripts() {
+    if ($this->hasScripts()) {
+      foreach ($this->scripts as $script) {
+        echo '<script src="'.$script.'"></script>'."\n";
+      }
+    }
+  }
 }
 
 ?>
