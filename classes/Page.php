@@ -10,8 +10,10 @@ abstract class Page {
   const SEARCH_PAGE   = 7;
   const STATIC_PAGE   = 8;
 
+  protected $scripts;
+
   public function __construct() {
-    $this->script = array();
+    $this->scripts = array();
   }
 
   protected function addScript($script) {
