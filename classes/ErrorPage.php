@@ -17,6 +17,11 @@ class ErrorPage extends Page {
     return $this->message;
   }
 
+  public function getDecoratedContent() {
+    return $this->getParsedContent();
+  }
+
+
   public function getParsedContent() {
     return '<p>'.$this->message.'</p>';
   }
