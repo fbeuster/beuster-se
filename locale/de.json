@@ -108,6 +108,7 @@
         }
       },
       "new" : {
+        "attachments" : {
           "label" : "Dateianhänge",
           "placeholder" : "Dateianhang auswählen",
           "title" : "Zum Entfernen klicken"
