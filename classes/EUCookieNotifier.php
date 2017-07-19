@@ -18,8 +18,8 @@
     }
 
     private static function loadAssets() {
-      echo '<link href="system/assets/css/eu_cookies.css" rel="stylesheet">'."\n";
-      echo '<script src="system/assets/js/eu_cookies.js"></script>'."\n";
+      echo '<link href="/system/assets/css/eu_cookies.css" rel="stylesheet">'."\n";
+      echo '<script src="/system/assets/js/eu_cookies.js"></script>'."\n";
     }
 
     private static function prompt($info_page) {
