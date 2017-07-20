@@ -211,6 +211,7 @@ class ArticlePage extends RequestPage {
 
       if (count($this->article->getAttachments())) {
         $this->addScript('/system/assets/js/download.js');
+        $token = null;
 
         if (!isset($_COOKIE['api_token'])) {
           $token = new ApiToken(true);
@@ -220,6 +221,31 @@ class ArticlePage extends RequestPage {
             ApiToken::delete($_COOKIE['api_token']);
             $token = new ApiToken(true);
           }
+        }
+
+        # adding article information to the token
+        if ($token) {
+          $extra = array('article_id' => $this->article_id);
+          $extra = json_encode($extra);
+
+          $token_string = $token->getString();
+
+          $db  = Database::getDB()->getCon();
+          $sql = "UPDATE  api_tokens
+                  SET     extra = ?
+                  WHERE   token = ?";
+
+          if (!$stmt = $db->prepare($sql)) {
+            return $db->error;
+          }
+
+          $stmt->bind_param('ss', $extra, $token_string);
+
+          if (!$stmt->execute()) {
+            return $stmt->error;
+          }
+
+          $stmt->close();
         }
       }
     }
