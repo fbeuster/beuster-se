@@ -39,16 +39,21 @@ admin.articleEditor = {
     var append  = value + ';',
         $hidden = $('input[name=attachments]'),
         $li     = $('<li></li>'),
-        $list   = $('ul.current_attachments');
+        $list   = $('ul.current_attachments'),
+        $remove = $('<a></a>');
 
     $hidden.val($hidden.val() + append);
 
+    $remove.text('x')
+            .addClass('delete')
+            .attr( 'title', I18n.t('admin.article.edit.attachments.title') )
+            .click(function(){
+              $hidden.val($hidden.val().replace(append, ''));
+              $li.remove();
+            });
+
     $li.text(text)
-        .attr( 'title', I18n.t('admin.article.edit.attachments.title') )
-        .click(function(){
-          $hidden.val($hidden.val().replace(append, ''));
-          $li.remove();
-        })
+        .append($remove)
         .appendTo($list);
   }
 }

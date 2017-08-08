@@ -13,9 +13,26 @@ form.userform {
       margin-bottom: 0;
     }
 
-    ul.current_attachments li:hover {
-      cursor: pointer;
-      font-weight: bold;
+    ul.current_attachments li {
+      list-style-type: circle;
+      margin: 0.5em 0;
+
+      a {
+        @include icon_image;
+        color: transparent;
+        display: inline-block;
+        margin: 0 0 0 $icon_width / 2;
+        overflow: hidden;
+        vertical-align: sub;
+
+        &.delete { background-position: -1 * $icon_width 0;}
+
+        &:hover {
+          color: transparent;
+
+          &.delete { background-position: -1 * $icon_width -1 * $icon_width;}
+        }
+      }
     }
   }
 
