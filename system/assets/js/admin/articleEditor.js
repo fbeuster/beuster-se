@@ -1,6 +1,11 @@
 /** beuster{se} | (c) 2010-2016 **/
 
 admin.articleEditor = {
+  preview_auto_update : true,
+  preview_delay       : 0,
+  preview_delay_time  : 2000,
+  preview_old_value   : '',
+  textarea_id         : '#newsinhalt',
 
   attachmentsSelectChangeListener: function() {
     var text    = this.options[this.selectedIndex].text,
@@ -13,8 +18,43 @@ admin.articleEditor = {
     }
   },
 
+  fetchArticlePreview : function() {
+    $.ajax({
+      type: "POST",
+      url: "/api.php",
+      data: {
+        'scope' : 'admin',
+        'method' : 'ApiArticleEditorPreview',
+        'data' : {
+          'content' : admin.articleEditor.preview_old_value
+        }
+      },
+      success: function(data) {
+        if (data != '') {
+          $('section.preview.article .content').html(data);
+
+          if (!$('section.preview.article .content').is(':visible')) {
+            $('section.preview.article .content').slideDown(400);
+          }
+        }
+      }
+    });
+  },
+
   init: function() {
+    if ($('#preview_auto_update').is(':checked')) {
+      this.preview_auto_update = true;
+
+    } else {
+      this.preview_auto_update = false;
+    }
+
+    $(this.textarea_id).blur(this.textareaBlurListener);
+    $(this.textarea_id).focus(this.textareaFocusListener);
     $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
+    $('#preview_manual_update').click(this.previewManualUpdate);
+    $('#preview_auto_update').change(this.previewAutoUpdateListener);
+
     this.loadPrefilledAttachments();
   },
 
@@ -33,6 +73,35 @@ admin.articleEditor = {
         admin.articleEditor.selectAttachment(attachments[i], text);
       }
     }
+  },
+
+  previewAutoUpdateListener : function() {
+    if ($('#preview_auto_update').is(':checked')) {
+      admin.articleEditor.preview_auto_update = true;
+      admin.articleEditor.previewManualUpdate();
+
+    } else {
+      this.preview_auto_update = false;
+    }
+  },
+
+  previewManualUpdate : function() {
+    var current_value = $(admin.articleEditor.textarea_id).val();
+
+    if (current_value != admin.articleEditor.preview_old_value) {
+      admin.articleEditor.preview_old_value = current_value;
+      admin.articleEditor.fetchArticlePreview();
+    }
+  },
+
+  previewUpdate : function() {
+    clearTimeout(admin.articleEditor.preview_delay);
+
+    admin.articleEditor.preview_delay = setTimeout(function(){
+      clearTimeout(admin.articleEditor.preview_delay);
+      admin.articleEditor.previewManualUpdate();
+
+    }, admin.articleEditor.preview_delay_time);
   },
 
   selectAttachment : function(value, text) {
@@ -55,5 +124,15 @@ admin.articleEditor = {
     $li.text(text)
         .append($remove)
         .appendTo($list);
+  },
+
+  textareaBlurListener : function() {
+    $(admin.articleEditor.textarea_id).off('keyup');
+  },
+
+  textareaFocusListener : function() {
+    if (admin.articleEditor.preview_auto_update) {
+      $(admin.articleEditor.textarea_id).keyup(admin.articleEditor.previewUpdate);
+    }
   }
 }

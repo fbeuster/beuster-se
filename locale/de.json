@@ -226,6 +226,18 @@
           "hits" : "Hits",
           "hits_per_day" : "Hits/Tag"
         }
+      },
+      "preview" : {
+        "description" : "Hier siehst du eine Vorschau dieses Artikels. Sofern aktiviert, wird diese automatisch aktualisiert.",
+        "manual_update" : {
+          "label" : "Jetzt aktualisieren",
+          "title" : "Klicken, um die Vorschau jetzt manuell zu aktualisieren"
+        },
+        "auto_update" : {
+          "label" : "Automatisches Aktualisieren",
+          "title" : "Klicken, um das automatische Aktualisieren der Vorschau zu aktivieren oder deaktivieren"
+        },
+        "title" : "Vorschau"
       }
     },
     "attachment" : {

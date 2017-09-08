@@ -35,5 +35,122 @@ body.article article {
     p {
       margin-bottom: 1em;
     }
+
+    &.preview {
+      @include section_title;
+
+      .content {
+        display: none;
+
+        blockquote {
+          background: $grey;
+          border-left: 2px solid $green;
+          margin-bottom: 1em;
+          padding: 1em;
+
+          p:first-of-type {
+            margin-top: 0;
+          }
+
+          span {
+            color: $darker_grey;
+            font-size: 0.85em;
+          }
+        }
+
+        .code {
+          background: $grey;
+          margin-bottom: 1em;
+          overflow-x: auto;
+
+          .line {
+            @include code_font;
+            color: $cold_black;
+            display: flex;
+            font-size: 0.95em;
+            line-height: 1.5;
+            padding: 0 1em 0 0;
+            transition: 0.15s all;
+
+            &:hover {
+              background: $dark_grey;
+              cursor: default;
+            }
+
+            .no {
+              background: $dark_grey;
+              display: block;
+              margin-right: 0.6em;
+              opacity: 0.7;
+              padding-right: 0.4em;
+              text-align: right;
+              min-width: 2em;
+            }
+          }
+        }
+
+        del {
+          text-decoration: line-through;
+        }
+
+        h2 {
+          color: $cold_black;
+          margin-bottom: 0;
+        }
+
+        h3 {
+          font-size: 1em;
+          margin-top: 1.25em;
+        }
+
+        ins {
+          text-decoration: underline;
+        }
+
+        p {
+          &:empty {
+            display: none;
+          }
+
+          &:first-of-type {
+            margin-top: 1.25em;
+          }
+
+          &.image {
+            text-align: center;
+
+            img {
+              max-width: 95%;
+            }
+          }
+        }
+
+        .video {
+          max-width: 656px;
+          margin: 0 auto 1.5em auto;
+
+          .wrapper {
+            clear: both;
+            float: none;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+            width: 100%;
+
+            iframe {
+              height: 100%;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 100%;
+            }
+
+            .embeddedVideo.link {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
 }

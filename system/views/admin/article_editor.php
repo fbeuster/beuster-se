@@ -258,5 +258,22 @@
       </fieldset>
     </form>
   </section>
+
+  <section class="preview article">
+    <h2><?php I18n::e('admin.article.preview.title'); ?></h2>
+    <p><?php I18n::e('admin.article.preview.description'); ?></p>
+    <form class="controls">
+      <input type="button"  id="preview_manual_update"
+              title="<?php I18n::e('admin.article.preview.manual_update.title'); ?>"
+              value="<?php I18n::e('admin.article.preview.manual_update.label'); ?>">
+
+      <label title="<?php I18n::e('admin.article.preview.auto_update.title'); ?>">
+        <input type="checkbox" id="preview_auto_update">
+        <?php I18n::e('admin.article.preview.auto_update.label'); ?>
+      </label>
+    </form>
+    <div class="content"></div>
+  </section>
+
   <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

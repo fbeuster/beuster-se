@@ -248,6 +248,30 @@ div.preview {
   }
 }
 
+.article.preview {
+  .controls {
+    input[type=button] {
+      border: 0;
+      cursor: pointer;
+      font-size: 1.1em;
+      margin-right: 1em;
+      padding: 0.5em 1em;
+
+      background: $grey;
+      color: $darker_grey;
+
+      &:hover {
+        color: $cold_black;
+      }
+    }
+  }
+
+  .content {
+    border-top: 2px solid $grey;
+    margin-top: 1em;
+  }
+}
+
 .multiFieldset {
   fieldset + fieldset {
     margin-top: 2em;

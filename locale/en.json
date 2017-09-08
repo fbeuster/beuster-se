@@ -226,6 +226,18 @@
           "hits" : "Hits",
           "hits_per_day" : "Hits/day"
         }
+      },
+      "preview" : {
+        "description" : "Here you can find a preview of this article. If enabled, it will refresh automatically.",
+        "manual_update" : {
+          "label" : "Refresh now",
+          "title" : "Click to refresh the preview manually"
+        },
+        "auto_update" : {
+          "label" : "Automatic refresh",
+          "title" : "Click to toggle the automatic refresh of the preview"
+        },
+        "title" : "Preview"
       }
     },
     "attachment" : {
