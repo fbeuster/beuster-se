@@ -45,6 +45,11 @@ class Image {
     $pic['dim']   = array('w' => $pic['dim'][0],
                           'h' => $pic['dim'][1]);
 
+    if ( $pic['dim']['w'] > $width || $pic['dim']['h'] > $height ||
+        ($pic['dim']['w'] == $width && $pic['dim']['h'] == $height)) {
+      return false;
+    }
+
     $pic['t'] = getimagesize($path);
     $pic['t'] = $pic['t'][2];
 
@@ -68,6 +73,8 @@ class Image {
 
     imagedestroy($thumb);
     imagedestroy($original);
+
+    return true;
   }
 
   public static function delete($path) {
@@ -199,8 +206,14 @@ class Image {
         return self::ARTICLE_IMAGE_PATH . $this->path;
 
       } else {
-        self::createThumbnail($this->path, $width, $height);
-        return self::ARTICLE_IMAGE_PATH . $path;
+        $created = self::createThumbnail($this->path, $width, $height);
+
+        if ($created) {
+          return self::ARTICLE_IMAGE_PATH . $path;
+
+        } else {
+          return self::ARTICLE_IMAGE_PATH . $this->path;
+        }
       }
     }
 
