@@ -326,6 +326,18 @@ abstract class ArticleParser {
      * Translate url tags into HTML
      */
     public function links() {
+        // match twitter links for embedding
+        $tweet_url = 'https?://(www\.)?twitter\.com/([A-Za-z0-9-_]+?)/status/[0-9]+';
+        $this->str = preg_replace(
+                        '#\[url\]('.$tweet_url.')\[/url\]#Uis',
+                        '<a class="tweet" href="$1">$3 (Twitter)</a>',
+                        $this->str);
+        $this->str = preg_replace(
+                        '#\[url=('.$tweet_url.')\]('.$tweet_url.')\[/url\]#Uis',
+                        '<a class="tweet" href="$1">$3 (Twitter)</a>',
+                        $this->str);
+
+
         $this->str = preg_replace('#\[url\](.*)\[/url\]#Uis', '<a href="$1">$1</a>', $this->str);
         $urlPos = 0;
         $anz = substr_count($this->str, '[url=');
@@ -855,12 +867,29 @@ class ContentParser extends ArticleParser {
         parent::paragraphs();
         parent::appendQuoteSources();
         parent::affiliateImage();
+        $this->embedTweets();
         return $this->str;
     }
 
     public function blockquotes() {
         parent::collectQuotes();
         $this->str = preg_replace('#\[bquote=(.*)\](.*)\[/bquote\]#Uis', '</p><blockquote cite="$1"><p>$2</p><span class="source">Quelle: $1</span></blockquote><p>', $this->str);
+    }
+
+    public function embedTweets() {
+        preg_match_all(
+                        '#<a class="tweet" href="(.*)">(.*)</a>#Uis',
+                        $this->str,
+                        $matches);
+
+        for ($i = 0; $i < count($matches[0]); $i++) {
+            $url_encode = urlencode($matches[1][$i]);
+            $json_str   = file_get_contents('https://publish.twitter.com/oembed?url='.$url_encode);
+            $json_arr   = json_decode($json_str);
+            $this->str  = preg_replace( '#'.$matches[0][$i].'#Us',
+                                        $json_arr->html,
+                                        $this->str, 1);
+        }
     }
 
     public function embedVideo() {
