@@ -49,6 +49,9 @@ admin.articleEditor = {
       this.preview_auto_update = false;
     }
 
+    $('.section_opener').attr('title', 'Click to open');
+    $('.section_opener').click(this.sectionOpenerListener);
+
     $(this.textarea_id).blur(this.textareaBlurListener);
     $(this.textarea_id).focus(this.textareaFocusListener);
     $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
@@ -102,6 +105,10 @@ admin.articleEditor = {
       admin.articleEditor.previewManualUpdate();
 
     }, admin.articleEditor.preview_delay_time);
+  },
+
+  sectionOpenerListener : function() {
+    $(this).next('.section_expander').slideToggle();
   },
 
   selectAttachment : function(value, text) {

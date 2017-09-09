@@ -213,46 +213,50 @@
           </div>
         <?php } ?>
 
-        <p class="section_header">
+        <p class="section_header section_opener">
           <?php I18n::e('admin.article.'.$this->action.'.section.images'); ?>
         </p>
 
-        <p>
-          <?php I18n::e('admin.article.'.$this->action.'.pictures.info', array('5MB')); ?>
-        </p>
-        <label<?php if (isset($this->errors['thumbnail'])) { echo ' class="has_error"'; } ?>>
-          <span>
-            <?php I18n::e('admin.article.'.$this->action.'.thumbnail.label'); ?>
-          </span>
-          <input type="number" name="thumbnail" value="<?php if (isset($this->values['thumbnail'])) echo $this->values['thumbnail']; ?>" placeholder="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.placeholder'); ?>">
-        </label>
+        <div class="section_expander">
+          <p>
+            <?php I18n::e('admin.article.'.$this->action.'.pictures.info', array('5MB')); ?>
+          </p>
+          <label<?php if (isset($this->errors['thumbnail'])) { echo ' class="has_error"'; } ?>>
+            <span>
+              <?php I18n::e('admin.article.'.$this->action.'.thumbnail.label'); ?>
+            </span>
+            <input type="number" name="thumbnail" value="<?php if (isset($this->values['thumbnail'])) echo $this->values['thumbnail']; ?>" placeholder="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.placeholder'); ?>">
+          </label>
 
-        <ol id="files">
-          <li><input type="file" name="file[]"></li>
-        </ol>
+          <ol id="files">
+            <li><input type="file" name="file[]"></li>
+          </ol>
 
-        <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.remove_field'); ?>" class="delInp">
-        <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.add_field'); ?>" id="addInp">
+          <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.remove_field'); ?>" class="delInp">
+          <input type="button" value="<?php I18n::e('admin.article.'.$this->action.'.thumbnail.add_field'); ?>" id="addInp">
+        </div>
 
-        <p class="section_header">
+        <p class="section_header section_opener">
           <?php I18n::e('admin.article.'.$this->action.'.section.attachments'); ?>
         </p>
 
-        <label class="<?php if(isset($this->errors['attachments'])) { echo ' has_error'; } ?>">
-          <span>
-            <?php I18n::e('admin.article.'.$this->action.'.attachments.label'); ?>
-          </span>
-          <input type="hidden" name="attachments" value="<?php if (isset($this->values['attachments'])) { echo $this->values['attachments']; } else { echo ';'; } ?>">
-          <select name="attachments_select">
-            <option value="error">
-              <?php I18n::e('admin.article.'.$this->action.'.attachments.placeholder'); ?>
-            </option>
-            <?php foreach($this->attachments as $attachment) { ?>
-              <option <?php echo 'value="'.$attachment['id'].'"'; ?>"><?php echo $attachment['file_name']; ?></option>
-            <?php } ?>
-          </select>
-        </label>
-        <ul class="current_attachments"></ul>
+        <div class="section_expander">
+          <label class="<?php if(isset($this->errors['attachments'])) { echo ' has_error'; } ?>">
+            <span>
+              <?php I18n::e('admin.article.'.$this->action.'.attachments.label'); ?>
+            </span>
+            <input type="hidden" name="attachments" value="<?php if (isset($this->values['attachments'])) { echo $this->values['attachments']; } else { echo ';'; } ?>">
+            <select name="attachments_select">
+              <option value="error">
+                <?php I18n::e('admin.article.'.$this->action.'.attachments.placeholder'); ?>
+              </option>
+              <?php foreach($this->attachments as $attachment) { ?>
+                <option <?php echo 'value="'.$attachment['id'].'"'; ?>"><?php echo $attachment['file_name']; ?></option>
+              <?php } ?>
+            </select>
+          </label>
+          <ul class="current_attachments"></ul>
+        </div>
 
         <input type="submit" name="<?php echo $this->submit; ?>" value="<?php I18n::e('admin.article.'.$this->action.'.submit'); ?>" />
       </fieldset>
