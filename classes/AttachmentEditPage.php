@@ -34,7 +34,7 @@
 
         if ($id == null || $id == '' || $id == 0 || !is_numeric($id)) {
           $this->errors['attachment_id'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.invalid_attachment_id'),
+            'message' => I18n::t('admin.attachment.error.invalid_attachment_id'),
             'value'   => $id);
 
         }
@@ -42,13 +42,13 @@
         if ($license == '') {
           # empty license
           $this->errors['license'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.empty_license'),
+            'message' => I18n::t('admin.attachment.error.empty_license'),
             'value'   => $license);
 
         } else if (mb_strlen($license, 'UTF-8') > self::MAX_LENGTH_LICENSE) {
           # license too long
           $this->errors['license'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.license_too_long',
+            'message' => I18n::t('admin.attachment.error.license_too_long',
               array(self::MAX_LENGTH_LICENSE)),
             'value'   => $license);
         }
@@ -56,13 +56,13 @@
         if ($name == '') {
           # empty name
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.empty_name'),
+            'message' => I18n::t('admin.attachment.error.empty_name'),
             'value'   => $name);
 
         } else if (mb_strlen($name, 'UTF-8') > self::MAX_LENGTH_NAME) {
           # name too long
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.name_too_long',
+            'message' => I18n::t('admin.attachment.error.name_too_long',
               array(self::MAX_LENGTH_NAME)),
             'value'   => $name);
         }
@@ -70,13 +70,13 @@
         if ($version == '') {
           # empty version
           $this->errors['version'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.empty_version'),
+            'message' => I18n::t('admin.attachment.error.empty_version'),
             'value'   => $version);
 
         } else if (mb_strlen($version, 'UTF-8') > self::MAX_LENGTH_VERSION) {
           # version too long
           $this->errors['version'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.version_too_long',
+            'message' => I18n::t('admin.attachment.error.version_too_long',
               array(self::MAX_LENGTH_VERSION)),
             'value'   => $version);
         }
@@ -106,7 +106,7 @@
         }
 
         if (empty($this->errors)) {
-          $this->showMessage( I18n::t('admin.attachment.edit.success'),
+          $this->showMessage( I18n::t('admin.attachment.editor.actions.edit.success'),
                               'admin');
         }
 
@@ -127,7 +127,7 @@
 
         if ($id == null || $id == '' || $id == 0 || !is_numeric($id)) {
           $this->errors['attachment'] = array(
-            'message' => I18n::t('admin.attachment.edit.error.no_attachment_selected'),
+            'message' => I18n::t('admin.attachment.error.no_attachment_selected'),
             'value'   => $id);
 
         } else {
@@ -149,7 +149,7 @@
     }
 
     private function load() {
-      $this->setTitle(I18n::t('admin.attachment.edit.label'));
+      $this->setTitle(I18n::t('admin.attachment.editor.actions.edit.label'));
 
       $db     = Database::getDB();
       $fields = array('id', 'file_name');
