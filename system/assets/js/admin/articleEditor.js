@@ -122,7 +122,7 @@ admin.articleEditor = {
 
     $remove.text('x')
             .addClass('delete')
-            .attr( 'title', I18n.t('admin.article.edit.attachments.title') )
+            .attr( 'title', I18n.t('admin.article.editor.attachments.title') )
             .click(function(){
               $hidden.val($hidden.val().replace(append, ''));
               $li.remove();

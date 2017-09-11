@@ -36,7 +36,7 @@
 
         if ($id == null || $id == '' || $id == 0 || !is_numeric($id)) {
           $this->errors['article'] = array(
-            'message' => I18n::t('admin.article.edit.error.no_article_selected'),
+            'message' => I18n::t('admin.article.editor.error.no_article_selected'),
             'value'   => $id);
 
         } else {
@@ -46,7 +46,7 @@
           $res    = $db->select('newscatcross', $fields, $cond);
 
           if (count($res) == 0) {
-            $this->showMessage( I18n::t('admin.article.edit.not_found'),
+            $this->showMessage( I18n::t('admin.article.editor.errors.not_found'),
                                 'article-edit');
 
           } else {
@@ -164,28 +164,28 @@
         if ($title == '') {
           # empty title
           $this->errors['title'] = array(
-            'message' => I18n::t('admin.article.edit.error.empty_title'),
+            'message' => I18n::t('admin.article.editor.error.empty_title'),
             'value'   => $title);
         }
 
         if ($content == '') {
           # empty content
           $this->errors['content'] = array(
-            'message' => I18n::t('admin.article.edit.error.empty_content'),
+            'message' => I18n::t('admin.article.editor.error.empty_content'),
             'value'   => $content);
         }
 
         if ($article_id == '') {
           # missing article id
           $this->errors['article_id'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_article_id'),
+            'message' => I18n::t('admin.article.editor.error.missing_article_id'),
             'value'   => $article_id);
         }
 
         if ($tag_string == '') {
           # empty content
           $this->errors['tags'] = array(
-            'message' => I18n::t('admin.article.edit.error.empty_tags'),
+            'message' => I18n::t('admin.article.editor.error.empty_tags'),
             'value'   => $tag_string);
         }
 
@@ -196,7 +196,7 @@
         } else {
           if (!preg_match('/^[0-9]{4}(-[0-9]{2}){2}$/', $release_date)) {
             $this->errors['release_date'] = array(
-              'message' => I18n::t('admin.article.edit.error.invalid_release_date'),
+              'message' => I18n::t('admin.article.editor.error.invalid_release_date'),
               'value'   => $release_date);
 
           } else {
@@ -204,7 +204,7 @@
 
             if (!checkdate($srelease_arr[1], $srelease_arr[2], $srelease_arr[0])) {
               $this->errors['release_date'] = array(
-                'message' => I18n::t('admin.article.edit.error.invalid_release_date'),
+                'message' => I18n::t('admin.article.editor.error.invalid_release_date'),
                 'value'   => $release_date);
             }
           }
@@ -217,7 +217,7 @@
         } else {
           if (!preg_match('/^(2[0-3]|[01][0-9]):([0-5][0-9])$/', $release_time)) {
             $this->errors['release_time'] = array(
-              'message' => I18n::t('admin.article.edit.error.invalid_release_time'),
+              'message' => I18n::t('admin.article.editor.error.invalid_release_time'),
               'value'   => $release_time);
 
           } else {
@@ -229,70 +229,70 @@
         if ($category == 'error' && $category_new == '' && $playlist == 'error' && $playlist_new == '' && $category_parent == 'error' && $playlist_new_id == '') {
           # no cat/play selected and no new cat/play given
           $this->errors['category'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_category_playlist'),
+            'message' => I18n::t('admin.article.editor.error.missing_category_playlist'),
             'value'   => $category);
         }
 
         if ($category != 'error' && $playlist != 'error') {
           # new category and new playlist not possible
           $this->errors['category'] = array(
-            'message' => I18n::t('admin.article.edit.error.invalid_category_playlist'),
+            'message' => I18n::t('admin.article.editor.error.invalid_category_playlist'),
             'value'   => $category);
         }
 
         if ($playlist_new != '' && $category_new != '') {
           # new category and new playlist not possible
           $this->errors['playlist_new'] = array(
-            'message' => I18n::t('admin.article.edit.error.invalid_playlist_category'),
+            'message' => I18n::t('admin.article.editor.error.invalid_playlist_category'),
             'value'   => $playlist_new);
         }
 
         if ($playlist != 'error' && ($playlist_new != '' || $playlist_new_id != '')) {
           # old and new playlist not possible
           $this->errors['playlist'] = array(
-            'message' => I18n::t('admin.article.edit.error.playlist_old_new'),
+            'message' => I18n::t('admin.article.editor.error.playlist_old_new'),
             'value'   => $playlist);
         }
 
         if ($playlist_new != '' && $playlist_new_id == '') {
           # new playlist name but id missing
           $this->errors['playlist_new_id'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_playlist_id'),
+            'message' => I18n::t('admin.article.editor.error.missing_playlist_id'),
             'value'   => $playlist_new_id);
         }
 
         if ($playlist_new_id != '' && $playlist_new == '') {
           # new playlist id but name missing
           $this->errors['playlist_new'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_playlist_name'),
+            'message' => I18n::t('admin.article.editor.error.missing_playlist_name'),
             'value'   => $playlist_new);
         }
 
         if ($category != 'error' && $category_new != '') {
           # old and new category not possible
           $this->errors['category'] = array(
-            'message' => I18n::t('admin.article.edit.error.category_old_new'),
+            'message' => I18n::t('admin.article.editor.error.category_old_new'),
             'value'   => $category);
         }
 
         if ($category != 'error' && $category_parent != 'error') {
           # old category can't get new parent
           $this->errors['category'] = array(
-            'message' => I18n::t('admin.article.edit.error.invalid_category_parent'),
+            'message' => I18n::t('admin.article.editor.error.invalid_category_parent'),
             'value'   => $category);
         }
 
         if ($category_parent == 'error' && $category_new != '') {
           # new category but parent missing
           $this->errors['category_parent'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_category_parent'),
+            'message' => I18n::t('admin.article.editor.error.missing_category_parent'),
             'value'   => $category_parent);
         }
 
         if ($category_parent != 'error' && $category_new == '') {
           # category parent but new name missing
           $this->errors['category_new'] = array(
-            'message' => I18n::t('admin.article.edit.error.missing_category_name'),
+            'message' => I18n::t('admin.article.editor.error.missing_category_name'),
             'value'   => $category_new);
         }
 
@@ -301,7 +301,7 @@
           if ($project_status == 0) {
             # missing project status
             $this->errors['project_status'] = array(
-              'message' => I18n::t('admin.article.edit.error.missing_project_status'),
+              'message' => I18n::t('admin.article.editor.error.missing_project_status'),
               'value'   => $project_status);
           }
 
@@ -313,13 +313,13 @@
           if (!preg_match('/^[0-9]*$/', $thumbnail)) {
             # thumbnail number invalid
             $this->errors['thumbnail'] = array(
-              'message' => I18n::t('admin.article.edit.error.invalid_thumbnail_number'),
+              'message' => I18n::t('admin.article.editor.error.invalid_thumbnail_number'),
               'value'   => $thumbnail);
 
           } else if ($thumbnail > count($_FILES['file']['name'])) {
             # thumbnail number too big
             $this->errors['thumbnail'] = array(
-              'message' => I18n::t('admin.article.edit.error.thumbnail_too_big'),
+              'message' => I18n::t('admin.article.editor.error.thumbnail_too_big'),
               'value'   => $thumbnail);
 
           } else if ( $thumbnail < 1 &&
@@ -328,7 +328,7 @@
             # thumbnail number too small
             # only matters for non-playlist articles
             $this->errors['thumbnail'] = array(
-              'message' => I18n::t('admin.article.edit.error.thumbnail_too_small'),
+              'message' => I18n::t('admin.article.editor.error.thumbnail_too_small'),
               'value'   => $thumbnail);
           }
         }
@@ -370,14 +370,14 @@
               if (!Image::isValidSize($_FILES['file']['size'][$key])) {
                 # invlaid file size
                 $image_errors[] = array(
-                  'message' => I18n::t( 'admin.article.edit.error.invalid_image_size',
+                  'message' => I18n::t( 'admin.article.editor.error.invalid_image_size',
                                         $_FILES['file']['name'][$key]),
                   'value'   => $_FILES['file']['name'][$key]);
 
               } else if (!Image::isValidFormat($_FILES['file']['type'][$key])) {
                 # invalid image format
                 $image_errors[] = array(
-                  'message' => I18n::t( 'admin.article.edit.error.invalid_image_format',
+                  'message' => I18n::t( 'admin.article.editor.error.invalid_image_format',
                                         $_FILES['file']['name'][$key]),
                   'value'   => $_FILES['file']['name'][$key]);
 
@@ -388,7 +388,7 @@
                 if (!$saved) {
                   # saving error
                   $image_errors[] = array(
-                    'message' => I18n::t('admin.article.edit.error.image_save_failure'),
+                    'message' => I18n::t('admin.article.editor.error.image_save_failure'),
                     'value'   => $_FILES['file']['name'][$key]);
 
                 } else {
@@ -628,7 +628,7 @@
             }
 
             if (empty($this->errors)) {
-              $this->showMessage( I18n::t('admin.article.edit.success'),
+              $this->showMessage( I18n::t('admin.article.actions.editor.actions.edit.success'),
                                   'article-edit');
             }
           }
@@ -637,7 +637,7 @@
     }
 
     private function load() {
-      $this->setTitle(I18n::t('admin.article.edit.label'));
+      $this->setTitle(I18n::t('admin.article.editor.actions.edit.label'));
 
       $db       = Database::getDB();
       $fields   = array('ID', 'Titel',
