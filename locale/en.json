@@ -370,7 +370,19 @@
     "no_access" : "You have no access to this page.",
     "not_logged_in" : "You're not logged in.",
     "snippet" : {
-      "edit" : {
+      "editor" : {
+        "actions" : {
+          "edit" : {
+            "label" : "Edit snippet",
+            "submit" : "Save changes",
+            "success" : "The snippet has been changed."
+          },
+          "new" : {
+            "label" : "Create new snippet",
+            "submit" : "Create snippet",
+            "success" : "The snippet has been added."
+          }
+        },
         "choose" : {
           "label" : "Select snippet",
           "placeholder" : "Please select...",
@@ -385,26 +397,6 @@
           "long_name" : "The snipppet name is too long.",
           "no_old_exists" : "A snippet with the old name does not exist."
         },
-        "label" : "Edit snippet",
-        "submit" : "Save changes",
-        "success" : "The snippet has been changed.",
-        "name" : {
-          "label" : "Name",
-          "placeholder" : "Name of the snippet"
-        }
-      },
-      "new" : {
-        "content_label" : "Content",
-        "errors" : {
-          "empty_content" : "The content of a snippet can't be empty.",
-          "empty_name" : "The name of a snippet can't be empty.",
-          "exists" : "This snippet already exists.",
-          "invalid_characters" : "The snippet name has invalid characters.",
-          "long_name" : "The snipppet name is too long."
-        },
-        "label" : "Create new snippet",
-        "submit" : "Create snippet",
-        "success" : "The snippet has been added.",
         "name" : {
           "label" : "Name",
           "placeholder" : "Name of the snippet"

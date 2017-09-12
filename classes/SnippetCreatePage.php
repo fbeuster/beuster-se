@@ -24,31 +24,31 @@
 
         if ($name == '') {
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.snippet.new.errors.empty_name'),
+            'message' => I18n::t('admin.snippet.editor.errors.empty_name'),
             'value'   => $name);
         }
 
         if (strlen($name) > 20) {
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.snippet.new.errors.long_name'),
+            'message' => I18n::t('admin.snippet.editor.errors.long_name'),
             'value'   => $name);
         }
 
         if (!preg_match('#^[A-Za-z0-9]*$#', $name)) {
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.snippet.new.errors.invalid_characters'),
+            'message' => I18n::t('admin.snippet.editor.errors.invalid_characters'),
             'value'   => $name);
         }
 
         if (Snippet::exists($name)) {
           $this->errors['name'] = array(
-            'message' => I18n::t('admin.snippet.new.errors.exists'),
+            'message' => I18n::t('admin.snippet.editor.errors.exists'),
             'value'   => $name);
         }
 
         if ($content == '') {
           $this->errors['content'] = array(
-            'message' => I18n::t('admin.snippet.new.errors.empty_content'),
+            'message' => I18n::t('admin.snippet.editor.errors.empty_content'),
             'value'   => $content);
         }
 
@@ -62,14 +62,14 @@
 
           $link     = ' <br /><a href="/admin">'.
                       I18n::t('admin.back_link').'</a>';
-          $message  = I18n::t('admin.snippet.new.success').$link;
+          $message  = I18n::t('admin.snippet.editor.actions.new.success').$link;
           $this->showMessage($message, 'admin');
         }
       }
     }
 
     private function load() {
-      $this->setTitle(I18n::t('admin.snippet.new.label'));
+      $this->setTitle(I18n::t('admin.snippet.editor.actions.new.label'));
     }
 
     public function show() {
