@@ -27,43 +27,43 @@
 
         if ($url == '') {
           $this->errors['url'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.empty_url'),
+            'message' => I18n::t('admin.static_page.editor.errors.empty_url'),
             'value'   => $url);
         }
 
         if (strlen($url) > 50) {
           $this->errors['url'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.long_url'),
+            'message' => I18n::t('admin.static_page.editor.errors.long_url'),
             'value'   => $url);
         }
 
         if (!preg_match('#^[A-Za-z0-9]*$#', $url)) {
           $this->errors['url'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.invalid_characters'),
+            'message' => I18n::t('admin.static_page.editor.errors.invalid_characters'),
             'value'   => $url);
         }
 
         if (StaticPage::exists($url)) {
           $this->errors['url'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.exists'),
+            'message' => I18n::t('admin.static_page.editor.errors.exists'),
             'value'   => $url);
         }
 
         if ($title == '') {
           $this->errors['title'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.empty_title'),
+            'message' => I18n::t('admin.static_page.editor.errors.empty_title'),
             'value'   => $title);
         }
 
         if (strlen($title) > 100) {
           $this->errors['title'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.long_title'),
+            'message' => I18n::t('admin.static_page.editor.errors.long_title'),
             'value'   => $title);
         }
 
         if ($content == '') {
           $this->errors['content'] = array(
-            'message' => I18n::t('admin.static_page.new.errors.empty_content'),
+            'message' => I18n::t('admin.static_page.editor.errors.empty_content'),
             'value'   => $content);
         }
 
@@ -78,7 +78,7 @@
           if ($res !== null) {
             $link     = ' <br /><a href="/admin">'.
                         I18n::t('admin.back_link').'</a>';
-            $message  = I18n::t('admin.static_page.new.success').$link;
+            $message  = I18n::t('admin.static_page.editor.actions.new.success').$link;
 
             $this->showMessage($message, 'admin');
           }
@@ -87,7 +87,7 @@
     }
 
     private function load() {
-      $this->setTitle(I18n::t('admin.static_page.new.label'));
+      $this->setTitle(I18n::t('admin.static_page.editor.actions.new.label'));
     }
 
     public function show() {

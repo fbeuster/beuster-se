@@ -429,7 +429,19 @@
       }
     },
     "static_page" : {
-      "edit" : {
+      "editor" : {
+        "actions" : {
+          "edit" : {
+            "label" : "Statische Seite bearbeiten",
+            "submit" : "Änderungen speichern",
+            "success" : "Die statische Seite wurde geändert."
+          },
+          "new" : {
+            "label" : "Neue statische Seite erstellen",
+            "submit" : "Statische Seite erstellen",
+            "success" : "Die statische Seite wurde erstellt."
+          }
+        },
         "choose" : {
           "label" : "Statische Seite auswählen",
           "placeholder" : "Bitte wählen...",
@@ -447,33 +459,6 @@
           "no_old_exists" : "Unter der alten URL existiert keine statische Seite."
         },
         "feedback_label" : "Feedback Formular",
-        "label" : "Statische Seite bearbeiten",
-        "submit" : "Änderungen speichern",
-        "success" : "Die statische Seite wurde geändert.",
-        "title" : {
-          "label" : "Titel",
-          "placeholder" : "Titel der statischen Seite"
-        },
-        "url" : {
-          "label" : "URL",
-          "placeholder" : "URL der statischen Seite"
-        }
-      },
-      "new" : {
-        "content_label" : "Inhal",
-        "errors" : {
-          "empty_content" : "Der Inhalt der statischen Seite darf nicht leer sein.",
-          "empty_title" : "Der Titel der statischen Seite darf nicht leer sein.",
-          "empty_url" : "Die URL der statischen Seite darf nicht leer sein.",
-          "exists" : "Diese statische Seite existiert bereits.",
-          "invalid_characters" : "Die URL der statischen Seite enthält ungültige Zeichen.",
-          "long_title" : "Der Titel der statischen Seite ist zu lang.",
-          "long_url" : "Die URL der statischen Seite ist zu lang."
-        },
-        "feedback_label" : "Feedback Formular",
-        "label" : "Neue statische Seite erstellen",
-        "submit" : "Statische Seite erstellen",
-        "success" : "Die statische Seite wurde erstellt.",
         "title" : {
           "label" : "Titel",
           "placeholder" : "Titel der statischen Seite"
