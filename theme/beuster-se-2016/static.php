@@ -4,6 +4,7 @@
       <section class="article">
         <h1><?php echo $static_page->getTitle(); ?></h1>
         <?php echo $static_page->getDecoratedContent(); ?>
+        <?php echo $static_page->addUriSnippets(); ?>
       </section>
     </article>
 
