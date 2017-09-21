@@ -50,16 +50,24 @@ admin.articleEditor = {
         this.preview_auto_update = false;
       }
 
-      $('.section_opener').attr('title', 'Click to open');
-      $('.section_opener').click(this.sectionOpenerListener);
-
       $(this.textarea_id).blur(this.textareaBlurListener);
       $(this.textarea_id).focus(this.textareaFocusListener);
-      $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
-      $('#preview_manual_update').click(this.previewManualUpdate);
-      $('#preview_auto_update').change(this.previewAutoUpdateListener);
 
-      this.loadPrefilledAttachments();
+      if ($('.section_opener').length) {
+        $('.section_opener').attr('title', 'Click to open');
+        $('.section_opener').click(this.sectionOpenerListener);
+      }
+
+      if ($('#preview_manual_update').length &&
+          $('#preview_auto_update').length) {
+        $('#preview_manual_update').click(this.previewManualUpdate);
+        $('#preview_auto_update').change(this.previewAutoUpdateListener);
+      }
+
+      if ($('input[name=attachments]').length) {
+        $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
+        this.loadPrefilledAttachments();
+      }
     }
   },
 
