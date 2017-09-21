@@ -114,7 +114,7 @@
 
     function getCatID($cat) {
         $db = Database::getDB()->getCon();
-        $cat = replaceUml(lowerCat($cat));
+        $cat = LinkBuilder::replaceUmlaute(lowerCat($cat));
         $cats = array();
         $sql = "SELECT
                     ID,
@@ -125,7 +125,7 @@
         if(!$result->execute()) {return $result->error;}
         $result->bind_result($id, $c);
         while($result->fetch()) {
-            $cats[$id] = replaceUml(lowerCat($c));
+            $cats[$id] = LinkBuilder::replaceUmlaute(lowerCat($c));
         }
         $result->close();
         $ret = array_search($cat, $cats);

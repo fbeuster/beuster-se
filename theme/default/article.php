@@ -2,7 +2,7 @@
   $page     = Lixter::getLix()->getPage();
   $article  = $page->getArticle();
 
-  $url    = 'https://beusterse.de'.replaceUml($article->getLink());
+  $url    = 'https://beusterse.de'.LinkBuilder::replaceUmlaute($article->getLink());
   $anhang = ' #beusterse ';
 
   if (strlen($article->getTitle()) > 61) {

@@ -15,6 +15,7 @@
  */
 class Lixter {
 
+  private $link_builder;
   private static $lix; /**< Lixter instance */
   private $page; /**< loaded page */
   private $protocal;
@@ -63,6 +64,10 @@ class Lixter {
     } else {
       $this->buildContent();
     }
+  }
+
+  public function getLinkBuilder() {
+    return $this->link_builder;
   }
 
   public function getPage() {
@@ -126,6 +131,9 @@ class Lixter {
 
     // set the protocol
     $this->protocol = Utilities::getProtocol();
+
+    // init LinkBuilder
+    $this->link_builder = new LinkBuilder();
 
     // loading configuration and functions
     include('settings/functions.php');

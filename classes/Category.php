@@ -75,13 +75,13 @@ class Category {
 	 */
 	public static function isCategoryName($name) {
 		$return = 0;
-		$name 	= replaceUml(self::getNameUrlStatic($name));
+    $name   = LinkBuilder::replaceUmlaute(self::getNameUrlStatic($name));
 		$dbs 		= Database::getDB();
 		$fields = array('ID', 'Cat');
     $res 		= $dbs->select('newscat', $fields);
 
     foreach ($res as $cId) {
-    	if ($name == replaceUml(self::getNameUrlStatic($cId['Cat']))) {
+      if ($name == LinkBuilder::replaceUmlaute(self::getNameUrlStatic($cId['Cat']))) {
     		$return = $cId['ID'];
     	}
     }

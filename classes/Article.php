@@ -93,18 +93,10 @@ class Article {
    * @return string
    */
   public function getLink() {
-    $title = $this->title;
-    $removes = '#?|().,;:{}[]/';
-    $strokes = array(' ', '---', '--');
-
-    for($i = 0; $i < strlen($removes); $i++) {
-      $title = str_replace($removes[$i], '', $title);
-    }
-
-    foreach($strokes as $char) {
-      $title = str_replace($char, '-', $title);
-    }
-    return '/'.$this->id.'/'.$this->getCategory()->getNameUrl().'/'.replaceUml($title);
+    $lb = Lixter::getLix()->getLinkBuilder();
+    return $lb->makeArticleLink($this->id,
+                                $this->getCategory()->getNameUrl(),
+                                $this->title);
   }
 
   /*** GETTER / SETTER ***/
