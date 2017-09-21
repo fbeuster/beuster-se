@@ -628,7 +628,7 @@
             }
 
             if (empty($this->errors)) {
-              $this->showMessage( I18n::t('admin.article.actions.editor.actions.edit.success'),
+              $this->showMessage( I18n::t('admin.article.editor.actions.edit.success'),
                                   'article-edit');
             }
           }

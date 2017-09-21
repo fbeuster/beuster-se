@@ -106,7 +106,7 @@
           </span>
           <select name="category_parent">
             <option value="error">
-              <?php I18n::e('admin.article.edit.new_category.placeholder_select'); ?>
+              <?php I18n::e('admin.article.editor.new_category.placeholder_select'); ?>
             </option>
             <?php foreach($this->parents as $parent) {
                     if(isset($this->values['category_parent']) && $this->values['category_parent'] == $parent) {
@@ -114,7 +114,7 @@
                     } else {
                       $selected = '';
                     } ?>
-            <option <?php echo 'value="'.$parent.'"'.$selected; ?>><?php echo getCatName($parent); ?></option>
+            <option <?php echo 'value="'.$parent.'"'.$selected; ?>><?php echo $parent; ?></option>
             <?php } ?>
           </select>
           <input type="text" name="category_new" placeholder="<?php I18n::e('admin.article.editor.new_category.placeholder_input'); ?>" title="<?php I18n::e('admin.article.editor.new_category.placeholder_input'); ?>" value="<?php if(isset($this->values['category_new'])) echo $this->values['category_new']; ?>">
@@ -187,13 +187,13 @@
               <tr>
                 <th>&nbsp;</th>
                 <th>
-                  <?php I18n::e('admin.article.edit.pictures.table.thumbnail'); ?>
+                  <?php I18n::e('admin.article.editor.pictures.table.thumbnail'); ?>
                 </th>
                 <th>
-                  <?php I18n::e('admin.article.edit.pictures.table.delete'); ?>
+                  <?php I18n::e('admin.article.editor.pictures.table.delete'); ?>
                 </th>
                 <th>
-                  <?php I18n::e('admin.article.edit.pictures.table.bbcode'); ?>
+                  <?php I18n::e('admin.article.editor.pictures.table.bbcode'); ?>
                 </th>
               </tr>
             </thead>
