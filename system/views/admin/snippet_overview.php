@@ -31,7 +31,7 @@
           <td ><?php echo $entry['edited']; ?></td>
           <td class="actions">
             <div>
-              <a class="edit"  title="<?php I18n::e('admin.snippet.overview.edit.title'); ?>" href="/snippetedit/s/<?php echo $entry['name']; ?>">
+              <a class="edit"  title="<?php I18n::e('admin.snippet.overview.edit.title'); ?>" href="/snippet-edit/s/<?php echo $entry['name']; ?>">
                 <?php I18n::e('admin.snippet.overview.edit.text'); ?>
               </a>
               <a class="delete" title="<?php I18n::e('admin.snippet.overview.delete.title'); ?>">
