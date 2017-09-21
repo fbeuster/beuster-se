@@ -42,23 +42,25 @@ admin.articleEditor = {
   },
 
   init: function() {
-    if ($('#preview_auto_update').is(':checked')) {
-      this.preview_auto_update = true;
+    if ($(this.textarea_id).length) {
+      if ($('#preview_auto_update').is(':checked')) {
+        this.preview_auto_update = true;
 
-    } else {
-      this.preview_auto_update = false;
+      } else {
+        this.preview_auto_update = false;
+      }
+
+      $('.section_opener').attr('title', 'Click to open');
+      $('.section_opener').click(this.sectionOpenerListener);
+
+      $(this.textarea_id).blur(this.textareaBlurListener);
+      $(this.textarea_id).focus(this.textareaFocusListener);
+      $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
+      $('#preview_manual_update').click(this.previewManualUpdate);
+      $('#preview_auto_update').change(this.previewAutoUpdateListener);
+
+      this.loadPrefilledAttachments();
     }
-
-    $('.section_opener').attr('title', 'Click to open');
-    $('.section_opener').click(this.sectionOpenerListener);
-
-    $(this.textarea_id).blur(this.textareaBlurListener);
-    $(this.textarea_id).focus(this.textareaFocusListener);
-    $('select[name=attachments_select]').change(this.attachmentsSelectChangeListener);
-    $('#preview_manual_update').click(this.previewManualUpdate);
-    $('#preview_auto_update').change(this.previewAutoUpdateListener);
-
-    this.loadPrefilledAttachments();
   },
 
   isAttachmentSelected: function(value) {
