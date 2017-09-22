@@ -14,6 +14,10 @@
     const DEFAULT_CATEGORY_SCHEMA = '/#name#';
     const PARAMETER_CATEGORY_SCHEMA = '/index.php?p=#name#';
 
+    # other page schemas
+    const DEFAULT_OTHER_PAGE_SCHEMA = '/#page#';
+    const PARAMETER_OTHER_PAGE_SCHEMA = 'index.php?p=#page#';
+
     # paging schemas
     const DEFAULT_PAGING_SCHEMA = '/page';
     const PARAMETER_PAGING_SCHEMA = 'page=';
@@ -24,6 +28,8 @@
 
     private $article_link;
     private $category_link;
+    private $other_link;
+    private $search_link;
     private $selected_schema;
 
     public function __construct() {
@@ -47,6 +53,14 @@
       $category_name = mb_strtolower($category_name, 'UTF-8');
 
       $link = str_replace('#name#', $category_name, $this->category_link);
+
+      return $link;
+    }
+
+    public function makeOtherPageLink($page_name) {
+      $page_name = mb_strtolower($page_name, 'UTF-8');
+
+      $link = str_replace('#page#', $page_name, $this->other_link);
 
       return $link;
     }
@@ -121,6 +135,7 @@
         case self::PARAMETER_SCHEMA :
           $this->article_link   = self::PARAMETER_ARTICLE_SCHEMA;
           $this->category_link  = self::PARAMETER_CATEGORY_SCHEMA;
+          $this->other_link     = self::PARAMETER_OTHER_PAGE_SCHEMA;
           $this->search_link    = self::PARAMETER_SEARCH_SCHEMA;
           break;
 
@@ -128,6 +143,7 @@
         default :
           $this->article_link   = self::DEFAULT_ARTICLE_SCHEMA;
           $this->category_link  = self::DEFAULT_CATEGORY_SCHEMA;
+          $this->other_link     = self::DEFAULT_OTHER_PAGE_SCHEMA;
           $this->search_link    = self::DEFAULT_SEARCH_SCHEMA;
           break;
       }

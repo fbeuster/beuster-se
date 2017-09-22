@@ -6,6 +6,7 @@
   <meta name="description" content="<?php echo getPageDescription(); ?>">
   <meta name="loaded_lang" content="<?php echo Config::getConfig()->get('language'); ?>">
   <?php
+    $lb   = Lixter::getLix()->getLinkBuilder();
     $page = Lixter::getLix()->getPage();
     $keywords = '';
 
@@ -52,7 +53,8 @@
         <span><a href="/">beuster{se}</a></span>
         <?php } ?>
         <div class="search inactive">
-          <form action="/search" method="post">
+          <form action="<?php echo $lb->makeOtherPageLink('search'); ?>"
+                method="post">
             <input type="text" placeholder="<?php I18n::e('search.form.placeholder'); ?>" name="s">
             <input type="submit" value="" alt="<?php I18n::e('search.form.submit'); ?>" name="search">
           </form>
@@ -62,7 +64,11 @@
         <span class="expander">Menü anzeigen</span>
         <menu class="clearfix">
           <?php genMenu(); ?>
-          <li><a href="/kontakt">Kontakt</a></li>
+          <li>
+            <a href="<?php echo $lb->makeOtherPageLink('kontakt'); ?>">
+              Kontakt
+            </a>
+          </li>
         </menu>
       </nav>
     </div>
