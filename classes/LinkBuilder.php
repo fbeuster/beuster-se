@@ -18,6 +18,10 @@
     const DEFAULT_PAGING_SCHEMA = '/page';
     const PARAMETER_PAGING_SCHEMA = 'page=';
 
+    # search schemas
+    const DEFAULT_SEARCH_SCHEMA = '/search/#term#';
+    const PARAMETER_SEARCH_SCHEMA = '/index.php?p=search&s=#term#';
+
     private $article_link;
     private $category_link;
     private $selected_schema;
@@ -69,6 +73,10 @@
       }
     }
 
+    public function makeSearchLink($search_term) {
+      return str_replace('#term#', $search_term,  $this->search_link);
+    }
+
     public static function replaceStrokes($string) {
       $strokes = array(' ', '---', '--');
 
@@ -113,12 +121,14 @@
         case self::PARAMETER_SCHEMA :
           $this->article_link   = self::PARAMETER_ARTICLE_SCHEMA;
           $this->category_link  = self::PARAMETER_CATEGORY_SCHEMA;
+          $this->search_link    = self::PARAMETER_SEARCH_SCHEMA;
           break;
 
         case self::DEFAULT_SCHEMA :
         default :
           $this->article_link   = self::DEFAULT_ARTICLE_SCHEMA;
           $this->category_link  = self::DEFAULT_CATEGORY_SCHEMA;
+          $this->search_link    = self::DEFAULT_SEARCH_SCHEMA;
           break;
       }
     }
