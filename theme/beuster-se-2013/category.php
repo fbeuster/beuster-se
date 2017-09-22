@@ -1,5 +1,6 @@
 <?php
 
+  $link_builder = Lixter::getLix()->getLinkBuilder();
   $page = Lixter::getLix()->getPage();
 
   if ($page->hasArticles()) { ?>
@@ -49,10 +50,10 @@
         $i++;
       }
       if ( $page->getDestination() != '' ) {
-        $dest = '/'.$page->getDestination().'/page';
+        $dest = $page->getDestination().$link_builder->makePageAppendix();
 
       } else {
-        $dest = '/page';
+        $dest = $link_builder->makePageLink();
       }
       echo '<br class="clear">'."\r";
       echo genPager($page->getTotalPagesCount(), $page->getStartPage(), $dest); ?>

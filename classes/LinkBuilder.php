@@ -14,8 +14,13 @@
     const DEFAULT_CATEGORY_SCHEMA = '/#name#';
     const PARAMETER_CATEGORY_SCHEMA = '/index.php?p=#name#';
 
+    # paging schemas
+    const DEFAULT_PAGING_SCHEMA = '/page';
+    const PARAMETER_PAGING_SCHEMA = 'page=';
+
     private $article_link;
     private $category_link;
+    private $selected_schema;
 
     public function __construct() {
       # TODO
@@ -40,6 +45,28 @@
       $link = str_replace('#name#', $category_name, $this->category_link);
 
       return $link;
+    }
+
+    public function makePageAppendix() {
+      return $this->makePageParameter('&');
+    }
+
+    public function makePageLink() {
+      return $this->makePageParameter('?');
+    }
+
+    private function makePageParameter($prepend) {
+      switch ($this->selected_schema) {
+        case self::CUSTOM_SCHEMA :
+          return '';
+
+        case self::PARAMETER_SCHEMA :
+          return $prepend.self::PARAMETER_PAGING_SCHEMA;
+
+        case self::DEFAULT_SCHEMA :
+        default :
+          return self::DEFAULT_PAGING_SCHEMA;
+      }
     }
 
     public static function replaceStrokes($string) {
@@ -77,9 +104,9 @@
     }
 
     private function setSchema() {
-      $selected_schema = self::DEFAULT_SCHEMA;
+      $this->selected_schema = self::DEFAULT_SCHEMA;
 
-      switch ($selected_schema) {
+      switch ($this->selected_schema) {
         case self::CUSTOM_SCHEMA :
           break;
 

@@ -262,7 +262,7 @@ class CategoryPage extends Page {
       $conds[1] = $conds[1] . $cat_conds[1];
       $conds[2] = array_merge($conds[2], $cat_conds[2]);
 
-      $this->destination  = $this->category->getNameUrl();
+      $this->destination  = $this->category->getLink();
       $this->title        = $this->category->getName();
     }
 
