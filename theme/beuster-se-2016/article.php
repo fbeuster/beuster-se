@@ -3,7 +3,7 @@
   $article  = $page->getArticle();
 ?>
     <article>
-      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
         <section class="article">
@@ -21,7 +21,7 @@
         </i>
         <?php echo $article->getContentDecorated(); ?>
       </section>
-      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
 
@@ -65,7 +65,7 @@
 
       <?php if (count($article->getAttachments()) > 0 &&
                 count($article->getGallery()) > 0) { ?>
-      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
       <?php } ?>
@@ -87,7 +87,7 @@
         ?>
       </section>
 
-      <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>" class="back">
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
 

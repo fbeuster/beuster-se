@@ -124,10 +124,10 @@
 
             echo '<li class="between">&gt;</li><li><a href="/">Blog</a></li>'."\r";
             if ($category->getNameUrl() !== 'blog') {
-                echo    '<li class="between">&gt;</li><li><a href="/'
-                        .$parent->getNameUrl().'">'.$parent->getName().'</a></li>'."\r";
-                echo    '<li class="between">&gt;</li><li><a href="/'.
-                        $category->getNameUrl().'">'.$category->getName().'</a></li>'."\r";
+                echo    '<li class="between">&gt;</li><li><a href="'
+                        .$parent->getLink().'">'.$parent->getName().'</a></li>'."\r";
+                echo    '<li class="between">&gt;</li><li><a href="'.
+                        $category->getLink().'">'.$category->getName().'</a></li>'."\r";
             }
         } else {
             if (isset($_GET['c']) &&
@@ -163,7 +163,7 @@
             }
 
             foreach($children as $child) {
-                echo    ' <li'.$noborder.'><a href="/'.$child->getNameUrl().'">'.
+                echo    ' <li'.$noborder.'><a href="'.$child->getLink().'">'.
                         $child->getName().'</a></li>'."\r";
                 $noborder = '';
             }

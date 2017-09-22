@@ -255,13 +255,20 @@ class Category {
 	 * @return String
 	 */
 	public function getNameUrl() {
-		$name = $this->name;
-        $strokes = array(' ', '---', '--');
-        foreach($strokes as $char) {
-            $name = str_replace($char, '-', $name);
-        }
-        return mb_strtolower($name, 'UTF-8');
+    $lb   = Lixter::getLix()->getLinkBuilder();
+		$name = $lb->replaceStrokes($this->name);
+
+    return mb_strtolower($name, 'UTF-8');
 	}
+
+  /**
+   * getter for name as url save variant
+   * @return String
+   */
+  public function getLink() {
+    $lb = Lixter::getLix()->getLinkBuilder();
+    return $lb->makeCategoryLink($this->name);
+  }
 
 	/**
 	 * getter for type

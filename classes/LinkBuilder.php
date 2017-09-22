@@ -1,9 +1,13 @@
 <?php
 
   class LinkBuilder {
-    #article schemas
+    # article schemas
     const DEFAULT_ARTICLE_SCHEMA    = '/#id#/#category#/#title#';
-    const PARAMETER_ARTICLE_SCHEMA  = 'index.php?p=blog&n=#id#';
+    const PARAMETER_ARTICLE_SCHEMA  = '/index.php?p=blog&n=#id#';
+
+    # category schemas
+    const DEFAULT_CATEGORY_SCHEMA = '/#name#';
+    const PARAMETER_CATEGORY_SCHEMA = '/index.php?p=#name#';
 
     public function __construct() {
       # TODO
@@ -21,6 +25,26 @@
       return $link;
     }
 
+    public function makeCategoryLink($category_name) {
+      $category_name = $this->replaceStrokes($category_name);
+      $category_name = mb_strtolower($category_name, 'UTF-8');
+
+      $link = self::DEFAULT_CATEGORY_SCHEMA;
+      $link = str_replace('#name#', $category_name,  $link);
+
+      return $link;
+    }
+
+    public static function replaceStrokes($string) {
+      $strokes = array(' ', '---', '--');
+
+      foreach($strokes as $char) {
+        $string = str_replace($char, '-', $string);
+      }
+
+      return $string;
+    }
+
     public static function replaceUmlaute($string) {
       $string = str_replace('ä', 'ae', $string);
       $string = str_replace('ö', 'oe', $string);
@@ -35,15 +59,13 @@
 
     public function removeSpecialCharacters($string) {
       $removes = '#?|().,;:{}[]/%';
-      $strokes = array(' ', '---', '--');
 
       for($i = 0; $i < strlen($removes); $i++) {
         $string = str_replace($removes[$i], '', $string);
       }
 
-      foreach($strokes as $char) {
-        $string = str_replace($char, '-', $string);
-      }
+      $string = $this->replaceStrokes($string);
+
       return $this->replaceUmlaute($string);
     }
   }

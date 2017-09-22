@@ -39,7 +39,7 @@
             </time>
 
             <?php I18n::e('article.info.in'); ?>
-            <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>">
+            <a href="<?php echo $article->getCategory()->getLink(); ?>">
               <?php echo $article->getCategory()->getName(); ?>
             </a>
           </i>
