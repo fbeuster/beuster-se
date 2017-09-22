@@ -109,8 +109,16 @@
 
     function genMenu() {
         $pars = getTopCats();
-        foreach($pars as $par) {
-            echo '<li><a href="/'.(($par!=getCatID('Blog'))?lowerCat(getCatName($par)):'').'">'.getCatName($par).'</a></li>'."\r";
+        foreach ($pars as $par) {
+            $category   = new Category($par);
+
+            if ($category->getId() == getCatID('Blog')) {
+                $link = '/';
+            } else {
+                $link = $category->getLink();
+            }
+
+            echo '<li><a href="'.$link.'">'.$category->getName().'</a></li>'."\r";
         }
     }
 
