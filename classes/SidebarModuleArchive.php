@@ -20,6 +20,7 @@
       $counts     = '';
       $db         = Database::getDB();
       $last_year  = null;
+      $lb         = Lixter::getLix()->getLinkBuilder();
 
       $fields     = array('COUNT(`ID`) AS `amount`',
                           'MONTH(`Datum`) AS `month`',
@@ -43,7 +44,10 @@
           $last_year = $row['year'];
         }
 
-        $month_str    = '<a href="/'.$row['year'].'/'.$row['month'].'">';
+        $month_str    = '<a href="'.
+                        $lb->makeArchiveMonthLink($row['year'],
+                                                  $row['month']).
+                        '">';
         $month_str    .= I18n::t('datetime.month.' . $row['month']);
         $month_str    .= ' <span class="number" style="color: #999999;">';
         $month_str    .= '('.$row['amount'].')';

@@ -6,6 +6,13 @@
     const DEFAULT_SCHEMA    = 1;
     const PARAMETER_SCHEMA  = 2;
 
+    # archive schemas
+    const DEFAULT_YEAR_SCHEMA    = '/#year#';
+    const PARAMETER_YEAR_SCHEMA  = '/index.php?y=#year#';
+
+    const DEFAULT_MONTH_SCHEMA    = '/#year#/#month#';
+    const PARAMETER_MONTH_SCHEMA  = '/index.php?y=#year#&m=#month#';
+
     # article schemas
     const DEFAULT_ARTICLE_SCHEMA    = '/#id#/#category#/#title#';
     const PARAMETER_ARTICLE_SCHEMA  = '/index.php?p=blog&n=#id#';
@@ -28,15 +35,28 @@
 
     private $article_link;
     private $category_link;
+    private $month_link;
     private $other_link;
     private $search_link;
     private $selected_schema;
+    private $year_schema;
 
     public function __construct() {
       # TODO
       # getting current schema from database
 
       $this->setSchema();
+    }
+
+    public function makeArchiveMonthLink($year, $month) {
+      $link = str_replace('#year#',  $year,   $this->month_link);
+      $link = str_replace('#month#', $month,  $link);
+
+      return $link;
+    }
+
+    public function makeArchiveYearLink($year) {
+      return str_replace('#year#',  $year,   $this->year_link);
     }
 
     public function makeArticleLink($id, $category, $title) {
@@ -135,16 +155,20 @@
         case self::PARAMETER_SCHEMA :
           $this->article_link   = self::PARAMETER_ARTICLE_SCHEMA;
           $this->category_link  = self::PARAMETER_CATEGORY_SCHEMA;
+          $this->month_link     = self::PARAMETER_MONTH_SCHEMA;
           $this->other_link     = self::PARAMETER_OTHER_PAGE_SCHEMA;
           $this->search_link    = self::PARAMETER_SEARCH_SCHEMA;
+          $this->year_link      = self::PARAMETER_YEAR_SCHEMA;
           break;
 
         case self::DEFAULT_SCHEMA :
         default :
           $this->article_link   = self::DEFAULT_ARTICLE_SCHEMA;
           $this->category_link  = self::DEFAULT_CATEGORY_SCHEMA;
+          $this->month_link     = self::DEFAULT_MONTH_SCHEMA;
           $this->other_link     = self::DEFAULT_OTHER_PAGE_SCHEMA;
           $this->search_link    = self::DEFAULT_SEARCH_SCHEMA;
+          $this->year_link      = self::DEFAULT_YEAR_SCHEMA;
           break;
       }
     }

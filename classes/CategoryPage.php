@@ -90,10 +90,11 @@ class CategoryPage extends Page {
         return "news.Datum < NOW()";
 
       } else {
+        $lb       = Lixter::getLix()->getLinkBuilder();
         $year_sql = "YEAR(news.Datum) = " . $year;
 
         if (!isset($_GET['m'])) {
-          $this->destination = $year;
+          $this->destination = $lb->makeArchiveYearLink($year);
           return $year_sql . " AND news.Datum < NOW()";
 
         } else {
@@ -103,7 +104,7 @@ class CategoryPage extends Page {
             return "news.Datum < NOW()";
 
           } else {
-            $this->destination = $year . '/' . $month;
+            $this->destination = $lb->makeArchiveMonthLink($year,$month);
             $month_sql = " AND MONTH(news.Datum) = " . $month;
             return $year_sql . $month_sql . " AND news.Datum < NOW()";
           }
@@ -250,6 +251,8 @@ class CategoryPage extends Page {
       if ($this->author != null) {
         $conds  = $this->getAuthorConditions();
 
+        # TODO
+        # author name needs to be url safe
         $this->destination  = $this->author->getName();
         $this->title        = $this->author->getClearname();
       }
