@@ -33,6 +33,10 @@
     const DEFAULT_SEARCH_SCHEMA = '/search/#term#';
     const PARAMETER_SEARCH_SCHEMA = '/index.php?p=search&s=#term#';
 
+    # snippet schemas
+    const DEFAULT_SNIPPET_SCHEMA = '/s/';
+    const PARAMETER_SNIPPET_SCHEMA = '&snip=';
+
     private $article_link;
     private $category_link;
     private $month_link;
@@ -77,10 +81,14 @@
       return $link;
     }
 
-    public function makeOtherPageLink($page_name) {
+    public function makeOtherPageLink($page_name, $snippet = null) {
       $page_name = mb_strtolower($page_name, 'UTF-8');
 
       $link = str_replace('#page#', $page_name, $this->other_link);
+
+      if ($snippet !== null) {
+        $link .= $this->makeSnippetParameter().$snippet;
+      }
 
       return $link;
     }
@@ -109,6 +117,20 @@
 
     public function makeSearchLink($search_term) {
       return str_replace('#term#', $search_term,  $this->search_link);
+    }
+
+    private function makeSnippetParameter($snippet = '') {
+      switch ($this->selected_schema) {
+        case self::CUSTOM_SCHEMA :
+          return '';
+
+        case self::PARAMETER_SCHEMA :
+          return self::PARAMETER_SNIPPET_SCHEMA;
+
+        case self::DEFAULT_SCHEMA :
+        default :
+          return self::DEFAULT_SNIPPET_SCHEMA;
+      }
     }
 
     public static function replaceStrokes($string) {
