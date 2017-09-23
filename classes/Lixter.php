@@ -133,7 +133,24 @@ class Lixter {
     $this->protocol = Utilities::getProtocol();
 
     // init LinkBuilder
-    $this->link_builder = new LinkBuilder();
+    # TODO
+    # load this setting from the database
+    $selected_schema = LinkBuilder::DEFAULT_SCHEMA;
+
+    switch ($selected_schema) {
+      case LinkBuilder::PARAMETER_SCHEMA :
+        $this->link_builder = new ParameterLinkBuilder();
+        break;
+
+      # TODO
+      # custom schema needs a custom builder
+
+      case LinkBuilder::CUSTOM_SCHEMA :
+      case LinkBuilder::DEFAULT_SCHEMA :
+      default :
+        $this->link_builder = new DefaultLinkBuilder();
+        break;
+    }
 
     // loading configuration and functions
     include('settings/functions.php');
