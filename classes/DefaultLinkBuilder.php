@@ -5,6 +5,16 @@
     public function __construct() {
     }
 
+    public function makeAdminLink($page, $data = null) {
+      if ($data === null) {
+        $append = '';
+      } else {
+        $append = '/d/'.$data;
+      }
+
+      return '/'.$page.$append;
+    }
+
     public function makeArchiveMonthLink($year, $month) {
       return '/'.$year.'/'.$month;
     }

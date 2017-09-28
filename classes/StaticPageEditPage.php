@@ -17,13 +17,13 @@
 
     private function handleGet() {
       if (  ( 'GET' == $_SERVER['REQUEST_METHOD'] &&
-              isset($_GET['static_page']) ) ||
+              isset($_GET['data']) ) ||
             ( 'POST' == $_SERVER['REQUEST_METHOD'] &&
               isset($_POST['formactionchoose']) ) ) {
         $db = Database::getDB();
 
-        if (isset($_GET['static_page'])) {
-          $url = trim($_GET['static_page']);
+        if (isset($_GET['data'])) {
+          $url = trim($_GET['data']);
 
         } else if(isset($_POST['static_page'])) {
           $url = trim($_POST['static_page']);

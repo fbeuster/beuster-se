@@ -1,3 +1,6 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
   <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
@@ -44,7 +47,9 @@
             <td ><?php echo $article->getDateFormatted("d.m.Y H:i"); ?></td>
             <td class="actions">
               <div>
-                <a class="edit"  title="<?php I18n::e('admin.article.overview.edit.title'); ?>" href="/article-edit/a/<?php echo $article->getId(); ?>">
+                <a  class="edit"
+                    title="<?php I18n::e('admin.article.overview.edit.title'); ?>"
+                    href="<?php echo $lb->makeAdminLink('article-edit', $article->getId()); ?>">
                   <?php I18n::e('admin.article.overview.edit.text'); ?>
                 </a>
                 <a class="delete" title="<?php I18n::e('admin.article.overview.delete.title'); ?>">

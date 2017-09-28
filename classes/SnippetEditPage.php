@@ -17,9 +17,9 @@
 
     private function handleGet() {
       if ('GET' == $_SERVER['REQUEST_METHOD']) {
-        if (isset($_GET['snip'])) {
+        if (isset($_GET['data'])) {
           $db     = Database::getDB();
-          $name   = trim($_GET['snip']);
+          $name   = trim($_GET['data']);
           $fields = array('name', 'content_de');
           $conds  = array('name = ?', 's', array($name));
           $res    = $db->select('snippets', $fields, $conds);

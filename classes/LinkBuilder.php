@@ -9,6 +9,8 @@
     public function __construct() {
     }
 
+    public abstract function makeAdminLink($page, $data = null);
+
     public abstract function makeArchiveMonthLink($year, $month);
 
     public abstract function makeArchiveYearLink($year);
