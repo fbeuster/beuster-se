@@ -133,9 +133,7 @@ class Lixter {
     $this->protocol = Utilities::getProtocol();
 
     // init LinkBuilder
-    # TODO
-    # load this setting from the database
-    $selected_schema = LinkBuilder::DEFAULT_SCHEMA;
+    $selected_schema = Config::getConfig()->get('url_schema');
 
     switch ($selected_schema) {
       case LinkBuilder::PARAMETER_SCHEMA :
