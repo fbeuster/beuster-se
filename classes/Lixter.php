@@ -225,7 +225,7 @@ class Lixter {
               $this->page = new LoginPage();
 
             } else {
-              $link       = ' <a href="/login">'.I18n::t('admin.try_again').'</a>';
+              $link       = ' <a href="'.$this->link_builder->makeAdminLink('login').'">'.I18n::t('admin.try_again').'</a>';
               $message    = I18n::t('admin.not_logged_in').$link;
               $this->page = new ErrorPage($message, 'login');
             }

@@ -1,6 +1,9 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
     <?php if(count($this->errors)){ ?>
       <div class="error">
@@ -13,7 +16,7 @@
       </div>
     <?php } ?>
 
-    <form action="/<?php echo $this->form_action; ?>" method="post" class="userform articleform">
+    <form action="<?php echo $lb->makeAdminLink($this->form_action); ?>" method="post" class="userform articleform">
       <fieldset>
         <legend>
           <?php I18n::e('admin.snippet.editor.actions.'.$this->action.'.label'); ?>
@@ -64,5 +67,5 @@
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

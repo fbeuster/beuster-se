@@ -3,7 +3,7 @@
 ?>
 
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
   	<h1><?php I18n::e('admin.attachment.overview.label'); ?></h1>
   	<p>
@@ -61,5 +61,5 @@
     <?php  } ?>
   </section>
 
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

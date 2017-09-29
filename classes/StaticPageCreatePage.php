@@ -76,8 +76,9 @@
           $res    = $db->insert('static_pages', $fields, $values);
 
           if ($res !== null) {
-            $link     = ' <br /><a href="/admin">'.
-                        I18n::t('admin.back_link').'</a>';
+            $lb       = Lixter::getLix()->getLinkBuilder();
+            $link     = ' <br /><a href="'.$lb->makeAdminLink('admin').
+                        '">'.I18n::t('admin.back_link').'</a>';
             $message  = I18n::t('admin.static_page.editor.actions.new.success').$link;
 
             $this->showMessage($message, 'admin');

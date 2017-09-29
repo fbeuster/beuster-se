@@ -101,7 +101,10 @@
         $ret .= I18n::t('general_form.wait', array($wait))."\r";
         $ret .= '</p>'."\r";
         $ret .= '<p class="beCommentNewDisclaimer">'."\r";
-        $more_info = '<a href="/impressum">'.I18n::t('general_form.imprint').'</a>';
+
+        $lb = Lixter::getLix()->getLinkBuilder();
+        $more_info = '<a href="'.$lb->makeOtherPageLink('impressum').
+                        '">'.I18n::t('general_form.imprint').'</a>';
         $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
         $ret .= '</p>'."\r";
         return $ret;
@@ -154,9 +157,10 @@
                 $catID = getCatID($catID);
             }
 
+            $lb = Lixter::getLix()->getLinkBuilder();
             $noborder = ' class="noborder"';
             if($catID == getCatID('blog')) {
-                echo ' <li'.$noborder.'><a href="/blog">Blog</a></li>'."\r";
+                echo ' <li'.$noborder.'><a href="'.$lb->makeCategoryLink('blog').'">Blog</a></li>'."\r";
                 $noborder = '';
             }
 

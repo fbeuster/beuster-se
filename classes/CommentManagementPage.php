@@ -24,7 +24,8 @@
           }
         }
 
-        $link     = '<br /><a href="/admin">'.
+        $lb       = Lixter::getLix()->getLinkBuilder();
+        $link     = '<br /><a href="'.$lb->makeAdminLink('admin').'">'.
                     I18n::t('admin.back_link').'</a>';
         $message  = I18n::t('admin.category.success').$link;
         $this->showMessage($message, 'admin');

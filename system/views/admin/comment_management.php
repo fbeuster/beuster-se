@@ -1,10 +1,13 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
     <h1>Freischaltung</h1>
     <?php if(count($this->comments)) { ?>
-      <form action="/comment-management" method="post" class="userform articleform">
+      <form action="<?php echo $lb->makeAdminLink('comment-management'); ?>" method="post" class="userform articleform">
         <fieldset>
           <table class="commentlist">
             <thead>
@@ -44,5 +47,5 @@
       <p>Keine Kommentare freizuschalten</p>
     <?php } ?>
   </section>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

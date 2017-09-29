@@ -1,12 +1,15 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
     <h1><?php I18n::e('admin.category.label'); ?></h1>
     <?php if( count($this->categories) &&
               count($this->parent_categories)) {
         $i = 0; ?>
-      <form action="/category-management" method="post" class="userform articleform multiFieldset">
+      <form action="<?php echo $lb->makeAdminLink('category-management'); ?>" method="post" class="userform articleform multiFieldset">
         <fieldset>
           <fieldset>
             <legend>
@@ -185,5 +188,5 @@
       <p>Keine Kategorien vorhanden.</p>
     <?php } ?>
   </section>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>
