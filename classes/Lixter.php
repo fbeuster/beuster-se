@@ -133,9 +133,9 @@ class Lixter {
     $this->protocol = Utilities::getProtocol();
 
     // init LinkBuilder
-    $selected_schema = Config::getConfig()->get('url_schema');
+    $url_schema = Config::getConfig()->get('url_schema');
 
-    switch ($selected_schema) {
+    switch ($url_schema) {
       case LinkBuilder::PARAMETER_SCHEMA :
         $this->link_builder = new ParameterLinkBuilder();
         break;
@@ -223,7 +223,9 @@ class Lixter {
               $this->page = new LoginPage();
 
             } else {
-              $link       = ' <a href="'.$this->link_builder->makeAdminLink('login').'">'.I18n::t('admin.try_again').'</a>';
+              $link       = ' <a href="'.
+                            $this->link_builder->makeAdminLink('login').
+                            '">'.I18n::t('admin.try_again').'</a>';
               $message    = I18n::t('admin.not_logged_in').$link;
               $this->page = new ErrorPage($message, 'login');
             }
