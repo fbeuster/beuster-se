@@ -89,6 +89,12 @@ body.article article {
           }
         }
 
+        code.inline {
+          @include code_font;
+          background: $grey;
+          padding: 0 0.375em;
+        }
+
         del {
           text-decoration: line-through;
         }

@@ -18,6 +18,7 @@
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.li'); ?>" id="btnli">&nbsp;</button>
   </div>
   <div class="bbSpan">
+    <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.tt'); ?>" id="btntt">&nbsp;</button>
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.code'); ?>" id="btncode">&nbsp;</button>
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.par'); ?>" id="btnpar">&nbsp;</button>
   </div>
@@ -26,12 +27,6 @@
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.yt'); ?>" id="btnyt">&nbsp;</button>
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.play'); ?>" id="btnplay">&nbsp;</button>
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.amazon'); ?>" id="btnamazon">&nbsp;</button>
-  </div>
-  <div class="bbSpan">
-    <button class="bbImg" type="button" title=":)" id="smsmile">&nbsp;</button>
-    <button class="bbImg" type="button" title=":(" id="smlaugh">&nbsp;</button>
-    <button class="bbImg" type="button" title=":D" id="smsad">&nbsp;</button>
-    <button class="bbImg" type="button" title=";)" id="smone">&nbsp;</button>
   </div>
   <div class="bbSpan">
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.uber2'); ?>" id="btnuber2">&nbsp;</button>

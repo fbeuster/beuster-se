@@ -29,6 +29,7 @@ admin.bbCode = {
     $('#btncite').click(  { text: 'Quelle angeben (Link oder Text):',  tag: 'cite' },   this.wrapUrl);
     $('#btnbquote').click({ text: 'Quelle angeben (Link oder Text):',  tag: 'bquote' }, this.wrapUrl);
 
+    $('#btntt').click(    { o: '[tt]',    c: '[/tt]' },     this.wrapSelection);
     $('#btncode').click(  { o: '[code]',  c: '[/code]' },   this.wrapSelection);
     $('#btnquote').click( { o: '[quote]', c: '[/quote]' },  this.wrapSelection);
 
@@ -45,15 +46,21 @@ admin.bbCode = {
 
       $('#btnyt').click(function(){
         var url = prompt('Videocode eingeben:','');
-        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[yt]' + url, '[/yt]'));
+        if(url.trim() != '') {
+          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[yt]' + url, '[/yt]'));
+        }
       });
       $('#btnplay').click(function(){
         var url = prompt('Playlist-ID eingeben:','');
-        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[play]' + url, '[/play]'));
+        if(url.trim() != '') {
+          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[play]' + url, '[/play]'));
+        }
       });
       $('#btnamazon').click(function(){
         var asin = prompt('ASIN eingeben:','');
-        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
+        if(asin.trim() != '') {
+          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
+        }
       });
     }
   },

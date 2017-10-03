@@ -651,6 +651,7 @@
         "ol" : "Aufzählung",
         "ul" : "Liste",
         "li" : "Listenelement",
+        "tt" : "Inline Code",
         "code" : "Codebereich",
         "par" : "Neuer Absatz",
         "link" : "Link einfügen",

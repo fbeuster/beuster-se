@@ -45,22 +45,29 @@ form.userform {
   }
 
   .bbDiv {
-      height: 25px;
-      border-bottom: 0;
+    background: $grey;
+    border: 1px solid $dark_grey;
+    height: $editor_button_width;
   }
 
   .bbSpan {
-    @include editor_sprite($grey);
     display: block;
-    padding-left: 7px;
     float: left;
-    border-top: 1px solid $grey;
+
+    &:not(:first-child) {
+      padding-left: 0.25em;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $dark_grey;
+      padding-right: 0.25 * $editor_button_width;
+    }
   }
 
   .bbImg {
     @include editor_sprite;
-    width: 25px;
-    height: 25px;
+    width: $editor_button_width;
+    height: $editor_button_width;
     padding: 0 !important;
     margin: 0;
     box-shadow: 0 0 0;
