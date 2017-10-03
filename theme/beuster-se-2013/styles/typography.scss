@@ -125,7 +125,18 @@ a {
         text-align: right;
         opacity: 0.7;
       }
+
+      div {
+        display: inline-block;
+      }
     }
+  }
+
+  code.inline {
+    @include font-source;
+    background: $lighterer_gray;
+    border: 1px solid $dark_gray;
+    padding: 0 0.25em;
   }
 
   pre {

@@ -202,6 +202,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[ins\]\[/ins\]#', '', $this->str);
         $this->str = preg_replace('#\[h2\]\[/h2\]#', '', $this->str);
         $this->str = preg_replace('#\[h3\]\[/h3\]#', '', $this->str);
+        $this->str = preg_replace('#\[tt\]\[/tt\]#', '', $this->str);
     }
 
     /**
@@ -213,6 +214,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[b\](.+?)\[/b\]#', '<b>$1</b>', $this->str);
         $this->str = preg_replace('#\[u\](.+?)\[/u\]#', '<u>$1</u>', $this->str);
         $this->str = preg_replace('#\[i\](.+?)\[/i\]#', '<i>$1</i>', $this->str);
+        $this->str = preg_replace('#\[tt\](.+?)\[/tt\]#', '<code class="inline">$1</code>', $this->str);
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '<del>$1</del>', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '<ins>$1</ins>', $this->str);
         $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#', '<mark>$1</mark>', $this->str);
@@ -251,6 +253,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[b\](.+?)\[/b\]#', '$1', $this->str);
         $this->str = preg_replace('#\[u\](.+?)\[/u\]#', '$1', $this->str);
         $this->str = preg_replace('#\[i\](.+?)\[/i\]#', '$1', $this->str);
+        $this->str = preg_replace('#\[tt\](.+?)\[/tt\]#', '$1', $this->str);
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '$1', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '$1', $this->str);
         $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#', '$1', $this->str);
