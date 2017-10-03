@@ -1,4 +1,7 @@
-<?php $search = Lixter::getLix()->getPage(); ?>
+<?php
+
+  $lb     = Lixter::getLix()->getLinkBuilder();
+  $search = Lixter::getLix()->getPage(); ?>
 
   <div class="beContentEntry">
     <h1 class="beContentEntryHeader"><?php echo $search->getTitle(); ?></h1>
@@ -33,5 +36,5 @@
   <?php
         echo genPager($search->getTotalPages(),
                       $search->getCurrentPage(),
-                      '/search/'.$search->getSearchTerm().'/page');
+                      $search->getLink().$lb->makePageAppendix());
       } ?>

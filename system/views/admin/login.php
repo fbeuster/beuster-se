@@ -1,7 +1,10 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
   <section class="article">
-    <form action="/login" method="post" class="userform articleform">
+    <form action="<?php echo $lb->makeAdminLink('login'); ?>" method="post" class="userform articleform">
       <fieldset>
         <legend><?php I18n::e('login.form.legend'); ?></legend>
         <label class="required">

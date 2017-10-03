@@ -18,14 +18,14 @@
 
     private function handleGet() {
       if (  ( 'GET' == $_SERVER['REQUEST_METHOD'] &&
-              isset($_GET['article']) ) ||
+              isset($_GET['data']) ) ||
             ( 'POST' == $_SERVER['REQUEST_METHOD'] &&
               isset($_POST['formactionchoose']) ) ) {
 
         $db = Database::getDB();
 
-        if (isset($_GET['article'])) {
-          $id = trim($_GET['article']);
+        if (isset($_GET['data'])) {
+          $id = trim($_GET['data']);
 
         } else if(isset($_POST['article'])) {
           $id = trim($_POST['article']);

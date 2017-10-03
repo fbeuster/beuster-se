@@ -1,4 +1,8 @@
+<?php
 
+  $lb = Lixter::getLix()->getLinkBuilder();
+
+?>
       <footer>
         <div class="socials">
           <a href="https://twitter.com/FBeuster" class="tw">Twitter</a>
@@ -8,8 +12,12 @@
           <a href="https://fixel.me" class="lk">fixel.me</a>
         </div>
         <div class="links">
-          <a href="/about">Über und Feedback</a>
-          <a href="/impressum">Impressum und Datenschutz</a>
+          <a href="<?php echo $lb->makeOtherPageLink('about'); ?>">
+            Über und Feedback
+          </a>
+          <a href="<?php echo $lb->makeOtherPageLink('impressum'); ?>">
+            Impressum und Datenschutz
+          </a>
         </div>
         <div class="copy">
           &copy; Copyright 2010 - 2017 Felix Beuster

@@ -111,12 +111,12 @@
         }
 
       } else if ( ( 'GET' == $_SERVER['REQUEST_METHOD'] &&
-                    isset($_GET['attachment']) ) ||
+                    isset($_GET['data']) ) ||
                   ( 'POST' == $_SERVER['REQUEST_METHOD'] &&
                     isset($_POST['formselect']) )) {
 
-        if (isset($_GET['attachment'])) {
-          $id = trim($_GET['attachment']);
+        if (isset($_GET['data'])) {
+          $id = trim($_GET['data']);
 
         } else if(isset($_POST['attachment'])) {
           $id = trim($_POST['attachment']);

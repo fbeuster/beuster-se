@@ -1,5 +1,6 @@
 <?php
 
+  $link_builder = Lixter::getLix()->getLinkBuilder();
   $page = Lixter::getLix()->getPage();
 
   if ($page->getType() === Page::INDEX_PAGE) {
@@ -17,7 +18,7 @@
   <?php if ($page->getCategory()) { ?>
     <?php $parent = $page->getCategory()->getParent(); ?>
     <?php if ($parent) { ?>
-      <a href="/<?php echo $parent->getNameUrl(); ?>" class="back">
+      <a href="<?php echo $parent->getLink(); ?>" class="back">
         <?php I18n::e('utilities.back_link', array($parent->getName())); ?>
       </a>
 
@@ -26,7 +27,7 @@
         <li><?php I18n::e('utilities.subcategories'); ?>:</li>
         <?php foreach ($page->getCategory()->getChildren() as $child) { ?>
           <li>
-            <a href="/<?php echo $child->getNameUrl(); ?>">
+            <a href="<?php echo $child->getLink(); ?>">
               <?php echo $child->getName(); ?>
             </a>
           </li>
@@ -40,7 +41,7 @@
         <li><?php I18n::e('utilities.subcategories'); ?>:</li>
         <?php foreach ($category->getChildren() as $child) { ?>
           <li>
-            <a href="/<?php echo $child->getNameUrl(); ?>">
+            <a href="<?php echo $child->getLink(); ?>">
               <?php echo $child->getName(); ?>
             </a>
           </li>
@@ -90,7 +91,7 @@
         </time>
 
         <?php I18n::e('article.info.in'); ?>
-        <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>">
+        <a href="<?php echo $article->getCategory()->getLink(); ?>">
           <?php echo $article->getCategory()->getName(); ?>
         </a>
       </i>
@@ -104,10 +105,10 @@
   }
 
   if ( $page->getDestination() != '' ) {
-    $dest = '/'.$page->getDestination().'/page';
+    $dest = $page->getDestination().$link_builder->makePageAppendix();
 
   } else {
-    $dest = '/page';
+    $dest = $link_builder->makePageLink();
   }
   echo '<br class="clear">'."\r";
   echo genPager($page->getTotalPagesCount(), $page->getStartPage(), $dest);

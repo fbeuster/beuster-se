@@ -1,5 +1,6 @@
 <?php
 
+  $link_builder = Lixter::getLix()->getLinkBuilder();
   $page = Lixter::getLix()->getPage();
 
   if ($page->hasArticles()) { ?>
@@ -13,7 +14,7 @@
   <article>
     <h2><a href="<?php $article->getLink();?>"><?php echo $article->getTitle(); ?></a></h2>
     <div>
-      <span>Kategorie: <a href="/<?php echo $article->getCategory()->getNameUrl(); ?>"><?php echo $article->getCategory()->getName(); ?></a></span>
+      <span>Kategorie: <a href="<?php echo $article->getCategory()->getLink(); ?>"><?php echo $article->getCategory()->getName(); ?></a></span>
       <span>von <?php echo $article->getAuthor()->getClearname(); ?></span>
       <span>
         <a href="<?php echo $article->getLink();?>#comments">
@@ -39,10 +40,10 @@
       }
 
       if ( $page->getDestination() != '' ) {
-        $dest = '/'.$page->getDestination().'/page';
+        $dest = $page->getDestination().$link_builder->makePageAppendix();
 
       } else {
-        $dest = '/page';
+        $dest = $link_builder->makePageLink();
       }
 
       echo genPager($page->getTotalPagesCount(), $page->getStartPage(), $dest); ?>

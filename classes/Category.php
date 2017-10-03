@@ -75,13 +75,13 @@ class Category {
 	 */
 	public static function isCategoryName($name) {
 		$return = 0;
-		$name 	= replaceUml(self::getNameUrlStatic($name));
+    $name   = LinkBuilder::replaceUmlaute(self::getNameUrlStatic($name));
 		$dbs 		= Database::getDB();
 		$fields = array('ID', 'Cat');
     $res 		= $dbs->select('newscat', $fields);
 
     foreach ($res as $cId) {
-    	if ($name == replaceUml(self::getNameUrlStatic($cId['Cat']))) {
+      if ($name == LinkBuilder::replaceUmlaute(self::getNameUrlStatic($cId['Cat']))) {
     		$return = $cId['ID'];
     	}
     }
@@ -255,13 +255,20 @@ class Category {
 	 * @return String
 	 */
 	public function getNameUrl() {
-		$name = $this->name;
-        $strokes = array(' ', '---', '--');
-        foreach($strokes as $char) {
-            $name = str_replace($char, '-', $name);
-        }
-        return mb_strtolower($name, 'UTF-8');
+    $lb   = Lixter::getLix()->getLinkBuilder();
+		$name = $lb->replaceStrokes($this->name);
+
+    return mb_strtolower($name, 'UTF-8');
 	}
+
+  /**
+   * getter for name as url save variant
+   * @return String
+   */
+  public function getLink() {
+    $lb = Lixter::getLix()->getLinkBuilder();
+    return $lb->makeCategoryLink($this->name);
+  }
 
 	/**
 	 * getter for type

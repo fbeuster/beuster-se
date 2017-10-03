@@ -66,6 +66,7 @@
 
   function getPageDescription() {
     $db = Database::getDB()->getCon();
+    $lb = Lixter::getLix()->getLinkBuilder();
     $curPage = getCurrentPage();
     switch($curPage) {
       case 'blog':
@@ -103,7 +104,7 @@
       $stmt->bind_result($catDescr);
 
       if(!$stmt->fetch())
-        return 'Es wurde keine solche Kategorie gefunden. <br /><a href="/blog">Zurück zum Blog</a>';
+        return 'Es wurde keine solche Kategorie gefunden. <br /><a href="'.$lb->makeCategoryLink('blog').'">Zurück zum Blog</a>';
 
       $stmt->close();
 
@@ -127,7 +128,7 @@
       $stmt->bind_result($cont);
 
       if(!$stmt->fetch())
-        return 'Es wurde keine solche News gefunden. <br /><a href="/blog">Zurück zum Blog</a>';
+        return 'Es wurde keine solche News gefunden. <br /><a href="'.$lb->makeCategoryLink('blog').'">Zurück zum Blog</a>';
 
       $stmt->close();
 

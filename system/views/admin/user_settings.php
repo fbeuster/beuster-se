@@ -1,6 +1,9 @@
-﻿
+﻿<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
+
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
     <?php if(count($this->errors)){ ?>
       <div class="error">
@@ -12,7 +15,7 @@
         </ul>
       </div>
     <?php } ?>
-    <form action="/user-settings" method="post" class="userform articleform multiFieldset">
+    <form action="<?php echo $lb->makeAdminLink('user-settings'); ?>" method="post" class="userform articleform multiFieldset">
       <fieldset>
         <legend><?php I18n::e('user.settings.label'); ?></legend>
 
@@ -62,5 +65,5 @@
       </fieldset>
     </form>
   </section>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

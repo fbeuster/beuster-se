@@ -12,7 +12,8 @@
 
       if ('POST' == $_SERVER['REQUEST_METHOD']) {
         # set go back link
-        $back = '<br /><a href="/login">'.
+        $lb   = Lixter::getLix()->getLinkBuilder();
+        $back = '<br /><a href="'.$lb->makeAdminLink('login').'">'.
                 I18n::t('login.try_again').'</a>';
 
         # check form completeness

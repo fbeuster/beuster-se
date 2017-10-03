@@ -17,13 +17,13 @@
 
     private function handleGet() {
       if (  ( 'GET' == $_SERVER['REQUEST_METHOD'] &&
-              isset($_GET['static_page']) ) ||
+              isset($_GET['data']) ) ||
             ( 'POST' == $_SERVER['REQUEST_METHOD'] &&
               isset($_POST['formactionchoose']) ) ) {
         $db = Database::getDB();
 
-        if (isset($_GET['static_page'])) {
-          $url = trim($_GET['static_page']);
+        if (isset($_GET['data'])) {
+          $url = trim($_GET['data']);
 
         } else if(isset($_POST['static_page'])) {
           $url = trim($_POST['static_page']);
@@ -141,8 +141,9 @@
           if(!$stmt->execute()) {return $stmt->error;}
           $stmt->close();
 
-          $link     = '<br /><a href="/admin">'.
-                      I18n::t('admin.back_link').'</a>';
+          $lb       = Lixter::getLix()->getLinkBuilder();
+          $link     = ' <br /><a href="'.$lb->makeAdminLink('admin').
+                      '">'.I18n::t('admin.back_link').'</a>';
           $message  = I18n::t('admin.static_page.editor.actions.edit.success').$link;
           $this->showMessage($message, 'admin');
         }

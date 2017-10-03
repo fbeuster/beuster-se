@@ -279,17 +279,6 @@
         return $cnt;
     }
 
-    function replaceUml($ret) {
-        $ret = str_replace('ä', 'ae', $ret);
-        $ret = str_replace('ö', 'oe', $ret);
-        $ret = str_replace('ü', 'ue', $ret);
-        $ret = str_replace('Ä', 'Ae', $ret);
-        $ret = str_replace('Ö', 'Oe', $ret);
-        $ret = str_replace('Ü', 'Ue', $ret);
-        $ret = str_replace('ß', 'ss', $ret);
-        return $ret;
-    }
-
     function getYouTubeIDFromArticle($id) {
         $db = Database::getDB()->getCon();
         $ret = array();

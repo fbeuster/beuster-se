@@ -1,6 +1,9 @@
+<?php
+  $lb = Lixter::getLix()->getLinkBuilder();
+?>
 
 <article>
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
   <section class="article">
   	<h1><?php I18n::e('admin.static_page.overview.label'); ?></h1>
     <form>
@@ -29,7 +32,9 @@
           <td class="title"><?php echo $entry['title']; ?></td>
           <td class="actions">
             <div>
-              <a class="edit"  title="<?php I18n::e('admin.static_page.overview.edit.title'); ?>" href="/static-page-edit/p/<?php echo $entry['url']; ?>">
+              <a  class="edit"
+                  title="<?php I18n::e('admin.static_page.overview.edit.title'); ?>"
+                  href="<?php echo $lb->makeAdminLink('static-page-edit', $entry['url']); ?>">
                 <?php I18n::e('admin.static_page.overview.edit.text'); ?>
               </a>
               <a class="delete" title="<?php I18n::e('admin.static_page.overview.delete.title'); ?>">
@@ -50,5 +55,5 @@
     </table>
   </section>
 
-  <a href="/admin" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

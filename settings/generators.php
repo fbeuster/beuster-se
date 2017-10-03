@@ -101,7 +101,10 @@
         $ret .= I18n::t('general_form.wait', array($wait))."\r";
         $ret .= '</p>'."\r";
         $ret .= '<p class="beCommentNewDisclaimer">'."\r";
-        $more_info = '<a href="/impressum">'.I18n::t('general_form.imprint').'</a>';
+
+        $lb = Lixter::getLix()->getLinkBuilder();
+        $more_info = '<a href="'.$lb->makeOtherPageLink('impressum').
+                        '">'.I18n::t('general_form.imprint').'</a>';
         $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
         $ret .= '</p>'."\r";
         return $ret;
@@ -109,8 +112,16 @@
 
     function genMenu() {
         $pars = getTopCats();
-        foreach($pars as $par) {
-            echo '<li><a href="/'.(($par!=getCatID('Blog'))?lowerCat(getCatName($par)):'').'">'.getCatName($par).'</a></li>'."\r";
+        foreach ($pars as $par) {
+            $category   = new Category($par);
+
+            if ($category->getId() == getCatID('Blog')) {
+                $link = '/';
+            } else {
+                $link = $category->getLink();
+            }
+
+            echo '<li><a href="'.$link.'">'.$category->getName().'</a></li>'."\r";
         }
     }
 
@@ -124,10 +135,10 @@
 
             echo '<li class="between">&gt;</li><li><a href="/">Blog</a></li>'."\r";
             if ($category->getNameUrl() !== 'blog') {
-                echo    '<li class="between">&gt;</li><li><a href="/'
-                        .$parent->getNameUrl().'">'.$parent->getName().'</a></li>'."\r";
-                echo    '<li class="between">&gt;</li><li><a href="/'.
-                        $category->getNameUrl().'">'.$category->getName().'</a></li>'."\r";
+                echo    '<li class="between">&gt;</li><li><a href="'
+                        .$parent->getLink().'">'.$parent->getName().'</a></li>'."\r";
+                echo    '<li class="between">&gt;</li><li><a href="'.
+                        $category->getLink().'">'.$category->getName().'</a></li>'."\r";
             }
         } else {
             if (isset($_GET['c']) &&
@@ -146,9 +157,10 @@
                 $catID = getCatID($catID);
             }
 
+            $lb = Lixter::getLix()->getLinkBuilder();
             $noborder = ' class="noborder"';
             if($catID == getCatID('blog')) {
-                echo ' <li'.$noborder.'><a href="/blog">Blog</a></li>'."\r";
+                echo ' <li'.$noborder.'><a href="'.$lb->makeCategoryLink('blog').'">Blog</a></li>'."\r";
                 $noborder = '';
             }
 
@@ -163,7 +175,7 @@
             }
 
             foreach($children as $child) {
-                echo    ' <li'.$noborder.'><a href="/'.$child->getNameUrl().'">'.
+                echo    ' <li'.$noborder.'><a href="'.$child->getLink().'">'.
                         $child->getName().'</a></li>'."\r";
                 $noborder = '';
             }

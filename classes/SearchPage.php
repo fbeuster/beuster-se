@@ -72,6 +72,11 @@ class SearchPage extends Page {
     return 'search.php';
   }
 
+  public function getLink() {
+    $lb = Lixter::getLix()->getLinkBuilder();
+    return $lb->makeSearchLink($this->search_term);
+  }
+
   public function getPagedSearchResults() {
     return array_slice($this->search_results, $this->getResultsSart() - 1, self::DEFAULT_PAGE_LENGTH);
   }

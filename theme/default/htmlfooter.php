@@ -1,7 +1,11 @@
+<?php
 
+  $lb = Lixter::getLix()->getLinkBuilder();
+
+?>
   <!-- beMainFooter -->
   <footer>
-    <a href="/about">Über und Feedback</a> | <a href="/impressum">Impressum und Datenschutz</a><br>
+    <a href="<?php echo $lb->makeOtherPageLink('about'); ?>">Über und Feedback</a> | <a href="<?php echo $lb->makeOtherPageLink('impressum'); ?>">Impressum und Datenschutz</a><br>
     &copy; Copyright 2010-2017 Felix Beuster
   </footer>
   <!-- Ende beMainFooter -->

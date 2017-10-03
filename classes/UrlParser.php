@@ -106,7 +106,7 @@
             foreach($strokes as $char) {
               $title = str_replace($char, '-', $title);
             }
-            return replaceUml($title);
+            return LinkBuilder::replaceUmlaute($title);
         }
 
         // get and set the category based on url
