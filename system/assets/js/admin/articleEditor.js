@@ -75,6 +75,10 @@ admin.articleEditor = {
     return $('input[name=attachments]').val().indexOf(value) > -1;
   },
 
+  isPreviewAutoUpdateEnabled: function() {
+    return $('#preview_auto_update').is(':checked');
+  },
+
   loadPrefilledAttachments : function() {
     var attachments = $('input[name=attachments]').val()
                                                   .split(';');
@@ -89,7 +93,7 @@ admin.articleEditor = {
   },
 
   previewAutoUpdateListener : function() {
-    if ($('#preview_auto_update').is(':checked')) {
+    if (admin.articleEditor.isPreviewAutoUpdateEnabled()) {
       admin.articleEditor.preview_auto_update = true;
       admin.articleEditor.previewManualUpdate();
 

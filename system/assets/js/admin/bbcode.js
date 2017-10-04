@@ -95,6 +95,10 @@ admin.bbCode = {
     } else {
       textArea.selectRange(start + event.data.o.length + length + event.data.c.length);
     }
+
+    if (admin.articleEditor.isPreviewAutoUpdateEnabled()) {
+      admin.articleEditor.previewManualUpdate();
+    }
   },
 
   wrapUrl: function(event) {
