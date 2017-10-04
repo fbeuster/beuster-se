@@ -5,12 +5,8 @@ admin.bbCode = {
   target : '',
 
   init: function() {
-    if(this.isNewsForm() || this.isUserForm()) {
-      var tarFormCnt;
-
-      if(this.isNewsForm()) this.target = '#newsinhalt';
-      if(this.isUserForm()) this.target = '#usrcnt';
-
+    if(this.isNewsForm()) {
+      this.target = '#newsinhalt';
       this.bindHandlers();
     }
   },
@@ -72,10 +68,6 @@ admin.bbCode = {
 
   isNewsForm: function() {
     return $('#newsinhalt').length > 0;
-  },
-
-  isUserForm: function() {
-    return $('#usercnt').length > 0;
   },
 
   makeEventData: function(open, close) {
