@@ -29,36 +29,29 @@ admin.bbCode = {
     $('#btncode').click(  { o: '[code]',  c: '[/code]' },   this.wrapSelection);
     $('#btnquote').click( { o: '[quote]', c: '[/quote]' },  this.wrapSelection);
 
-    $('#smsmile').click(  { o: ':)', c: '' }, this.wrapSelection);
-    $('#smlaugh').click(  { o: ':D', c: '' }, this.wrapSelection);
-    $('#smsad').click(    { o: ':(', c: '' }, this.wrapSelection);
-    $('#smone').click(    { o: ';)', c: '' }, this.wrapSelection);
+    $('#btnpar').click( { o: '[/p]', c: '[p]' },   this.wrapSelection);
+    $('#btnul').click(  { o: '[ul]', c: '[/ul]' }, this.wrapSelection);
+    $('#btnol').click(  { o: '[ol]', c: '[/ol]' }, this.wrapSelection);
+    $('#btnli').click(  { o: '[li]', c: '[/li]' }, this.wrapSelection);
 
-    if(this.isNewsForm()) {
-      $('#btnpar').click( { o: '[/p]', c: '[p]' },   this.wrapSelection);
-      $('#btnul').click(  { o: '[ul]', c: '[/ul]' }, this.wrapSelection);
-      $('#btnol').click(  { o: '[ol]', c: '[/ol]' }, this.wrapSelection);
-      $('#btnli').click(  { o: '[li]', c: '[/li]' }, this.wrapSelection);
-
-      $('#btnyt').click(function(){
-        var url = prompt('Videocode eingeben:','');
-        if(url.trim() != '') {
-          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[yt]' + url, '[/yt]'));
-        }
-      });
-      $('#btnplay').click(function(){
-        var url = prompt('Playlist-ID eingeben:','');
-        if(url.trim() != '') {
-          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[play]' + url, '[/play]'));
-        }
-      });
-      $('#btnamazon').click(function(){
-        var asin = prompt('ASIN eingeben:','');
-        if(asin.trim() != '') {
-          admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
-        }
-      });
-    }
+    $('#btnyt').click(function(){
+      var url = prompt('Videocode eingeben:','');
+      if(url.trim() != '') {
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[yt]' + url, '[/yt]'));
+      }
+    });
+    $('#btnplay').click(function(){
+      var url = prompt('Playlist-ID eingeben:','');
+      if(url.trim() != '') {
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[play]' + url, '[/play]'));
+      }
+    });
+    $('#btnamazon').click(function(){
+      var asin = prompt('ASIN eingeben:','');
+      if(asin.trim() != '') {
+        admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
+      }
+    });
   },
 
   hasSelected: function() {
