@@ -47,15 +47,16 @@ form.userform {
   .bbDiv {
     background: $grey;
     border: 1px solid $dark_grey;
-    height: $editor_button_width;
+    height: 1.25 * $editor_button_width;
   }
 
   .bbSpan {
     display: block;
     float: left;
+    padding:  0.125 * $editor_button_width 0;
 
     &:not(:first-child) {
-      padding-left: 0.25em;
+      padding-left: 0.25 * $editor_button_width;
     }
 
     &:not(:last-child) {
@@ -76,6 +77,10 @@ form.userform {
 
     &:hover {
       cursor: pointer;
+    }
+
+    &.mar_left {
+      margin-left: 0.25 * $editor_button_width;
     }
   }
 

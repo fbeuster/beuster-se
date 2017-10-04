@@ -10,7 +10,7 @@
   <div class="bbSpan">
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.quote'); ?>" id="btnquote">&nbsp;</button>
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.cite'); ?>" id="btncite">&nbsp;</button>
-    <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.bquote'); ?>" id="btnbquote">&nbsp;</button>
+    <button class="bbImg mar_left" type="button" title="<?php I18n::e('editor.toolbar.label.bquote'); ?>" id="btnbquote">&nbsp;</button>
   </div>
   <div class="bbSpan">
     <button class="bbImg" type="button" title="<?php I18n::e('editor.toolbar.label.ol'); ?>" id="btnol">&nbsp;</button>
