@@ -2,11 +2,13 @@
 
 class SetupHandler {
 
+  private $config;
   private $messages = array();
   private $step;
 
   public function __construct() {
-    $this->step = Setup::getSetup()->getStepName();
+    $this->config = Config::getConfig();
+    $this->step   = Setup::getSetup()->getStepName();
   }
 
   private function addMessage($message) {
@@ -55,30 +57,21 @@ class SetupHandler {
   }
 
   private function handleAdvanced() {
-    $base_path    = '../';
-    $config_file  = 'user/config.ini';
-
     if (isset($_POST['devServer'])) {
+      $dev    = $_POST['devServerAddress'];
+      $remote = $_POST['remoteServerAddress'];
 
-      if (file_exists($base_path . $config_file)) {
-        $dev    = $_POST['devServerAddress'];
-        $remote = $_POST['remoteServerAddress'];
+      $dev    = preg_replace('#https?://#i', '', $dev);
+      $remote = preg_replace('#https?://#i', '', $remote);
 
-        $dev    = preg_replace('#https?://#i', '', $dev);
-        $remote = preg_replace('#https?://#i', '', $remote);
+      $saved = $this->config->set('site', 'dev_server_address', $dev);
+      $saved = $saved && $this->config->set('site',
+                                            'remote_server_address',
+                                            $remote);
 
-        $data = array(
-                  "devServer = \"" . $dev . "\"\n",
-                  "remote_address = \"" . $remote . "\"\n"
-                );
-        $output = file_put_contents($base_path . $config_file, implode('', $data), FILE_APPEND);
-
-        if ($output === false) {
-          $this->addMessage(I18n::t('setup.advanced.file_write_error', $config_file));
-        }
-
-      } else {
-        $this->addMessage(I18n::t('setup.advanced.file_missing', $config_file));
+      if (!$saved) {
+        $this->addMessage(
+          I18n::t('setup.advanced.configuration_save_error'));
       }
     }
   }
@@ -135,22 +128,15 @@ class SetupHandler {
 
   private function handleCustom() {
     $base_path    = '../';
-    $config_file  = 'user/config.ini';
     $local_file   = 'user/local.php';
 
-    if (!file_exists($base_path . $config_file)) {
-      $data = array(
-                "language = \"" . $_POST['language'] . "\"\n",
-                "theme = \"" . $_POST['theme'] . "\"\n"
-              );
+    $saved = $this->config->set('site', 'language', $_POST['language']);
+    $saved = $saved && $this->config->set('site', 'theme',
+                                          $_POST['theme']);
 
-      $output = file_put_contents($base_path . $config_file, implode('', $data));
-
-      if ($output === false) {
-        $this->addMessage(I18n::t('setup.custom.file_write_error', $config_file));
-      }
-    } else {
-      $this->addMessage(I18n::t('setup.custom.file_missing', $config_file));
+    if (!$saved) {
+      $this->addMessage(
+        I18n::t('setup.custom.configuration_save_error'));
     }
 
     if (file_exists($base_path . $local_file)) {

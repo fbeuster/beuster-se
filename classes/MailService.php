@@ -36,8 +36,8 @@
         return false;
       }
 
-      $site_name    = Config::getConfig()->get('site_name');
-      $server_mail  = Config::getConfig()->get('server_mail');
+      $site_name    = Config::getConfig()->get('site', 'name');
+      $server_mail  = Config::getConfig()->get('site', 'mail');
 
       if (!$server_mail) {
         return false;
@@ -55,7 +55,7 @@
         $user_page  = '('.$page_link.')';
       }
 
-      $site_name  = Config::getConfig()->get('site_name');
+      $site_name  = Config::getConfig()->get('site', 'name');
 
       if ($user == null) {
         $type = 'admin';
@@ -110,7 +110,7 @@
       $protocol   = Lixter::getLix()->getProtocol();
       $site_link  = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
       $site_link  = '<a href="'.$protocol.'://'.$site_link.'">'.$site_link.'</a>';
-      $site_name  = Config::getConfig()->get('site_name');
+      $site_name  = Config::getConfig()->get('site', 'name');
 
 
       $fields = array('title');

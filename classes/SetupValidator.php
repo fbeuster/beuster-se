@@ -55,10 +55,10 @@ class SetupValidator extends AbstractValidator {
     $content    = $this->readyForContent();
     $admin_user = $this->readyForAdminUser();
     $custom     = $this->readyForCustom();
-    $config     = Config::getConfig('../');
+    $config     = Config::getConfig();
 
     return  $content && $admin_user &&
-            $custom && $config->get('theme') !== null;
+            $custom && $config->get('site', 'theme') !== null;
   }
 
   public function readyForContent() {

@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?php echo getPageDescription(); ?>">
-  <meta name="loaded_lang" content="<?php echo Config::getConfig()->get('language'); ?>">
+  <meta name="loaded_lang" content="<?php echo Config::getConfig()->get('site', 'language'); ?>">
   <?php
     $page = Lixter::getLix()->getPage();
   ?>
@@ -12,7 +12,7 @@
 <meta name="author" content="Felix Beuster">
   <meta property='og:locale' content='de_de'/>
   <meta property='fb:admins' content='100002550334323'/>
-  <meta property='og:title' content='<?php echo $page->getTitle().' - '.$config->get('site_name'); ?>'/>
+  <meta property='og:title' content='<?php echo $page->getTitle().' - '.$config->get('site', 'name'); ?>'/>
   <meta property='og:url' content='<?php echo getPageUrl(); ?>'/>
   <meta property='og:site_name' content='beusterse.de'/>
   <meta property='og:type' content='website'/>
@@ -20,7 +20,7 @@
   <meta property='og:description' content='<?php echo getPageDescription(); ?>'/>
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
-  <title><?php echo $page->getTitle().' - '.$config->get('site_name'); ?></title>
+  <title><?php echo $page->getTitle().' - '.$config->get('site', 'name'); ?></title>
 
   <link href="/<?php echo Lixter::getLix()->getSystemFile('assets/css/admin/styles.css'); ?>" rel="stylesheet" type="text/css" media="screen">
 

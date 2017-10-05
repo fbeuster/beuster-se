@@ -67,7 +67,7 @@ class Api {
   }
 
   private function loadLocales() {
-    $lang = Config::getConfig()->get('language');
+    $lang = Config::getConfig()->get('site', 'language');
     $lang = $lang === null ? 'en' : $lang;
 
     $locales = new Locale($lang);

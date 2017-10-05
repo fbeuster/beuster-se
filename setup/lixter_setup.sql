@@ -52,6 +52,47 @@ CREATE TABLE IF NOT EXISTS `article_attachments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `configuration`
+--
+
+CREATE TABLE `configuration` (
+  `option_set` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `option_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `option_value` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `configuration`
+--
+
+INSERT INTO `configuration` (`option_set`, `option_name`, `option_value`) VALUES
+('search', 'case_sensitive', '0'),
+('search', 'marks', '1'),
+('site', 'amazon_tag', ''),
+('site', 'category_page_length', '8'),
+('site', 'dev_server_address', ''),
+('site', 'google_analytics', ''),
+('site', 'language', 'en'),
+('site', 'mail', ''),
+('site', 'name', 'Lixter'),
+('site', 'remote_server_address', ''),
+('site', 'theme', 'default'),
+('site', 'title', 'My Blog'),
+('site', 'url_schema', '2');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `configuration`
+--
+ALTER TABLE `configuration`
+  ADD PRIMARY KEY (`option_set`,`option_name`);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kommentare`
 --
 

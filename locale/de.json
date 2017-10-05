@@ -800,8 +800,7 @@
     },
     "advanced" : {
       "back_link" : "Zurück",
-      "file_missing" : "Konnte %s nicht finden.",
-      "file_wrtie_error" : "Konnte nicht in %s schreiben.",
+      "configuration_save_error" : "Konnte die Konfiguration nicht in die Datenbank speichern.",
       "invalid_dev_server_address" : "Development Server Adresse ungültig.",
       "invalid_remote_server_address" : "Remote Server Adresse ungültig.",
       "label_dev_server" : "Development server",
@@ -835,6 +834,7 @@
     },
     "custom" : {
       "back_link" : "Zurück",
+      "configuration_save_error" : "Konnte die Konfiguration nicht in die Datenbank speichern.",
       "file_missing" : "Konnte %s nicht finden.",
       "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "invalid_language" : "Ungültige Sprache.",
