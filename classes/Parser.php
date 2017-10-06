@@ -359,18 +359,24 @@ abstract class ArticleParser {
     }
 
     public function internalLinks() {
-        while (preg_match('#\[article=([0-9]*)\]#Uis', $this->str)) {
-            preg_match('#\[article=([0-9]*)\]#Uis', $this->str, $snippets);
-            preg_match('#([0-9]*)#', $snippets[1], $values);
-            $this->str = preg_replace(  '#\[article=([0-9]*)\](.*)\[/article\]#Uis',
-                                        '<a href="'.$this->makeInternalLink($values[1]).'">$2</a>',
-                                        $this->str, 1);
-        }
-    }
+        preg_match_all('#\[article=([0-9]*)\](.*)\[/article\]#Uis',
+                    $this->str,
+                    $snippets);
 
-    private function makeInternalLink($id) {
-        $article = new Article($id);
-        return $article->getLink();
+        for ($i = 0; $i < count($snippets[0]); $i++) {
+            $replace = $snippets[2][$i];
+
+            if (Article::exists($snippets[1][$i])) {
+                $article = new Article($snippets[1][$i]);
+                $replace = '<a href="'.$article->getLink().'">'.
+                            $replace.
+                            '</a>';
+            }
+
+            $this->str = str_replace($snippets[0][$i],
+                                    $replace,
+                                    $this->str);
+        }
     }
 
     /**
