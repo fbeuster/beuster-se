@@ -246,7 +246,7 @@ class CategoryPage extends Page {
 
     if ($this->category == null) {
       $joins = null;
-      $this->title = $this->config->get('site', 'title');
+      $this->title = $this->config->get('meta', 'title');
 
       if ($this->author != null) {
         $conds  = $this->getAuthorConditions();

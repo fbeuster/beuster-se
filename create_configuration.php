@@ -70,23 +70,37 @@
   $value_rows = array();
 
   ### site configuration
-  $site_set = 'site';
-
+  $site_config_set  = 'site';
   $site_config_copy = array('url_schema', 'language', 'theme',
-                            'category_page_length', 'amazon_tag',
-                            'google_analytics');
+                            'category_page_length');
   foreach ($site_config_copy as $option_name) {
-    $value_rows[] = array($site_set, $option_name,
+    $value_rows[] = array($site_config_set, $option_name,
                           $config[$option_name]);
   }
 
-  $value_rows[] = array($site_set, 'dev_server_address',
-                        $config['devServer']);
-  $value_rows[] = array($site_set, 'remote_server_address',
-                        $config['remote_address']);
-  $value_rows[] = array($site_set, 'mail', $config['server_mail']);
-  $value_rows[] = array($site_set, 'name', $config['site_name']);
-  $value_rows[] = array($site_set, 'title', $config['site_title']);
+  ### site information
+  $site_info_set  = 'meta';
+  $value_rows[]   = array($site_info_set, 'mail',
+                          $config['server_mail']);
+  $value_rows[]   = array($site_info_set, 'name',
+                          $config['site_name']);
+  $value_rows[]   = array($site_info_set, 'title',
+                          $config['site_title']);
+
+  ### external configuration
+  $ext_config_set = 'ext';
+  $value_rows[]   = array($ext_config_set, 'amazon_tag',
+                          $config['amazon_tag']);
+  $value_rows[]   = array($ext_config_set, 'google_analytics',
+                          $config['google_analytics']);
+
+  ### developer configuration
+  $dev_config_set = 'dev';
+  $value_rows[]   = array($dev_config_set, 'debug', 0);
+  $value_rows[]   = array($dev_config_set, 'dev_server_address',
+                          $config['devServer']);
+  $value_rows[]   = array($dev_config_set, 'remote_server_address',
+                          $config['remote_address']);
 
   ### search configuration
   $search_set   = 'search';
@@ -105,10 +119,6 @@
   } else {
     echo 'Success: Copied configuration values to DB.' . $line_end;
   }
-
-  $config = Config::getConfig();
-
-  echo '<pre>'; print_r($config); echo '</pre>';
 
   # delete configuration files
   if ($delete_configuration_files) {

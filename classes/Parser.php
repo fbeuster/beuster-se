@@ -478,7 +478,7 @@ abstract class ArticleParser {
      */
     public function affiliateImage() {
         # affiliate tag
-        $tag = Config::getConfig()->get('site', 'amazon_tag');
+        $tag = Config::getConfig()->get('ext', 'amazon_tag');
 
         # old style
         $this->str = preg_replace('#\[affi=(.*)\]#Uis', '<img src="$1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />', $this->str);

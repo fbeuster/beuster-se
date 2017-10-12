@@ -278,7 +278,7 @@ class Lixter {
 
     include('system/views/admin/htmlheader.php');
 
-    if (Utilities::isDevServer() || $config->get('site', 'debug')) {
+    if (Utilities::isDevServer() || $config->get('dev', 'debug')) {
       include('system/views/debug.php');
     }
 
@@ -301,7 +301,7 @@ class Lixter {
 
     include($this->theme->getFile('htmlheader.php'));
 
-    if (Utilities::isDevServer() || $config->get('site', 'debug')) {
+    if (Utilities::isDevServer() || $config->get('dev', 'debug')) {
       include('system/views/debug.php');
     }
 

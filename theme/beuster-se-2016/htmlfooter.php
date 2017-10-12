@@ -42,7 +42,7 @@
   <?php if (Utilities::isDevServer()) { ?>
   <!-- No Google Analytics, dev server -->
 
-  <?php } elseif (Config::getConfig()->get('site', 'google_analytics') == null) { ?>
+  <?php } elseif (Config::getConfig()->get('ext', 'google_analytics') == null) { ?>
   <!-- No Google Analytics configured -->
 
   <?php } else { ?>
@@ -63,7 +63,7 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', '<?php echo Config::getConfig()->get('site', 'google_analytics'); ?>', 'auto');
+    ga('create', '<?php echo Config::getConfig()->get('ext', 'google_analytics'); ?>', 'auto');
     ga('send', 'pageview');
   </script>
   <!-- / Google Anlaytics -->

@@ -64,7 +64,7 @@ class SetupHandler {
       $dev    = preg_replace('#https?://#i', '', $dev);
       $remote = preg_replace('#https?://#i', '', $remote);
 
-      $saved = $this->config->set('site', 'dev_server_address', $dev);
+      $saved = $this->config->set('dev', 'dev_server_address', $dev);
       $saved = $saved && $this->config->set('site',
                                             'remote_server_address',
                                             $remote);
