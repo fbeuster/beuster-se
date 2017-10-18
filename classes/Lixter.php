@@ -134,21 +134,7 @@ class Lixter {
 
     // init LinkBuilder
     $url_schema = Config::getConfig()->get('site', 'url_schema');
-
-    switch ($url_schema) {
-      case LinkBuilder::PARAMETER_SCHEMA :
-        $this->link_builder = new ParameterLinkBuilder();
-        break;
-
-      # TODO
-      # custom schema needs a custom builder
-
-      case LinkBuilder::CUSTOM_SCHEMA :
-      case LinkBuilder::DEFAULT_SCHEMA :
-      default :
-        $this->link_builder = new DefaultLinkBuilder();
-        break;
-    }
+    $this->setLinkBuilder($url_schema);
 
     // loading configuration and functions
     include('settings/functions.php');
@@ -356,6 +342,23 @@ class Lixter {
    */
   private function isValidTemplate() {
     return isset($this->page) && is_string($this->page->getFilename());
+  }
+
+  public function setLinkBuilder($url_schema) {
+    switch ($url_schema) {
+      case LinkBuilder::PARAMETER_SCHEMA :
+        $this->link_builder = new ParameterLinkBuilder();
+        break;
+
+      # TODO
+      # custom schema needs a custom builder
+
+      case LinkBuilder::CUSTOM_SCHEMA :
+      case LinkBuilder::DEFAULT_SCHEMA :
+      default :
+        $this->link_builder = new DefaultLinkBuilder();
+        break;
+    }
   }
 }
 

@@ -352,6 +352,7 @@
         "label" : "Miscellanious",
         "logout" : "Logout",
         "statistics" : "View statistics",
+        "system_settings" : "System settings",
         "user_settings" : "User settings"
       },
       "snippet" : {
@@ -506,6 +507,97 @@
           "date" : "Date",
           "hits" : "Hits",
           "hits_per_day" : "Hits/day"
+        }
+      }
+    },
+    "system_settings" : {
+      "all" : {
+        "submit" : "Change all"
+      },
+      "dev" : {
+        "debug_mode" : {
+          "label" : "Debug mode",
+          "placeholder" : "Enable debug mode"
+        },
+        "dev_server_address" : {
+          "label" : "Dev Server",
+          "placeholder" : "Dev Server Hostname"
+        },
+        "label" : "Developer options",
+        "remote_server_address" : {
+          "label" : "Remote Server",
+          "placeholder" : "Remote Server Hostname"
+        }
+      },
+      "error" : {
+        "empty_category_page_length" : "The category page length can't be empty.",
+        "empty_mail" : "The site mail can't be empty.",
+        "empty_name" : "The site name can't be empty.",
+        "empty_title" : "The site title can't be empty.",
+        "invalid_category_page_length" : "The chosen category page length is invalid.",
+        "invalid_dev_server_address" : "The chosen dev server hostname is invalid.",
+        "invalid_language" : "The chosen language is invalid.",
+        "invalid_theme" : "The chosen theme is invalid.",
+        "invalid_url_schema" : "The chosen URL schema is invalid.",
+        "no_language" : "The language selection can't be empty.",
+        "no_theme" : "The theme selection can't be empty.",
+        "no_url_schema" : "The URL schema selection can't be empty."
+      },
+      "ext" : {
+        "amazon_tag" : {
+          "label" : "Amazon Associates",
+          "placeholder" : "Amazon Associates ID"
+        },
+        "google_analytics" : {
+          "label" : "Google Analytics",
+          "placeholder" : "Google Analytics ID"
+        },
+        "label" : "External services"
+      },
+      "label" : "System settings",
+      "meta" : {
+        "label" : "Site information",
+        "mail" : {
+          "label" : "Site mail",
+          "placeholder" : "Site's mail address"
+        },
+        "name" : {
+          "label" : "Site name",
+          "placeholder" : "Site's name"
+        },
+        "title" : {
+          "label" : "Site title",
+          "placeholder" : "Site's title"
+        }
+      },
+      "search" : {
+        "case_sensitive" : {
+          "label" : "Case sensitive",
+          "placeholder" : "Make search case sensitive"
+        },
+        "label" : "Search options",
+        "marks" : {
+          "label" : "Highlighting",
+          "placeholder" : "Highlight the search term in results"
+        }
+      },
+      "site" : {
+        "category_page_length" : {
+          "label" : "Articles per page",
+          "placeholder" : "Number of articles on each category page"
+        },
+        "label" : "Site options",
+        "language" : {
+          "label" : "Language",
+          "placeholder" : "Language"
+        },
+        "theme" : {
+          "label" : "Theme",
+          "placeholder" : "Theme"
+        },
+        "url_schema" : {
+          "label" : "URL-Schema",
+          "placeholder" : "URL-Schema for links"
         }
       }
     },
@@ -724,6 +816,12 @@
     },
     "website_spam" : {
       "label" : "This info is requested in a different field. Please leave this field blank."
+    }
+  },
+  "locale" : {
+    "languages" : {
+      "de" : "German",
+      "en" : "English"
     }
   },
   "login" : {

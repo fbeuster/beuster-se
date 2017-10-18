@@ -102,6 +102,11 @@
     <h2><?php I18n::e('admin.navigation.misc.label'); ?></h2>
     <ul class="pagesList">
       <li>
+        <a href="<?php echo $lb->makeAdminLink('system-settings'); ?>">
+          <?php I18n::e('admin.navigation.misc.system_settings'); ?>
+        </a>
+      </li>
+      <li>
         <a href="<?php echo $lb->makeAdminLink('statistics'); ?>">
           <?php I18n::e('admin.navigation.misc.statistics'); ?>
         </a>

@@ -60,6 +60,18 @@
 
       return $this->replaceUmlaute($string);
     }
+
+    public static function schemaExists($schema) {
+      switch($schema) {
+        case self::CUSTOM_SCHEMA:
+        case self::DEFAULT_SCHEMA:
+        case self::PARAMETER_SCHEMA:
+          return true;
+
+        default:
+          return false;
+      }
+    }
   }
 
 ?>
