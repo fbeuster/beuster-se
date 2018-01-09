@@ -92,10 +92,23 @@
       $content = 'Amazon Widget'."\n";
 
     } else {
-      $content = '<script type="text/javascript"><!--'."\n";
-      $content .= 'amazon_ad_tag = "'.$amazon_tag.'"; amazon_ad_width = "'.$width.'"; amazon_ad_height = "'.$height.'";';
-      $content .= '//--></script>'."\n";
-      $content .= '<script type="text/javascript" src="https://ir-de.amazon-adsystem.com/s/ads.js"></script>'."\n";
+      # TODO make configuration for these settings
+      $background_color = 'f3f9f9';
+      $link_color       = '0ea86c';
+      $mode             = 'ce-de';
+      $search           = '';
+      $size             = '48';
+      $text_color       = '191f1f';
+
+      $src      = 'https://rcm-eu.amazon-adsystem.com/e/cm?f=ifr&t='.$amazon_tag.
+                  '&o=3&p='.$size.
+                  '&l=st1&mode='.$mode.
+                  '&search='.$search.
+                  '&fc1='.$text_color.
+                  '&lt1=_blank&lc1='.$link_color.
+                  '&bg1='.$background_color;
+      $content  = '<iframe src="'.$src.'" marginwidth="0" marginheight="0" width="'.$width.'" height="'.$height.
+                  '" border="0" frameborder="0" style="border:none;" scrolling="no"></iframe>';
     }
 
     $config = array("title"   => "",
