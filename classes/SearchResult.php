@@ -9,7 +9,7 @@
     public function __construct($article_id, $search_str) {
       $this->article      = new Article($article_id);
       $this->search_str   = $search_str;
-      $this->search_marks = Config::getConfig()->get('search.marks');
+      $this->search_marks = Config::getConfig()->get('search', 'marks');
     }
 
     public function getArticle() {

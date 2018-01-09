@@ -23,6 +23,19 @@ class Theme {
     }
   }
 
+  public static function getAllThemes() {
+    $themes = scandir('theme');
+
+    foreach ($themes as $key => $theme) {
+      if (!is_dir('theme/'.$theme) ||
+          $theme == '.' || $theme == '..') {
+        unset($themes[$key]);
+      }
+    }
+
+    return $themes;
+  }
+
   public function getFile($filename) {
     if (file_exists($this->user_path.$filename))
       return $this->user_path.$filename;

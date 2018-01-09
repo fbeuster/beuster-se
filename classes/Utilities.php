@@ -12,7 +12,7 @@ class Utilities {
   }
 
   public static function getRemoteAddress() {
-    return Config::getConfig()->get('remote_address');
+    return Config::getConfig()->get('dev', 'remote_server_address');
   }
 
   public static function getSystemAddress() {
@@ -36,7 +36,7 @@ class Utilities {
   }
 
   public static function isDevServer() {
-    return Config::getConfig()->get('devServer') === $_SERVER['SERVER_NAME'];
+    return Config::getConfig()->get('dev', 'dev_server_address') === $_SERVER['SERVER_NAME'];
   }
 
   public static function isOldIE() {

@@ -133,22 +133,8 @@ class Lixter {
     $this->protocol = Utilities::getProtocol();
 
     // init LinkBuilder
-    $url_schema = Config::getConfig()->get('url_schema');
-
-    switch ($url_schema) {
-      case LinkBuilder::PARAMETER_SCHEMA :
-        $this->link_builder = new ParameterLinkBuilder();
-        break;
-
-      # TODO
-      # custom schema needs a custom builder
-
-      case LinkBuilder::CUSTOM_SCHEMA :
-      case LinkBuilder::DEFAULT_SCHEMA :
-      default :
-        $this->link_builder = new DefaultLinkBuilder();
-        break;
-    }
+    $url_schema = Config::getConfig()->get('site', 'url_schema');
+    $this->setLinkBuilder($url_schema);
 
     // loading configuration and functions
     include('settings/functions.php');
@@ -160,7 +146,7 @@ class Lixter {
    * loading the specified language
    */
   private function loadLocales() {
-    $lang = Config::getConfig()->get('language');
+    $lang = Config::getConfig()->get('site', 'language');
     $lang = $lang === null ? 'en' : $lang;
 
     $locales = new Locale($lang);
@@ -261,7 +247,7 @@ class Lixter {
       $this->theme = new Theme( $_GET['theme'] );
 
     } else {
-      $this->theme = new Theme( Config::getConfig()->get('theme') );
+      $this->theme = new Theme( Config::getConfig()->get('site', 'theme') );
     }
 
     include($this->theme->getFile('functions.php'));
@@ -278,7 +264,7 @@ class Lixter {
 
     include('system/views/admin/htmlheader.php');
 
-    if (Utilities::isDevServer() || $config->get('debug')) {
+    if (Utilities::isDevServer() || $config->get('dev', 'debug')) {
       include('system/views/debug.php');
     }
 
@@ -301,7 +287,7 @@ class Lixter {
 
     include($this->theme->getFile('htmlheader.php'));
 
-    if (Utilities::isDevServer() || $config->get('debug')) {
+    if (Utilities::isDevServer() || $config->get('dev', 'debug')) {
       include('system/views/debug.php');
     }
 
@@ -356,6 +342,23 @@ class Lixter {
    */
   private function isValidTemplate() {
     return isset($this->page) && is_string($this->page->getFilename());
+  }
+
+  public function setLinkBuilder($url_schema) {
+    switch ($url_schema) {
+      case LinkBuilder::PARAMETER_SCHEMA :
+        $this->link_builder = new ParameterLinkBuilder();
+        break;
+
+      # TODO
+      # custom schema needs a custom builder
+
+      case LinkBuilder::CUSTOM_SCHEMA :
+      case LinkBuilder::DEFAULT_SCHEMA :
+      default :
+        $this->link_builder = new DefaultLinkBuilder();
+        break;
+    }
   }
 }
 

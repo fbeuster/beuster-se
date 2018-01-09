@@ -85,7 +85,7 @@
    * Colors are default for now, size can be adjusted.
    */
   function moduleAmazon($width, $height) {
-    $amazon_tag = Config::getConfig()->get('amazon_tag');
+    $amazon_tag = Config::getConfig()->get('ext', 'amazon_tag');
     $classes    = "amazon w".$width;
 
     if (Utilities::isDevServer() || User::newFromCookie()) {

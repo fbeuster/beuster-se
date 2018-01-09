@@ -61,7 +61,7 @@
 
   <?php
     if (!Utilities::isDevServer() &&
-        Config::getConfig()->get('google_analytics') != null) {
+        Config::getConfig()->get('ext', 'google_analytics') != null) {
 
       $user =  User::newFromCookie();
 
@@ -74,7 +74,7 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', '<?php echo Config::getConfig()->get('google_analytics'); ?>', 'auto');
+    ga('create', '<?php echo Config::getConfig()->get('ext', 'google_analytics'); ?>', 'auto');
     ga('send', 'pageview');
   </script>
   <!-- ende Google Anlaytics -->

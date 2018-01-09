@@ -151,13 +151,13 @@ class CategoryPage extends Page {
   }
 
   public function getPageLength() {
-    $length = $this->config->get('category_page_length');
+    $length = $this->config->get('site', 'category_page_length');
 
     if ($length == null || !(is_int($length) || ctype_digit($length))) {
       return self::DEFAULT_PAGE_LENGTH;
     }
 
-    return $this->config->get('category_page_length');
+    return $this->config->get('site', 'category_page_length');
   }
 
   public function getParsedContent() {
@@ -246,7 +246,7 @@ class CategoryPage extends Page {
 
     if ($this->category == null) {
       $joins = null;
-      $this->title = $this->config->get('site_title');
+      $this->title = $this->config->get('meta', 'title');
 
       if ($this->author != null) {
         $conds  = $this->getAuthorConditions();

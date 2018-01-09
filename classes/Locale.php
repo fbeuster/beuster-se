@@ -85,6 +85,26 @@
       return $compiled;
     }
 
+    public static function exists($language) {
+      $lang_file = 'locale/'.$language.'.'.self::LANG_FILE_TYPE_JSON;
+      return file_exists($lang_file);
+    }
+
+    public static function getAllLanguages() {
+      $languages = scandir('locale');
+
+      foreach ($languages as $key => $language) {
+        if (!preg_match('/^.*\.json$/', $language)) {
+          unset($languages[$key]);
+
+        } else {
+          $languages[$key] = preg_replace('/^(.*)\.json/', '$1', $language);
+        }
+      }
+
+      return $languages;
+    }
+
     private function includeLanguage() {
       require_once $this->cache_file;
     }

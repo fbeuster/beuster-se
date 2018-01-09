@@ -352,6 +352,7 @@
         "label" : "Sonstiges",
         "logout" : "Logout",
         "statistics" : "Statistiken ansehen",
+        "system_settings" : "Systemeinstellungen",
         "user_settings" : "Nutzereinstellungen"
       },
       "snippet" : {
@@ -506,6 +507,97 @@
           "date" : "Datum",
           "hits" : "Hits",
           "hits_per_day" : "Hits/Tag"
+        }
+      }
+    },
+    "system_settings" : {
+      "all" : {
+        "submit" : "Alles speichern"
+      },
+      "dev" : {
+        "debug_mode" : {
+          "label" : "Debug Modus",
+          "placeholder" : "Debug Modus aktivieren"
+        },
+        "dev_server_address" : {
+          "label" : "Dev Server",
+          "placeholder" : "Dev Server Hostname"
+        },
+        "label" : "Entwickleroptionen",
+        "remote_server_address" : {
+          "label" : "Remote Server",
+          "placeholder" : "Remote Server Hostname"
+        }
+      },
+      "error" : {
+        "empty_category_page_length" : "Die Artikelanzahl pro Seite darf nicht leer sein.",
+        "empty_mail" : "Die Seiten-E-Mail darf nicht leer sein.",
+        "empty_name" : "Der Seitenname darf nicht leer sein.",
+        "empty_title" : "Der Seitentitel darf nicht leer sein.",
+        "invalid_category_page_length" : "Die gewählte Artikelanzahl ist ungültig.",
+        "invalid_dev_server_address" : "Der gewählte Dev Server Hostname ist ungültig.",
+        "invalid_language" : "Die gewählte Sprache ist ungültig.",
+        "invalid_theme" : "Das gewählte Design ist ungültig.",
+        "invalid_url_schema" : "Das gewählte URL-Schema ist ungültig.",
+        "no_language" : "Die Sprachauswahl darf nicht leer sein.",
+        "no_theme" : "Die Designauswahl darf nicht leer sein.",
+        "no_url_schema" : "Die URL-Schema-Asuwahl darf nicht leer sein."
+      },
+      "ext" : {
+        "amazon_tag" : {
+          "label" : "Amazon Partner ID",
+          "placeholder" : "Amazon Partner ID"
+        },
+        "google_analytics" : {
+          "label" : "Google Analytics",
+          "placeholder" : "Google Analytics ID"
+        },
+        "label" : "Externe Dienste"
+      },
+      "label" : "Systemeinstellungen",
+      "meta" : {
+        "label" : "Seiteninformationen",
+        "mail" : {
+          "label" : "Seiten-E-Mail",
+          "placeholder" : "E-Mail-Adresse der Seite"
+        },
+        "name" : {
+          "label" : "Seitenname",
+          "placeholder" : "Name der Seite"
+        },
+        "title" : {
+          "label" : "Seitentitel",
+          "placeholder" : "Titel der Seite"
+        }
+      },
+      "search" : {
+        "case_sensitive" : {
+          "label" : "Groß-/Kleinschreibung",
+          "placeholder" : "Groß-/Kleinschreibung in Suche beachten"
+        },
+        "label" : "Sucheinstellungen",
+        "marks" : {
+          "label" : "Hervorhebung",
+          "placeholder" : "Suchbegriff in den Ergebnissen hervorheben"
+        }
+      },
+      "site" : {
+        "category_page_length" : {
+          "label" : "Artikel pro Seite",
+          "placeholder" : "Anzahl der Artikel auf jeder Kategorieseite"
+        },
+        "label" : "Seiteneinstellungen",
+        "language" : {
+          "label" : "Sprache",
+          "placeholder" : "Sprache"
+        },
+        "theme" : {
+          "label" : "Design",
+          "placeholder" : "Design"
+        },
+        "url_schema" : {
+          "label" : "URL-Schema",
+          "placeholder" : "URL-Schema für Links"
         }
       }
     },
@@ -726,6 +818,12 @@
       "label" : "Die Abfrage erfolgt in einem anderen Feld. Tragen Sie hier bitte NICHTS ein!"
     }
   },
+  "locale" : {
+    "languages" : {
+      "de" : "Deutsch",
+      "en" : "Englisch"
+    }
+  },
   "login" : {
     "already_signed_in" : "Du bist bereits eingeloggt.",
     "form" : {
@@ -800,8 +898,7 @@
     },
     "advanced" : {
       "back_link" : "Zurück",
-      "file_missing" : "Konnte %s nicht finden.",
-      "file_wrtie_error" : "Konnte nicht in %s schreiben.",
+      "configuration_save_error" : "Konnte die Konfiguration nicht in die Datenbank speichern.",
       "invalid_dev_server_address" : "Development Server Adresse ungültig.",
       "invalid_remote_server_address" : "Remote Server Adresse ungültig.",
       "label_dev_server" : "Development server",
@@ -835,6 +932,7 @@
     },
     "custom" : {
       "back_link" : "Zurück",
+      "configuration_save_error" : "Konnte die Konfiguration nicht in die Datenbank speichern.",
       "file_missing" : "Konnte %s nicht finden.",
       "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "invalid_language" : "Ungültige Sprache.",
