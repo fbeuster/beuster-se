@@ -599,7 +599,8 @@
           "label" : "URL-Schema",
           "placeholder" : "URL-Schema for links"
         }
-      }
+      },
+      "success" : "System settings have been saved."
     },
     "try_again" : "Try again."
   },
