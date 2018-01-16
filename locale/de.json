@@ -599,7 +599,8 @@
           "label" : "URL-Schema",
           "placeholder" : "URL-Schema für Links"
         }
-      }
+      },
+      "success" : "Die Systemeinstellungen wurden gespeichert."
     },
     "try_again" : "Erneut versuchen."
   },

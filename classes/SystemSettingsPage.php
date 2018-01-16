@@ -77,7 +77,7 @@
         $this->mapSettingsToValues();
 
         if (empty($this->errors)) {
-          $this->showMessage( I18n::t('admin.article.editor.actions.new.success'),
+          $this->showMessage( I18n::t('admin.system_settings.success'),
                               'system-settings');
         }
       }
@@ -182,6 +182,7 @@
 
     private function validate() {
       if (isset($this->settings['dev']['dev_server_address']) &&
+          $this->settings['dev']['dev_server_address'] != '' &&
           $this->settings['dev']['dev_server_address'] != $_SERVER['SERVER_NAME']) {
         # invalid dev server address
         $this->errors['dev-dev_server_address'] = array(
