@@ -88,7 +88,7 @@
     $amazon_tag = Config::getConfig()->get('ext', 'amazon_tag');
     $classes    = "amazon w".$width;
 
-    if (false && (Utilities::isDevServer() || User::newFromCookie())) {
+    if (Utilities::isDevServer() || User::newFromCookie()) {
       $content = 'Amazon Widget'."\n";
 
     } else {
