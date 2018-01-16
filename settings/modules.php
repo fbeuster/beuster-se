@@ -88,27 +88,32 @@
     $amazon_tag = Config::getConfig()->get('ext', 'amazon_tag');
     $classes    = "amazon w".$width;
 
-    if (Utilities::isDevServer() || User::newFromCookie()) {
+    if (false && (Utilities::isDevServer() || User::newFromCookie())) {
       $content = 'Amazon Widget'."\n";
 
     } else {
       # TODO make configuration for these settings
-      $background_color = 'f3f9f9';
-      $link_color       = '0ea86c';
-      $mode             = 'ce-de';
+      $background_color = '191f1f';
+      $category         = 'Electronics';
+      $region           = 'DE';
       $search           = '';
-      $size             = '48';
-      $text_color       = '191f1f';
+      $theme            = 'dark';
 
-      $src      = 'https://rcm-eu.amazon-adsystem.com/e/cm?f=ifr&t='.$amazon_tag.
-                  '&o=3&p='.$size.
-                  '&l=st1&mode='.$mode.
-                  '&search='.$search.
-                  '&fc1='.$text_color.
-                  '&lt1=_blank&lc1='.$link_color.
-                  '&bg1='.$background_color;
-      $content  = '<iframe src="'.$src.'" marginwidth="0" marginheight="0" width="'.$width.'" height="'.$height.
-                  '" border="0" frameborder="0" style="border:none;" scrolling="no"></iframe>';
+      $content = '<script charset="utf-8" type="text/javascript">'.
+                  'amzn_assoc_ad_type = "responsive_search_widget";'.
+                  'amzn_assoc_tracking_id = "'.$amazon_tag.'";'.
+                  'amzn_assoc_marketplace = "amazon";'.
+                  'amzn_assoc_region = "'.$region.'";'.
+                  'amzn_assoc_placement = "";'.
+                  'amzn_assoc_search_type = "search_widget";'.
+                  'amzn_assoc_width = '.$width.';'.
+                  'amzn_assoc_height = 250;'.
+                  'amzn_assoc_default_search_category = "'.$category.'";'.
+                  'amzn_assoc_default_search_key = "'.$search.'";'.
+                  'amzn_assoc_theme = "'.$theme.'";'.
+                  'amzn_assoc_bg_color = "'.$background_color.'";'.
+                  '</script>'.
+                  '<script src="//z-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace='.$region.'"></script>';
     }
 
     $config = array("title"   => "",
