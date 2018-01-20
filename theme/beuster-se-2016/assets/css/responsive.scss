@@ -238,12 +238,8 @@
 
 @media(min-width: 45.5em) {
   body.article {
-    .amazon.w728 {
+    .amazon.w720 {
       display: block;
-
-      iframe {
-        margin-left: -4px;
-      }
     }
   }
 }
@@ -257,14 +253,6 @@
   section.article {
     .content {
       width: 42.5em;
-    }
-  }
-
-  article {
-    .amazon.w728 {
-      iframe {
-        margin-left: 0px;
-      }
     }
   }
 
