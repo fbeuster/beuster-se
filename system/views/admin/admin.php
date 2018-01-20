@@ -74,6 +74,11 @@
     <h2><?php I18n::e('admin.navigation.comment.label'); ?></h2>
     <ul class="pagesList">
       <li>
+        <a href="<?php echo $lb->makeAdminLink('comment-overview'); ?>">
+          <?php I18n::e('admin.navigation.comment.overview'); ?>
+        </a>
+      </li>
+      <li>
         <a href="<?php echo $lb->makeAdminLink('comment-management'); ?>">
           <?php I18n::e('admin.navigation.comment.enable'); ?>
         </a>

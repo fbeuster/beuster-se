@@ -319,11 +319,31 @@
       "success" : "All category changes have been saved."
     },
     "comment" : {
-      "label" : "Comment management"
+      "label" : "Comment management",
+      "overview" : {
+        "delete" : {
+          "text" : "Delete",
+          "title" : "Click to delete"
+        },
+        "empty" : "There are no comments.",
+        "filter" : {
+          "label" : "Filter comment list",
+          "placeholder" : "Search phrase"
+        },
+        "label" : "Comment overview list",
+        "summary" : "A total of %s comments have been posted on your articles.",
+        "table_header" : {
+          "actions" : "Actions",
+          "article" : "Article",
+          "author" : "Author",
+          "content" : "Content",
+          "date" : "Date"
+        }
+      }
     },
     "footer" : {
       "cms" : "Lixter CMS by Felix Beuster",
-      "copy" : "&copy; Copyright 2010 - 2017",
+      "copy" : "&copy; Copyright 2010 - 2018",
       "runs_with" : "Runs with"
     },
     "label" : "Page administration",
@@ -346,7 +366,8 @@
       },
       "comment" : {
         "enable" : "Enable comments",
-        "label" : "Comments"
+        "label" : "Comments",
+        "overview" : "Comment overview"
       },
       "misc" : {
         "label" : "Miscellanious",

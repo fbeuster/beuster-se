@@ -319,11 +319,31 @@
       "success" : "Alle Änderungen wurden erfolgreich gespeichert."
     },
     "comment" : {
-      "label" : "Kommentarverwaltung"
+      "label" : "Kommentarverwaltung",
+      "overview" : {
+        "delete" : {
+          "text" : "Löschen",
+          "title" : "Klicken zum Löschen"
+        },
+        "empty" : "Es sind noch keine Kommentare vorhanden.",
+        "filter" : {
+          "label" : "Kommentarliste filtern",
+          "placeholder" : "Suchwort"
+        },
+        "label" : "Kommentarübersichtsliste",
+        "summary" : "Insgesamt wurden %s Kommentare zu deinen Artikeln gepostet.",
+        "table_header" : {
+          "actions" : "Aktionen",
+          "article" : "Artikel",
+          "author" : "Autor",
+          "content" : "Inhalt",
+          "date" : "Datum"
+        }
+      }
     },
     "footer" : {
       "cms" : "Lixter CMS von Felix Beuster",
-      "copy" : "&copy; Copyright 2010 - 2017",
+      "copy" : "&copy; Copyright 2010 - 2018",
       "runs_with" : "Läuft mit"
     },
     "label" : "Seitenverwaltung",
@@ -346,7 +366,8 @@
       },
       "comment" : {
         "enable" : "Kommentare freischalten",
-        "label" : "Kommentare"
+        "label" : "Kommentare",
+        "overview" : "Kommentarübersicht"
       },
       "misc" : {
         "label" : "Sonstiges",

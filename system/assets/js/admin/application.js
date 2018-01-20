@@ -84,5 +84,28 @@ $(document).ready(function(){
         });
       });
     });
+
+    $('input[name=comment_filter]').on('focus', function() {
+      $(this).on('keyup', function() {
+        var value = this.value;
+
+        $('table.entry_list tbody tr').each(function(){
+          var text = '';
+
+          if ($(this).find('td.article').length > 0) {
+            text += $(this).find('td.article').attr('title') + '';
+          }
+          text += $(this).find('td.author').text() + '';
+          text += $(this).find('td.content').attr('data-search');
+
+          if (text.toLowerCase().includes(value.toLowerCase())) {
+            $(this).removeClass('hidden');
+
+          } else {
+            $(this).addClass('hidden');
+          }
+        });
+      });
+    });
   }
 });

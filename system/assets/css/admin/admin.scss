@@ -116,7 +116,8 @@ form.userform {
   }
 }
 
-input[name=article_filter] {
+input[name=article_filter],
+input[name=comment_filter] {
   border: 1px solid $grey;
   display: inline-block;
   margin-bottom: 0.5em;
@@ -135,6 +136,7 @@ p.empty {
 
 table.commentlist,
 table.entry_list {
+  border-spacing: 0;
   margin-top: 1em;
   width: 100%;
 
@@ -157,6 +159,10 @@ table.entry_list {
     }
   }
 
+  th.author {
+    width: 7em;
+  }
+
   th.bigNumber {
     width: 5em;
   }
@@ -170,6 +176,10 @@ table.entry_list {
     width: 9em;
   }
 
+  th.mediumNumber {
+    width: 4em;
+  }
+
   th.radio {
     width: 1.5em;
   }
@@ -181,6 +191,7 @@ table.entry_list {
   td, th {
     padding-top: 0.5em;
     text-align: left;
+    vertical-align: top;
   }
 
   body.article & {
@@ -188,6 +199,7 @@ table.entry_list {
       div {
         @include display_flex;
         justify-content: center;
+
         a {
           @include icon_image;
           color: transparent;
@@ -211,6 +223,45 @@ table.entry_list {
 table.entry_list.snippets {
   td.title {
     cursor: pointer;
+  }
+}
+
+table.entry_list.comments {
+  tr {
+    td {
+      padding-bottom: 0.5em;
+      padding-top: 0.5em;
+
+      &:first-child {
+        padding-left: 0.75em;
+      }
+    }
+  }
+
+  tr.comment:not(:first-child) {
+    td {
+      border-top: 1px solid $dark_grey;
+    }
+  }
+
+  tr.comment + tr.reply {
+    td {
+      border-top: 0;
+    }
+  }
+
+  tr.reply {
+    td {
+      border-top: 1px solid $grey;
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      & {
+        background: $grey;
+      }
+    }
   }
 }
 
