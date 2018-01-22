@@ -39,7 +39,8 @@
         <?php $i = 0; ?>
         <?php foreach ($this->comments as $comment) { ?>
           <?php $article = new Article($comment->getNewsId()); ?>
-          <tr class="comment <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>">
+          <tr class="comment <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>"
+              data-comment="<?php echo $comment->getId(); ?>">
             <td class="article">
               <a  href="<?php echo $article->getLink(); ?>"
                   title="<?php echo $article->getTitle(); ?>">
@@ -81,7 +82,8 @@
           </tr>
           <?php $i++; ?>
           <?php foreach ($comment->getReplies() as $reply) { ?>
-            <tr class="reply <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>">
+            <tr class="reply <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>"
+                data-comment="<?php echo $reply->getId(); ?>">
               <td></td>
               <td class="author">
                 <?php

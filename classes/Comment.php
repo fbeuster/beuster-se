@@ -76,6 +76,16 @@ class Comment {
     $stmt->close();
 	}
 
+  public static function exists($id) {
+    $db = Database::getDB();
+
+    $fields = array('Inhalt');
+    $conds  = array('ID = ?', 'i', array($id));
+    $res    = $db->select('kommentare', $fields, $conds);
+
+    return count($res) == 1;
+  }
+
 	/**
 	 * Load replies.
 	 *

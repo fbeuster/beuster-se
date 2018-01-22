@@ -8,6 +8,7 @@ var admin = admin || {};
 //@ articleactions
 //@ articleEditor
 //@ attachmentActions
+//@ commentActions
 //@ staticPageActions
 //@ bbcode
 //@ snippetpreview
@@ -20,6 +21,7 @@ $(document).ready(function(){
     admin.articleActions.init();
     admin.articleEditor.init();
     admin.attachmentActions.init();
+    admin.commentActions.init();
     admin.staticPageActions.init();
     admin.bbCode.init();
     admin.snippetPreview.init();
