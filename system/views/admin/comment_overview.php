@@ -47,7 +47,23 @@
               </a>
             </td>
             <td class="author">
-              <?php echo $comment->getAuthor()->getClearname(); ?>
+              <?php
+                $author  = $comment->getAuthor();
+                $website = $author->getWebsite();
+              ?>
+
+              <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
+                <a  class="author"
+                    href="<?php echo rewriteUrl($website); ?>"
+                    title="<?php echo $author->getMail(); ?>">
+                  <?php echo $author->getClearname(); ?>
+                </a>
+
+              <?php } else { ?>
+                <span title="<?php echo $author->getMail(); ?>">
+                  <?php echo $author->getClearname(); ?>
+                </span>
+              <?php } ?>
             </td>
             <td class="content"
                 data-search="<?php echo $comment->getContent(); ?>">
@@ -68,7 +84,23 @@
             <tr class="reply <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>">
               <td></td>
               <td class="author">
-                <?php echo $reply->getAuthor()->getClearname(); ?>
+                <?php
+                  $author  = $reply->getAuthor();
+                  $website = $author->getWebsite();
+                ?>
+
+                <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
+                  <a  class="author"
+                      href="<?php echo rewriteUrl($website); ?>"
+                      title="<?php echo $author->getMail(); ?>">
+                    <?php echo $author->getClearname(); ?>
+                  </a>
+
+                <?php } else { ?>
+                  <span title="<?php echo $author->getMail(); ?>">
+                    <?php echo $author->getClearname(); ?>
+                  </span>
+                <?php } ?>
               </td>
               <td class="content"
                   data-search="<?php echo $reply->getContent(); ?>">
