@@ -94,11 +94,11 @@ $(document).ready(function(){
         $('table.entry_list tbody tr').each(function(){
           var text = '';
 
-          if ($(this).find('td.article').length > 0) {
-            text += $(this).find('td.article').attr('title') + '';
+          if ($(this).find('td div.article').length > 0) {
+            text += $(this).find('td div.article').attr('data-search') + ' ';
           }
-          text += $(this).find('td.author').text() + '';
-          text += $(this).find('td.content').attr('data-search');
+          text += $(this).find('td div.author').attr('data-search') + ' ';
+          text += $(this).find('td div.content').attr('data-search');
 
           if (text.toLowerCase().includes(value.toLowerCase())) {
             $(this).removeClass('hidden');

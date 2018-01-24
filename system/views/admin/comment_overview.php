@@ -18,17 +18,11 @@
     <table class="entry_list comments">
       <thead>
         <tr>
-          <th class="mediumNumber">
-            <?php I18n::e('admin.comment.overview.table_header.article'); ?>
-          </th>
-          <th class="author">
-            <?php I18n::e('admin.comment.overview.table_header.author'); ?>
+          <th class="short_date">
+            <?php I18n::e('admin.comment.overview.table_header.date'); ?>
           </th>
           <th>
             <?php I18n::e('admin.comment.overview.table_header.content'); ?>
-          </th>
-          <th class="date">
-            <?php I18n::e('admin.comment.overview.table_header.date'); ?>
           </th>
           <th class="button">
             <?php I18n::e('admin.comment.overview.table_header.actions'); ?>
@@ -36,41 +30,55 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i = 0; ?>
         <?php foreach ($this->comments as $comment) { ?>
           <?php $article = new Article($comment->getNewsId()); ?>
-          <tr class="comment <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>"
+          <tr class="comment"
               data-comment="<?php echo $comment->getId(); ?>">
-            <td class="article">
-              <a  href="<?php echo $article->getLink(); ?>"
-                  title="<?php echo $article->getTitle(); ?>">
-                <?php echo $article->getId(); ?>
-              </a>
-            </td>
-            <td class="author">
+            <td class="date"><?php echo date('d.m.Y', $comment->getDate()); ?></td>
+            <td class="comment_info">
+              <div  class="article"
+                    data-search="<?php echo $article->getTitle(); ?>">
+                <span>Article:</span>
+                <a  href="<?php echo $article->getLink(); ?>">
+                  <?php echo $article->getTitle(); ?>
+                </a>
+              </div>
               <?php
                 $author  = $comment->getAuthor();
                 $website = $author->getWebsite();
               ?>
+              <div  class="author"
+                    data-search="<?php echo $author->getClearname().
+                                            $author->getMail(); ?>">
+                <span>Author:</span>
+                <span>
+                  <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
+                    <a  class="author"
+                        href="<?php echo rewriteUrl($website); ?>">
+                      <?php echo $author->getClearname(); ?>
+                    </a>
 
-              <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
-                <a  class="author"
-                    href="<?php echo rewriteUrl($website); ?>"
-                    title="<?php echo $author->getMail(); ?>">
-                  <?php echo $author->getClearname(); ?>
-                </a>
-
-              <?php } else { ?>
-                <span title="<?php echo $author->getMail(); ?>">
-                  <?php echo $author->getClearname(); ?>
+                  <?php } else { ?>
+                    <?php echo $author->getClearname(); ?>
+                  <?php } ?>
+                  <span class="mail">
+                    (<?php echo $author->getMail(); ?>)
+                  </span>
                 </span>
+              </div>
+              <div  class="content"
+                    data-search="<?php echo $comment->getContent(); ?>">
+                <span>Content:</span>
+                <div>
+                  <?php echo $comment->getContentParsed(); ?>
+                </div>
+              </div>
+              <?php if ($comment->hasReplies()) { ?>
+                <div class="replies">
+                  Has <?php echo count($comment->getReplies()); ?> replies:
+                </div>
               <?php } ?>
             </td>
-            <td class="content"
-                data-search="<?php echo $comment->getContent(); ?>">
-              <?php echo $comment->getContentParsed(); ?>
-            </td>
-            <td><?php echo date('d.m.Y H:i', $comment->getDate()); ?></td>
             <td class="actions">
               <div>
                 <a  class="delete"
@@ -80,35 +88,50 @@
               </div>
             </td>
           </tr>
-          <?php $i++; ?>
+
           <?php foreach ($comment->getReplies() as $reply) { ?>
-            <tr class="reply <?php echo $i % 2 == 0 ? 'even' : 'odd'; ?>"
+            <tr class="reply"
                 data-comment="<?php echo $reply->getId(); ?>">
-              <td></td>
-              <td class="author">
+              <td class="date"><?php echo date('d.m.Y', $reply->getDate()); ?></td>
+              <td class="comment_info">
+                <div  class="article"
+                      data-search="<?php echo $article->getTitle(); ?>">
+                  <span>Article:</span>
+                  <a  href="<?php echo $article->getLink(); ?>">
+                    <?php echo $article->getTitle(); ?>
+                  </a>
+                </div>
                 <?php
                   $author  = $reply->getAuthor();
                   $website = $author->getWebsite();
                 ?>
+                <div  class="author"
+                      data-search="<?php echo $author->getClearname().
+                                              $author->getMail(); ?>">
+                  <span>Author:</span>
+                  <span>
+                    <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
+                      <a  class="author"
+                          href="<?php echo rewriteUrl($website); ?>">
+                        <?php echo $author->getClearname(); ?>
+                      </a>
 
-                <?php if (isValidUserUrl(rewriteUrl($website))) { ?>
-                  <a  class="author"
-                      href="<?php echo rewriteUrl($website); ?>"
-                      title="<?php echo $author->getMail(); ?>">
-                    <?php echo $author->getClearname(); ?>
-                  </a>
-
-                <?php } else { ?>
-                  <span title="<?php echo $author->getMail(); ?>">
-                    <?php echo $author->getClearname(); ?>
+                    <?php } else { ?>
+                      <?php echo $author->getClearname(); ?>
+                    <?php } ?>
+                    <span class="mail">
+                      (<?php echo $author->getMail(); ?>)
+                    </span>
                   </span>
-                <?php } ?>
+                </div>
+                <div  class="content"
+                      data-search="<?php echo $reply->getContent(); ?>">
+                  <span>Content:</span>
+                  <div>
+                    <?php echo $reply->getContentParsed(); ?>
+                  </div>
+                </div>
               </td>
-              <td class="content"
-                  data-search="<?php echo $reply->getContent(); ?>">
-                <?php echo $reply->getContentParsed(); ?>
-              </td>
-              <td><?php echo date('d.m.Y H:i', $reply->getDate()); ?></td>
               <td class="actions">
                 <div>
                   <a  class="delete"
@@ -118,7 +141,6 @@
                 </div>
               </td>
             </tr>
-            <?php $i++; ?>
           <?php } ?>
         <?php } ?>
       </tbody>

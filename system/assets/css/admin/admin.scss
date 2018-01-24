@@ -232,8 +232,57 @@ table.entry_list.comments {
       padding-bottom: 0.5em;
       padding-top: 0.5em;
 
-      &:first-child {
-        padding-left: 0.75em;
+      &.comment_info {
+        div.article,
+        div.author,
+        div.content,
+        div.replies {
+          @include display_flex;
+
+          & > span:first-child {
+            margin-right: 1em;
+            width: 4em;
+          }
+
+          &.author {
+            .mail {
+              color: $darker_grey;
+            }
+          }
+        }
+
+        div.replies {
+          color: $darker_grey;
+          font-style: italic;
+          margin-top: 0.5em;
+        }
+      }
+
+      &.date {
+        color: $darker_grey;
+      }
+    }
+
+    th.short_date {
+      width: 6em;
+    }
+
+    td:first-child,
+    th:first-child {
+      padding-left: 0.5em;
+    }
+
+    td:last-child,
+    th:last-child {
+      padding-right: 0.5em;
+    }
+  }
+
+  tr.comment,
+  tr.reply {
+    &:hover {
+      td {
+        background: $light_grey;
       }
     }
   }
@@ -252,14 +301,11 @@ table.entry_list.comments {
 
   tr.reply {
     td {
+      background: $grey;
       border-top: 1px solid $grey;
 
       &:first-child {
         border-top: 0;
-      }
-
-      & {
-        background: $grey;
       }
     }
   }

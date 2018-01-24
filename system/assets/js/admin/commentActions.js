@@ -30,7 +30,7 @@ admin.commentActions = {
             .wrapInner('<div></div>');
 
           row
-            .find('td div')
+            .find('td > div')
             .slideUp( admin.commentActions.slide_duration, function(){
               row.remove();
             });
