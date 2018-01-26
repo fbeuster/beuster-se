@@ -325,6 +325,14 @@
           "text" : "Delete",
           "title" : "Click to delete"
         },
+        "disable" : {
+          "text" : "Disable",
+          "title" : "Click to disable"
+        },
+        "enable" : {
+          "text" : "Enable",
+          "title" : "Click to enable"
+        },
         "empty" : "There are no comments.",
         "filter" : {
           "label" : "Filter comment list",

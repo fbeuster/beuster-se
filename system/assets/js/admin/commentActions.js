@@ -6,6 +6,8 @@ admin.commentActions = {
   bindHandlers: function() {
     if ($('.entry_list.comments').length > 0) {
       $('td.actions a.delete').on('click', this.deleteHandler);
+      $('td.actions a.disable').on('click', this.disableHandler);
+      $('td.actions a.enable').on('click', this.enableHandler);
     }
   },
 
@@ -34,6 +36,62 @@ admin.commentActions = {
             .slideUp( admin.commentActions.slide_duration, function(){
               row.remove();
             });
+        }
+      }
+    });
+  },
+
+  disableHandler: function() {
+    var link    = $(this),
+        comment = $(this).closest('tr')
+                          .attr('data-comment');
+
+    $.ajax({
+      type: "POST",
+      url: "/api.php",
+      data: {
+        'scope' : 'admin',
+        'method' : 'ApiCommentDisable',
+        'data' : {
+          'id' : comment
+        }
+      },
+      success: function(data) {
+        if (data == 'success') {
+          link.removeClass('disable')
+              .addClass('enable')
+              .attr('title', admin.i18n.translate('admin.comment.overview.enable.title'))
+              .text(admin.i18n.translate('admin.comment.overview.enable.text'))
+              .off('click')
+              .on('click', admin.commentActions.enableHandler);
+        }
+      }
+    });
+  },
+
+  enableHandler: function() {
+    var link    = $(this),
+        comment = $(this).closest('tr')
+                          .attr('data-comment');
+
+    $.ajax({
+      type: "POST",
+      url: "/api.php",
+      data: {
+        'scope' : 'admin',
+        'method' : 'ApiCommentEnable',
+        'data' : {
+          'id' : comment
+        }
+      },
+      success: function(data) {
+        if (data == 'success') {
+          link.removeClass('enable')
+              .addClass('disable')
+              .attr('title', admin.i18n.translate('admin.comment.overview.disable.title'))
+              .text(admin.i18n.translate('admin.comment.overview.disable.text'))
+              .off('click')
+              .on('click', admin.commentActions.disableHandler);
         }
       }
     });

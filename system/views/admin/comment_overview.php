@@ -85,6 +85,21 @@
                     title="<?php I18n::e('admin.comment.overview.delete.title'); ?>">
                   <?php I18n::e('admin.comment.overview.delete.text'); ?>
                 </a>
+
+                <?php if (!$author->isAdmin()) { ?>
+                  <?php
+                    if ($comment->getEnable() == Comment::ENA_DISABLED) {
+                      $action = 'enable';
+
+                    } else {
+                      $action = 'disable';
+                    }
+                  ?>
+                  <a  class="<?php echo $action; ?>"
+                      title="<?php I18n::e('admin.comment.overview.'.$action.'.title'); ?>">
+                    <?php I18n::e('admin.comment.overview.'.$action.'.text'); ?>
+                  </a>
+                <?php } ?>
               </div>
             </td>
           </tr>
@@ -138,6 +153,21 @@
                       title="<?php I18n::e('admin.comment.overview.delete.title'); ?>">
                     <?php I18n::e('admin.comment.overview.delete.text'); ?>
                   </a>
+
+                  <?php if (!$author->isAdmin()) { ?>
+                    <?php
+                      if ($reply->getEnable() == Comment::ENA_DISABLED) {
+                        $action = 'enable';
+
+                      } else {
+                        $action = 'disable';
+                      }
+                    ?>
+                    <a  class="<?php echo $action; ?>"
+                        title="<?php I18n::e('admin.comment.overview.'.$action.'.title'); ?>">
+                      <?php I18n::e('admin.comment.overview.'.$action.'.text'); ?>
+                    </a>
+                  <?php } ?>
                 </div>
               </td>
             </tr>

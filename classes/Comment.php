@@ -15,6 +15,7 @@
  */
 class Comment {
 
+	const ENA_DISABLED = 0;
 	const ENA_DEFAULT = 1;	/**< enabled names of comment */
 	const ENA_ADMIN = 2;	/**< enabled names of comment */
 
@@ -53,8 +54,25 @@ class Comment {
 		return $db->delete('kommentare', $cond);
 	}
 
+	public static function disable($id) {
+		return self::updateEnable($id, self::ENA_DISABLED);
+	}
+
 	public static function enable($id) {
-		$status = self::ENA_DEFAULT;
+		return self::updateEnable($id, self::ENA_DEFAULT);
+	}
+
+  public static function exists($id) {
+    $db = Database::getDB();
+
+    $fields = array('Inhalt');
+    $conds  = array('ID = ?', 'i', array($id));
+    $res    = $db->select('kommentare', $fields, $conds);
+
+    return count($res) == 1;
+  }
+
+  private static function updateEnable($id, $status) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE
               kommentare
@@ -74,16 +92,6 @@ class Comment {
     }
 
     $stmt->close();
-	}
-
-  public static function exists($id) {
-    $db = Database::getDB();
-
-    $fields = array('Inhalt');
-    $conds  = array('ID = ?', 'i', array($id));
-    $res    = $db->select('kommentare', $fields, $conds);
-
-    return count($res) == 1;
   }
 
 	/**

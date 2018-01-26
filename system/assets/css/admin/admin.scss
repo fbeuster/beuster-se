@@ -209,10 +209,14 @@ table.entry_list {
 
           &.edit { background-position: 0 * $icon_width 0;}
           &.delete { background-position: -1 * $icon_width 0;}
+          &.enable { background-position: -2 * $icon_width 0;}
+          &.disable { background-position: -3 * $icon_width 0;}
 
           &:hover {
             &.edit { background-position: 0 * $icon_width -1 * $icon_width;}
             &.delete { background-position: -1 * $icon_width -1 * $icon_width;}
+            &.enable { background-position: -2 * $icon_width -1 * $icon_width;}
+            &.disable { background-position: -3 * $icon_width -1 * $icon_width;}
           }
         }
       }

@@ -325,6 +325,14 @@
           "text" : "Löschen",
           "title" : "Klicken zum Löschen"
         },
+        "disable" : {
+          "text" : "Deaktivieren",
+          "title" : "Klicken zum Deaktivieren"
+        },
+        "enable" : {
+          "text" : "Freischalten",
+          "title" : "Klicken zum Freischalten"
+        },
         "empty" : "Es sind noch keine Kommentare vorhanden.",
         "filter" : {
           "label" : "Kommentarliste filtern",
