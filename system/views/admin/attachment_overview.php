@@ -43,10 +43,14 @@
               <a  class="edit"
                   title="<?php I18n::e('admin.attachment.overview.edit.title'); ?>"
                   href="<?php echo $lb->makeAdminLink('attachment-edit', $entry['id']); ?>">
-                <?php I18n::e('admin.attachment.overview.edit.text'); ?>
+                <svg viewBox="0 0 24 24" class="icon edit">
+                  <use xlink:href="#icon-edit"></use>
+                </svg>
               </a>
               <a class="delete" title="<?php I18n::e('admin.attachment.overview.delete.title'); ?>">
-                <?php I18n::e('admin.attachment.overview.delete.text'); ?>
+                <svg viewBox="0 0 24 24" class="icon delete">
+                  <use xlink:href="#icon-delete"></use>
+                </svg>
               </a>
             </div>
           </td>

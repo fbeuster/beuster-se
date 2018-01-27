@@ -83,21 +83,27 @@
               <div>
                 <a  class="delete"
                     title="<?php I18n::e('admin.comment.overview.delete.title'); ?>">
-                  <?php I18n::e('admin.comment.overview.delete.text'); ?>
+                  <svg viewBox="0 0 24 24" class="icon delete">
+                    <use xlink:href="#icon-delete"></use>
+                  </svg>
                 </a>
 
                 <?php if (!$author->isAdmin()) { ?>
                   <?php
                     if ($comment->getEnable() == Comment::ENA_DISABLED) {
                       $action = 'enable';
+                      $icon   = 'done';
 
                     } else {
                       $action = 'disable';
+                      $icon   = 'clear';
                     }
                   ?>
                   <a  class="<?php echo $action; ?>"
                       title="<?php I18n::e('admin.comment.overview.'.$action.'.title'); ?>">
-                    <?php I18n::e('admin.comment.overview.'.$action.'.text'); ?>
+                    <svg viewBox="0 0 24 24" class="icon <?php echo $icon; ?>">
+                      <use xlink:href="#icon-<?php echo $icon; ?>"></use>
+                    </svg>
                   </a>
                 <?php } ?>
               </div>
@@ -151,21 +157,27 @@
                 <div>
                   <a  class="delete"
                       title="<?php I18n::e('admin.comment.overview.delete.title'); ?>">
-                    <?php I18n::e('admin.comment.overview.delete.text'); ?>
+                    <svg viewBox="0 0 24 24" class="icon delete">
+                      <use xlink:href="#icon-delete"></use>
+                    </svg>
                   </a>
 
                   <?php if (!$author->isAdmin()) { ?>
                     <?php
                       if ($reply->getEnable() == Comment::ENA_DISABLED) {
                         $action = 'enable';
+                        $icon   = 'done';
 
                       } else {
                         $action = 'disable';
+                        $icon   = 'clear';
                       }
                     ?>
                     <a  class="<?php echo $action; ?>"
                         title="<?php I18n::e('admin.comment.overview.'.$action.'.title'); ?>">
-                      <?php I18n::e('admin.comment.overview.'.$action.'.text'); ?>
+                      <svg viewBox="0 0 24 24" class="icon <?php echo $icon; ?>">
+                        <use xlink:href="#icon-<?php echo $icon; ?>"></use>
+                      </svg>
                     </a>
                   <?php } ?>
                 </div>

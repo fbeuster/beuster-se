@@ -35,10 +35,14 @@
               <a  class="edit"
                   title="<?php I18n::e('admin.static_page.overview.edit.title'); ?>"
                   href="<?php echo $lb->makeAdminLink('static-page-edit', $entry['url']); ?>">
-                <?php I18n::e('admin.static_page.overview.edit.text'); ?>
+                <svg viewBox="0 0 24 24" class="icon edit">
+                  <use xlink:href="#icon-edit"></use>
+                </svg>
               </a>
               <a class="delete" title="<?php I18n::e('admin.static_page.overview.delete.title'); ?>">
-                <?php I18n::e('admin.static_page.overview.delete.text'); ?>
+                <svg viewBox="0 0 24 24" class="icon delete">
+                  <use xlink:href="#icon-delete"></use>
+                </svg>
               </a>
             </div>
           </td>

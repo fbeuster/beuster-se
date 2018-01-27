@@ -32,6 +32,7 @@
   } ?>
  </head>
  <body class="article">
+  <?php include_once(Lixter::getLix()->getSystemFile('assets/img/admin/icons.svg')); ?>
   <header>
     <div class="wrapper">
       <span><a href="/">beuster{se}</a></span>

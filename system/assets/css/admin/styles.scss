@@ -8,6 +8,10 @@
 @import 'layout';
 @import 'responsive';
 
+body > svg#definitions {
+  display: none;
+}
+
 div.wrapper footer {
   margin-top: 1.5em;
   text-align: center;

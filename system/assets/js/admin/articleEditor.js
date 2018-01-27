@@ -130,17 +130,28 @@ admin.articleEditor = {
         $hidden = $('input[name=attachments]'),
         $li     = $('<li></li>'),
         $list   = $('ul.current_attachments'),
-        $remove = $('<a></a>');
+        $remove = $('<a></a>'),
+        $svg    = $(document.createElementNS('http://www.w3.org/2000/svg','svg')),
+        $use    = $(document.createElementNS("http://www.w3.org/2000/svg","use"));
 
     $hidden.val($hidden.val() + append);
 
-    $remove.text('x')
-            .addClass('delete')
-            .attr( 'title', I18n.t('admin.article.editor.attachments.title') )
-            .click(function(){
-              $hidden.val($hidden.val().replace(append, ''));
-              $li.remove();
-            });
+    $use[0].setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", '#icon-delete' );
+
+    $svg
+      .attr({
+        'class'   : 'icon delete',
+        'viewBox' : '0 0 24 24'
+      })
+      .append($use)
+      .appendTo($remove);
+
+    $remove
+      .attr('title', I18n.t('admin.article.editor.attachments.title'))
+      .click(function(){
+        $hidden.val($hidden.val().replace(append, ''));
+        $li.remove();
+      });
 
     $li.text(text)
         .append($remove)
