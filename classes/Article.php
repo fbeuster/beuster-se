@@ -94,9 +94,19 @@ class Article {
    */
   public function getLink() {
     $lb = Lixter::getLix()->getLinkBuilder();
-    return $lb->makeArticleLink($this->id,
-                                $this->getCategory()->getNameUrl(),
-                                $this->title);
+
+    if ($lb == null) {
+      $lb = Api::getApi()->getLinkBuilder();
+    }
+
+    if ($lb == null) {
+      return '';
+
+    } else {
+      return $lb->makeArticleLink($this->id,
+                                  $this->getCategory()->getNameUrl(),
+                                  $this->title);
+    }
   }
 
   /*** GETTER / SETTER ***/

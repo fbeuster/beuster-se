@@ -7,6 +7,7 @@ class Api {
 
   private static $api;
 
+  private $link_builder;
   private $method;
 
   public function __construct() {}
@@ -15,6 +16,10 @@ class Api {
     if(!self::$api)
       self::$api = new Api();
     return self::$api;
+  }
+
+  public function getLinkBuilder() {
+    return $this->link_builder;
   }
 
   public function init() {
@@ -59,6 +64,10 @@ class Api {
     } else {
       error_reporting(NULL);
     }
+
+    // init LinkBuilder
+    $url_schema = Config::getConfig()->get('site', 'url_schema');
+    $this->setLinkBuilder($url_schema);
 
     // loading configuration and functions
     include('settings/functions.php');
@@ -108,6 +117,23 @@ class Api {
           $module->run();
         }
       }
+    }
+  }
+
+  public function setLinkBuilder($url_schema) {
+    switch ($url_schema) {
+      case LinkBuilder::PARAMETER_SCHEMA :
+        $this->link_builder = new ParameterLinkBuilder();
+        break;
+
+      # TODO
+      # custom schema needs a custom builder
+
+      case LinkBuilder::CUSTOM_SCHEMA :
+      case LinkBuilder::DEFAULT_SCHEMA :
+      default :
+        $this->link_builder = new DefaultLinkBuilder();
+        break;
     }
   }
 }

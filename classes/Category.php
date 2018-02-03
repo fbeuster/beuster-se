@@ -255,8 +255,18 @@ class Category {
 	 * @return String
 	 */
 	public function getNameUrl() {
-    $lb   = Lixter::getLix()->getLinkBuilder();
-		$name = $lb->replaceStrokes($this->name);
+    $lb = Lixter::getLix()->getLinkBuilder();
+
+    if ($lb == null) {
+      $lb = Api::getApi()->getLinkBuilder();
+    }
+
+    if ($lb == null) {
+      $name = '';
+
+    } else {
+		  $name = $lb->replaceStrokes($this->name);
+    }
 
     return mb_strtolower($name, 'UTF-8');
 	}
