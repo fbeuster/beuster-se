@@ -1,6 +1,24 @@
 /** beuster{se} | (c) 2010-2015 **/
 
-var KEY_ESCAPE = 27;
+var KEYS = {
+  ALT     : 18,
+  CTRL    : 17,
+  ESCAPE  : 27,
+  SHIFT   : 16,
+  TWO     : 50,
+  THREE   : 51,
+  A       : 65,
+  B       : 66,
+  C       : 67,
+  D       : 68,
+  I       : 73,
+  M       : 77,
+  O       : 79,
+  Q       : 81,
+  T       : 84,
+  U       : 85,
+  Y       : 89
+};
 
 admin.utilities = {
 };

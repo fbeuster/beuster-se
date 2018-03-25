@@ -76,6 +76,7 @@ admin.bbCode = {
         text      = value.substring(start, end),
         post      = value.substring(end, value.length);
     textArea.val(pre + event.data.o + text + event.data.c + post);
+    textArea.blur();
     textArea.focus();
 
     if (length ==  0) {
