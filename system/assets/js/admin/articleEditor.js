@@ -148,6 +148,13 @@ admin.articleEditor = {
         }
         break;
 
+      case KEYS.L:
+        if (ctrl && shift && !alt) {
+          event.preventDefault();
+          admin.bbCode.wrapUrl({ data : { text: 'URL eingeben:', tag: 'url' }});
+        }
+        break;
+
       case KEYS.M:
         if (ctrl && shift && !alt) {
           event.preventDefault();
@@ -190,11 +197,6 @@ admin.articleEditor = {
         if (ctrl && !shift && !alt) {
           event.preventDefault();
           admin.bbCode.wrapSelection({ data : {o: '[u]', c: '[/u]' }});
-        }
-
-        if (ctrl && shift && !alt) {
-          event.preventDefault();
-          admin.bbCode.wrapUrl({ data : { text: 'URL eingeben:', tag: 'url' }});
         }
 
         if (ctrl && !shift && alt) {
