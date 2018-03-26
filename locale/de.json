@@ -759,6 +759,53 @@
     }
   },
   "editor" : {
+    "shortcuts" : {
+      "command" : {
+        "bold" : "Strg + B",
+        "italic" : "Strg + I",
+        "underline" : "Strg + U",
+        "mark" : "Strg + Shift + M",
+        "del" : "Strg + Shift + D",
+        "ins" : "Strg + Shift + I",
+        "quote" : "Strg + Q",
+        "cite" : "Strg + Alt + Q",
+        "bquote" : "Strg + Shift + Alt + Q",
+        "ol" : "Strg + Alt + O",
+        "ul" : "Strg + Alt + U",
+        "li" : "Ctrl  + Alt + I ",
+        "tt" : "Strg + Shift + T",
+        "code" : "Strg + Shift + C",
+        "link" : "Strg + Shift L",
+        "yt" : "Strg + Alt + Y",
+        "play" : "Strg + Shift + Alt + Y",
+        "amazon" : "Strg + Alt + A",
+        "uber2" : "Strg + Alt + 2",
+        "uber3" : "Strg + Alt + 3"
+      },
+      "description" : {
+        "bold" : "<b>Fett</b>",
+        "italic" : "<i>Kursiv</i>",
+        "underline" : "<u>Unterstrichen</u>",
+        "mark" : "<mark>Markiert</mark>",
+        "del" : "<del>Gelöscht</del>",
+        "ins" : "<ins>Eingefügt</ins>",
+        "quote" : "Anführungsstriche &quot; &quot;",
+        "cite" : "Zitat",
+        "bquote" : "Blockzitat",
+        "ol" : "Nummerierte Liste",
+        "ul" : "Unsortierte Liste",
+        "li" : "Listeneintrag",
+        "tt" : "Quelltext in Zeile",
+        "code" : "Quelltextbereich",
+        "link" : "Link einfügen",
+        "yt" : "YouTube Video einfügen",
+        "play" : "YouTube Playliste einfügen",
+        "amazon" : "Amazon Link einfügen",
+        "uber2" : "Überschrift 2",
+        "uber3" : "Überschrift 3"
+      },
+      "title" : "Tastenkürzel"
+    },
     "toolbar" : {
       "label" : {
         "bold" : "Fett",

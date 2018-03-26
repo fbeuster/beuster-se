@@ -52,11 +52,36 @@ admin.bbCode = {
         admin.bbCode.wrapSelection(admin.bbCode.makeEventData('[asin=' + asin + ']', '[/asin]'));
       }
     });
+
+    $('#btnhelp').click(this.helpClick);
   },
 
   hasSelected: function() {
     var target = $(admin.bbCode.target)[0];
     return target.selectionStart != target.selectionEnd;
+  },
+
+  helpClick : function(event) {
+    event.preventDefault();
+
+    if ($('div.keyboard_help').is(":visible")) {
+      $('div.keyboard_help').fadeOut(200);
+
+    } else {
+      $('div.keyboard_help').fadeIn(200, function(){
+        $(document).on('click', function(event){
+          event.preventDefault();
+
+          if (!$.contains($('div.keyboard_help')[0], event.target) &&
+              !$('div.keyboard_help').is($(event.target))) {
+            $(document).off('click');
+            $('div.keyboard_help').fadeOut(200);
+          }
+        });
+      });
+    }
+
+    return false;
   },
 
   isNewsForm: function() {

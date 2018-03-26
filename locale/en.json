@@ -759,6 +759,53 @@
     }
   },
   "editor" : {
+    "shortcuts" : {
+      "command" : {
+        "bold" : "Ctrl + B",
+        "italic" : "Ctrl + I",
+        "underline" : "Ctrl + U",
+        "mark" : "Ctrl + Shift + M",
+        "del" : "Ctrl + Shift + D",
+        "ins" : "Ctrl + Shift + I",
+        "quote" : "Ctrl + Q",
+        "cite" : "Ctrl + Alt + Q",
+        "bquote" : "Ctrl + Shift + Alt + Q",
+        "ol" : "Ctrl + Alt + O",
+        "ul" : "Ctrl + Alt + U",
+        "li" : "Ctrl  + Alt + I ",
+        "tt" : "Ctrl + Shift + T",
+        "code" : "Ctrl + Shift + C",
+        "link" : "Ctrl + Shift L",
+        "yt" : "Ctrl + Alt + Y",
+        "play" : "Ctrl + Shift + Alt + Y",
+        "amazon" : "Ctrl + Alt + A",
+        "uber2" : "Ctrl + Alt + 2",
+        "uber3" : "Ctrl + Alt + 3"
+      },
+      "description" : {
+        "bold" : "<b>Bold</b>",
+        "italic" : "<i>Italic</i>",
+        "underline" : "<u>Underline</u>",
+        "mark" : "<mark>Marked</mark>",
+        "del" : "<del>Deleted</del>",
+        "ins" : "<ins>Inserted</ins>",
+        "quote" : "Quotes &quot; &quot;",
+        "cite" : "Citation",
+        "bquote" : "Blockquote",
+        "ol" : "Numbered List",
+        "ul" : "Unordered List",
+        "li" : "Listitem",
+        "tt" : "Inline code",
+        "code" : "Code area",
+        "link" : "Insert link",
+        "yt" : "Insert YouTube video",
+        "play" : "Insert YouTube playlist",
+        "amazon" : "Insert Amazon link",
+        "uber2" : "Headline 2",
+        "uber3" : "Headline 3"
+      },
+      "title" : "Keyboard Shortcuts"
+    },
     "toolbar" : {
       "label" : {
         "bold" : "Bold",

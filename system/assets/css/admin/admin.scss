@@ -48,6 +48,7 @@ form.userform {
     background: $grey;
     border: 1px solid $dark_grey;
     height: 1.25 * $editor_button_width;
+    position: relative;
   }
 
   .bbSpan {
@@ -81,6 +82,56 @@ form.userform {
 
     &.mar_left {
       margin-left: 0.25 * $editor_button_width;
+    }
+  }
+
+  button.icon {
+    background: transparent;
+    border: 0;
+    box-shadow: 0 0 0;
+    font-size: $editor_button_width / 1.5;
+    margin:  0.125 * $editor_button_width 0;
+    margin-left: 0.25 * $editor_button_width;
+    padding: 0 !important;
+
+    &:hover {
+      cursor: pointer;
+
+      svg {
+        fill: $green;
+      }
+    }
+  }
+
+  div.keyboard_help {
+    background: $light_grey;
+    box-shadow: 0 0 0.25em $dark_grey;
+    color: $darker_grey;
+    display: none;
+    font-size: 0.9em;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+
+    div {
+      border-bottom: 1px solid $dark_grey;
+      font-weight: bold;
+      margin-bottom: 0.25em;
+      padding-bottom: 0.25em;;
+      text-align: center;
+    }
+
+    dl {
+      display: grid;
+      grid-column-gap: 1em;
+
+      dt {
+        grid-column-start: 1;
+      }
+
+      dd {
+        grid-column-start: 2;
+      }
     }
   }
 
