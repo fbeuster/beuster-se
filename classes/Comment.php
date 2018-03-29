@@ -49,9 +49,9 @@ class Comment {
 		# trigger delete of others?
 		# maybe mark as deleted?
 		$db 	= Database::getDB();
-		$cond = array('ID = ?', 'i', array($id));
+		$cond = array('id = ?', 'i', array($id));
 
-		return $db->delete('kommentare', $cond);
+		return $db->delete('comments', $cond);
 	}
 
 	public static function disable($id) {
@@ -65,9 +65,9 @@ class Comment {
   public static function exists($id) {
     $db = Database::getDB();
 
-    $fields = array('Inhalt');
-    $conds  = array('ID = ?', 'i', array($id));
-    $res    = $db->select('kommentare', $fields, $conds);
+    $fields = array('content');
+    $conds  = array('id = ?', 'i', array($id));
+    $res    = $db->select('comments', $fields, $conds);
 
     return count($res) == 1;
   }
@@ -75,11 +75,11 @@ class Comment {
   private static function updateEnable($id, $status) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE
-              kommentare
+              comments
             SET
-              Frei = ?
+              enabled = ?
             WHERE
-              ID = ?';
+              id = ?';
     $stmt = $con->prepare($sql);
 
     if (!$stmt) {
@@ -100,12 +100,12 @@ class Comment {
 	 * Based on the actual comment, this function loads all replies.
 	 */
 	public function loadReplies() {
-		$fields = array('ID');
-		$conds = array('ParentID = ?', 'i', array($this->id));
-		$options = 'ORDER BY Datum DESC';
-		$res = Database::getDB()->select('kommentare', $fields, $conds);
+		$fields = array('id');
+		$conds = array('parent_comment_id = ?', 'i', array($this->id));
+		$options = 'ORDER BY date DESC';
+		$res = Database::getDB()->select('comments', $fields, $conds);
 		foreach ($res as $rep) {
-			$this->replies[] = new Comment($rep['ID']);
+			$this->replies[] = new Comment($rep['id']);
 		}
 	}
 
@@ -130,15 +130,15 @@ class Comment {
 
 	public function getLink() {
 		$db 		= Database::getDB();
-		$fields = array('NewsID');
-		$conds  = array('ID = ?', 'i', array($this->id));
-		$aid    = $db->select('kommentare', $fields, $conds);
+		$fields = array('article_id');
+		$conds  = array('id = ?', 'i', array($this->id));
+		$aid    = $db->select('comments', $fields, $conds);
 
 		if (count($aid) != 1) {
 			return '';
 		}
 
-		$article = new Article($aid[0]['NewsID']);
+		$article = new Article($aid[0]['article_id']);
 
 		return $article->getLink().'#comment'.$this->id;
 	}
@@ -237,17 +237,18 @@ class Comment {
 	 * This loads a comment from database, refrenced by comment id
 	 */
 	private function loadComment() {
-		$fields = array('UID', 'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'NewsID', 'Frei', 'ParentID');
-		$conds = array('ID = ?', 'i', array($this->id));
-		$res = Database::getDB()->select('kommentare', $fields, $conds);
+		$fields = array('user_id', 'content', 'UNIX_TIMESTAMP(date) AS timestamp',
+										'article_id', 'enabled', 'parent_comment_id');
+		$conds = array('id = ?', 'i', array($this->id));
+		$res = Database::getDB()->select('comments', $fields, $conds);
 		if(count($res) != 1)
 			return;
-		$this->setDate($res[0]['Date']);
-		$this->setAuthor(User::newFromId($res[0]['UID']));
-		$this->setEnable($res[0]['Frei']);
-		$this->setNewsId($res[0]['NewsID']);
-		$this->setContent($res[0]['Inhalt']);
-		$this->setParentId($res[0]['ParentID']);
+		$this->setDate($res[0]['timestamp']);
+		$this->setAuthor(User::newFromId($res[0]['user_id']));
+		$this->setEnable($res[0]['enabled']);
+		$this->setNewsId($res[0]['article_id']);
+		$this->setContent($res[0]['content']);
+		$this->setParentId($res[0]['parent_comment_id']);
 		$this->loaded = true;
 	}
 }

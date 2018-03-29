@@ -40,27 +40,27 @@
     private function loadComments($deep_loading = false) {
       $this->comments = array();
       $db       = Database::getDB();
-      $fields   = array('ID', 'UID', 'NewsID', 'Inhalt',
-                        'UNIX_TIMESTAMP(Datum) AS comment_date');
-      $conds    = array('Frei = ?', 'i', array(0));
-      $options  = 'ORDER BY comment_date DESC, NewsID DESC';
-      $results  = $db->select('kommentare', $fields, $conds, $options);
+      $fields   = array('id', 'user_id', 'article_id', 'content',
+                        'UNIX_TIMESTAMP(date) AS comment_date');
+      $conds    = array('enabled = ?', 'i', array(0));
+      $options  = 'ORDER BY comment_date DESC, article_id DESC';
+      $results  = $db->select('comments', $fields, $conds, $options);
 
       foreach($results as $result) {
         if ($deep_loading) {
-          $user = User::newFromId( $result['UID'] );
-          $news = new Article( $result['NewsID'] );
+          $user = User::newFromId( $result['user_id'] );
+          $news = new Article( $result['article_id'] );
 
         } else {
-          $user = $result['UID'];
-          $news = $result['NewsID'];
+          $user = $result['user_id'];
+          $news = $result['article_id'];
         }
 
         $this->comments[] = array(
-          'content' => Parser::parse( $result['Inhalt'],
+          'content' => Parser::parse( $result['content'],
                                       Parser::TYPE_COMMENT),
           'date'    => $result['comment_date'],
-          'id'      => $result['ID'],
+          'id'      => $result['id'],
           'user'    => $user,
           'news'    => $news );
       }

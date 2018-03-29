@@ -17,10 +17,10 @@
       # collecting comments
       $db       = Database::getDB();
       $fields   = array('id');
-      $conds    = array('ParentID = ?', 'i', array(-1));
-      $options  = 'ORDER BY Datum DESC';
+      $conds    = array('parent_comment_id = ?', 'i', array(-1));
+      $options  = 'ORDER BY date DESC';
 
-      $comment_list = $db->select('kommentare', $fields,
+      $comment_list = $db->select('comments', $fields,
                                   $conds, $options);
 
       foreach ($comment_list as $key => $comment) {
@@ -31,8 +31,8 @@
       $this->comments = $comment_list;
 
       # get number of comments
-      $fields = array('COUNT(ID) AS total_comments');
-      $res    = $db->select('kommentare', $fields);
+      $fields = array('COUNT(id) AS total_comments');
+      $res    = $db->select('comments', $fields);
 
       if (count($res)) {
         $this->total_comments = $res[0]['total_comments'];

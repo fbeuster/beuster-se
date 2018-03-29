@@ -383,22 +383,22 @@ class Article {
     $nCmt = getCmt($this->id);
     $this->pagesCmt = getPages($nCmt, 10, $this->startCmt);
 
-    $fields   = array('ID');
-    $conds    = array('NewsID = ? AND ParentID = -1', 'i', array($this->id));
-    $options  = 'ORDER BY Datum DESC';
+    $fields   = array('id');
+    $conds    = array('article_id = ? AND parent_comment_id = -1', 'i', array($this->id));
+    $options  = 'ORDER BY date DESC';
     $limit    = array('LIMIT ?, 10', 'i', array(getOffset($nCmt, 10, $this->startCmt)));
-    $comments = $db->select('kommentare', $fields, $conds, $options, $limit);
+    $comments = $db->select('comments', $fields, $conds, $options, $limit);
 
     foreach ($comments as $k => $comment) {
-      $comment = new Comment($comment['ID']);
+      $comment = new Comment($comment['id']);
       $comment->loadReplies();
       $this->comments[] = $comment;
     }
 
     # comments count
-    $fields = array('COUNT(ID) as count');
-    $conds  = array('NewsID = ?', 'i', array($this->id));
-    $res    = $db->select('kommentare', $fields, $conds);
+    $fields = array('COUNT(id) as count');
+    $conds  = array('article_id = ?', 'i', array($this->id));
+    $res    = $db->select('comments', $fields, $conds);
 
     foreach ($res as $key => $value) {
       $this->commentsCount = $value['count'];

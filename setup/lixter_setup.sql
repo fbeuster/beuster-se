@@ -93,25 +93,25 @@ ALTER TABLE `configuration`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kommentare`
+-- Table structure for table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `kommentare` (
-  `ID` smallint(6) NOT NULL AUTO_INCREMENT,
-  `UID` smallint(6) NOT NULL,
-  `Inhalt` text COLLATE utf8_unicode_ci NOT NULL,
-  `Datum` datetime NOT NULL,
-  `NewsID` smallint(6) NOT NULL,
-  `Frei` tinyint(1) NOT NULL,
-  `ParentID` smallint(6) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`ID`)
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `article_id` smallint(6) NOT NULL,
+  `parent_comment_id` smallint(6) NOT NULL,
+  `user_id` smallint(6) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `kommentare`
 --
 
-INSERT INTO `kommentare` (`ID`, `UID`, `Inhalt`, `Datum`, `NewsID`, `Frei`, `ParentID`) VALUES
+INSERT INTO `comments` (`id`, `user_id`, `content`, `date`, `article_id`, `enabled`, `parent_comment_id`) VALUES
 (1, 10001, 'First comment', NOW(), 1, 2, -1);
 
 -- --------------------------------------------------------

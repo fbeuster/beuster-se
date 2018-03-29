@@ -64,8 +64,8 @@
       $this->article_lists['released_articles'] = $released;
 
       # get number of comments
-      $fields = array('COUNT(ID) AS total_comments');
-      $res    = $db->select('kommentare', $fields);
+      $fields = array('COUNT(id) AS total_comments');
+      $res    = $db->select('comments', $fields);
 
       if (count($res)) {
         $this->total_comments = $res[0]['total_comments'];

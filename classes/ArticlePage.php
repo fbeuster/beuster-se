@@ -137,10 +137,10 @@ class ArticlePage extends RequestPage {
       }
 
       # insert comment
-      $fields = array('Inhalt', 'Datum', 'NewsID', 'Frei', 'ParentID', 'UID');
+      $fields = array('content', 'date', 'article_id', 'enabled', 'parent_comment_id', 'user_id');
       $values = array('s&iiii', array(
                  $content, 'NOW()', $this->article_id, $enable, $reply_to, $user_id ));
-      $id     = $db->insert('kommentare', $fields, $values);
+      $id     = $db->insert('comments', $fields, $values);
 
       if ($id) {
         # reload comments

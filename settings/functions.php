@@ -184,11 +184,11 @@
         }
 
         $sql = 'SELECT
-                    ID
+                    id
                 FROM
-                    kommentare
+                    comments
                 WHERE
-                    ID = ?';
+                    id = ?';
         $stmt = $db->prepare($sql);
         if (!$stmt) {return -1;}
         $stmt->bind_param('i', $id);
@@ -236,8 +236,8 @@
 
     function getCmt($id) {
         $db = Database::getDB();
-        $cond = array('NewsID = ?', 'i', array($id));
-        $res = $db->select('kommentare', array('COUNT(ID) AS n'), $cond);
+        $cond = array('article_id = ?', 'i', array($id));
+        $res = $db->select('comments', array('COUNT(id) AS n'), $cond);
         if($res != null)
             return $res[0]['n'];
         return 0;
