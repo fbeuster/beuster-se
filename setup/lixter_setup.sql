@@ -242,18 +242,18 @@ INSERT INTO `static_pages` (`title`, `content`, `url`, `feedback`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tags` (
-  `ID` smallint(6) NOT NULL AUTO_INCREMENT,
-  `news_id` smallint(6) NOT NULL,
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `article_id` smallint(6) NOT NULL,
   `tag` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `news_id` (`news_id`,`tag`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `article_id` (`article_id`,`tag`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tags`
 --
 
-INSERT INTO `tags` (`ID`, `news_id`, `tag`) VALUES
+INSERT INTO `tags` (`id`, `article_id`, `tag`) VALUES
 (1, 1, 'Hello'),
 (2, 1, 'world'),
 (3, 1, 'sample');

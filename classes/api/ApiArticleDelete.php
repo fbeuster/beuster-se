@@ -38,7 +38,7 @@
         $res    = $this->db->delete('newscatcross', $conds);
 
         # remove tags from db
-        $conds  = array('news_id = ?', 'i', array($this->data['id']));
+        $conds  = array('article_id = ?', 'i', array($this->data['id']));
         $res    = $this->db->delete('tags', $conds);
 
         # remove news

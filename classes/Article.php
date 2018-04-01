@@ -406,7 +406,7 @@ class Article {
 
     # tags
     $fields = array('tag');
-    $conds  = array('news_id = ?', 'i', array($this->id));
+    $conds  = array('article_id = ?', 'i', array($this->id));
     $res    = $db->select('tags', $fields, $conds);
 
     foreach ($res as $tag) {

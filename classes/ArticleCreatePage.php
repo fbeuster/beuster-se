@@ -395,7 +395,7 @@
             }
 
             if (!empty($tags)) {
-              $fields = array('news_id', 'tag');
+              $fields = array('article_id', 'tag');
               $values = array('is', $tags);
               $res    = $dbo->insertMany('tags', $fields, $values);
             }

@@ -1,7 +1,6 @@
 <?php
 
   include ('classes/Database.php');
-  include ('classes/Image.php');
   include ('user/local.php');
 
   # database options
