@@ -1,7 +1,7 @@
 <?php
 
-  include ('classes/Database.php');
-  include ('user/local.php');
+  include_once ('classes/Database.php');
+  include_once ('user/local.php');
 
   # database options
   $db     = Database::getDB();
