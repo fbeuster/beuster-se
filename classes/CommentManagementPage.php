@@ -48,12 +48,12 @@
 
       foreach($results as $result) {
         if ($deep_loading) {
-          $user = User::newFromId( $result['user_id'] );
-          $news = new Article( $result['article_id'] );
+          $user     = User::newFromId( $result['user_id'] );
+          $article  = new Article( $result['article_id'] );
 
         } else {
-          $user = $result['user_id'];
-          $news = $result['article_id'];
+          $user     = $result['user_id'];
+          $article  = $result['article_id'];
         }
 
         $this->comments[] = array(
@@ -62,7 +62,7 @@
           'date'    => $result['comment_date'],
           'id'      => $result['id'],
           'user'    => $user,
-          'news'    => $news );
+          'article' => $article );
       }
     }
 

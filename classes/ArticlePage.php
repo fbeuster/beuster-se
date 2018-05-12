@@ -171,11 +171,11 @@ class ArticlePage extends RequestPage {
       if (!$user || ($user && !$user->isAdmin())) {
         $db   = Database::getDB()->getCon();
         $sql  = 'UPDATE
-                  news
+                  articles
                 SET
-                  Hits = Hits + 1
+                  hits = hits + 1
                 WHERE
-                  ID = ?';
+                  id = ?';
 
         if (!$stmt = $db->prepare($sql)) {
           return $db->error;

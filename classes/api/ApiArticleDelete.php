@@ -37,9 +37,9 @@
         $conds  = array('article_id = ?', 'i', array($this->data['id']));
         $res    = $this->db->delete('tags', $conds);
 
-        # remove news
-        $conds  = array('ID = ?', 'i', array($this->data['id']));
-        $res    = $this->db->delete('news', $conds);
+        # remove articles
+        $conds  = array('id = ?', 'i', array($this->data['id']));
+        $res    = $this->db->delete('articles', $conds);
 
         if ($res) {
           echo 'success';

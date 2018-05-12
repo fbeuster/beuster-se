@@ -20,7 +20,7 @@
     public function run() {
       if (StaticPage::exists($this->data['url'])) {
 
-        # remove news
+        # remove static page
         $conds  = array('url LIKE ?', 's', array($this->data['url']));
         $res    = $this->db->delete('static_pages', $conds);
 

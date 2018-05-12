@@ -37,17 +37,17 @@ class SearchPage extends Page {
 
   private function getArticles() {
     $db     = Database::getDB();
-    $fields = array('ID');
-    $conds  = array('MATCH (Titel, Inhalt) AGAINST (?)',
+    $fields = array('id');
+    $conds  = array('MATCH (title, content) AGAINST (?)',
                     's', array($this->search_term));
-    $res    = $db->select('news', $fields, $conds);
+    $res    = $db->select('article', $fields, $conds);
 
     $this->articles = array();
 
     if (count($res)) {
 
       foreach ($res as $match) {
-        $this->articles[] = array('ID' => $match['ID']);
+        $this->articles[] = array('id' => $match['id']);
       }
     }
   }

@@ -44,10 +44,6 @@
           $is_public = true;
         }
 
-        if (isset($_POST['project_status'])) {
-          $project_status = trim($_POST['project_status']);
-        }
-
         # check if $_FILES is empty or not
         if (empty($_FILES)) {
           $has_uploads = false;
@@ -202,19 +198,6 @@
             'value'   => $category_new);
         }
 
-        if (Category::isCategoryName('Projekte') &&
-            Category::newFromName('Projekte')->getId() == Category::newFromName($category)->getId()) {
-          if ($project_status == 0) {
-            # missing project status
-            $this->errors['project_status'] = array(
-              'message' => I18n::t('admin.article.editor.error.missing_project_status'),
-              'value'   => $project_status);
-          }
-
-        } else {
-          $project_status = 0;
-        }
-
         if (!$has_uploads || $playlist != 'error' || $playlist_new != '') {
           $thumbnail = 0;
 
@@ -266,9 +249,9 @@
           }
 
           # insert the article
-          $fields = array('Autor', 'Titel', 'Inhalt', 'Datum', 'enable', 'Status');
-          $values = array('isssii', array($user->getId(), $title, $content, $release_date, $is_public, $project_status));
-          $id     = $dbo->insert('news', $fields, $values);
+          $fields = array('author', 'title', 'content', 'created', 'edited', 'public');
+          $values = array('isssii', array($user->getId(), $title, $content, $release_date, $release_date, $is_public));
+          $id     = $dbo->insert('articles', $fields, $values);
 
           # upload images
           $image_errors   = array();
@@ -317,8 +300,8 @@
               Image::delete($image['image_id']);
             }
 
-            $cond = array('ID = ?', 'i', array($id));
-            $res  = $dbo->delete('news', $cond);
+            $cond = array('id = ?', 'i', array($id));
+            $res  = $dbo->delete('articles', $cond);
 
             $this->errors['files'] = $image_errors;
 
@@ -332,7 +315,7 @@
               $content_new  = str_replace($search, $replace, $content_new);
             }
 
-            $sql = "UPDATE news SET Inhalt = ? WHERE ID = ?";
+            $sql = "UPDATE articles SET content = ? WHERE id = ?";
 
             if (!$stmt = $db->prepare($sql)) {
               return $db->error;

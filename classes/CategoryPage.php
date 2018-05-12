@@ -38,7 +38,7 @@ class CategoryPage extends Page {
   }
 
   private function getAuthorConditions() {
-    $cat_sql    = ' news.Autor = ?';
+    $cat_sql    = ' articles.author = ?';
     $cat_params = 'i';
     $cat_vars   = array( $this->author->getId() );
 
@@ -66,7 +66,7 @@ class CategoryPage extends Page {
   }
 
   private function getCategoryJoins() {
-    $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
+    $joins = 'JOIN newscatcross ON articles.id = newscatcross.NewsID';
 
     if ($this->category->isTopCategory()) {
       $joins .= ' JOIN categories ON categories.id = newscatcross.Cat';
@@ -81,32 +81,32 @@ class CategoryPage extends Page {
 
   private function getDateSQL() {
     if (!isset($_GET['y'])) {
-      return "news.Datum < NOW()";
+      return "articles.created < NOW()";
 
     } else {
       $year = (int) $_GET['y'];
 
       if ($year > (int) date("Y")) {
-        return "news.Datum < NOW()";
+        return "articles.created < NOW()";
 
       } else {
         $lb       = Lixter::getLix()->getLinkBuilder();
-        $year_sql = "YEAR(news.Datum) = " . $year;
+        $year_sql = "YEAR(articles.created) = " . $year;
 
         if (!isset($_GET['m'])) {
           $this->destination = $lb->makeArchiveYearLink($year);
-          return $year_sql . " AND news.Datum < NOW()";
+          return $year_sql . " AND articles.created < NOW()";
 
         } else {
           $month = (int) $_GET['m'];
 
           if ($month > 12 || $month < 1) {
-            return "news.Datum < NOW()";
+            return "articles.created < NOW()";
 
           } else {
             $this->destination = $lb->makeArchiveMonthLink($year,$month);
-            $month_sql = " AND MONTH(news.Datum) = " . $month;
-            return $year_sql . $month_sql . " AND news.Datum < NOW()";
+            $month_sql = " AND MONTH(articles.created) = " . $month;
+            return $year_sql . $month_sql . " AND articles.created < NOW()";
           }
         }
       }
@@ -118,7 +118,7 @@ class CategoryPage extends Page {
       return array( $this->getDateSQL(), '', array() );
 
     } else {
-      return array( $this->getDateSQL().' AND news.enable = ?',
+      return array( $this->getDateSQL().' AND articles.public = ?',
                       'i', array(true));
     }
   }
@@ -201,8 +201,8 @@ class CategoryPage extends Page {
       $conds[2] = array_merge($conds[2], $cat_conds[2]);
     }
 
-    $fields = array('COUNT(*) AS total');
-    $res    = $db->select('news', $fields, $conds, null, null, $joins);
+    $fields = array('COUNT(id) AS total');
+    $res    = $db->select('articles', $fields, $conds, null, null, $joins);
 
     if (count($res) == 1) {
       return $res[0]['total'];
@@ -269,15 +269,15 @@ class CategoryPage extends Page {
       $this->title        = $this->category->getName();
     }
 
-    $fields = array('news.ID');
-    $opt    = 'GROUP BY news.ID ORDER BY news.Datum DESC';
+    $fields = array('articles.id');
+    $opt    = 'GROUP BY articles.id ORDER BY articles.created DESC';
     $limit  = array('LIMIT ?, ?', 'ii',
                     array($this->getOffsetPages(), $this->getPageLength()));
-    $res    = $db->select('news', $fields, $conds, $opt, $limit, $joins);
+    $res    = $db->select('articles', $fields, $conds, $opt, $limit, $joins);
 
     if ($res) {
       foreach ($res as $aId) {
-        $this->articles[] = new Article($aId['ID']);
+        $this->articles[] = new Article($aId['id']);
       }
     }
   }

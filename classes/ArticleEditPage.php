@@ -467,16 +467,16 @@
               }
             }
 
-            # update news entry
+            # update article entry
             $sql = "UPDATE
-                      news
+                      articles
                     SET
-                      Titel = ?,
-                      Inhalt = ?,
-                      enable = ?,
-                      Datum = ?
+                      title = ?,
+                      content = ?,
+                      public = ?,
+                      edited = ?
                     WHERE
-                      ID = ?";
+                      id = ?";
 
             if (!$stmt = $db->prepare($sql)) {
               return $db->error;
@@ -632,16 +632,16 @@
       $this->setTitle(I18n::t('admin.article.editor.actions.edit.label'));
 
       $db       = Database::getDB();
-      $fields   = array('ID', 'Titel',
-                        "DATE_FORMAT(Datum, '%d.%m.%Y') AS date_format");
-      $options  = 'ORDER BY Datum DESC';
-      $res      = $db->select('news', $fields, null, $options);
+      $fields   = array('id', 'title',
+                        "DATE_FORMAT(created, '%d.%m.%Y') AS date_format");
+      $options  = 'ORDER BY created DESC';
+      $res      = $db->select('articles', $fields, null, $options);
 
       foreach ($res as $article) {
-        $this->articles[$article['ID']] = array(
-          'id'    => $article['ID'],
+        $this->articles[$article['id']] = array(
+          'id'    => $article['id'],
           'date'  => $article['date_format'],
-          'title' => Parser::parse( $article['Titel'],
+          'title' => Parser::parse( $article['title'],
                                     Parser::TYPE_PREVIEW ));
       }
 

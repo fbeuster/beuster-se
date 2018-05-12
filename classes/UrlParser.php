@@ -76,10 +76,10 @@
             $this->title = $this->smoothenTitle($this->title);
 
             $sql = "SELECT
-                        ID,
-                        Titel
+                        id,
+                        title
                     FROM
-                        news";
+                        articles";
             if(!$stmt = $this->db->prepare($sql)){return $this->db->error;}
             if(!$stmt->execute()) {return $result->error;}
             $stmt->bind_result($id, $title);

@@ -47,12 +47,12 @@ class User {
 		}
 
 		$db 		= Database::getDB();
-		$fields = array('COUNT(`ID`) AS articles');
-		$conds 	= array('Autor = ?', 'i', array($author->getId()));
-		$res 		= $db->select('news', $fields, $conds);
+		$fields = array('COUNT(`id`) AS number_articles');
+		$conds 	= array('author = ?', 'i', array($author->getId()));
+		$res 		= $db->select('articles', $fields, $conds);
 
 		if (count($res)) {
-			return $res[0]['articles'] > 0;
+			return $res[0]['number_articles'] > 0;
 		}
 
 		return false;

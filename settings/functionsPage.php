@@ -112,11 +112,11 @@
     } else {
       $id = $_GET['n'];
       $sql = "SELECT
-                Inhalt
+                content
               FROM
-                news
+                articles
               WHERE
-                ID = ?";
+                id = ?";
       if(!$stmt = $db->prepare($sql))
         return $db->error;
 

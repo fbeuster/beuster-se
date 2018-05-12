@@ -39,11 +39,11 @@
     function getRandomArticle() {
         $db  = Database::getDB()->getCon();
         $ena = 1;
-        $sql = "SELECT  ID
-                FROM    news
-                WHERE Datum < NOW() AND enable = ? AND ID >= (
-                    SELECT FLOOR( MAX(ID) * RAND())
-                    FROM news )
+        $sql = "SELECT  id
+                FROM    articles
+                WHERE created < NOW() AND public = ? AND id >= (
+                    SELECT FLOOR( MAX(id) * RAND())
+                    FROM articles )
                 ORDER BY ID
                 LIMIT 1";
 

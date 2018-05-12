@@ -13,7 +13,7 @@
             <thead>
               <tr>
                 <th class="date">Datum</th>
-                <th class="tabTitle">News</th>
+                <th class="tabTitle">Article</th>
                 <th class="tabName">Name</th>
                 <th class="tabMail">Mail</th>
                 <th>Inhalt</th>
@@ -25,7 +25,7 @@
             <?php $i = 0; foreach($this->comments as $cmt) { $i++; ?>
               <tr>
                 <td><?php echo date('d.m.Y H:m', $cmt['date']); ?></td>
-                <td><div class="wrap close"><a href="<?php echo $cmt['news']->getLink();?>" title="<?php echo $cmt['news']->getTitle(); ?>"><?php echo $cmt['news']->getTitle();?></a></div></td>
+                <td><div class="wrap close"><a href="<?php echo $cmt['articles']->getLink();?>" title="<?php echo $cmt['articles']->getTitle(); ?>"><?php echo $cmt['articles']->getTitle();?></a></div></td>
                 <td><?php if(isValidUserUrl($cmt['user']->getWebsite())) {echo '<a href="'.$cmt['user']->getWebsite().'">'.$cmt['user']->getClearname().'</a>';} else {echo $cmt['user']->getClearname();}?></td>
                 <td><?php echo $cmt['user']->getMail();?></td>
                 <td><div class="wrap close"><?php echo $cmt['content'];?></div></td>

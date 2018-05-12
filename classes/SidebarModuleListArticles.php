@@ -27,21 +27,21 @@
 
     private function generateList() {
       if ($this->type == self::TYPE_MOST) {
-        $options = 'GROUP BY ID ORDER BY Hits DESC, Datum DESC';
+        $options = 'GROUP BY id ORDER BY hits DESC, created DESC';
 
       } else {
-        $options = 'GROUP BY ID ORDER BY Datum DESC';
+        $options = 'GROUP BY id ORDER BY created DESC';
       }
 
       $db         = Database::getDB();
       $res        = array();
-      $fields     = array('ID');
-      $conds      = array('enable = ? AND Datum < NOW()', 'i', array(1));
+      $fields     = array('id');
+      $conds      = array('public = ? AND created < NOW()', 'i', array(1));
       $limit      = array('LIMIT 0, ?', 'i', array($this->n));
-      $articles   = $db->select('news', $fields, $conds, $options, $limit);
+      $articles   = $db->select('articles', $fields, $conds, $options, $limit);
 
       foreach ($articles as $article) {
-          $article    = new Article($article['ID']);
+          $article    = new Article($article['id']);
           $title      = $article->getTitle();
           $res[]      = '<a href="'.$article->getLink().'" title="'.$title.'">'.shortenTitle($title, 25).'</a>';
       }

@@ -49,9 +49,9 @@ class Article {
   public static function exists($id) {
     $db = Database::getDB();
 
-    $fields = array('inhalt');
-    $conds  = array('ID = ?', 'i', array($id));
-    $res    = $db->select('news', $fields, $conds);
+    $fields = array('content');
+    $conds  = array('id = ?', 'i', array($id));
+    $res    = $db->select('articles', $fields, $conds);
 
     return count($res) == 1;
   }
@@ -127,13 +127,13 @@ class Article {
    * getter for enable
    * @return int
    */
-  public function getEnable() { return $this->enable; }
+  public function getEnable() { return $this->public; }
 
   /**
    * setter for enable
    * @param int $enable to set
    */
-  public function setEnable($enable) { $this->enable = $enable; }
+  public function setEnable($public) { $this->public = $public; }
 
   /**
    * getter for title
@@ -344,22 +344,22 @@ class Article {
   private function loadArticle() {
 
     # article itself
-    $fields = array('Titel', 'Autor',  'Inhalt', 'UNIX_TIMESTAMP(Datum) AS Date', 'Status', 'enable');
+    $fields = array('title', 'author',  'content', 'UNIX_TIMESTAMP(created) AS date_created', 'UNIX_TIMESTAMP(edited) AS date_edited', 'public');
     $conds  = array('ID = ?', 'i', array($this->id));
 
     $db   = Database::getDB();
-    $res  = $db->select('news', $fields, $conds);
+    $res  = $db->select('articles', $fields, $conds);
 
     if (count($res) != 1) {
       return;
     }
 
-    $this->title      = $res[0]['Titel'];
-    $this->author     = User::newFromId($res[0]['Autor']);
-    $this->content    = $res[0]['Inhalt'];
-    $this->date       = $res[0]['Date'];
-    $this->enable     = $res[0]['enable'];
-    $this->projState  = $res[0]['Status'];
+    $this->title      = $res[0]['title'];
+    $this->author     = User::newFromId($res[0]['author']);
+    $this->content    = $res[0]['content'];
+    $this->date       = $res[0]['date_created'];
+    $this->date       = $res[0]['date_edited'];
+    $this->public     = $res[0]['public'];
 
     # category
     $fields = array('Cat');
@@ -435,7 +435,7 @@ class Article {
     $fields = array('attachments.id');
     $conds  = array('article_attachments.article_id = ?', 'i', array($this->id));
     $joins  = ' JOIN article_attachments ON article_attachments.attachment_id = attachments.id'.
-              ' JOIN news ON news.ID = article_attachments.article_id';
+              ' JOIN articles ON articles.id = article_attachments.article_id';
     $attachments = $db->select('attachments', $fields, $conds, null, null, $joins);
 
     foreach ($attachments as $attachment) {

@@ -283,11 +283,11 @@
         $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
-                    Inhalt
+                    content
                 FROM
-                    news
+                    articles
                 WHERE
-                    ID = ?";
+                    id = ?";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         $result->bind_param('i', $id);
         if(!$result->execute()) {return $result->error;}

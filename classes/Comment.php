@@ -162,10 +162,10 @@ class Comment {
 	public function getEnable() { return $this->enable; }
 
 	/**
-	 * getter for comment news id
+	 * getter for comment article id
 	 * @return int
 	 */
-	public function getNewsId() { return $this->newsId; }
+	public function getNewsId() { return $this->article_id; }
 
 	/**
 	 * getter for comment content
@@ -212,10 +212,10 @@ class Comment {
 	public function setEnable($enable) { $this->enable = $enable; }
 
 	/**
-	 * setter for comment news id
-	 * @param int $newsId The comment news id
+	 * setter for comment article id
+	 * @param int $newsId The comment article id
 	 */
-	public function setNewsId($newsId) { $this->newsId = $newsId; }
+	public function setNewsId($article_id) { $this->article_id = $article_id; }
 
 	/**
 	 * setter for comment content

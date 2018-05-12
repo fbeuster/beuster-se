@@ -22,12 +22,12 @@
       $last_year  = null;
       $lb         = Lixter::getLix()->getLinkBuilder();
 
-      $fields     = array('COUNT(`ID`) AS `amount`',
-                          'MONTH(`Datum`) AS `month`',
-                          'YEAR(`Datum`) AS `year`');
-      $group      = 'GROUP BY MONTH(`Datum`), YEAR(`Datum`) '.
-                    'ORDER BY YEAR(`Datum`) DESC, MONTH(`Datum`) DESC';
-      $months     = $db->select('news', $fields, null, $group);
+      $fields     = array('COUNT(`id`) AS `amount`',
+                          'MONTH(`created`) AS `month`',
+                          'YEAR(`created`) AS `year`');
+      $group      = 'GROUP BY MONTH(`created`), YEAR(`created`) '.
+                    'ORDER BY YEAR(`created`) DESC, MONTH(`created`) DESC';
+      $months     = $db->select('articles', $fields, null, $group);
 
       $month_list = array();
       foreach ($months as $key => $row) {
