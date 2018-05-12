@@ -309,19 +309,16 @@
 
           if (!empty($image_errors)) {
             # image errors, clean up the mess
-            $fields = array('file_name');
+            $fields = array('image_id');
             $conds  = array('article_id = ?', 'i', array($id));
-            $images = $dbo->select('images', $fields, $conds);
+            $images = $dbo->select('article_images', $fields, $conds);
 
             foreach ($images as $image) {
-              Image::delete($image['file_name']);
+              Image::delete($image['image_id']);
             }
 
             $cond = array('ID = ?', 'i', array($id));
             $res  = $dbo->delete('news', $cond);
-
-            $cond = array('article_id = ?', 'i', array($id));
-            $res  = $dbo->delete('images', $cond);
 
             $this->errors['files'] = $image_errors;
 

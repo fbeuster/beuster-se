@@ -414,21 +414,21 @@ class Article {
     }
 
     # thumbnail
-    $fields = array('id');
-    $conds  = array('article_id = ? AND is_thumb = ?', 'ii', array($this->id, 1));
-    $res    = $db->select('images', $fields, $conds);
+    $fields = array('image_id');
+    $conds  = array('article_id = ? AND is_thumbnail = ?', 'ii', array($this->id, 1));
+    $res    = $db->select('article_images', $fields, $conds);
 
     if (count($res) == 1) {
-      $this->thumbnail = new Image($res[0]['id']);
+      $this->thumbnail = new Image($res[0]['image_id']);
     }
 
     # gallery
-    $fields = array('id');
+    $fields = array('image_id');
     $conds  = array('article_id = ?', 'i', array($this->id));
-    $res    = $db->select('images', $fields, $conds);
+    $res    = $db->select('article_images', $fields, $conds);
 
     foreach ($res as $image) {
-      $this->gallery[] = new Image($image['id']);
+      $this->gallery[] = new Image($image['image_id']);
     }
 
     # attachments

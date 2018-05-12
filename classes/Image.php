@@ -77,18 +77,31 @@ class Image {
     return true;
   }
 
-  public static function delete($path) {
-    $file_name      = pathinfo($path, PATHINFO_FILENAME);
-    $file_extension = pathinfo($path, PATHINFO_EXTENSION);
+  public static function delete($id) {
+    $db = Database::getDB();
 
-    foreach (glob(self::ARTICLE_IMAGE_PATH . $file_name.'_*x*.'.$file_extension) as $file) {
-      if (file_exists($file)) {
-        unlink($file);
+    $fields = array('file_name');
+    $conds  = array('id = ?', 'i', array($id));
+    $image  = $db->select('images', $fields, $conds);
+
+    if (count($res) == 1) {
+      $path = $res[0]['file_name'];
+
+      $file_name      = pathinfo($path, PATHINFO_FILENAME);
+      $file_extension = pathinfo($path, PATHINFO_EXTENSION);
+
+      foreach (glob(self::ARTICLE_IMAGE_PATH . $file_name.'_*x*.'.$file_extension) as $file) {
+        if (file_exists($file)) {
+          unlink($file);
+        }
       }
-    }
 
-    if (file_exists(self::ARTICLE_IMAGE_PATH . $path)) {
-      unlink(self::ARTICLE_IMAGE_PATH . $path);
+      if (file_exists(self::ARTICLE_IMAGE_PATH . $path)) {
+        unlink(self::ARTICLE_IMAGE_PATH . $path);
+      }
+
+      $cond = array('id = ?', 'i', array($id));
+      $db->delete('images', $cond);
     }
   }
 
@@ -128,9 +141,13 @@ class Image {
       move_uploaded_file($tmp_name, $path);
 
       $db     = Database::getDB();
-      $fields = array('article_id', 'caption', 'file_name', 'is_thumb', 'upload_date');
-      $values = array('issi&', array($article_id, $save_name, $save_name, $thumb, 'NOW()'));
+      $fields = array('caption', 'file_name', 'upload_date');
+      $values = array('ss&', array($save_name, $save_name, 'NOW()'));
       $maxid  = $db->insert('images', $fields, $values);
+
+      $fields = array('article_id', 'image_id', 'is_thumbnail');
+      $values = array('iii', array($article_id, $maxid, $thumb));
+      $a_i    = $db->insert('article_images', $fields, $values);
 
       # create thumbnail
       foreach ($thumb_sizes as $thumb_size) {
@@ -284,17 +301,22 @@ class Image {
    * Loads the image.
    */
   private function loadImage() {
-    $fields = array('article_id', 'caption', 'file_name', 'is_thumb');
-    $cond = array('ID = ?', 'i', array($this->id));
     $db = Database::getDB();
-    $res = $db->select('images', $fields, $cond);
 
-    if(count($res) != 1)
+    $fields = array('images.caption', 'images.file_name',
+                    'article_images.article_id', 'article_images.is_thumbnail');
+    $conds  = array('images.id = ?', 'i', array($this->id));
+    $join   = ' JOIN article_images ON images.id = article_images.image_id';
+    $res    = $db->select('images', $fields, $conds, null, null, $join);
+
+    if(count($res) != 1) {
       return;
-    $this->articleId = $res[0]['article_id'];
-    $this->title = $res[0]['caption'];
-    $this->path = $res[0]['file_name'];
-    $this->thumb = $res[0]['is_thumb'];
+    }
+
+    $this->articleId  = $res[0]['article_id'];
+    $this->title      = $res[0]['caption'];
+    $this->path       = $res[0]['file_name'];
+    $this->thumb      = $res[0]['is_thumbnail'];
 
     $this->loaded = true;
   }

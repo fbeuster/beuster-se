@@ -52,6 +52,19 @@ CREATE TABLE IF NOT EXISTS `article_attachments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `article_images`
+--
+
+CREATE TABLE IF NOT EXISTS `article_images` (
+  `article_id` smallint(6) NOT NULL DEFAULT '0',
+  `image_id` smallint(6) NOT NULL DEFAULT '0',
+  `is_thumbnail` tinyint(1) NOT NULL,
+  PRIMARY KEY (`article_id`,`image_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `configuration`
 --
 
@@ -194,10 +207,8 @@ INSERT INTO `newscatcross` (`NewsID`, `Cat`, `CatID`) VALUES
 
 CREATE TABLE IF NOT EXISTS `images` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `article_id` smallint(6) NOT NULL,
   `caption` text COLLATE utf8_unicode_ci NOT NULL,
   `file_name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `is_humb` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

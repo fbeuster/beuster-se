@@ -78,16 +78,18 @@
             }
           }
 
-          $fields   = array('file_name', 'is_thumb', 'id');
-          $conds    = array('article_id = ?', 'i', array($id));
-          $options  = 'ORDER BY id';
-          $res      = $db->select('images', $fields, $conds, $options);
+          $fields   = array('images.file_name', 'images.id',
+                            'article_images.is_thumbnail');
+          $conds    = array('article_images.article_id = ?', 'i', array($id));
+          $options  = ' ORDER BY images.id';
+          $join     = ' JOIN article_images ON images.id = article_images.image_id';
+          $res      = $db->select('images', $fields, $conds, $options, null, $join);
 
           $this->images = array();
 
           foreach ($res as $pic) {
             $this->images[] = array('path'  => $pic['file_name'],
-                                    'thumb' => $pic['is_thumb'],
+                                    'thumb' => $pic['is_thumbnail'],
                                     'id'    => $pic['id']);
           }
         }
@@ -364,6 +366,7 @@
 
           $image_errors   = array();
           $image_replace  = array();
+          $image_saves    = array();
 
           if ($has_uploads) {
             foreach ($_FILES['file']['name'] as $key => $value) {
@@ -388,11 +391,12 @@
                 if (!$saved) {
                   # saving error
                   $image_errors[] = array(
-                    'message' => I18n::t('admin.article.editor.error.image_save_failure'),
+                    'message' => I18n::t('admin.article.editor.error.image_save_error'),
                     'value'   => $_FILES['file']['name'][$key]);
 
                 } else {
                   $image_replace[] = array('n' => $key + 1, 'id' => $saved);
+                  $image_saves[]   = $saved;
                 }
               }
             }
@@ -400,19 +404,14 @@
 
           if (!empty($image_errors)) {
             # image errors, clean up the mess
-            $fields = array('file_name');
-            $conds  = array('article_id = ?', 'i', array($id));
-            $images = $dbo->select('images', $fields, $conds);
+            # TODO failures on adding images to existing article should NOT delete article
+            $fields = array('image_id');
+            $conds  = array('article_id = ?', 'i', array($article_id));
+            $images = $dbo->select('article_images', $fields, $conds);
 
             foreach ($images as $image) {
-              Image::delete($image['file_name']);
+              Image::delete($image['image_id']);
             }
-
-            $cond = array('ID = ?', 'i', array($id));
-            $res  = $dbo->delete('news', $cond);
-
-            $cond = array('article_id = ?', 'i', array($id));
-            $res  = $dbo->delete('images', $cond);
 
             $this->errors['files'] = $image_errors;
 
@@ -556,12 +555,12 @@
             if (isset($_POST['thumbnail_old'])) {
               $pidF = trim($_POST['thumbnail_old']);
 
-              $fields = array('id');
-              $conds  = array('article_id = ? AND is_thumb = 1', 'i', array($article_id));
-              $res    = $dbo->select('images', $fields, $conds);
+              $fields = array('image_id');
+              $conds  = array('article_id = ? AND is_thumbnail = 1', 'i', array($article_id));
+              $res    = $dbo->select('article_images', $fields, $conds);
 
               if (count($res) > 0) {
-                $th = $res[0]['id'];
+                $th = $res[0]['image_id'];
 
               } else {
                 # no old thumbnail found error
@@ -570,17 +569,18 @@
 
               if ($th != $pidF) {
                 $sql = 'UPDATE
-                          images
+                          article_images
                         SET
-                          is_thumb = 1
+                          is_thumbnail = 1
                         WHERE
-                          id = ?';
+                          article_id = ? AND
+                          image_id = ?';
 
                 if (!$stmt = $db->prepare($sql)) {
                   return $db->error;
                 }
 
-                $stmt->bind_param('i', $pidF);
+                $stmt->bind_param('ii', $article_id, $pidF);
 
                 if (!$stmt->execute()) {
                   return $stmt->error;
@@ -589,17 +589,18 @@
                 $stmt->close();
 
                 $sql = 'UPDATE
-                          images
+                          article_images
                         SET
-                          is_thumb = 0
+                          is_thumbnail = 0
                         WHERE
-                          id = ?';
+                          article_id = ? AND
+                          image_id = ?';
 
                 if (!$stmt = $db->prepare($sql)) {
                   return $db->error;
                 }
 
-                $stmt->bind_param('i', $th);
+                $stmt->bind_param('i', $article_id, $th);
 
                 if (!$stmt->execute()) {
                   return $stmt->error;
@@ -613,17 +614,8 @@
             if (!empty($_POST['del'])) {
               $del = $_POST['del'];
 
-              foreach($del as $pf) {
-                $fields = array('file_name');
-                $conds  = array('id = ?', 'i', array($pf));
-                $res    = $dbo->select('images', $fields, $conds);
-
-                if (count($res) > 0) {
-                  Image::delete($res[0]['file_name']);
-                }
-
-                $conds = array('id = ?', 'i', array($pf));
-                $dbo->delete('images', $conds);
+              foreach($del as $image_id) {
+                Image::delete($image_id);
               }
             }
 

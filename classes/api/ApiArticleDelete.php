@@ -21,17 +21,13 @@
       if (Article::exists($this->data['id'])) {
 
         # unlink image files
-        $fields = array('file_name');
+        $fields = array('image_id');
         $conds  = array('article_id = ?', 'i', array($this->data['id']));
-        $images = $this->db->select('images', $fields, $conds);
+        $images = $this->db->select('article_images', $fields, $conds);
 
         foreach ($images as $image) {
-            Image::delete($image['file_name']);
+            Image::delete($image['image_id']);
         }
-
-        # remove images from db
-        $conds  = array('article_id = ?', 'i', array($this->data['id']));
-        $res    = $this->db->delete('images', $conds);
 
         # remove newscatcross
         $conds  = array('NewsID = ?', 'i', array($this->data['id']));
