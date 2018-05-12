@@ -363,7 +363,7 @@
 
               # create new playlist
               if ($is_new_playlist) {
-                $fields = array('ytID', 'catID');
+                $fields = array('playlist_id', 'category_id');
                 $values = array('si', array($playlist_new_id, $category_id));
                 $res    = $dbo->insert('playlist', $fields, $values);
               }

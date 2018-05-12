@@ -169,12 +169,12 @@ class Category {
 	public function getPlaylistId() {
 		$db = Database::getDB();
 
-		$fields = array('ytID');
-		$conds 	= array('catID = ?', 'i', array($this->id));
+		$fields = array('playlist_id');
+		$conds 	= array('category_id = ?', 'i', array($this->id));
 		$res		= $db->select('playlist', $fields, $conds);
 
 		if (count($res)) {
-			return $res[0]['ytID'];
+			return $res[0]['playlist_id'];
 		}
 
 		return '';

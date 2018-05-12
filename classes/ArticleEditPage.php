@@ -440,7 +440,7 @@
               $categoryID = 1;
 
               if ($is_new_playlist) {
-                $fields = array('ytID', 'CatID');
+                $fields = array('playlist_id', 'category_id');
                 $values = array('si', array( $playlist_new_id, $categoryID));
                 $res    = $dbo->insert('playlist', $fields, $values);
               }
