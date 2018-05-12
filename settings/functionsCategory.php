@@ -3,13 +3,13 @@
     function getPlaylists() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
-                    Cat
+                    name
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    Typ = 1
+                    type = 1
                 ORDER BY
-                    Cat ASC";
+                    name ASC";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         if(!$result->execute()) {return $result->error;}
         $result->bind_result($c);
@@ -25,11 +25,11 @@
         $db = Database::getDB()->getCon();
         $cID = $c;
         $sql = "SELECT
-                    Typ
+                    type
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    ID = ?";
+                    id = ?";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         $result->bind_param('i', $cID);
         if(!$result->execute()) {return $result->error;}
@@ -46,11 +46,11 @@
         $db = Database::getDB()->getCon();
         $ret = array();
         $sql = "SELECT
-                    Cat
+                    name
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    ParentID = ?";
+                    parent_category_id = ?";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         $result->bind_param('i', $c);
         if(!$result->execute()) {return $result->error;}
@@ -74,11 +74,11 @@
     function getTopCats() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
-                    ID
+                    id
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    ParentID = 0";
+                    parent_category_id = 0";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         if(!$result->execute()) {return $result->error;}
         $result->bind_result($c);
@@ -93,14 +93,14 @@
     function getSubCats() {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
-                    Cat
+                    name
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    Typ = 2 OR
-                    Typ = 3
+                    type = 2 OR
+                    type = 3
                 ORDER BY
-                    Cat ASC";
+                    name ASC";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         if(!$result->execute()) {return $result->error;}
         $result->bind_result($c);
@@ -117,10 +117,10 @@
         $cat = LinkBuilder::replaceUmlaute(lowerCat($cat));
         $cats = array();
         $sql = "SELECT
-                    ID,
-                    Cat
+                    id,
+                    name
                 FROM
-                    newscat";
+                    categories";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         if(!$result->execute()) {return $result->error;}
         $result->bind_result($id, $c);
@@ -139,11 +139,11 @@
     function getCatName($id) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
-                    Cat
+                    name
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    ID = ?";
+                    id = ?";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         $result->bind_param('i',$id);
         if(!$result->execute()) {return $result->error;}
@@ -156,11 +156,11 @@
     function getCatParent($catID) {
         $db = Database::getDB()->getCon();
         $sql = "SELECT
-                    ParentID
+                    parent_category_id
                 FROM
-                    newscat
+                    categories
                 WHERE
-                    ID = ?";
+                    id = ?";
         if(!$result = $db->prepare($sql)) {return $db->error;}
         $result->bind_param('i', $catID);
         if(!$result->execute()) {return $result->error;}

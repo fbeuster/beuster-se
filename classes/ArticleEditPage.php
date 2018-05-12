@@ -430,8 +430,8 @@
               # new category
               Category::create($category_new, $category_parent, $category_type);
 
-              $fields = array('MAX(ID) as idn');
-              $res    = $dbo->select('newscat', $fields);
+              $fields = array('MAX(id) as idn');
+              $res    = $dbo->select('categories', $fields);
 
               if (count($res) > 0) {
                 $category = $res[0]['idn'];

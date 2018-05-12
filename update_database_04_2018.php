@@ -4,5 +4,6 @@
  include ('update_tags.php');
  include ('update_images_2.php');
  include ('update_playlist.php');
+ include ('update_categories.php');
 
 ?>

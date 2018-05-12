@@ -112,10 +112,10 @@
         // get and set the category based on url
         private function parseCategoryUrl() {
             $sql = "SELECT
-                        ID,
-                        Cat
+                        id,
+                        name
                     FROM
-                        newscat";
+                        categories";
             if(!$stmt = $this->db->prepare($sql)){return $this->db->error;}
             if(!$stmt->execute()) {return $result->error;}
             $stmt->bind_result($id, $name);

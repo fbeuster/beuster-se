@@ -51,7 +51,7 @@ class CategoryPage extends Page {
 
   private function getCategoryConditions() {
     if ($this->category->isTopCategory()) {
-      $cat_sql    = ' AND (newscat.ParentID = ? OR newscat.ID = ?)';
+      $cat_sql    = ' AND (categories.parent_category_id = ? OR categories.id = ?)';
       $cat_params = 'ii';
       $cat_vars   = array(  $this->category->getId(),
                             $this->category->getId() );
@@ -69,7 +69,7 @@ class CategoryPage extends Page {
     $joins = 'JOIN newscatcross ON news.ID = newscatcross.NewsID';
 
     if ($this->category->isTopCategory()) {
-      $joins .= ' JOIN newscat ON newscat.ID = newscatcross.Cat';
+      $joins .= ' JOIN categories ON categories.id = newscatcross.Cat';
     }
 
     return $joins;

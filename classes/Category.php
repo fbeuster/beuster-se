@@ -41,31 +41,31 @@ class Category {
 
 	public static function create($name, $parent_id, $type = self::CAT_TYPE_SUB) {
 		$db 		= Database::getDB();
-		$fields	= array('Cat', 'ParentID', 'Typ');
+		$fields	= array('name', 'parent_category_id', 'type');
 		$values = array('sii', array($name, $parent_id, $type));
 
-		return $db->insert('newscat', $fields, $values);
+		return $db->insert('categories', $fields, $values);
 	}
 
 	public static function delete($id) {
 		$db 	= Database::getDB();
-		$cond = array('ID = ?', 'i', array($id));
+		$cond = array('id = ?', 'i', array($id));
 
-		return $db->delete('newscat', $cond);
+		return $db->delete('categories', $cond);
 	}
 
 	public static function exists($id_or_name) {
 		$db 		= Database::getDB();
-		$fields = array('ID');
+		$fields = array('id');
 
 		if (is_numeric($id_or_name)) {
-			$conds = array('ID = ?', 'i', array($id_or_name));
+			$conds = array('id = ?', 'i', array($id_or_name));
 
 		} else {
-			$conds = array('Cat = ?', 's', array($id_or_name));
+			$conds = array('name = ?', 's', array($id_or_name));
 		}
 
-		return $db->select('newscat', $fields, $conds) == true;
+		return $db->select('categories', $fields, $conds) == true;
 	}
 
 	/**
@@ -77,12 +77,12 @@ class Category {
 		$return = 0;
     $name   = LinkBuilder::replaceUmlaute(self::getNameUrlStatic($name));
 		$dbs 		= Database::getDB();
-		$fields = array('ID', 'Cat');
-    $res 		= $dbs->select('newscat', $fields);
+		$fields = array('id', 'name');
+    $res 		= $dbs->select('categories', $fields);
 
     foreach ($res as $cId) {
-      if ($name == LinkBuilder::replaceUmlaute(self::getNameUrlStatic($cId['Cat']))) {
-    		$return = $cId['ID'];
+      if ($name == LinkBuilder::replaceUmlaute(self::getNameUrlStatic($cId['name']))) {
+    		$return = $cId['id'];
     	}
     }
 
@@ -117,11 +117,11 @@ class Category {
 	public function assignToParent($parent_id) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE
-              newscat
+              categories
             SET
-              ParentID = ?
+              parent_category_id = ?
             WHERE
-              ID = ?';
+              id = ?';
     $stmt = $con->prepare($sql);
 
     if (!$stmt) {
@@ -205,11 +205,11 @@ class Category {
 	public function moveChildren($target_category) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE
-              newscat
+              categories
             SET
-              ParentID = ?
+              parent_category_id = ?
             WHERE
-              ParentID = ?';
+              parent_category_id = ?';
     $stmt = $con->prepare($sql);
 
     if (!$stmt) {
@@ -325,32 +325,32 @@ class Category {
 
 		$dbs = Database::getDB();
 		$fields = array(
-			'ID',
-			'Cat',
-			'ParentID',
-			'Typ',
-			'Beschreibung');
-		$conds = array('ID = ?', 'i', array($this->id));
-		$res = $dbs->select('newscat', $fields, $conds);
+			'id',
+			'name',
+			'parent_category_id',
+			'type',
+			'description');
+		$conds = array('id = ?', 'i', array($this->id));
+		$res = $dbs->select('categories', $fields, $conds);
 
 		if(count($res) != 1)
 			return;
 
-		$this->name = $res[0]['Cat'];
-		$this->type = $res[0]['Typ'];
-		$this->parent = $res[0]['ParentID'];
-		$this->description = $res[0]['Beschreibung'];
+		$this->name = $res[0]['name'];
+		$this->type = $res[0]['type'];
+		$this->parent = $res[0]['parent_category_id'];
+		$this->description = $res[0]['description'];
 
     $this->children = array();
 
     if ($this->type == self::CAT_TYPE_TOP) {
-      $fields = array('ID');
-      $conds  = array('ParentID = ?', 'i', array($this->id));
-      $res    = $dbs->select('newscat', $fields, $conds);
+      $fields = array('id');
+      $conds  = array('parent_category_id = ?', 'i', array($this->id));
+      $res    = $dbs->select('categories', $fields, $conds);
 
       if (count($res)) {
         foreach ($res as $sub_category) {
-          $this->children[] = new Category($sub_category['ID']);
+          $this->children[] = new Category($sub_category['id']);
         }
       }
     }

@@ -88,11 +88,11 @@
 
     if($i !== 0) {
       $sql = "SELECT
-                Beschreibung
+                description
               FROM
-                newscat
+                categories
               WHERE
-                ID = ?";
+                id = ?";
       if(!$stmt = $db->prepare($sql))
         return $db->error;
 

@@ -444,7 +444,11 @@
     private function load() {
       $this->setTitle(I18n::t('admin.article.editor.actions.new.label'));
 
-      $this->parents      = getTopCats();
+      $this->parents = array();
+      foreach (getTopCats() as $parent) {
+        $this->parents[] = getCatName($parent);
+      }
+
       $this->categories   = getSubCats();
       $this->categories[] = 'Blog';
       $this->playlists    = getPlaylists();

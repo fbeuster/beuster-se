@@ -21,9 +21,9 @@
      */
     private function handleCategoryChanges() {
       $db         = Database::getDB();
-      $fields     = array('ID');
-      $conds      = array('Typ = ?', 'i', array(Category::CAT_TYPE_SUB));
-      $categories = $db->select('newscat', $fields, $conds);
+      $fields     = array('id');
+      $conds      = array('type = ?', 'i', array(Category::CAT_TYPE_SUB));
+      $categories = $db->select('categories', $fields, $conds);
 
       $to_delete_categories   = array();
       $to_reassign_categories = array();
@@ -175,9 +175,9 @@
      */
     private function handleParentCategoryChanges() {
       $db       = Database::getDB();
-      $fields   = array('ID');
-      $conds    = array('Typ = ?', 'i', array(Category::CAT_TYPE_TOP));
-      $parents  = $db->select('newscat', $fields, $conds);
+      $fields   = array('id');
+      $conds    = array('type = ?', 'i', array(Category::CAT_TYPE_TOP));
+      $parents  = $db->select('categories', $fields, $conds);
 
       $to_delete_parents = array();
 
