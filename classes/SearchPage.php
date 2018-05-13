@@ -31,7 +31,7 @@ class SearchPage extends Page {
 
     foreach ($this->articles as $article) {
       $this->has_results       = true;
-      $this->search_results[] = new SearchResult($article['ID'], $this->search_term);
+      $this->search_results[] = new SearchResult($article['id'], $this->search_term);
     }
   }
 
@@ -40,7 +40,7 @@ class SearchPage extends Page {
     $fields = array('id');
     $conds  = array('MATCH (title, content) AGAINST (?)',
                     's', array($this->search_term));
-    $res    = $db->select('article', $fields, $conds);
+    $res    = $db->select('articles', $fields, $conds);
 
     $this->articles = array();
 
