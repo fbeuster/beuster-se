@@ -23,7 +23,9 @@
 ?>
       <section class="article">
         <div class="thumb">
-          <img src="<?php echo $thumb_src; ?>" alt="thumb">
+          <a href="<?php echo $article->getLink();?>">
+            <img src="<?php echo $thumb_src; ?>" alt="thumb">
+          </a>
         </div>
         <div class="content">
           <h2><?php echo $result->getMarkedTitle(); ?></h2>
