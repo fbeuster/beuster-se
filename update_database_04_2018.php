@@ -6,5 +6,6 @@
  include ('update_playlist.php');
  include ('update_categories.php');
  include ('update_articles.php');
+ include ('update_article_categories.php');
 
 ?>

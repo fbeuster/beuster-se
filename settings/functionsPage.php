@@ -49,16 +49,19 @@
     switch($curPage) {
       case 'blog':
         return $protocol.'://'.$_SERVER['HTTP_HOST'];
+
       case 'entry':
-        $id = $_GET['n'];
-        $article = new Article($id);
-        $title = $article->getTitle();
-        $cat = getCatName(getNewsCat($id));
+        $id       = $_GET['n'];
+        $article  = new Article($id);
+        $title    = $article->getTitle();
         return $protocol.'://'.$_SERVER['HTTP_HOST'].$article->getLink();
+
       case 'topCategory':
         return $protocol.'://'.$_SERVER['HTTP_HOST'];
+
       case 'category':
         return $protocol.'://'.$_SERVER['HTTP_HOST'];
+
       default:
         return $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.http_build_query ($_GET);
     }

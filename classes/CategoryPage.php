@@ -57,7 +57,7 @@ class CategoryPage extends Page {
                             $this->category->getId() );
 
     } else {
-      $cat_sql    = ' AND newscatcross.Cat = ?';
+      $cat_sql    = ' AND article_categories.category_id = ?';
       $cat_params = 'i';
       $cat_vars   = array($this->category->getId());
     }
@@ -66,10 +66,10 @@ class CategoryPage extends Page {
   }
 
   private function getCategoryJoins() {
-    $joins = 'JOIN newscatcross ON articles.id = newscatcross.NewsID';
+    $joins = 'JOIN article_categories ON articles.id = article_categories.article_id';
 
     if ($this->category->isTopCategory()) {
-      $joins .= ' JOIN categories ON categories.id = newscatcross.Cat';
+      $joins .= ' JOIN categories ON categories.id = article_categories.category_id';
     }
 
     return $joins;

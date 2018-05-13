@@ -242,10 +242,6 @@
           if (!$is_new_category) {
             $o_category           = Category::newFromName($category);
             $category_id          = $o_category->getId();
-            $category_article_id  = $o_category->getMaxArticleId() + 1;
-
-          } else {
-            $category_article_id = 1;
           }
 
           # insert the article
@@ -398,9 +394,9 @@
             }
 
             # connect category and article
-            $fields = array('NewsID', 'Cat', 'CatID');
-            $values = array('iii', array($id, $o_category->getId(), $category_article_id));
-            $res    = $dbo->insert('newscatcross', $fields, $values);
+            $fields = array('article_id', 'category_id');
+            $values = array('ii', array($id, $o_category->getId()));
+            $res    = $dbo->insert('article_categories', $fields, $values);
 
             # add rss entry
             if ($is_public && isset($rssFeedPath)) {

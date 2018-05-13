@@ -362,15 +362,15 @@ class Article {
     $this->public     = $res[0]['public'];
 
     # category
-    $fields = array('Cat');
-    $conds  = array('NewsID = ?', 'i', array($this->id));
-    $res    = $db->select('newscatcross', $fields, $conds);
+    $fields = array('category_id');
+    $conds  = array('article_id = ?', 'i', array($this->id));
+    $res    = $db->select('article_categories', $fields, $conds);
 
     if (count($res) != 1) {
       return;
     }
 
-    $this->category = $res[0]['Cat'];
+    $this->category = $res[0]['category_id'];
 
     # comments
     if (isset($_GET['page'])) {

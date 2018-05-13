@@ -152,20 +152,6 @@ class Category {
     return $this->children;
   }
 
-	public function getMaxArticleId() {
-		$db = Database::getDB();
-
-		$fields = array('MAX(CatID) as max_article_id');
-		$conds  = array('Cat = ?', 'i', array($this->id));
-		$res   	= $db->select('newscatcross', $fields, $conds);
-
-		if (count($res) && $res[0]['max_article_id'] !== null) {
-			return $res[0]['max_article_id'];
-		}
-
-		return 0;
-	}
-
 	public function getPlaylistId() {
 		$db = Database::getDB();
 
@@ -183,11 +169,11 @@ class Category {
 	public function moveArticles($target_category) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE
-              newscatcross
+              article_categories
             SET
-              Cat = ?
+              category_id = ?
             WHERE
-              Cat = ?';
+              category_id = ?';
     $stmt = $con->prepare($sql);
 
     if (!$stmt) {

@@ -29,9 +29,9 @@
             Image::delete($image['image_id']);
         }
 
-        # remove newscatcross
-        $conds  = array('NewsID = ?', 'i', array($this->data['id']));
-        $res    = $this->db->delete('newscatcross', $conds);
+        # remove article_categories
+        $conds  = array('article_id = ?', 'i', array($this->data['id']));
+        $res    = $this->db->delete('article_categories', $conds);
 
         # remove tags from db
         $conds  = array('article_id = ?', 'i', array($this->data['id']));

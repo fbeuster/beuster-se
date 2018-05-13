@@ -41,17 +41,13 @@
 
         } else {
           # get article for edit
-          $fields = array('Cat');
-          $cond   = array('NewsID = ?', 'i', array($id));
-          $res    = $db->select('newscatcross', $fields, $cond);
-
-          if (count($res) == 0) {
+          if (!Article::exists($id)) {
             $this->showMessage( I18n::t('admin.article.editor.errors.not_found'),
                                 'article-edit');
 
           } else {
             $article  = new Article($id);
-            $cat      = new Category($res[0]['Cat']);
+            $cat      = $article->getCategory();
 
             $attachments = ';';
 
@@ -358,10 +354,6 @@
           if (!$is_new_category) {
             $o_category           = Category::newFromName($category);
             $category_id          = $o_category->getId();
-            $category_article_id  = $o_category->getMaxArticleId() + 1;
-
-          } else {
-            $category_article_id = 1;
           }
 
           $image_errors   = array();
@@ -416,9 +408,6 @@
             $this->errors['files'] = $image_errors;
 
           } else {
-            $category_old_id  = getNewsCatID($article_id);
-            $category_old     = getNewsCat($article_id);
-
             if ($is_new_category) {
               if ($is_new_playlist) {
                 $category_type   = Category::CAT_TYPE_PLAYLIST;
@@ -434,37 +423,17 @@
               $res    = $dbo->select('categories', $fields);
 
               if (count($res) > 0) {
-                $category = $res[0]['idn'];
+                $category_id = $res[0]['idn'];
               }
-
-              $categoryID = 1;
 
               if ($is_new_playlist) {
                 $fields = array('playlist_id', 'category_id');
-                $values = array('si', array( $playlist_new_id, $categoryID));
+                $values = array('si', array( $playlist_new_id, $category_id));
                 $res    = $dbo->insert('playlist', $fields, $values);
               }
 
             } else {
-              $category = getCatID($category);
-
-              if ($category_old != $category) {
-                $fields = array('MAX(CatID) AS new');
-                $conds  = array('Cat = ?', 'i', array($category));
-                $res    = $dbo->select('newscatcross', $fields, $conds);
-
-                if (count($res) > 0) {
-                  $categoryID = $res[0]['new'];
-
-                } else {
-                  # category not found error
-                }
-
-                $categoryID = $categoryID + 1;
-
-              } else {
-                $categoryID = $category_old_id;
-              }
+              $category_id = getCatID($category);
             }
 
             # update article entry
@@ -490,20 +459,19 @@
 
             $stmt->close();
 
-            # update news x cat
+            # update article_categories
             $sql = "UPDATE
-                      newscatcross
+                      article_categories
                     SET
-                      Cat = ?,
-                      CatID = ?
+                      category_id = ?
                     WHERE
-                      NewsID = ?";
+                      article_id = ?";
 
             if (!$stmt = $db->prepare($sql)) {
               return $db->error;
             }
 
-            $stmt->bind_param('iii', $category, $categoryID, $article_id);
+            $stmt->bind_param('ii', $category_id, $article_id);
 
             if (!$stmt->execute()) {
               return $stmt->error;
