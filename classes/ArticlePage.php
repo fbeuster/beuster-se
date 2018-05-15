@@ -114,22 +114,29 @@ class ArticlePage extends RequestPage {
 
     $error_return = $this->article->getLink();
 
+    if (isset($_POST['notifications_enabled'])) {
+      $notifications_enabled = true;
+
+    } else {
+      $notifications_enabled = false;
+    }
+
     if ($this->error == 0) {
       $new_user = true;
       $user_id  = 0;
 
       # exists user in db?
-      $fields = array('ID');
-      $conds = array('LOWER(Email) = ?', 's', array($usermail));
+      $fields = array('id');
+      $conds = array('LOWER(mail) = ?', 's', array($usermail));
       $res  = $db->select('users', $fields, $conds);
 
       if (count($res)) {
         $new_user = false;
-        $user_id  = $res[0]['ID'];
+        $user_id  = $res[0]['id'];
 
       } else {
         # add new user
-        $fields   = array('Name', 'Rights', 'Email', 'regDate', 'Clearname', 'Website');
+        $fields   = array('username', 'rights', 'mail', 'registered', 'screen_name', 'website');
         $values   = array('sss&ss', array(
                       preg_replace('/[^A-Za-z0-9-_]/', '', $username),
                       'user', $usermail, 'NOW()', $username, $website));
@@ -137,9 +144,9 @@ class ArticlePage extends RequestPage {
       }
 
       # insert comment
-      $fields = array('content', 'date', 'article_id', 'enabled', 'parent_comment_id', 'user_id');
-      $values = array('s&iiii', array(
-                 $content, 'NOW()', $this->article_id, $enable, $reply_to, $user_id ));
+      $fields = array('content', 'date', 'article_id', 'enabled', 'parent_comment_id', 'user_id', 'notifications');
+      $values = array('s&iiiii', array(
+                 $content, 'NOW()', $this->article_id, $enable, $reply_to, $user_id, $notifications_enabled ));
       $id     = $db->insert('comments', $fields, $values);
 
       if ($id) {
@@ -160,7 +167,8 @@ class ArticlePage extends RequestPage {
       $this->values = array('user' => $username,
                             'cnt' => $content,
                             'mail' => $usermail,
-                            'page' => $website);
+                            'page' => $website,
+                            'notifications_enabled' => $notifications_enabled);
     }
   }
 
@@ -271,7 +279,8 @@ class ArticlePage extends RequestPage {
 
       $parent = new Comment($comment->getParentId());
 
-      if (!in_array($parent->getAuthor()->getId(), $notified)) {
+      if (!in_array($parent->getAuthor()->getId(), $notified) &&
+          $comment->notificationsEnabled()) {
         MailService::commentNotification($this->article, $comment, $parent->getAuthor());
         $notified[] = $comment->getAuthor()->getId();
       }
@@ -281,7 +290,8 @@ class ArticlePage extends RequestPage {
       # notify whole thread
       if ($parent->hasReplies()) {
         foreach ($parent->getReplies() as $reply) {
-          if (!in_array($reply->getAuthor()->getId(), $notified)) {
+          if (!in_array($reply->getAuthor()->getId(), $notified) &&
+              $comment->notificationsEnabled()) {
             MailService::commentNotification($this->article, $comment, $reply->getAuthor());
             $notified[] = $reply->getAuthor()->getId();
           }

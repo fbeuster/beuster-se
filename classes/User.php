@@ -26,6 +26,7 @@ class User {
 	private $rights; 	/**< user's rights */
 	private $website; 	/**< user's website */
 	private $clearname; /**< user's clear name */
+	private $profile_image; /**< user's profile image */
 
 	/**
 	 * construcotr
@@ -141,15 +142,16 @@ class User {
 	}
 
 	public function checkPassword($password) {
-		$fields = array('Password');
-		$conds 	= array('ID = ?', 'i', array($this->id));
+		$fields = array('password_hash');
+		$conds 	= array('id = ?', 'i', array($this->id));
 		$res 		= Database::getDB()->select('users', $fields, $conds);
 
-		if(count($res) !== 1)
+		if(count($res) !== 1) {
 			return false;
+		}
 
 		# this compares the sha2 hashes, which are case insensitive
-		return strtolower( $password ) === strtolower( $res[0]['Password'] );
+		return strtolower( $password ) === strtolower( $res[0]['password_hash'] );
 	}
 
 	/**
@@ -159,29 +161,32 @@ class User {
 	 */
 	public function loadUser() {
 
-		$fields = array('ID, Email, Name, Rights, Clearname, Website');
+		$fields = array('id, mail, username, rights, screen_name, website');
 		switch ($this->by) {
 			case self::BY_ID:
-				$conds = array('ID = ?', 'i', array($this->id));
+				$conds = array('id = ?', 'i', array($this->id));
 				break;
 			case self::BY_MAIL:
-				$conds = array('Email = ?', 's', array($this->mail));
+				$conds = array('mail = ?', 's', array($this->mail));
 				break;
 			case self::BY_NAME:
-				$conds = array('name = ?', 's', array($this->name));
+				$conds = array('username = ?', 's', array($this->name));
 				break;
 			default:
 				return;
 		}
 		$res = Database::getDB()->select('users', $fields, $conds);
-		if(count($res) !== 1)
+		if(count($res) !== 1) {
 			return;
-		$this->setId($res[0]['ID']);
-		$this->setMail($res[0]['Email']);
-		$this->setName($res[0]['Name']);
-		$this->setRights($res[0]['Rights']);
-		$this->setWebsite($res[0]['Website']);
-		$this->setClearname($res[0]['Clearname']);
+		}
+
+		$this->setId($res[0]['id']);
+		$this->setMail($res[0]['mail']);
+		$this->setName($res[0]['username']);
+		$this->setRights($res[0]['rights']);
+		$this->setWebsite($res[0]['website']);
+		$this->setClearname($res[0]['screen_name']);
+
 		$this->loaded = true;
 	}
 
@@ -195,8 +200,8 @@ class User {
 	public function buildInfo() {
 		return str_replace(
 			'[contactmail]',
-			'</p><address>'.str_replace('@', ' [at] ', $this->getUserInfo('Contactmail')).'</address><p>',
-			Parser::parse($this->getUserInfo('About'), Parser::TYPE_CONTENT));
+			'</p><address>'.str_replace('@', ' [at] ', $this->getUserInfo('contact_mail')).'</address><p>',
+			Parser::parse($this->getUserInfo('description'), Parser::TYPE_CONTENT));
 	}
 
 	/**
@@ -211,7 +216,7 @@ class User {
 		if(!$this->loaded) {
 			return '';
 		} else {
-			$rinfo = Database::getDB()->select('users', array($info), array('ID = ?', 'i', array($this->id)));
+			$rinfo = Database::getDB()->select('users', array($info), array('id = ?', 'i', array($this->id)));
 			return $rinfo[0][$info];
 		}
 	}

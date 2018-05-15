@@ -120,6 +120,16 @@ form.userform {
           border: 1px solid $red;
         }
       }
+
+      & > input[type=checkbox] {
+        height: 1.05em;
+        margin-right: 1em;
+        vertical-align: middle;
+
+        & + span {
+          width: auto;
+        }
+      }
     }
 
     input[type=reset],

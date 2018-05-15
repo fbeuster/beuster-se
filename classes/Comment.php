@@ -28,6 +28,7 @@ class Comment {
 	private $newsId;	/**< comment news id */
 	private $content;	/**< comment content */
 	private $parentId;	/**< comment parent id*/
+	private $notifications;
 
 	private $replies = array();	/**< comment replies */
 
@@ -118,6 +119,10 @@ class Comment {
 	 */
 	public function hasReplies() {
 		return count($this->replies) > 0;
+	}
+
+	public function notificationsEnabled() {
+		return $this->notifications;
 	}
 
 	/*** GET / SET ***/
@@ -238,7 +243,7 @@ class Comment {
 	 */
 	private function loadComment() {
 		$fields = array('user_id', 'content', 'UNIX_TIMESTAMP(date) AS timestamp',
-										'article_id', 'enabled', 'parent_comment_id');
+										'article_id', 'enabled', 'parent_comment_id', 'notifications');
 		$conds = array('id = ?', 'i', array($this->id));
 		$res = Database::getDB()->select('comments', $fields, $conds);
 		if(count($res) != 1)
@@ -249,6 +254,8 @@ class Comment {
 		$this->setNewsId($res[0]['article_id']);
 		$this->setContent($res[0]['content']);
 		$this->setParentId($res[0]['parent_comment_id']);
+
+		$this->notifications = $res[0]['notifications'];
 		$this->loaded = true;
 	}
 }

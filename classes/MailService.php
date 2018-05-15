@@ -4,15 +4,15 @@
 
     public static function getAdminNotificationMail() {
       $db     = Database::getDB();
-      $fields = array('Email');
-      $conds  = array('Rights = ?', 's', array('admin'));
+      $fields = array('mail');
+      $conds  = array('rights = ?', 's', array('admin'));
       $res    = $db->select('users', $fields, $conds);
 
       if (count($res) == 0) {
         return '';
       }
 
-      return $res[0]['Email'];
+      return $res[0]['mail'];
     }
 
     private static function getNotificationMailHeader($from, $reply = '') {

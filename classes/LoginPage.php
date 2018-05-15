@@ -33,8 +33,8 @@
         }
 
         # check user name
-        $fields = array('ID');
-        $conds  = array('Name = ?', 's', array($user_name));
+        $fields = array('id');
+        $conds  = array('username = ?', 's', array($user_name));
         $res    = $db->select('users', $fields, $conds);
 
         if (count($res) != 1) {
@@ -42,12 +42,12 @@
           return;
         }
 
-        $user_id = $res[0]['ID'];
+        $user_id = $res[0]['id'];
 
         # check password
         $password_hash = hash('sha512', $password);
 
-        $conds  = array('ID = ? AND Password = ?', 'is',
+        $conds  = array('id = ? AND password_hash = ?', 'is',
                         array($user_id, $password_hash));
         $res    = $db->select('users', $fields, $conds);
 

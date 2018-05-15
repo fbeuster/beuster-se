@@ -673,6 +673,9 @@
       "message" : {
         "label" : "Kommentar",
         "placeholder" : "Schreibe deinen Kommentar..."
+      },
+      "notifications" : {
+        "label" : "Benachrichtige mich bei Antworten zu meinem Kommentar."
       }
     },
     "info" : {

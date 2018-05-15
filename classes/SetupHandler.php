@@ -22,13 +22,13 @@ class SetupHandler {
   private function handleAdminUser() {
     $mysqli = Database::getDB()->getCon();
     $sql    = ' UPDATE users
-                SET Name = ?,
-                    Clearname = ?,
-                    Email = ?,
-                    Contactmail = ?,
-                    Website = ?,
-                    Password = ?
-                WHERE ID = ?';
+                SET username = ?,
+                    screen_name = ?,
+                    mail = ?,
+                    contact_mail = ?,
+                    website = ?,
+                    password_hash = ?
+                WHERE id = ?';
 
     $stmt = $mysqli->prepare($sql);
 

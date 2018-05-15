@@ -80,10 +80,18 @@
       $replyId = $comment->getId();
     }
 
+    $avatar = $comment->getAuthor()->getUserInfo('profile_image');
+
+    if ($avatar == '') {
+      $version  = $comment->getAuthor()->getId() % 3;
+      $path     = 'assets/img/default_avatar_'.$version.'.png';
+      $avatar   = '/'.Lixter::getLix()->getTheme()->getFile($path);
+    }
+
     $html = '';
     $html .= '<section class="comment" id="comment'.$comment->getId().'" data-reply="'.$replyId.'">';
     $html .= ' <div class="wrapper">';
-    $html .= '  <div class="avatar"><img src="'.Externals::getGravatar($comment->getAuthor()->getMail()).'" alt="Avatar"></div>';
+    $html .= '  <div class="avatar"><img src="'.$avatar.'" alt="Avatar"></div>';
     $html .= '  <div class="content">';
 
     if(isValidUserUrl(rewriteUrl($comment->getAuthor()->getWebsite()))) {
@@ -228,6 +236,18 @@
       $ret .= I18n::t('general_form.remain', array($remain))."\r";
       $ret .= '</p>'."\r";
     }
+
+    $ret .= '  <label>';
+    $ret .= '  <input type="checkbox" name="notifications_enabled"';
+    if (  $err['t'] != 0 &&
+          $err['c'] != '' &&
+          $err['c']['notifications_enabled'] === false) {
+      $ret .= '';
+    } else {
+      $ret .= ' checked="checked"';
+    }
+    $ret .= '><span>'.I18n::t('comment.form.notifications.label').'</span></label>'."\r";
+
     $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
     $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
 

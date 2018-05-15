@@ -72,8 +72,8 @@ class SetupValidator extends AbstractValidator {
 
     $db     = Database::getDB();
     $result = $db->select('users',
-                          array('ID'),
-                          array('ID = ? AND Password = ?',
+                          array('id'),
+                          array('id = ? AND password_hash = ?',
                                 'is',
                                 array(10001, 'empty')));
 

@@ -52,9 +52,9 @@
           $sql  = ' UPDATE
                       users
                     SET
-                      Email = ?
+                      mail = ?
                     WHERE
-                      ID = ?';
+                      id = ?';
           $stmt = $db->prepare($sql);
 
           if (!$stmt) {
@@ -130,9 +130,9 @@
           $sql  = ' UPDATE
                       users
                     SET
-                      Password = ?
+                      password_hash = ?
                     WHERE
-                      ID = ?';
+                      id = ?';
           $stmt = $db->prepare($sql);
 
           if (!$stmt) {
