@@ -1,4 +1,39 @@
-@import url(//fonts.googleapis.com/css?family=Roboto);
+/* Roboto */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src:  local('Roboto'),
+        local('Roboto-Regular'),
+        url('../fonts/roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src:  local('Roboto Italic'),
+        local('Roboto-Italic'),
+        url('../fonts/roboto/Roboto-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src:  local('Roboto Bold'),
+        local('Roboto-Bold'),
+        url('../fonts/roboto/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 700;
+  src:  local('Roboto Bold Italic'),
+        local('Roboto-BoldItalic'),
+        url('../fonts/roboto/Roboto-BoldItalic.ttf') format('truetype');
+}
 
 @mixin code_font {
   font-family: "Source Code Pro", "Lucida Console", Monaco, 'Courier New', monospace;
