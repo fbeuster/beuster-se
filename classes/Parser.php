@@ -487,7 +487,8 @@ abstract class ArticleParser {
         $tag = Config::getConfig()->get('ext', 'amazon_tag');
 
         # old style
-        $this->str = preg_replace('#\[affi=(.*)\]#Uis', '<img src="$1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />', $this->str);
+        # tag is for tracking image, which is now removed for GDPR
+        $this->str = preg_replace('#\[affi=(.*)\]#Uis', '', $this->str);
 
         # new style
         preg_match_all('/\[asin=(.+?)\](.+?)\[\/asin\]/', $this->str, $asins, PREG_PATTERN_ORDER);
@@ -504,9 +505,6 @@ abstract class ArticleParser {
                 $href       .= '/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=';
                 $href       .= $asin.'&linkCode=as2&tag='.$tag;
                 $replace    = '<a href="'.$href.'">'.$text.' *</a>';
-
-                $src        = 'https://ir-de.amazon-adsystem.com/e/ir?t='.$tag.'&l=am2&o=3&a='.$asin;
-                $replace    .= '<img src="'.$src.'" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />';
             }
 
             $this->str = str_replace($pattern, $replace, $this->str);
