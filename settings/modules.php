@@ -90,26 +90,25 @@
       $content .= '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
       $content .= Config::getConfig()->get('ext', 'google_adsense_ad');
       $content .= '<script>';
-      $content .= 'var ads = (adsbygoogle = window.adsbygoogle || []);';
 
       if (!EUCookieNotifier::areCookiesAccepted()) {
         # diasble ads
-        $content .= 'ads.pauseAdRequests = 1;';
-        $content .= 'ads.push({});';
+        $content .= '(adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 1;';
+        $content .= '(adsbygoogle = window.adsbygoogle || []).push({});';
 
         # listen for cookie enabling
         $content .= '$(document).ready(function(){';
         $content .= '  $(document).on("cookies_enabled", function(e){';
-        $content .= '    ads.pauseAdRequests = 0;';
-        $content .= '    ads.requestNonPersonalizedAds = 1';
-        $content .= '    ads.push({});'        ;
+        $content .= '    (adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 0;';
+        $content .= '    (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;';
+        $content .= '    (adsbygoogle = window.adsbygoogle || []).push({});';
         $content .= '  });';
         $content .= '});';
 
       } else {
         # cookies enabled, serve ads
-        $content .= 'ads.requestNonPersonalizedAds = 1';
-        $content .= 'ads.push({});';
+        $content .= '(adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;';
+        $content .= '(adsbygoogle = window.adsbygoogle || []).push({});';
       }
 
       $content .='</script>';
