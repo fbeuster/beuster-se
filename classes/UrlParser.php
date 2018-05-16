@@ -2,6 +2,7 @@
     include('../settings/functions.php');
     include('../user/local.php');
     include('Database.php');
+    include('LinkBuilder.php');
     include('Utilities.php');
 
     $parsingUrl = new UrlParser('/#id#/#cat#/#title#', '/#id#/#cat#');
