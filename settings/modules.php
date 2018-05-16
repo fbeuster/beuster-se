@@ -79,6 +79,24 @@
     return $adsense->getHTML();
   }
 
+  function moduleGoogleAdSense() {
+    $classes = "google_adsense";
+
+    if (Utilities::isDevServer() || User::newFromCookie()) {
+      $content = 'Google AdSense';
+
+    } else {
+      $content = Config::getConfig()->get('ext', 'google_adsense_ad');
+    }
+
+    $config = array("title"   => "",
+                    "classes" => $classes,
+                    "id"      => "google-adsense-1",
+                    "content" => $content);
+    $adsense = new SidebarModuleContent($config);
+    return $adsense->getHTML();
+  }
+
   /**
    * self optimizing link widget
    *

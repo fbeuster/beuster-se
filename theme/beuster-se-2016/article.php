@@ -25,7 +25,7 @@
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
       </a>
 
-      <?php echo moduleAmazon(720, 90); ?>
+      <?php echo moduleGoogleAdSense(); ?>
 
       <?php if(count($article->getGallery()) > 0) { ?>
         <section class="gallery">

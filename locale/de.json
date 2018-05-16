@@ -577,6 +577,10 @@
           "label" : "Amazon Partner ID",
           "placeholder" : "Amazon Partner ID"
         },
+        "google_adsense_ad" : {
+          "label" : "Google AdSense",
+          "placeholder" : "Code für Ihre Anzeigeneinheit"
+        },
         "google_analytics" : {
           "label" : "Google Analytics",
           "placeholder" : "Google Analytics ID"

@@ -69,6 +69,15 @@
           </label>
           <label class="">
             <span>
+              <?php I18n::e('admin.system_settings.ext.google_adsense_ad.label'); ?>
+            </span>
+            <input type="text" name="ext-google_adsense_ad"
+                    placeholder="<?php I18n::e('admin.system_settings.ext.google_adsense_ad.placeholder'); ?>"
+                    title="<?php I18n::e('admin.system_settings.ext.google_adsense_ad.placeholder'); ?>"
+                    value="<?php echo $this->values['ext.google_adsense_ad']; ?>">
+          </label>
+          <label class="">
+            <span>
               <?php I18n::e('admin.system_settings.ext.google_analytics.label'); ?>
             </span>
             <input type="text" name="ext-google_analytics"

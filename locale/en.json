@@ -577,6 +577,10 @@
           "label" : "Amazon Associates",
           "placeholder" : "Amazon Associates ID"
         },
+        "google_adsense_ad" : {
+          "label" : "Google AdSense",
+          "placeholder" : "Code for your ad unit"
+        },
         "google_analytics" : {
           "label" : "Google Analytics",
           "placeholder" : "Google Analytics ID"

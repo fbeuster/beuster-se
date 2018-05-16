@@ -37,6 +37,8 @@
           $con = Database::getDB()->getCon();
           foreach ($this->settings as $set_name => $set_settings) {
             foreach ($set_settings as $option_name => $option_value) {
+              $option_value = html_entity_decode($option_value);
+
               $sql = "UPDATE
                         configuration
                       SET
@@ -92,7 +94,8 @@
         $sets = array(
           'dev'    => array( 'debug', 'dev_server_address',
                               'remote_server_address'),
-          'ext'     => array( 'amazon_tag', 'google_analytics'),
+          'ext'     => array( 'amazon_tag', 'google_adsense_ad',
+                              'google_analytics'),
           'meta'    => array( 'name', 'title', 'mail'),
           'search'  => array( 'case_sensitive', 'marks'),
           'site'    => array( 'theme', 'language',
@@ -108,7 +111,7 @@
               }
 
               if (!isset($this->settings[$set_name][$option_name])) {
-                $this->settings[$set_name][$option_name] = $config->get($set_name, $option_name);
+                $this->settings[$set_name][$option_name] = htmlentities($config->get($set_name, $option_name));
               }
             }
           }
@@ -142,6 +145,7 @@
           'remote_server_address' => ''),
         'ext'     => array(
           'amazon_tag'            => '',
+          'google_adsense_ad'     => '',
           'google_analytics'      => ''),
         'meta'    => array(
           'name'                  => 'My Blog',

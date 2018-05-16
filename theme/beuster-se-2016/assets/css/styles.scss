@@ -114,13 +114,17 @@ div.wrapper footer {
 }
 
 body.article {
-  section.amazon {
+  section.amazon,
+  section.google_adsense {
     @include section_style_info;
 
     background: none;
-    display: none;
     padding: 0;
     text-align: center;
+  }
+
+  section.amazon {
+    display: none;
   }
 
   section.attachments {
