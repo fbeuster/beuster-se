@@ -86,7 +86,32 @@
       $content = 'Google AdSense';
 
     } else {
-      $content = Config::getConfig()->get('ext', 'google_adsense_ad');
+      $content = '';
+      $content .= '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
+      $content .= Config::getConfig()->get('ext', 'google_adsense_ad');
+      $content .= '<script>';
+      $content .= 'var ads = (adsbygoogle = window.adsbygoogle || []);';
+      $content .= 'ads.requestNonPersonalizedAds = 1';
+
+      if (!EUCookieNotifier::areCookiesAccepted()) {
+        # diasble ads
+        $content .= 'ads.pauseAdRequests = 1;';
+        $content .= 'ads.push({});';
+
+        # listen for cookie enabling
+        $content .= '$(document).ready(function(){';
+        $content .= '  $(document).on("cookies_enabled", function(e){';
+        $content .= '    ads.pauseAdRequests = 0;';
+        $content .= '    ads.push({});'        ;
+        $content .= '  });';
+        $content .= '});';
+
+      } else {
+        # cookies enabled, serve ads
+        $content .='ads.push({});';
+      }
+
+      $content .='</script>';
     }
 
     $config = array("title"   => "",
