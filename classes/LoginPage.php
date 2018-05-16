@@ -56,7 +56,7 @@
           return;
         }
 
-        $user_id = $res[0]['ID'];
+        $user_id = $res[0]['id'];
 
         # set cookies
         setcookie('user_id',  $user_id,       strtotime("+1 day"), '/');
