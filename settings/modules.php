@@ -100,7 +100,6 @@
         $content .= '$(document).ready(function(){';
         $content .= '  $(document).on("cookies_enabled", function(e){';
         $content .= '    (adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 0;';
-        $content .= '    (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;';
         $content .= '    (adsbygoogle = window.adsbygoogle || []).push({});';
         $content .= '  });';
         $content .= '});';
