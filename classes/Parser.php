@@ -218,7 +218,7 @@ abstract class ArticleParser {
         $this->str = preg_replace('#\[del\](.+?)\[/del\]#', '<del>$1</del>', $this->str);
         $this->str = preg_replace('#\[ins\](.+?)\[/ins\]#', '<ins>$1</ins>', $this->str);
         $this->str = preg_replace('#\[mark\](.+?)\[/mark\]#', '<mark>$1</mark>', $this->str);
-        $this->str = preg_replace('#\[address\](.+?)\[/address\]#Uis', '<address>$1</address>', $this->str);
+        $this->str = preg_replace('#\[address\](.+?)\[/address\]#s', '<address>$1</address>', $this->str);
         $this->str = preg_replace('=&amp;=is', '&', $this->str);
     }
 
