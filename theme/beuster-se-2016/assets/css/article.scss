@@ -140,6 +140,22 @@ body.article article {
       li > ul {
         margin-bottom: 0;
       }
+
+      & > li > ol {
+        list-style-type: lower-alpha;;
+      }
+    }
+
+    & > ol {
+      list-style-type: decimal;
+
+      & > li > ol {
+        list-style-type: lower-alpha;
+
+        & > li > ol {
+          list-style-type: lower-roman;
+        }
+      }
     }
 
     p {
