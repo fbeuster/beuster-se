@@ -247,7 +247,7 @@
 
           # insert the article
           $fields = array('author', 'title', 'content', 'created', 'edited', 'public');
-          $values = array('isssii', array($user->getId(), $title, $content, $release_date, $release_date, $is_public));
+          $values = array('issssi', array($user->getId(), $title, $content, $release_date, $release_date, $is_public));
           $id     = $dbo->insert('articles', $fields, $values);
 
           # upload images
