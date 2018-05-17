@@ -223,6 +223,7 @@
         }
 
         if (empty($this->errors)) {
+          $is_new_category = false;
           $release_date = $release_date . ' ' . $release_time;
 
           # category, sub-category or playlist?
