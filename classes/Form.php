@@ -227,7 +227,7 @@
       # check if impressum or disclaimer exists
       $lb         = Lixter::getLix()->getLinkBuilder();
       $more_info  = '<a href="'.$lb->makeOtherPageLink('impressum').
-                    '">'.I18n::t('general_form.imprint').'</a>';
+                    '">'.I18n::t('general_form.privacy').'</a>';
       I18n::e('general_form.disclaimer', array($more_info))."\r";
 
       echo '</p>'."\r";

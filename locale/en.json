@@ -858,7 +858,7 @@
   "general_form" : {
     "clear" : "Clear form",
     "commenting_as" : "You're commenting as %s (%s).",
-    "disclaimer" : "Marked fields (*) are required, your mail adress won't be published. Furter information can be found under %s.",
+    "disclaimer" : "Marked fields (*) are required Upon submitting this form, you agree to the %s.",
     "error" : "Error",
     "errors" : {
       "incomplete_form" : "The formular is incomplete. Marked fields are required.",
@@ -891,6 +891,7 @@
       "subject" : "Message from %s - %s",
       "title" : "Message from %s"
     },
+    "privacy" : "Privacy Policy",
     "remain" : "%s characters left.",
     "submit" : "Post",
     "wait" : "Please wait %s seconds before you can submit the form.",

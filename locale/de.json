@@ -858,7 +858,7 @@
   "general_form" : {
     "clear" : "Eingaben löschen",
     "commenting_as" : "Du kommentierst als %s (%s).",
-    "disclaimer" : "Mit * makierte Felder sind Pflicht, deine Mailadresse wird nicht veröffentlicht. Mehr dazu im %s.",
+    "disclaimer" : "Mit * makierte Felder sind Pflichtfelder. Mit dem Absenden des Formulars eklären Sie sich mit den %s einverstanden.",
     "error" : "Fehler",
     "errors" : {
       "incomplete_form" : "Das Formular ist unvollständig. Markierte Felder sind Pflicht.",
@@ -891,6 +891,7 @@
       "subject" : "Nachricht von %s - %s",
       "title" : "Nachricht von %s"
     },
+    "privacy" : "Datenschutzerklärung",
     "remain" : "Noch %s Zeichen übrig.",
     "submit" : "Absenden",
     "wait" : "Bitt warte %s Sekunden, bevor du das Formular abschicken kannst.",

@@ -251,6 +251,13 @@
     $ret .= '  <input type="hidden" name="date" value="'.$time.'">'."\r";
     $ret .= '  <input type="hidden" name="reply" value="'.$reply.'" class="reply">'."\r";
 
+    $ret .= '<p class="newCommentDisclaimer">'."\r";
+
+    $more_info = '<a href="/impressum">'.I18n::t('general_form.privacy').'</a>';
+    $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
+
+    $ret .= '</p>'."\r";
+
     $ret .= '  <input type="submit" name="formaction" value="'.I18n::t('general_form.submit').'" class="button" id="formaction">'."\r";
     $ret .= '  <input type="reset" name="formreset" value="'.I18n::t('general_form.clear').'" class="button" id="formreset">'."\r";
 
@@ -260,12 +267,6 @@
 
     $wait = '<strong id="wait">20</strong>';
     $ret .= I18n::t('general_form.wait', array($wait))."\r";
-
-    $ret .= '</p>'."\r";
-    $ret .= '<p class="newCommentDisclaimer">'."\r";
-
-    $more_info = '<a href="/impressum">'.I18n::t('general_form.imprint').'</a>';
-    $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
 
     $ret .= '</p>'."\r";
     return $ret;

@@ -104,7 +104,7 @@
 
         $lb = Lixter::getLix()->getLinkBuilder();
         $more_info = '<a href="'.$lb->makeOtherPageLink('impressum').
-                        '">'.I18n::t('general_form.imprint').'</a>';
+                        '">'.I18n::t('general_form.privacy').'</a>';
         $ret .= I18n::t('general_form.disclaimer', array($more_info))."\r";
         $ret .= '</p>'."\r";
         return $ret;
