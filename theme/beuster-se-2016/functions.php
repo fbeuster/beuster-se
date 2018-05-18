@@ -241,10 +241,10 @@
     $ret .= '  <input type="checkbox" name="notifications_enabled"';
     if (  $err['t'] != 0 &&
           $err['c'] != '' &&
-          $err['c']['notifications_enabled'] === false) {
-      $ret .= '';
-    } else {
+          $err['c']['notifications_enabled'] === true) {
       $ret .= ' checked="checked"';
+    } else {
+      $ret .= '';
     }
     $ret .= '><span>'.I18n::t('comment.form.notifications.label').'</span></label>'."\r";
 
