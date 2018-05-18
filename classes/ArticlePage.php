@@ -136,10 +136,17 @@ class ArticlePage extends RequestPage {
 
       } else {
         # add new user
-        $fields   = array('username', 'rights', 'mail', 'registered', 'screen_name', 'website');
-        $values   = array('sss&ss', array(
+        do {
+          $token  = hash('sha256', microtime() + random_int(0, 1000));
+          $fields = array('id');
+          $conds  = array('token = ?', 's', array($token));
+          $unique = $db->select('users', $fields, $conds);
+        } while (count($unique) > 0);
+
+        $fields   = array('username', 'rights', 'mail', 'registered', 'screen_name', 'website', 'token');
+        $values   = array('sss&sss', array(
                       preg_replace('/[^A-Za-z0-9-_]/', '', $username),
-                      'user', $usermail, 'NOW()', $username, $website));
+                      'user', $usermail, 'NOW()', $username, $website, $token));
         $user_id  = $db->insert('users', $fields, $values);
       }
 
@@ -280,7 +287,7 @@ class ArticlePage extends RequestPage {
       $parent = new Comment($comment->getParentId());
 
       if (!in_array($parent->getAuthor()->getId(), $notified) &&
-          $comment->notificationsEnabled()) {
+          $parent->notificationsEnabled()) {
         MailService::commentNotification($this->article, $comment, $parent->getAuthor());
         $notified[] = $comment->getAuthor()->getId();
       }
@@ -291,7 +298,7 @@ class ArticlePage extends RequestPage {
       if ($parent->hasReplies()) {
         foreach ($parent->getReplies() as $reply) {
           if (!in_array($reply->getAuthor()->getId(), $notified) &&
-              $comment->notificationsEnabled()) {
+              $reply->notificationsEnabled()) {
             MailService::commentNotification($this->article, $comment, $reply->getAuthor());
             $notified[] = $reply->getAuthor()->getId();
           }

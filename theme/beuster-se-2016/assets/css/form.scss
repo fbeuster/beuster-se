@@ -73,6 +73,10 @@ form.userform {
       }
     }
 
+    legend + p {
+      margin-top: 0;
+    }
+
     label {
       display: block;
       font-size: 1.05em;
@@ -121,12 +125,15 @@ form.userform {
         }
       }
 
-      & > input[type=checkbox] {
-        height: 1.05em;
-        margin-right: 1em;
-        vertical-align: middle;
+      &.checkbox {
+        display: flex;
 
-        & + span {
+        input[type=checkbox] {
+          height: 1.05em;
+          margin-right: 1em;
+        }
+
+        span {
           width: auto;
         }
       }
@@ -182,6 +189,39 @@ form.userform {
   &.hasError {
     .hasError:required {
       border-color: $red;
+    }
+  }
+
+  ul.comment_list {
+    background: $light_grey;
+    border: 0.125em solid $dark_grey;
+    list-style-type: none;
+    margin-left: 0 !important;
+    padding: 1em;
+
+    li {
+      &:not(:first-child) {
+        border-left: 0.25em solid $dark_grey;
+        margin-left: 1em;
+        padding-left: 1em;
+      }
+
+      &.own {
+        span.author {
+          color: $green;
+        }
+      }
+
+      span.author {
+        color: $darker_grey;
+        margin-right: 0.5em;
+
+        &:after {
+          content: "-";
+          display: inline-block;
+          margin-left: 0.5em;
+        }
+      }
     }
   }
 }

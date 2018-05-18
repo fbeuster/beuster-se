@@ -13,9 +13,10 @@
  */
 class User {
 
-	const BY_ID = 1;	/**< referenced by id */
-	const BY_MAIL = 2;	/**< referenced by mail */
-	const BY_NAME = 3;	/**< referenced by name */
+	const BY_ID 			= 1;	/**< referenced by id */
+	const BY_MAIL 		= 2;	/**< referenced by mail */
+	const BY_NAME 		= 3;	/**< referenced by name */
+	const BY_TOKEN  	= 4;	/**< referenced by id */
 
 	private $by = null;			/**< referenced by */
 	private $loaded = false;	/**< user loaded? */
@@ -76,6 +77,17 @@ class User {
 		// new
 		$u = new self(self::BY_ID);
 		$u->setId($id);
+		$u->loadUser();
+		return $u;
+	}
+
+	public static function newFromToken($token) {
+		if (trim($token) == '') {
+			return null;
+		}
+
+		$u = new self(self::BY_TOKEN);
+		$u->setId($token);
 		$u->loadUser();
 		return $u;
 	}
@@ -171,6 +183,9 @@ class User {
 				break;
 			case self::BY_NAME:
 				$conds = array('username = ?', 's', array($this->name));
+				break;
+			case self::BY_TOKEN:
+				$conds = array('token = ?', 's', array($this->id));
 				break;
 			default:
 				return;

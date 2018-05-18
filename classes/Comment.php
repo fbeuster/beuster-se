@@ -73,6 +73,20 @@ class Comment {
     return count($res) == 1;
   }
 
+  public static function getIdFromHash($hash) {
+    $db = Database::getDB();
+
+    $fields = array('id');
+    $conds  = array('MD5(id) = ?', 's', array($hash));
+    $res    = $db->select('comments', $fields, $conds);
+
+    if (count($res) == 1) {
+    	return $res[0]['id'];
+    }
+
+    return -1;
+  }
+
   private static function updateEnable($id, $status) {
     $con = Database::getDB()->getCon();
     $sql = 'UPDATE

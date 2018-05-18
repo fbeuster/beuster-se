@@ -697,7 +697,8 @@
         "footer" : "This is an automated message from %s.",
         "subject" : "New answer to your comment on %s - %s"
       },
-      "forward" : "Click %s to go to the comment."
+      "forward" : "Click %s to go to the comment.",
+      "privacy" : "If you don't want to receive notifications in the future, you can change your settings %s."
     },
     "reply" : {
       "cancel" : "Cancel reply",
@@ -945,6 +946,27 @@
   "pager" : {
     "next_text" : "Next",
     "prev_text" : "Prev"
+  },
+  "privacy_settings" : {
+    "error" : {
+      "comment_not_found" : "The provided comment doesn't exist.",
+      "no_comment" : "Missing value for comment.",
+      "no_user" : "Missing value for user.",
+      "user_not_found" : "The provided user doesn't exist.",
+      "user_not_in_thread" : "You don't have a comment in this conversation."
+    },
+    "notifications" : {
+      "disable_all" : "Disable notifications for answers on all my comments on %s.",
+      "disable_thread" : "Disable notifications for answers on these comments.",
+      "legend" : "Notifications",
+      "submit" : "Save Notifications",
+      "thread" : "You want to change the settings for notifications of the following thread:"
+    },
+    "success" : {
+      "message" : "Your privacy settings have been saved.",
+      "title" : "Success"
+    },
+    "title" : "Privacy Settings"
   },
   "search" :  {
     "form" : {

@@ -237,7 +237,7 @@
       $ret .= '</p>'."\r";
     }
 
-    $ret .= '  <label>';
+    $ret .= '  <label class="checkbox">';
     $ret .= '  <input type="checkbox" name="notifications_enabled"';
     if (  $err['t'] != 0 &&
           $err['c'] != '' &&

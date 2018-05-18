@@ -688,16 +688,17 @@
     },
     "notification" : {
       "admin" : {
-        "description" : "Auf dein Seite %s, der Nutzer %s %s hat folgenden Kommentar geschrieben:",
+        "description" : "Auf deiner Seite %s hat der Nutzer %s %s folgenden Kommentar geschrieben:",
         "footer" : "Dies ist eine automatisierte Nachricht von deiner Seite %s.",
         "subject" : "Neuer Kommentar zu %s - %s"
       },
       "answer" : {
-        "description" : "Auf %s, der Nutzer %s %s hat folgende Antwort auf deinen Kommentar geschrieben:",
-        "footer" : "Dies ist eine automatisierte Nachricht von %s (%s).",
+        "description" : "Auf %s hat der Nutzer %s %s folgende Antwort auf deinen Kommentar geschrieben:",
+        "footer" : "Dies ist eine automatisierte Nachricht von %s.",
         "subject" : "Neue Antwort auf deinen Kommentar zu %s - %s"
       },
-      "forward" : "Klick %s, um zum Kommentar zu gehen."
+      "forward" : "Klick %s, um zum Kommentar zu gehen.",
+      "privacy" : "Wenn du in Zukunft keine Benachrichtigungen erhalten möchtest, klicke %s um deine Einstellungen anzupassen."
     },
     "reply" : {
       "cancel" : "Antwort abbrechen",
@@ -945,6 +946,27 @@
   "pager" : {
     "next_text" : "Vor",
     "prev_text" : "Zurück"
+  },
+  "privacy_settings" : {
+    "error" : {
+      "comment_not_found" : "Der angegebene Kommentar existiert nicht.",
+      "no_comment" : "Angabe des Kommentars fehlt.",
+      "no_user" : "Angabe des Nutzers fehlt.",
+      "user_not_found" : "Der angegebene Nutzer existiert nicht.",
+      "user_not_in_thread" : "In dem angegebenenGespräch gibt es von dir keinen Kommentar."
+    },
+    "notifications" : {
+      "disable_all" : "Benachrichtigungen über Antworten auf alle meine Kommentare auf %s deaktivieren",
+      "disable_thread" : "Benachrichtigungen über Antworten auf diese Kommentare deaktivieren",
+      "legend" : "Benachrichtigungen",
+      "submit" : "Benachrichtigungen speichern",
+      "thread" : "Du möchtest die Benachrichtigungen für den folgenden Kommentarverlauf ändern:"
+    },
+    "success" : {
+      "message" : "Deine Privatsphähreinstellungen wurden gespeichert.",
+      "title" : "Erfolg"
+    },
+    "title" : "Privatsphähreinstellungen"
   },
   "search" :  {
     "form" : {

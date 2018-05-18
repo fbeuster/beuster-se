@@ -38,7 +38,7 @@
     <p>{{description}}</p>
     <p>{{message}}</p>
     <footer>
-      {{forward}} {{footer}}
+      {{forward}} {{footer}} {{privacy}}
       <br><br>
       {{copy}}
     </footer>

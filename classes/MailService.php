@@ -77,6 +77,20 @@
       $comment_link = '<a href="'.$comment_link.'">'.
                       I18n::t('utilities.here').'</a>';
 
+      $comment_id = $comment->getParentId();
+
+      if ($comment_id == -1) {
+        $comment_id = $comment->getId();
+      }
+
+      $privacy_link = Utilities::getProtocol().'://'.$system.
+                      '/privacy-settings?comment='.
+                      md5($comment_id).
+                      '&user='.
+                      $comment->getAuthor()->getUserInfo('token');
+      $privacy_link = '<a href="'.$privacy_link.'">'.
+                      I18n::t('utilities.here').'</a>';
+
       $copy         = I18n::t('admin.footer.runs_with');
       $copy         .= ' <a href="https://fixel.me">'.I18n::t('admin.footer.cms').'</a><br>';
       $copy         .= I18n::t('admin.footer.copy');
@@ -91,6 +105,9 @@
       $forward      = I18n::t('comment.notification.forward',
                               array($comment_link));
 
+      $privacy      = I18n::t('comment.notification.privacy',
+                              array($privacy_link));
+
       $subject      = I18n::t('comment.notification.'.$type.'.subject',
                               array($article->getTitle(), $site_name) );
 
@@ -99,6 +116,7 @@
       $body = preg_replace('/{{description}}/', $description, $body);
       $body = preg_replace('/{{forward}}/',     $forward,     $body);
       $body = preg_replace('/{{footer}}/',      $footer,      $body);
+      $body = preg_replace('/{{privacy}}/',     $privacy,     $body);
       $body = preg_replace('/{{copy}}/',        $copy,        $body);
       $body = preg_replace('/{{message}}/',     $comment->getContentParsed(), $body);
 

@@ -6,9 +6,10 @@ abstract class Page {
   const CATEGORY_PAGE = 3;
   const CONTENT_PAGE  = 4;
   const FEEDBACK_PAGE = 5;
-  const INDEX_PAGE    = 6;
-  const SEARCH_PAGE   = 7;
-  const STATIC_PAGE   = 8;
+  const GDPR_PAGE     = 6;
+  const INDEX_PAGE    = 7;
+  const SEARCH_PAGE   = 8;
+  const STATIC_PAGE   = 9;
 
   protected $scripts;
 

@@ -176,6 +176,9 @@ class Lixter {
             $this->page = new ErrorPage($this->page->getError());
           }
 
+        } else if (PrivacySettingsPage::is($_GET['p'])) {
+          $this->page = new PrivacySettingsPage();
+
         } else if (FeedbackPage::exists($_GET['p'])) {
           # page argument is static page
           $this->page = new FeedbackPage($_GET['p']);
