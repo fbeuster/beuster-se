@@ -10,7 +10,8 @@ body {
 }
 
 header {
-  background: $green;
+  background: $green url(../img/border.png) repeat-x bottom center;
+  padding-bottom: 30px;
   padding-top: 2em;
 
   .wrapper {
