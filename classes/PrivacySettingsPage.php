@@ -14,6 +14,8 @@ class PrivacySettingsPage extends Page {
   private static $page_name   = 'privacy-settings';
 
   public function __construct() {
+    $this->addScript('system/assets/js/privacy_settings.js');
+
     if (isset($_POST) && isset($_POST['disable_notifications'])) {
       $this->validateDisableNotificationRequest();
       $this->disableNotifications();
