@@ -12,6 +12,7 @@ abstract class Page {
   const STATIC_PAGE   = 9;
 
   protected $scripts;
+  protected $styles;
 
   public function __construct() {
     $this->scripts = array();
@@ -19,6 +20,10 @@ abstract class Page {
 
   protected function addScript($script) {
     $this->scripts[] = $script;
+  }
+
+  protected function addStyle($style) {
+    $this->styles[] = $style;
   }
 
   public function addUriSnippets() {
@@ -77,10 +82,22 @@ abstract class Page {
     return count($this->scripts);
   }
 
+  public function hasStyles() {
+    return count($this->styles);
+  }
+
   public function includeScripts() {
     if ($this->hasScripts()) {
       foreach ($this->scripts as $script) {
         echo '<script src="'.$script.'"></script>'."\n";
+      }
+    }
+  }
+
+  public function includeStyles() {
+    if ($this->hasStyles()) {
+      foreach ($this->styles as $style) {
+        echo '<link href="'.$style.'" rel="stylesheet">'."\n";
       }
     }
   }

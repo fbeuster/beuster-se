@@ -40,17 +40,31 @@ if [ ! -f "README.md" ]; then
 fi
 echo -e " ${GREEN}ok${NC}"
 
-# build system css
-echo -n "building system css..."
+# build admin css
+echo -n "building admin css..."
 cd system/assets/css/admin
 sass styles.scss styles.css
 cd $INSTALL_PATH
 echo -e " ${GREEN}done${NC}"
 
-# build system js
-echo -n "building system js..."
+# build admin js
+echo -n "building admin js..."
 cd system/assets/js/admin
 js-build 1>/dev/null application.js admin.js
+cd $INSTALL_PATH
+echo -e " ${GREEN}done${NC}"
+
+# build cookies css
+echo -n "building cookies css..."
+cd system/assets/css
+sass eu_cookies.scss eu_cookies.css
+cd $INSTALL_PATH
+echo -e " ${GREEN}done${NC}"
+
+# build privacy css
+echo -n "building privacy css..."
+cd system/assets/css
+sass privacy_settings.scss privacy_settings.css
 cd $INSTALL_PATH
 echo -e " ${GREEN}done${NC}"
 
