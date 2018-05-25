@@ -5,8 +5,9 @@ class Theme {
 
   private $name;
   private $path;
-  private $thumbnail_sizes = array();
-  private $user_path  = 'user/theme/';
+  private $thumbnail_sizes  = array();
+  private $system_path      = 'system/views/defaults/';
+  private $user_path        = 'user/theme/';
 
   public function __construct($name) {
     if (!Theme::isValidTheme($name)) {
@@ -42,6 +43,9 @@ class Theme {
 
     if (file_exists($this->path.$filename))
       return $this->path.$filename;
+
+    if (file_exists($this->system_path.$filename))
+      return $this->system_path.$filename;
 
     return false;
   }
