@@ -1,11 +1,28 @@
 <?php
   $lb   = $this->getLinkBuilder();
   $page = $this->getPage();
+
+  if (EUCookieNotifier::areCookiesAccepted()) {
+    $cookie_class = 'accepted';
+
+  } else {
+    $cookie_class = 'not_accepted';
+  }
+
 ?>
 
 <article>
-  <section class="article">
+  <section class="article privacy_settings">
     <h1><?php I18n::e('privacy_settings.title'); ?></h1>
+
+    <span
+      class="cookies toggle <?php echo $cookie_class; ?>"
+      title="<?php I18n::e('privacy_settings.cookies.'.$cookie_class.'.title'); ?>">
+      <span class="icon">c</span>
+      <span class="label">
+        <?php I18n::e('privacy_settings.cookies.'.$cookie_class.'.label'); ?>
+      </span>
+    </span>
 
     <?php if ($page->isNotificationDisablePage() && $page->sentByGet()) { ?>
       <?php if ($page->getError() !== '') { ?>

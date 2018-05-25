@@ -948,6 +948,16 @@
     "prev_text" : "Prev"
   },
   "privacy_settings" : {
+    "cookies" : {
+      "accepted" : {
+        "label" : "Cookies are active",
+        "title" : "Click to deactivate cookies"
+      },
+      "not_accepted" : {
+        "label" : "Cookies are not active",
+        "title" : "Click to activate cookies"
+      }
+    },
     "error" : {
       "comment_not_found" : "The provided comment doesn't exist.",
       "no_comment" : "Missing value for comment.",

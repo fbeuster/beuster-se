@@ -96,19 +96,27 @@
         $content .= '(adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 1;';
         $content .= '(adsbygoogle = window.adsbygoogle || []).push({});';
 
-        # listen for cookie enabling
-        $content .= '$(document).ready(function(){';
-        $content .= '  $(document).on("cookies_enabled", function(e){';
-        $content .= '    (adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 0;';
-        $content .= '    (adsbygoogle = window.adsbygoogle || []).push({});';
-        $content .= '  });';
-        $content .= '});';
-
       } else {
         # cookies enabled, serve ads
         $content .= '(adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;';
         $content .= '(adsbygoogle = window.adsbygoogle || []).push({});';
       }
+
+      # listen for cookie disabling
+      $content .= '$(document).ready(function(){';
+      $content .= '  $(document).on("cookies_disabled", function(e){';
+      $content .= '    (adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 1;';
+      $content .= '    (adsbygoogle = window.adsbygoogle || []).push({});';
+      $content .= '  });';
+      $content .= '});';
+
+      # listen for cookie enabling
+      $content .= '$(document).ready(function(){';
+      $content .= '  $(document).on("cookies_enabled", function(e){';
+      $content .= '    (adsbygoogle = window.adsbygoogle || []).pauseAdRequests = 0;';
+      $content .= '    (adsbygoogle = window.adsbygoogle || []).push({});';
+      $content .= '  });';
+      $content .= '});';
 
       $content .='</script>';
     }

@@ -66,6 +66,42 @@ nav {
   }
 }
 
+section.privacy_settings {
+  h1 {
+    margin-bottom: 0.5em;
+  }
+
+  span.toggle {
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 1em;
+
+    & > .icon {
+      @include icon_image;
+      color: transparent;
+      display: inline-block;
+      margin: 0 $icon_width / 2;
+      overflow: hidden;
+    }
+
+    &.not_accepted > .icon {
+      background-position: -7 * $icon_width 0;
+    }
+
+    &.not_accepted:hover > .icon {
+      background-position: -7 * $icon_width -1 * $icon_width;
+    }
+
+    &.accepted > .icon {
+      background-position: -7 * $icon_width -1 * $icon_width;
+    }
+
+    &.accepted:hover > .icon {
+      background-position: -7 * $icon_width 0;
+    }
+  }
+}
+
 div.wrapper footer {
   margin-top: 1.5em;
   text-align: center;

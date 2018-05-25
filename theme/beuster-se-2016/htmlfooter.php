@@ -18,6 +18,9 @@
           <a href="<?php echo $lb->makeOtherPageLink('impressum'); ?>">
             Impressum und Datenschutz
           </a>
+          <a href="<?php echo $lb->makeOtherPageLink('privacy-settings'); ?>">
+            Privatsphäreeinstellungen
+          </a>
         </div>
         <div class="copy">
           &copy; Copyright 2010 - 2017 Felix Beuster

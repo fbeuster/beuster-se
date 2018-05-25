@@ -948,6 +948,16 @@
     "prev_text" : "Zurück"
   },
   "privacy_settings" : {
+    "cookies" : {
+      "accepted" : {
+        "label" : "Cookies sind aktiv",
+        "title" : "Klicken um Cookies zu deaktivieren"
+      },
+      "not_accepted" : {
+        "label" : "Cookies sind nicht aktiv",
+        "title" : "Klicken um Cookies zu aktivieren"
+      }
+    },
     "error" : {
       "comment_not_found" : "Der angegebene Kommentar existiert nicht.",
       "no_comment" : "Angabe des Kommentars fehlt.",
