@@ -100,9 +100,9 @@ class ArticlePage extends RequestPage {
 
     } else {
       $enable   = 0;
-      $usermail = strtolower(trim($_POST['usrml']));
-      $username = trim($_POST['usr']);
-      $website  = trim($_POST['usrpg']);
+      $usermail = strtolower(   trim( $_POST['usrml'] ) );
+      $username = htmlentities( trim( $_POST['usr']   ) );
+      $website  = htmlentities( trim( $_POST['usrpg'] ) );
     }
 
     $this->error = checkStandForm($username, $content, $usermail, $website,

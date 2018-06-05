@@ -23,6 +23,7 @@ class SearchPage extends Page {
       $this->search_term = trim($_GET['s']);
     }
 
+    $this->search_term = htmlentities($this->search_term);
     $this->validate();
   }
 
