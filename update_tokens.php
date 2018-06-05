@@ -36,7 +36,7 @@
   if (count($res)) {
     foreach ($res as $user) {
       do {
-        $token  = hash('sha256', microtime() + random_int(0, 1000));
+        $token  = hash('sha256', microtime() + rand(0, 1000));
         $conds  = array('token = ?', 's', array($token));
         $unique = $db->select('users', $fields, $conds);
       } while (count($unique) > 0);
