@@ -1,3 +1,15 @@
+<?php
+  $adsense    = ' https://*.doubleclick.net';
+  $analytics  = ' https://*.google-analytics.com https://*.googletagmanager.com http://*.googlesyndication.com';
+  $google     = ' https://*.google.de https://*.google.com';
+  $youtube    = ' https://*.youtube.com';
+  $default    = " default-src 'self' https://*.beusterse.de".
+                $adsense.$analytics.$google.$youtube;
+  $style      = " style-src 'unsafe-inline'";
+
+  header('Content-Security-Policy:'.$default.$style);
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="de-DE" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
  <head>
