@@ -95,10 +95,10 @@
           <?php echo $article->getCategory()->getName(); ?>
         </a>
       </i>
-      <a class="more" href="<?php echo $article->getLink();?>">
-        <?php I18n::e('article.preview.read_more'); ?>
-      </a>
     </div>
+    <a class="more" href="<?php echo $article->getLink();?>">
+      <?php I18n::e('article.preview.read_more'); ?>
+    </a>
   </section>
 
   <?php

@@ -121,6 +121,11 @@
     }
   }
   section.article {
+    .more {
+      margin: 1em 1em 0 1em;
+      padding: 1em;
+    }
+
     .thumb {
       overflow: hidden;
       width: 100%;
@@ -155,12 +160,17 @@
 
   body.category {
     section.article {
-      @include display_flex;
-
-      border-left: $article_border_width solid $light_grey;
+      border-left: $article_border_width solid $grey;
+      display: grid;
+      grid-template-columns: 16em auto;
+      padding: 1em 2em;
 
       &:hover {
         border-left: $article_border_width solid $blue;
+      }
+
+      .content {
+        padding: 0 0 0 2em;
       }
 
       .thumb {
@@ -172,12 +182,17 @@
           width: 16em;
 
           img {
-            box-shadow: $dark_grey 0 0 1.5em;
+            box-shadow: $dark_grey 0 0 1em;
             display: inline-block;
             margin-top: 0;
             width: 100%;
           }
         }
+      }
+
+      .more {
+        grid-column: 1 / span 2;
+        padding: 1em 1em 0 1em;
       }
     }
   }
