@@ -5,9 +5,13 @@
   $youtube    = ' https://*.youtube.com';
   $default    = " default-src 'self' https://*.beusterse.de".
                 $adsense.$analytics.$google.$youtube;
-  $style      = " style-src 'unsafe-inline'";
+  $script     = "; script-src 'self' 'unsafe-inline' https://*.beusterse.de".
+                $adsense.$analytics.$google.$youtube;
+  $style      = "; style-src 'self' 'unsafe-inline' https://*.beusterse.de".
+                $adsense.$analytics.$google.$youtube;
 
-  header('Content-Security-Policy:'.$default.$style);
+  header('Content-Security-Policy:'.$default.$script.$style);
+  header('X-Frame-Options: DENY');
 ?>
 
 <!DOCTYPE html>
