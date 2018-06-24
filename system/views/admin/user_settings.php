@@ -3,7 +3,7 @@
 ?>
 
 <article>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <?php include 'navbar.php'; ?>
   <section class="article">
     <?php if(count($this->errors)){ ?>
       <div class="error">
@@ -65,5 +65,4 @@
       </fieldset>
     </form>
   </section>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

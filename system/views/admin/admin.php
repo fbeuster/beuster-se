@@ -4,7 +4,8 @@
 
 <article>
   <section class="article">
-    <h1><?php I18n::e('admin.label'); ?></h1>
+    <?php include 'navbar.php'; ?>
+
     <h2><?php I18n::e('admin.navigation.article.label'); ?></h2>
     <ul class="pagesList">
       <li>

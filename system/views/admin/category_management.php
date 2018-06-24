@@ -3,7 +3,7 @@
 ?>
 
 <article>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <?php include 'navbar.php'; ?>
   <section class="article">
     <h1><?php I18n::e('admin.category.label'); ?></h1>
     <?php if( count($this->categories) &&
@@ -188,5 +188,4 @@
       <p>Keine Kategorien vorhanden.</p>
     <?php } ?>
   </section>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

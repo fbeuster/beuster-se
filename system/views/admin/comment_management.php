@@ -3,7 +3,7 @@
 ?>
 
 <article>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
+  <?php include 'navbar.php'; ?>
   <section class="article">
     <h1>Freischaltung</h1>
     <?php if(count($this->comments)) { ?>
@@ -47,5 +47,4 @@
       <p>Keine Kommentare freizuschalten</p>
     <?php } ?>
   </section>
-  <a href="<?php echo $lb->makeAdminLink('admin'); ?>" class="back"><?php I18n::e('admin.back_link'); ?></a>
 </article>

@@ -12,6 +12,74 @@ svg.icon {
   }
 }
 
+body.article article {
+  ul.navbar {
+    @include display_flex;
+    justify-content: center;
+    margin-top: 1em;
+
+    li {
+      list-style-type: none;
+
+      button {
+        background: none;
+        border: 0;
+        cursor: pointer;
+        margin: 0 1em;
+
+        svg {
+          fill: $darker_grey;
+          height: 2.5em;
+          width: 2.5em;
+        }
+      }
+
+      ul {
+        box-shadow: 0 0 5px $grey;
+        display: none;
+        margin-left: 0;
+        position: absolute;
+
+        li {
+          background: $cold_grey;
+          border: 1px solid $dark_grey;
+
+          a {
+            color: $cold_black;
+            display: block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+          }
+
+          &:not(:last-child) {
+            border-bottom: 0;
+          }
+
+          &:hover {
+            background: $green;
+
+            a {
+              color: $cold_grey;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        button {
+          svg {
+            fill: $green;
+          }
+        }
+
+        ul {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
 form.userform {
   @include editor_buttons;
 
