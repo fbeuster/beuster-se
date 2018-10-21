@@ -54,13 +54,15 @@
         </button>
       </li>
       <li>
-        <button class="attachments"
-                title="<?php I18n::e('admin.navigation.attachment.label'); ?>"
-                type="buttom">
-          <svg viewBox="0 0 24 24" class="icon attachments">
-            <use xlink:href="#icon-attachment"></use>
-          </svg>
-        </button>
+        <a href="<?php echo $lb->makeAdminLink('attachment-overview'); ?>">
+          <button class="attachments"
+                  title="<?php I18n::e('admin.navigation.attachment.label'); ?>"
+                  type="buttom">
+            <svg viewBox="0 0 24 24" class="icon attachments">
+              <use xlink:href="#icon-attachment"></use>
+            </svg>
+          </button>
+        </a>
         <ul>
           <li>
             <a href="<?php echo $lb->makeAdminLink('attachment-overview'); ?>">
@@ -80,13 +82,15 @@
         </ul>
       </li>
       <li>
-        <button class="comments"
-                title="<?php I18n::e('admin.navigation.comment.label'); ?>"
-                type="buttom">
-          <svg viewBox="0 0 24 24" class="icon comments">
-            <use xlink:href="#icon-comment"></use>
-          </svg>
-        </button>
+        <a href="<?php echo $lb->makeAdminLink('comment-overview'); ?>">
+          <button class="comments"
+                  title="<?php I18n::e('admin.navigation.comment.label'); ?>"
+                  type="buttom">
+            <svg viewBox="0 0 24 24" class="icon comments">
+              <use xlink:href="#icon-comment"></use>
+            </svg>
+          </button>
+        </a>
         <ul>
           <li>
             <a href="<?php echo $lb->makeAdminLink('comment-overview'); ?>">
@@ -101,13 +105,15 @@
         </ul>
       </li>
       <li>
-        <button class="static-pages"
-                title="<?php I18n::e('admin.navigation.static_page.label'); ?>"
-                type="buttom">
-          <svg viewBox="0 0 24 24" class="icon static-pages">
-            <use xlink:href="#icon-description"></use>
-          </svg>
-        </button>
+        <a href="<?php echo $lb->makeAdminLink('static-page-overview'); ?>">
+          <button class="static-pages"
+                  title="<?php I18n::e('admin.navigation.static_page.label'); ?>"
+                  type="buttom">
+            <svg viewBox="0 0 24 24" class="icon static-pages">
+              <use xlink:href="#icon-description"></use>
+            </svg>
+          </button>
+        </a>
         <ul>
           <li>
             <a href="<?php echo $lb->makeAdminLink('static-page-overview'); ?>">
@@ -127,13 +133,15 @@
         </ul>
       </li>
       <li>
-        <button class="snippets"
-                title="<?php I18n::e('admin.navigation.snippet.label'); ?>"
-                type="buttom">
-          <svg viewBox="0 0 24 24" class="icon snippets">
-            <use xlink:href="#icon-note-add"></use>
-          </svg>
-        </button>
+        <a href="<?php echo $lb->makeAdminLink('snippet-overview'); ?>">
+          <button class="snippets"
+                  title="<?php I18n::e('admin.navigation.snippet.label'); ?>"
+                  type="buttom">
+            <svg viewBox="0 0 24 24" class="icon snippets">
+              <use xlink:href="#icon-note-add"></use>
+            </svg>
+          </button>
+        </a>
         <ul>
           <li>
             <a href="<?php echo $lb->makeAdminLink('snippet-overview'); ?>">
