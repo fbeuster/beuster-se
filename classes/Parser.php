@@ -893,9 +893,9 @@ class ContentParser extends ArticleParser {
             $url_encode = urlencode($matches[1][$i]);
             $json_str   = file_get_contents('https://publish.twitter.com/oembed?url='.$url_encode);
             $json_arr   = json_decode($json_str);
-            $this->str  = preg_replace( '#'.$matches[0][$i].'#Us',
+            $this->str  = str_replace(  $matches[0][$i],
                                         $json_arr->html,
-                                        $this->str, 1);
+                                        $this->str);
         }
     }
 
