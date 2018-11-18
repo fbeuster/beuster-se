@@ -899,28 +899,75 @@ class ContentParser extends ArticleParser {
         }
     }
 
+    private function embedVideoOrPlaylist($param_set) {
+      $matches = array();
+
+      preg_match_all($param_set['bb_pattern'], $this->str, $matches);
+
+      $width      = 560;
+      $height     = 315;
+      $pre_wrap   = '<div class="video"><div class="wrapper">';
+      $post_wrap  = '</div></div>';
+
+      $iframe_pre   = '<iframe width="'.$width.'" height="'.$height.'" ';
+      $iframe_post  = ' frameborder="0" allowfullscreen></iframe>';
+
+      foreach ($matches[0] as $i => $match) {
+        $replace = $match;
+
+        if (  preg_match($param_set['id_pattern'], $matches[1][$i]) ||
+              preg_match($param_set['link_pattern'], $matches[1][$i])) {
+          $id = $matches[1][$i];
+
+          if (preg_match($param_set['link_pattern'], $matches[1][$i])) {
+            $id = preg_replace($param_set['link_pattern'], $param_set['replace'], $id);
+          }
+
+          $iframe_src = str_replace('#VALUE#', $id, $param_set['iframe_src']);
+          $iframe     = $iframe_pre.$iframe_src.$iframe_post;
+          $note       = str_replace('#VALUE#', $id, $param_set['note']);
+          $replace    = $pre_wrap.$iframe.$note.$post_wrap;
+
+        } else {
+          # something invalid
+          $replace = $matches[1][$i];
+        }
+
+        $this->str = str_replace($match, $replace, $this->str);
+      }
+    }
+
     public function embedVideo() {
-        $width      = 560;
-        $height     = 315;
-        $pre_wrap   = '<div class="video"><div class="wrapper">';
-        $post_wrap  = '</div></div>';
-
-        $iframe_pre   = '<iframe width="'.$width.'" height="'.$height.'" ';
-        $iframe_post  = ' frameborder="0" allowfullscreen></iframe>';
-
-        $play   = $iframe_pre.'src="https://www.youtube.com/embed/videoseries?list=$1"'.$iframe_post;
-        $video  = $iframe_pre.'src="https://www.youtube.com/embed/$1"'.$iframe_post;
-
-        $p_link = '<a href="https://www.youtube.com/playlist?list=$1">'.I18n::t('article.content.playlist.link_text').'</a>';
-        $p_note = I18n::t('article.content.playlist.player_too_small',
-                          $p_link);
-
-        $v_link = '<a href="https://www.youtube.com/watch?v=$1">'.I18n::t('article.content.video.link_text').'</a>';
-        $v_note = I18n::t('article.content.video.player_too_small',
+      $v_link = '<a href="https://www.youtube.com/watch?v=#VALUE#">'.I18n::t('article.content.video.link_text').'</a>';
+      $v_note = I18n::t('article.content.video.player_too_small',
                           $v_link);
 
-        $this->str = preg_replace('#\[play\](.*?)\[/play\]#Ui', $pre_wrap.$play.$p_note.$post_wrap, $this->str);
-        $this->str = preg_replace('#\[yt\](.*?)\[/yt\]#Ui', $pre_wrap.$video.$v_note.$post_wrap, $this->str);
+      $p_link = '<a href="https://www.youtube.com/playlist?list=#VALUE#">'.I18n::t('article.content.playlist.link_text').'</a>';
+      $p_note = I18n::t('article.content.playlist.player_too_small',
+                          $p_link);
+
+      $params = array(
+        array(
+          'bb_pattern'    => '#\[yt\](.*?)\[/yt\]#Ui',
+          'id_pattern'    => '/^[A-Za-z0-9-_]{11}$/',
+          'link_pattern'  => '/(https?:\/\/(w{3}\.)?)?(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"\'>]+)/',
+          'replace'       => '$7',
+          'iframe_src'    => 'src="https://www.youtube.com/embed/#VALUE#"',
+          'note'          => $v_note
+        ),
+        array(
+          'bb_pattern'    => '#\[play\](.*?)\[/play\]#Ui',
+          'id_pattern'    => '/^[A-Za-z0-9-_]{18,34}$/',
+          'link_pattern'  => '/(https?:\/\/(w{3}\.)?)?(youtube\.com\/(playlist\?(.*&)?list=))([^\?&"\'>]+)/',
+          'replace'       => '$6',
+          'iframe_src'    => 'src="https://www.youtube.com/embed/videoseries?list=#VALUE#"',
+          'note'          => $p_note
+        )
+      );
+
+      foreach ($params as $param_set) {
+        $this->embedVideoOrPlaylist($param_set);
+      }
     }
 }
 
