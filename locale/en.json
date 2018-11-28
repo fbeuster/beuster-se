@@ -664,6 +664,10 @@
       "playlist" : "Click here to watch the playlist.",
       "read_more" : "Read more",
       "video" : "Click here to watch the video."
+    },
+    "recommendations" : {
+      "from_category_headline" : "More from %s",
+      "random_headline" : "Some more articles"
     }
   },
   "category" : {

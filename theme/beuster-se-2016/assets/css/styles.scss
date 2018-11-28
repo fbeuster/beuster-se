@@ -160,6 +160,58 @@ body.article {
       }
     }
   }
+
+  section.recommended {
+    background: transparent;
+    padding: 0;
+
+    h2 {
+      margin: 0 0 0 1.33em;
+    }
+
+    div.recommendations {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-column-gap: 1.5em;
+
+       div.recommendation {
+        background: #f3f9f9;
+        padding: 2em;
+        display: flex;
+        margin-top: 1.5em;
+
+        div.thumbnail {
+          width: 192px;
+          height: 108px;
+          margin-right: 2em;
+
+          img {
+            width: 192px;
+            height: 108px;
+          }
+        }
+
+        div.meta {
+          a {
+            color: black;
+            text-decoration: none;
+          }
+
+          & > a {
+            color: $green;
+            display: block;
+            font-weight: bold;
+            text-decoration: none;
+          }
+
+          p {
+            height: 5em;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
 }
 
 aside {

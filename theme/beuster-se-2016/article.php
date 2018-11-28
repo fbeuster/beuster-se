@@ -70,6 +70,50 @@
       </a>
       <?php } ?>
 
+      <?php
+        $recommendations = ArticleRecommender::getRecommendationsFromArticleCategory($article->getId(), $article->getCategory()->getId());
+      ?>
+
+      <?php if (count($recommendations) > 0) { ?>
+        <section class="recommended">
+          <h2><?php I18n::e('article.recommendations.from_category_headline',$article->getCategory()->getName()); ?></h2>
+          <div class="recommendations">
+            <?php foreach ($recommendations as $recommendation) {?>
+              <?php
+                if($recommendation->getThumbnail() != null) {
+                  if($recommendation->isPlaylist()) {
+                    $thumb_src = $recommendation->getThumbnail();
+                  } else {
+                    $thumb_src = $recommendation->getThumbnail()->getPathThumb(800, 450);
+                  }
+                } else {
+                  $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/default_thumbnail_800_450.jpg');
+                }
+              ?>
+              <div class="recommendation">
+                <div class="thumbnail">
+                  <a href="<?php echo $recommendation->getLink();?>">
+                    <img src="/<?php echo $thumb_src; ?>" alt="<?php echo $recommendation->getTitle(); ?>">
+                  </a>
+                </div>
+                <div class="meta">
+                  <a href="<?php echo $recommendation->getLink(); ?>">
+                    <?php echo $recommendation->getTitle(); ?>
+                  </a>
+                  <p>
+                    <?php echo $recommendation->getContentPreview(256); ?>
+                  </p>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+        </section>
+      <?php } ?>
+
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
+        <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
+      </a>
+
       <section class="comments">
         <h2><?php I18n::e('comment.title'); ?></h2>
         <?php if(count($article->getComments()) > 0) { ?>
@@ -86,6 +130,50 @@
                         I18n::t('comment.form.legend'), 'commentForm', $page->getCommentReply());
         ?>
       </section>
+
+      <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
+        <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>
+      </a>
+
+      <?php
+        $recommendations = ArticleRecommender::getRandomRecommendationsFromArticle($article->getId());
+      ?>
+
+      <?php if (count($recommendations) > 0) { ?>
+        <section class="recommended">
+          <h2><?php I18n::e('article.recommendations.random_headline'); ?></h2>
+          <div class="recommendations">
+            <?php foreach ($recommendations as $recommendation) {?>
+              <?php
+                if($recommendation->getThumbnail() != null) {
+                  if($recommendation->isPlaylist()) {
+                    $thumb_src = $recommendation->getThumbnail();
+                  } else {
+                    $thumb_src = $recommendation->getThumbnail()->getPathThumb(800, 450);
+                  }
+                } else {
+                  $thumb_src = Lixter::getLix()->getTheme()->getFile('assets/img/default_thumbnail_800_450.jpg');
+                }
+              ?>
+              <div class="recommendation">
+                <div class="thumbnail">
+                  <a href="<?php echo $recommendation->getLink();?>">
+                    <img src="/<?php echo $thumb_src; ?>" alt="<?php echo $recommendation->getTitle(); ?>">
+                  </a>
+                </div>
+                <div class="meta">
+                  <a href="<?php echo $recommendation->getLink(); ?>">
+                    <?php echo $recommendation->getTitle(); ?>
+                  </a>
+                  <p>
+                    <?php echo $recommendation->getContentPreview(256); ?>
+                  </p>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+        </section>
+      <?php } ?>
 
       <a href="<?php echo $article->getCategory()->getLink(); ?>" class="back">
         <?php I18n::e('article.back_link', array($article->getCategory()->getName())); ?>

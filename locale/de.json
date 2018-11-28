@@ -664,6 +664,10 @@
       "playlist" : "Hier klicken, um die Playlist zu sehen.",
       "read_more" : "Weiterlesen",
       "video" : "Hier klicken, um das Video zu sehen."
+    },
+    "recommendations" : {
+      "from_category_headline" : "Mehr aus %s",
+      "random_headline" : "Ein parr mehr Artikel"
     }
   },
   "category" : {

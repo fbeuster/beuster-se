@@ -236,6 +236,14 @@
     width: 60em;
   }
 
+  body.article {
+    section.recommended {
+      div.recommendations {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+  }
+
   section.recommended {
     section.article {
       .content {
