@@ -456,6 +456,18 @@
           "edited" : "Bearbeitet",
           "name" : "Name"
         }
+      },
+      "preview" : {
+        "description" : "Hier siehst du eine Vorschau dieses Snippets. Sofern aktiviert, wird diese automatisch aktualisiert.",
+        "manual_update" : {
+          "label" : "Jetzt aktualisieren",
+          "title" : "Klicken, um die Vorschau jetzt manuell zu aktualisieren"
+        },
+        "auto_update" : {
+          "label" : "Automatisches Aktualisieren",
+          "title" : "Klicken, um das automatische Aktualisieren der Vorschau zu aktivieren oder deaktivieren"
+        },
+        "title" : "Vorschau"
       }
     },
     "static_page" : {
@@ -517,6 +529,18 @@
           "title" : "Titel",
           "url" : "URL"
         }
+      },
+      "preview" : {
+        "description" : "Hier siehst du eine Vorschau dieser statischen Seite. Sofern aktiviert, wird diese automatisch aktualisiert.",
+        "manual_update" : {
+          "label" : "Jetzt aktualisieren",
+          "title" : "Klicken, um die Vorschau jetzt manuell zu aktualisieren"
+        },
+        "auto_update" : {
+          "label" : "Automatisches Aktualisieren",
+          "title" : "Klicken, um das automatische Aktualisieren der Vorschau zu aktivieren oder deaktivieren"
+        },
+        "title" : "Vorschau"
       }
     },
     "statistics" : {

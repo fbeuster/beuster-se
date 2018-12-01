@@ -456,6 +456,18 @@
           "edited" : "Last edited",
           "name" : "Name"
         }
+      },
+      "preview" : {
+        "description" : "Here you can find a preview of this snippet. If enabled, it will refresh automatically.",
+        "manual_update" : {
+          "label" : "Refresh now",
+          "title" : "Click to refresh the preview manually"
+        },
+        "auto_update" : {
+          "label" : "Automatic refresh",
+          "title" : "Click to toggle the automatic refresh of the preview"
+        },
+        "title" : "Preview"
       }
     },
     "static_page" : {
@@ -517,6 +529,18 @@
           "title" : "Title",
           "url" : "URL"
         }
+      },
+      "preview" : {
+        "description" : "Here you can find a preview of this static page. If enabled, it will refresh automatically.",
+        "manual_update" : {
+          "label" : "Refresh now",
+          "title" : "Click to refresh the preview manually"
+        },
+        "auto_update" : {
+          "label" : "Automatic refresh",
+          "title" : "Click to toggle the automatic refresh of the preview"
+        },
+        "title" : "Preview"
       }
     },
     "statistics" : {

@@ -67,4 +67,20 @@
       </fieldset>
     </form>
   </section>
+
+  <section class="preview article">
+    <h2><?php I18n::e('admin.snippet.preview.title'); ?></h2>
+    <p><?php I18n::e('admin.snippet.preview.description'); ?></p>
+    <form class="controls">
+      <input type="button"  id="preview_manual_update"
+              title="<?php I18n::e('admin.snippet.preview.manual_update.title'); ?>"
+              value="<?php I18n::e('admin.snippet.preview.manual_update.label'); ?>">
+
+      <label title="<?php I18n::e('admin.snippet.preview.auto_update.title'); ?>">
+        <input type="checkbox" id="preview_auto_update">
+        <?php I18n::e('admin.snippet.preview.auto_update.label'); ?>
+      </label>
+    </form>
+    <div class="content"></div>
+  </section>
 </article>
