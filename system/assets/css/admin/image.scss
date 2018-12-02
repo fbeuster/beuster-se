@@ -1,0 +1,27 @@
+@import 'lib/_color';
+
+body.article article section.article {
+  ul.image_list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1em 1em;
+    margin-top: 1em;
+
+    li {
+      align-self: center;
+      border: 1px solid $darker_grey;
+      overflow: hidden;
+      padding: 0.25em;
+
+      &:hover {
+        box-shadow: 0 0 0.5em $dark_grey;
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

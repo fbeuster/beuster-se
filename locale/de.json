@@ -354,6 +354,11 @@
       "copy" : "&copy; Copyright 2010 - 2018",
       "runs_with" : "Läuft mit"
     },
+    "image" : {
+      "overview" : {
+        "label" : "Bilderliste"
+      }
+    },
     "label" : "Seitenverwaltung",
     "navigation" : {
       "article" : {
@@ -376,6 +381,9 @@
         "enable" : "Kommentare freischalten",
         "label" : "Kommentare",
         "overview" : "Kommentarübersicht"
+      },
+      "image" : {
+        "label" : "Bildübersicht"
       },
       "misc" : {
         "label" : "Sonstiges",

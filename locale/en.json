@@ -354,6 +354,11 @@
       "copy" : "&copy; Copyright 2010 - 2018",
       "runs_with" : "Runs with"
     },
+    "image" : {
+      "overview" : {
+        "label" : "Images overview"
+      }
+    },
     "label" : "Page administration",
     "navigation" : {
       "article" : {
@@ -376,6 +381,9 @@
         "enable" : "Enable comments",
         "label" : "Comments",
         "overview" : "Comment overview"
+      },
+      "image" : {
+        "label" : "Image overview"
       },
       "misc" : {
         "label" : "Miscellanious",

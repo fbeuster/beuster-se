@@ -45,13 +45,15 @@
         </ul>
       </li>
       <li>
-        <button class="images"
-                title="<?php I18n::e('admin.navigation.attachment.label'); ?>"
-                type="buttom">
-          <svg viewBox="0 0 24 24" class="icon images">
-            <use xlink:href="#icon-photo"></use>
-          </svg>
-        </button>
+        <a href="<?php echo $lb->makeAdminLink('image-overview'); ?>">
+          <button class="images"
+                  title="<?php I18n::e('admin.navigation.image.label'); ?>"
+                  type="buttom">
+            <svg viewBox="0 0 24 24" class="icon images">
+              <use xlink:href="#icon-photo"></use>
+            </svg>
+          </button>
+        </a>
       </li>
       <li>
         <a href="<?php echo $lb->makeAdminLink('attachment-overview'); ?>">
