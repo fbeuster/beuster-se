@@ -280,25 +280,32 @@
     }
 
     function getYouTubeIDFromArticle($id) {
-        $db = Database::getDB()->getCon();
-        $ret = array();
-        $sql = "SELECT
-                    content
-                FROM
-                    articles
-                WHERE
-                    id = ?";
-        if(!$result = $db->prepare($sql)) {return $db->error;}
-        $result->bind_param('i', $id);
-        if(!$result->execute()) {return $result->error;}
-        $result->bind_result($cnt);
-        $r = array();
-        if($result->fetch()) {
-            preg_match('#\[yt\](.{11})\[/yt\]#', $cnt, $matches);
-            return preg_replace('#\[yt\](.{11})\[/yt\]#', '$1', $matches[0]);
+        $db     = Database::getDB();
+        $fields = array('content');
+        $conds  = array('id = ?', 'i', array($id));
+        $res    = $db->select('articles', $fields, $conds);
+
+        if (count($res) != 1) {
+            return '';
         }
-        $result->close();
-        return -1;
+
+        $matches        = array();
+        $bb_pattern     = '';
+        $id_pattern     = '/^[A-Za-z0-9-_]{11}$/';
+        $link_pattern   = '/(https?:\/\/(w{3}\.)?)?(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"\'>]+)/';
+
+        preg_match_all('#\[yt\](.*?)\[/yt\]#Ui', $res[0]['content'], $matches);
+        $first_video = $matches[1][0];
+
+        if (preg_match($link_pattern, $first_video)) {
+            return preg_replace($link_pattern, '$7', $first_video);
+        }
+
+        if (preg_match($id_pattern, $first_video)) {
+            return $first_video;
+        }
+
+        return '';
     }
 
     function rewriteUrl($url) {
