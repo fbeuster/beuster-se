@@ -1107,7 +1107,7 @@
       "access_denied" : "Access denied for user %s.",
       "back_link" : "Back",
       "connection_error" : "A connection error occured.",
-      "file_missing" : "Could not find %s",
+      "file_already_exists" : "File %s already exists",
       "file_wrtie_error" : "Could not write into %s",
       "label_db_host" : "Database host",
       "label_db_name" : "Database name",
@@ -1119,8 +1119,8 @@
       "missing_db_user" : "Value for database user is missing.",
       "missing_db_pass" : "Value for database password is missing.",
       "submit" : "Save and next",
-      "unkown_database" : "Unknown database '%s'.",
-      "unkown_host" : "Unknown host '%s'."
+      "unknown_database" : "Unknown database '%s'.",
+      "unknown_host" : "Unknown host '%s'."
     },
     "finish" : {
       "info" : "You finished the setup and everything is ready to go now. Head over to the %s and the results. You can always can gp to the admin section and change some of the settings.",

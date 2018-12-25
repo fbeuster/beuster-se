@@ -156,7 +156,7 @@ class SetupHandler {
   }
 
   private function handleDatabase() {
-    $base_path  = '../'
+    $base_path  = '../';
     $local_file = 'user/local.php';
 
     if (!file_exists($base_path . $local_file)) {
@@ -175,7 +175,7 @@ class SetupHandler {
       }
 
     } else {
-      $this->addMessage(I18n::t('setup.database.file_missing', $local_file));
+      $this->addMessage(I18n::t('setup.database.file_already_exists', $local_file));
     }
   }
 

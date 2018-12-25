@@ -1107,7 +1107,7 @@
       "access_denied" : "Zugriff für Nutzer %s verweigert.",
       "back_link" : "Zurück",
       "connection_error" : "Ein Verbindungsfehler ist aufgetreten.",
-      "file_missing" : "Konnte %s nicht finden.",
+      "file_already_exists" : "Die Datei %s existier bereits.",
       "file_wrtie_error" : "Konnte nicht in %s schreiben.",
       "label_db_host" : "Datenbank Host",
       "label_db_name" : "Datenbank Name",
@@ -1119,8 +1119,8 @@
       "missing_db_user" : "Angabe des Datenbank-Nutzers fehlt.",
       "missing_db_pass" : "Angabe des Datenbank-Passwortes fehlt.",
       "submit" : "Speichern und weiter",
-      "unkown_database" : "Unbekannte Datenbank '%s'.",
-      "unkown_host" : "Unbekannter Host '%s'."
+      "unknown_database" : "Unbekannte Datenbank '%s'.",
+      "unknown_host" : "Unbekannter Host '%s'."
     },
     "finish" : {
       "info" : "Du hast die Einrichtung abgeschlossen und alles ist bereit. Schau dir die %s an, um die Ergebnisse zu sehe. Du kannst jederzeit einige der Einstellungen im Administrationsbereich ändern.",

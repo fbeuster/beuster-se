@@ -59,7 +59,7 @@ class Config {
                 WHERE   option_set = ? AND
                         option_name = ?";
 
-    if (!$stmt = $mysql->prepare($sql)) {
+    if (!$stmt = $mysqli->prepare($sql)) {
       return false;
     }
 
