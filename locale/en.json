@@ -356,6 +356,12 @@
     },
     "image" : {
       "overview" : {
+        "detail" : {
+          "close_title" : "Close detail view",
+          "meta_added" : "Added",
+          "meta_caption" : "Caption",
+          "meta_file_name" : "File name"
+        },
         "label" : "Images overview"
       }
     },

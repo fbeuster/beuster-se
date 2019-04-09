@@ -356,6 +356,12 @@
     },
     "image" : {
       "overview" : {
+        "detail" : {
+          "close_title" : "Detaiansicht schließen",
+          "meta_added" : "Hinzugefügt",
+          "meta_caption" : "Beschreibung",
+          "meta_file_name" : "Dateiname"
+        },
         "label" : "Bilderliste"
       }
     },

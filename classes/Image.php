@@ -13,6 +13,7 @@ class Image {
   private $path;
   private $title;
   private $thumb;
+  private $upload_date;
 
   /**
    * constructor
@@ -295,6 +296,19 @@ class Image {
    */
   public function setTitle($title) { $this->title = $title; }
 
+  public function getUploadDate() {
+    return $this->upload_date;
+  }
+
+  public function getMetaInformation() {
+    return array(
+      'absolute_path' => $this->getAbsolutePath(),
+      'caption' => $this->title,
+      'file_name' => $this->path,
+      'added' => $this->upload_date
+    );
+  }
+
   /*** PRIVATE ***/
 
   /**
@@ -303,7 +317,7 @@ class Image {
   private function loadImage() {
     $db = Database::getDB();
 
-    $fields = array('images.caption', 'images.file_name',
+    $fields = array('images.caption', 'images.file_name', 'images.upload_date',
                     'article_images.article_id', 'article_images.is_thumbnail');
     $conds  = array('images.id = ?', 'i', array($this->id));
     $join   = ' JOIN article_images ON images.id = article_images.image_id';
@@ -313,10 +327,11 @@ class Image {
       return;
     }
 
-    $this->articleId  = $res[0]['article_id'];
-    $this->title      = $res[0]['caption'];
-    $this->path       = $res[0]['file_name'];
-    $this->thumb      = $res[0]['is_thumbnail'];
+    $this->articleId    = $res[0]['article_id'];
+    $this->title        = $res[0]['caption'];
+    $this->upload_date  = $res[0]['upload_date'];
+    $this->path         = $res[0]['file_name'];
+    $this->thumb        = $res[0]['is_thumbnail'];
 
     $this->loaded = true;
   }

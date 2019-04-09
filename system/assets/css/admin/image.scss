@@ -13,9 +13,45 @@ body.article article section.article {
       overflow: hidden;
       padding: 0.25em;
 
-      &:hover {
+      &:hover:not(.detail) {
         box-shadow: 0 0 0.5em $dark_grey;
         cursor: pointer;
+      }
+
+      &.detail {
+        display: grid;
+        grid-column-start: span 5;
+        grid-template-columns: 3fr 2fr;
+        padding: 0;
+
+        &>div {
+          padding: 1em;
+        }
+
+        &>.image {
+          background: $grey;
+        }
+
+        &>.meta {
+          background: $light_grey;
+          position: relative;
+
+          .controls {
+            position: absolute;
+            right: 1em;
+            top: 1em;
+          }
+
+          dl {
+            dt {
+              font-weight: bold;
+            }
+
+            dd {
+              margin-bottom: 0.5em;
+            }
+          }
+        }
       }
 
       img {
