@@ -39,7 +39,7 @@ admin.imageActions = {
 
   addMetaListEntry: function($list, data, key) {
     $('<dt></dt>').text(I18n.t('admin.image.overview.detail.meta_' + key)).appendTo($list);
-    $('<dd></dd>').text(data.meta[key]).appendTo($list);
+    $('<dd></dd>').addClass(key).text(data.meta[key]).appendTo($list);
   },
 
   bindHandlers: function() {
@@ -56,9 +56,21 @@ admin.imageActions = {
   },
 
   changeDetailInList: function($img, $ul) {
-    var $li = $img.parent();
-    // TODO check if move needed
-    // TODO swap data and image
+    var data = $img.data();
+    var $detail = $('ul .' + admin.imageActions.detailContainerClass);
+    var $detail_img = $detail.find('img');
+    var $detail_meta = $detail.find('.meta');
+
+    // check if update is needed
+    if (admin.imageActions.isDifferentImage($detail_img, data.meta.absolute_path)) {
+      // TODO close container if needed
+
+      // update image and data
+      admin.imageActions.updateDetailImage($detail_img, data.meta.absolute_path);
+      admin.imageActions.updateDetailMeta($detail_meta, data);
+
+      // TODO re-open container in new location
+    }
   },
 
   collapseAndRemoveDetailContainer: function($container) {
@@ -135,5 +147,19 @@ admin.imageActions = {
 
   init: function() {
     this.bindHandlers();
+  },
+
+  isDifferentImage: function($img, new_src) {
+    return $img.attr('src') != new_src;
+  },
+
+  updateDetailImage: function($img, new_src) {
+    $img.attr('src', new_src);
+  },
+
+  updateDetailMeta: function($meta, data) {
+    $meta.find('.added').text(data.meta.added);
+    $meta.find('.caption').text(data.meta.caption);
+    $meta.find('.file_name').text(data.meta.file_name);
   }
 };
