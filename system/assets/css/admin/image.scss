@@ -19,6 +19,7 @@ body.article article section.article {
       }
 
       &.detail {
+        background: $grey;
         display: grid;
         grid-column-start: span 5;
         grid-template-columns: 3fr 2fr;
@@ -29,7 +30,8 @@ body.article article section.article {
         }
 
         &>.image {
-          background: $grey;
+          align-self: center;
+          text-align: center;
         }
 
         &>.meta {
