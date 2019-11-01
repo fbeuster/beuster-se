@@ -158,8 +158,7 @@ class Lixter {
   private function loadPage() {
     $db = Database::getDB()->getCon();
     if ($db->connect_errno) {
-      $message    = I18n::t( 'lixter.load.mysql_connection_error', array(mysqli_connect_error()) );
-      $this->page = new ErrorPage($message);
+      header('Location: setup/index.php');
 
     } else {
       if (isset($_GET['p'])) {

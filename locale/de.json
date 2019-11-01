@@ -1,7 +1,6 @@
 {
   "lixter" : {
     "load" : {
-      "mysql_connection_error" : "Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: %s",
       "include_not_found" : "Include-Datei konnte nicht geladen werden: %s"
     },
     "build" : {
