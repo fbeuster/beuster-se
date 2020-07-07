@@ -29,19 +29,12 @@ CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `author` smallint(6) NOT NULL,
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `content` text COLLATE utf8_unicode_ci,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `public` tinyint(1) NOT NULL,
-  `hits` int(11) NOT NULL,
-  `edited` datetime NOT NULL
+  `hits` int(11) NOT NULL DEFAULT 0,
+  `edited` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `articles`
---
-
-INSERT INTO `articles` (`id`, `author`, `title`, `content`, `created`, `public`, `hits`, `edited`) VALUES
-(1, 10001, 'Hello world!', 'We are live, this is your first article!', '2015-12-02 00:12:54', 1, 0, '2015-12-02 00:12:54');
 
 
 -- --------------------------------------------------------
@@ -66,13 +59,6 @@ CREATE TABLE `article_categories` (
   `category_id` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `article_categories`
---
-
-INSERT INTO `article_categories` (`article_id`, `category_id`) VALUES
-(1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -80,10 +66,10 @@ INSERT INTO `article_categories` (`article_id`, `category_id`) VALUES
 --
 
 CREATE TABLE `article_images` (
-  `article_id` smallint(6) NOT NULL DEFAULT '0',
-  `image_id` smallint(6) NOT NULL DEFAULT '0',
+  `article_id` smallint(6) NOT NULL,
+  `image_id` smallint(6) NOT NULL,
   `is_thumbnail` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -95,7 +81,7 @@ CREATE TABLE `attachments` (
   `id` smallint(6) NOT NULL,
   `file_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `file_path` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `downloads` smallint(6) NOT NULL,
+  `downloads` smallint(6) NOT NULL DEFAULT 0,
   `license` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` tinyint(4) NOT NULL,
   `version` varchar(64) COLLATE utf8_unicode_ci NOT NULL
@@ -115,13 +101,6 @@ CREATE TABLE `categories` (
   `description` text COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `parent_category_id`, `type`, `description`) VALUES
-(1, 'Blog', 0, 0, 'Default category');
-
 -- --------------------------------------------------------
 
 --
@@ -136,15 +115,8 @@ CREATE TABLE `comments` (
   `article_id` smallint(6) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   `parent_comment_id` smallint(6) NOT NULL,
-  `notifications` tinyint(1) NOT NULL DEFAULT '0'
+  `notifications` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `user_id`, `content`, `date`, `article_id`, `enabled`, `parent_comment_id`, `notifications`) VALUES
-(1, 10001, 'First comment', '2015-12-02 00:12:54', 1, 2, -1, 1);
 
 -- --------------------------------------------------------
 
@@ -161,35 +133,12 @@ CREATE TABLE `configuration` (
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `configuration`
---
-
-INSERT INTO `configuration` (`option_set`, `option_name`, `option_value`) VALUES
-('dev', 'debug', '0'),
-('dev', 'dev_server_address', 'beusterse.local'),
-('dev', 'remote_server_address', 'beusterse.de'),
-('ext', 'amazon_tag', 'beustersede-21'),
-('ext', 'google_adsense_ad', '<!-- beusterseBanner --> <ins class=\"adsbygoogle\"      style=\"display:block\"      data-ad-client=\"ca-pub-4132935023049723\"      data-ad-slot=\"4340633755\"      data-ad-format=\"auto\"></ins>'),
-('ext', 'google_analytics', 'UA-1710454-3'),
-('meta', 'mail', 'info@beusterse.de'),
-('meta', 'name', 'beuster{se}'),
-('meta', 'title', 'Blog, Tipps und Videos'),
-('search', 'case_sensitive', '0'),
-('search', 'marks', 'on'),
-('site', 'category_page_length', '8'),
-('site', 'language', 'de'),
-('site', 'theme', 'beuster-se-2016'),
-('site', 'url_schema', '1');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `images`
 --
 
 CREATE TABLE `images` (
   `id` smallint(6) NOT NULL,
-  `caption` text COLLATE utf8_unicode_ci NOT NULL,
+  `caption` text COLLATE utf8_unicode_ci,
   `file_name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `upload_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -217,7 +166,7 @@ CREATE TABLE `snippets` (
   `content_de` text COLLATE utf8_unicode_ci NOT NULL,
   `content_en` text COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
-  `edited` datetime NOT NULL
+  `edited` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -229,16 +178,9 @@ CREATE TABLE `snippets` (
 CREATE TABLE `static_pages` (
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `url` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `feedback` tinyint(1) NOT NULL DEFAULT '0'
+  `url` varchar(50) COLLATE latin1_general_cs NOT NULL,
+  `feedback` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `static_pages`
---
-
-INSERT INTO `static_pages` (`title`, `content`, `url`, `feedback`) VALUES
-('Imprint', 'Your imprint here.', 'imprint', 0);
 
 -- --------------------------------------------------------
 
@@ -251,15 +193,6 @@ CREATE TABLE `tags` (
   `article_id` smallint(6) NOT NULL,
   `tag` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tags`
---
-
-INSERT INTO `tags` (`id`, `article_id`, `tag`) VALUES
-(1, 1, 'Hello'),
-(2, 1, 'world'),
-(3, 1, 'sample');
 
 -- --------------------------------------------------------
 
@@ -274,20 +207,13 @@ CREATE TABLE `users` (
   `rights` varchar(20) CHARACTER SET utf8 NOT NULL,
   `mail` varchar(128) CHARACTER SET utf8 NOT NULL,
   `registered` datetime NOT NULL,
-  `contact_mail` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `screen_name` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `description` text CHARACTER SET utf8 NOT NULL,
-  `website` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `profile_image` text CHARACTER SET utf8 NOT NULL,
-  `token` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+  `contact_mail` varchar(128) CHARACTER SET utf8,
+  `screen_name` varchar(128) CHARACTER SET utf8,
+  `description` text CHARACTER SET utf8,
+  `website` varchar(128) CHARACTER SET utf8,
+  `profile_image` text CHARACTER SET utf8,
+  `token` varchar(128) COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password_hash`, `rights`, `mail`, `registered`, `contact_mail`, `screen_name`, `description`, `website`, `profile_image`, `token`) VALUES
-(10002, 'admin', 'empty', 'admin', 'admin@mail.com', 'NOW()', '', 'Admin', '', '', '', ''),
 
 -- --------------------------------------------------------
 
@@ -385,6 +311,79 @@ ALTER TABLE `tags`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `token` (`token`);
+
+
+
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `author`, `title`, `content`, `created`, `public`, `hits`, `edited`) SELECT
+1, 10001, 'Hello world!', 'We are live, this is your first article!', NOW(), 1, 0, NOW();
+
+--
+-- Dumping data for table `article_categories`
+--
+
+INSERT INTO `article_categories` (`article_id`, `category_id`) VALUES
+(1, 1);
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `parent_category_id`, `type`, `description`) VALUES
+(1, 'Blog', 0, 0, 'Default category');
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `content`, `date`, `article_id`, `enabled`, `parent_comment_id`, `notifications`) SELECT
+1, 10001, 'First comment', NOW(), 1, 2, -1, 1;
+--
+-- Dumping data for table `configuration`
+--
+
+INSERT INTO `configuration` (`option_set`, `option_name`, `option_value`) VALUES
+('dev', 'debug', '0'),
+('dev', 'dev_server_address', ''),
+('dev', 'remote_server_address', ''),
+('ext', 'amazon_tag', ''),
+('ext', 'google_adsense_ad', ''),
+('ext', 'google_analytics', ''),
+('meta', 'mail', ''),
+('meta', 'name', ''),
+('meta', 'title', ''),
+('search', 'case_sensitive', '0'),
+('search', 'marks', 'on'),
+('site', 'category_page_length', '8'),
+('site', 'language', 'de'),
+('site', 'theme', 'beuster-se-2016'),
+('site', 'url_schema', '1');
+
+--
+-- Dumping data for table `static_pages`
+--
+
+INSERT INTO `static_pages` (`title`, `content`, `url`, `feedback`) VALUES
+('Imprint', 'Your imprint here.', 'imprint', 0);
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `article_id`, `tag`) VALUES
+(1, 1, 'Hello'),
+(2, 1, 'world'),
+(3, 1, 'sample');
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password_hash`, `rights`, `mail`, `registered`, `contact_mail`, `screen_name`, `description`, `website`, `profile_image`, `token`) SELECT
+10001, 'admin', SHA2('admin', 512), 'admin', 'admin@mail.com', NOW(), '', 'Admin', '', '', '', '';
 
 --
 -- AUTO_INCREMENT for dumped tables

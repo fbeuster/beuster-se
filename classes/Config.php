@@ -24,7 +24,7 @@ class Config {
 
     $this->config = array();
 
-    if (count($result)) {
+    if ($result != null  && count($result)) {
       foreach ($result as $option) {
         if (!isset($this->config[$option['option_set']])) {
           $this->config[$option['option_set']] = array();

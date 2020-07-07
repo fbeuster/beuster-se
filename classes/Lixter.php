@@ -205,8 +205,6 @@ class Lixter {
             $class_name = AbstractAdminPage::getClass($_GET['p']);
             $this->page = new $class_name();
 
-          } else if ($user) {
-
           } else {
             if ($_GET['p'] == 'login') {
               $this->page = new LoginPage();
