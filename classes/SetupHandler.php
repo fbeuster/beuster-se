@@ -141,7 +141,7 @@ class SetupHandler {
 
     if (file_exists($base_path . $local_file)) {
       $data = array(
-                "date_default_timezone_get('" . $_POST['timezone'] . "');\n",
+                "date_default_timezone_set('" . $_POST['timezone'] . "');\n",
                 "\$rssFeedPath = '" . $_POST['rss_path'] . "';\n"
               );
       $output = file_put_contents($base_path . $local_file, implode('', $data), FILE_APPEND);
