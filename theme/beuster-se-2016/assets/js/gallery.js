@@ -57,7 +57,7 @@ beusterse.gallery = {
     });
 
     newImg.onload = function() {
-      view.attr('src', $image.attr('src')).load(function(){
+      view.attr('src', $image.attr('data-src')).load(function(){
         var textHeight = $('.lightbox .wrapper .text').outerHeight(true),
             newScale  = beusterse.gallery.scaleLightbox(newImg.width + textHeight,
                                                         newImg.height + textHeight)
@@ -75,7 +75,7 @@ beusterse.gallery = {
         });
       });
     }
-    newImg.src = $image.attr('src');
+    newImg.src = $image.attr('data-src');
 
     if (view.attr('data-caption') != undefined &&
         view.attr('data-caption') != null &&

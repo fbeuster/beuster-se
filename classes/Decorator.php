@@ -19,6 +19,11 @@
       return $this->content;
     }
 
+    public function getDecorationOptions() {
+      preg_match($this->pattern, $this->content, $snippets);
+      return isset($snippets[2]) ? $snippets[2] : '';
+    }
+
     public function getDecorationValue() {
       preg_match($this->pattern, $this->content, $snippets);
       preg_match($this->value_pattern, $snippets[1], $values);
@@ -38,7 +43,7 @@
         $pattern        = str_replace($value_pattern, $value, $this->pattern);
       }
 
-      $this->content = preg_replace($pattern, $replace, $this->content);
+      $this->content = preg_replace($pattern, $replace, $this->content, 1);
     }
   }
 
