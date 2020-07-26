@@ -25,10 +25,6 @@ class Image {
   }
 
   public static function createThumbnail($path, $width, $height) {
-    if (!file_exists($path)) {
-      return false;
-    }
-
     $pic      = array();
     $path_arr = pathinfo($path);
 
@@ -37,17 +33,24 @@ class Image {
     }
 
     if (!file_exists($path)) {
+      # given image doesn't exists
       return false;
     }
 
     $dimensions   = '_' . $width . 'x'. $height;
     $pic['path']  = self::ARTICLE_IMAGE_PATH . $path_arr['filename'] . $dimensions .'.'. $path_arr['extension'];
+
+    if (file_exists($pic['path'])) {
+      # thumb already exists
+      return false;
+    }
+
     $pic['dim']   = getimagesize($path);
     $pic['dim']   = array('w' => $pic['dim'][0],
                           'h' => $pic['dim'][1]);
 
-    if ( $pic['dim']['w'] > $width || $pic['dim']['h'] > $height ||
-        ($pic['dim']['w'] == $width && $pic['dim']['h'] == $height)) {
+    if ( $pic['dim']['w'] < $width && $pic['dim']['h'] < $height) {
+      # image too small
       return false;
     }
 
