@@ -201,7 +201,7 @@ class CategoryPage extends Page {
       $conds[2] = array_merge($conds[2], $cat_conds[2]);
     }
 
-    $fields = array('COUNT(id) AS total');
+    $fields = array('COUNT(articles.id) AS total');
     $res    = $db->select('articles', $fields, $conds, null, null, $joins);
 
     if (count($res) == 1) {

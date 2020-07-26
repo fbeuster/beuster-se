@@ -79,11 +79,11 @@ abstract class Page {
   public abstract function getTitle();
 
   public function hasScripts() {
-    return count($this->scripts);
+    return !empty($this->scripts);
   }
 
   public function hasStyles() {
-    return count($this->styles);
+    return !empty($this->styles);
   }
 
   public function includeScripts() {

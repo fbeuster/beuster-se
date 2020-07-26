@@ -9,12 +9,15 @@ class ArticleRecommender {
     $options  = ' ORDER BY articles.hits DESC';
     $limit    = array('LIMIT ?', 'i', array(32));
     $result   = $db->select('articles', $fields, $conds, $options, $limit, $join);
+    $results  = count($result);
 
     $recommendations = array();
 
-    if (count($result) > 0) {
-      $keys = array_rand( $result,
-                            min(4, count($result)));
+    if ($results == 1) {
+      $recommendations[] = new Article($result[0]['article_id']);
+
+    } else if ($results > 1) {
+      $keys = array_rand( $result, min(4, $results));
 
       foreach ($keys as $key) {
         $recommendations[] = new Article($result[$key]['article_id']);

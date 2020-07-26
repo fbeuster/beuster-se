@@ -2,9 +2,9 @@
 
   class CategoryManagementPage extends AbstractAdminPage {
 
-    private $categories;
+    private $categories = array();
     private $errors = array();
-    private $parent_categories;
+    private $parent_categories = array();
 
     public function __construct() {
       $this->handlePost();

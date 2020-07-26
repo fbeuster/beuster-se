@@ -61,7 +61,7 @@
         </tbody>
       </table>
     <?php } else { ?>
-      <p class="empty"><?php I18n::e('admin.attachment.overview.empty.'.$list_name); ?></p>
+      <p class="empty"><?php I18n::e('admin.attachment.overview.empty'); ?></p>
     <?php  } ?>
   </section>
 </article>
