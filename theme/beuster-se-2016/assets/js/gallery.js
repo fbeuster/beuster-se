@@ -12,6 +12,7 @@ beusterse.gallery = {
     $('.lightbox').click(this.hideLightbox);
 
     $('body.article p.image img').click(this.lightbox);
+    $('body.article span.image img').click(this.lightbox);
 
     $('.lightbox .close').click(this.closeLightbox);
 

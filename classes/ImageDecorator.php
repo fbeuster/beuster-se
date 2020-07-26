@@ -2,11 +2,12 @@
 
   class ImageDecorator extends Decorator {
 
+    const ALIGN_PATTERN = '(left|right)';
     const HEIGHT_PATTERN = '[0-9]*';
     const WIDTH_PATTERN = '[0-9]*';
 
-    const SINGLE_OPTIONS_PATTERN = '(\s'.self::WIDTH_PATTERN.'\s'.self::HEIGHT_PATTERN.')';
-    const SEPARATE_OPTIONS_PATTERN = '(\s'.self::WIDTH_PATTERN.')(\s'.self::HEIGHT_PATTERN.')';
+    const SINGLE_OPTIONS_PATTERN = '(\s'.self::WIDTH_PATTERN.'\s'.self::HEIGHT_PATTERN.'(\s'.self::ALIGN_PATTERN.')?)';
+    const SEPARATE_OPTIONS_PATTERN = '(\s'.self::WIDTH_PATTERN.')(\s'.self::HEIGHT_PATTERN.')(\s'.self::ALIGN_PATTERN.')?';
 
     const VALUE_PATTERN = '([0-9]*)';
     const IMAGE_PATTERN = '#\[img'.self::VALUE_PATTERN.self::SINGLE_OPTIONS_PATTERN.'?\]#';
@@ -35,15 +36,25 @@
         $path = $image->getAbsoluteThumbnailPath($options['width'], $options['height']);
       }
 
-      $imageSrc  = '</p><p class="image"><img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'" data-src="'.$image->getAbsolutePath().'"></p><p>';
+      if ($options['align'] == null) {
+        $pre = '</p><p class="image">';
+        $post = '</p><p>';
 
-      return $imageSrc;
+      } else {
+        $pre = '<span class="image '.$options['align'].'">';
+        $post = '</span>';
+      }
+
+      $imageSrc  = '<img src="'.$path.'" alt="'.$name.'" name="'.$name.'" title="'.$name.'" data-src="'.$image->getAbsolutePath().'">';
+
+      return $pre.$imageSrc.$post;
     }
 
     private function getImageOptions() {
       preg_match('#'.self::SEPARATE_OPTIONS_PATTERN.'#', $this->getDecorationOptions(), $options);
 
-      return array( 'height' => isset($options[2]) ? $options[2] : 0,
+      return array( 'align' => isset($options[4]) ? $options[4] : null,
+                    'height' => isset($options[2]) ? $options[2] : 0,
                     'width' => isset($options[1]) ? $options[1] : 0);
     }
   }

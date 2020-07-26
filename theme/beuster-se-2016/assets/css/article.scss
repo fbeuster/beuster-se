@@ -159,6 +159,7 @@ body.article article {
     }
 
     p {
+      clear: both;
       margin-bottom: 1em;
 
       &:empty {
@@ -175,6 +176,18 @@ body.article article {
         img {
           max-width: 95%;
         }
+      }
+
+      span.image.left {
+        float: left;
+        margin-bottom: 1em;
+        margin-right: 1em;
+      }
+
+      span.image.right {
+        float: right;
+        margin-bottom: 1em;
+        margin-left: 1em;
       }
     }
 
