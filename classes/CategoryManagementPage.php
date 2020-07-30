@@ -182,24 +182,31 @@
       $to_delete_parents = array();
 
       foreach ($parents as $parent) {
-        if (isset($_POST['delete_parent_'.$parent['ID']])) {
-          $to_delete_parents[] = $parent['ID'];
+        if (isset($_POST['delete_parent_'.$parent['id']])) {
+          $to_delete_parents[] = $parent['id'];
         }
       }
 
-      foreach ($to_delete_parents as $parent_id) {
-        $target = 'delete_parent_'.$parent_id.'_target';
+      if (count($to_delete_parents) == count($parents)) {
+        $this->errors[] = array(
+                'message' => I18n::t('admin.category.parent_category.error.cannot_delete_all'));
+      }
 
-        if (!isset($_POST[$target]) || $_POST[$target] === 'error') {
-          $this->errors[$target] = array(
-                'message' => I18n::t('admin.category.parent_category.error.missing_target'),
-                'value'   => 'error');
-        }
+      if (empty($this->errors)) {
+        foreach ($to_delete_parents as $parent_id) {
+          $target = 'delete_parent_'.$parent_id.'_target';
 
-        if (in_array($_POST[$target], $to_delete_parents)) {
-          $this->errors[$target] = array(
-                'message' => I18n::t('admin.category.parent_category.error.target_deleted'),
-                'value'   => 'error');
+          if (!isset($_POST[$target]) || $_POST[$target] === 'error') {
+            $this->errors[$target] = array(
+                  'message' => I18n::t('admin.category.parent_category.error.missing_target'),
+                  'value'   => 'error');
+          }
+
+          if (in_array($_POST[$target], $to_delete_parents)) {
+            $this->errors[$target] = array(
+                  'message' => I18n::t('admin.category.parent_category.error.target_deleted'),
+                  'value'   => 'error');
+          }
         }
       }
 

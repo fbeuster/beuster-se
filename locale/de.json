@@ -274,6 +274,7 @@
           "title" : "Auswählen um Kategorie zum Läschen zu markieren"
         },
         "error" : {
+          "cannot_delete_all" : "Es muss mindestens eine Topkategorie geben.",
           "missing_target" : "Zielkategorie fehlt.",
           "target_deleted" : "Die Zielkategorie wurde zum Löschen markiert."
         },
@@ -293,6 +294,7 @@
         "delete" : {
           "title" : "Auswählen um Kategorie zum Läschen zu markieren"
         },
+        "empty" : "Es sind keine Unterkategorien vorhanden.",
         "error" : {
           "missing_target" : "Zielkategorie fehlt.",
           "parent_and_delete" : "Die Kategorie wurde einer neuen Elternkategorie zugeordnet und zum Löschen markiert.",

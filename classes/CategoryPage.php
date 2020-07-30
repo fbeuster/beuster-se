@@ -3,7 +3,7 @@
 class CategoryPage extends Page {
   const DEFAULT_PAGE_LENGTH = 8;
 
-  private $articles;
+  private $articles = array();
   private $author;
   private $config;
   private $content;

@@ -274,6 +274,7 @@
           "title" : "Check to mark category for deletion."
         },
         "error" : {
+          "cannot_delete_all" : "You need at least one parent category.",
           "missing_target" : "Target category is missing.",
           "target_deleted" : "The target category is selected for deletion."
         },
@@ -293,6 +294,7 @@
         "delete" : {
           "title" : "Check to mark category for deletion."
         },
+        "empty" : "There are no sub categories.",
         "error" : {
           "missing_target" : "Target category is missing.",
           "parent_and_delete" : "The category is assigned to a new parent and marked for deletion.",
