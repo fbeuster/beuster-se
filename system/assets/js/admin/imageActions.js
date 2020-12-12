@@ -25,8 +25,8 @@ admin.imageActions = {
 
     // add data
     var data = $img.data();
-    admin.imageActions.createMetaList($img, data)
-                      .appendTo($div_meta);
+    var $form = admin.imageActions.createMetaForm(data);
+    $form.appendTo($div_meta);
 
     // add image
     admin.imageActions.createDetailImage(data.meta.absolute_path)
@@ -34,12 +34,38 @@ admin.imageActions = {
 
     // open container
     $li_new.insertAfter($prev);
-    admin.imageActions.expandDetailContainer($li_new, $div_image);
+    admin.imageActions.expandDetailContainer($li_new, $div_image, $form);
   },
 
-  addMetaListEntry: function($list, data, key) {
-    $('<dt></dt>').text(I18n.t('admin.image.overview.detail.meta_' + key)).appendTo($list);
-    $('<dd></dd>').addClass(key).text(data.meta[key]).appendTo($list);
+  addMetaFormEntry: function($form, data, key, fixed) {
+    var $label = $('<label></label>');
+    var $val;
+
+    $label
+      .text(I18n.t('admin.image.overview.detail.meta_' + key))
+      .appendTo($form);
+
+    if (fixed) {
+      $val = $('<span></span>').text(data.meta[key]);
+    } else {
+      $val = $('<input></input>').attr('type', 'text').val(data.meta[key]);
+    }
+
+    $val.addClass(key).appendTo($label);
+  },
+
+  addMetaFormImageId: function($fieldset, data) {
+    $('<input></input>')
+      .attr({
+        'name' : 'id',
+        'type' : 'hidden',
+        'value' : data.id
+      })
+      .appendTo($fieldset);
+  },
+
+  addMetaFormSubmit: function($fieldset) {
+    $('<input></input>').attr('type', 'submit').appendTo($fieldset);
   },
 
   bindHandlers: function() {
@@ -105,21 +131,40 @@ admin.imageActions = {
     return $div_controls;
   },
 
-  createMetaList: function($img, data) {
-    var $dl = $('<dl></dl>');
+  createMetaFieldset: function(data) {
+    var $fieldset = $('<fieldset></fieldset>');
 
-    admin.imageActions.addMetaListEntry($dl, data, 'caption');
-    admin.imageActions.addMetaListEntry($dl, data, 'file_name');
-    admin.imageActions.addMetaListEntry($dl, data, 'added');
+    admin.imageActions.addMetaFormEntry($fieldset, data, 'caption', false);
+    admin.imageActions.addMetaFormEntry($fieldset, data, 'file_name', true);
+    admin.imageActions.addMetaFormEntry($fieldset, data, 'added', true);
+    admin.imageActions.addMetaFormImageId($fieldset, data);
+    admin.imageActions.addMetaFormSubmit($fieldset);
 
-    return $dl;
+    return $fieldset;
   },
 
-  expandDetailContainer: function($container, $image) {
+  createMetaForm: function(data) {
+    var $form = $('<form></form>');
+
+    $form
+      .addClass('userform')
+      .attr({
+        'action' : '/image-overview',
+        'method' : 'POST'
+      });
+
+    admin.imageActions.createMetaFieldset(data).appendTo($form);
+
+    return $form;
+  },
+
+  expandDetailContainer: function($container, $image, $form) {
     var width       = $image.width();
     var outer_width = $image.outerWidth();
     var spacing     = outer_width - width;
-    var height      = width / 16 * 9 + spacing;
+    var imgHeight   = width / 16 * 9 + spacing;
+    var formHeight  = $form.outerHeight() + spacing;
+    var height      = Math.max(imgHeight, formHeight);
 
     $container.animate({height : height}, 400, function() {
       $container.addClass(admin.imageActions.expandedClass);

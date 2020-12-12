@@ -44,13 +44,27 @@ body.article article section.article {
             top: 1em;
           }
 
-          dl {
-            dt {
-              font-weight: bold;
-            }
+          form {
+            margin: 0;
 
-            dd {
-              margin-bottom: 0.5em;
+            fieldset {
+              label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+
+                input,
+                span {
+                  display: block;
+                  font-weight: normal;
+                  width: 100%;
+                }
+
+                input {
+                  font-size: 1em;
+                  padding: 0.5em;
+                }
+              }
             }
           }
         }
