@@ -101,17 +101,33 @@ admin.imageActions = {
 
     // check if update is needed
     if (admin.imageActions.isDifferentImage($detail_img, data.meta.absolute_path)) {
-      // TODO close container if needed
+      if (admin.imageActions.isDifferentRow($detail, $img)) {
+        // move detail to new row
+        var $ul = $img.parent().parent();
 
-      // update image and data
-      admin.imageActions.updateDetailImage($detail_img, data.meta.absolute_path);
-      admin.imageActions.updateDetailMeta($detail_meta, data);
+        admin.imageActions.collapseAndRemoveDetailContainer($detail);
+        admin.imageActions.addDetailToList($img, $ul);
 
-      // TODO re-open container in new location
+      } else {
+        // update in place
+        admin.imageActions.updateDetailImage($detail_img, data.meta.absolute_path);
+        admin.imageActions.updateDetailMeta($detail_meta, data);
+      }
     }
   },
 
+  isDifferentRow: function($detail, $img) {
+    var detail_index = $detail.index();
+    var new_index = $img.parent().index();
+    var old_row = Math.floor((detail_index - 1) / 5);
+    var new_row = Math.floor(new_index / 5);
+
+    return new_row != old_row;
+  },
+
   collapseAndRemoveDetailContainer: function($container) {
+    $container.find('form').attr('action', '');
+    $container.find('input[type=submit]').attr('disabled', 'disabled');
     $container.animate({height : 0}, 400, function() {
       $container.remove();
     });
