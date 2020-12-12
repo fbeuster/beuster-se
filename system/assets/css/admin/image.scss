@@ -18,6 +18,10 @@ body.article article section.article {
         cursor: pointer;
       }
 
+      &.hasError {
+        border-color: $red;
+      }
+
       &.detail {
         background: $grey;
         display: grid;

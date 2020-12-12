@@ -48,7 +48,12 @@ admin.imageActions = {
     if (fixed) {
       $val = $('<span></span>').text(data.meta[key]);
     } else {
-      $val = $('<input></input>').attr('type', 'text').val(data.meta[key]);
+      $val = $('<input></input>')
+              .attr({
+                'name' : 'img_caption',
+                'type' : 'text'
+              })
+              .val(data.meta[key]);
     }
 
     $val.addClass(key).appendTo($label);
@@ -57,7 +62,7 @@ admin.imageActions = {
   addMetaFormImageId: function($fieldset, data) {
     $('<input></input>')
       .attr({
-        'name' : 'id',
+        'name' : 'img_id',
         'type' : 'hidden',
         'value' : data.id
       })
@@ -65,7 +70,13 @@ admin.imageActions = {
   },
 
   addMetaFormSubmit: function($fieldset) {
-    $('<input></input>').attr('type', 'submit').appendTo($fieldset);
+    $('<input></input>')
+      .attr({
+        'name' : 'formsubmit',
+        'type' : 'submit',
+        'value' : I18n.t('admin.image.overview.form.submit')
+      })
+      .appendTo($fieldset);
   },
 
   bindHandlers: function() {

@@ -358,10 +358,17 @@
     "image" : {
       "overview" : {
         "detail" : {
-          "close_title" : "Detaiansicht schließen",
+          "close_title" : "Detailansicht schließen",
           "meta_added" : "Hinzugefügt",
           "meta_caption" : "Beschreibung",
           "meta_file_name" : "Dateiname"
+        },
+        "error" : {
+          "empty_caption" : "Die Beschreibung darf nicht leer sein.",
+          "not_found" : "Das Bild wurde nicht gefunden."
+        },
+        "form" : {
+          "submit" : "Änderungen speichern"
         },
         "label" : "Bilderliste"
       }

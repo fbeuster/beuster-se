@@ -88,8 +88,8 @@ class Image {
     $conds  = array('id = ?', 'i', array($id));
     $image  = $db->select('images', $fields, $conds);
 
-    if (count($res) == 1) {
-      $path = $res[0]['file_name'];
+    if (count($image) == 1) {
+      $path = $image[0]['file_name'];
 
       $file_name      = pathinfo($path, PATHINFO_FILENAME);
       $file_extension = pathinfo($path, PATHINFO_EXTENSION);
@@ -107,6 +107,15 @@ class Image {
       $cond = array('id = ?', 'i', array($id));
       $db->delete('images', $cond);
     }
+  }
+  public static function exists($id) {
+    $db = Database::getDB();
+
+    $fields = array('file_name');
+    $conds  = array('id = ?', 'i', array($id));
+    $image  = $db->select('images', $fields, $conds);
+
+    return count($image) == 1;
   }
 
   public static function isValidFormat($format) {

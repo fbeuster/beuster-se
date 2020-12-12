@@ -363,6 +363,13 @@
           "meta_caption" : "Caption",
           "meta_file_name" : "File name"
         },
+        "error" : {
+          "empty_caption" : "The caption cannot be empty.",
+          "not_found" : "The image was not found."
+        },
+        "form" : {
+          "submit" : "Save changes"
+        },
         "label" : "Images overview"
       }
     },
