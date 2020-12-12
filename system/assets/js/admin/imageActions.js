@@ -61,6 +61,7 @@ admin.imageActions = {
 
   addMetaFormImageId: function($fieldset, data) {
     $('<input></input>')
+      .addClass('img_id')
       .attr({
         'name' : 'img_id',
         'type' : 'hidden',
@@ -215,7 +216,8 @@ admin.imageActions = {
 
   updateDetailMeta: function($meta, data) {
     $meta.find('.added').text(data.meta.added);
-    $meta.find('.caption').text(data.meta.caption);
+    $meta.find('.caption').val(data.meta.caption);
     $meta.find('.file_name').text(data.meta.file_name);
+    $meta.find('.img_id').val(data.id);
   }
 };
