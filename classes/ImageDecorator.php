@@ -53,9 +53,9 @@
     private function getImageOptions() {
       preg_match('#'.self::SEPARATE_OPTIONS_PATTERN.'#', $this->getDecorationOptions(), $options);
 
-      return array( 'align' => isset($options[4]) ? $options[4] : null,
-                    'height' => isset($options[2]) ? $options[2] : 0,
-                    'width' => isset($options[1]) ? $options[1] : 0);
+      return array( 'align' => isset($options[4]) ? trim($options[4]) : null,
+                    'height' => isset($options[2]) ? trim($options[2]) : 0,
+                    'width' => isset($options[1]) ? trim($options[1]) : 0);
     }
   }
 

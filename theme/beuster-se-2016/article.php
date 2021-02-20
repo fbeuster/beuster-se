@@ -33,7 +33,11 @@
           <ul>
           <?php foreach ($article->getGallery() as $image) { ?>
             <li>
-              <img src="<?php echo $image->getAbsolutePath(); ?>" alt="<?php echo $image->getPath(); ?>" data-caption="<?php echo $image->getTitle(); ?>">
+              <img
+                src="<?php echo $image->getAbsolutePath(); ?>"
+                data-src="<?php echo $image->getAbsolutePath(); ?>"
+                alt="<?php echo $image->getPath(); ?>"
+                data-caption="<?php echo $image->getTitle(); ?>">
             </li>
           <?php } ?>
           </ul>

@@ -604,7 +604,7 @@ abstract class ArticleParser {
      * Just remove all images from ArticleParser#$str
      */
     public function hideArticleImages() {
-        $this->str = preg_replace('=\[img([0-9]*)\]=Ui', '', $this->str);
+        $this->str = preg_replace('=\[img[0-9]*(\s[0-9]*\s[0-9]*(\s(left|right))?)?\]=Ui', '', $this->str);
     }
 
     abstract function blockquotes();    /**< abstract, implementation in sub class */

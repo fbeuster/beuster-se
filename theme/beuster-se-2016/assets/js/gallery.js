@@ -49,34 +49,11 @@ beusterse.gallery = {
         newImg  = new Image();
     $image = $(this);
 
-    beusterse.gallery.openLightbox();
-
     view.attr({
       'alt'           : $image.attr('alt'),
       'data-caption'  : $image.attr('data-caption'),
       'title'         : $image.attr('title')
     });
-
-    newImg.onload = function() {
-      view.attr('src', $image.attr('src')).load(function(){
-        var textHeight = $('.lightbox .wrapper .text').outerHeight(true),
-            newScale  = beusterse.gallery.scaleLightbox(newImg.width + textHeight,
-                                                        newImg.height + textHeight)
-            imgHeight = newScale.height,
-            imgWidth  = newScale.width;
-
-        $('.lightbox .wrapper').css({
-          'marginTop' : (window.innerHeight - (imgHeight + textHeight)) / 2,
-          'width'     : imgWidth,
-          'height'    : imgHeight + textHeight
-        });
-        view.css({
-          'width'   : imgWidth,
-          'height'  : imgHeight
-        });
-      });
-    }
-    newImg.src = $image.attr('src');
 
     if (view.attr('data-caption') != undefined &&
         view.attr('data-caption') != null &&
@@ -86,6 +63,31 @@ beusterse.gallery = {
     } else {
       $('.lightbox .description').text(view.attr('alt'));
     }
+
+    view.load(function(){
+      beusterse.gallery.openLightbox();
+    });
+
+    $(newImg).load(function() {
+      view.attr('src', $image.attr('data-src'));
+      var textHeight = $('.lightbox .wrapper .text').outerHeight(true) / 2 * 3.6,
+          newScale  = beusterse.gallery.scaleLightbox(newImg.width + textHeight,
+                                                      newImg.height + textHeight)
+          boxHeight = newScale.height,
+          boxWidth  = newScale.width;
+
+      $('.lightbox .wrapper').css({
+        'marginTop' : (window.innerHeight - boxHeight) / 2,
+        'width'     : boxWidth,
+        'height'    : boxHeight
+      });
+      view.css({
+        'width'   : boxWidth,
+        'height'  : boxHeight - textHeight
+      });
+    });
+
+    newImg.src = $image.attr('data-src');
   },
 
   openLightbox: function() {
@@ -94,8 +96,8 @@ beusterse.gallery = {
   },
 
   scaleLightbox: function(_width, _height) {
-    while(  _width >= window.innerWidth ||
-            _height >= window.innerHeight ) {
+    while(  _width >= window.innerWidth * 0.9 ||
+            _height >= window.innerHeight * 0.9) {
       _width  = _width * 0.9;
       _height = _height * 0.9;
     }
